@@ -10,6 +10,8 @@ export default class ChooseARecordTypeToSearchPage {
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
+  readonly recordType_fieldset: Locator;
+  readonly recordType_radio: Locator;
   // readonly searchLink: Locator;
   // readonly search_hint_label: Locator;
 
@@ -24,6 +26,8 @@ export default class ChooseARecordTypeToSearchPage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.chooseARecordTypeToSearchPageTestData.Choose_A_Record_Type_To_Search_Page.pageHeading);
+    this.recordType_fieldset = this.page.locator('.govuk-form-group');
+    this.recordType_radio = this.recordType_fieldset.getByRole('radio');
     // this.searchLink = this.page.getByText(this.linkTextData.System_Administration_Page.Manage_Review_Bodies, {
     //   exact: true,
     // });

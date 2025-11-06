@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../hooks/CustomFixtures';
+import { Locator } from '@playwright/test';
 
 const { Then } = createBdd(test);
 
@@ -30,3 +31,28 @@ Then('I can see the choose a record type to search page', async ({ chooseARecord
 //     }
 //   }
 // );
+
+Then('I select the radio button for {string}', async ({ chooseARecordTypeToSearchPage }, radioButtonValue: string) => {
+  // const locatorVal: Locator = chooseARecordTypeToSearchPage[`recordType_radio`];
+  // const typeAttribute = await locatorVal
+  //   .locator('[value=' + `${radioButtonValue}`)
+  //   .first()
+  //   .getAttribute('type');
+  let recordType: string;
+  if (radioButtonValue === 'Modification_Record') {
+    recordType =
+      chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Label_Texts.modification_record_label;
+  } else {
+    recordType = chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Label_Texts.project_record_label;
+  }
+  const locatorVal: Locator = chooseARecordTypeToSearchPage.page.getByRole('radio').filter({
+    has: chooseARecordTypeToSearchPage.page.getByText(recordType),
+  });
+
+  await locatorVal.check();
+
+  // const typeAttribute = await locatorVal.first().getAttribute('type');
+  // if (typeAttribute === 'radio') {
+  //   await locatorVal.check();
+  // }
+});

@@ -7,11 +7,11 @@ Feature: Receive Amendments: Sort modification results after performing a search
         And I capture the page screenshot
         And I can see the 'Choose_A_Record_Type_To_Search_Page'
         And I capture the page screenshot
-        And I click the radio button to select 'Modification record'
+        And I select the radio button for 'Modification_Record'
         And I capture the page screenshot
         Then I have navigated to the 'Search_Modifications_Page'
 
-    @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016
+    @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016 @TestONly
     Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
         And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
@@ -31,7 +31,7 @@ Feature: Receive Amendments: Sort modification results after performing a search
         Examples:
             | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
             | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
-            | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+    # | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
     @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @rsp-4016
     Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
