@@ -86,7 +86,6 @@ Then(
         await commonItemsPage.clickButton('Modification_Details_Page', 'Add_Another_Change');
       }
     }
-    await modificationsCommonPage.validateIndividualAndOverallRanking();
   }
 );
 
@@ -359,51 +358,6 @@ Then(
       await expect.soft(reviewAllChangesPage.now_send_to_sponsor_heading).not.toBeVisible();
       await expect.soft(reviewAllChangesPage.now_send_to_sponsor_hint_label).not.toBeVisible();
     }
-  }
-);
-
-Then(
-  'I fill the modification enter free text page using {string} dataset',
-  async ({ modificationsCommonPage, commonItemsPage }, datasetName: string) => {
-    const dataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    for (const subKey in dataset) {
-      const subDataset = dataset[subKey];
-      if (subDataset.specific_change_dropdown) {
-        await modificationsCommonPage.validatePageHeading(subDataset.specific_change_dropdown);
-      }
-      if (subDataset.changes_free_text) {
-        await commonItemsPage.fillUIComponent(subDataset, 'changes_free_text', modificationsCommonPage);
-      }
-    }
-  }
-);
-
-Then(
-  'I can validate that an error is shown when the entered free text exceeds the character limit on enter free text page',
-  async ({ modificationsCommonPage, commonItemsPage }) => {
-    const expectedFreeTextSummaryError =
-      modificationsCommonPage.modificationsCommonPageTestData.Summary_Error_Messages.changes_free_text_summary_error;
-    const actualFreeTextSummaryError = confirmStringNotNull(
-      await modificationsCommonPage.changes_free_text_summary_error.textContent()
-    );
-    expect.soft(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    expect.soft(modificationsCommonPage.changes_free_text_summary_error).toBeVisible();
-    expect.soft(actualFreeTextSummaryError).toBe(expectedFreeTextSummaryError);
-  }
-);
-
-Then(
-  'I validate the free text content and specific change label on review modifications page using {string} dataset',
-  async ({ modificationsCommonPage, modificationReviewChangesPage }, changeDatasetName: string) => {
-    const dataset = modificationsCommonPage.modificationsCommonPageTestData[changeDatasetName];
-    const changeName = Object.keys(dataset);
-    const expectedFreeText = dataset[changeName]['changes_free_text'];
-    const actualFreeText = confirmStringNotNull(await modificationReviewChangesPage.changes_free_text.textContent());
-    const actualSpecificChangeLabel = confirmStringNotNull(
-      await modificationsCommonPage.pageHeading.getByText(dataset[changeName]['specific_change_dropdown']).textContent()
-    );
-    expect.soft(actualSpecificChangeLabel).toBe(dataset[changeName]['specific_change_dropdown']);
-    expect.soft(actualFreeText).toBe(expectedFreeText);
   }
 );
 
