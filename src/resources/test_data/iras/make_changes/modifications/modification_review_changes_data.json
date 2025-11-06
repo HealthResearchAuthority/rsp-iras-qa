@@ -1,0 +1,31 @@
+{
+  "Review_Changes_Page": {
+    "page_heading_label": "Review changes",
+    "sub_heading_specific_change_label": "Change to planned end date",
+    "select_change_label": "Select change",
+    "project_reference_numbers_radio_label": "Project reference numbers",
+    "title_radio_label": "Title",
+    "which_reference_do_you_need_to_change_label": "Which reference(s) do you need to change?",
+    "isrctn_reference_number_label": "International standard randomised controlled trial number (ISRCTN)",
+    "nct_reference_number_label": "ClinicalTrials.gov identifier (NCT number)",
+    "funder_name_label": "Funder name",
+    "funder_reference_number_label": "Funder reference number",
+    "other_reference_number_label": "Other reference number",
+    "what_other_is_label": "What ‘other’ is",
+    "new_short_project_title_label": "New short project title",
+    "new_full_project_title_label": "New full project title"
+  },
+  "Label_Texts_Nhs": {
+    "new_planned_project_end_date_label": "New planned project end date",
+    "affected_organisation_types_label": "Affected organisation types",
+    "affected_nhs_hsc_locations_label": "Affected NHS/HSC organisation locations",
+    "portion_of_nhs_hsc_organisations_affected_label": "Portion of NHS/HSC organisations affected",
+    "additional_resource_implications_label": "Additional resource implications",
+    "details_describing_this_change_label": "Details describing this change"
+  },
+  "Label_Texts_Non_Nhs": {
+    "new_planned_project_end_date_label": "New planned project end date",
+    "affected_organisation_types_label": "Affected organisation types",
+    "affected_non_nhs_hsc_locations_label": "Affected non-NHS/HSC locations"
+  }
+}

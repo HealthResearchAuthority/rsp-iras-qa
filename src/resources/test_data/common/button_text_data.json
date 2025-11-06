@@ -266,5 +266,25 @@
   },
   "Edit_Your_Profile_Page": {
     "Save": "Save"
+  },
+  "Modification_Enter_Free_Text_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_Select_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_SelectReference_To_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_Enter_Reference_Numbers_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
   }
 }
