@@ -7,9 +7,11 @@ Feature: Receive Amendments: Sort modification results after performing a search
         And I capture the page screenshot
         And I can see the 'Choose_A_Record_Type_To_Search_Page'
         And I capture the page screenshot
-        And I select the radio button for 'Modification_Record'
+        And I select the radio button for 'Modification_Record' in the choose a record type to search page
         And I capture the page screenshot
-        Then I have navigated to the 'Search_Modifications_Page'
+        And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+        And I capture the page screenshot
+        Then I can see the 'Search_Modifications_Page'
 
     @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016 @TestONly
     Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
