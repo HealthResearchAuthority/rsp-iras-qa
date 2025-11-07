@@ -8,6 +8,15 @@ When('I am on the confirmation screen', async ({ confirmationPage }) => {
   await confirmationPage.assertOnConfirmationPage();
 });
 
+Then('I can see the delete multiple documents confirmation page', async ({ confirmationPage }) => {
+  await expect(
+    confirmationPage.confirmation_header_common_label.getByText(
+      confirmationPage.confirmationPageTestData.Delete_Document_Confirmation_Labels
+        .delete_multiple_documents_page_heading
+    )
+  ).toBeVisible();
+});
+
 Then(
   'I validate {string} labels displayed in disable user profile confirmation page using the {string} details',
   async ({ confirmationPage, createUserProfilePage }, validationLabelsDatasetName, userDetailsdatasetName: string) => {
