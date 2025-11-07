@@ -254,6 +254,25 @@ Then(
 );
 
 Then(
+  'I validate all field values on delete modification confirmation screen',
+  async ({ projectDetailsIRASPage, confirmationPage }) => {
+    const modificationIDExpected = (await projectDetailsIRASPage.getUniqueIrasId()) + '/' + 1;
+    const expectedHeadingText =
+      confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels
+        .delete_modification_page_heading +
+      ' ' +
+      modificationIDExpected;
+    const actualHeadingText = confirmStringNotNull(
+      await confirmationPage.confirmation_header_common_label.textContent()
+    );
+    const expectedConfirmationBody =
+      confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels.page_guidance_text;
+    expect(actualHeadingText).toBe(expectedHeadingText);
+    await expect(confirmationPage.confirmation_body_label.getByText(expectedConfirmationBody)).toBeVisible();
+  }
+);
+
+Then(
   'I validate {string} labels displayed in the success confirmation page when the modification has been sent to sponsor',
   async ({ confirmationPage }, validationLabelsDatasetName) => {
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];

@@ -74,7 +74,8 @@
     "Confirm": "Confirm",
     "Return_To_Project_Overview": "Return to project overview",
     "Delete_Project": "Delete project",
-    "Keep_Project": "Keep project"
+    "Keep_Project": "Keep project",
+    "Delete_Modification": "Delete modification"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"

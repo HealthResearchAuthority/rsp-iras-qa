@@ -924,11 +924,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I enter 'Valid_Iras_Id_Ln_England_Pn_England' into the search field in the modifications ready to assign page
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-    And I capture the page screenshot
     When I select modifications with ids as 'Modification_Id_Ln_England_Pn_England_Five_Six' by clicking the checkbox in the modifications ready to assign page
-    And I capture the page screenshot
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
-    And I capture the page screenshot
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -939,18 +936,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I enter 'Valid_Iras_Id_Ln_England_Pn_England' into the search field in the modifications ready to assign page
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-    And I capture the page screenshot
     When I select modifications with ids as 'Modification_Id_Ln_England_Pn_England_One' by clicking the checkbox in the modifications ready to assign page
-    And I capture the page screenshot
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
-    And I capture the page screenshot
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
     And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
-    And I capture the page screenshot
     And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
-    And I capture the page screenshot
     Then I can see the modifications assignment confirmation page for 'Study_Wide_Reviewer_HRA_England'
-    And I capture the page screenshot
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -1222,7 +1213,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
-    And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
@@ -1252,7 +1242,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
-    And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
@@ -1369,7 +1358,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
-    And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
@@ -1377,6 +1365,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I create 'Multiple_Changes_Planned_End_Date' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
@@ -1421,7 +1410,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
     When I click the 'Save_Continue' button on the 'Review_Changes_Planned_End_Date_Page'
     And I can see the modifications details page
-    And I capture the page screenshot
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -1651,8 +1639,34 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
     When I click the 'Save_Continue' button on the 'Review_Changes_Planned_End_Date_Page'
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+@axeAccessibilityDeleteModificationConfirmationPage @ApplicantUser
+  Scenario: Delete modification confirmation page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I create 'Multiple_Changes_Planned_End_Date' for the created modification
+    And I click the 'Delete_Modification' link on the 'Modification_Details_Page'
+    And I validate all field values on delete modification confirmation screen
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
