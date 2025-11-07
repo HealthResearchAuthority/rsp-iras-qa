@@ -56,6 +56,7 @@ Then(
     }
   }
 );
+
 Then(
   'I keep note of the individual and overall ranking of changes created using {string}',
   async ({ modificationsCommonPage }, datasetName) => {
@@ -132,7 +133,7 @@ Then(
         }
       }
       await commonItemsPage.clickButton('Review_Changes_Planned_End_Date_Page', 'Save_Continue');
-      await commonItemsPage.clickButton('Modifications_Details_Page', 'Save_Continue_Review');
+      await commonItemsPage.clickButton('Modification_Details_Page', 'Save_Continue_Review');
       await commonItemsPage.clickButton('Sponsor_Reference_Page', 'Save_Continue_Review');
     }
   }

@@ -254,32 +254,21 @@ Then(
 );
 
 Then(
-  'I validate all field {string} value on delete modification confirmation screeen',
-  async (
-    { modificationsCommonPage, projectDetailsIRASPage, projectDetailsTitlePage, confirmationPage },
-    projectTitleDatasetName: string
-  ) => {
-    const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
-    const shortProjectTitleExpected =
-      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
-    const modificationIDExpected = irasIDExpected + '/' + 1;
-    const irasIDActual = confirmStringNotNull(await modificationsCommonPage.iras_id_value.textContent());
-    const shortProjectTitleActual = confirmStringNotNull(
-      await modificationsCommonPage.short_project_title_value.textContent()
-    );
-    const modificationIDActual = confirmStringNotNull(
-      await modificationsCommonPage.modification_id_value.textContent()
-    );
+  'I validate all field values on delete modification confirmation screen',
+  async ({ projectDetailsIRASPage, confirmationPage }) => {
+    const modificationIDExpected = (await projectDetailsIRASPage.getUniqueIrasId()) + '/' + 1;
     const expectedHeadingText =
       confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels
-        .delete_modification_page_heading + modificationIDExpected;
+        .delete_modification_page_heading +
+      ' ' +
+      modificationIDExpected;
     const actualHeadingText = confirmStringNotNull(
-      await confirmationPage.delete_modification_page_heading.textContent()
+      await confirmationPage.confirmation_header_common_label.textContent()
     );
-    expect(irasIDActual).toBe(irasIDExpected);
-    expect(shortProjectTitleActual).toBe(shortProjectTitleExpected);
-    expect(modificationIDActual).toBe(modificationIDExpected);
-    expect(expectedHeadingText).toBe(actualHeadingText);
+    const expectedConfirmationBody =
+      confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels.page_guidance_text;
+    expect(actualHeadingText).toBe(expectedHeadingText);
+    await expect(confirmationPage.confirmation_body_label.getByText(expectedConfirmationBody)).toBeVisible();
   }
 );
 

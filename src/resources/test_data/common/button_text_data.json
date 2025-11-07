@@ -74,7 +74,8 @@
     "Confirm": "Confirm",
     "Return_To_Project_Overview": "Return to project overview",
     "Delete_Project": "Delete project",
-    "Keep_Project": "Keep project"
+    "Keep_Project": "Keep project",
+    "Delete_Modification": "Delete modification"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -182,9 +183,6 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes"
-  },
-  "Delete_Modifications_Confirm_Page": {
-    "delete_modification": "Delete modification"
   },
   "Affected_Organisation_Selection_Page": {
     "Save_Continue": "Save and continue",

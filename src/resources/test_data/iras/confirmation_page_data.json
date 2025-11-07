@@ -36,7 +36,7 @@
     "page_guidance_text": " has been sent an email confirming that they have been added to "
   },
   "Delete_Modification_Confirmation_Labels": {
-    "delete_modification_page_heading": "Confirm that you want to permanently delete modification ",
+    "delete_modification_page_heading": "Confirm that you want to permanently delete modification",
     "page_guidance_text": "Deleting a modification cannot be undone."
   },
   "Project_Record_Created_Labels": {

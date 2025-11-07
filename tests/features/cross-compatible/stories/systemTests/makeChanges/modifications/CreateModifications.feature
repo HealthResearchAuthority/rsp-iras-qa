@@ -201,7 +201,7 @@ Feature: Create Amendment - Create Modifications
     # And I validate the overall ranking of changes displayed for '<Changes>'
     # And I validate the individual ranking of changes displayed for '<Changes>'
     # And I validate the field values are displayed as per the '<Changes>' dataset
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
@@ -257,7 +257,7 @@ Feature: Create Amendment - Create Modifications
     # And I validate the overall ranking of changes displayed for '<Changes>'
     # And I validate the individual ranking of changes displayed for '<Changes>'
     # And I validate the field values are displayed as per the '<Changes>' dataset
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
@@ -298,7 +298,7 @@ Feature: Create Amendment - Create Modifications
     # And I validate the overall ranking of changes displayed for '<Changes>'
     # And I validate the individual ranking of changes displayed for '<Changes>'
     # And I validate the field values are displayed as per the '<Changes>' dataset
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
@@ -367,7 +367,7 @@ Feature: Create Amendment - Create Modifications
     And I can see the select area of change page
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
     Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
@@ -388,7 +388,7 @@ Feature: Create Amendment - Create Modifications
     And I can see the select area of change page
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
     When I click the 'Save_For_Later' button on the 'Sponsor_Reference_Page'
     Then I can see the project overview page
@@ -407,7 +407,7 @@ Feature: Create Amendment - Create Modifications
     And I can see the select area of change page
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
@@ -427,7 +427,7 @@ Feature: Create Amendment - Create Modifications
       | Change_Planned_End_Date | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
       | Change_Planned_End_Date | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
 
-  @rsp-4392 @VerifyUserAbleToDeleteTheModificationDetails
+  @rsp-4392 @VerifyUserAbleToDeleteTheModificationDetails @runn
   Scenario Outline: Verify user is able to delete the modification details
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -436,10 +436,11 @@ Feature: Create Amendment - Create Modifications
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
-    And I click the 'Delete_Modification' link on the 'Modifications_Details_Page'
-    And I validate all field 'Valid_Data_All_Fields' value on delete modification confirmation screeen
+    And I click the 'Delete_Modification' link on the 'Modification_Details_Page'
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate all field values on delete modification confirmation screen
     And I capture the page screenshot
-    And I click the 'delete_modification' button on the 'Delete_Modifications_Confirm_Page'
+    And I click the 'Delete_Modification' button on the 'Confirmation_Page'
     And I capture the page screenshot
     And I validate the delete modification success message
     And I capture the page screenshot
