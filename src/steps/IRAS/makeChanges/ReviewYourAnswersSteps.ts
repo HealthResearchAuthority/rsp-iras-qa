@@ -17,7 +17,7 @@ Then(
       projectDetailsIRASPage,
       projectDetailsTitlePage,
       chiefInvestigatorPage,
-      reseachLocationsPage,
+      researchLocationsPage,
       projectIdentifiersPage,
     },
     datasetNameProjectTitle: string,
@@ -27,7 +27,7 @@ Then(
   ) => {
     const datasetProjectTitle = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetNameProjectTitle];
     const datasetChiefInvestigator = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator];
-    const datasetResearchLoctions = reseachLocationsPage.researchLocationsPageTestData[datasetNameResearchLocations];
+    const datasetResearchLoctions = researchLocationsPage.researchLocationsPageTestData[datasetNameResearchLocations];
     const datasetProjectIdentifier =
       projectIdentifiersPage.projectIdentifiersPageTestData[datasetNameProjectIdentifier];
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
