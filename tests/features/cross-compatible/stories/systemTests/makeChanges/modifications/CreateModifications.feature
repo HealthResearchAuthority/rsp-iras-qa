@@ -17,7 +17,7 @@ Feature: Create Modification- This feature file help an applicant user complete 
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation @KNOWN_DEFECT_RSP-5184 @KNOWN_DEFECT_RSP-5317
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation @KNOWN_DEFECT_RSP-5184
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till send modification to sponsor confirmation page and return to project overview page from there
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -68,6 +68,7 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'
     And the 'Save_For_Later' button should be 'unavailable' on the 'Review_All_Changes_Page'
     And the now sent to sponsor heading and hint text should be 'unavailable' on the review all changes page
+    And I validate the individual and overall ranking of changes on the relevant modification page
 
     Examples:
       | Changes                           | Research_Locations  |
@@ -149,12 +150,14 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I keep note of the individual and overall ranking of changes created using '<New_Changes>' and '<Research_Locations>' dataset
     And I modify the current changes with '<New_Changes>' for the created modification
     And I capture the page screenshot
     Then I can see the review all changes modifications page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     And I validate the change details are displayed as per the '<New_Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I validate the individual and overall ranking of changes on the relevant modification page
     And I modify the current sponsor details with 'Valid_Data_All_Fields_Changes' for the created modification
     And I capture the page screenshot
     Then I can see the review all changes modifications page
@@ -177,6 +180,7 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'
     And the 'Save_For_Later' button should be 'unavailable' on the 'Review_All_Changes_Page'
     And the now sent to sponsor heading and hint text should be 'unavailable' on the review all changes page
+    And I validate the individual and overall ranking of changes on the relevant modification page
 
     Examples:
       | Changes                           | New_Changes                              | Research_Locations  |
@@ -220,7 +224,6 @@ Feature: Create Modification- This feature file help an applicant user complete 
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     And I capture the page screenshot
     Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
@@ -333,7 +336,6 @@ Feature: Create Modification- This feature file help an applicant user complete 
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     And I capture the page screenshot
     Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
