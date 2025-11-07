@@ -139,7 +139,7 @@ Feature: Create Amendment - Project Overview
             | previous link     |
 
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
-    @rsp-4545 @ProjectDocumentsTab
+    @rsp-4545 @rsp-5280 @ProjectDocumentsTab
     Scenario: Validate the user is able to access and view the project documents details from the project overview page
         When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot

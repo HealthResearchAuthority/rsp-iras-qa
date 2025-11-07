@@ -69,7 +69,7 @@ Feature: Create Amendment - Project Documents Edit and Save
                         | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
 
-        @rsp-3889 @AddDetailsToUploadedDocumentsCompletedStatus @KNOWN-DEFECT-RSP-5091
+        @rsp-3889 @rsp-5280 @AddDetailsToUploadedDocumentsCompletedStatus @KNOWN-DEFECT-RSP-5091_5747 @fail
         Scenario Outline: Verify the user is able to enter details for uploaded documents with completed status and review your information page
                 And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
                 When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
