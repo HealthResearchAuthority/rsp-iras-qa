@@ -531,8 +531,8 @@ Feature: Create Amendment - Create Modifications
     And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    # Then I can see the review all changes modifications page
-    # Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
+    Then I can see the review all changes modifications page
+    Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
 
     Examples:
       | Changes              | Sponsor_Reference_Page |

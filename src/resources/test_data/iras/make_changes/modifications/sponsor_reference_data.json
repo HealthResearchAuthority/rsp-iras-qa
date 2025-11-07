@@ -2,6 +2,7 @@
   "Sponsor_Reference_Page": {
     "heading": "Add sponsor reference, date and brief summary of changes",
     "sponsor_modification_reference_label": "Sponsor modification reference (optional)",
+    "sponsor_modification_reference_date_label": "Sponsor modification date",
     "sponsor_modification_date_day_label": "Day",
     "sponsor_modification_date_month_label": "Month",
     "sponsor_modification_date_year_label": "Year",
@@ -87,7 +88,11 @@
     "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": ""
   },
-  "Review_All_Changes_Page": {
-    "heading": "Review all changes"
+  "Valid_Data_All_Fields_Changes": {
+    "sponsor_modification_reference_textbox": "Sponsor Reference Text Updated",
+    "sponsor_modification_date_day_textbox": "30",
+    "sponsor_modification_date_month_dropdown": "July",
+    "sponsor_modification_date_year_textbox": "2056",
+    "sponsor_summary_textbox": "This is a test summary for the sponsor reference modification page. This summary is intended to provide a brief overview of the changes being proposed in this modification. The purpose of this summary is to ensure that all stakeholders are informed about the nature of the modifications and can provide feedback or approval as necessary.Updated"
   }
 }
