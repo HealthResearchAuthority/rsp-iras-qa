@@ -8,6 +8,15 @@ When('I am on the confirmation screen', async ({ confirmationPage }) => {
   await confirmationPage.assertOnConfirmationPage();
 });
 
+Then('I can see the delete multiple documents confirmation page', async ({ confirmationPage }) => {
+  await expect(
+    confirmationPage.confirmation_header_common_label.getByText(
+      confirmationPage.confirmationPageTestData.Delete_Document_Confirmation_Labels
+        .delete_multiple_documents_page_heading
+    )
+  ).toBeVisible();
+});
+
 Then(
   'I validate {string} labels displayed in disable user profile confirmation page using the {string} details',
   async ({ confirmationPage, createUserProfilePage }, validationLabelsDatasetName, userDetailsdatasetName: string) => {
@@ -250,6 +259,25 @@ Then(
     const actualSuccessMessage = confirmStringNotNull(await confirmationPage.success_message_body_text.textContent());
     await expect(confirmationPage.success_message_body_text.getByText(expectedSuccessMessage)).toBeVisible();
     expect(actualSuccessMessage).toBe(expectedSuccessMessage);
+  }
+);
+
+Then(
+  'I validate all field values on delete modification confirmation screen',
+  async ({ projectDetailsIRASPage, confirmationPage }) => {
+    const modificationIDExpected = (await projectDetailsIRASPage.getUniqueIrasId()) + '/' + 1;
+    const expectedHeadingText =
+      confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels
+        .delete_modification_page_heading +
+      ' ' +
+      modificationIDExpected;
+    const actualHeadingText = confirmStringNotNull(
+      await confirmationPage.confirmation_header_common_label.textContent()
+    );
+    const expectedConfirmationBody =
+      confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels.page_guidance_text;
+    expect(actualHeadingText).toBe(expectedHeadingText);
+    await expect(confirmationPage.confirmation_body_label.getByText(expectedConfirmationBody)).toBeVisible();
   }
 );
 

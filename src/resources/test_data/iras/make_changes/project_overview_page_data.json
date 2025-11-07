@@ -6,6 +6,7 @@
     "project_details_hint_label": "View and edit key information about this project.",
     "modification_saved_success_message_header_text": "Success",
     "modification_saved_success_message_text": "Modification progress successfully saved",
+    "delete_modification_success_message_text": "Modification {{modificationNumber}} has been successfully deleted",
     "project_overview_irasid_header": "IRAS ID:",
     "project_overview_shorttitle_header": "Short project title:",
     "project_details_irasid": "IRAS ID",
