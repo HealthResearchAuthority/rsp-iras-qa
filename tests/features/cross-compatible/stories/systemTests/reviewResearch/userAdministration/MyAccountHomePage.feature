@@ -176,34 +176,34 @@ Feature: My Account Home page
       | User                 | Page                                     |
       | System_Admin         | System_Administration_Page               |
       | System_Admin         | My_Research_Access_Denied_Page           |
-      #       # | System_Admin         | Sponsor_Access_Denied_Page                      |
+      # | System_Admin         | Sponsor_Access_Denied_Page                      |
       | Applicant_User       | Approvals_Access_Denied_Page             |
       | Applicant_User       | System_Administration_Access_Denied_Page |
       | Studywide_Reviewer   | System_Administration_Access_Denied_Page |
       | Studywide_Reviewer   | My_Research_Access_Denied_Page           |
-      #       #| Studywide_Reviewer   | Sponsor_Access_Denied_Page                      |
-      #       #| Studywide_Reviewer   | Cag_Members_Access_Denied_Page                  |
-      #       #| Studywide_Reviewer   | Cat_Access_Denied_Page                          |
-      #       #| Studywide_Reviewer   | Reg_Members_Access_Denied_Page                  |
-      #       #| Studywide_Reviewer   | Technical_Assurence_Access_Denied_Page          |
-      #       #| Studywide_Reviewer   | Technical_Assurence_Reviewers_Access_Denied_Page|
+      #| Studywide_Reviewer   | Sponsor_Access_Denied_Page                      |
+      #| Studywide_Reviewer   | Cag_Members_Access_Denied_Page                  |
+      #| Studywide_Reviewer   | Cat_Access_Denied_Page                          |
+      #| Studywide_Reviewer   | Reg_Members_Access_Denied_Page                  |
+      #| Studywide_Reviewer   | Technical_Assurence_Access_Denied_Page          |
+      #| Studywide_Reviewer   | Technical_Assurence_Reviewers_Access_Denied_Page|
       | Team_Manager         | System_Administration_Access_Denied_Page |
       | Team_Manager         | My_Research_Access_Denied_Page           |
-      #       #| Team_Manager         | Sponsor_Access_Denied_Page                      |
-      #       #| Team_Manager         | Cag_Members_Access_Denied_Page                  |
-      #       #| Team_Manager         | Cat_Access_Denied_Page                          |
-      #       #| Team_Manager         | Reg_Members_Access_Denied_Page                  |
-      #       #| Team_Manager         | Technical_Assurence_Access_Denied_Page          |
-      #       #| Team_Manager         | Technical_Assurence_Reviewers_Access_Denied_Page|
+      #| Team_Manager         | Sponsor_Access_Denied_Page                      |
+      #| Team_Manager         | Cag_Members_Access_Denied_Page                  |
+      #| Team_Manager         | Cat_Access_Denied_Page                          |
+      #| Team_Manager         | Reg_Members_Access_Denied_Page                  |
+      #| Team_Manager         | Technical_Assurence_Access_Denied_Page          |
+      #| Team_Manager         | Technical_Assurence_Reviewers_Access_Denied_Page|
       | Workflow_Coordinator | System_Administration_Access_Denied_Page |
       | Workflow_Coordinator | My_Research_Access_Denied_Page           |
-      # #| Workflow_Coordinator | Sponsor_Access_Denied_Page                      |
-      # #| Workflow_Coordinator | Cag_Members_Access_Denied_Page                  |
-      # #| Workflow_Coordinator | Cat_Access_Denied_Page                          |
-      # #| Workflow_Coordinator | Reg_Members_Access_Denied_Page                  |
-      # #| Workflow_Coordinator | Technical_Assurence_Access_Denied_Page          |
-      # #| Workflow_Coordinator | Technical_Assurence_Reviewers_Access_Denied_Page|
-      # #| Workflow_Coordinator | Member_Management_Access_Denied_Page            |
+      #| Workflow_Coordinator | Sponsor_Access_Denied_Page                      |
+      #| Workflow_Coordinator | Cag_Members_Access_Denied_Page                  |
+      #| Workflow_Coordinator | Cat_Access_Denied_Page                          |
+      #| Workflow_Coordinator | Reg_Members_Access_Denied_Page                  |
+      #| Workflow_Coordinator | Technical_Assurence_Access_Denied_Page          |
+      #| Workflow_Coordinator | Technical_Assurence_Reviewers_Access_Denied_Page|
+      #| Workflow_Coordinator | Member_Management_Access_Denied_Page            |
       | Sponsor_User         | My_Research_Access_Denied_Page           |
       | Sponsor_User         | System_Administration_Access_Denied_Page |
       | Sponsor_User         | Approvals_Access_Denied_Page             |

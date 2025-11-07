@@ -277,7 +277,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
 
     # Few failures due to data issues- to be re executed once data issues are fixed(review body and country)
     @rsp-4418 @rsp-5250 @ValidateFilters @DataIssues
-    Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters (Roles:-Studywide Reviewer,Workflow_Coordinator,SPonsor), and clicking the 'Apply filters' button
+    Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters (Roles:-Studywide Reviewer,Workflow Coordinator,Sponsor), and clicking the 'Apply filters' button
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
