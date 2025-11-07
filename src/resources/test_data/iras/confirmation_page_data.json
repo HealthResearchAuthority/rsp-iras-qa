@@ -35,6 +35,14 @@
     "page_heading": "User has been successfully added",
     "page_guidance_text": " has been sent an email confirming that they have been added to "
   },
+  "Delete_Modification_Confirmation_Labels": {
+    "delete_modification_page_heading": "Confirm that you want to permanently delete modification",
+    "page_guidance_text": "Deleting a modification cannot be undone."
+  },
+  "Delete_Document_Confirmation_Labels": {
+    "delete_multiple_documents_page_heading": "Are you sure you want to delete these documents?",
+    "delete_single_document_page_heading": "Are you sure you want to delete this document?"
+  },
   "Project_Record_Created_Labels": {
     "page_heading": "Project record created",
     "page_heading_prefix": "For",

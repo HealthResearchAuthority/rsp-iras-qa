@@ -455,6 +455,7 @@ Then(
       completeYourProfilePage,
       editYourProfilePage,
       addDocumentDetailsForSpecificDocumentModificationsPage,
+      projectIdentificationEnterReferenceNumbersPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -548,6 +549,12 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = addDocumentDetailsForSpecificDocumentModificationsPage;
+    } else if (pageKey == 'Project_Identification_Enter_Reference_Numbers_Page') {
+      errorMessageFieldDataset =
+        projectIdentificationEnterReferenceNumbersPage.projectIdentificationEnterReferenceNumbersPageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = projectIdentificationEnterReferenceNumbersPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

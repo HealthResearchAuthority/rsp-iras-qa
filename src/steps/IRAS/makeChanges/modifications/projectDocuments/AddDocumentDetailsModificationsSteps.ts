@@ -4,9 +4,9 @@ import { expect, Locator } from '@playwright/test';
 import fs from 'node:fs';
 import { confirmStringNotNull, generateUniqueValue } from '../../../../../utils/UtilFunctions';
 
-const { Then } = createBdd(test);
+const { Then, When } = createBdd(test);
 
-Then(
+When(
   'I can see the add document details for {string} page',
   async ({ selectAreaOfChangePage, addDocumentDetailsModificationsPage }, specificChangeDatsetName: string) => {
     const dataset =
@@ -97,6 +97,36 @@ Then(
         }
       }
       await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
+    }
+  }
+);
+Then(
+  'I click on the document link with status {string} and delete the uploaded document in the add document details for specific document page',
+  async ({ commonItemsPage, confirmationPage, addDocumentDetailsModificationsPage }, docStatusDataset: string) => {
+    const statusDataset =
+      addDocumentDetailsModificationsPage.addDocumentDetailsModificationsPageTestData[docStatusDataset];
+    const status = statusDataset.status;
+    const displayedDocumentsListMap =
+      await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
+    const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
+    const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
+    for (
+      let displayedDocumentsListIndex = 0;
+      displayedDocumentsListIndex < displayedDocumentsList.length;
+      displayedDocumentsListIndex++
+    ) {
+      if (displayedStatusesList[displayedDocumentsListIndex] === status) {
+        const documentName = displayedDocumentsList[displayedDocumentsListIndex];
+        await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
+      }
+      await addDocumentDetailsModificationsPage.documentlink.getByText('Delete', { exact: true }).first().click();
+      await expect(
+        confirmationPage.confirmation_header_common_label.getByText(
+          confirmationPage.confirmationPageTestData.Delete_Document_Confirmation_Labels
+            .delete_single_document_page_heading
+        )
+      ).toBeVisible();
+      await commonItemsPage.clickButton('Confirmation_Page', 'Delete_Document');
     }
   }
 );
