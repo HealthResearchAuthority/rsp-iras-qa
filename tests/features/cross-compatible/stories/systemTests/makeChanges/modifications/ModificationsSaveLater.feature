@@ -2093,6 +2093,18 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
 
   @rsp-3888 @DeleteAllDocumentsModification @runn
   Scenario Outline: Validate the user is able to delete all documents after uploading
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -2116,8 +2128,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+      | Specific_Change                    | Document_Upload_Files |
+      | Correction_Of_Typographical_Errors | Multiple_Files_Three  |
       | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
       | GDPR_Wording                                 | Multiple_Files_Three  |
       | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
@@ -2127,6 +2139,18 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
 
   @rsp-3888 @DeleteDocumentsOneByOneInModification
   Scenario Outline: Validate the user is able to delete documents one by one from documents added for page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -2158,6 +2182,18 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
 
   @rsp-3888 @DeleteDocumentsOneByOneFromAddDocumentDetailsModification
   Scenario Outline: Validate the user is able to delete documents from add document details page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
