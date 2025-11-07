@@ -100,16 +100,23 @@ Then(
       await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
     const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
     const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
-    for (let i = 0; i < displayedDocumentsList.length; i++) {
-      if (displayedStatusesList[i] === status) {
-        const documentName = displayedDocumentsList[i];
+    for (
+      let displayedDocumentsListIndex = 0;
+      displayedDocumentsListIndex < displayedDocumentsList.length;
+      displayedDocumentsListIndex++
+    ) {
+      if (displayedStatusesList[displayedDocumentsListIndex] === status) {
+        const documentName = displayedDocumentsList[displayedDocumentsListIndex];
         await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
       }
       await addDocumentDetailsModificationsPage.documentlink.getByText('Delete', { exact: true }).first().click();
-      await confirmationPage.assertOnDeleteDocumentConfirmationPage();
-      const pageKey = 'Delete_Document_Confirmation_Page';
-      const buttonKey = 'Delete_Document';
-      await commonItemsPage.clickButton(pageKey, buttonKey);
+      await expect(
+        confirmationPage.confirmation_header_common_label.getByText(
+          confirmationPage.confirmationPageTestData.Delete_Document_Confirmation_Labels
+            .delete_single_document_page_heading
+        )
+      ).toBeVisible();
+      await commonItemsPage.clickButton('Confirmation_Page', 'Delete_Document');
     }
   }
 );

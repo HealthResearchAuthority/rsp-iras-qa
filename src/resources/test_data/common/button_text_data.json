@@ -74,7 +74,9 @@
     "Confirm": "Confirm",
     "Return_To_Project_Overview": "Return to project overview",
     "Delete_Project": "Delete project",
-    "Keep_Project": "Keep project"
+    "Keep_Project": "Keep project",
+    "Delete_Documents": "Delete documents",
+    "Delete_Document": "Delete document"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -247,12 +249,6 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Change_Details": "Change"
-  },
-  "Delete_Documents_Confirmation_Page": {
-    "Delete_Documents": "Delete documents"
-  },
-  "Delete_Document_Confirmation_Page": {
-    "Delete_Document": "Delete document"
   },
   "Modification_Unfinished_Error_Page": {
     "Return_To_Modification_Details": "Return to modification details"

@@ -75,10 +75,13 @@ Then(
             .Review_Uploaded_Documents_Modifications_Page.delete_label,
         })
         .click();
-      await confirmationPage.assertOnDeleteDocumentConfirmationPage();
-      const pageKey = 'Delete_Document_Confirmation_Page';
-      const buttonKey = 'Delete_Document';
-      await commonItemsPage.clickButton(pageKey, buttonKey);
+      await expect(
+        confirmationPage.confirmation_header_common_label.getByText(
+          confirmationPage.confirmationPageTestData.Delete_Document_Confirmation_Labels
+            .delete_single_document_page_heading
+        )
+      ).toBeVisible();
+      await commonItemsPage.clickButton('Confirmation_Page', 'Delete_Document');
       if (fileDeleteCount < 3) {
         await addDocumentDetailsModificationsPage.assertOnAddDocumentsDetailsModificationsPage(
           specificChangeTitleLabel

@@ -32,7 +32,7 @@ Feature: Create Amendment - Project Documents Modifications
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
- 
+
   @rsp-3876 @ValidateUploadDocumentsModificationsPageLabels @KNOWN_DEFECT_RSP-4801
   Scenario Outline: Validate the ui labels displayed for upload documents pages in modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
@@ -189,10 +189,10 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | OGG_File                         | single invalid   |
       | Correction_Of_Typographical_Errors | PS_File                          | single invalid   |
       | Correction_Of_Typographical_Errors | RAW_File                         | single invalid   |
-      #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
       | Correction_Of_Typographical_Errors | WAV_File                         | single invalid   |
       | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
       | Protocol_Non_Substantial_Changes   | JSON_File                        | single invalid   |
+      #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
@@ -249,7 +249,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
 
-  @rsp-3888 @DeleteAllDocumentsModification 
+  @rsp-3888 @DeleteAllDocumentsModification
   Scenario Outline: Validate the user is able to delete all documents after uploading
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -264,9 +264,9 @@ Feature: Create Amendment - Project Documents Modifications
     And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
     And I capture the page screenshot
     And I click the 'Delete_All' link on the 'Documents_Added_For_Change_Page'
-    Then I can see the delete documents confirmation page 
+    Then I can see the delete multiple documents confirmation page
     And I capture the page screenshot
-    And I click the 'Delete_Documents' button on the 'Delete_Documents_Confirmation_Page'
+    And I click the 'Delete_Documents' button on the 'Confirmation_Page'
     And I capture the page screenshot
     Then I can see the add documents for '<Specific_Change>' page
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
@@ -274,16 +274,16 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                              | Document_Upload_Files|
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three |
-      | GDPR_Wording                                 | Multiple_Files_Three |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three |
+      | Specific_Change                              | Document_Upload_Files |
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+      | GDPR_Wording                                 | Multiple_Files_Three  |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
-  @rsp-3888 @DeleteDocumentsOneByOneInModification 
+  @rsp-3888 @DeleteDocumentsOneByOneInModification
   Scenario Outline: Validate the user is able to delete documents one by one from documents added for page
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -305,16 +305,16 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                              | Document_Upload_Files|
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three |
-      | GDPR_Wording                                 | Multiple_Files_Three |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three |
+      | Specific_Change                              | Document_Upload_Files |
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+      | GDPR_Wording                                 | Multiple_Files_Three  |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
-  @rsp-3888 @DeleteDocumentsOneByOneFromAddDocumentDetailsModification 
+  @rsp-3888 @DeleteDocumentsOneByOneFromAddDocumentDetailsModification
   Scenario Outline: Validate the user is able to delete documents from add document details page
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -341,15 +341,11 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                              | Document_Upload_Files|
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three |
-      | GDPR_Wording                                 | Multiple_Files_Three |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three |
-
-
-
-
+      | Specific_Change                              | Document_Upload_Files |
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+      | GDPR_Wording                                 | Multiple_Files_Three  |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |

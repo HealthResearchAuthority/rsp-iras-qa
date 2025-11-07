@@ -10,8 +10,6 @@ export default class ConfirmationPage {
   readonly success_message_header_label: Locator;
   readonly success_message_body_text: Locator;
   readonly confirmation_body_label: Locator;
-  readonly delete_documents_page_heading: Locator;
-  readonly delete_document_page_heading: Locator;
   readonly what_happens_next_label: Locator;
 
   //Initialize Page Objects
@@ -38,22 +36,6 @@ export default class ConfirmationPage {
     });
     this.success_message_body_text = this.page.locator('.govuk-panel__body');
     this.confirmation_body_label = this.page.getByRole('paragraph').first();
-
-    this.delete_documents_page_heading = this.page.getByRole('heading', {
-      name: confirmationPageTestData.Delete_Document_Confirmation_Labels.delete_documents_page_heading,
-    });
-
-    this.delete_document_page_heading = this.page.getByRole('heading', {
-      name: confirmationPageTestData.Delete_Document_Confirmation_Labels.delete_document_page_heading,
-    });
-  }
-
-  async assertOnDeleteDocumentsConfirmationPage() {
-    await expect(this.delete_documents_page_heading).toBeVisible();
-  }
-
-  async assertOnDeleteDocumentConfirmationPage() {
-    await expect(this.delete_document_page_heading).toBeVisible();
     this.what_happens_next_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
     });

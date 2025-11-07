@@ -238,35 +238,10 @@
   "Project_Overview_Unfinished_Projects_Page": {
     "Back": "Back"
   },
-  "Project_Created_Confirmation_Page": {
-    "View_Project_Overview": "View project overview"
-  },
-  "Review_All_Changes_Page": {
-    "Delete_Modification": "Delete modification",
-    "Change": "Change"
-  },
-  "Modification_Details_Page": {
-    "Back": "Back",
-    "Change": "Change",
-    "Remove": "Remove",
-    "Delete_Modification": "Delete modification"
-  },
-  "Modification_Unfinished_Error_Page": {
-    "Back": "Back"
-  },
-  "Create_Project_Confirmation_Page": {
-    "View_Project_Overview": "View project overview"
-  },
-  "Project_Overview_Unfinished_Projects_Page": {
-    "Back": "Back"
-  },
   "Documents_Added_For_Change_Page": {
     "Delete_All": "Delete all"
   },
-  "Add_Documents_Details": {
+  "Add_Documents_Details_Page": {
     "Delete": "Delete"
-  },
-  "Delete_Document_Confirmation_Page": {
-    "Cancel": "Cancel"
   }
 }
