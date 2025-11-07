@@ -2,6 +2,9 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as auditHistoryUserPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/audit_history_user_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import * as dbConfigData from '../../../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../../../utils/DbConfig';
+import { getTimeFormatted } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class AuditHistoryUserPage {
@@ -9,6 +12,7 @@ export default class AuditHistoryUserPage {
   readonly auditHistoryUserPageTestData: typeof auditHistoryUserPageTestData;
   readonly linkTextData: typeof linkTextData;
   readonly buttonTextData: typeof buttonTextData;
+  readonly dbConfigData: typeof dbConfigData;
   private _updated_time: string;
   readonly page_heading: Locator;
   readonly date_column_header: Locator;
@@ -21,6 +25,7 @@ export default class AuditHistoryUserPage {
     this.auditHistoryUserPageTestData = auditHistoryUserPageTestData;
     this.linkTextData = linkTextData;
     this.buttonTextData = buttonTextData;
+    this.dbConfigData = dbConfigData;
     this._updated_time = '';
     this.page_heading = this.page
       .getByRole('heading')
@@ -36,6 +41,11 @@ export default class AuditHistoryUserPage {
     this.sys_admin_column_header = this.page
       .locator('thead tr')
       .getByText(this.auditHistoryUserPageTestData.Audit_History_User_Page.Column_Header_Labels.sys_admin_label);
+  }
+
+  //Page Methods
+  async goto(userEmail: string, userId: string) {
+    await this.page.goto(`admin/users/useraudittrail?email=${userEmail}&userId=${userId}`);
   }
 
   async assertOnAuditHistoryUserPage() {
@@ -58,5 +68,29 @@ export default class AuditHistoryUserPage {
 
   async setUpdatedTime(value: string): Promise<void> {
     this._updated_time = value;
+  }
+
+  // SQL STATEMENTS //
+  async sqlGetUserAuditHistoryById(userId: string): Promise<Map<string, string[]>> {
+    const timeValues: string[] = [];
+    const eventValues: string[] = [];
+    const adminEmailValues: string[] = [];
+    const sqlConnection = await connect(dbConfigData.Identity_Service);
+    const queryResult = await sqlConnection.query(`SELECT DateTimeStamp, [Description], Email FROM UserAuditTrails 
+INNER JOIN Users ON Users.Id = UserAuditTrails.SystemAdministratorId
+WHERE UserId = '${userId}' ORDER BY DateTimeStamp DESC`);
+    console.dir(queryResult);
+    await sqlConnection.close();
+    for (const record of queryResult.recordset) {
+      timeValues.push(await getTimeFormatted(record.DateTimeStamp));
+      eventValues.push(record.Description.trim());
+      adminEmailValues.push(record.Email);
+    }
+    const auditMap = new Map([
+      ['timeValues', timeValues],
+      ['eventValues', eventValues],
+      ['adminEmailValues', adminEmailValues],
+    ]);
+    return auditMap;
   }
 }
