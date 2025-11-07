@@ -82,18 +82,11 @@ Then(
         )
       ).toBeVisible();
       await commonItemsPage.clickButton('Confirmation_Page', 'Delete_Document');
-      if (fileDeleteCount < 3) {
+      if (fileDeleteCount < fileArray.length) {
         await addDocumentDetailsModificationsPage.assertOnAddDocumentsDetailsModificationsPage(
           specificChangeTitleLabel
         );
         await commonItemsPage.govUkLink.getByText('Back').click();
-      } else {
-        break;
-      }
-      if (fileDeleteCount < 3) {
-        await reviewUploadedDocumentsModificationsPage.assertOnReviewUploadedDocumentsModificationsPage(
-          specificChangeTitleLabel
-        );
       } else {
         break;
       }
