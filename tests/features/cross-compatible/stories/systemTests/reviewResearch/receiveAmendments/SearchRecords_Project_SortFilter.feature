@@ -1,13 +1,20 @@
 @ReceiveAmendments @SearchModificationsSortFilter @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @DataIssueNeedsFixing
-Feature: Receive Amendments: Filter, Search and Sort the Search modifications page
+Feature: Receive Amendments: Filter, Search and Sort the Search project records page
 
         Background:
-                Given I have navigated to the 'Search_Modifications_Page'
+                Given I have navigated to the 'Approvals_Page'
+                And I click the 'Search_Records' link on the 'Approvals_Page'
                 And I capture the page screenshot
+                And I can see the 'Choose_A_Record_Type_To_Search_Page'
+                And I capture the page screenshot
+                And I select the radio button for 'Project_Record' in the choose a record type to search page
+                And I capture the page screenshot
+                And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Projects_Page'
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        # When JS Enabled >> Sponsor org is taking too long to display data >>JS DIsabled only for Sponsor selection -Advanced_Filters_Nth
 
         @SortModificationsByColumn @rsp-4090
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
@@ -37,6 +44,73 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Modification_Type   | modification type   |
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
+
+        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016 @TestONly
+        Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                And the default page size should be 'twenty'
+                And the 'Next' button will be 'available' to the user
+                And the 'Previous' button will be 'not available' to the user
+                And the current page number should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                And I capture the page screenshot
+                Examples:
+                        | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
+                        | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+                        | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
+        @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @rsp-4016
+        Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                And the 'Previous' button will be 'available' to the user
+                And the 'Next' button will be 'not available' to the user
+                And I capture the page screenshot
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                And I capture the page screenshot
+                Examples:
+                        | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
+                        | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+                        | previous link     | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
+        @SearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031
+        Scenario: Verify back and short project title link navigation for search modifications tasklist
+                And I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for modifications received for approval
+                And Each 'short project title' displayed on the 'Search_Modifications_Page' is a link
+                When I click a 'short project title' on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the project overview page
+                When I click the 'Back' link on the 'Project_Overview_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+                When I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for modifications received for approval
+                Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
+                When I click a 'modification id' on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the review all changes modifications page
+                When I click the 'Back' link on the 'Review_All_Changes_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
@@ -482,7 +556,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @fail @ScriptNeedsFixing @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
@@ -504,7 +578,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118 @fail @ScriptNeedsFixing @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118 @RTS
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
@@ -539,14 +613,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 And I capture the page screenshot
                 Examples:
                         | Advanced_Filters                      |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
                         | Advanced_Filters_Sponsor_Organisation |
 
         @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID
@@ -616,7 +682,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 When I click the 'Back' link on the 'Approvals_Page'
                 Then I can see the 'Home_Page'
 
-        # Issue in sponsor org -too long to display RTS data
         @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
@@ -639,8 +704,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Advanced_Filter_Two_Participating_Nation_Selected   |
                         | Advanced_Filter_Three_Participating_Nation_Selected |
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
-        # | Advanced_Filters_Nth                                |
-
+                        | Advanced_Filters_Nth                                |
 
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
@@ -664,7 +728,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Advanced_Filter_Two_Participating_Nation_Selected   |
                         | Advanced_Filter_Three_Participating_Nation_Selected |
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
-        # | Advanced_Filters_Nth                                |
+                        | Advanced_Filters_Nth                                |
 
         # Can't close advanced filters panel- for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167

@@ -9,9 +9,10 @@ export default class ApprovalsPage {
   readonly approvalsPageTestData: typeof approvalsPageTestData;
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
+  readonly mainPageContent: Locator;
   readonly pageHeading: Locator;
-  readonly searchLink: Locator;
-  readonly search_hint_label: Locator;
+  readonly search_records_link: Locator;
+  readonly search_records_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -21,11 +22,14 @@ export default class ApprovalsPage {
     this.linkTextData = linkTextData;
 
     //Locators
-    this.pageHeading = this.page.getByRole('heading').getByText(this.approvalsPageTestData.Approvals_Page.pageHeading);
-    this.searchLink = this.page.getByText(this.linkTextData.System_Administration_Page.Manage_Review_Bodies, {
-      exact: true,
-    });
-    this.search_hint_label = this.searchLink.locator('..').getByRole('paragraph');
+    this.mainPageContent = this.page.getByTestId('main-content');
+    this.pageHeading = this.mainPageContent
+      .getByRole('heading')
+      .getByText(this.approvalsPageTestData.Approvals_Page.pageHeading);
+    this.search_records_link = this.mainPageContent
+      .getByRole('link')
+      .getByText(this.approvalsPageTestData.Approvals_Page.search_records_link);
+    this.search_records_hint_label = this.search_records_link.locator('..').getByRole('paragraph');
   }
 
   //Page Methods
@@ -34,6 +38,14 @@ export default class ApprovalsPage {
   }
 
   async assertOnApprovalsPage() {
-    await expect(this.pageHeading).toBeVisible();
+    // expect
+    //   .soft(await this.page.title())
+    //   .toBe(this.approvalsPageTestData.Approvals_Page.title);
+    await expect.soft(this.pageHeading).toBeVisible();
+    await expect.soft(this.search_records_link).toBeVisible();
+    await expect.soft(this.search_records_hint_label).toBeVisible();
+    expect
+      .soft(await this.search_records_hint_label.textContent())
+      .toBe(this.approvalsPageTestData.Approvals_Page.search_records_hint_label);
   }
 }

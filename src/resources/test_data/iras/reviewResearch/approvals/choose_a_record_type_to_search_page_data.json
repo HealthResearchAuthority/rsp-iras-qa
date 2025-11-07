@@ -1,10 +1,13 @@
 {
   "Choose_A_Record_Type_To_Search_Page": {
     "pageHeading": "Choose a record type to search",
-    "hint_text": "Choose one"
-  },
-  "Label_Texts": {
+    "hint_text": "Choose one",
     "project_record_label": "Project record",
     "modification_record_label": "Modification record"
+  },
+  "Error_Validation": {
+    "No_Record_Type_Selected_Error": {
+      "recordType_radio": "Select a record type"
+    }
   }
 }

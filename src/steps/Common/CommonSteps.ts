@@ -459,6 +459,7 @@ Then(
       completeYourProfilePage,
       editYourProfilePage,
       addDocumentDetailsForSpecificDocumentModificationsPage,
+      chooseARecordTypeToSearchPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -552,6 +553,12 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = addDocumentDetailsForSpecificDocumentModificationsPage;
+    } else if (pageKey == 'Choose_A_Record_Type_To_Search_Page') {
+      errorMessageFieldDataset =
+        chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = chooseARecordTypeToSearchPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

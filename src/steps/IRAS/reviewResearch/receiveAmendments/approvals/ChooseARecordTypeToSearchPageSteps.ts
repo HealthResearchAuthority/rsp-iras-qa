@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../hooks/CustomFixtures';
+import { test } from '../../../../../hooks/CustomFixtures';
 import { expect } from '@playwright/test';
 
 const { Then } = createBdd(test);
@@ -14,9 +14,12 @@ Then(
     let recordType: string;
     if (radioButtonValue === 'Modification_Record') {
       recordType =
-        chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Label_Texts.modification_record_label;
+        chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Choose_A_Record_Type_To_Search_Page
+          .modification_record_label;
     } else {
-      recordType = chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Label_Texts.project_record_label;
+      recordType =
+        chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Choose_A_Record_Type_To_Search_Page
+          .project_record_label;
     }
     const locatorVal = await chooseARecordTypeToSearchPage.selectRecordTypeToSearch(recordType);
     await expect.soft(locatorVal).toBeChecked();
