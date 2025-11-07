@@ -1,7 +1,7 @@
 {
   "Sponsor_Reference_Page": {
     "heading": "Add sponsor reference, date and brief summary of changes",
-    "sponsor_modification_reference_label": "Sponsor modification reference",
+    "sponsor_modification_reference_label": "Sponsor modification reference (optional)",
     "sponsor_modification_reference_date_label": "Sponsor modification date",
     "sponsor_modification_date_day_label": "Day",
     "sponsor_modification_date_month_label": "Month",
@@ -10,7 +10,7 @@
   },
   "Label_Texts": {
     "sponsor_modification_date_label": "Sponsor modification date (optional)",
-    "sponsor_modification_date_hint_label": "For example, 27 March 2029",
+    "sponsor_modification_date_hint_label": "For example, 19 June 2030",
     "characters_remaining_label": "You have 3200 characters remaining"
   },
   "Missing_Mandatory_Fields_Error": {
@@ -23,16 +23,16 @@
     "sponsor_modification_date_day_textbox": "Sponsor modification date must be today or in the past"
   },
   "Valid_Data_All_Fields": {
-    "sponsor_modification_reference_textbox": "Sponsor Reference Text",
+    "sponsor_modification_reference_textbox": "(NSA#20):165-774.21/89, pharmaceutical conditon_IB",
     "sponsor_modification_date_day_textbox": "01",
     "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": "2030",
-    "sponsor_summary_textbox": "This is a test summary for the sponsor reference modification page. This summary is intended to provide a brief overview of the changes being proposed in this modification. The purpose of this summary is to ensure that all stakeholders are informed about the nature of the modifications and can provide feedback or approval as necessary."
+    "sponsor_summary_textbox": "On behalf of the study Sponsor, HRA Inc, we would like to resubmit a substantial amendment application previous ethics (11/HRA/HDR5 and 16/HP/0219) to Study FR-WEAD-ED: 1. We have updated some names in positions within Fundicó to reflect staff changes. 2. We have extended the provisional end date for the project. 3. We have explicitly added that we can link health data to data which is likely to impact on acute admissions, to understand the wider determinants of health. This includes data such as air quality, pollen counts, and experimental data from laboratory studies, assessing inflammation, for example. We already feel this is part of our remit and have supported data applications which have requested health data linked to air pollution, for example. However, we wished to add this explicitly to the protocol. 4. After some enquiries about whether a dataset requested from HRA can be exclusively “owned” by a requestor, we have added an explicit statement to our protocol that HRA data will be non-exclusive and that we may curate similar or even the same dataset for other researchers. This is to support open, reproducible science, where researchers can check and build on other people’s findings. This is in line with the FAIR principles of data used in science (that the data should be Findable, Accessible, Interoperable (able to be linked to other data) and Reusable). 5. Explicitly stated that data processing and storage can occur both on-premise and in Data Controller cloud services, reflecting HRA's move to cloud processes. The cloud services are equally as secure as on premise facilities and reduce the need for sending data to other centres for analysis, as we can offer secure analytical environments which remain under the Data Controller. a) We have made the role of the Data Trust Committee Chair clearer in the protocol, including who can hold this role. After discussion with the DMC members, they have asked for their names not to be on the public HRA website, and we have changed the text in the protocol to reflect this. b) We have updated the composition of the HRA Oversight Group, to reflect how it operates after our experiences to date. c) We have updated the Strategy Executive Group to reflect its current operations - ICF Parent/Legal Guardian V2.4 dated 05Dec2025: in Tables 1, 2 and 3 technical errors were removed and superscript references for additional information provided under these tables were corrected. ICF is now version 2.4 dated 19Jan2026. Please find enclosed track and clean version of the document. + Investigator’s Brochure (IB) Version 9.0, dated 13-Dec-2024 + Participant information sheet (PIS) Version 3.0, dated 13-Mar-2024 + Informed Consent Form (ICF) Version 3.0, dated 13-Mar-2024 • Protocol HRA-301 version 4.0 dated 13 February 2024 • Inclusion of subjects with mild cognitive impairment. Site changed from: Björn Clinical Trials Limited 120A Séraphïn Road Belfast BT3 2ED Northern Ireland To: Çelesté Clinical Trials Limited Linenhall Exchange 26 Tërmïnäl Street Belfast BT1 8RH Northern Ireland ABC 1234 ! ” £ $ % ^ & * ( ) _ + [ ] { } ; : @ ‘ ~ # < > , . ? /` ¬ λγθν€£¥©®™±≠≤≥÷×∞µ×÷≥∩∫≈≠≡≤≥⌂⌐⌠⌡"
   },
   "Missing_Mandatory_Field": {
-    "sponsor_modification_reference_textbox": "Sponsor Reference Text",
+    "sponsor_modification_reference_textbox": "(NSA#20):165-774.21/89, pharmaceutical conditon_IB",
     "sponsor_modification_date_day_textbox": "01",
-    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": "2030"
   },
   "Max_Character_Sponsor_Summary_Fields": {
@@ -40,52 +40,52 @@
   },
   "Invalid_Day_Number": {
     "sponsor_modification_date_day_textbox": "32",
-    "sponsor_modification_date_month_textbox": "December",
+    "sponsor_modification_date_month_dropdown": "December",
     "sponsor_modification_date_year_textbox": "2028"
   },
   "Invalid_Day_Letters": {
     "sponsor_modification_date_day_textbox": "o1",
-    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": "2028"
   },
   "Invalid_Year_Number_1": {
     "sponsor_modification_date_day_textbox": "1",
-    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": "28"
   },
   "Invalid_Year_Number_2": {
     "sponsor_modification_date_day_textbox": "1",
-    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": "'28"
   },
   "Invalid_Year_Letters": {
     "sponsor_modification_date_day_textbox": "1",
-    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": "'2ooo"
   },
   "Invalid_Date_Past": {
     "sponsor_modification_date_day_textbox": "1",
-    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": "'2020"
   },
   "Invalid_Date_Today": {
     "sponsor_modification_date_day_textbox": "Today_Day",
-    "sponsor_modification_date_month_textbox": "Today_Month",
+    "sponsor_modification_date_month_dropdown": "Today_Month",
     "sponsor_modification_date_year_textbox": "'Today_Year"
   },
   "Invalid_Date_No_Day": {
     "sponsor_modification_date_day_textbox": "",
-    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": "2028"
   },
   "Invalid_Date_No_Month": {
     "sponsor_modification_date_day_textbox": "1",
-    "sponsor_modification_date_month_textbox": "Choose month",
+    "sponsor_modification_date_month_dropdown": "Choose month",
     "sponsor_modification_date_year_textbox": "2028"
   },
   "Invalid_Date_No_Year": {
     "sponsor_modification_date_day_textbox": "1",
-    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_month_dropdown": "January",
     "sponsor_modification_date_year_textbox": ""
   },
   "Valid_Data_All_Fields_Changes": {

@@ -430,8 +430,8 @@ Feature: Create Amendment - Create Modifications
   # Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
   # When I click the change link '<Change_Field>' on modification review changes page
   # Then I can see the 'Planned_End_Date' page for modifications
-
-  @rsp-4364 @ValidateSponsorReferenceModifications
+  
+  @rsp-4364 @ValidateSponsorReferenceModifications @KNOWN-DEFECT-RSP-5184
   Scenario Outline: Verify user is able to fill sponsor reference details for the modification
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -531,8 +531,8 @@ Feature: Create Amendment - Create Modifications
     And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    # Then I can see the review all changes modifications page
-    # Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
+    Then I can see the review all changes modifications page
+    Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
 
     Examples:
       | Changes              | Sponsor_Reference_Page |
@@ -584,7 +584,8 @@ Feature: Create Amendment - Create Modifications
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Sponsor_Reference_Page'
-
+    And I capture the page screenshot
+    
     Examples:
       | Changes                 | Sponsor_Reference_Page               | Field_And_Summary_Error_Message |
       | Change_Planned_End_Date | Missing_Mandatory_Field              | Missing_Mandatory_Fields_Error  |

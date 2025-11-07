@@ -14,7 +14,7 @@ Then(
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, sponsorReferencePage);
-        expect(labelVal).toBe(dataset[key]);
+        expect.soft(labelVal).toBe(dataset[key]);
       }
     }
   }
