@@ -209,6 +209,7 @@ Feature: Create Modification- This feature file help an applicant user complete 
   # And I can see the modification review changes page
   # Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
   # When I click the change link '<Change_Field>' on modification review changes page
+  # When I click the change link '<Change_Field>' on modification review changes page
   # Then I can see the 'Planned_End_Date' page for modifications
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496
