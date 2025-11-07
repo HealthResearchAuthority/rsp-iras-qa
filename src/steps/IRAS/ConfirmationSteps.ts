@@ -280,12 +280,14 @@ Then(
     const guidanceText = confirmationPage.confirmationPageTestData[validationLabelsDatasetName].page_guidance_text;
     const whatHappensNextLabel =
       confirmationPage.confirmationPageTestData[validationLabelsDatasetName].what_happens_next_label;
+    const expectedGuidanceText = confirmationPage.confirmation_body_label
+      .getByText(confirmationPage.confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.page_guidance_text)
+      .first()
+      .textContent();
     expect
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedSuccessHeader);
-    expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
-      .toBe(guidanceText);
+    expect.soft(confirmStringNotNull(await expectedGuidanceText).trim()).toBe(guidanceText);
     expect
       .soft(confirmStringNotNull(await confirmationPage.what_happens_next_label.textContent()).trim())
       .toBe(whatHappensNextLabel);
