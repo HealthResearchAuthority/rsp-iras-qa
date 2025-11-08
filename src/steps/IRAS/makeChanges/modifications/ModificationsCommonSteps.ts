@@ -9,6 +9,20 @@ Then('I can see the {string} page for modifications', async ({ modificationsComm
   await modificationsCommonPage.assertOnModificationsPage(dataset);
 });
 
+Then('I can see the review all changes page', async ({ reviewAllChangesPage }) => {
+  await reviewAllChangesPage.assertOnReviewAllChangesPage();
+});
+
+Then(
+  'I can see the modification page matching with the specific change using {string} dataset',
+  async ({ modificationsCommonPage }, datasetName) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeName = Object.keys(dataset);
+    const expectedPageHeading = dataset[changeName].specific_change_dropdown;
+    await expect(modificationsCommonPage.pageHeading.getByText(expectedPageHeading)).toBeVisible();
+  }
+);
+
 Then(
   'I validate the project information labels using {string} dataset displayed on modifications page',
   async (
@@ -41,14 +55,32 @@ Then(
 
 Then(
   'I create {string} for the created modification',
-  async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
+  async (
+    {
+      commonItemsPage,
+      modificationsCommonPage,
+      selectAreaOfChangePage,
+      projectIdentificationSelectChangePage,
+      projectIdentificationSelectReferenceToChangePage,
+      projectIdentificationEnterReferenceNumbersPage,
+    },
+    datasetName
+  ) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset);
     for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
       const changeName = changeNames[changeIndex];
       const changeDataset = changesDataset[changeName];
       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
-      await modificationsCommonPage.createChangeModification(changeName, changeDataset);
+      await modificationsCommonPage.createChangeModification(
+        {
+          projectIdentificationSelectChangePage,
+          projectIdentificationSelectReferenceToChangePage,
+          projectIdentificationEnterReferenceNumbersPage,
+        },
+        changeName,
+        changeDataset
+      );
       // Only click "Add Another Change" if it's not the last iteration
       if (changeIndex < changeNames.length - 1) {
         await commonItemsPage.clickButton('Modification_Details_Page', 'Add_Another_Change');
@@ -58,18 +90,60 @@ Then(
 );
 
 Then(
-  'I keep note of the individual and overall ranking of changes created using {string}',
-  async ({ modificationsCommonPage }, datasetName) => {
+  'I keep note of the individual and overall ranking of changes created using {string} and {string} dataset',
+  async ({ modificationsCommonPage, researchLocationsPage }, datasetName, datasetNameResearchLocation) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const researchLocationDataset = researchLocationsPage.researchLocationsPageTestData[datasetNameResearchLocation];
     for (const changeName of Object.keys(changesDataset)) {
       const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
       if ('which_organisation_change_affect_checkbox' in changeDataset) {
         await modificationsCommonPage.calculateAndStoreRankingForChangesForApplicability(changeName, changeDataset);
       } else {
-        await modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(changeName);
+        await modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(
+          changeName,
+          changeDataset,
+          researchLocationDataset
+        );
       }
       await modificationsCommonPage.calculateAndStoreOverallRanking();
     }
+  }
+);
+
+Then(
+  'I validate the individual and overall ranking of changes on the relevant modification page',
+  async ({ modificationsCommonPage }) => {
+    const { actualValuesArray, ranking, changeNames } = await modificationsCommonPage.getIndividualRankingData();
+    const overallExpected = await modificationsCommonPage.getOverallRankingForChanges();
+    // Overall Ranking Assertions
+    const overAllActual = actualValuesArray[0];
+    expect.soft(overAllActual.modificationType).toBe(overallExpected.modificationType);
+    expect.soft(overAllActual.category).toBe(overallExpected.category);
+    expect.soft(overAllActual.reviewType).toBe(overallExpected.reviewType);
+    // Individual Ranking Assertions
+    const reversedChangeNames = changeNames.toReversed();
+    for (let arrayIndex = 0, fieldIndex = 1; arrayIndex < actualValuesArray.length - 1; arrayIndex++, fieldIndex++) {
+      const changeName = reversedChangeNames[arrayIndex];
+      const changeRankings = ranking[changeName];
+
+      if (changeRankings && changeRankings.length > 0) {
+        const { expectedModificationType, expectedCategory, expectedReviewType } = changeRankings[0];
+        expect.soft(actualValuesArray[fieldIndex].modificationType).toBe(expectedModificationType);
+        expect.soft(actualValuesArray[fieldIndex].category).toBe(expectedCategory);
+        expect.soft(actualValuesArray[fieldIndex].reviewType).toBe(expectedReviewType);
+      } else {
+        throw new Error(`No ranking data found for changeName: ${changeName}`);
+      }
+    }
+  }
+);
+
+Then(
+  'I validate the individual ranking of change on the relevant modification page using {string} dataset',
+  async ({ modificationsCommonPage }, datasetName) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeName = Object.keys(dataset);
+    await modificationsCommonPage.validateRankingForIndividualChange(dataset[changeName]);
   }
 );
 
@@ -79,7 +153,7 @@ Then(
     {
       commonItemsPage,
       modificationsCommonPage,
-      reviewChangesPlannedEndDatePage,
+      modificationReviewChangesPage,
       plannedEndDateChangePage,
       affectedOrganisationSelectionPage,
       affectedOrganisationQuestionsPage,
@@ -107,15 +181,15 @@ Then(
       // Ensure page is loaded
       await commonItemsPage.page.waitForLoadState('domcontentloaded');
       //validate the review changes page for the specific change
-      await reviewChangesPlannedEndDatePage.assertOnReviewChangesSpecificChangePage(specificChange);
-      // When I click the change link '<Change_Field>' on review changes planned end date page
+      await modificationReviewChangesPage.assertOnReviewChangesSpecificChangePage(specificChange);
+      // When I click the change link '<Change_Field>' on modification review changes page
       if (specificChange === 'Change to planned end date') {
-        if (await reviewChangesPlannedEndDatePage.new_planned_project_end_date_change_link.isVisible()) {
-          await reviewChangesPlannedEndDatePage.clickChangeLinks('New_Planned_End_Date');
+        if (await modificationReviewChangesPage.new_planned_project_end_date_change_link.isVisible()) {
+          await modificationReviewChangesPage.clickChangeLinks('New_Planned_End_Date');
           await plannedEndDateChangePage.fillPlannedProjectEndDateModificationsPage(changeDataset, 'edit');
         }
-        if (await reviewChangesPlannedEndDatePage.affected_organisation_types_change_link.isVisible()) {
-          await reviewChangesPlannedEndDatePage.clickChangeLinks('affected_organisation_types');
+        if (await modificationReviewChangesPage.affected_organisation_types_change_link.isVisible()) {
+          await modificationReviewChangesPage.clickChangeLinks('affected_organisation_types');
           await commonItemsPage.clearCheckboxes(
             'which_organisation_change_affect_checkbox',
             affectedOrganisationSelectionPage
@@ -133,7 +207,7 @@ Then(
         }
       }
       await commonItemsPage.clickButton('Review_Changes_Planned_End_Date_Page', 'Save_Continue');
-      await commonItemsPage.clickButton('Modifications_Details_Page', 'Save_Continue_Review');
+      await commonItemsPage.clickButton('Modification_Details_Page', 'Save_Continue_Review');
       await commonItemsPage.clickButton('Sponsor_Reference_Page', 'Save_Continue_Review');
     }
   }
@@ -166,6 +240,9 @@ const validateCardData = (expectedData: any, actualData: any) => {
     return expected.every((val, index) => val === actual[index]);
   };
   for (const key of Object.keys(expectedData)) {
+    if (key.includes('change_status')) {
+      continue;
+    }
     const expectedValue = expectedData[key];
     const actualValue = actualData[key];
     if (Array.isArray(expectedValue)) {
@@ -173,7 +250,7 @@ const validateCardData = (expectedData: any, actualData: any) => {
       const sortedActual = [...(actualValue || [])].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
       expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
     } else {
-      expect.soft(actualValue).toBe(expectedValue);
+      expect.soft(actualValue).toStrictEqual(expectedValue);
     }
   }
 };
@@ -189,7 +266,8 @@ Then(
       const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
       const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
         cardTitle,
-        reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading
+        reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading,
+        expectedData
       );
       validateCardData(expectedData, actualData.cardData);
     }
@@ -202,7 +280,8 @@ Then(
     const expectedData = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
     const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
       reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
-      reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading
+      reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
+      expectedData
     );
     validateCardData(Object.keys(expectedData), actualData.cardData);
   }
@@ -279,5 +358,50 @@ Then(
       await expect.soft(reviewAllChangesPage.now_send_to_sponsor_heading).not.toBeVisible();
       await expect.soft(reviewAllChangesPage.now_send_to_sponsor_hint_label).not.toBeVisible();
     }
+  }
+);
+
+Then(
+  'I fill the modification enter free text page using {string} dataset',
+  async ({ modificationsCommonPage, commonItemsPage }, datasetName: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    for (const subKey in dataset) {
+      const subDataset = dataset[subKey];
+      if (subDataset.specific_change_dropdown) {
+        await modificationsCommonPage.validatePageHeading(subDataset.specific_change_dropdown);
+      }
+      if (subDataset.changes_free_text) {
+        await commonItemsPage.fillUIComponent(subDataset, 'changes_free_text', modificationsCommonPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I can validate that an error is shown when the entered free text exceeds the character limit on enter free text page',
+  async ({ modificationsCommonPage, commonItemsPage }) => {
+    const expectedFreeTextSummaryError =
+      modificationsCommonPage.modificationsCommonPageTestData.Summary_Error_Messages.changes_free_text_summary_error;
+    const actualFreeTextSummaryError = confirmStringNotNull(
+      await modificationsCommonPage.changes_free_text_summary_error.textContent()
+    );
+    expect.soft(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    expect.soft(modificationsCommonPage.changes_free_text_summary_error).toBeVisible();
+    expect.soft(actualFreeTextSummaryError).toBe(expectedFreeTextSummaryError);
+  }
+);
+
+Then(
+  'I validate the free text content and specific change label on review modifications page using {string} dataset',
+  async ({ modificationsCommonPage, modificationReviewChangesPage }, changeDatasetName: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[changeDatasetName];
+    const changeName = Object.keys(dataset);
+    const expectedFreeText = dataset[changeName]['changes_free_text'];
+    const actualFreeText = confirmStringNotNull(await modificationReviewChangesPage.changes_free_text.textContent());
+    const actualSpecificChangeLabel = confirmStringNotNull(
+      await modificationsCommonPage.pageHeading.getByText(dataset[changeName]['specific_change_dropdown']).textContent()
+    );
+    expect.soft(actualSpecificChangeLabel).toBe(dataset[changeName]['specific_change_dropdown']);
+    expect.soft(actualFreeText).toBe(expectedFreeText);
   }
 );

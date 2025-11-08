@@ -12,6 +12,7 @@ export default class SponsorReferencePage {
   readonly sponsor_modification_date_day_textbox: Locator;
   readonly sponsor_modification_date_month_dropdown: Locator;
   readonly sponsor_modification_date_year_textbox: Locator;
+  readonly sponsor_modification_date_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -62,6 +63,7 @@ export default class SponsorReferencePage {
         has: this.page.getByText(this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_summary_label),
       })
       .getByRole('textbox');
+    this.sponsor_modification_date_hint_label = this.page.getByTestId('Questions[1]_AnswerText-hint').locator('p');
   }
 
   //Page Methods

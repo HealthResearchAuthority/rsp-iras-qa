@@ -50,6 +50,7 @@ export default class AuditHistoryReviewBodyPage {
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
   }
 
+  //Page Methods
   async assertOnAuditHistoryReviewBodyPage() {
     await expect(this.page_heading).toBeVisible();
     await expect(this.date_column_header).toBeVisible();
