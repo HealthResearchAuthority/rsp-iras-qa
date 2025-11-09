@@ -1,4 +1,8 @@
 {
+  "Participating_Organisations_Page": {
+    "guidance_header_cant_find_organisation": "Can't find your organisation?",
+    "guidance_body_cant_find_organisation": "Can't find your organisation? This section is asking for details of the organisation responsible for the research at a certain location. This may be different from the actual location the research is taking place. For example, in the case of an NHS hospital in England you should search for the Trust responsible for that hospital. You can improve your search results by: adding or removing filters double-checking your spelling using fewer keywords searching for something less specific If you still can't find what you're looking for, contact the Service Desk with your IRAS ID and the name and address of the organisations you want to add. Service Desk will notify you on the outcome. It can take up to 2 weeks for an organisation to be added.Service Desk email: service.desk@hra.nhs.uk You can either save this change and its modification to submit later once the organisation has been added, or submit the modification now without the organisation and create a separate one once the organisation is available."
+  },
   "Label_Texts": {
     "iras_id_label": "IRAS ID",
     "short_project_title_label": "Short project title",

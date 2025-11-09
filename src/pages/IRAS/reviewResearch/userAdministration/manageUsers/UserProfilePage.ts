@@ -3,6 +3,9 @@ import * as userProfilePageTestData from '../../../../../resources/test_data/ira
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import * as dbConfigData from '../../../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../../../utils/DbConfig';
+import { IResult } from 'mssql';
 
 //Declare Page Objects
 export default class UserProfilePage {
@@ -10,6 +13,7 @@ export default class UserProfilePage {
   readonly userProfilePageTestData: typeof userProfilePageTestData;
   readonly linkTextData: typeof linkTextData;
   readonly buttonTextData: typeof buttonTextData;
+  readonly dbConfigData: typeof dbConfigData;
   private _userid: string;
   private _title: string;
   private _new_title: string;
@@ -79,6 +83,7 @@ export default class UserProfilePage {
     this.userProfilePageTestData = userProfilePageTestData;
     this.linkTextData = linkTextData;
     this.buttonTextData = buttonTextData;
+    this.dbConfigData = dbConfigData;
     this._userid = '';
     this._title = '';
     this._new_title = '';
@@ -192,87 +197,6 @@ export default class UserProfilePage {
     this.last_updated_value = this.last_updated_row.locator('td').nth(1);
     this.disable_header_label = this.enable_header_label = this.page.locator('h2[class="govuk-heading-m"]');
     this.disable_hint_label = this.enable_hint_label = this.page.locator('div[class="govuk-hint"]');
-  }
-
-  async assertOnUserProfilePage() {
-    await expect(this.page_heading).toBeVisible();
-  }
-
-  async goto(userId: string) {
-    await this.page.goto(`admin/users/viewuser?userId=${userId}`);
-  }
-
-  async clickOnChangeUserProfileDetails(editUserFieldName: string, userRole: string) {
-    switch (editUserFieldName) {
-      case 'title_text':
-        await this.title_change_link.click();
-        break;
-      case 'first_name_text':
-        await this.first_name_change_link.click();
-        break;
-      case 'last_name_text':
-        await this.last_name_change_link.click();
-        break;
-      case 'email_address_text':
-        await this.email_address_change_link.click();
-        break;
-      case 'telephone_text':
-        await this.telephone_change_link.click();
-        break;
-      case 'organisation_text':
-        await this.organisation_change_link.click();
-        break;
-      case 'job_title_text':
-        await this.job_title_change_link.click();
-        break;
-      case 'role_checkbox':
-        await this.role_change_link.click();
-        break;
-      case 'country_checkbox':
-        if (!userRole.trim().toLocaleLowerCase().includes('team manager')) {
-          break;
-        } else {
-          await this.country_change_link.click();
-          break;
-        }
-      case 'review_body':
-        if (
-          !userRole.trim().toLocaleLowerCase().includes('study-wide reviewer') &&
-          !userRole.trim().toLocaleLowerCase().includes('workflow co-ordinator')
-        ) {
-          break;
-        } else {
-          await this.review_body_change_link.click();
-          break;
-        }
-      default:
-        throw new Error(`${editUserFieldName} is not a valid field to edit user profile`);
-    }
-  }
-
-  async getUserProfileValue(editUserFieldName: string) {
-    switch (editUserFieldName) {
-      case 'title_text':
-        return confirmStringNotNull(await this.title_value.textContent()).trim();
-      case 'first_name_text':
-        return confirmStringNotNull(await this.first_name_value.textContent()).trim();
-      case 'last_name_text':
-        return confirmStringNotNull(await this.last_name_value.textContent()).trim();
-      case 'email_address_text':
-        return confirmStringNotNull(await this.email_address_value.textContent()).trim();
-      case 'telephone_text':
-        return confirmStringNotNull(await this.telephone_value.textContent()).trim();
-      case 'organisation_text':
-        return confirmStringNotNull(await this.organisation_value.textContent()).trim();
-      case 'job_title_text':
-        return confirmStringNotNull(await this.job_title_value.textContent()).trim();
-      case 'role_checkbox':
-        return confirmStringNotNull(await this.role_value.textContent()).trim();
-      case 'country_checkbox':
-        return confirmStringNotNull(await this.country_value.textContent()).trim();
-      default:
-        throw new Error(`${editUserFieldName} is not a valid user profile field`);
-    }
   }
 
   //Getters & Setters for Private Variables
@@ -426,5 +350,151 @@ export default class UserProfilePage {
 
   async setRole(value: string[]): Promise<void> {
     this._role = value;
+  }
+
+  //Page Methods
+  async assertOnUserProfilePage() {
+    await expect(this.page_heading).toBeVisible();
+  }
+
+  async goto(userId: string) {
+    await this.page.goto(`admin/users/viewuser?userId=${userId}`);
+  }
+
+  async clickOnChangeUserProfileDetails(editUserFieldName: string, userRole: string) {
+    switch (editUserFieldName) {
+      case 'title_text':
+        await this.title_change_link.click();
+        break;
+      case 'first_name_text':
+        await this.first_name_change_link.click();
+        break;
+      case 'last_name_text':
+        await this.last_name_change_link.click();
+        break;
+      case 'email_address_text':
+        await this.email_address_change_link.click();
+        break;
+      case 'telephone_text':
+        await this.telephone_change_link.click();
+        break;
+      case 'organisation_text':
+        await this.organisation_change_link.click();
+        break;
+      case 'job_title_text':
+        await this.job_title_change_link.click();
+        break;
+      case 'role_checkbox':
+        await this.role_change_link.click();
+        break;
+      case 'country_checkbox':
+        if (!userRole.trim().toLocaleLowerCase().includes('team manager')) {
+          break;
+        } else {
+          await this.country_change_link.click();
+          break;
+        }
+      case 'review_body':
+        if (
+          !userRole.trim().toLocaleLowerCase().includes('study-wide reviewer') &&
+          !userRole.trim().toLocaleLowerCase().includes('workflow co-ordinator')
+        ) {
+          break;
+        } else {
+          await this.review_body_change_link.click();
+          break;
+        }
+      default:
+        throw new Error(`${editUserFieldName} is not a valid field to edit user profile`);
+    }
+  }
+
+  async getUserProfileValue(editUserFieldName: string) {
+    switch (editUserFieldName) {
+      case 'title_text':
+        return confirmStringNotNull(await this.title_value.textContent()).trim();
+      case 'first_name_text':
+        return confirmStringNotNull(await this.first_name_value.textContent()).trim();
+      case 'last_name_text':
+        return confirmStringNotNull(await this.last_name_value.textContent()).trim();
+      case 'email_address_text':
+        return confirmStringNotNull(await this.email_address_value.textContent()).trim();
+      case 'telephone_text':
+        return confirmStringNotNull(await this.telephone_value.textContent()).trim();
+      case 'organisation_text':
+        return confirmStringNotNull(await this.organisation_value.textContent()).trim();
+      case 'job_title_text':
+        return confirmStringNotNull(await this.job_title_value.textContent()).trim();
+      case 'role_checkbox':
+        return confirmStringNotNull(await this.role_value.textContent()).trim();
+      case 'country_checkbox':
+        return confirmStringNotNull(await this.country_value.textContent()).trim();
+      default:
+        throw new Error(`${editUserFieldName} is not a valid user profile field`);
+    }
+  }
+
+  async setAllUserProfileValues(userQueryResult: IResult<any>, userRolesQueryResult: IResult<any>): Promise<void> {
+    await this.setUserId(userQueryResult.recordset[0].Id);
+    await this.setFirstName(userQueryResult.recordset[0].GivenName);
+    await this.setLastName(userQueryResult.recordset[0].FamilyName);
+    await this.setEmail(userQueryResult.recordset[0].UserName);
+    if (userQueryResult.recordset[0].Country === null) {
+      await this.setCountries(['']);
+    } else {
+      await this.setCountries(userQueryResult.recordset[0].Country.split(','));
+    }
+    if (userQueryResult.recordset[0].JobTitle === null) {
+      await this.setJobTitle('');
+    } else {
+      await this.setJobTitle(userQueryResult.recordset[0].JobTitle);
+    }
+    if (userQueryResult.recordset[0].Organisation === null) {
+      await this.setOrganisation('');
+    } else {
+      await this.setOrganisation(userQueryResult.recordset[0].Organisation);
+    }
+    if (userQueryResult.recordset[0].Telephone === null) {
+      await this.setTelephone('');
+    } else {
+      await this.setTelephone(userQueryResult.recordset[0].Telephone);
+    }
+    if (userQueryResult.recordset[0].Title === null) {
+      await this.setTitle('');
+    } else {
+      await this.setTitle(userQueryResult.recordset[0].Title);
+    }
+    await this.setTitle(userQueryResult.recordset[0].Title);
+    const roles: string[] = [];
+    for (const role of userRolesQueryResult.recordset) {
+      const key = role.Name;
+      roles.push(this.userProfilePageTestData.User_Roles[key]);
+    }
+    await this.setRole(roles);
+  }
+
+  // SQL STATEMENTS //
+  async sqlGetUserProfileByEmail(email: string): Promise<void> {
+    const sqlConnection = await connect(dbConfigData.Identity_Service);
+    const queryResult = await sqlConnection.query(`SELECT * FROM Users WHERE UserName = '${email}'`);
+    const userId = queryResult.recordset[0].Id;
+    const rolesQueryResult = await sqlConnection.query(`SELECT Name FROM Roles
+INNER JOIN UserRoles ON UserRoles.RoleId = Roles.Id
+WHERE UserRoles.UserId = '${userId}'`);
+    console.dir(queryResult);
+    console.dir(rolesQueryResult);
+    await this.setAllUserProfileValues(queryResult, rolesQueryResult);
+    await sqlConnection.close();
+  }
+
+  async sqlDeleteUserProfileByEmail(email: string): Promise<void> {
+    const sqlConnection = await connect(dbConfigData.Identity_Service);
+    const queryResult = await sqlConnection.query(`SELECT Id FROM Users WHERE UserName = '${email}'`);
+    if (queryResult.recordset.length > 0) {
+      await sqlConnection.query(`DELETE FROM UserRoles WHERE UserId = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM UserAuditTrails WHERE UserId = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM Users WHERE Id = '${queryResult.recordset[0].Id}'`);
+    }
+    await sqlConnection.close();
   }
 }
