@@ -31,7 +31,7 @@ Feature: Create Amendment - Contact Details Modifications
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I fill the contact details modifications page with '<Changes>' for 'create' action
@@ -88,7 +88,7 @@ Feature: Create Amendment - Contact Details Modifications
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I can see the 'Contact_Details_Select_Change_Page' page for modifications
@@ -101,7 +101,7 @@ Feature: Create Amendment - Contact Details Modifications
     Then I can see the modification progress saved successful message on project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I can see the 'Contact_Details_Select_Change_Page' page for modifications
     And I fill the contact details modifications page with 'Contact_Details_Chief_Investigator_Valid_Data' for 'create' action
@@ -114,7 +114,7 @@ Feature: Create Amendment - Contact Details Modifications
     Then I can see the modification progress saved successful message on project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I can see the 'Contact_Details_Select_Change_Page' page for modifications
     And I fill the contact details modifications page with 'Contact_Details_Sponsor_Contact_Valid_Data' for 'create' action
@@ -125,7 +125,7 @@ Feature: Create Amendment - Contact Details Modifications
     Then I can see the modification progress saved successful message on project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I can see the 'Contact_Details_Select_Change_Page' page for modifications
     And I fill the contact details modifications page with 'Contact_Details_Other_Valid_Data' for 'create' action
@@ -136,7 +136,7 @@ Feature: Create Amendment - Contact Details Modifications
     Then I can see the modification progress saved successful message on project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I can see the 'Contact_Details_Select_Change_Page' page for modifications
     And I fill the contact details modifications page with 'Contact_Details_Other_Valid_Data' for 'create' action
@@ -161,7 +161,7 @@ Feature: Create Amendment - Contact Details Modifications
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I fill the contact details modifications page with '<Modification_Data>' for 'create' action
@@ -204,7 +204,7 @@ Feature: Create Amendment - Contact Details Modifications
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I fill the contact details modifications page with '<Modification_Data>' for 'create' action
