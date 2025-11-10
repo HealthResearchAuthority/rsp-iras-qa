@@ -219,6 +219,15 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
+    And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    And the 'Previous' button will be 'available' to the user
+    And the 'Next' button will be 'not available' to the user
+    And I capture the page screenshot
+    Then I sequentially navigate through each 'Manage_Review_Bodies_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+    Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
     And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
     Then I can see the 'System_Administration_Page'
@@ -288,3 +297,5 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
         Examples:
             | Edit_Review_Body         | Field_Name        | Advanced_Filters                     |
             | Valid_Data_In_All_Fields | Organisation_Name | Advanced_Filter_All_Countries_Active |
+
+    

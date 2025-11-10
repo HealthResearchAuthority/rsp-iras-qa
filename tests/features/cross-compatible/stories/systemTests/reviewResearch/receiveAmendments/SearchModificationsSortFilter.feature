@@ -704,6 +704,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 When I click the 'Back' link on the 'Search_Modifications_Page'
                 Then I can see the approvals home page
                 And I click the 'Search' link on the 'Approvals_Page'
+                And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
                 And I 'cannot' see active filters displayed
                 And I capture the page screenshot
