@@ -188,7 +188,6 @@ export default class CommonItemsPage {
     this.govUkLink = this.page.getByRole('link');
     this.myAccountGovUkBreadCrumbsLink = this.page.locator('.govuk-breadcrumbs__link');
     this.govUkBreadCrumbsLink = this.page.locator('a.govuk-breadcrumbs__link');
-    this.myAccountGovUkBreadCrumbsLink = this.page.locator('.govuk-breadcrumbs__link');
     this.fieldGroup = this.page.locator('.govuk-form-group');
     this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message');
