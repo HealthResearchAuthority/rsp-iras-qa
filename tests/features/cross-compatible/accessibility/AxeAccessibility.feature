@@ -2295,3 +2295,11 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Confirm' button on the 'Confirmation_Page'
     Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
     Then I can see the 'Sponsor_Org_User_List_Page'
+  @axeAccessibilitymyResearchPage @ApplicantUser
+  Scenario: My Research search and advanced filters page
+    Given I have navigated to the 'Home_Page'
+    When I click the 'My_research' link on the 'Home_Page'
+    Then I can see the 'My_Research_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations

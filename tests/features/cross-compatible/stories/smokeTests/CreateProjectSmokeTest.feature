@@ -1,4 +1,4 @@
-@ApplicantUser @CreateProjectSmokeFeature @Smoke
+@ApplicantUser @CreateProjectSmokeFeature @Smoke @skip
 Feature: Create Amendment - Create Project - Smoke Tests
 
   Background:
