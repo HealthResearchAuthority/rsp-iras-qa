@@ -16,7 +16,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
 
-        @SortModificationsByColumn @rsp-4090
+        @SortModificationsByColumn
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -45,7 +45,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
 
-        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016 @TestONly
+        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -67,7 +67,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
                         | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @rsp-4016
+        @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick
         Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot

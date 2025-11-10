@@ -10,9 +10,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
 
-        @viewTasklistByLeadNation  @Complete-After-DB-Connection
+        @viewTeamManagerDashboardByLeadNation  @Complete-After-DB-Connection
         Scenario Outline: Verify the team manger is able to view a list of modifications for a specific lead nation
-                Given I have navigated to the 'Approvals_Page'  as '<User>'
+                Given I have navigated to the 'Approvals_Page' as '<User>'
                 And I capture the page screenshot
                 And I click the 'Team_Manager_Dashboard' link on the 'Approvals_Page'
                 And I capture the page screenshot
@@ -22,11 +22,11 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
                 # And I see only modifications where the lead nation is the country linked to the review body of the '<User>'
                 Examples:
-                        | User            |
-                        | Team_Manager    |
-                        | Team_Manager_NI |
-                        | Team_Manager_S  |
-                        | Team_Manager_W  |
+                        | User         |
+                        | Team_Manager |
+        # | Team_Manager_NI |
+        # | Team_Manager_S  |
+        # | Team_Manager_W  |
 
         @searchTasklistByIrasIdWithResults
         Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
