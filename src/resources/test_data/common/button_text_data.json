@@ -262,6 +262,43 @@
     "Edit_Project_Record": "Edit project record",
     "Delete_Project": "Delete project"
   },
+  "Manage_Sponsor_Organisations_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters",
+    "Org_Name": "Organisation name",
+    "Country": "Country",
+    "Status": "Status"
+  },
+  "Setup_New_Sponsor_Organisation_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Setup_Sponsor_Organisation_Page": {
+    "Save_Profile": "Save profile",
+    "Cancel": "Cancel"
+  },
+  "Sponsor_Organisation_Profile_Page": {
+    "Disable": "Disable",
+    "Enable": "Enable"
+  },
+  "Search_Add_User_Sponsor_Org_Page": {
+    "Search": "Search"
+  },
+  "Check_Add_User_Sponsor_Org_Page": {
+    "Add_User": "Add user"
+  },
+  "Sponsor_Org_User_List_Page": {
+    "Search": "Search",
+    "First_Name": "First name",
+    "Last_Name": "Last name",
+    "Email_Address": "Email address",
+    "Status": "Status",
+    "Last_Logged_In": "Last logged in"
+  },
+  "View_Edit_User_Profile_Page": {
+    "Disable_User": "Disable user",
+    "Enable_User": "Enable user"
+  },
   "Complete_Your_Profile_Page": {
     "Save_Continue": "Save and continue"
   },
