@@ -1,0 +1,9 @@
+{
+  "Check_Setup_Sponsor_Organisation_profile_Page": {
+    "title": "Check and save sponsor organisation profile - Manage sponsor organisations - System administration - Plan and manage health and care research",
+    "heading": "Check and set up a sponsor organisation profile",
+    "guidance_text": "Check the information here is correct before creating the profile.",
+    "organisation_name_label": "Organisation name",
+    "country_label": "Country"
+  }
+}

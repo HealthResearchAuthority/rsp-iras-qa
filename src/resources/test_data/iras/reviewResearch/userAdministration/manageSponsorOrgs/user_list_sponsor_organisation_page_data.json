@@ -1,0 +1,32 @@
+{
+  "Sponsor_Organisation_User_List_Page": {
+    "title": "Users for sponsor organisation - Manage sponsor organisations - System administration - Plan and manage health and care research",
+    "heading_prefix_label": "Users for ",
+    "guidance_text": "Search for an existing user to add to this sponsor organisation",
+    "search_box_label": "Find a user",
+    "search_box_hint_text": "You can search by first name, last name or email address",
+    "search_button": "Search",
+    "Column_Header_Labels": {
+      "first_name_label": "First name",
+      "last_name_label": "Last name",
+      "email_address_label": "Email address",
+      "status_label": "Status",
+      "last_logged_in_label": "Last logged in",
+      "actions_label": "Action"
+    },
+    "user_added_to_sponsor_organisation_success_message_header_text": "Success",
+    "user_added_to_sponsor_organisation__success_message_text": "User added to this organisation",
+    "user_in_sponsor_organisation_disabled_success_message_header_text": "Success",
+    "user_in_sponsor_organisation_disabled_success_message_text": "User disabled",
+    "user_in_sponsor_organisation_enabled_success_message_header_text": "Success",
+    "user_in_sponsor_organisation_enabled_success_message_text": "User enabled"
+  },
+  "Search_For_Users_In_Sponsor_Organisations": {
+    "Search_Queries": {
+      "Existing_QA_User_First_Name": { "search_input_text": "Sponsor" },
+      "Existing_QA_User_Last_Name": { "search_input_text": "User" },
+      "Existing_QA_User_Email": { "search_input_text": "FutureIRAS.Sponsor@hra.nhs.uk" },
+      "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" }
+    }
+  }
+}
