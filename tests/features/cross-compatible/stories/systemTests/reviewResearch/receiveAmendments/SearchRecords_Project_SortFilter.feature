@@ -1,4 +1,4 @@
-@ReceiveAmendments @SearchModificationsSortFilter @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @DataIssueNeedsFixing
+@ReceiveAmendments @SearchProjectRecordsSortFilter @StudyWideReviewer @SystemTest
 Feature: Receive Amendments: Filter, Search and Sort the Search project records page
 
         Background:

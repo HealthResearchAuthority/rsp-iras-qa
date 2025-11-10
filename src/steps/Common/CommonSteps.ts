@@ -46,6 +46,7 @@ When(
       completeYourProfilePage,
       checkYourProfilePage,
       chooseARecordTypeToSearchPage,
+      teamManagerDashboardPage,
     },
     page: string
   ) => {
@@ -126,6 +127,9 @@ When(
         break;
       case 'Choose_A_Record_Type_To_Search_Page':
         await chooseARecordTypeToSearchPage.assertOnChooseARecordTypeToSearchPage();
+        break;
+      case 'Team_Manager_Dashboard_Page':
+        await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -776,6 +780,7 @@ Given(
       profileCommonPage,
       profileSettingsPage,
       editYourProfilePage,
+      teamManagerDashboardPage,
     },
     page: string
   ) => {
@@ -848,6 +853,15 @@ Given(
         await editYourProfilePage.assertOnEditProfilePage();
         await profileCommonPage.assertCommonProfilePageItems();
         break;
+      case 'Team_Manager_Dashboard_Page':
+        await teamManagerDashboardPage.goto();
+        await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -866,6 +880,7 @@ Given(
       approvalsPage,
       myModificationsTasklistPage,
       modificationsReadyToAssignPage,
+      teamManagerDashboardPage,
     },
     page: string,
     user: string
@@ -917,6 +932,16 @@ Given(
           await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
           await modificationsReadyToAssignPage.goto();
           await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+          break;
+        case 'Approvals_Page':
+          await approvalsPage.page.context().addCookies(authState.cookies);
+          await approvalsPage.goto();
+          await approvalsPage.assertOnApprovalsPage();
+          break;
+        case 'Team_Manager_Dashboard_Page':
+          await teamManagerDashboardPage.page.context().addCookies(authState.cookies);
+          await teamManagerDashboardPage.goto();
+          await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
           break;
         default:
           throw new Error(`${page} is not a valid option`);
