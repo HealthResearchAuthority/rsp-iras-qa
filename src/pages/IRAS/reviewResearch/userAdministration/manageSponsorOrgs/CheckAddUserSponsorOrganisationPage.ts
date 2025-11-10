@@ -62,6 +62,7 @@ export default class CheckAddUserSponsorOrganisationPage {
   }
 
   async assertOnCheckAddUserSponsorOrganisationPage() {
+    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.title);

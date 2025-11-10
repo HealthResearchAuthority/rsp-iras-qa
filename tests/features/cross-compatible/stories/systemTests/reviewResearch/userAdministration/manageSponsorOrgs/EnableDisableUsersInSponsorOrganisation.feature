@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin @KNOWN_DEFECT-RSP-5531
 Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Disable users in the selected Sponsor Organisations
 
   Background:

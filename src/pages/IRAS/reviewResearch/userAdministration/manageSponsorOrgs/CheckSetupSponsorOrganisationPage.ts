@@ -92,6 +92,7 @@ export default class CheckSetupSponsorOrganisationPage {
   async assertOnCheckSetupSponsorOrganisationPage() {
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.guidance_text).toBeVisible();
+    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.checkSetupSponsorOrganisationProfilePageData.Check_Setup_Sponsor_Organisation_profile_Page.title);

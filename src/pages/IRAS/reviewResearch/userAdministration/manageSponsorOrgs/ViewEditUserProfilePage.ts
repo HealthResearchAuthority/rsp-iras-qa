@@ -211,6 +211,7 @@ export default class ViewEditUserProfilePage {
   }
 
   async assertOnViewEditUserProfilePage() {
+    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.title);

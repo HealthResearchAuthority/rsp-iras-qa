@@ -41,6 +41,7 @@ export default class SearchAddUserSponsorOrganisationPage {
   }
 
   async assertOnSearchAddUserSponsorOrganisationPage() {
+    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
     // expect.soft(await this.page.title()).toBe(this.searchAddUserSonsorOrgPageTestData.Add_A_New_User_Page.title);
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.page_description).toBeVisible();

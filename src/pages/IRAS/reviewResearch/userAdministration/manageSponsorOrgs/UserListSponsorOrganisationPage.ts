@@ -56,6 +56,7 @@ export default class UserListReviewBodyPage {
   }
 
   async assertOnUserListSponsorOrgPage(commonItemsPage: CommonItemsPage): Promise<void> {
+    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page.title);

@@ -53,6 +53,7 @@ export default class SetupNewSponsorOrganisationPage {
   }
   async assertOnSetupNewSponsorOrganisationsPage() {
     await expect.soft(this.pageHeading).toBeVisible();
+    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page.title);

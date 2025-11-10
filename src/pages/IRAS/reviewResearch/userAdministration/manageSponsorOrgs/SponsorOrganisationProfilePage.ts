@@ -177,6 +177,7 @@ export default class SponsorOrganisationProfilePage {
 
   //Page Methods
   async assertOnSponsorOrganisationProfilePage() {
+    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.title);
