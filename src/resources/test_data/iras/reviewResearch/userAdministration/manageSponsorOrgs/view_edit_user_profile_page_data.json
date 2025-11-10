@@ -1,0 +1,32 @@
+{
+  "View_And_Edit_User_Profile_Page": {
+    "title": "View and edit user profile - Manage sponsor organisations - System administration - Plan and manage health and care research",
+    "page_heading": "View and edit user profile",
+    "organisation_name_label": "Organisation name",
+    "title_label": "Title",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "email_address_label": "Email address",
+    "telephone_label": "Telephone",
+    "organisation_label": "Organisation",
+    "job_title_label": "Job title",
+    "role_label": "Role",
+    "sponsor_role_value": "Sponsor",
+    "disable_user_page_title": "Confirm to disable user of sponsor organisation - Sponsor organisation profile - System administration - Plan and manage health and care research",
+    "disable_sub_heading": "Disable user from this sponsor organisation",
+    "disable_guidance_text": "Disabling this user will stop them from working under this sponsor organisation and can be reversed.",
+    "enable_user_page_title": "Confirm to enable user of sponsor organisation - Sponsor organisation profile - System administration - Plan and manage health and care research",
+    "enable_sub_heading": "Enable user for this sponsor organisation",
+    "enable_guidance_text": "Enabling this user will allow them to work under this sponsor organisation and can be reversed.",
+    "disable_button": "Disable user",
+    "enable_button": "Enable user"
+  },
+  "Disable_Label_Texts": {
+    "disable_sub_heading": "Disable user from this sponsor organisation",
+    "disable_guidance_text": "Disabling this user will stop them from working under this sponsor organisation and can be reversed."
+  },
+  "Enable_Label_Texts": {
+    "enable_sub_heading": "Enable user for this sponsor organisation",
+    "enable_guidance_text": "Enabling this user will allow them to work under this sponsor organisation and can be reversed."
+  }
+}

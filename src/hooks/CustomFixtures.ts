@@ -72,6 +72,14 @@ import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeCh
 import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
+import ManageSponsorOrganisationsPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ManageSponsorOrganisationsPage';
+import SetupNewSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SetupNewSponsorOrganisationPage';
+import CheckSetupSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
+import SponsorOrganisationProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SponsorOrganisationProfilePage';
+import UserListSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/UserListSponsorOrganisationPage';
+import CheckAddUserSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckAddUserSponsorOrganisationPage';
+import SearchAddUserSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SearchAddUserSponsorOrganisationPage';
+import ViewEditUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ViewEditUserProfilePage';
 import ProfileCommonPage from '../pages/IRAS/reviewResearch/profileManagement/ProfileCommonPage';
 import ProfileSettingsPage from '../pages/IRAS/reviewResearch/profileManagement/ProfileSettingsPage';
 import EditYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/EditYourProfilePage';
@@ -155,6 +163,14 @@ type CustomFixtures = {
   reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
+  manageSponsorOrganisationPage: ManageSponsorOrganisationsPage;
+  setupNewSponsorOrganisationPage: SetupNewSponsorOrganisationPage;
+  checkSetupSponsorOrganisationPage: CheckSetupSponsorOrganisationPage;
+  sponsorOrganisationProfilePage: SponsorOrganisationProfilePage;
+  userListSponsorOrganisationPage: UserListSponsorOrganisationPage;
+  checkAddUserSponsorOrganisationPage: CheckAddUserSponsorOrganisationPage;
+  searchAddUserSponsorOrganisationPage: SearchAddUserSponsorOrganisationPage;
+  viewEditUserProfilePage: ViewEditUserProfilePage;
   profileCommonPage: ProfileCommonPage;
   profileSettingsPage: ProfileSettingsPage;
   editYourProfilePage: EditYourProfilePage;
@@ -448,6 +464,37 @@ export const test = base.extend<CustomFixtures>({
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
   },
+  manageSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new ManageSponsorOrganisationsPage(page));
+  },
+
+  setupNewSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new SetupNewSponsorOrganisationPage(page));
+  },
+
+  checkSetupSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckSetupSponsorOrganisationPage(page));
+  },
+
+  sponsorOrganisationProfilePage: async ({ page }, use) => {
+    await use(new SponsorOrganisationProfilePage(page));
+  },
+
+  userListSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new UserListSponsorOrganisationPage(page));
+  },
+
+  checkAddUserSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckAddUserSponsorOrganisationPage(page));
+  },
+
+  searchAddUserSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new SearchAddUserSponsorOrganisationPage(page));
+  },
+
+  viewEditUserProfilePage: async ({ page }, use) => {
+    await use(new ViewEditUserProfilePage(page));
+  },
 
   profileCommonPage: async ({ page }, use) => {
     await use(new ProfileCommonPage(page));
@@ -514,6 +561,12 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState(loginPageTestData.Studywide_Reviewer_W.authPath);
     } else if ($tags.includes('@TeamManager')) {
       storageState = getAuthState(loginPageTestData.Team_Manager.authPath);
+    } else if ($tags.includes('@TeamManagerNI')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_NI.authPath);
+    } else if ($tags.includes('@TeamManagerSco')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_S.authPath);
+    } else if ($tags.includes('@TeamManagerW')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_W.authPath);
     } else if ($tags.includes('@WorkFlowCoordinator')) {
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
@@ -522,6 +575,8 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator_S.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator_W.authPath);
+    } else if ($tags.includes('@SponsorUser')) {
+      storageState = getAuthState(loginPageTestData.Sponsor_User.authPath);
     }
     await use(storageState);
   },

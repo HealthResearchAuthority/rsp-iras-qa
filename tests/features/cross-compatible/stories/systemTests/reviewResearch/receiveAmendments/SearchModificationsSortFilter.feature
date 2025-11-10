@@ -7,8 +7,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        # When JS Enabled >> Sponsor org is taking too long to display data >>JS DIsabled only for Sponsor selection -Advanced_Filters_Nth
-
         @SortModificationsByColumn @rsp-4090
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
@@ -482,16 +480,18 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @fail @ScriptNeedsFixing @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
                 And I capture the page screenshot
                 When I authorise the rts api using '<RTS_API_Data>'
                 Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
-                And I type valid '<Sponsor_Organisation>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
-                And I type invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
-                And I type min characters '<Sponsor_Organisation_Min>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
+                And I type valid '<Sponsor_Organisation>' for sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
+                And I capture the page screenshot
+                And I type invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
+                And I capture the page screenshot
+                And I type min characters '<Sponsor_Organisation_Min>' for sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
                 And I capture the page screenshot
                 Examples:
                         | Advanced_Filters                      | Sponsor_Organisation                          | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min             | Suggestion_List_Headers        | RTS_API_Data         | RTS_Request                                 |
@@ -504,18 +504,18 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118 @fail @ScriptNeedsFixing @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118 @KNOWN-DEFECT-RSP-5483 @RTS
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
                 And I capture the page screenshot
                 When I authorise the rts api using '<RTS_API_Data>'
                 Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
-                And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box in advanced filters and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+                And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
                 And I capture the page screenshot
-                And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box in advanced filters and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+                And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
                 And I capture the page screenshot
-                And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box in advanced filters
+                And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
                 Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
                 And I capture the page screenshot
@@ -616,7 +616,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 When I click the 'Back' link on the 'Approvals_Page'
                 Then I can see the 'Home_Page'
 
-        # Issue in sponsor org -too long to display RTS data
         @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
