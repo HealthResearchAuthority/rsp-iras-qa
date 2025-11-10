@@ -44,6 +44,7 @@ export default class CheckAddUserReviewBodyPage {
     this.user_email_value = this.user_email_row.getByRole('cell').nth(1);
   }
 
+  //Page Methods
   async assertOnCheckAddUserReviewBodyPage() {
     await expect(this.page_heading).toBeVisible();
     await expect(this.page_guidance_text).toBeVisible();

@@ -32,12 +32,6 @@ export default class SearchModificationsPage {
   readonly modification_type_label: Locator;
   readonly modification_type_fieldset: Locator;
   readonly modification_type_checkbox: Locator;
-  readonly sponsor_organisation_text: Locator;
-  readonly sponsor_organisation_jsenabled_text: Locator;
-  readonly sponsor_organisation_suggestion_list_labels: Locator;
-  readonly sponsor_organisation_suggestion_listbox: Locator;
-  readonly sponsor_organisation_jsdisabled_search_button: Locator;
-  readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly chief_investigator_name_text_chevron: Locator;
   readonly date_submitted_from_day_text_chevron: Locator;
   readonly date_submitted_to_day_text_chevron: Locator;
@@ -51,12 +45,10 @@ export default class SearchModificationsPage {
   readonly date_submitted_from_date_fieldset: Locator;
   readonly date_submitted_to_date_fieldset: Locator;
   readonly short_project_title_fieldset: Locator;
-  readonly sponsor_organisation_fieldset: Locator;
   readonly sponsor_organisation_jsdisabled_result_hint_label: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_labels: Locator;
   readonly sponsor_organisation_jsdisabled_narrow_down_label: Locator;
   readonly sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
-  readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
   readonly date_submitted_to_date_error: Locator;
   readonly lead_nation_checkbox_hint_label: Locator;
   readonly modification_type_checkbox_hint_label: Locator;
@@ -306,39 +298,14 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label, {
         exact: true,
       });
-    this.sponsor_organisation_fieldset = this.page.locator('.govuk-fieldset', {
-      has: this.page.getByText(
-        this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text
-      ),
-    });
-    this.sponsor_organisation_jsenabled_text = this.sponsor_organisation_fieldset.getByRole('combobox');
-    this.sponsor_organisation_text = this.sponsor_organisation_fieldset.getByRole('textbox');
-    this.sponsor_organisation_suggestion_list_labels = this.sponsor_organisation_jsenabled_text
-      .locator('..')
-      .getByRole('option');
-    this.sponsor_organisation_suggestion_listbox = this.sponsor_organisation_jsenabled_text
-      .locator('..')
-      .getByRole('listbox');
-    this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset.getByRole('button', {
-      name: 'Search',
-    });
-    this.sponsor_organisation_jsdisabled_search_results_radio_button =
-      this.sponsor_organisation_fieldset.getByRole('radio');
-
-    this.sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
-      'Search.SponsorOrgSearch.SelectedOrganisation-hint'
+    this.sponsor_organisation_jsdisabled_result_hint_label = this.page.locator(
+      '[id$="SponsorOrgSearch.SelectedOrganisation-hint"]'
     );
     this.sponsor_organisation_jsdisabled_narrow_down_label = this.page.locator('.govuk-inset-text');
     this.sponsor_organisation_jsdisabled_search_results_labels = this.page
       .locator('.govuk-radios__item')
       .filter({ has: this.page.locator('.govuk-radios__label') });
     this.sponsor_organisation_jsdisabled_no_suggestions_label = this.page.locator('.govuk-inset-text');
-    this.sponsor_organisation_jsdisabled_min_error_message = this.page
-      .locator('.govuk-fieldset')
-      .filter({
-        hasText: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text,
-      })
-      .locator('.govuk-error-message');
     this.results_table = this.page.getByTestId('modificationsTable');
   }
 
@@ -427,21 +394,6 @@ export default class SearchModificationsPage {
     }
   }
 
-  async selectSponsorOrgJsEnabled<PageObject>(
-    dataset: JSON,
-    key: string,
-    commonItemsPage: CommonItemsPage,
-    page: PageObject
-  ) {
-    dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
-    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
-    await this.page.waitForTimeout(2000);
-    const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
-    if (suggestionVisible) {
-      await this.sponsor_organisation_suggestion_list_labels.first().click();
-    }
-  }
-
   async selectSponsorOrgJsDisabled<PageObject>(
     dataset: JSON,
     key: string,
@@ -449,10 +401,10 @@ export default class SearchModificationsPage {
     page: PageObject
   ) {
     await commonItemsPage.fillUIComponent(dataset, key, page);
-    await this.sponsor_organisation_jsdisabled_search_button.click();
+    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
     await this.page.waitForTimeout(2000);
     if (dataset[key] !== '') {
-      await this.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
+      await commonItemsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
     }
   }
 
