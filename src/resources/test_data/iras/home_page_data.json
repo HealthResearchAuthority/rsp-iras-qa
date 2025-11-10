@@ -18,7 +18,8 @@
     "workspaces_links_applicant_user": ["My research"],
     "workspaces_links_studywide_reviewer": ["Approvals", "Member management"],
     "workspaces_links_team_manager": ["Approvals", "Member management"],
-    "workspaces_links_workflow_coordinator": ["Approvals"]
+    "workspaces_links_workflow_coordinator": ["Approvals"],
+    "workspaces_links_sponsor_user": ["Sponsor"]
   },
   "Label_Texts_System_Admin_Role": {
     "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
@@ -43,5 +44,8 @@
   },
   "Label_Texts_Workflow_Coordinator_Role": {
     "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review."
+  },
+  "Label_Texts_Sponsor_Role": {
+    "sponsor_hint_label": "Workspace to view, manage and authorise the research I am responsible for."
   }
 }

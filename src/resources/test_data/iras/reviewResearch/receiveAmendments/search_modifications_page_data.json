@@ -47,7 +47,7 @@
     "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
       "search_hint_header_prefix": "Results for",
       "search_hint_footer_prefix": "sponsor organisations match your search for",
-      "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
+      "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed.",
       "no_suggestion_found": "No suggestions found for"
     },
     "Error_Validation": {

@@ -82,3 +82,53 @@ Then(
     expect(rtsDataFromApplicationJSONActual).toEqual(rtsResponseDataExpected);
   }
 );
+
+Then(
+  'I make a request to the rts api using {string} dataset for sponsor organisation {string} and  retrive country',
+  async ({ request, rtsPage, setupNewSponsorOrganisationPage }, datasetName: string, sponsorDatasetName: string) => {
+    const dataset = rtsPage.rtsPageTestData[datasetName];
+    const sponsorDataset =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
+        sponsorDatasetName
+      ];
+
+    const { rts_base_url: rtsBaseUrl, active, role, count, offset } = dataset;
+
+    const organisationName = sponsorDataset['sponsor_organisation_text'];
+
+    const buildRequestUrl = (offsetCount: number): string =>
+      `${rtsBaseUrl}organization?name:contains=${organisationName}&NihrRoleIdentifier=${role}&_count=${count}&_offset=${offsetCount}`;
+
+    const processEntry = (entry: any[]) => {
+      for (const element of entry) {
+        const extensions = element.resource.extension ?? [];
+        for (const orgRole of extensions) {
+          const subExtensions = orgRole.extension;
+          if (!subExtensions) continue;
+
+          const [roleExt, , , statusExt] = subExtensions;
+          if (
+            roleExt?.valueString === role &&
+            statusExt?.valueString === 'Active' &&
+            element.resource.active === active
+          ) {
+            const name = element.resource.name;
+            const country = element.resource.address?.[0]?.country || 'Unknown';
+            rtsPage.rtsResponseListRecord.push({ name, country });
+          }
+        }
+      }
+    };
+
+    for (let offsetCount = 0; offsetCount <= offset; offsetCount += 1000) {
+      const requestUrl = buildRequestUrl(offsetCount);
+      const response = await rtsPage.executeRTSRequest(request, dataset, rtsPage.bearerToken, requestUrl);
+      await expect.soft(response).toBeOK();
+
+      const json = await response.json();
+      if (json.entry) {
+        processEntry(json.entry);
+      }
+    }
+  }
+);
