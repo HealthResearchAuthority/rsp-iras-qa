@@ -493,6 +493,8 @@ Then(
       setupNewSponsorOrganisationPage,
       completeYourProfilePage,
       editYourProfilePage,
+      addDocumentDetailsForSpecificDocumentModificationsPage,
+      projectIdentificationEnterReferenceNumbersPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -583,6 +585,19 @@ Then(
       errorMessageFieldDataset =
         editYourProfilePage.editYourProfilePageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
       page = completeYourProfilePage;
+    } else if (pageKey == 'Add_Document_Details_For_Specific_Document_Modifications_Page') {
+      errorMessageFieldDataset =
+        addDocumentDetailsForSpecificDocumentModificationsPage
+          .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = addDocumentDetailsForSpecificDocumentModificationsPage;
+    } else if (pageKey == 'Project_Identification_Enter_Reference_Numbers_Page') {
+      errorMessageFieldDataset =
+        projectIdentificationEnterReferenceNumbersPage.projectIdentificationEnterReferenceNumbersPageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = projectIdentificationEnterReferenceNumbersPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

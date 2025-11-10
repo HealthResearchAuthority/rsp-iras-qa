@@ -21,7 +21,7 @@ import MyResearchProjectsPage from '../pages/IRAS/makeChanges/MyResearchProjects
 import CreateProjectRecordPage from '../pages/IRAS/makeChanges/CreateProjectRecordPage';
 import ProjectDetailsIRASPage from '../pages/IRAS/makeChanges/ProjectDetailsIRASPage';
 import ProjectDetailsTitlePage from '../pages/IRAS/makeChanges/ProjectDetailsTitlePage';
-import ReseachLocationsPage from '../pages/IRAS/makeChanges/ResearchLocationsPage';
+import ResearchLocationsPage from '../pages/IRAS/makeChanges/ResearchLocationsPage';
 import ChiefInvestigatorPage from '../pages/IRAS/makeChanges/ChiefInvestigatorPage';
 import ProjectIdentifiersPage from '../pages/IRAS/makeChanges/ProjectIdentifiersPage';
 import ReviewYourApplicationPage from '../pages/IRAS/makeChanges/ReviewYourApplicationPage';
@@ -58,7 +58,7 @@ import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/Mod
 import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationQuestionsPage';
-import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
+import ModificationReviewChangesPage from '../pages/IRAS/makeChanges/modifications/ModificationReviewChangesPage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
 import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReceivedCommonPage';
@@ -85,6 +85,9 @@ import ProfileSettingsPage from '../pages/IRAS/reviewResearch/profileManagement/
 import EditYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/EditYourProfilePage';
 import CompleteYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/CompleteYourProfilePage';
 import CheckYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/CheckYourProfilePage';
+import ProjectIdentificationSelectChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectChangePage';
+import ProjectIdentificationSelectReferenceToChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectReferenceToChangePage';
+import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationEnterReferenceNumbersPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -106,7 +109,7 @@ type CustomFixtures = {
   createProjectRecordPage: CreateProjectRecordPage;
   projectDetailsIRASPage: ProjectDetailsIRASPage;
   projectDetailsTitlePage: ProjectDetailsTitlePage;
-  reseachLocationsPage: ReseachLocationsPage;
+  researchLocationsPage: ResearchLocationsPage;
   chiefInvestigatorPage: ChiefInvestigatorPage;
   projectIdentifiersPage: ProjectIdentifiersPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
@@ -143,7 +146,7 @@ type CustomFixtures = {
   plannedEndDateChangePage: PlannedEndDateChangePage;
   affectedOrganisationSelectionPage: AffectedOrganisationSelectionPage;
   affectedOrganisationQuestionsPage: AffectedOrganisationQuestionsPage;
-  reviewChangesPlannedEndDatePage: ReviewChangesPlannedEndDatePage;
+  modificationReviewChangesPage: ModificationReviewChangesPage;
   addDocumentsModificationsPage: AddDocumentsModificationsPage;
   reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
   selectStudyWideReviewerPage: SelectStudyWideReviewerPage;
@@ -170,6 +173,10 @@ type CustomFixtures = {
   editYourProfilePage: EditYourProfilePage;
   completeYourProfilePage: CompleteYourProfilePage;
   checkYourProfilePage: CheckYourProfilePage;
+
+  projectIdentificationSelectChangePage: ProjectIdentificationSelectChangePage;
+  projectIdentificationSelectReferenceToChangePage: ProjectIdentificationSelectReferenceToChangePage;
+  projectIdentificationEnterReferenceNumbersPage: ProjectIdentificationEnterReferenceNumbersPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -251,8 +258,8 @@ export const test = base.extend<CustomFixtures>({
     await use(new ProjectDetailsTitlePage(page));
   },
 
-  reseachLocationsPage: async ({ page }, use) => {
-    await use(new ReseachLocationsPage(page));
+  researchLocationsPage: async ({ page }, use) => {
+    await use(new ResearchLocationsPage(page));
   },
 
   chiefInvestigatorPage: async ({ page }, use) => {
@@ -398,8 +405,8 @@ export const test = base.extend<CustomFixtures>({
     await use(new AffectedOrganisationQuestionsPage(page));
   },
 
-  reviewChangesPlannedEndDatePage: async ({ page }, use) => {
-    await use(new ReviewChangesPlannedEndDatePage(page));
+  modificationReviewChangesPage: async ({ page }, use) => {
+    await use(new ModificationReviewChangesPage(page));
   },
 
   addDocumentsModificationsPage: async ({ page }, use) => {
@@ -502,6 +509,18 @@ export const test = base.extend<CustomFixtures>({
 
   checkYourProfilePage: async ({ page }, use) => {
     await use(new CheckYourProfilePage(page));
+  },
+
+  projectIdentificationSelectChangePage: async ({ page }, use) => {
+    await use(new ProjectIdentificationSelectChangePage(page));
+  },
+
+  projectIdentificationSelectReferenceToChangePage: async ({ page }, use) => {
+    await use(new ProjectIdentificationSelectReferenceToChangePage(page));
+  },
+
+  projectIdentificationEnterReferenceNumbersPage: async ({ page }, use) => {
+    await use(new ProjectIdentificationEnterReferenceNumbersPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
