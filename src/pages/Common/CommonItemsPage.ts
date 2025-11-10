@@ -108,6 +108,7 @@ export default class CommonItemsPage {
   readonly active_filters_list_to_remove: Locator;
   readonly errorMessageFieldLabelList: Locator;
   readonly details_component: Locator;
+  readonly govUkBackLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -133,6 +134,7 @@ export default class CommonItemsPage {
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
+    this.govUkBackLink = this.page.locator('.govuk-back-link');
     this.fieldGroup = this.page.locator('.govuk-form-group');
     this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message');

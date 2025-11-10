@@ -54,6 +54,7 @@ Feature: Post Approval Page
         And I capture the page screenshot
         And I click on the modification id hyperlink in the post approval tab
         Then I can see the review all changes modifications page
+        And the 'Delete_Modification' link should be 'not available' on the 'Review_All_Changes_Page'
         And I validate the status 'Modification_Status_Approved' is displayed on the page
         And I capture the page screenshot
 
