@@ -51,7 +51,9 @@ export default class ProjectDetailsTitlePage {
 
   //Page Methods
   async assertOnProjectDetailsTitlePage() {
-    await expect(this.pageHeading).toBeVisible();
-    await expect(this.pageHeading).toHaveText(this.projectDetailsTitlePageTestData.Project_Details_Title_Page.heading);
+    await expect.soft(this.pageHeading).toBeVisible();
+    await expect
+      .soft(this.pageHeading)
+      .toHaveText(this.projectDetailsTitlePageTestData.Project_Details_Title_Page.heading);
   }
 }

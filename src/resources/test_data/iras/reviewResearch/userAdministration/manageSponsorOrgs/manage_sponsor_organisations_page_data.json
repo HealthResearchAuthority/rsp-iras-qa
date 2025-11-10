@@ -1,0 +1,39 @@
+{
+  "Manage_Sponsor_Organisations_Page": {
+    "title": "Manage sponsor organisations - System administration - Plan and manage health and care research",
+    "heading": "Manage sponsor organisations",
+    "Setup_New_Sponsor_Organisation": "Set up a new sponsor organisation",
+    "organisation_name_column_header": "Organisation name",
+    "country_column_header": "Country",
+    "status_column_header": "Status",
+    "actions_column_header": "Actions",
+    "search_button": "Search",
+    "search_box": "",
+    "enabled_status": "Active",
+    "disabled_status": "Disabled",
+    "actions_link": "View/Edit",
+    "search_hint_text": "Search for an organisation name",
+    "sponsor_organisation_search_box_label": "Find an organisation",
+    "country_label": "Country",
+    "status_label": "Status",
+    "sponsor_organisation_added_success_message_header_text": "Success",
+    "sponsor_organisation_added_success_message_text": "You have successfully added a new sponsor organisation",
+    "sponsor_organisation_disabled_success_message_header_text": "Success",
+    "sponsor_organisation_disabled_success_message_text": "Sponsor organisation disabled",
+    "sponsor_organisation_enabled_success_message_header_text": "Success",
+    "sponsor_organisation_enabled_success_message_text": "Sponsor organisation enabled",
+    "clinical_research_sponsor_role_id": "CRSPNSR@2.16.840.1.113883.5.110"
+  },
+  "Search_For_Sponsor_Organisations": {
+    "Search_Queries": {
+      "Non_Existant_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+      "Leading_White_Space_Data": { "search_input_text": " CHESTERFIELD ROYAL HOSPITAL" },
+      "Leading_And_Trailing_White_Space_Data": { "search_input_text": " CHESTERFIELD ROYAL HOSPITAL " },
+      "Trailing_White_Space_Data": { "search_input_text": "CHESTERFIELD ROYAL HOSPITAL " },
+      "Existing_QA_Data_One": { "search_input_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST" },
+      "Existing_QA_Data_Two": { "search_input_text": "AIREDALE NHS FOUNDATION TRUST" },
+      "Existing_QA_Data_Three": { "search_input_text": "ALDER HEY CHILDREN'S NHS FOUNDATION TRUST" },
+      "Empty_Search_Data": { "search_input_text": "" }
+    }
+  }
+}

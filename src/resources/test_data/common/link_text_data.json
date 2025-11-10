@@ -86,7 +86,8 @@
   "System_Administration_Page": {
     "Back": "Back",
     "Manage_Review_Bodies": "Manage review bodies",
-    "Manage_Users": "Manage users"
+    "Manage_Users": "Manage users",
+    "Manage_Sponsor_Organisations": "Manage sponsor organisations"
   },
   "Create_Review_Body_Page": {
     "Back": "Back"
@@ -147,7 +148,9 @@
     "Manage_Users": "Manage users",
     "Add_User": "Add user"
   },
-  "Check_Add_User_Review_Body_Page": { "Back": "Back" },
+  "Check_Add_User_Review_Body_Page": {
+    "Back": "Back"
+  },
   "Add_User_Review_Body_Confirmation_Page": {
     "Add_Another_User": "Add another user to review body",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
@@ -235,9 +238,54 @@
   "Project_Overview_Unfinished_Projects_Page": {
     "Back": "Back"
   },
-  "Profile_Settings_Page": { "One_Login_Account": "One Login account", "Change": "Change" },
-  "Edit_Your_Profile_Page": { "One_Login_Account": "One Login account" },
-  "Complete_Your_Profile_Page": { "One_Login_Account": "One Login account" },
-  "Check_Your_Profile_Page": { "One_Login_Account": "One Login account", "Change": "Change" },
-  "Profile_Common_Page": { "Change": "Change" }
+  "Manage_Sponsor_Organisations_Page": {
+    "Back": "Back",
+    "Setup_New_Sponsor_Organisation": "Set up a new sponsor organisation",
+    "View_Edit": "View/Edit",
+    "Advanced_Filters": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters"
+  },
+  "Setup_New_Sponsor_Organisation_Page": {
+    "Back": "Back"
+  },
+  "Check_Setup_Sponsor_Organisation_Page": {
+    "Back": "Back"
+  },
+  "Sponsor_Organisation_Profile_Page": {
+    "Back": "Back",
+    "View_This_Sponsor_Org_List_Of_Users": "View this sponsor organisation's list of users"
+  },
+  "Sponsor_Org_User_List_Page": {
+    "Add_A_New_User_Profile_Record": "Add a new user profile record",
+    "Sponsor_Organisation_Profile": "Sponsor organisation profile",
+    "View_Edit": "View/edit"
+  },
+  "Search_Add_User_Sponsor_Org_Page": {
+    "Back": "Back",
+    "Add_User": "Add user"
+  },
+  "Check_Add_User_Sponsor_Org_Page": { "Back": "Back" },
+  "Profile_Settings_Page": {
+    "One_Login_Account": "One Login account",
+    "Change": "Change"
+  },
+  "Edit_Your_Profile_Page": {
+    "One_Login_Account": "One Login account"
+  },
+  "Complete_Your_Profile_Page": {
+    "One_Login_Account": "One Login account"
+  },
+  "Check_Your_Profile_Page": {
+    "One_Login_Account": "One Login account",
+    "Change": "Change"
+  },
+  "Profile_Common_Page": {
+    "Change": "Change"
+  },
+  "Documents_Added_For_Change_Page": {
+    "Delete_All": "Delete all"
+  },
+  "Add_Documents_Details_Page": {
+    "Delete": "Delete"
+  }
 }

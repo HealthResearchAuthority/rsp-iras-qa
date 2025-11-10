@@ -148,7 +148,35 @@ Feature: My Account Home page
       | Validation_Text                 | Navigation_Link_First | Navigation_Link |
       | Label_Texts_Applicant_User_Role | My_research           | Back            |
 
-  @rsp-3821 @rsp-4486 @MyAccountHomepage @rsp-4424 @rsp-4422 @rsp-4423 @rsp-4488 @ApplicantUser
+  @rsp-5228 @rsp-4846 @MyAccountHomepage @SponsorUser
+  Scenario Outline: Validate the My Account Home page of front stage user
+    Given I have navigated to the 'Home_Page'
+    Given I can see project guidance text on the home_page
+    Then I can see the my account home page
+    And I cannot see a 'My_research' link on the 'Home_Page'
+    And I can see a 'Sponsor' link on the 'Home_Page'
+    And I cannot see a 'Approvals' link on the 'Home_Page'
+    And I cannot see a 'Member_management' link on the 'Home_Page'
+    And I cannot see a 'CAG_members' link on the 'Home_Page'
+    And I cannot see a 'CAT' link on the 'Home_Page'
+    And I cannot see a 'REC_members' link on the 'Home_Page'
+    And I cannot see a 'System_Administration' link on the 'Home_Page'
+    And I cannot see a 'Technical_Assurance' link on the 'Home_Page'
+    And I cannot see a 'Technical_Assurance_reviewers' link on the 'Home_Page'
+    Then I can see the '<Validation_Text>' ui labels on the my account home page
+    Then I capture the page screenshot
+    # When I click the '<Navigation_Link_First>' link on the 'Home_Page'
+    # Then I can see the 'Sponsor_Page'
+    # Then I capture the page screenshot
+    # When I click the '<Navigation_Link>' link on the 'Sponsor_Page'
+    # Then I can see the my account home page
+    # Then I capture the page screenshot
+
+    Examples:
+      | Validation_Text          | Navigation_Link_First | Navigation_Link |
+      | Label_Texts_Sponsor_Role | Sponsor               | Back            |
+
+  @rsp-3821 @rsp-4486 @MyAccountHomepage @rsp-4424 @rsp-4422 @rsp-4423 @rsp-4488 @rsp-5228 @ApplicantUser
   Scenario Outline: Validate the workspaces in my account home page for different user roles
     Given I have navigated to the 'Home_Page' as '<User>'
     Then I capture the page screenshot
@@ -164,8 +192,9 @@ Feature: My Account Home page
       | Studywide_Reviewer   | Label_Texts_Studywide_Reviewer_Role   |
       | Team_Manager         | Label_Texts_Team_Manager_Role         |
       | Workflow_Coordinator | Label_Texts_Workflow_Coordinator_Role |
+      | Sponsor_User         | Label_Texts_Sponsor_Role              |
 
-  @rsp-3821 @rsp-4486 @MyAccountHomepage @rsp-4424 @rsp-4423 @rsp-4422 @rsp-4488 @ApplicantUser
+  @rsp-3821 @rsp-4486 @MyAccountHomepage @rsp-4424 @rsp-4423 @rsp-4422 @rsp-4488 @ApplicantUser @rsp-5228
   Scenario Outline: Validate the access of user role using url navigation
     Given I have navigated to the '<Page>' as '<User>'
     Then I capture the page screenshot
@@ -196,10 +225,13 @@ Feature: My Account Home page
       #| Team_Manager         | Technical_Assurence_Reviewers_Access_Denied_Page|
       | Workflow_Coordinator | System_Administration_Access_Denied_Page |
       | Workflow_Coordinator | My_Research_Access_Denied_Page           |
-#| Workflow_Coordinator | Sponsor_Access_Denied_Page                      |
-#| Workflow_Coordinator | Cag_Members_Access_Denied_Page                  |
-#| Workflow_Coordinator | Cat_Access_Denied_Page                          |
-#| Workflow_Coordinator | Reg_Members_Access_Denied_Page                  |
-#| Workflow_Coordinator | Technical_Assurence_Access_Denied_Page          |
-#| Workflow_Coordinator | Technical_Assurence_Reviewers_Access_Denied_Page|
-#| Workflow_Coordinator | Member_Management_Access_Denied_Page            |
+      #| Workflow_Coordinator | Sponsor_Access_Denied_Page                      |
+      #| Workflow_Coordinator | Cag_Members_Access_Denied_Page                  |
+      #| Workflow_Coordinator | Cat_Access_Denied_Page                          |
+      #| Workflow_Coordinator | Reg_Members_Access_Denied_Page                  |
+      #| Workflow_Coordinator | Technical_Assurence_Access_Denied_Page          |
+      #| Workflow_Coordinator | Technical_Assurence_Reviewers_Access_Denied_Page|
+      #| Workflow_Coordinator | Member_Management_Access_Denied_Page            |
+      | Sponsor_User         | My_Research_Access_Denied_Page           |
+      | Sponsor_User         | System_Administration_Access_Denied_Page |
+      | Sponsor_User         | Approvals_Access_Denied_Page             |
