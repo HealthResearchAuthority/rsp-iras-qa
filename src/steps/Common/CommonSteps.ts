@@ -261,7 +261,7 @@ Given(
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
     } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
-      await commonItemsPage.myAccountgovUkBreadCrumbsLink.click();
+      await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
     } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {

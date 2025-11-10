@@ -4,7 +4,7 @@
   "description": "Test Automation for the IRAS project, which will provide E2E UI Regression Testing",
   "main": "index.js",
   "scripts": {
-    "testTags": "(npx bddgen --tags \"@authSetup or @Smoke\") && (npx playwright test)",
+    "testTags": "(npx bddgen --tags \"@authSetup or @ModificationsToAddBulkFreeTextReviewable\") && (npx playwright test)",
     "testDebug": "(npx bddgen) && (npx playwright test --debug)",
     "test": "(npx bddgen) && (npx playwright test)",
     "test-failed": "(npx bddgen) && (npx playwright test --last-failed)",
