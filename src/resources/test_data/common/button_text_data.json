@@ -72,7 +72,12 @@
   },
   "Confirmation_Page": {
     "Confirm": "Confirm",
-    "Return_To_Project_Overview": "Return to project overview"
+    "Return_To_Project_Overview": "Return to project overview",
+    "Delete_Project": "Delete project",
+    "Keep_Project": "Keep project",
+    "Delete_Modification": "Delete modification",
+    "Delete_Documents": "Delete documents",
+    "Delete_Document": "Delete document"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -231,7 +236,8 @@
     "Save_For_Later": "Save for later"
   },
   "Sponsor_Reference_Page": {
-    "Save_Continue_Review": "Save and continue to review"
+    "Save_Continue_Review": "Save and continue to review",
+    "Save_For_Later": "Save for later"
   },
   "Review_All_Changes_Page": {
     "Send_Modification_To_Sponsor": "Send modification to sponsor",
@@ -255,5 +261,76 @@
   "Project_Overview_Unfinished_Projects_Page": {
     "Edit_Project_Record": "Edit project record",
     "Delete_Project": "Delete project"
+  },
+  "Manage_Sponsor_Organisations_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters",
+    "Org_Name": "Organisation name",
+    "Country": "Country",
+    "Status": "Status"
+  },
+  "Setup_New_Sponsor_Organisation_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Setup_Sponsor_Organisation_Page": {
+    "Save_Profile": "Save profile",
+    "Cancel": "Cancel"
+  },
+  "Sponsor_Organisation_Profile_Page": {
+    "Disable": "Disable",
+    "Enable": "Enable"
+  },
+  "Search_Add_User_Sponsor_Org_Page": {
+    "Search": "Search"
+  },
+  "Check_Add_User_Sponsor_Org_Page": {
+    "Add_User": "Add user"
+  },
+  "Sponsor_Org_User_List_Page": {
+    "Search": "Search",
+    "First_Name": "First name",
+    "Last_Name": "Last name",
+    "Email_Address": "Email address",
+    "Status": "Status",
+    "Last_Logged_In": "Last logged in"
+  },
+  "View_Edit_User_Profile_Page": {
+    "Disable_User": "Disable user",
+    "Enable_User": "Enable user"
+  },
+  "Complete_Your_Profile_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Your_Profile_Page": {
+    "Add_Profile": "Add user profile"
+  },
+  "Edit_Your_Profile_Page": {
+    "Save": "Save"
+  },
+  "Modification_Enter_Free_Text_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_Select_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_SelectReference_To_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_Enter_Reference_Numbers_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "My_Research_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
   }
 }

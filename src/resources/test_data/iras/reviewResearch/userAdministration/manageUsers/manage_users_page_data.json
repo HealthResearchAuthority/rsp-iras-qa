@@ -327,6 +327,9 @@
     "Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator": {
       "role_checkbox": ["Workflow co-ordinator"]
     },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor": {
+      "role_checkbox": ["Sponsor"]
+    },
     "Advanced_Filter_Country_No_Review_Body_All_Role_All": {
       "review_body_checkbox": [
         "Health Research Authority (HRA)",

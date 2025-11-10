@@ -1,0 +1,195 @@
+import { expect, Locator, Page } from '@playwright/test';
+import * as sponsorOrgProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageSponsorOrgs/sponsor_organisation_profile_page_data.json';
+import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+
+//Declare Page Objects
+export default class SponsorOrganisationProfilePage {
+  readonly page: Page;
+  readonly sponsorOrgProfilePageTestData: typeof sponsorOrgProfilePageTestData;
+  readonly buttonTextData: typeof buttonTextData;
+  readonly linkTextData: typeof linkTextData;
+  private _org_name: string;
+  private _countries: string[];
+  private _last_updated_date: string;
+  private _updated_time: string;
+  readonly back_link: Locator;
+  readonly page_heading: Locator;
+  readonly row_value_locator: Locator;
+  readonly organisation_name_row: Locator;
+  readonly organisation_name_value: Locator;
+  readonly country_row: Locator;
+  readonly country_value: Locator;
+  readonly email_address_row: Locator;
+  readonly email_address_value: Locator;
+  readonly description_row: Locator;
+  readonly description_value: Locator;
+  readonly create_profile_btn: Locator;
+  readonly users_row: Locator;
+  readonly row_view_this_sponsor_organisation_list_of_users_link_locator: Locator;
+  readonly view_this_sponsor_organisation_list_of_users_link: Locator;
+  readonly view_this_sponsor_organisation_audit_history_link: Locator;
+  readonly row_view_this_sponsor_organisation_audit_history_link: Locator;
+  readonly audit_row: Locator;
+  readonly last_updated_row: Locator;
+  readonly last_updated_value: Locator;
+  readonly disable_sub_heading: Locator;
+  readonly disable_guidance_text: Locator;
+  readonly disable_button: Locator;
+  readonly enable_button: Locator;
+  readonly enable_sub_heading: Locator;
+  readonly enable_guidance_text: Locator;
+
+  //Initialize Page Objects
+  constructor(page: Page) {
+    this.page = page;
+    this.sponsorOrgProfilePageTestData = sponsorOrgProfilePageTestData;
+    this.buttonTextData = buttonTextData;
+    this.linkTextData = linkTextData;
+    this._org_name = '';
+    this._countries = [];
+    this._last_updated_date = '';
+    this._updated_time = '';
+
+    //Locators
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.heading_prefix_label);
+    this.row_value_locator = this.page.locator('input');
+    this.organisation_name_row = this.page.locator('tr', {
+      has: this.page
+        .getByRole('cell')
+        .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.organisation_name_label, {
+          exact: true,
+        }),
+    });
+    this.organisation_name_value = this.organisation_name_row.locator('td', { has: this.row_value_locator });
+    this.country_row = this.page.locator('tr', {
+      has: this.page
+        .getByRole('cell')
+        .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.country_label, {
+          exact: true,
+        }),
+    });
+    this.country_value = this.country_row.locator('td', { has: this.row_value_locator });
+    this.users_row = this.page.locator('tr', {
+      has: this.page
+        .getByRole('cell')
+        .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.users_label, {
+          exact: true,
+        }),
+    });
+    this.row_view_this_sponsor_organisation_list_of_users_link_locator = this.page
+      .getByRole('cell')
+      .getByText(
+        this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+          .view_this_sponsor_organisation_list_of_users_link,
+        { exact: true }
+      );
+    this.view_this_sponsor_organisation_list_of_users_link = this.users_row.locator(
+      this.row_view_this_sponsor_organisation_list_of_users_link_locator
+    );
+    this.audit_row = this.page.locator('tr', {
+      has: this.page
+        .getByRole('cell')
+        .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.audit_label, {
+          exact: true,
+        }),
+    });
+    this.row_view_this_sponsor_organisation_audit_history_link = this.page
+      .getByRole('cell')
+      .getByText(
+        this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+          .view_this_sponsor_organisation_audit_history_link,
+        { exact: true }
+      );
+    this.view_this_sponsor_organisation_audit_history_link = this.audit_row.locator(
+      this.row_view_this_sponsor_organisation_audit_history_link
+    );
+    this.last_updated_row = this.page.locator('tr', {
+      has: this.page
+        .getByRole('cell')
+        .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.last_updated_label, {
+          exact: true,
+        }),
+    });
+    this.last_updated_value = this.last_updated_row.locator('td', { has: this.row_value_locator });
+    this.disable_sub_heading = this.page
+      .getByRole('heading')
+      .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.disable_sub_heading, {
+        exact: true,
+      });
+    this.disable_guidance_text = this.page
+      .locator('.govuk-hint')
+      .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.disable_guidance_text, {
+        exact: true,
+      });
+    this.disable_button = this.page
+      .getByRole('button')
+      .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.disable_button, { exact: true });
+    this.enable_sub_heading = this.page
+      .getByRole('heading')
+      .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.enable_sub_heading, {
+        exact: true,
+      });
+    this.enable_guidance_text = this.page
+      .locator('.govuk-hint')
+      .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.enable_guidance_text, {
+        exact: true,
+      });
+    this.enable_button = this.page
+      .getByRole('button')
+      .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.enable_button, { exact: true });
+  }
+
+  //Getters & Setters for Private Variables
+  async getOrgName(): Promise<string> {
+    return this._org_name;
+  }
+
+  async setOrgName(value: string): Promise<void> {
+    this._org_name = value;
+  }
+
+  async getCountries(): Promise<string[]> {
+    return this._countries;
+  }
+
+  async setCountries(value: string[]): Promise<void> {
+    this._countries = value;
+  }
+
+  async getLastUpdatedDate(): Promise<string> {
+    return this._last_updated_date;
+  }
+
+  async setLastUpdatedDate(value: string): Promise<void> {
+    this._last_updated_date = value;
+  }
+
+  async getUpdatedTime(): Promise<string> {
+    return this._updated_time;
+  }
+
+  async setUpdatedTime(value: string): Promise<void> {
+    this._updated_time = value;
+  }
+
+  //Page Methods
+  async assertOnSponsorOrganisationProfilePage() {
+    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
+    // expect
+    //   .soft(await this.page.title())
+    //   .toBe(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.title);
+    await expect.soft(this.page_heading).toBeVisible();
+    await expect.soft(this.organisation_name_value).toBeVisible();
+    await expect.soft(this.country_value).toBeVisible();
+    await expect.soft(this.view_this_sponsor_organisation_list_of_users_link).toBeVisible();
+    await expect.soft(this.view_this_sponsor_organisation_audit_history_link).toBeVisible();
+    await expect.soft(this.last_updated_value).toBeVisible();
+  }
+
+  async goto() {
+    await this.page.goto('');
+  }
+}

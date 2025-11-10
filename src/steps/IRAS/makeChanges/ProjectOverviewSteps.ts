@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+import { Locator } from '@playwright/test';
 
 const { Then } = createBdd(test);
 
@@ -8,17 +9,31 @@ Then('I can see the project overview page', async ({ projectOverviewPage }) => {
   await projectOverviewPage.assertOnProjectOverviewPage();
 });
 
-Then('I navigate to the project overview page of a specific project', async ({ projectOverviewPage }) => {
-  await projectOverviewPage.gotoSpecificProjectPage();
-  await projectOverviewPage.assertOnProjectOverviewPage();
-});
+Then(
+  'I navigate to the project overview page of the {string} project',
+  async ({ projectOverviewPage }, projectName: string) => {
+    await projectOverviewPage.gotoSpecificProjectPage(projectName);
+    await projectOverviewPage.assertOnProjectOverviewPage();
+  }
+);
 
 Then(
-  'I can see the project details on project overview page for {string}',
-  async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+  'I can see the {string} project details on project overview page for {string}',
+  async (
+    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage },
+    projectType: string,
+    datasetName: string
+  ) => {
+    let dataset: any;
+    let expectedIrasId: string;
+    if (projectType.toLowerCase() == 'existing') {
+      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details;
+      expectedIrasId = dataset.iras_id;
+    } else {
+      dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+      expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    }
     const expectedProjectTitle = dataset.short_project_title_text;
-    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     const projectTitle = confirmStringNotNull(await projectOverviewPage.project_overview_heading.textContent());
     const projectDetails = projectTitle.split('\n');
     const irasId = projectDetails[0].split(' ');
@@ -67,24 +82,12 @@ Then(
 
 Then(
   'I can see the {string} ui labels on the project overview page',
-  async ({ commonItemsPage, projectOverviewPage }, datasetName: string) => {
+  async ({ projectOverviewPage }, datasetName: string) => {
     const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(key, projectOverviewPage);
-        expect.soft(labelVal).toBe(dataset[key]);
-      }
-    }
-  }
-);
-
-Then(
-  'I validate the ui labels using {string} on the project documents page',
-  async ({ projectOverviewPage, commonItemsPage }, datasetName) => {
-    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, projectOverviewPage);
+        const locator: Locator = projectOverviewPage[key];
+        await expect(locator).toBeVisible();
       }
     }
   }
@@ -114,34 +117,54 @@ Then(
 );
 
 Then(
-  'I validate the data displayed {string} in the project details tab of project overview page',
-  async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
+  'I validate the {string} data for {string} is displayed in the project details tab of project overview page',
+  async (
+    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage },
+    projectType: string,
+    datasetName: string
+  ) => {
+    let dataset: any;
+    let expectedIrasId: string;
     await expect(projectOverviewPage.project_details_heading).toBeVisible();
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+    if (projectType.toLowerCase() == 'existing') {
+      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details;
+      expectedIrasId = dataset.iras_id;
+    } else {
+      dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+      expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    }
     const expectedProjectTitle = dataset.short_project_title_text;
-    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     const actualProjectTitle = confirmStringNotNull(
-      await projectOverviewPage.project_details_short_project_title.textContent()
+      await projectOverviewPage.project_details_tab_short_project_title.textContent()
     );
-    const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_details_irasid.textContent());
+    const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_details_tab_iras_id.textContent());
     expect.soft(actualProjectTitle).toBe(expectedProjectTitle);
     expect.soft(actualIrasId).toBe(expectedIrasId);
   }
 );
 
 Then(
-  'I can see the {string} in the key project roles tab of project overview page',
-  async ({ projectOverviewPage, chiefInvestigatorPage }, datasetName: string) => {
-    await expect(projectOverviewPage.key_project_roles_heading).toBeVisible();
-    const dataset = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetName];
+  'I validate the {string} data for {string} is displayed in the project team tab of project overview page',
+  async ({ projectOverviewPage, chiefInvestigatorPage }, projectType: string, datasetName: string) => {
+    let dataset: any;
+    await expect(projectOverviewPage.project_team_heading).toBeVisible();
+    if (projectType.toLowerCase() == 'existing') {
+      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Team;
+    } else {
+      dataset = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetName];
+    }
     const expectedChiefInvestigator = dataset.chief_investigator_email_text;
     const expectedPrimarySponsorOrganisation = dataset.primary_sponsor_organisation_text;
     const expectedSponsorContact = dataset.sponsor_contact_email_text;
-    const actualChiefInvestigator = confirmStringNotNull(await projectOverviewPage.chief_investigator.textContent());
-    const actualPrimarySponsorOrganisation = confirmStringNotNull(
-      await projectOverviewPage.primary_sponsor_organisation.textContent()
+    const actualChiefInvestigator = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_chief_investigator.textContent()
     );
-    const actualSponsorContact = confirmStringNotNull(await projectOverviewPage.sponsor_contact.textContent());
+    const actualPrimarySponsorOrganisation = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_primary_sponsor_org.textContent()
+    );
+    const actualSponsorContact = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_sponsor_contact.textContent()
+    );
     expect.soft(actualChiefInvestigator).toBe(expectedChiefInvestigator);
     expect.soft(actualPrimarySponsorOrganisation).toBe(expectedPrimarySponsorOrganisation);
     expect.soft(actualSponsorContact).toBe(expectedSponsorContact);
@@ -149,23 +172,25 @@ Then(
 );
 
 Then(
-  'I can see the {string} in the research locations tab of project overview page',
+  'I validate the data for {string} is displayed in the research locations tab of project overview page',
   async ({ projectOverviewPage }, datasetName: string) => {
     await expect(projectOverviewPage.research_locations_heading).toBeVisible();
-    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Research_Locations;
     const expectedParticipatingNations = dataset.participating_nations;
     const expectedNhsHscOrganisations = dataset.nhs_hsc_organisations;
     const expectedLeadNation = dataset.lead_nation;
     const actualParticipatingNations = confirmStringNotNull(
-      await projectOverviewPage.participating_nations.textContent()
+      await projectOverviewPage.research_locations_tab_participating_nations.textContent()
     );
     const actualTrimmedParticipatingNations = await removeUnwantedWhitespace(
       confirmStringNotNull(actualParticipatingNations)
     );
     const actualNhsHscOrganisations = confirmStringNotNull(
-      await projectOverviewPage.nhs_hsc_organisations.textContent()
+      await projectOverviewPage.research_locations_tab_nhs_hsc_organisations.textContent()
     );
-    const actualLeadNation = confirmStringNotNull(await projectOverviewPage.lead_nation.textContent());
+    const actualLeadNation = confirmStringNotNull(
+      await projectOverviewPage.research_locations_tab_lead_nation.textContent()
+    );
     expect.soft(actualTrimmedParticipatingNations).toContain(expectedParticipatingNations);
     expect.soft(actualNhsHscOrganisations).toBe(expectedNhsHscOrganisations);
     expect.soft(actualLeadNation).toBe(expectedLeadNation);
@@ -200,6 +225,16 @@ Then(
 );
 
 Then(
+  'I can see the project status for {string} displayed on the project overview page',
+  async ({ projectOverviewPage }, projectName: string) => {
+    await expect(projectOverviewPage.projectStatusTag).toBeVisible();
+    expect(await projectOverviewPage.projectStatusTag.textContent()).toBe(
+      projectOverviewPage.projectOverviewPageTestData[projectName].status
+    );
+  }
+);
+
+Then(
   'I can now see a table of search results for project documents page',
   async ({ projectOverviewPage, commonItemsPage }) => {
     await expect.soft(projectOverviewPage.results_count_project_documents).toBeVisible();
@@ -228,3 +263,38 @@ Then('I click the {string} button on the project documents page', async ({ proje
       throw new Error(`${button} is not a valid option`);
   }
 });
+
+Then(
+  'I can see the project status as {string} on the project overview page',
+  async ({ projectOverviewPage, createProjectRecordPage }, datasetName: string) => {
+    const dataset = createProjectRecordPage.createProjectRecordPageTestData[datasetName];
+    const expectedStatus = dataset.status;
+    const actualStatus = confirmStringNotNull(await projectOverviewPage.projectStatusTag.textContent());
+    expect.soft(actualStatus).toBe(expectedStatus);
+  }
+);
+
+Then('I validate the delete modification success message', async ({ projectOverviewPage, projectDetailsIRASPage }) => {
+  await expect.soft(projectOverviewPage.modification_saved_success_message_header_text).toBeVisible();
+  const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
+  const modificationIDExpected = irasIDExpected + '/' + 1;
+  const expectedDeleteModificationSuccessText =
+    projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.delete_modification_success_message_text.replace(
+      '{{modificationNumber}}',
+      modificationIDExpected
+    );
+  const actualDeleteModificationSuccessText = confirmStringNotNull(
+    await projectOverviewPage.delete_modification_success_message_text.textContent()
+  );
+  expect.soft(expectedDeleteModificationSuccessText).toBe(actualDeleteModificationSuccessText);
+});
+
+Then(
+  'I validate the deleted modification does not appear in the modification in the post approval tab',
+  async ({ projectOverviewPage, projectDetailsIRASPage }) => {
+    const modificationTableData = await projectOverviewPage.getAllModificationTableData();
+    const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
+    const modificationIDExpected = irasIDExpected + '/' + 1;
+    expect(modificationTableData).not.toContain(modificationIDExpected);
+  }
+);

@@ -49,5 +49,8 @@
     "Edit_User_Country": {
       "event_description_text": " was changed to "
     }
+  },
+  "User_Profiles": {
+    "One_Login_Account_User": { "email_address": "hagnenulta@necub.com" }
   }
 }

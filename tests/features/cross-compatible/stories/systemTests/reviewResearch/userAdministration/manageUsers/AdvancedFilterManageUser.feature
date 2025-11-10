@@ -8,7 +8,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Users_Page'
 
-    @VerifyValidSearchAndAdvancedFilterManageUser
+    @VerifyValidSearchAndAdvancedFilterManageUser @rsp-5250
     Scenario Outline: Verify the user is able to view the list of users by entering a valid first name, last name,email address selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
@@ -36,8 +36,9 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Empty_Search_Data           | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Empty_Search_Data           | Advanced_Filter_Last_Logged_In_From_Date_Only                                       |
             | Empty_Search_Data           | Advanced_Filter_Last_Logged_In_To_Date_Only                                         |
+            | Existing_QA_User_First_Name | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    @VerifySearchButtonClickAndAdvancedFilterManageUser
+    @VerifySearchButtonClickAndAdvancedFilterManageUser @rsp-5250
     Scenario Outline: Verify the user is able to view the list of users by entering valid first name, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
@@ -55,8 +56,9 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Search_Queries              | Advanced_Filters                                                                    |
             | Existing_QA_User_First_Name | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Empty_Search_Data           | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
+            | Existing_QA_User_First_Name | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    @VerifyApplyingFilterFirstAndSearch
+    @VerifyApplyingFilterFirstAndSearch @rsp-5250
     Scenario Outline: Verify the user can view the list of users by selecting advanced filters and click on apply filters button then entering valid first name and click on search button
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -85,6 +87,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Existing_QA_User_First_Name | Advanced_Filter_Eight                                                               |
             | Existing_QA_User_First_Name | Advanced_Filter_Nine                                                                |
             | Existing_QA_User_First_Name | Advanced_Filter_Ten                                                                 |
+            | Existing_QA_User_First_Name | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
     @ValidateLastLoggedInInvalidDateErrorMessageManageUser
     Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date
@@ -107,17 +110,20 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         Then the no search results found message is displayed
 
-    @VerifyNoResultsFoundInvalidSearchAdvancedFiltersManageUser
-    Scenario: Verify the user can see no matching results found message on click on apply filter button with invalid filter/search criteria
+    @VerifyNoResultsFoundInvalidSearchAdvancedFiltersManageUser @rsp-5250
+    Scenario Outline: Verify the user can see no matching results found message on click on apply filter button with invalid filter/search criteria
         When I enter 'Non_Existant_User_Data' into the search field for manage users page
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
-        Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All' in the 'Manage_Users_Page'
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot
         Then the no search results found message is displayed
+            | Advanced_Filters                                                                    |
+            | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
     @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFiltersManageUser
     Scenario: When javascript disabled verify the hint text for country advanced filters when user select multiple checkboxes
@@ -179,7 +185,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Seven                                                               |
             | Advanced_Filter_Nine                                                                |
 
-    @ValidateClearAllFilters
+    @ValidateClearAllFilters @rsp-5250
     Scenario: Validate clear all filters removes all active filters in mange users page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -196,8 +202,10 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Advanced_Filter_Last_Logged_In_From_Date_Only                                       |
             | Advanced_Filter_Last_Logged_In_To_Date_Only                                         |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    @RemoveAllActiveFiltersOneByOne  @iBossSecurityIssue @fail
+    # @iBossSecurityIssue @fail
+    @RemoveAllActiveFiltersOneByOne @rsp-5250
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -214,6 +222,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filters                                                                    | Advanced_Filters_Remove                                                             |
             | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Advanced_Filter_Two                                                                 | Advanced_Filter_Two_All                                                             |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
     @rsp-4418 @ValidateActiveReviewbodies
     Scenario Outline: Validate the review body checkbox in the advanced filters of manage users page incorporates all currently enabled review bodies from the manage review bodies page
@@ -267,8 +276,8 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
 
     # Few failures due to data issues- to be re executed once data issues are fixed(review body and country)
-    @rsp-4418 @ValidateFilters @DataIssues
-    Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters (Roles:-Studywide Reviewer,Workflow_Coordinator), and clicking the 'Apply filters' button
+    @rsp-4418 @rsp-5250 @ValidateFilters @DataIssues
+    Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters (Roles:-Studywide Reviewer,Workflow Coordinator,Sponsor), and clicking the 'Apply filters' button
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -288,6 +297,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filters                                                    |
             | Advanced_Filter_Country_No_Review_Body_No_Role_Studywide_Reviewer   |
             | Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor              |
 
     @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
     Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from mange user page
