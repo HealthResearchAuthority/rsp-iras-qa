@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
-import * as contactDetailsModificationPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/nonReviewable/contact_details_modification_data.json';
-import CommonItemsPage from '../../../../Common/CommonItemsPage';
+import * as contactDetailsModificationPageTestData from '../../../../resources/test_data/iras/make_changes/modifications/contact_details_modification_data.json';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ContactDetailsModificationPage {

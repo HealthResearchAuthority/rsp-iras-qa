@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
-import * as projectPersonnelChangeChiefInvestigatorModificationPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/nonReviewable/project_personnel_change_chief_investigator_data.json';
-import CommonItemsPage from '../../../../Common/CommonItemsPage';
+import * as projectPersonnelChangeChiefInvestigatorModificationPageTestData from '../../../../resources/test_data/iras/make_changes/modifications/project_personnel_change_chief_investigator_data.json';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ProjectPersonnelChangeChiefInvestigatorPage {

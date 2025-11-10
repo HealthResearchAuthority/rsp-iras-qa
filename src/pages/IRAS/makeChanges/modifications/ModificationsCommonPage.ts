@@ -5,9 +5,9 @@ import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOr
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
 import { confirmStringNotNull, convertDate } from '../../../../utils/UtilFunctions';
-import ContactDetailsModificationPage from './nonReviewable/ContactDetailsModificationPage';
-import ProjectPersonnelChangeChiefInvestigatorPage from './nonReviewable/ProjectPersonnelChangeChiefInvestigatorPage';
-import ProjectPersonnelChangePrincipalInvestigatorPage from './nonReviewable/ProjectPersonnelChangePrincipalInvestigatorPage';
+import ContactDetailsModificationPage from './ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from './ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from './ProjectPersonnelChangePrincipalInvestigatorPage';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {

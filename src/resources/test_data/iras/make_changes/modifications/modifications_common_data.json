@@ -792,6 +792,72 @@
         "Wales"
       ],
       "change_status": "Change ready for submission"
+    }
+  },
+  "Multiple_Changes_Non_Reviewable_Set_One": {
+    "Project_Personnel_Chief_Investigator_New": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of chief investigator",
+      "select_details_to_change_radio": "New chief investigator",
+      "chief_investigator_email_text": "ci_test_modified@test.com",
+      "name_text": "QA test name"
+    },
+    "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of chief investigator",
+      "select_details_to_change_radio": "Temporary arrangement to cover absence",
+      "chief_investigator_email_text": "ci_test_modified@test.com",
+      "name_text": "QA test name"
+    },
+    "Project_Personnel_Principal_Investigator_New": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of principal investigator",
+      "select_details_to_change_radio": "New principal investigator",
+      "principal_investigator_email_text": "test_modified@test.com",
+      "name_text": "QA test name",
+      "which_organisation_change_affect_checkbox": [
+        "NHS/HSC",
+        "Non-NHS/HSC"
+      ],
+      "where_organisation_change_affect_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Project_Personnel_Temporary_Arrangement": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of principal investigator",
+      "select_details_to_change_radio": "Temporary arrangement to cover absence",
+      "principal_investigator_email_text": "test_modified@test.com",
+      "name_text": "QA test name",
+      "which_organisation_change_affect_checkbox": [
+        "NHS/HSC",
+        "Non-NHS/HSC"
+      ],
+      "where_organisation_change_affect_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
     },
     "Contact_Details_Chief_Investigator": {
       "area_of_change_dropdown": "Administrative details for the project",
@@ -814,46 +880,6 @@
       "contact_name_text": "New modified contact name",
       "contact_email_text": "other_contact_test_modified@test.com",
       "change_status": "Change ready for submission"
-    }
-  },
-  "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Three": {
-    "Project_Personnel_Chief_Investigator_New": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of chief investigator",
-      "select_details_to_change_radio": "New chief investigator",
-      "chief_investigator_email_text": "ci_test_modified@test.com",
-      "name_text": "QA test name"
-    },
-    "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of chief investigator",
-      "select_details_to_change_radio": "Temporary arrangement to cover absence",
-      "chief_investigator_email_text": "ci_test_modified@test.com",
-      "name_text": "QA test name"
-    },
-    "Project_Personnel_Principal_Investigator_New": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of principal investigator",
-      "select_details_to_change_radio": "New principal investigator",
-      "principal_investigator_email_text": "test_modified@test.com",
-      "name_text": "QA test name",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "will_some_or_all_organisations_be_affected_question_radio": "All",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-      "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-    },
-    "Project_Personnel_Temporary_Arrangement": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of principal investigator",
-      "select_details_to_change_radio": "Temporary arrangement to cover absence",
-      "principal_investigator_email_text": "test_modified@test.com",
-      "name_text": "QA test name",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "will_some_or_all_organisations_be_affected_question_radio": "All",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-      "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     }
   },
   "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability": {

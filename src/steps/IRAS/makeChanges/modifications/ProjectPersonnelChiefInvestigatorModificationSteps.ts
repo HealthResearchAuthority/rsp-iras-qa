@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { expect, test } from '../../../../../hooks/CustomFixtures';
+import { expect, test } from '../../../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
@@ -28,7 +28,7 @@ Then(
 Then(
   'I keep note of the individual and overall ranking of change chief investigator change created using {string} and {string} dataset',
   async (
-    { projectPersonnelChangeChiefInvestigatorPage, modificationsCommonPage, reseachLocationsPage },
+    { projectPersonnelChangeChiefInvestigatorPage, modificationsCommonPage, researchLocationsPage },
     datasetName,
     datasetNameResearchLocation
   ) => {
@@ -36,7 +36,7 @@ Then(
       projectPersonnelChangeChiefInvestigatorPage.projectPersonnelChangeChiefInvestigatorModificationPageTestData[
         datasetName
       ];
-    const researchLocationDataset = reseachLocationsPage.researchLocationsPageTestData[datasetNameResearchLocation];
+    const researchLocationDataset = researchLocationsPage.researchLocationsPageTestData[datasetNameResearchLocation];
     await modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(
       datasetName,
       changeDataset,

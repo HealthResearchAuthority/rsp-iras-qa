@@ -80,9 +80,9 @@ import CheckYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement
 import ProjectIdentificationSelectChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectChangePage';
 import ProjectIdentificationSelectReferenceToChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectReferenceToChangePage';
 import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationEnterReferenceNumbersPage';
-import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ContactDetailsModificationPage';
-import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ProjectPersonnelChangeChiefInvestigatorPage';
-import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ProjectPersonnelChangePrincipalInvestigatorPage';
+import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangePrincipalInvestigatorPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
