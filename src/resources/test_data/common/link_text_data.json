@@ -289,5 +289,9 @@
   },
   "Add_Documents_Details_Page": {
     "Delete": "Delete"
+  },
+  "IRAS_ID_Error_Page": {
+    "Follow_Existing_Processes": "follow existing processes",
+    "HRA_Support_Site": "HRA support site"
   }
 }
