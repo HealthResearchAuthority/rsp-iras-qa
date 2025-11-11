@@ -526,11 +526,10 @@ export default class ModificationsCommonPage {
     } else {
       modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification;
     }
-    const categories = values.map((v) => v.expectedCategory);
-    const hasCategoryA = categories.includes(this.modificationsCommonPageTestData.Label_Texts.category_a);
-    const hasCategoryB = categories.includes(this.modificationsCommonPageTestData.Label_Texts.category_b);
-    const hasCategoryC = categories.includes(this.modificationsCommonPageTestData.Label_Texts.category_c);
-
+    const categories = new Set(values.map((v) => v.expectedCategory));
+    const hasCategoryA = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_a);
+    const hasCategoryB = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_b);
+    const hasCategoryC = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_c);
     if (hasCategoryB && hasCategoryC && !hasCategoryA) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b_c;
     } else {
