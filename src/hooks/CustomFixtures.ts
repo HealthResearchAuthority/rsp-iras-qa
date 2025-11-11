@@ -90,6 +90,7 @@ import ProjectIdentificationSelectReferenceToChangePage from '../pages/IRAS/make
 import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationEnterReferenceNumbersPage';
 import ChooseARecordTypeToSearchPage from '../pages/IRAS/reviewResearch/approvals/ChooseARecordTypeToSearchPage';
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
+import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchProjectsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -175,12 +176,12 @@ type CustomFixtures = {
   editYourProfilePage: EditYourProfilePage;
   completeYourProfilePage: CompleteYourProfilePage;
   checkYourProfilePage: CheckYourProfilePage;
-
   projectIdentificationSelectChangePage: ProjectIdentificationSelectChangePage;
   projectIdentificationSelectReferenceToChangePage: ProjectIdentificationSelectReferenceToChangePage;
   projectIdentificationEnterReferenceNumbersPage: ProjectIdentificationEnterReferenceNumbersPage;
   chooseARecordTypeToSearchPage: ChooseARecordTypeToSearchPage;
   teamManagerDashboardPage: TeamManagerDashboardPage;
+  searchProjectsPage: SearchProjectsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -532,6 +533,10 @@ export const test = base.extend<CustomFixtures>({
 
   teamManagerDashboardPage: async ({ page }, use) => {
     await use(new TeamManagerDashboardPage(page));
+  },
+
+  searchProjectsPage: async ({ page }, use) => {
+    await use(new SearchProjectsPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

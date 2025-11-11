@@ -17,6 +17,7 @@ When(
       participatingOrganisationsPage,
       manageSponsorOrganisationPage,
       userListSponsorOrganisationPage,
+      searchProjectsPage,
     },
     searchType: string,
     searchQueryName: string
@@ -34,6 +35,8 @@ When(
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
       searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'project records') {
+      searchQueryDataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'tasklist') {
       searchQueryDataset =
         modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];

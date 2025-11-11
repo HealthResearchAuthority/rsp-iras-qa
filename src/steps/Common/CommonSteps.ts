@@ -613,6 +613,12 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = chooseARecordTypeToSearchPage;
+    } else if (pageKey == 'Team_Manager_Dashboard_Page') {
+      errorMessageFieldDataset =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = modificationsReadyToAssignPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
