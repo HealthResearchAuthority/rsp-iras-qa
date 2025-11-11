@@ -219,9 +219,16 @@ export default class ModificationsCommonPage {
     const changeRankings = ranking[changeName];
     if (changeRankings && changeRankings.length > 0) {
       const { expectedModificationType, expectedCategory, expectedReviewType } = changeRankings[0];
-      expect.soft(actualModificationType).toBe(expectedModificationType);
-      expect.soft(actualCategory).toBe(expectedCategory);
-      expect.soft(actualReviewType).toBe(expectedReviewType);
+      try {
+        expect(actualModificationType).toBe(expectedModificationType);
+        expect(actualCategory).toBe(expectedCategory);
+        expect(actualReviewType).toBe(expectedReviewType);
+      } catch (error) {
+        console.log('Error in Change Name: ' + changeName + error);
+        expect.soft(actualModificationType).toBe(expectedModificationType);
+        expect.soft(actualCategory).toBe(expectedCategory);
+        expect.soft(actualReviewType).toBe(expectedReviewType);
+      }
     } else {
       throw new Error(`No ranking data found for changeName: ${changeName}`);
     }
@@ -435,8 +442,16 @@ export default class ModificationsCommonPage {
     }
     if (affectsNonNhsOnly) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
-    } else if (affectsNhs && requiresResources === 'no') {
+    } else if (
+      affectsNhs &&
+      requiresResources === 'no' &&
+      modificationsCommonPageTestData.Nhs_Resource_Implications.includes(dataset.specific_change_dropdown)
+    ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+    } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_b;
+    } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_a;
     } else if (affectsNhs && requiresResources === 'yes' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'yes' && affectedOrgs === 'all') {
@@ -481,6 +496,8 @@ export default class ModificationsCommonPage {
     const values = Object.values(await this.getrankingForChanges()).flatMap((value) =>
       Array.isArray(value) ? value : [value]
     );
+    let category: null | string;
+    let categoryOrder = [];
     const reviewType = values.some(
       (reviewTypeValue) =>
         reviewTypeValue.expectedReviewType ===
@@ -509,15 +526,25 @@ export default class ModificationsCommonPage {
     } else {
       modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification;
     }
-    const categoryOrder = [
-      this.modificationsCommonPageTestData.Label_Texts.category_a,
-      this.modificationsCommonPageTestData.Label_Texts.category_b,
-      this.modificationsCommonPageTestData.Label_Texts.category_c,
-      this.modificationsCommonPageTestData.Label_Texts.category_n_a,
-    ];
-    const category = categoryOrder.find((categoryValue) =>
-      values.some((value) => value.expectedCategory === categoryValue)
-    );
+    const categories = values.map((v) => v.expectedCategory);
+    const hasCategoryA = categories.includes(this.modificationsCommonPageTestData.Label_Texts.category_a);
+    const hasCategoryB = categories.includes(this.modificationsCommonPageTestData.Label_Texts.category_b);
+    const hasCategoryC = categories.includes(this.modificationsCommonPageTestData.Label_Texts.category_c);
+
+    if (hasCategoryB && hasCategoryC && !hasCategoryA) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_b_c;
+    } else {
+      categoryOrder = [
+        this.modificationsCommonPageTestData.Label_Texts.category_a,
+        this.modificationsCommonPageTestData.Label_Texts.category_b,
+        this.modificationsCommonPageTestData.Label_Texts.category_c,
+        this.modificationsCommonPageTestData.Label_Texts.category_new_site,
+        this.modificationsCommonPageTestData.Label_Texts.category_n_a,
+      ];
+      category = categoryOrder.find((categoryValue) =>
+        values.some((value) => value.expectedCategory === categoryValue)
+      );
+    }
     this.setOverallRanking(modificationType, category, reviewType);
   }
 
