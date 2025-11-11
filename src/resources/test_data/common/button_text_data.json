@@ -38,6 +38,10 @@
   "Project_Details_IRAS_Page": {
     "Add_Project": "Add project"
   },
+  "Confirm_Project_Details_Page": {
+    "Add_Project": "Add project",
+    "Return_to_Iras_Id":"Return to IRAS ID"
+  },
   "Project_Details_Title_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
@@ -339,5 +343,10 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes"
+  },
+  "My_Research_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
   }
 }

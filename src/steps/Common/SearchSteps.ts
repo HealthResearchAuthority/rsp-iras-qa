@@ -17,6 +17,7 @@ When(
       participatingOrganisationsPage,
       manageSponsorOrganisationPage,
       userListSponsorOrganisationPage,
+      myResearchProjectsPage,
       projectOverviewPage,
     },
     searchType: string,
@@ -52,6 +53,8 @@ When(
       searchQueryDataset =
         userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Search_For_Users_In_Sponsor_Organisations
           .Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'my research') {
+      searchQueryDataset = myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'modifications in post approval') {
       searchQueryDataset =
         projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchQueryName];

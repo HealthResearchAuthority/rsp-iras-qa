@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 
-const { Then } = createBdd(test);
+const { Then, When } = createBdd(test);
 
 Then('I have navigated to the my research projects page', async ({ myResearchProjectsPage }) => {
   await myResearchProjectsPage.goto();
@@ -162,5 +162,51 @@ Then(
     expect
       .soft((await commonItemsPage.no_results_bullet_points.allTextContents()).map((t) => t.trim()))
       .toEqual(commonItemsPage.commonTestData.no_results_bullet_points);
+  }
+);
+
+When(
+  'I select advanced filters in the my research page using {string}',
+  async ({ myResearchProjectsPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = myResearchProjectsPage.myResearchProjectsPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key.includes('date')) {
+          if (!(await myResearchProjectsPage.date_project_created_from_day_text.isVisible())) {
+            await myResearchProjectsPage.date_project_created_from_day_text_chevron.click();
+          }
+          await commonItemsPage.fillUIComponent(dataset, key, myResearchProjectsPage);
+        } else {
+          await myResearchProjectsPage[key + '_chevron'].click();
+          await commonItemsPage.fillUIComponent(dataset, key, myResearchProjectsPage);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I can see the results matching the search {string} and filter criteria {string} for my research page',
+  async ({ myResearchProjectsPage, commonItemsPage }, searchDatasetName: string, filterDatasetName: string) => {
+    const searchCriteriaDataset =
+      myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchDatasetName];
+    const filterDataset = myResearchProjectsPage.myResearchProjectsPageTestData.Advanced_Filters[filterDatasetName];
+    if (searchDatasetName !== '') {
+      await myResearchProjectsPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        true
+      );
+    }
+  }
+);
+
+When(
+  'I can see the results matching the filter criteria {string} for my research page',
+  async ({ myResearchProjectsPage, commonItemsPage }, filterDatasetName: string) => {
+    const filterDataset = myResearchProjectsPage.myResearchProjectsPageTestData.Advanced_Filters[filterDatasetName];
+    await myResearchProjectsPage.validateResults(commonItemsPage, {}, filterDataset, false);
   }
 );

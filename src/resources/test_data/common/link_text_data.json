@@ -160,7 +160,10 @@
   },
   "My_Research_Page": {
     "Back": "Back",
-    "Project": "QA_Automation - This is a short project title"
+    "Project": "QA_Automation - This is a short project title",
+    "Advanced_Filters": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters",
+    "My_Account": "My account"
   },
   "Search_Modifications_Page": {
     "Advanced_Filters": "Advanced filters",

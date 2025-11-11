@@ -146,6 +146,7 @@ export default class CommonItemsPage {
   readonly back_to_users_link: Locator;
   readonly success_message_header_text: Locator;
   readonly govUkBreadCrumbsLink: Locator;
+  readonly myAccountGovUkBreadCrumbsLink: Locator;
   readonly govUkBackLink: Locator;
 
   //Initialize Page Objects
@@ -186,6 +187,7 @@ export default class CommonItemsPage {
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
+    this.myAccountGovUkBreadCrumbsLink = this.page.locator('.govuk-breadcrumbs__link');
     this.govUkBreadCrumbsLink = this.page.locator('a.govuk-breadcrumbs__link');
     this.govUkBackLink = this.page.locator('.govuk-back-link');
     this.fieldGroup = this.page.locator('.govuk-form-group');
@@ -203,6 +205,7 @@ export default class CommonItemsPage {
       .getByTestId('SearchQuery')
       .or(this.page.getByTestId('Search.SearchQuery'))
       .or(this.page.getByTestId('Search_IrasId'))
+      .or(this.page.getByTestId('SearchTerm'))
       .or(this.page.getByTestId('Search.SearchNameTerm'))
       .or(this.page.getByTestId('Search.ModificationId'))
       .first();
@@ -1336,6 +1339,8 @@ export default class CommonItemsPage {
         replaceValue
       );
     } else if (key.startsWith('date_submitted')) {
+      return await this.getActiveFilterLabelDateField(filterLabels, filterDataset, key, dateSuffixRegex, replaceValue);
+    } else if (key.startsWith('date_project_created')) {
       return await this.getActiveFilterLabelDateField(filterLabels, filterDataset, key, dateSuffixRegex, replaceValue);
     }
   }
