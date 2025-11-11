@@ -5,7 +5,7 @@ const { Then } = createBdd(test);
 
 Then(
   'I can see the check and remove user profile page',
-  async ({ checkRemoveUserReviewBodyPage, reviewBodyProfilePage, userListReviewBodyPage }) => {
+  async ({ checkRemoveUserReviewBodyPage, reviewBodyProfilePage, commonItemsPage }) => {
     await checkRemoveUserReviewBodyPage.assertOnCheckRemoveUserProfilePage();
     const organisationName = await reviewBodyProfilePage.getOrgName();
     await expect(checkRemoveUserReviewBodyPage.page_heading).toHaveText(
@@ -16,11 +16,9 @@ Then(
         organisationName +
         '.'
     );
-    await expect(checkRemoveUserReviewBodyPage.first_name_value).toHaveText(
-      await userListReviewBodyPage.getFirstName()
-    );
-    await expect(checkRemoveUserReviewBodyPage.last_name_value).toHaveText(await userListReviewBodyPage.getLastName());
-    await expect(checkRemoveUserReviewBodyPage.email_address_value).toHaveText(await userListReviewBodyPage.getEmail());
+    await expect(checkRemoveUserReviewBodyPage.first_name_value).toHaveText(await commonItemsPage.getFirstName());
+    await expect(checkRemoveUserReviewBodyPage.last_name_value).toHaveText(await commonItemsPage.getLastName());
+    await expect(checkRemoveUserReviewBodyPage.email_address_value).toHaveText(await commonItemsPage.getEmail());
     await checkRemoveUserReviewBodyPage.setTitle(
       confirmStringNotNull(await checkRemoveUserReviewBodyPage.title_value.textContent())
     );

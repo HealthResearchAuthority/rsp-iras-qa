@@ -45,6 +45,52 @@ BeforeScenario(
 
 BeforeScenario(
   {
+    name: 'Ensure sponsor organisation does not exist in system',
+    tags: '@SetupNewSponsorOrg',
+  },
+  async function ({ manageSponsorOrganisationPage, setupNewSponsorOrganisationPage }) {
+    const unusedSponsorOrgId = await manageSponsorOrganisationPage.findUnmatchedOrganisations();
+    const unusedSponsorOrgName = (
+      await manageSponsorOrganisationPage.sqlGetOrganisationNameFromRTSById(unusedSponsorOrgId)
+    ).toString();
+    await setupNewSponsorOrganisationPage.saveUnusedSponsorOrgTosetupNewSponsorOrganisation(unusedSponsorOrgName);
+  }
+);
+
+AfterScenario(
+  {
+    name: 'Remove sponsor organisation from the system',
+    tags: '@SetupNewSponsorOrg',
+  },
+  async function ({ manageSponsorOrganisationPage, setupNewSponsorOrganisationPage }) {
+    const usedSponsorOrg =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation
+        .Sponsor_Organisation_Unused.sponsor_organisation_text;
+    const sponsor_id = (
+      await manageSponsorOrganisationPage.sqlGetOrganisationIdFromRTSByName(usedSponsorOrg)
+    ).toString();
+    await manageSponsorOrganisationPage.sqlDeleteSponsorOrgById(sponsor_id);
+  }
+);
+
+AfterScenario(
+  {
+    name: 'Remove sponsor organisation from the system',
+    tags: '@SetupNewSponsorOrgGoLive',
+  },
+  async function ({ manageSponsorOrganisationPage, setupNewSponsorOrganisationPage }) {
+    const usedSponsorOrg =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation
+        .Sponsor_Organisation_Unused.sponsor_organisation_text;
+    const sponsor_id = (
+      await manageSponsorOrganisationPage.sqlGetOrganisationIdFromRTSByName(usedSponsorOrg)
+    ).toString();
+    await manageSponsorOrganisationPage.sqlDeleteSponsorOrgById(sponsor_id);
+  }
+);
+
+BeforeScenario(
+  {
     name: 'Ensure One Login User does not exist in system',
     tags: '@OneLoginUser',
   },
@@ -99,10 +145,14 @@ BeforeScenario(
         'Studywide_Reviewer_S',
         'Studywide_Reviewer_W',
         'Team_Manager',
+        'Team_Manager_NI',
+        'Team_Manager_S',
+        'Team_Manager_W',
         'Workflow_Coordinator',
         'Workflow_Coordinator_NI',
         'Workflow_Coordinator_S',
         'Workflow_Coordinator_W',
+        'Sponsor_User',
       ];
 
       for (const user of users) {
@@ -125,10 +175,14 @@ BeforeScenario(
         '@StudyWideReviewerSco': 'studywide_reviewer_s',
         '@StudyWideReviewerWal': 'studywide_reviewer_w',
         '@TeamManager': 'team_manager',
+        '@TeamManagerNI': 'team_manager_ni',
+        '@TeamManagerSco': 'team_manager_s',
+        '@TeamManagerW': 'team_manager_w',
         '@WorkFlowCoordinator': 'workflow_coordinator',
         '@WorkFlowCoordinatorNI': 'workflow_coordinator_ni',
         '@WorkFlowCoordinatorSco': 'workflow_coordinator_s',
         '@WorkFlowCoordinatorWal': 'workflow_coordinator_w',
+        '@SponsorUser': 'sponsor_user',
       };
 
       for (const tag in tagToUserMap) {

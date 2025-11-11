@@ -52,14 +52,7 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
           .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_label
       ),
     });
-    this.sponsor_document_day_text = this.sponsor_document_date_fieldset
-      .locator('.govuk-form-group', {
-        has: this.page.getByText(
-          this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
-            .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_day_label
-        ),
-      })
-      .getByRole('textbox');
+    this.sponsor_document_day_text = this.page.getByTestId('Questions[3].Day');
     this.sponsor_document_month_dropdown = this.sponsor_document_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(

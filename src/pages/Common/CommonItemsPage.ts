@@ -5,6 +5,8 @@ import * as questionSetData from '../../resources/test_data/common/question_set_
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
 import * as documentUploadTestData from '../../resources/test_data/common/document_upload_data.json';
 import * as searchFilterResultsData from '../../resources/test_data/common/search_filter_results_data.json';
+import * as searchModificationsPageTestData from '../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
+import * as setupNewSponsorOrganisationPageTestData from '../../resources/test_data/iras/reviewResearch/userAdministration/manageSponsorOrgs/setup_new_sponsor_organisation_page_data.json';
 import * as fs from 'node:fs';
 import path from 'node:path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
@@ -28,6 +30,8 @@ export default class CommonItemsPage {
   readonly commonTestData: typeof commonTestData;
   readonly documentUploadTestData: typeof documentUploadTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
+  readonly searchModificationsPageTestData: typeof searchModificationsPageTestData;
+  readonly setupNewSponsorOrganisationPageTestData: typeof setupNewSponsorOrganisationPageTestData;
   private _search_key: string;
   private _no_of_results_before_search: number;
   private _no_of_results_after_search: number;
@@ -35,6 +39,15 @@ export default class CommonItemsPage {
   private _date_submitted_from_filter: string;
   private _date_submitted_to_filter: string;
   private _no_of_total_pages: number;
+  private _user_list_before_search: string[];
+  private _user_email: string[];
+  private _user_fname: string[];
+  private _user_lname: string[];
+  private _first_name: string;
+  private _last_name: string;
+  private _email_address: string;
+  private _status: string;
+  private _user_full_name: Map<string, string>;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -108,6 +121,32 @@ export default class CommonItemsPage {
   readonly active_filters_list_to_remove: Locator;
   readonly errorMessageFieldLabelList: Locator;
   readonly details_component: Locator;
+  readonly sponsor_organisation_fieldset: Locator;
+  readonly sponsor_organisation_jsenabled_text: Locator;
+  readonly sponsor_organisation_suggestion_list_labels: Locator;
+  readonly sponsor_organisation_suggestion_listbox: Locator;
+  readonly sponsor_organisation_text: Locator;
+  readonly sponsor_organisation_jsdisabled_search_button: Locator;
+  readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
+  readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
+  readonly listCell: Locator;
+  readonly userListTableRows: Locator;
+  readonly userListTableBodyRows: Locator;
+  readonly search_box_label: Locator;
+  readonly first_name_label: Locator;
+  readonly first_name_value_first_row: Locator;
+  readonly last_name_value_first_row: Locator;
+  readonly email_address_value_first_row: Locator;
+  readonly status_value_first_row: Locator;
+  readonly last_name_label: Locator;
+  readonly email_address_label: Locator;
+  readonly status_label: Locator;
+  readonly last_logged_in_label: Locator;
+  readonly actions_label: Locator;
+  readonly back_to_users_link: Locator;
+  readonly success_message_header_text: Locator;
+  readonly govUkBreadCrumbsLink: Locator;
+  readonly myAccountGovUkBreadCrumbsLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -118,6 +157,8 @@ export default class CommonItemsPage {
     this.commonTestData = commonTestData;
     this.documentUploadTestData = documentUploadTestData;
     this.searchFilterResultsData = searchFilterResultsData;
+    this.searchModificationsPageTestData = searchModificationsPageTestData;
+    this.setupNewSponsorOrganisationPageTestData = setupNewSponsorOrganisationPageTestData;
     this._search_key = '';
     this._no_of_results_before_search = 0;
     this._no_of_results_after_search = 0;
@@ -125,6 +166,18 @@ export default class CommonItemsPage {
     this._date_submitted_from_filter = '';
     this._date_submitted_to_filter = '';
     this._no_of_total_pages = 0;
+    this._user_list_before_search = [];
+    this._user_email = [];
+    this._user_fname = [];
+    this._user_lname = [];
+    this._first_name = '';
+    this._last_name = '';
+    this._email_address = '';
+    this._status = '';
+    this._user_full_name = new Map();
+    this._first_name = '';
+    this._last_name = '';
+    this._email_address = '';
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -133,6 +186,8 @@ export default class CommonItemsPage {
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
+    this.myAccountGovUkBreadCrumbsLink = this.page.locator('.govuk-breadcrumbs__link');
+    this.govUkBreadCrumbsLink = this.page.locator('a.govuk-breadcrumbs__link');
     this.fieldGroup = this.page.locator('.govuk-form-group');
     this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message');
@@ -148,6 +203,7 @@ export default class CommonItemsPage {
       .getByTestId('SearchQuery')
       .or(this.page.getByTestId('Search.SearchQuery'))
       .or(this.page.getByTestId('Search_IrasId'))
+      .or(this.page.getByTestId('SearchTerm'))
       .or(this.page.getByTestId('Search.SearchNameTerm'))
       .first();
     //Banner
@@ -264,6 +320,96 @@ export default class CommonItemsPage {
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'));
     this.details_component = this.page.locator('.govuk-details');
+    this.sponsor_organisation_fieldset = this.page.locator('.govuk-fieldset', {
+      has: this.page.getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text
+      ),
+    });
+    this.sponsor_organisation_jsenabled_text = this.sponsor_organisation_fieldset.getByRole('combobox').or(
+      this.page.getByRole('combobox', {
+        name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+          .select_a_sponsor_organisation_hint_text,
+      })
+    );
+    this.sponsor_organisation_suggestion_list_labels = this.sponsor_organisation_jsenabled_text
+      .locator('..')
+      .getByRole('option');
+    this.sponsor_organisation_suggestion_listbox = this.sponsor_organisation_jsenabled_text
+      .locator('..')
+      .getByRole('listbox');
+    this.sponsor_organisation_text = this.sponsor_organisation_fieldset.getByRole('textbox').or(
+      this.page.getByRole('textbox', {
+        name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+          .select_a_sponsor_organisation_hint_text,
+      })
+    );
+    this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset
+      .getByRole('button', {
+        name: 'Search',
+      })
+      .or(this.govUkButton.getByText('Search'));
+    this.sponsor_organisation_jsdisabled_search_results_radio_button =
+      this.sponsor_organisation_fieldset.getByRole('radio');
+    this.sponsor_organisation_jsdisabled_min_error_message = this.page
+      .locator('.govuk-fieldset')
+      .filter({
+        hasText: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text,
+      })
+      .locator('.govuk-error-message')
+      .or(this.page.locator('.field-validation-error'))
+      .or(
+        this.page
+          .locator('.govuk-form-group')
+          .filter({
+            hasText:
+              this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+                .select_a_sponsor_organisation_hint_text,
+          })
+          .locator('.govuk-error-message')
+      );
+    this.listCell = this.page.getByRole('cell');
+
+    this.userListTableRows = this.page.getByRole('table').getByRole('row');
+    this.userListTableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
+    this.first_name_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.first_name_label, {
+        exact: true,
+      });
+    this.first_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').first();
+    this.last_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(1);
+    this.email_address_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(2);
+    this.status_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(3);
+    this.last_name_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.last_name_label, {
+        exact: true,
+      });
+    this.email_address_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.email_address_label, { exact: true });
+    this.status_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.status_label, {
+        exact: true,
+      });
+    this.last_logged_in_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.last_logged_in_label, {
+        exact: true,
+      });
+    this.actions_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.actions_label, {
+        exact: true,
+      });
+    this.search_box_label = this.page.getByText(this.commonTestData.search_box_label, {
+      exact: true,
+    });
+    this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.success_message_header_text = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(this.commonTestData.success_header_label);
   }
 
   //Getters & Setters for Private Variables
@@ -324,6 +470,76 @@ export default class CommonItemsPage {
     this._no_of_total_pages = value;
   }
 
+  async getUserListBeforeSearch(): Promise<string[]> {
+    return this._user_list_before_search;
+  }
+
+  async setUserListBeforeSearch(value: string[]): Promise<void> {
+    this._user_list_before_search = value;
+  }
+
+  async getUserEmail(): Promise<string[]> {
+    return this._user_email;
+  }
+
+  async setUserEmail(value: string[]): Promise<void> {
+    this._user_email = value;
+  }
+
+  async getUserFirstName(): Promise<string[]> {
+    return this._user_fname;
+  }
+
+  async setUserFirstName(value: string[]): Promise<void> {
+    this._user_fname = value;
+  }
+  async getUserLastName(): Promise<string[]> {
+    return this._user_lname;
+  }
+
+  async setUserLastName(value: string[]): Promise<void> {
+    this._user_lname = value;
+  }
+  async getFirstName(): Promise<string> {
+    return this._first_name;
+  }
+
+  async setFirstName(value: string): Promise<void> {
+    this._first_name = value;
+  }
+
+  async getLastName(): Promise<string> {
+    return this._last_name;
+  }
+
+  async setLastName(value: string): Promise<void> {
+    this._last_name = value;
+  }
+
+  async getEmail(): Promise<string> {
+    return this._email_address;
+  }
+
+  async setEmail(value: string): Promise<void> {
+    this._email_address = value;
+  }
+
+  async getStatus(): Promise<string> {
+    return this._status;
+  }
+
+  async setStatus(value: string): Promise<void> {
+    this._status = value;
+  }
+
+  async getFullName(): Promise<Map<string, string>> {
+    return this._user_full_name;
+  }
+
+  async setFullName(value: Map<string, string>): Promise<void> {
+    this._user_full_name = value;
+  }
+
   //Page Methods
   async storeAuthState(user: string) {
     const userPath = confirmStringNotNull(user.toLowerCase());
@@ -366,7 +582,7 @@ export default class CommonItemsPage {
     console.log(testType + ' test action');
   }
 
-  async fillUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  async fillUIComponent<PageObject>(dataset: JSON | Record<string, any>, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
     if (typeAttribute === 'radio') {
@@ -817,9 +1033,9 @@ export default class CommonItemsPage {
   }
 
   async getPageNumber(currentUrl: string) {
-    const parts: string[] = currentUrl.split('?');
-    const pageName: string[] = parts[1].split('&');
-    const pageNumber = Number.parseInt(pageName[0].split('=')[1], 10);
+    const parts: string[] = currentUrl.split('pageNumber=');
+    const pageName: string[] = parts[1].split('&pageSize');
+    const pageNumber = Number.parseInt(pageName[0]);
     return pageNumber;
   }
 
@@ -1118,6 +1334,8 @@ export default class CommonItemsPage {
         replaceValue
       );
     } else if (key.startsWith('date_submitted')) {
+      return await this.getActiveFilterLabelDateField(filterLabels, filterDataset, key, dateSuffixRegex, replaceValue);
+    } else if (key.startsWith('date_project_created')) {
       return await this.getActiveFilterLabelDateField(filterLabels, filterDataset, key, dateSuffixRegex, replaceValue);
     }
   }
@@ -1440,5 +1658,37 @@ export default class CommonItemsPage {
         await checkbox.uncheck();
       }
     }
+  }
+
+  async selectSponsorOrgJsEnabled<PageObject>(dataset: JSON | Record<string, any>, key: string, page: PageObject) {
+    dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
+    await this.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
+    await this.page.waitForTimeout(2000);
+    const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
+    if (suggestionVisible) {
+      await this.sponsor_organisation_suggestion_list_labels.first().click();
+    }
+  }
+
+  async shouldGoToNextPage(): Promise<boolean> {
+    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+  }
+
+  async goToNextPage(): Promise<void> {
+    await this.next_button.click();
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+
+  async buildSearchRecord(name: string, status?: string): Promise<string> {
+    if (status === undefined) {
+      return name;
+    }
+    return `${name}|${status}`;
+  }
+
+  async getRowData(row: any, status?: string): Promise<string> {
+    const columns = await row.locator(this.listCell).allTextContents();
+    const selected = status === undefined ? [columns[0]] : [columns[0], columns[2]];
+    return selected.map((col) => col.trim()).join('|');
   }
 }

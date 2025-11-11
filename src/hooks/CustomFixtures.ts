@@ -21,7 +21,7 @@ import MyResearchProjectsPage from '../pages/IRAS/makeChanges/MyResearchProjects
 import CreateProjectRecordPage from '../pages/IRAS/makeChanges/CreateProjectRecordPage';
 import ProjectDetailsIRASPage from '../pages/IRAS/makeChanges/ProjectDetailsIRASPage';
 import ProjectDetailsTitlePage from '../pages/IRAS/makeChanges/ProjectDetailsTitlePage';
-import ReseachLocationsPage from '../pages/IRAS/makeChanges/ResearchLocationsPage';
+import ResearchLocationsPage from '../pages/IRAS/makeChanges/ResearchLocationsPage';
 import ChiefInvestigatorPage from '../pages/IRAS/makeChanges/ChiefInvestigatorPage';
 import ProjectIdentifiersPage from '../pages/IRAS/makeChanges/ProjectIdentifiersPage';
 import ReviewYourApplicationPage from '../pages/IRAS/makeChanges/ReviewYourApplicationPage';
@@ -58,7 +58,7 @@ import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/Mod
 import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationQuestionsPage';
-import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
+import ModificationReviewChangesPage from '../pages/IRAS/makeChanges/modifications/ModificationReviewChangesPage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
 import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReceivedCommonPage';
@@ -72,11 +72,22 @@ import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeCh
 import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
+import ManageSponsorOrganisationsPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ManageSponsorOrganisationsPage';
+import SetupNewSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SetupNewSponsorOrganisationPage';
+import CheckSetupSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
+import SponsorOrganisationProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SponsorOrganisationProfilePage';
+import UserListSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/UserListSponsorOrganisationPage';
+import CheckAddUserSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckAddUserSponsorOrganisationPage';
+import SearchAddUserSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SearchAddUserSponsorOrganisationPage';
+import ViewEditUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ViewEditUserProfilePage';
 import ProfileCommonPage from '../pages/IRAS/reviewResearch/profileManagement/ProfileCommonPage';
 import ProfileSettingsPage from '../pages/IRAS/reviewResearch/profileManagement/ProfileSettingsPage';
 import EditYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/EditYourProfilePage';
 import CompleteYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/CompleteYourProfilePage';
 import CheckYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/CheckYourProfilePage';
+import ProjectIdentificationSelectChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectChangePage';
+import ProjectIdentificationSelectReferenceToChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectReferenceToChangePage';
+import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationEnterReferenceNumbersPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -98,7 +109,7 @@ type CustomFixtures = {
   createProjectRecordPage: CreateProjectRecordPage;
   projectDetailsIRASPage: ProjectDetailsIRASPage;
   projectDetailsTitlePage: ProjectDetailsTitlePage;
-  reseachLocationsPage: ReseachLocationsPage;
+  researchLocationsPage: ResearchLocationsPage;
   chiefInvestigatorPage: ChiefInvestigatorPage;
   projectIdentifiersPage: ProjectIdentifiersPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
@@ -135,7 +146,7 @@ type CustomFixtures = {
   plannedEndDateChangePage: PlannedEndDateChangePage;
   affectedOrganisationSelectionPage: AffectedOrganisationSelectionPage;
   affectedOrganisationQuestionsPage: AffectedOrganisationQuestionsPage;
-  reviewChangesPlannedEndDatePage: ReviewChangesPlannedEndDatePage;
+  modificationReviewChangesPage: ModificationReviewChangesPage;
   addDocumentsModificationsPage: AddDocumentsModificationsPage;
   reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
   selectStudyWideReviewerPage: SelectStudyWideReviewerPage;
@@ -149,11 +160,23 @@ type CustomFixtures = {
   reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
+  manageSponsorOrganisationPage: ManageSponsorOrganisationsPage;
+  setupNewSponsorOrganisationPage: SetupNewSponsorOrganisationPage;
+  checkSetupSponsorOrganisationPage: CheckSetupSponsorOrganisationPage;
+  sponsorOrganisationProfilePage: SponsorOrganisationProfilePage;
+  userListSponsorOrganisationPage: UserListSponsorOrganisationPage;
+  checkAddUserSponsorOrganisationPage: CheckAddUserSponsorOrganisationPage;
+  searchAddUserSponsorOrganisationPage: SearchAddUserSponsorOrganisationPage;
+  viewEditUserProfilePage: ViewEditUserProfilePage;
   profileCommonPage: ProfileCommonPage;
   profileSettingsPage: ProfileSettingsPage;
   editYourProfilePage: EditYourProfilePage;
   completeYourProfilePage: CompleteYourProfilePage;
   checkYourProfilePage: CheckYourProfilePage;
+
+  projectIdentificationSelectChangePage: ProjectIdentificationSelectChangePage;
+  projectIdentificationSelectReferenceToChangePage: ProjectIdentificationSelectReferenceToChangePage;
+  projectIdentificationEnterReferenceNumbersPage: ProjectIdentificationEnterReferenceNumbersPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -235,8 +258,8 @@ export const test = base.extend<CustomFixtures>({
     await use(new ProjectDetailsTitlePage(page));
   },
 
-  reseachLocationsPage: async ({ page }, use) => {
-    await use(new ReseachLocationsPage(page));
+  researchLocationsPage: async ({ page }, use) => {
+    await use(new ResearchLocationsPage(page));
   },
 
   chiefInvestigatorPage: async ({ page }, use) => {
@@ -382,8 +405,8 @@ export const test = base.extend<CustomFixtures>({
     await use(new AffectedOrganisationQuestionsPage(page));
   },
 
-  reviewChangesPlannedEndDatePage: async ({ page }, use) => {
-    await use(new ReviewChangesPlannedEndDatePage(page));
+  modificationReviewChangesPage: async ({ page }, use) => {
+    await use(new ModificationReviewChangesPage(page));
   },
 
   addDocumentsModificationsPage: async ({ page }, use) => {
@@ -436,6 +459,37 @@ export const test = base.extend<CustomFixtures>({
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
   },
+  manageSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new ManageSponsorOrganisationsPage(page));
+  },
+
+  setupNewSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new SetupNewSponsorOrganisationPage(page));
+  },
+
+  checkSetupSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckSetupSponsorOrganisationPage(page));
+  },
+
+  sponsorOrganisationProfilePage: async ({ page }, use) => {
+    await use(new SponsorOrganisationProfilePage(page));
+  },
+
+  userListSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new UserListSponsorOrganisationPage(page));
+  },
+
+  checkAddUserSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckAddUserSponsorOrganisationPage(page));
+  },
+
+  searchAddUserSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new SearchAddUserSponsorOrganisationPage(page));
+  },
+
+  viewEditUserProfilePage: async ({ page }, use) => {
+    await use(new ViewEditUserProfilePage(page));
+  },
 
   profileCommonPage: async ({ page }, use) => {
     await use(new ProfileCommonPage(page));
@@ -455,6 +509,18 @@ export const test = base.extend<CustomFixtures>({
 
   checkYourProfilePage: async ({ page }, use) => {
     await use(new CheckYourProfilePage(page));
+  },
+
+  projectIdentificationSelectChangePage: async ({ page }, use) => {
+    await use(new ProjectIdentificationSelectChangePage(page));
+  },
+
+  projectIdentificationSelectReferenceToChangePage: async ({ page }, use) => {
+    await use(new ProjectIdentificationSelectReferenceToChangePage(page));
+  },
+
+  projectIdentificationEnterReferenceNumbersPage: async ({ page }, use) => {
+    await use(new ProjectIdentificationEnterReferenceNumbersPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
@@ -477,6 +543,12 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState(loginPageTestData.Studywide_Reviewer_W.authPath);
     } else if ($tags.includes('@TeamManager')) {
       storageState = getAuthState(loginPageTestData.Team_Manager.authPath);
+    } else if ($tags.includes('@TeamManagerNI')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_NI.authPath);
+    } else if ($tags.includes('@TeamManagerSco')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_S.authPath);
+    } else if ($tags.includes('@TeamManagerW')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_W.authPath);
     } else if ($tags.includes('@WorkFlowCoordinator')) {
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
@@ -485,6 +557,8 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator_S.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator_W.authPath);
+    } else if ($tags.includes('@SponsorUser')) {
+      storageState = getAuthState(loginPageTestData.Sponsor_User.authPath);
     }
     await use(storageState);
   },
