@@ -17,6 +17,7 @@ When(
       participatingOrganisationsPage,
       manageSponsorOrganisationPage,
       userListSponsorOrganisationPage,
+      myResearchProjectsPage,
     },
     searchType: string,
     searchQueryName: string
@@ -51,6 +52,8 @@ When(
       searchQueryDataset =
         userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Search_For_Users_In_Sponsor_Organisations
           .Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'my research') {
+      searchQueryDataset = myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
