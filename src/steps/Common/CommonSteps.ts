@@ -10,7 +10,7 @@ import {
   writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { confirmArrayNotNull, getAuthState, getTimeFormatted, getRandomNumber } from '../../utils/UtilFunctions';
+import { getAuthState, getTimeFormatted, getRandomNumber } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import * as fs from 'node:fs';
 import path from 'node:path';
@@ -714,21 +714,6 @@ When(
   }
 );
 
-When(
-  'I enter the {string} as the search query into the search field',
-  async ({ userListReviewBodyPage, commonItemsPage }, searchKey: string) => {
-    if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
-      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
-      const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
-      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-      await commonItemsPage.setSearchKey(searchKey);
-      await commonItemsPage.search_text.fill(searchKey);
-    } else {
-      throw new Error(`There are no items in list to search`);
-    }
-  }
-);
-
 Given(
   'I have navigated to the {string}',
   async (
@@ -739,6 +724,7 @@ Given(
       createApplicationPage,
       systemAdministrationPage,
       manageUsersPage,
+      createUserProfilePage,
       manageReviewBodiesPage,
       userProfilePage,
       reviewBodyProfilePage,
@@ -774,6 +760,10 @@ Given(
       case 'Manage_Users_Page':
         await manageUsersPage.goto();
         await manageUsersPage.assertOnManageUsersPage();
+        break;
+      case 'Create_User_Profile_Page':
+        await createUserProfilePage.goto();
+        await createUserProfilePage.assertOnCreateUserProfilePage();
         break;
       case 'Manage_Review_Bodies_Page':
         await manageReviewBodiesPage.goto();

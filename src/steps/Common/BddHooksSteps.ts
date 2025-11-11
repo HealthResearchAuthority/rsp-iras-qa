@@ -67,6 +67,17 @@ AfterScenario(
   }
 );
 
+AfterScenario(
+  {
+    name: 'Remove test automation generated users from a specific review body',
+    tags: '@RevBodyUserListCleanup',
+  },
+  async function ({ userListReviewBodyPage, reviewBodyProfilePage }) {
+    const revBodyId = await reviewBodyProfilePage.getReviewBodyId();
+    await userListReviewBodyPage.sqlDeleteReviewBodyAutomatedUserListById(revBodyId);
+  }
+);
+
 BeforeScenario(
   {
     name: 'Check that current auth state has not expired',

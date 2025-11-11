@@ -1,7 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as userListReviewBodyPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/user_list_review_body_page_data.json';
+import * as dbConfigData from '../../../../../resources/test_data/common/database/db_config_data.json';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 import CommonItemsPage from '../../../../Common/CommonItemsPage';
+import { connect } from '../../../../../utils/DbConfig';
 
 //Declare Page Objects
 export default class UserListReviewBodyPage {
@@ -318,5 +320,14 @@ export default class UserListReviewBodyPage {
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
     return filteredSearchResults;
+  }
+
+  // SQL STATEMENTS //
+  async sqlDeleteReviewBodyAutomatedUserListById(revBodyId: string): Promise<void> {
+    const sqlApplicationConnection = await connect(dbConfigData.Application_Service);
+    await sqlApplicationConnection.query(
+      `DELETE FROM RegulatoryBodiesUsers WHERE Id = '${revBodyId}' AND Email LIKE 'qaautomation%'`
+    );
+    await sqlApplicationConnection.close();
   }
 }

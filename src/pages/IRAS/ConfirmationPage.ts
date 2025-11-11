@@ -35,7 +35,7 @@ export default class ConfirmationPage {
       name: confirmationPageTestData.Project_Record_Created_Labels.page_heading,
     });
     this.success_message_body_text = this.page.locator('.govuk-panel__body');
-    this.confirmation_body_label = this.page.getByRole('paragraph').first();
+    this.confirmation_body_label = this.page.getByTestId('main-content').getByRole('paragraph').first();
     this.what_happens_next_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
     });

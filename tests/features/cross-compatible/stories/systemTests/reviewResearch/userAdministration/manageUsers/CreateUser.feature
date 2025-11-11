@@ -35,7 +35,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status_Enabled>' status in the manage user page
     And I capture the page screenshot
-    And I click the 'Back' link on the 'Manage_Users_Page'
+    And I click the 'System_Admin_Breadcrumb' link on the 'Manage_Users_Page'
     And I capture the page screenshot
     Then I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -91,7 +91,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status_Enabled>' status in the manage user page
     And I capture the page screenshot
-    And I click the 'Back' link on the 'Manage_Users_Page'
+    And I click the 'System_Admin_Breadcrumb' link on the 'Manage_Users_Page'
     And I capture the page screenshot
     Then I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -333,10 +333,11 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Email_Data_Multiple_Sub_Domains |
       | Valid_Email_Data_Domain               |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs
+  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs @KNOWN-DEFECT-RSP-5915
   Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I capture the page screenshot
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
     And I capture the page screenshot
 

@@ -200,10 +200,14 @@ Then(
 
 When(
   'I enter {string} into the search field for manage users page',
-  async ({ manageUsersPage }, datasetName: string) => {
-    const dataset =
-      manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[datasetName];
-    await manageUsersPage.user_search_text.fill(dataset['search_input_text']);
+  async ({ manageUsersPage, createUserProfilePage }, datasetName: string) => {
+    if (datasetName.toLowerCase() == 'the new users email') {
+      await manageUsersPage.user_search_text.fill(await createUserProfilePage.getUniqueEmail());
+    } else {
+      const dataset =
+        manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[datasetName];
+      await manageUsersPage.user_search_text.fill(dataset['search_input_text']);
+    }
   }
 );
 

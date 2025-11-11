@@ -48,7 +48,8 @@
     "Back": "Back",
     "View_Edit": "View/Edit",
     "Advanced_Filters": "Advanced filters",
-    "Clear_All_Filters": "Clear all filters"
+    "Clear_All_Filters": "Clear all filters",
+    "System_Admin_Breadcrumb": "System administration"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
@@ -63,7 +64,8 @@
   "User_Profile_Page": {
     "Change": "Change",
     "Back": "Back",
-    "View_Users_Audit_History": "View this user's audit history"
+    "View_Users_Audit_History": "View this user's audit history",
+    "Manage_Users_Breadcrumb": "Manage users"
   },
   "Edit_User_Profile_Page": {
     "Back": "Back"
