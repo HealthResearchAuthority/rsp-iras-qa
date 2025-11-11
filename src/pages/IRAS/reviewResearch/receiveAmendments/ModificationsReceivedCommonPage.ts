@@ -278,4 +278,26 @@ export default class ModificationsReceivedCommonPage {
     }
     return columnIndex;
   }
+
+  async getProjectRecordColumnIndex(pageType: string, columnName: string): Promise<number> {
+    let columnIndex: number;
+    switch (columnName.toLowerCase()) {
+      case 'iras id':
+        if (pageType.toLowerCase() == 'search_projects_page') {
+          columnIndex = 0;
+        }
+        break;
+      case 'short project title':
+        if (pageType.toLowerCase() == 'search_projects_page') {
+          columnIndex = 1;
+        }
+        break;
+      case 'lead nation':
+        columnIndex = 2;
+        break;
+      default:
+        throw new Error(`${columnName} is not a valid option`);
+    }
+    return columnIndex;
+  }
 }

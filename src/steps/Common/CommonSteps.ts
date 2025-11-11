@@ -60,6 +60,7 @@ When(
       checkYourProfilePage,
       chooseARecordTypeToSearchPage,
       teamManagerDashboardPage,
+      searchProjectsPage,
     },
     page: string
   ) => {
@@ -164,6 +165,9 @@ When(
         break;
       case 'Team_Manager_Dashboard_Page':
         await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
+        break;
+      case 'Search_Projects_Page':
+        await searchProjectsPage.assertOnSearchProjectsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -1391,9 +1395,14 @@ Then(
 When(
   'I click a {string} on the {string}',
   async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
+    let testNum: number;
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
     const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
-    const testNum = await getRandomNumber(0, rowCount - 1);
+    if (rowCount > 1) {
+      testNum = await getRandomNumber(0, rowCount - 1);
+    } else if (rowCount == 1) {
+      testNum = 0;
+    }
     const fieldLocator = commonItemsPage.tableBodyRows
       .nth(testNum)
       .getByRole('cell')

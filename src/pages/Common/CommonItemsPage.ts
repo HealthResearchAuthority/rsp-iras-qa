@@ -1686,4 +1686,17 @@ export default class CommonItemsPage {
     const selected = status === undefined ? [columns[0]] : [columns[0], columns[2]];
     return selected.map((col) => col.trim()).join('|');
   }
+
+  async sortIrasIds(irasIds: string[], sortDirection: string): Promise<string[]> {
+    // Convert all IRAS IDs to numbers for accurate sorting
+    const irasIdsAsNumbers = irasIds.map((id) => Number.parseInt(id));
+    let sortedNumbers: number[];
+    if (sortDirection.toLowerCase() === 'ascending') {
+      sortedNumbers = irasIdsAsNumbers.sort((a, b) => a - b);
+    } else {
+      sortedNumbers = irasIdsAsNumbers.sort((a, b) => b - a);
+    }
+    // Convert back to strings
+    return sortedNumbers.map((num) => num.toString());
+  }
 }

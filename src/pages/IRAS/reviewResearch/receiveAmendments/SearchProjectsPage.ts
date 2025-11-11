@@ -10,6 +10,7 @@ export default class SearchProjectsPage {
   readonly searchProjectsPageTestData: typeof searchProjectsPageTestData;
   readonly linkTextData: typeof linkTextData;
   private _modifications_list_after_search: string[];
+  readonly mainPageContent: Locator;
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
   readonly iras_id_search_text: Locator;
@@ -72,10 +73,11 @@ export default class SearchProjectsPage {
     this._modifications_list_after_search = [];
 
     //Locators
-    this.page_heading = this.page
+    this.mainPageContent = this.page.getByTestId('main-content');
+    this.page_heading = this.mainPageContent
       .getByRole('heading')
       .getByText(this.searchProjectsPageTestData.Search_Projects_Page.page_heading);
-    this.page_guidance_text = this.page
+    this.page_guidance_text = this.mainPageContent
       .getByRole('paragraph')
       .getByText(this.searchProjectsPageTestData.Search_Projects_Page.page_guidance_text);
     this.iras_id_search_text = this.page.getByLabel(
@@ -304,7 +306,7 @@ export default class SearchProjectsPage {
   }
 
   async goto() {
-    await this.page.goto('');
+    await this.page.goto('projectrecordsearch');
     await this.assertOnSearchProjectsPage();
   }
 

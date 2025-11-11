@@ -380,31 +380,3 @@ Then(
       .toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );
-
-Then(
-  'I can now see a table of search results for modifications received for approval',
-  async ({ searchModificationsPage, commonItemsPage }) => {
-    await expect.soft(searchModificationsPage.results_table).toBeVisible();
-    expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
-  }
-);
-
-Then(
-  'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
-  async ({ commonItemsPage, modificationsReceivedCommonPage }, sortDirection: string, sortField: string) => {
-    let sortedModsList: string[];
-    const searchColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(
-      'Search_Modifications_Page',
-      sortField
-    );
-    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
-    if (sortField.toLowerCase() == 'modification id') {
-      sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
-    } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedModsList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    } else {
-      sortedModsList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-    }
-    expect.soft(actualList).toEqual(sortedModsList);
-  }
-);

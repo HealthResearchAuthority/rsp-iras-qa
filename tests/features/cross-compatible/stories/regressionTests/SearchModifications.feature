@@ -21,22 +21,22 @@ Feature: Receive Amendments: Search Modifications
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And I can now see a table of search results for modifications received for approval
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I can now see a table of search results for 'modifications received for approval'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
                 Examples:
                         | Sort_Button         | Sort_Field          |
                         | Modification_Id     | modification id     |
@@ -53,7 +53,7 @@ Feature: Receive Amendments: Search Modifications
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -66,21 +66,21 @@ Feature: Receive Amendments: Search Modifications
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
                 Examples:
                         | Valid_Iras_Id        | Advanced_Filters             | Sort_Button         | Sort_Field          |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Lead_Nation | Modification_Id     | modification id     |
@@ -95,15 +95,15 @@ Feature: Receive Amendments: Search Modifications
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I can now see a table of search results for modifications received for approval
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I can now see a table of search results for 'modifications received for approval'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I select advanced filters in the search modifications page using 'Advanced_Filters_Checkboxes'
@@ -113,14 +113,14 @@ Feature: Receive Amendments: Search Modifications
                 Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Checkboxes' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search 'Valid_Iras_Id_Prefix' and filter criteria '<Advanced_Filters_Checkboxes>'
                 And I capture the page screenshot
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
                 Examples:
                         | Sort_Button         | Sort_Field          |
                         | Modification_Id     | modification id     |
@@ -150,7 +150,7 @@ Feature: Receive Amendments: Search Modifications
         Scenario: Verify back and short project title link navigation for search modifications tasklist
                 And I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And I can now see a table of search results for modifications received for approval
+                And I can now see a table of search results for 'modifications received for approval'
                 And Each 'short project title' displayed on the 'Search_Modifications_Page' is a link
                 When I click a 'short project title' on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -161,7 +161,7 @@ Feature: Receive Amendments: Search Modifications
                 When I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I can now see a table of search results for modifications received for approval
+                And I can now see a table of search results for 'modifications received for approval'
                 Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
                 When I click a 'modification id' on the 'Search_Modifications_Page'
                 And I capture the page screenshot
