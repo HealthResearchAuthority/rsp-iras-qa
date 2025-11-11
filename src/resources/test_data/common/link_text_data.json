@@ -289,5 +289,9 @@
   },
   "Add_Documents_Details_Page": {
     "Delete": "Delete"
+  },
+  "Sponsor_Workspace_Page": {
+    "My_Account": "My account",
+    "Authorisations": "Authorisations"
   }
 }

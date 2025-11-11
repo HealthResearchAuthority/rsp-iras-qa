@@ -88,6 +88,7 @@ import CheckYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement
 import ProjectIdentificationSelectChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectChangePage';
 import ProjectIdentificationSelectReferenceToChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectReferenceToChangePage';
 import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationEnterReferenceNumbersPage';
+import SponsorWorkspacePage from '../pages/IRAS/reviewResearch/userAdministration/SponsorWorkspacePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -173,10 +174,10 @@ type CustomFixtures = {
   editYourProfilePage: EditYourProfilePage;
   completeYourProfilePage: CompleteYourProfilePage;
   checkYourProfilePage: CheckYourProfilePage;
-
   projectIdentificationSelectChangePage: ProjectIdentificationSelectChangePage;
   projectIdentificationSelectReferenceToChangePage: ProjectIdentificationSelectReferenceToChangePage;
   projectIdentificationEnterReferenceNumbersPage: ProjectIdentificationEnterReferenceNumbersPage;
+  sponsorWorkspacePage: SponsorWorkspacePage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -521,6 +522,10 @@ export const test = base.extend<CustomFixtures>({
 
   projectIdentificationEnterReferenceNumbersPage: async ({ page }, use) => {
     await use(new ProjectIdentificationEnterReferenceNumbersPage(page));
+  },
+
+  sponsorWorkspacePage: async ({ page }, use) => {
+    await use(new SponsorWorkspacePage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
