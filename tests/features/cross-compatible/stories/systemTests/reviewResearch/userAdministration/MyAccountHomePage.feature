@@ -121,7 +121,7 @@ Feature: My Account Home page
       | Label_Texts_Applicant_User_Role | My_research           | Back            |
 
   @rsp-5228 @rsp-4846 @MyAccountHomepage @SponsorUser
-  Scenario Outline: Validate the My Account Home page of front stage user
+  Scenario Outline: Validate the My Account Home page of sponsor user
     Given I have navigated to the 'Home_Page'
     Given I can see project guidance text on the home_page
     Then I can see the my account home page
