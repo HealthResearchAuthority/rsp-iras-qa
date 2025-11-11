@@ -54,7 +54,7 @@ Feature: Create Amendment - Project Overview
         Examples:
             | Validation_Text_Research | Project_Details       | Research_Project_Details | Validation_Text_Project | Project_Team_Details  | Research_Locations_Details               |
             | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Nhs     |
-          #  | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Non_Nhs |
+            | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Non_Nhs |
 
     @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @KNOWN-DEFECT-RSP-5322
     Scenario Outline: Validate the expected data is available and displayed on the project overview page
