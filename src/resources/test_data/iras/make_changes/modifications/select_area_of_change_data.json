@@ -24,7 +24,9 @@
     "Project_Documents": "Project documents"
   },
   "Specific_Change_Options": {
-    "Default_Value": ["Select specific change"],
+    "Default_Value": [
+      "Select specific change"
+    ],
     "Participating_Organisation": [
       "Select specific change",
       "Early closure or withdrawal of research sites",
@@ -32,7 +34,10 @@
       "PICs - Early closure or withdrawal of Participant Identification Centres",
       "Addition of sites undertaking the same activities as existing sites"
     ],
-    "Project_Design": ["Select specific change", "Change to planned end date"],
+    "Project_Design": [
+      "Select specific change",
+      "Change to planned end date"
+    ],
     "Project_Documents": [
       "Select specific change",
       "Correction of typographical errors",
@@ -45,16 +50,32 @@
     ]
   },
   "Select_Area_Of_Change": {
-    "Default_Value": { "area_of_change_dropdown": "Select area of change" },
-    "Participating_Organisation": { "area_of_change_dropdown": "Participating organisations" },
-    "Project_Design": { "area_of_change_dropdown": "Project design" },
-    "Project_Documents": { "area_of_change_dropdown": "Project documents" },
-    "Participant_Procedures": { "area_of_change_dropdown": "Participant procedures" },
-    "Project_Personnel": { "area_of_change_dropdown": "Project personnel" },
-    "Administrative_Details_For_The_Project": { "area_of_change_dropdown": "Administrative details for the project" }
+    "Default_Value": {
+      "area_of_change_dropdown": "Select area of change"
+    },
+    "Participating_Organisation": {
+      "area_of_change_dropdown": "Participating organisations"
+    },
+    "Project_Design": {
+      "area_of_change_dropdown": "Project design"
+    },
+    "Project_Documents": {
+      "area_of_change_dropdown": "Project documents"
+    },
+    "Participant_Procedures": {
+      "area_of_change_dropdown": "Participant procedures"
+    },
+    "Project_Personnel": {
+      "area_of_change_dropdown": "Project personnel"
+    },
+    "Administrative_Details_For_The_Project": {
+      "area_of_change_dropdown": "Administrative details for the project"
+    }
   },
   "Select_Specific_Change": {
-    "Default_Value": { "specific_change_dropdown": "Select specific change" },
+    "Default_Value": {
+      "specific_change_dropdown": "Select specific change"
+    },
     "Addition_Of_Sites_Option": {
       "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites"
     },
@@ -67,12 +88,18 @@
     "Early_Closure_Of_Participant_Identification_Centres_Option": {
       "specific_change_dropdown": "PICs - Early closure or withdrawal of Participant Identification Centres"
     },
-    "Planned_End_Date": { "specific_change_dropdown": "Change to planned end date" },
-    "Correction_Of_Typographical_Errors": { "specific_change_dropdown": "Correction of typographical errors" },
+    "Planned_End_Date": {
+      "specific_change_dropdown": "Change to planned end date"
+    },
+    "Correction_Of_Typographical_Errors": {
+      "specific_change_dropdown": "Correction of typographical errors"
+    },
     "CRF_Other_Study_Data_Records": {
       "specific_change_dropdown": "CRF/other study data records - Changes in the documentation used by the research team for recording study data"
     },
-    "GDPR_Wording": { "specific_change_dropdown": "GDPR wording - Accepted wording used verbatim" },
+    "GDPR_Wording": {
+      "specific_change_dropdown": "GDPR wording - Accepted wording used verbatim"
+    },
     "Other_Minor_Change_To_Study_Documents": {
       "specific_change_dropdown": "Other minor change to study documents (e.g. information sheets, consent forms, questionnaires, letters) that will have additional resource implications for participating organisations"
     },
@@ -93,6 +120,15 @@
     },
     "Project_Identification": {
       "specific_change_dropdown": "Project identification"
+    },
+    "Contact_Details": {
+      "specific_change_dropdown": "Contact details"
+    },
+    "Change_Of_Chief_Investigator": {
+      "specific_change_dropdown": "Change of chief investigator"
+    },
+    "Change_Of_Principal_Investigator": {
+      "specific_change_dropdown": "Change of principal investigator"
     }
   }
 }

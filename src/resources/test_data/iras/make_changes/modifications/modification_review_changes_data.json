@@ -13,7 +13,13 @@
     "other_reference_number_label": "Other reference number",
     "what_other_is_label": "What ‘other’ is",
     "new_short_project_title_label": "New short project title",
-    "new_full_project_title_label": "New full project title"
+    "new_full_project_title_label": "New full project title",
+    "select_details_to_change": "Select details to change",
+    "chief_investigator_email": "New chief investigator email",
+    "sponsor_contact_email": "Sponsor contact email",
+    "name_text": "Name",
+    "email_text": "Email",
+    "principal_investigator_email": "New principal investigator email"
   },
   "Label_Texts_Nhs": {
     "new_planned_project_end_date_label": "New planned project end date",
