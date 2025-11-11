@@ -79,7 +79,7 @@ Then(
         .nth(i)
         .textContent();
       const trimmedActualDocumentName = actualDocumentName.trim();
-      expect(trimmedDocumentName).toBe(trimmedActualDocumentName);
+      expect.soft(trimmedDocumentName).toBe(trimmedActualDocumentName);
       for (const key in dataset) {
         if (Object.hasOwn(dataset, key)) {
           if (
