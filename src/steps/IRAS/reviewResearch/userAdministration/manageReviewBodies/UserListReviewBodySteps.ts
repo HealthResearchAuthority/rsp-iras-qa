@@ -42,23 +42,29 @@ When(
 
 Then(
   'the system displays no results found message in the user list page of the review body',
-  async ({ userListReviewBodyPage, reviewBodyProfilePage, commonItemsPage }) => {
+  async ({ userListReviewBodyPage, reviewBodyProfilePage, commonItemsPage, searchAddUserReviewBodyPage }) => {
     await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
     const organisationName = await reviewBodyProfilePage.getOrgName();
-    await expect(userListReviewBodyPage.page_heading).toHaveText(
-      userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
-    );
-    await expect(userListReviewBodyPage.no_results_heading).toHaveText(
-      userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_heading
-    );
-    await expect(userListReviewBodyPage.no_results_guidance_text).toHaveText(
-      userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_guidance_text
-    );
+    await expect
+      .soft(userListReviewBodyPage.page_heading)
+      .toHaveText(
+        userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
+      );
+    await expect
+      .soft(userListReviewBodyPage.no_results_heading)
+      .toHaveText(userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_heading);
+    await expect
+      .soft(userListReviewBodyPage.no_results_guidance_text)
+      .toHaveText(
+        userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_guidance_text
+      );
     expect(await commonItemsPage.userListTableRows.count()).toBe(0);
-    await expect(commonItemsPage.back_to_users_link).toHaveText(
-      userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.back_to_users_link +
-        organisationName
-    );
+    await expect
+      .soft(searchAddUserReviewBodyPage.back_to_users_link)
+      .toHaveText(
+        userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.back_to_users_link +
+          organisationName
+      );
   }
 );
 

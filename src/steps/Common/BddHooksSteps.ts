@@ -124,6 +124,27 @@ AfterScenario(
   }
 );
 
+AfterScenario(
+  {
+    name: 'Remove a newly created test automation review body',
+    tags: '@CreatedRevBodyCleanup',
+  },
+  async function ({ createReviewBodyPage }) {
+    const revBodyName = await createReviewBodyPage.getUniqueOrgName();
+    await createReviewBodyPage.sqlDeleteAutomatedReviewBodyByUniqueName(revBodyName);
+  }
+);
+
+BeforeScenario(
+  {
+    name: 'Ensure a test automation review body with DISABLED status exists',
+    tags: '@RevBodyStatusSetup',
+  },
+  async function ({ manageReviewBodiesPage }) {
+    await manageReviewBodiesPage.sqlUpdateAutomatedReviewBodyStatus('disabled');
+  }
+);
+
 BeforeScenario(
   {
     name: 'Check that current auth state has not expired',
