@@ -1,0 +1,27 @@
+{
+  "Sponsor_Organisation_Profile_Page": {
+    "title": "Sponsor organisation profile - Manage sponsor organisations - System administration - Plan and manage health and care research",
+    "heading_prefix_label": "Sponsor organisation profile: ",
+    "organisation_name_label": "Organisation name",
+    "country_label": "Country",
+    "users_label": "Users",
+    "audit_label": "Audit",
+    "view_this_sponsor_organisation_list_of_users_link": "View this sponsor organisation's list of users",
+    "view_this_sponsor_organisation_audit_history_link": "View this sponsor organisation's audit history",
+    "last_updated_label": "Last updated",
+    "disable_sub_heading": "Disable this sponsor organisation",
+    "disable_guidance_text": "Disabling a sponsor organisation will lock their account and can be reversed",
+    "enable_sub_heading": "Enable this sponsor organisation",
+    "enable_guidance_text": "Enabling will unlock the sponsor organisation.",
+    "disable_button": "Disable sponsor organisation",
+    "enable_button": "Enable sponsor organisation"
+  },
+  "Disable_Label_Texts": {
+    "disable_sub_heading": "Disable this sponsor organisation",
+    "disable_guidance_text": "Disabling a sponsor organisation will lock their account and can be reversed"
+  },
+  "Enable_Label_Texts": {
+    "enable_sub_heading": "Enable this sponsor organisation",
+    "enable_guidance_text": "Enabling will unlock the sponsor organisation."
+  }
+}

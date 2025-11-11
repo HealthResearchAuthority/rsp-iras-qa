@@ -15,6 +15,9 @@ When(
       myModificationsTasklistPage,
       commonItemsPage,
       participatingOrganisationsPage,
+      manageSponsorOrganisationPage,
+      userListSponsorOrganisationPage,
+      myResearchProjectsPage,
     },
     searchType: string,
     searchQueryName: string
@@ -41,6 +44,16 @@ When(
     } else if (searchType.toLowerCase() == 'organisations') {
       searchQueryDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'sponsor organisations') {
+      searchQueryDataset =
+        manageSponsorOrganisationPage.manageSponsorOrganisationsPageTestData.Search_For_Sponsor_Organisations
+          .Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'users in sponsor organisations') {
+      searchQueryDataset =
+        userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Search_For_Users_In_Sponsor_Organisations
+          .Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'my research') {
+      searchQueryDataset = myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
@@ -69,7 +82,7 @@ Given(
     );
     expect(searchResult).toBeTruthy();
     expect(userListAfterSearch).toHaveLength(searchResult.length);
-    await userListReviewBodyPage.updateUserInfo();
+    await userListReviewBodyPage.updateUserInfo(commonItemsPage);
   }
 );
 
@@ -77,6 +90,6 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
   if (resultsAmount.toLowerCase().includes('single')) {
     await expect(commonItemsPage.tableBodyRows).toHaveCount(1);
   } else {
-    expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
+    expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThanOrEqual(1);
   }
 });

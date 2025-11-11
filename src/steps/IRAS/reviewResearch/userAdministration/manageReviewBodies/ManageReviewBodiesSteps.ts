@@ -5,7 +5,7 @@ const { When, Then } = createBdd(test);
 
 Then(
   'I can see the review body for {string} is present in the list with {string} status',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, status: string) => {
+  async ({ manageReviewBodiesPage, createReviewBodyPage, commonItemsPage }, datasetName: string, status: string) => {
     const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const expectedCountryValue: string = dataset.country_checkbox.toString();
@@ -14,7 +14,11 @@ Then(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
       reviewBodyName
     );
-    const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
+    const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(
+      commonItemsPage,
+      reviewBodyName,
+      reviewBodyStatus
+    );
     const createdReviewBodyCountry = createdReviewBodyRow.locator('td', {
       hasText: expectedCountryValue.replaceAll(',', ', '),
       hasNotText: 'QA',
@@ -27,11 +31,11 @@ Then(
 
 Then(
   'I can see the updated review body is present in the list with {string}',
-  async ({ manageReviewBodiesPage, editReviewBodyPage }, datasetName: string) => {
+  async ({ manageReviewBodiesPage, editReviewBodyPage, commonItemsPage }, datasetName: string) => {
     const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
     const expectedCountryValue: string = dataset.country_checkbox.toString();
     const reviewBodyName = await editReviewBodyPage.getUniqueOrgName();
-    const updatedReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName);
+    const updatedReviewBodyRow = await manageReviewBodiesPage.findReviewBody(commonItemsPage, reviewBodyName);
     const updatedReviewBodyCountry = updatedReviewBodyRow.locator('td', {
       hasText: expectedCountryValue.replaceAll(',', ', '),
       hasNotText: 'QA',
@@ -60,7 +64,10 @@ Then(
 
 Then(
   'I click the view edit link for the {string}',
-  async ({ manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage }, inputType: string) => {
+  async (
+    { manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage, commonItemsPage },
+    inputType: string
+  ) => {
     const reviewBodyName = await manageReviewBodiesPage.getReviewBodyName(
       inputType,
       reviewBodyProfilePage,
@@ -70,7 +77,7 @@ Then(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
       reviewBodyName
     );
-    const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName);
+    const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(commonItemsPage, reviewBodyName);
     await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );
@@ -78,7 +85,7 @@ Then(
 When(
   'I can see the {string} should be present in the list with {string} status in the manage review bodies page',
   async (
-    { manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage },
+    { manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage, commonItemsPage },
     inputType: string,
     status: string
   ) => {
@@ -92,7 +99,7 @@ When(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
       reviewBodyName
     );
-    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
+    const foundRecords = await manageReviewBodiesPage.findReviewBody(commonItemsPage, reviewBodyName, reviewBodyStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
     await manageReviewBodiesPage.setReviewBodyRow(foundRecords);
@@ -101,9 +108,9 @@ When(
 
 When(
   'I select a {string} review Body to View and Edit which is {string}',
-  async ({ manageReviewBodiesPage }, reviewBodyName: string, status: string) => {
+  async ({ manageReviewBodiesPage, commonItemsPage }, reviewBodyName: string, status: string) => {
     const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
-    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
+    const foundRecords = await manageReviewBodiesPage.findReviewBody(commonItemsPage, reviewBodyName, reviewBodyStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
     await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();
@@ -137,61 +144,6 @@ Then('I click the view edit link', async ({ manageReviewBodiesPage }) => {
   const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
   await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
 });
-
-Then(
-  'I can see the manage review bodies list sorted by {string} order of the {string} on the {string} page',
-  async (
-    { manageReviewBodiesPage, commonItemsPage },
-    sortDirection: string,
-    sortField: string,
-    currentPage: string
-  ) => {
-    let sortedList: string[];
-    let columnIndex: number;
-    switch (sortField.toLowerCase()) {
-      case 'organisation name':
-        columnIndex = 0;
-        break;
-      case 'country':
-        columnIndex = 1;
-        break;
-      case 'status':
-        columnIndex = 2;
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
-    }
-    let actualList: string[] = [];
-    if (sortField.toLowerCase() == 'country') {
-      const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-      for (const country of originalList) {
-        if (country.includes(',')) {
-          actualList.push(country.slice(0, country.indexOf(',')));
-        } else {
-          actualList.push(country);
-        }
-      }
-    } else {
-      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-    }
-    if (sortDirection.toLowerCase() == 'ascending') {
-      sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-        expect(actualList).toContain(
-          manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status
-        );
-      }
-    } else {
-      sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-        expect(actualList).toContain(
-          manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status
-        );
-      }
-    }
-    expect(actualList).toEqual(sortedList);
-  }
-);
 
 When(
   'I select advanced filters in the manage review bodies page using {string}',

@@ -11,6 +11,7 @@ export default class ConfirmationPage {
   readonly success_message_body_text: Locator;
   readonly confirmation_body_label: Locator;
   readonly what_happens_next_label: Locator;
+  readonly mainPageContent: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -18,6 +19,7 @@ export default class ConfirmationPage {
     this.confirmationPageTestData = confirmationPageTestData;
 
     //Locators
+    this.mainPageContent = this.page.getByTestId('main-content');
     this.confirmation_header_common_label = this.page.getByRole('heading', { level: 1 });
     this.confirmation_header_label = this.page
       .getByRole('heading', {

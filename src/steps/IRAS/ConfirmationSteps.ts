@@ -342,3 +342,65 @@ Then(
       .toBeVisible();
   }
 );
+
+Then(
+  'I validate {string} labels displayed in disable sponsor organisation confirmation page using the organisation name',
+  async ({ confirmationPage, sponsorOrganisationProfilePage }, validationLabelsDatasetName: string) => {
+    const organisationNameMemory = await sponsorOrganisationProfilePage.getOrgName();
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedConfirmationHeader =
+      validationLabelsDataset.disable_confirmation_header_label + ' ' + organisationNameMemory;
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedConfirmationHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(validationLabelsDataset.disable_confirmation_body_label);
+  }
+);
+
+Then(
+  'I validate {string} labels displayed in enable sponsor organisation confirmation page using the organisation name',
+  async ({ confirmationPage, sponsorOrganisationProfilePage }, validationLabelsDatasetName: string) => {
+    const organisationNameMemory = await sponsorOrganisationProfilePage.getOrgName();
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedConfirmationHeader =
+      validationLabelsDataset.enable_confirmation_header_label + ' ' + organisationNameMemory;
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedConfirmationHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(validationLabelsDataset.enable_confirmation_body_label);
+  }
+);
+
+Then(
+  'I validate {string} labels displayed in disable user in sponsor organisation confirmation page using the user name',
+  async ({ confirmationPage, commonItemsPage }, validationLabelsDatasetName: string) => {
+    const userNameMemory = (await commonItemsPage.getFirstName()) + ' ' + (await commonItemsPage.getLastName());
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedConfirmationHeader = validationLabelsDataset.disable_confirmation_header_label + ' ' + userNameMemory;
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedConfirmationHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(validationLabelsDataset.disable_confirmation_body_label);
+  }
+);
+
+Then(
+  'I validate {string} labels displayed in enable user in sponsor organisation confirmation page using the user name',
+  async ({ confirmationPage, commonItemsPage }, validationLabelsDatasetName: string) => {
+    const userNameMemory = (await commonItemsPage.getFirstName()) + ' ' + (await commonItemsPage.getLastName());
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedConfirmationHeader = validationLabelsDataset.enable_confirmation_header_label + ' ' + userNameMemory;
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedConfirmationHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(validationLabelsDataset.enable_confirmation_body_label);
+  }
+);
