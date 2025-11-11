@@ -67,31 +67,6 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
 
-  @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
-  Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I create '<Changes>' for the created modification
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    Then I can see the add sponsor reference page
-    Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Sponsor_Reference_Page'
-
-    Examples:
-      | Changes                           |
-      | Multiple_Changes_Planned_End_Date |
-
 
   @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
   Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
