@@ -1436,7 +1436,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-
   @axeAccessibilityProjectOverviewUnfinishedPojectsPage @ApplicantUser
   Scenario: Project overview unfinished projects -Create project
     Given I have navigated to the my research projects page
@@ -2224,7 +2223,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityViewEditUserProfilePageofSponsorOrg @SysAdminUser
-  Scenario:  View and edit user profile page of the sponsor organisation
+  Scenario: View and edit user profile page of the sponsor organisation
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -2257,7 +2256,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityDisableUserConfirmationPageofSponsorOrg @SysAdminUser
-  Scenario:  Disable user confirmation page of the sponsor organisation
+  Scenario: Disable user confirmation page of the sponsor organisation
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -2291,7 +2290,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityyEnableUserConfirmationPageofSponsorOrg @SysAdminUser
-  Scenario:  Enable user confirmation page of the sponsor organisation
+  Scenario: Enable user confirmation page of the sponsor organisation
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -2335,11 +2334,90 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Confirm' button on the 'Confirmation_Page'
     Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
     Then I can see the 'Sponsor_Org_User_List_Page'
+
   @axeAccessibilitymyResearchPage @ApplicantUser
   Scenario: My Research search and advanced filters page
     Given I have navigated to the 'Home_Page'
     When I click the 'My_research' link on the 'Home_Page'
     Then I can see the 'My_Research_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityModificationsContactDetailsPage @ApplicantUser
+  Scenario: Modifications - Contact details page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Administrative_Details_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I can see the 'Contact_Details_Select_Change_Page' page for modifications
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityModificationsProjectPersonnelChangeChiefInvestigatorPage @ApplicantUser
+  Scenario: Modifications - Project Personnel Change Chief Investigator page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I can see the 'Project_Personnel_Select_Change_Page' page for modifications
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityModificationsProjectPersonnelChangePrincipalInvestigatorPage @ApplicantUser
+  Scenario: Modifications - Project Personnel Change Principal Investigator page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

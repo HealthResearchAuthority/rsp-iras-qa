@@ -242,7 +242,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
+  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
   Scenario Outline: Validate that user can create and submit non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -293,6 +293,8 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
+      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_Yes |
+      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_No  |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
       | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
