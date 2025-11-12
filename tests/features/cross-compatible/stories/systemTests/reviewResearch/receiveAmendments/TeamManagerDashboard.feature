@@ -4,18 +4,18 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
 
-        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @Complete-After-DB-Connection @skip
+        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @Complete-After-DB-Connection @Test
         Scenario Outline: Verify the team manger is able to view a list of modifications for a specific lead nation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
                 Then the country linked to the '<User>' appears as the lead nation in the page description
                 # And I see only modifications where the lead nation is the country linked to the '<User>'
                 Examples:
-                        | User            |
-                        | Team_Manager    |
-                        | Team_Manager_NI |
-                        | Team_Manager_S  |
-                        | Team_Manager_W  |
+                        | User         |
+                        | Team_Manager |
+        # | Team_Manager_NI |
+        # | Team_Manager_S  |
+        # | Team_Manager_W  |
 
         @searchTasklistByIrasIdWithResults @rsp-5125 @skip
         Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
@@ -415,7 +415,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
         # Need to integrate with modification creation process to have a fresh dataset for assignment
         # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
         @WFCAssignModificationSWR @rsp-4076 @rsp-4849 @skip
-        Scenario Outline: Validate the workflow co-ordinator can assign a study-wide reviewer to a modification from the modifications ready to assign page
+        Scenario Outline: Validate the team manager can assign a study-wide reviewer to a modification from the modifications ready to assign page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page

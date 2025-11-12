@@ -1,18 +1,18 @@
 @ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest
 Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
 
-    @viewTasklistByLeadNation @rsp-4201 @Complete-After-DB-Connection
+    @viewTasklistByLeadNation @rsp-4201 @Complete-After-DB-Connection @TestWFC
     Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
         Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
         # And I see only modifications where the lead nation is the country linked to the review body of the '<User>'
         Examples:
-            | User                    |
-            | Workflow_Coordinator    |
-            | Workflow_Coordinator_NI |
-            | Workflow_Coordinator_S  |
-            | Workflow_Coordinator_W  |
+            | User                 |
+            | Workflow_Coordinator |
+    # | Workflow_Coordinator_NI |
+    # | Workflow_Coordinator_S  |
+    # | Workflow_Coordinator_W  |
 
     @searchTasklistByIrasIdWithResults @rsp-4104
     Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID

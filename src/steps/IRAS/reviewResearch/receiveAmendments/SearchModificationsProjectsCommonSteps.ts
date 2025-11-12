@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-const { Then } = createBdd(test);
+const { When, Then } = createBdd(test);
 Then(
   'I can now see a table of search results for {string}',
   async ({ searchModificationsPage, commonItemsPage }, resultType: string) => {
@@ -42,5 +42,17 @@ Then(
       sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
     expect.soft(actualList).toEqual(sortedList);
+  }
+);
+
+When(
+  'I capture the iras id of the recently added project in the test data using {string}',
+  async ({ searchProjectsPage }, searchQueryName: string) => {
+    const searchQueryDataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[searchQueryName];
+    for (const key in searchQueryDataset) {
+      if (Object.hasOwn(searchQueryDataset, key)) {
+        await searchProjectsPage.saveIrasID(searchQueryDataset[key]);
+      }
+    }
   }
 );

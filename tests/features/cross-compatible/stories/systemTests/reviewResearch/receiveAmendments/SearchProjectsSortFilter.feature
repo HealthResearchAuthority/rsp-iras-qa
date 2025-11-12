@@ -1,8 +1,31 @@
-@ReceiveAmendments @SearchProjectRecordsSortFilter @StudyWideReviewer @SystemTest @rsp-5455 @rsp-5456
+@ReceiveAmendments @SearchProjectRecordsSortFilter @TeamManager  @SystemTest @rsp-5455 @rsp-5456
 Feature: Receive Amendments: Filter, Search and Sort the Search project records page
 
         Background:
-                Given I have navigated to the 'Approvals_Page'
+                Given I have navigated to the 'My_Research_Page' as 'Applicant_User'
+                And I can see the my research projects page
+                And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+                And I click the 'Start' button on the 'Create_Project_Record_Page'
+                And I fill the unique iras id in project details iras page
+                And I capture the page screenshot
+                And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+                Then I can see the project identifiers page
+                And I fill the project identifiers page with 'Valid_Data_All_Fields'
+                When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+                And I fill the project details title page with 'Valid_Data_All_Fields'
+                When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+                Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+                Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+                Then I fill the research locations page with 'Valid_Data_All_Fields'
+                When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+                Then I can see the review your answers page
+                And I capture the page screenshot
+                When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+                Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+                Then I can see the project overview page
+                And I capture the page screenshot
+                And I capture the iras id of the recently added project in the test data using 'Valid_Full_Iras_Id'
+                Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
                 And I click the 'Search_Records' link on the 'Approvals_Page'
                 And I capture the page screenshot
                 And I can see the 'Choose_A_Record_Type_To_Search_Page'
@@ -163,17 +186,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 When I click the 'Back' link on the 'Project_Overview_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Projects_Page'
-        # When I fill the search input for searching 'project records' with 'Valid_Full_Iras_Id' as the search query
-        # And I click the 'Search' button on the 'Search_Projects_Page'
-        # And I capture the page screenshot
-        # And I can now see a table of search results for 'modifications received for approval'
-        # Then Each 'modification id' displayed on the 'Search_Projects_Page' is a link
-        # When I click a 'modification id' on the 'Search_Projects_Page'
-        # And I capture the page screenshot
-        # Then I can see the review all changes modifications page
-        # When I click the 'Back' link on the 'Review_All_Changes_Page'
-        # And I capture the page screenshot
-        # Then I can see the 'Search_Projects_Page'
 
         @viewListOfProjects @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @skip
         Scenario Outline: Verify the user is able to view the list of projects by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
