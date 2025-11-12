@@ -16,6 +16,8 @@
     "category_a": "A",
     "category_b": "B",
     "category_c": "C",
+    "category_b_c": "B/C",
+    "category_new_site": "New site",
     "review_type_review_required": "Review required",
     "review_type_no_review_required": "No review required",
     "changes_free_textbox_label": "Enter details here describing this change",
@@ -69,7 +71,14 @@
     "Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
     "Inclusion or withdrawal of an EU Member State or third country outside of the UK",
     "Insurance renewal - no change to the level or breadth of cover",
-    "Participant procedures: non-significant change"
+    "Participant procedures: non-significant change",
+    "Recruitment - Change in identification, approach, recruitment or consent of participants",
+    "Addition of new participating organisation type",
+    "Change to activities undertaken by an existing participating organisation type",
+    "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
+    "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
+    "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
+    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
   ],
   "Modifications_To_Add_Administrative_Details": ["Project identification"],
   "Applicability_Changes": [
@@ -93,7 +102,13 @@
     "Change to the participant sample size: significant",
     "Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
     "Participant procedures: non-significant change",
-    "Change of principal investigator"
+    "Recruitment - Change in identification, approach, recruitment or consent of participants",
+    "Addition of new participating organisation type",
+    "Change to activities undertaken by an existing participating organisation type",
+    "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
+    "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
+    "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
+    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
   ],
   "Non_Applicability_Changes": [
     "Chief investigator: conflict of interest",
@@ -175,7 +190,14 @@
       "Other significant change to project design",
       "Other stop or restart of the project",
       "Other minor change to project management",
-      "Other significant change to project management"
+      "Other significant change to project management",
+      "Recruitment - Change in identification, approach, recruitment or consent of participants",
+      "Addition of new participating organisation type",
+      "Change to activities undertaken by an existing participating organisation type",
+      "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
+      "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
+      "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
+      "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
     ],
     "Non_Reviewable_Changes": [
       "Change to planned end date",
@@ -233,7 +255,13 @@
       "Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
       "Inclusion or withdrawal of an EU Member State or third country outside of the UK",
       "Participant procedures: non-significant change",
-      "Change of chief investigator"
+      "Recruitment - Change in identification, approach, recruitment or consent of participants",
+      "Addition of new participating organisation type",
+      "Change to activities undertaken by an existing participating organisation type",
+      "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
+      "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
+      "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
+      "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
     ],
     "Non_Notifiable_Modifications": [
       "Changes to the research team",
@@ -241,6 +269,15 @@
     ],
     "Substantial_Modifications": []
   },
+  "Nhs_Resource_Implications": [
+    "Other significant change to participant procedures",
+    "Other significant change to project design",
+    "Participant procedures: non-significant change",
+    "Change to planned end date",
+    "Other non-significant change to the project design",
+    "Other non-significant change to project documents",
+    "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below"
+  ],
   "Invalid_Data": {
     "Max_Length_Changes_Free_Text": {
       "changes_free_text": "This is a free text change for Other significant change to participant procedures. This text is specifically designed to exceed the maximum character limit of 3600 characters. Therefore, we will continue to add more text until we are certain that we have surpassed this limit. The purpose of this exercise is to test the system's ability to handle input that exceeds the allowed length, ensuring that appropriate validation messages are displayed and that the system remains stable and functional even when faced with such scenarios. By doing so, we can identify any potential issues or weaknesses in the system's design and make necessary improvements to enhance its overall robustness and user experience. This is a free text change for Other significant change to participant procedures. This text is specifically designed to exceed the maximum character limit of 3600 characters. Therefore, we will continue to add more text until we are certain that we have surpassed this limit. The purpose of this exercise is to test the system's ability to handle input that exceeds the allowed length, ensuring that appropriate validation messages are displayed and that the system remains stable and functional even when faced with such scenarios. By doing so, we can identify any potential issues or weaknesses in the system's design and make necessary improvements to enhance its overall robustness and user experience. This is a free text change for Other significant change to participant procedures. This text is specifically designed to exceed the maximum character limit of 3600 characters. Therefore, we will continue to add more text until we are certain that we have surpassed this limit. The purpose of this exercise is to test the system's ability to handle input that exceeds the allowed length, ensuring that appropriate validation messages are displayed and that the system remains stable and functional even when faced with such scenarios. By doing so, we can identify any potential issues or weaknesses in the system's design and make necessary improvements to enhance its overall robustness and user experience. This is a free text change for Other significant change to participant procedures. This text is specifically designed to exceed the maximum character limit of 3600 characters. Therefore, we will continue to add more text until we are certain that we have surpassed this limit. The purpose of this exercise is to test the system's ability to handle input that exceeds the allowed length, ensuring that appropriate validation messages are displayed and that the system remains stable and functional even when faced with such scenarios. By doing so, we can identify any potential issues or weaknesses in the system's design and make necessary improvements to enhance its overall robustness and user experience. This is a free text change for Other significant change to participant procedures. This text is specifically designed to exceed the maximum character limit of 3600 characters. Therefore, we will continue to add more text until we are certain that we have surpassed this limit. The purpose of this exercise is to test the system's ability to handle input that exceeds the allowed length, ensuring that appropriate validation messages are displayed and that the system remains stable and functional even when faced with such scenarios. By doing so, we can identify any potential issues or weaknesses in the system's design and make necessary improvements to enhance its overall robustness and user experience. This is a free text change for Other significant change to participant procedures. This text is specifically designed to exceed the maximum character limit of 3600 characters. Therefore, we will continue to add more text until we are certain that we have surpassed this limit. The purpose of this exercise is to test the system's ability to handle input that exceeds the allowed length, ensuring that appropriate validation messages are displayed and that the system remains stable and functional even when faced with such scenarios. By doing so, we can identify any potential issues or weaknesses in the system's design and make necessary improvements to enhance its overall robustness and user experience. This is a free text change for Other significant change to participant procedures. This text is specifically designed to exceed the maximum character limit of 3600 characters. Therefore, we will continue to add more text until we are certain that we have surpassed this limit. The purpose of this exercise is to test the system's ability to handle input that exceeds the allowed length, ensuring that appropriate validation messages are displayed and that the system remains stable and functional even when faced with such scenarios. By doing so, we can identify any potential issues or weaknesses in the system's design and make necessary improvements to enhance its overall robustness and user experience."
@@ -416,6 +453,17 @@
         "Wales"
       ],
       "change_status": "Change ready for submission"
+    },
+    "Other_Significant_Change_To_Project_Management": {
+      "area_of_change_dropdown": "Project management",
+      "specific_change_dropdown": "Other significant change to project management",
+      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
     }
   },
   "Other_Minor_Change_To_Project_Management": {
@@ -437,15 +485,89 @@
     }
   },
   "Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two": {
-    "Other_Significant_Change_To_Project_Management": {
-      "area_of_change_dropdown": "Project management",
-      "specific_change_dropdown": "Other significant change to project management",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+    "Recruitment_Change_Identification_Of_Participants": {
+      "area_of_change_dropdown": "Participant procedures",
+      "specific_change_dropdown": "Recruitment - Change in identification, approach, recruitment or consent of participants",
+      "changes_free_text": "This is a free text change for Recruitment - Change in identification, approach, recruitment or consent of participants",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England"],
-      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
       "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    },
+    "Addition_Of_New_Participating_Organisation_Type": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of new participating organisation type",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    },
+    "Change_To_Activities_Undertaken_By_An_Existing_Participating_Organisation_Type": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Change to activities undertaken by an existing participating organisation type",
+      "changes_free_text": "This is a free text change for Change to activities undertaken by an existing participating organisation type",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    },
+    "Data_Collection_Transfer_Or_Processing_Of_Identifiable_Participant_Information": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
+      "changes_free_text": "This is a free text change for Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    },
+    "Samples_Addition_Of_The_Storage_Human_Tissue_Samples_Under_The_Relevant_Legislation": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
+      "changes_free_text": "This is a free text change for Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    },
+    "Samples_Significant_Changes_Under_The_Relevant_Legislation_On_Human_Tissue": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
+      "changes_free_text": "This is a free text change for Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    },
+    "Sponsor_Delegations_Changes_To_The_Internal_Organisation_Of_The_Sponsor_Or_Persons": {
+      "area_of_change_dropdown": "Project management",
+      "specific_change_dropdown": "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
+      "changes_free_text": "This is a free text change for Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
       "change_status": "Change ready for submission"
     }
   },
