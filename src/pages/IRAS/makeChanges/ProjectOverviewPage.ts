@@ -57,6 +57,7 @@ export default class ProjectOverviewPage {
   readonly post_approvals_tab_category: Locator;
   readonly post_approvals_tab_date_submitted: Locator;
   readonly document_type_project_documents: Locator;
+  readonly file_name_project_documents: Locator;
   readonly document_name_project_documents: Locator;
   readonly version_project_documents: Locator;
   readonly document_date_project_documents: Locator;
@@ -438,6 +439,10 @@ export default class ProjectOverviewPage {
     });
     this.document_name_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.document_name_project_documents.trim(),
+      exact: true,
+    });
+    this.file_name_project_documents = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.file_name_project_documents.trim(),
       exact: true,
     });
     this.version_project_documents = this.page.getByRole('button', {
