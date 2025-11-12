@@ -40,7 +40,7 @@
   },
   "Confirm_Project_Details_Page": {
     "Add_Project": "Add project",
-    "Return_to_Iras_Id":"Return to IRAS ID"
+    "Return_to_Iras_Id": "Return to IRAS ID"
   },
   "Project_Details_Title_Page": {
     "Save_Continue": "Save and continue",
@@ -303,6 +303,12 @@
     "Status": "Status",
     "Last_Logged_In": "Last logged in"
   },
+  "Complete_Your_Profile_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Your_Profile_Page": {
+    "Add_Profile": "Add user profile"
+  },
   "View_Edit_User_Profile_Page": {
     "Disable_User": "Disable user",
     "Enable_User": "Enable user"
@@ -310,16 +316,6 @@
   "Modification_Sent_To_Sponsor_Page": {
     "Return_To_Project_Overview": "Return to project overview",
     "Submit_To_Regulator": "Submit to regulator"
-  },
-  "Modification_Enter_Free_Text_Page": {
-    "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later",
-    "Save_Changes": "Save changes"
-  },
-  "Project_Identification_Select_Change_Page": {
-    "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later",
-    "Save_Changes": "Save changes"
   },
   "Edit_Your_Profile_Page": {
     "Save": "Save"

@@ -469,12 +469,18 @@ Then(
   async ({ modificationsCommonPage }, statusDataset: string) => {
     const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
     const expectedStatus = dataset.status;
+    let expectedSubmittedDate = dataset.submited_date;
     const expectedModificationID = await modificationsCommonPage.getModificationID();
     const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
     const modificationIDActual = modificationRecord.get('modificationIdValue');
     expect.soft(modificationIDActual[0]).toBe(expectedModificationID);
     const statusActual = modificationRecord.get('statusValue');
     expect.soft(statusActual[0]).toBe(expectedStatus);
+    const actualDateSubmitted = modificationRecord.get('submittedDateValue');
+    if (expectedSubmittedDate !== '') {
+      expectedSubmittedDate = await getFormattedDate();
+    }
+    expect.soft(actualDateSubmitted[0]).toBe(expectedSubmittedDate);
   }
 );
 
@@ -518,7 +524,7 @@ Then(
 );
 
 Then(
-  'I validate the status {string} is displayed on the page',
+  'I validate the status {string} is displayed on modifications page',
   async ({ modificationsCommonPage }, statusDataset: string) => {
     const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
     const expectedStatus = dataset.status;

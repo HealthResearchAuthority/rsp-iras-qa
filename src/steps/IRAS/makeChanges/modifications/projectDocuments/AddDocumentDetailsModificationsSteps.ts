@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
 import { expect, Locator } from '@playwright/test';
 import fs from 'node:fs';
-import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull, generateUniqueValue } from '../../../../../utils/UtilFunctions';
 import path from 'node:path';
 const { Then, When } = createBdd(test);
 
@@ -83,7 +83,16 @@ Then(
       //Enter document details
       for (const key in dataset) {
         if (Object.hasOwn(dataset, key)) {
-          await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
+          if (key === 'document_name_text') {
+            const prefix =
+              addDocumentDetailsForSpecificDocumentModificationsPage
+                .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Document_Name_Prefix.prefix;
+            const uniqueDocName = await generateUniqueValue(dataset[key], prefix);
+            const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage[key];
+            await locator.fill(uniqueDocName);
+          } else {
+            await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
+          }
         }
       }
       await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
