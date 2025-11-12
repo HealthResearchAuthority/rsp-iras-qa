@@ -336,5 +336,8 @@
     "Search": "Search",
     "Advanced_Filters": "Advanced filters",
     "Apply_Filters": "Apply filters"
+  },
+  "IRAS_ID_Error_Page": {
+    "Return_To_IRAS_ID": "Return to IRAS ID"
   }
 }

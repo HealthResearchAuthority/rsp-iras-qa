@@ -497,6 +497,8 @@ Then(
       editYourProfilePage,
       addDocumentDetailsForSpecificDocumentModificationsPage,
       projectIdentificationEnterReferenceNumbersPage,
+      contactDetailsModificationPage,
+      projectPersonnelChangeChiefInvestigatorPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -600,6 +602,16 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = projectIdentificationEnterReferenceNumbersPage;
+    } else if (pageKey == 'Contact_Details_Modification_Page') {
+      errorMessageFieldDataset =
+        contactDetailsModificationPage.contactDetailsModificationPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = contactDetailsModificationPage;
+    } else if (pageKey == 'Project_Personnel_Change_Chief_Investigator_Page') {
+      errorMessageFieldDataset =
+        projectPersonnelChangeChiefInvestigatorPage.projectPersonnelChangeChiefInvestigatorModificationPageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = projectPersonnelChangeChiefInvestigatorPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

@@ -5,6 +5,9 @@ import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOr
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
 import { confirmStringNotNull, convertDate } from '../../../../utils/UtilFunctions';
+import ContactDetailsModificationPage from './ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from './ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from './ProjectPersonnelChangePrincipalInvestigatorPage';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
@@ -148,8 +151,8 @@ export default class ModificationsCommonPage {
   async assertOnModificationsPage(dataset: any) {
     const pageHeader = dataset['page_header'];
     const pageComponentLabel = dataset['page_component_label'];
-    await expect(this.pageHeading.getByText(pageHeader)).toBeVisible();
-    await expect(this.page.getByText(pageComponentLabel)).toBeVisible();
+    await expect(this.pageHeading.getByText(pageHeader).first()).toBeVisible();
+    await expect(this.page.getByText(pageComponentLabel).first()).toBeVisible();
   }
   async validatePageHeading(pageHeadingText: any) {
     await expect(this.pageHeading.getByText(pageHeadingText)).toBeVisible();
@@ -168,6 +171,16 @@ export default class ModificationsCommonPage {
     const commonItemsPage = new CommonItemsPage(this.page);
     if (dataset.specific_change_dropdown === 'Change to planned end date') {
       await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Contact details') {
+      await new ContactDetailsModificationPage(this.page).fillContactDetailsModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Change of chief investigator') {
+      await new ProjectPersonnelChangeChiefInvestigatorPage(
+        this.page
+      ).fillPersonnelChangeChiefInvestigatorModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Change of principal investigator') {
+      await new ProjectPersonnelChangePrincipalInvestigatorPage(
+        this.page
+      ).fillPersonnelChangePrincipalInvestigatorModificationsPage(dataset, 'create');
     } else if (
       this.modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset.specific_change_dropdown)
     ) {

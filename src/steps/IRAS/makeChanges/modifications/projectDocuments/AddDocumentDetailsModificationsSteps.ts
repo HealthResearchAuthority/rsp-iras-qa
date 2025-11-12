@@ -3,7 +3,7 @@ import { test } from '../../../../../hooks/CustomFixtures';
 import { expect, Locator } from '@playwright/test';
 import fs from 'node:fs';
 import { confirmStringNotNull, generateUniqueValue } from '../../../../../utils/UtilFunctions';
-
+import path from 'node:path';
 const { Then, When } = createBdd(test);
 
 When(
@@ -254,6 +254,36 @@ Then(
     for (const key of Object.keys(dataset)) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I click on the document link with status {string} and download the uploaded document in the add document details for specific document page',
+  async ({ addDocumentDetailsModificationsPage, page }, docStatusDataset: string) => {
+    const statusDataset =
+      addDocumentDetailsModificationsPage.addDocumentDetailsModificationsPageTestData[docStatusDataset];
+    const status = statusDataset.status;
+    const displayedDocumentsListMap =
+      await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
+    const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
+    const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
+    for (let index = 0; index < displayedDocumentsList.length; index++) {
+      if (displayedStatusesList[index] === status) {
+        const documentName = displayedDocumentsList[index];
+        await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
+        const fileNameLocator = addDocumentDetailsModificationsPage.documentlink;
+        const actualFileNameArray = await fileNameLocator.allTextContents();
+        const actualFileName = actualFileNameArray[1].trim();
+        const fieldLocator = addDocumentDetailsModificationsPage.documentlink.getByText(actualFileName);
+        const downloadPath = path.resolve(process.env.HOME || process.env.USERPROFILE || '', 'Downloads');
+        const [download] = await Promise.all([page.waitForEvent('download'), fieldLocator.click()]);
+        const suggestedFileName = download.suggestedFilename();
+        const savedFilePath = path.join(downloadPath, suggestedFileName);
+        await download.saveAs(savedFilePath);
+        const expectedFileName = path.basename(savedFilePath);
+        expect.soft(actualFileName).toBe(expectedFileName);
       }
     }
   }
