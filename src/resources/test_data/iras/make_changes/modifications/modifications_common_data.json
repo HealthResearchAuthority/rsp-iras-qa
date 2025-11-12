@@ -28,6 +28,14 @@
     "change_ready_for_submission_status_label": "Change ready for submission",
     "current_chief_investigator_email_label": "Current chief investigator email:"
   },
+  "Ranking_Category": {
+    "always_n_a": [
+      "Correction of typographical errors",
+      "GDPR: accepted wording used verbatim",
+      "Insurance renewal - no change to the level or breadth of cover",
+      "Translated versions of participant-facing documents"
+    ]
+  },
   "Modification_Change_Question_Label_Texts": {
     "planned_project_end_date_label": "Change to planned end date",
     "affected_organisation_types_label": "Affected organisation types",
@@ -78,7 +86,15 @@
     "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
     "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
     "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
-    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
+    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
+    "Correction of typographical errors",
+    "GDPR: accepted wording used verbatim",
+    "Insurance renewal - no change to the level or breadth of cover",
+    "Translated versions of participant-facing documents",
+    "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
+    "Other non-significant change to project documents",
+    "Post trial information for participants (which does not contradict the protocol)",
+    "Change to protocol: non-significant not affecting safety or the scientific value of the project"
   ],
   "Modifications_To_Add_Administrative_Details": ["Project identification"],
   "Applicability_Changes": [
@@ -108,7 +124,12 @@
     "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
     "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
     "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
-    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
+    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
+    "Change of principal investigator",
+    "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
+    "Other non-significant change to project documents",
+    "Post trial information for participants (which does not contradict the protocol)",
+    "Change to protocol: non-significant not affecting safety or the scientific value of the project"
   ],
   "Non_Applicability_Changes": [
     "Chief investigator: conflict of interest",
@@ -119,7 +140,11 @@
     "Insurance renewal - no change to the level or breadth of cover",
     "Project identification",
     "Contact details",
-    "Change of chief investigator"
+    "Change of chief investigator",
+    "Correction of typographical errors",
+    "GDPR: accepted wording used verbatim",
+    "Insurance renewal - no change to the level or breadth of cover",
+    "Translated versions of participant-facing documents"
   ],
   "Modification_Sponsor_Details_Label_Texts": {
     "sponsor_reference_label": "Sponsor reference (optional)",
@@ -221,7 +246,15 @@
       "Project identification",
       "Contact details",
       "Change of chief investigator",
-      "Change of principal investigator"
+      "Change of principal investigator",
+      "Correction of typographical errors",
+      "GDPR: accepted wording used verbatim",
+      "Insurance renewal - no change to the level or breadth of cover",
+      "Translated versions of participant-facing documents",
+      "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
+      "Other non-significant change to project documents",
+      "Post trial information for participants (which does not contradict the protocol)",
+      "Change to protocol: non-significant not affecting safety or the scientific value of the project"
     ]
   },
   "Ranking_Modification_Type": {
@@ -261,11 +294,20 @@
       "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
       "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
       "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
-      "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
+      "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
+      "Change of chief investigator",
+      "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
+      "Other non-significant change to project documents",
+      "Post trial information for participants (which does not contradict the protocol)",
+      "Change to protocol: non-significant not affecting safety or the scientific value of the project"
     ],
     "Non_Notifiable_Modifications": [
       "Changes to the research team",
-      "Insurance renewal - no change to the level or breadth of cover"
+      "Insurance renewal - no change to the level or breadth of cover",
+      "Correction of typographical errors",
+      "GDPR: accepted wording used verbatim",
+      "Insurance renewal - no change to the level or breadth of cover",
+      "Translated versions of participant-facing documents"
     ],
     "Substantial_Modifications": []
   },
@@ -276,7 +318,8 @@
     "Change to planned end date",
     "Other non-significant change to the project design",
     "Other non-significant change to project documents",
-    "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below"
+    "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below",
+    "Other non-significant change to project documents"
   ],
   "Invalid_Data": {
     "Max_Length_Changes_Free_Text": {
@@ -815,6 +858,93 @@
       "select_contact_details_to_change_radio": "Other",
       "contact_name_text": "New modified contact name",
       "contact_email_text": "other_contact_test_modified@test.com",
+      "change_status": "Change ready for submission"
+    }
+  },
+
+  "Correction_Of_Typographical_Errors": {
+    "Correction_Of_Typographical_Errors": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Correction of typographical errors",
+      "changes_free_text": "This is a free text for Correction of typographical errors",
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Gdpr_Accepted_Wording_Used_Verbatim": {
+    "Gdpr_Accepted_Wording_Used_Verbatim": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "GDPR: accepted wording used verbatim",
+      "changes_free_text": "This is a free text for GDPR: accepted wording used verbatim",
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Insurance_Renewal_No_Change_To_The_Level_Or_Breadth_Of_Cover": {
+    "Insurance_Renewal_No_Change_To_The_Level_Or_Breadth_Of_Cover": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Insurance renewal - no change to the level or breadth of cover",
+      "changes_free_text": "This is a free text for Insurance renewal - no change to the level or breadth of cover",
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Translated_Versions_Of_Participant_Facing_Documents": {
+    "Translated_Versions_Of_Participant_Facing_Documents": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Translated versions of participant-facing documents",
+      "changes_free_text": "This is a free text for Translated versions of participant-facing documents",
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Change_To_Case_Report_Forms_CRFs_Or_Other_Documents_Used_By_The_Research_Team_For_Recording_Research_Data": {
+    "Change_To_Case_Report_Forms_CRFs_Or_Other_Documents_Used_By_The_Research_Team_For_Recording_Research_Data": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
+      "changes_free_text": "This is a free text for Change to case report forms (CRFs) or other documents used by the research team for recording research data",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Other_Non_Significant_Change_To_Project_Documents": {
+    "Other_Non_Significant_Change_To_Project_Documents": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Other non-significant change to project documents",
+      "changes_free_text": "This is a free text change for Other non-significant change to project documents",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Post_Trial_Information_For_Participants_Which_Does_Not_Contradict_The_Protocol": {
+    "Post_Trial_Information_For_Participants_Which_Does_Not_Contradict_The_Protocol": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Post trial information for participants (which does not contradict the protocol)",
+      "changes_free_text": "This is a free text change for Post trial information for participants (which does not contradict the protocol)",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Change_To_Protocol_Non_Significant_Not_Affecting_Safety_Or_The_Scientific_Value_Of_The_Project": {
+    "Change_To_Protocol_Non_Significant_Not_Affecting_Safety_Or_The_Scientific_Value_Of_The_Project": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Change to protocol: non-significant not affecting safety or the scientific value of the project",
+      "changes_free_text": "This is a free text change for Change to protocol: non-significant not affecting safety or the scientific value of the project",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
       "change_status": "Change ready for submission"
     }
   },

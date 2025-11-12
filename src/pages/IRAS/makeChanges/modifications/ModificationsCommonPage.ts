@@ -443,6 +443,9 @@ export default class ModificationsCommonPage {
     let category: string | undefined;
     let requiresResources: string | undefined;
     let affectedOrgs: string | undefined;
+    const isRankingCategoryAlwaysNa = modificationsCommonPageTestData.Ranking_Category.always_n_a.includes(
+      dataset.specific_change_dropdown
+    );
     const affectsNonNhsOnly =
       dataset.which_organisation_change_affect_checkbox.some((item: string) => item.toLowerCase() === 'non-nhs/hsc') &&
       dataset.which_organisation_change_affect_checkbox.length === 1;
@@ -453,7 +456,12 @@ export default class ModificationsCommonPage {
       requiresResources = dataset.will_nhs_hsc_organisations_require_additional_resources_question_radio.toLowerCase();
       affectedOrgs = dataset.will_some_or_all_organisations_be_affected_question_radio.toLowerCase();
     }
-    if (affectsNonNhsOnly) {
+    if (
+      affectsNonNhsOnly ||
+      modificationsCommonPageTestData.Ranking_Category.always_n_a.includes(dataset.specific_change_dropdown)
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
+    } else if (affectsNhs && isRankingCategoryAlwaysNa) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
     } else if (
       affectsNhs &&
@@ -478,7 +486,11 @@ export default class ModificationsCommonPage {
   async getModificationCategoryForNonApplicability(changeDataset, researchLocationDataset: any): Promise<string> {
     let category: string | undefined;
     if (modificationsCommonPageTestData.Non_Applicability_Changes.includes(changeDataset.specific_change_dropdown)) {
-      if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'Yes') {
+      if (
+        modificationsCommonPageTestData.Ranking_Category.always_n_a.includes(changeDataset.specific_change_dropdown)
+      ) {
+        category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
+      } else if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'Yes') {
         category = this.modificationsCommonPageTestData.Label_Texts.category_c;
       } else if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'No') {
         category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
@@ -536,8 +548,22 @@ export default class ModificationsCommonPage {
     ) {
       modificationType =
         this.modificationsCommonPageTestData.Label_Texts.modification_type_modification_of_important_detail;
-    } else {
+    } else if (
+      values.some(
+        (modificationTypeValue) =>
+          modificationTypeValue.expectedModificationType ===
+          this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification
+      )
+    ) {
       modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification;
+    } else if (
+      values.some(
+        (modificationTypeValue) =>
+          modificationTypeValue.expectedModificationType ===
+          this.modificationsCommonPageTestData.Label_Texts.modification_type_non_notifiable
+      )
+    ) {
+      modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_non_notifiable;
     }
     const categories = new Set(values.map((v) => v.expectedCategory));
     const hasCategoryA = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_a);

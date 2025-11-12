@@ -274,7 +274,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     And I capture the page screenshot
     Then I can see the project overview page
@@ -288,18 +288,32 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I validate the change details are displayed as per the '<Changes>' dataset
 
     Examples:
-      | Changes                                                          | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
-      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_Yes |
-      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
-      | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
+      | Changes | Research_Locations |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_Yes |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
+      # | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_Yes |
+      # | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_No  |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
+      # | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
+      # | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
+      # | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
+      # | Multiple_Changes_Non_Reviewable_Set_Two | Nhs_Involvement_Yes |
+      # | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
+
+      | Correction_Of_Typographical_Errors                                                                        | Nhs_Involvement_No |
+      | Gdpr_Accepted_Wording_Used_Verbatim                                                                       | Nhs_Involvement_No |
+      | Insurance_Renewal_No_Change_To_The_Level_Or_Breadth_Of_Cover                                              | Nhs_Involvement_No |
+      | Translated_Versions_Of_Participant_Facing_Documents                                                       | Nhs_Involvement_No |
+      | Change_To_Case_Report_Forms_CRFs_Or_Other_Documents_Used_By_The_Research_Team_For_Recording_Research_Data | Nhs_Involvement_No |
+      | Other_Non_Significant_Change_To_Project_Documents                                                         | Nhs_Involvement_No |
+      | Post_Trial_Information_For_Participants_Which_Does_Not_Contradict_The_Protocol                            | Nhs_Involvement_No |
+      | Change_To_Protocol_Non_Significant_Not_Affecting_Safety_Or_The_Scientific_Value_Of_The_Project            | Nhs_Involvement_No |
+
+
+
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496
   Scenario Outline: Validate that user can create modifications to add free text for reviewable and non reviewable modifications

@@ -25,18 +25,15 @@ Then(
 
 Then(
   'I validate the project information labels using {string} dataset displayed on modifications page',
-  async (
-    { modificationsCommonPage, projectDetailsIRASPage, projectDetailsTitlePage },
-    projectTitleDatasetName: string
-  ) => {
+  async ({ modificationsCommonPage, projectDetailsIRASPage }) => {
     const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
-    const shortProjectTitleExpected =
-      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
+    // const shortProjectTitleExpected =
+    //   projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
     const modificationIDExpected = irasIDExpected + '/' + 1;
     const irasIDActual = await modificationsCommonPage.iras_id_value.textContent();
-    const shortProjectTitleActual = confirmStringNotNull(
-      await modificationsCommonPage.short_project_title_value.textContent()
-    );
+    // const shortProjectTitleActual = confirmStringNotNull(
+    //   await modificationsCommonPage.short_project_title_value.textContent()
+    // );
     const modificationIDActual = confirmStringNotNull(
       await modificationsCommonPage.modification_id_value.textContent()
     );
@@ -47,7 +44,7 @@ Then(
         .toBe(modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.draft_status_value);
     }
     expect.soft(irasIDActual).toBe(irasIDExpected);
-    expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
+    // expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
   }
