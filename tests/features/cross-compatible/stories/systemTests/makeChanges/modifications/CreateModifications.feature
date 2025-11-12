@@ -188,7 +188,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408
-  Scenario Outline: Validate that user can create modifications to add free text for reviewable modifications
+  Scenario Outline: Validate that user can create and submit reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -302,7 +302,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496
-  Scenario Outline: Validate that user can create modifications to add free text for reviewable and non reviewable modifications
+  Scenario Outline: Validate that user can create modifications for reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
