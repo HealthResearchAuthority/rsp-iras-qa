@@ -1,0 +1,13 @@
+{
+  "Confirm_Project_Details_Page": {
+    "heading": "Confirm project details",
+    "add_project_sub_heading": "Add project",
+    "guidance_text_one": "Check and confirm that the details below are correct before adding the project.",
+    "guidance_text_two": "Selecting 'Add project' will create a record for your project. Any future modifications will then be made using this service."
+  },
+  "Label_Texts": {
+    "iras_id_title": "IRAS ID",
+    "short_project_title": "Short project title",
+    "full_project_title": "Full project title"
+  }
+}

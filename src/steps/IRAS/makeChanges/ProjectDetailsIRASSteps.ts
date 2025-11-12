@@ -37,8 +37,10 @@ Then(
 );
 
 Then('I fill the unique iras id in project details iras page', async ({ projectDetailsIRASPage }) => {
-  const uniqueIrasId = await projectDetailsIRASPage.getValidIRASFromLegacySharepoint();
-  await projectDetailsIRASPage.setUniqueIrasId(uniqueIrasId);
+  const uniqueIrasId = await projectDetailsIRASPage.getValidIRASAndProjectTitlesFromLegacySharepoint();
+  await projectDetailsIRASPage.setUniqueIrasId(uniqueIrasId.foundIRASID);
+  await projectDetailsIRASPage.setShortProjectTitle(uniqueIrasId.foundShortProjectTitle);
+  await projectDetailsIRASPage.setFullProjectTitle(uniqueIrasId.foundFullProjectTitle);
   await projectDetailsIRASPage.iras_id_text.fill(await projectDetailsIRASPage.getUniqueIrasId());
 });
 
