@@ -40,7 +40,7 @@
   },
   "Confirm_Project_Details_Page": {
     "Add_Project": "Add project",
-    "Return_to_Iras_Id":"Return to IRAS ID"
+    "Return_to_Iras_Id": "Return to IRAS ID"
   },
   "Project_Details_Title_Page": {
     "Save_Continue": "Save and continue",
@@ -302,6 +302,12 @@
     "Email_Address": "Email address",
     "Status": "Status",
     "Last_Logged_In": "Last logged in"
+  },
+  "Complete_Your_Profile_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Your_Profile_Page": {
+    "Add_Profile": "Add user profile"
   },
   "View_Edit_User_Profile_Page": {
     "Disable_User": "Disable user",

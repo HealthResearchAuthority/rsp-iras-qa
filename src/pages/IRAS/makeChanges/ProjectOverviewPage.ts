@@ -56,7 +56,6 @@ export default class ProjectOverviewPage {
   readonly post_approvals_tab_review_type: Locator;
   readonly post_approvals_tab_category: Locator;
   readonly post_approvals_tab_date_submitted: Locator;
-  readonly post_approvals_tab_status: Locator;
   readonly document_type_project_documents: Locator;
   readonly document_name_project_documents: Locator;
   readonly version_project_documents: Locator;
