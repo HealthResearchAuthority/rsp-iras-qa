@@ -1712,7 +1712,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
       | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
-  @rsp-3889 @AddDetailsToUploadedDocumentsCompletedStatus @KNOWN-DEFECT-RSP-5091
+  @rsp-3889 @rsp-5280 @AddDetailsToUploadedDocumentsCompletedStatus @KNOWN-DEFECT-RSP-5091_5747 @fail
   Scenario Outline: Verify the user is able to enter details for uploaded documents with completed status and review your information page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

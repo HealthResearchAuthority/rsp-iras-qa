@@ -1,15 +1,16 @@
 {
   "Review_Your_Document_Information": {
-    "page_title": "Review your document information - Health research UK",
+    "page_title": "Review your document information - Plan and manage health and care research",
     "heading": "Review your document information",
     "hint_label_heading": "Confirm document details",
     "hint_label_text": "When you’ve checked that all the document details are correct, select Save and continue",
-    "document_name_label": "Document",
+    "file_name_label": "File name",
+    "document_name_label": "Document name",
     "document_type_label": "Document type",
     "document_type_guidance_text": "Enter document type",
     "sponsor_document_version_label": "Document version",
     "sponsor_document_date_label": "Document date",
-    "document_previously_approved_label": "Previously approved?"
+    "document_previously_approved_label": "Previously approved"
   },
   "Missing_Mandatory_Question_Previously_Approved_Error": {
     "document_previously_approved_row": "Enter previously approved?"
