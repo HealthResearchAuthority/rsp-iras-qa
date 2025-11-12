@@ -463,3 +463,87 @@ Then(
     await expect.soft(modificationsCommonPage.page.getByText(currentChiefInvestigatorNameExpected)).toBeVisible();
   }
 );
+
+Then(
+  'I can see the modification status as {string} on the post approval page',
+  async ({ modificationsCommonPage }, statusDataset: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const expectedStatus = dataset.status;
+    let expectedSubmittedDate = dataset.submited_date;
+    const expectedModificationID = await modificationsCommonPage.getModificationID();
+    const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+    const modificationIDActual = modificationRecord.get('modificationIdValue');
+    expect.soft(modificationIDActual[0]).toBe(expectedModificationID);
+    const statusActual = modificationRecord.get('statusValue');
+    expect.soft(statusActual[0]).toBe(expectedStatus);
+    const actualDateSubmitted = modificationRecord.get('submittedDateValue');
+    if (expectedSubmittedDate !== '') {
+      expectedSubmittedDate = await getFormattedDate();
+    }
+    expect.soft(actualDateSubmitted[0]).toBe(expectedSubmittedDate);
+  }
+);
+
+Then(
+  'I validate submitted date field value for {string} modifications and confirm {string} status',
+  async ({ modificationsCommonPage }, statusDataset: string, statusToCheck: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const expectedStatus = dataset.status;
+    let expectedSubmittedDate: string;
+    if (statusDataset == 'Modification_Status_Indraft') {
+      expectedSubmittedDate = dataset.submited_date;
+    } else {
+      expectedSubmittedDate = await getFormattedDate();
+    }
+    let modificationMap: any;
+    const displayedModificationIdValue: string[] = [];
+    const displayedSubmittedDateValue: string[] = [];
+    const displayedStatusValue: string[] = [];
+    const rows = await modificationsCommonPage.modificationRows.all();
+    for (const row of rows) {
+      const columns = await row.locator(modificationsCommonPage.listCell).allInnerTexts();
+      const status = confirmStringNotNull(columns[5] ?? '');
+      if (status == statusToCheck) {
+        displayedStatusValue.push(status);
+        const modificationId = confirmStringNotNull(columns[0]);
+        displayedModificationIdValue.push(modificationId);
+        const submittedDate = confirmStringNotNull(columns[4] ?? '');
+        displayedSubmittedDateValue.push(submittedDate);
+        modificationMap = new Map([
+          ['displayedStatusValue', displayedStatusValue],
+          ['displayedSubmittedDateValue', displayedSubmittedDateValue],
+          ['displayedModificationIdValue', displayedModificationIdValue],
+        ]);
+        const actualStatus = modificationMap.get('displayedStatusValue');
+        const actualDateSubmitted = modificationMap.get('displayedSubmittedDateValue');
+        expect.soft(actualStatus[0]).toBe(expectedStatus);
+        expect.soft(actualDateSubmitted[0]).toBe(expectedSubmittedDate);
+      }
+    }
+  }
+);
+
+Then(
+  'I validate the status {string} is displayed on modifications page',
+  async ({ modificationsCommonPage }, statusDataset: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const expectedStatus = dataset.status;
+    const actualStatus = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
+    expect.soft(actualStatus).toBe(expectedStatus);
+  }
+);
+
+Then(
+  'I create {string} and click on save for later on the select area of change page',
+  async ({ selectAreaOfChangePage, modificationsCommonPage, commonItemsPage }, dataset: string) => {
+    const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[dataset];
+    const modificationDataValues = Object.keys(modificationsDataset);
+    for (const index of modificationDataValues) {
+      const modificationName = modificationDataValues[index];
+      const modificationDataset = modificationsDataset[modificationName];
+      const buttonValue = commonItemsPage.buttonTextData.Project_Overview_Page.Create_New_Modification;
+      await commonItemsPage.govUkButton.getByText(confirmStringNotNull(buttonValue)).click();
+      await selectAreaOfChangePage.selectAreaOfChangeAndSaveLater(modificationDataset);
+    }
+  }
+);
