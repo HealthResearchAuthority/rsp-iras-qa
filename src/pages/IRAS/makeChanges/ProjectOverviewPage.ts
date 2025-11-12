@@ -503,4 +503,12 @@ export default class ProjectOverviewPage {
   async getAllModificationTableData() {
     return await this.modification_table_data.allTextContents();
   }
+
+  async getProjectColumnIndex(columnName: string): Promise<number> {
+    let columnIndex: number;
+    if (columnName.toLowerCase() == 'document name') {
+      columnIndex = 1;
+    }
+    return columnIndex;
+  }
 }

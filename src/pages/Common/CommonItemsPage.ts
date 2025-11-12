@@ -147,6 +147,7 @@ export default class CommonItemsPage {
   readonly success_message_header_text: Locator;
   readonly govUkBreadCrumbsLink: Locator;
   readonly myAccountGovUkBreadCrumbsLink: Locator;
+  readonly page_heading: Locator;
   readonly govUkBackLink: Locator;
 
   //Initialize Page Objects
@@ -415,6 +416,7 @@ export default class CommonItemsPage {
     this.success_message_header_text = this.page
       .getByTestId('govuk-notification-banner-title')
       .getByText(this.commonTestData.success_header_label);
+    this.page_heading = this.page.getByRole('heading');
   }
 
   //Getters & Setters for Private Variables
@@ -1633,8 +1635,12 @@ export default class CommonItemsPage {
   }
 
   async clickLink(page: string, linkName: string) {
-    const linkValue = this.linkTextData[page][linkName];
-    await this.govUkLink.getByText(linkValue, { exact: true }).click();
+    const linkLabel = this.linkTextData[page][linkName];
+    await this.govUkLink
+      .getByText(linkLabel, { exact: true })
+      .or(this.genericButton.getByText(linkLabel, { exact: true }))
+      .first()
+      .click();
   }
 
   async clickErrorSummaryLinkSpecific<PageObject>(key: string, page: PageObject, errorMsg: string) {
