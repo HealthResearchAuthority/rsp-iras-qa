@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { confirmStringNotNull, removeUnwantedWhitespace, getRandomNumber } from '../../../utils/UtilFunctions';
 import { Locator } from '@playwright/test';
-import * as path from 'path';
+import path from 'node:path';
 const { Then, When } = createBdd(test);
 
 Then('I can see the project overview page', async ({ projectOverviewPage }) => {
