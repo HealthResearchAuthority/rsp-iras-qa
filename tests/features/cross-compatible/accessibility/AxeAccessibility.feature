@@ -1193,7 +1193,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectOverviewProjectDocumentsSpecificProject @axeAccessibilityProjectOverviewDownloadProject @ApplicantUser
+  @axeAccessibilityProjectOverviewProjectDocumentsSpecificProject @ApplicantUser
   Scenario: Project overview project documents page for a specific project
     When I navigate to the project overview page of the 'Test_Project' project
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
@@ -1269,10 +1269,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityAddDocumentDetailsForSpecificDocumentPage @axeAccessibilityDownloadDocumentForSpecificDocumentPage@ApplicantUser
+  @axeAccessibilityAddDocumentDetailsForSpecificDocumentPage @ApplicantUser
   Scenario: Add document details for specific document page
-   Given I have navigated to the my research projects page
-    And I can see the my research projects page
+    Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -1303,7 +1302,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityDocumentDownloadProjectDocumentsAddedPage @ApplicantUser
-  Scenario: Modifications project documents download for Document added page page
+  Scenario: Modifications project documents download for Document added page
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'

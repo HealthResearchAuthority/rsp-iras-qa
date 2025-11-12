@@ -9,7 +9,6 @@ Feature: Create Modifications - Project Documents Modifications Regression
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I capture the page screenshot
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
@@ -109,4 +108,4 @@ Feature: Create Modifications - Project Documents Modifications Regression
       | Specific_Change                    | Document_Upload_Files |
       | Correction_Of_Typographical_Errors | Multiple_Files_Three  |
 
- 
+

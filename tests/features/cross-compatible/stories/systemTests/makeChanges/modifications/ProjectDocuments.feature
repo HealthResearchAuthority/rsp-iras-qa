@@ -27,7 +27,7 @@ Feature: Create Amendment - Project Documents Modifications
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot 
+    And I capture the page screenshot
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
 
