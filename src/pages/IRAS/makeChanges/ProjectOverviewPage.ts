@@ -289,7 +289,6 @@ export default class ProjectOverviewPage {
         exact: true,
       }
     );
-    //separation
     this.post_approvals_advanced_filters_category_label = this.page
       .getByRole('heading', { level: 2 })
       .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.category, {
