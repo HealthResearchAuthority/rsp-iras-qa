@@ -46,6 +46,53 @@ Then(
     await reviewUploadedDocumentsModificationsPage.setUploadedFileName(fileArray);
   }
 );
+Then(
+  'I delete the documents one by one from the documents added page of {string} modifications in reference to the uploaded {string} documents',
+  async (
+    {
+      reviewUploadedDocumentsModificationsPage,
+      addDocumentDetailsModificationsPage,
+      commonItemsPage,
+      selectAreaOfChangePage,
+      confirmationPage,
+    },
+    specificChangeDatasetName,
+    uploadDocumentsDatasetName: string
+  ) => {
+    const specificChangeDataset =
+      selectAreaOfChangePage.selectAreaOfChangePageTestData.Select_Specific_Change[specificChangeDatasetName];
+    const specificChangeTitleLabel = specificChangeDataset.specific_change_dropdown;
+    const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
+    const fileArray = Array.isArray(documentPath) ? documentPath : [documentPath];
+    let fileDeleteCount = 0;
+    for (const filePath of fileArray) {
+      fileDeleteCount = fileDeleteCount + 1;
+      const fileName = path.basename(filePath);
+      await reviewUploadedDocumentsModificationsPage.table
+        .locator(reviewUploadedDocumentsModificationsPage.rows, { hasText: `${fileName}` })
+        .getByRole('link', {
+          name: reviewUploadedDocumentsModificationsPage.reviewUploadedDocumentsModificationsPageTestData
+            .Review_Uploaded_Documents_Modifications_Page.delete_label,
+        })
+        .click();
+      await expect(
+        confirmationPage.confirmation_header_common_label.getByText(
+          confirmationPage.confirmationPageTestData.Delete_Document_Confirmation_Labels
+            .delete_single_document_page_heading
+        )
+      ).toBeVisible();
+      await commonItemsPage.clickButton('Confirmation_Page', 'Delete_Document');
+      if (fileDeleteCount < fileArray.length) {
+        await addDocumentDetailsModificationsPage.assertOnAddDocumentsDetailsModificationsPage(
+          specificChangeTitleLabel
+        );
+        await commonItemsPage.govUkLink.getByText('Back').click();
+      } else {
+        break;
+      }
+    }
+  }
+);
 
 Then(
   'I download the documents one by one from the documents added page of specific change modifications in reference to the uploaded {string} documents',

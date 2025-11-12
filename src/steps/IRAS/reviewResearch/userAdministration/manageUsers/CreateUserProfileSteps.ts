@@ -34,14 +34,14 @@ When(
 
 When(
   'I fill the new user profile page using {string} for field validation',
-  async ({ createUserProfilePage, commonItemsPage, userListReviewBodyPage }, datasetName: string) => {
+  async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const isDuplicateEmail = datasetName.startsWith('Duplicate_Email_');
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         if (isDuplicateEmail && key === 'email_address_text') {
           const locator = createUserProfilePage[key];
-          const [email] = await userListReviewBodyPage.getUserEmail();
+          const [email] = await commonItemsPage.getUserEmail();
           const searchKey = await commonItemsPage.getSearchKey();
           const uniqueEmail = await createUserProfilePage.getUniqueEmail();
           const valueToFill = email || searchKey || uniqueEmail;

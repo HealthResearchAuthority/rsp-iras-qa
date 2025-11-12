@@ -1,6 +1,6 @@
 {
   "Project_Details_Title_Page": {
-    "heading": "Project details"
+    "heading": "Planned project end date"
   },
   "Label_Texts": {
     "short_project_title_textbox_label": "Short project title",
@@ -94,7 +94,6 @@
     "planned_project_end_year_text": "2030"
   },
   "Valid_Data_All_Fields": {
-    "short_project_title_text": "QA_Automation - This is a short project title",
     "planned_project_end_day_text": "1",
     "planned_project_end_month_dropdown": "January",
     "planned_project_end_year_text": "2030"

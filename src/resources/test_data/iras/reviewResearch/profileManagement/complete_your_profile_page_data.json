@@ -1,0 +1,38 @@
+{
+  "Complete_Your_Profile_Page": {
+    "page_heading": "Complete your profile",
+    "email_address_label": "Email address",
+    "telephone_label": "Telephone",
+    "title_label": "Title",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "job_title_label": "Job title",
+    "organisation_label": "Organisation"
+  },
+  "Users": {
+    "One_Login_Account_User": {
+      "Profile_Details": {
+        "title_value": "Mr",
+        "first_name_value": "Hagne",
+        "last_name_value": "Nulta",
+        "job_title_value": "Researcher",
+        "organisation_value": "NECUB"
+      }
+    },
+    "Invalid_User": {
+      "Profile_Details": {
+        "title_value": "",
+        "first_name_value": "",
+        "last_name_value": "",
+        "job_title_value": "",
+        "organisation_value": ""
+      }
+    }
+  },
+  "Validation": {
+    "Missing_Mandatory_Fields_Error": {
+      "first_name_value": "Enter a first name",
+      "last_name_value": "Enter a last name"
+    }
+  }
+}

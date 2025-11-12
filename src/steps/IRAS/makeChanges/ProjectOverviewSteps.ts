@@ -274,6 +274,31 @@ Then(
   }
 );
 
+Then('I validate the delete modification success message', async ({ projectOverviewPage, projectDetailsIRASPage }) => {
+  await expect.soft(projectOverviewPage.modification_saved_success_message_header_text).toBeVisible();
+  const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
+  const modificationIDExpected = irasIDExpected + '/' + 1;
+  const expectedDeleteModificationSuccessText =
+    projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.delete_modification_success_message_text.replace(
+      '{{modificationNumber}}',
+      modificationIDExpected
+    );
+  const actualDeleteModificationSuccessText = confirmStringNotNull(
+    await projectOverviewPage.delete_modification_success_message_text.textContent()
+  );
+  expect.soft(expectedDeleteModificationSuccessText).toBe(actualDeleteModificationSuccessText);
+});
+
+Then(
+  'I validate the deleted modification does not appear in the modification in the post approval tab',
+  async ({ projectOverviewPage, projectDetailsIRASPage }) => {
+    const modificationTableData = await projectOverviewPage.getAllModificationTableData();
+    const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
+    const modificationIDExpected = irasIDExpected + '/' + 1;
+    expect(modificationTableData).not.toContain(modificationIDExpected);
+  }
+);
+
 When(
   'I click a {string} on the project overview page and validate the downlaoded file in the download folder',
   async ({ page, commonItemsPage, projectOverviewPage }, fieldName: string) => {
