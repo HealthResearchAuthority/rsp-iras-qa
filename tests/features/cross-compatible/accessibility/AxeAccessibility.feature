@@ -1286,7 +1286,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -1295,7 +1295,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
@@ -1307,12 +1306,39 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I can see the review uploaded documents for 'Correction_Of_Typographical_Errors' page
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for 'Correction_Of_Typographical_Errors' page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityDocumentDownloadProjectDocumentsAddedPage @ApplicantUser
+  Scenario: Modifications project documents download for Document added page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I upload 'PNG_File' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+ 
   @axeAccessibilityProjectConfirmationPage @ApplicantUser
   Scenario: Create Project confirmation page
     Given I have navigated to the my research projects page
