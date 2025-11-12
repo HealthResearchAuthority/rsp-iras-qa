@@ -109,6 +109,7 @@
   "Project_Documents_Tab": {
     "document_type_project_documents": "Document type",
     "document_name_project_documents": "Document name",
+    "file_name_project_documents": "File name",
     "version_project_documents": "Version",
     "document_date_project_documents": "Document date",
     "status_project_documents": "Status",
