@@ -736,13 +736,13 @@ export default class ModificationsCommonPage {
     const modificationIdValue: string[] = [];
     const submittedDateValue: string[] = [];
     const statusValue: string[] = [];
-    const columns = this.tableRows.nth(rowNumber).getByRole('cell');
-    const modificationId = confirmStringNotNull(await columns.nth(0).textContent());
-    modificationIdValue.push(modificationId);
-    const submittedDate = confirmStringNotNull(await columns.nth(4).textContent());
-    submittedDateValue.push(submittedDate);
-    const status = confirmStringNotNull(await columns.nth(5).textContent());
-    statusValue.push(status);
+    const columnValue = this.tableRows.nth(rowNumber).getByRole('cell');
+    const displayedModificationId = confirmStringNotNull(await columnValue.nth(0).textContent());
+    modificationIdValue.push(displayedModificationId);
+    const displayedSubmittedDate = confirmStringNotNull(await columnValue.nth(4).textContent());
+    submittedDateValue.push(displayedSubmittedDate);
+    const displayedStatus = confirmStringNotNull(await columnValue.nth(5).textContent());
+    statusValue.push(displayedStatus);
     const modificationMap = new Map([
       ['modificationIdValue', modificationIdValue],
       ['submittedDateValue', submittedDateValue],
