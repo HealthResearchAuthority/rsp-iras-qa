@@ -15,6 +15,7 @@ export default class ProjectOverviewPage {
   readonly project_short_title_label: Locator;
   readonly modification_saved_success_message_text: Locator;
   readonly modification_saved_success_message_header_text: Locator;
+  readonly delete_modification_success_message_text: Locator;
   readonly information_alert_banner: Locator;
   readonly project_overview_heading: Locator;
   readonly project_team_heading: Locator;
@@ -67,6 +68,7 @@ export default class ProjectOverviewPage {
   readonly advanced_filters_project_documents: Locator;
   readonly search_project_documents: Locator;
   readonly results_count_project_documents: Locator;
+  readonly modification_table_data: Locator;
   readonly post_approvals_heading: Locator;
   readonly post_approvals_advanced_filters_modification_type_label: Locator;
   readonly modification_type_fieldset: Locator;
@@ -135,6 +137,7 @@ export default class ProjectOverviewPage {
     this.modification_saved_success_message_text = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
+    this.delete_modification_success_message_text = this.page.locator('.govuk-notification-banner__heading');
     this.project_overview_heading = this.page.locator('.govuk-inset-text');
     this.project_team_heading = this.page
       .getByRole('heading')
@@ -467,6 +470,7 @@ export default class ProjectOverviewPage {
       .locator('.search-filter-panel__button-inner')
       .getByText(this.projectOverviewPageTestData.Project_Documents_Tab.advanced_filters_project_documents);
     this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
+    this.modification_table_data = page.locator('.govuk-table.modifications-tasklist-table td');
     this.date_submitted_to_date_error_message = this.page
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
@@ -494,5 +498,17 @@ export default class ProjectOverviewPage {
 
   async getStatus(row: any) {
     return confirmStringNotNull(await row.getByRole('cell').nth(5).textContent());
+  }
+
+  async getAllModificationTableData() {
+    return await this.modification_table_data.allTextContents();
+  }
+
+  async getProjectColumnIndex(columnName: string): Promise<number> {
+    let columnIndex: number;
+    if (columnName.toLowerCase() == 'document name') {
+      columnIndex = 1;
+    }
+    return columnIndex;
   }
 }

@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { confirmStringNotNull, getFormattedDate } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, getFormattedDate, removeUnwantedWhitespace } from '../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -403,6 +403,64 @@ Then(
     );
     expect.soft(actualSpecificChangeLabel).toBe(dataset[changeName]['specific_change_dropdown']);
     expect.soft(actualFreeText).toBe(expectedFreeText);
+  }
+);
+
+Then('I validate overall modification ranking', async ({ modificationsCommonPage }) => {
+  const modificationTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).modificationType;
+  const categoryExpected = (await modificationsCommonPage.getOverallRankingForChanges()).category;
+  const reviewTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).reviewType;
+  const modificationTypeActual = await removeUnwantedWhitespace(
+    await modificationsCommonPage.modification_type.first().textContent()
+  );
+  const categoryActual = await removeUnwantedWhitespace(await modificationsCommonPage.category.first().textContent());
+  const reviewTypeActual = await removeUnwantedWhitespace(
+    await modificationsCommonPage.review_type.first().textContent()
+  );
+  expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
+  expect.soft(categoryActual).toBe(categoryExpected);
+  expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
+});
+
+Then(
+  'I validate individual ranking for single card displayed in modifications page',
+  async ({ modificationsCommonPage }) => {
+    const individualRanking = await modificationsCommonPage.getrankingForChanges();
+    const firstCardKey = Object.keys(individualRanking)[0];
+    const modificationTypeExpected = individualRanking[firstCardKey][0].expectedModificationType;
+    const categoryExpected = individualRanking[firstCardKey][0].expectedCategory;
+    const reviewTypeExpected = individualRanking[firstCardKey][0].expectedReviewType;
+    const modificationTypeActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards
+        .locator(modificationsCommonPage.modification_type)
+        .first()
+        .textContent()
+    );
+    const categoryActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards.locator(modificationsCommonPage.category).first().textContent()
+    );
+    const reviewTypeActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards.locator(modificationsCommonPage.review_type).first().textContent()
+    );
+    expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
+    expect.soft(categoryActual).toBe(categoryExpected);
+    expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
+  }
+);
+
+Then(
+  'I can see the current chief investigator email details displayed on modifications page using {string} dataset',
+  async ({ modificationsCommonPage, chiefInvestigatorPage }, datasetNameChiefInvestigator) => {
+    const currentChiefInvestigatorNameExpected =
+      chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator].chief_investigator_email_text;
+    await expect
+      .soft(
+        modificationsCommonPage.page.getByText(
+          modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.current_chief_investigator_email_label
+        )
+      )
+      .toBeVisible();
+    await expect.soft(modificationsCommonPage.page.getByText(currentChiefInvestigatorNameExpected)).toBeVisible();
   }
 );
 

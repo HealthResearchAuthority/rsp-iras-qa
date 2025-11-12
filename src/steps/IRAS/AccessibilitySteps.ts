@@ -46,5 +46,5 @@ Then('I analyse the results from the Axe scan', async ({ $testInfo }) => {
 Then('I expect to receive no WCAG Violations', async ({ $testInfo }) => {
   const path = $testInfo.outputDir + '/temp-axe-results.json';
   const axeScanResults = await readAxeResultsContents(path);
-  expect(JSON.parse(axeScanResults).violations).toEqual([]);
+  expect.soft(JSON.parse(axeScanResults).violations).toEqual([]);
 });

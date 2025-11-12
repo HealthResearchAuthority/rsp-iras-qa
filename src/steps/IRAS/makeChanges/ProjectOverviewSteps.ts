@@ -1,8 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace, getRandomNumber } from '../../../utils/UtilFunctions';
 import { Locator } from '@playwright/test';
-
+import path from 'node:path';
 const { When, Then } = createBdd(test);
 
 Then('I can see the project overview page', async ({ projectOverviewPage }) => {
@@ -271,6 +271,54 @@ Then(
     const expectedStatus = dataset.status;
     const actualStatus = confirmStringNotNull(await projectOverviewPage.projectStatusTag.textContent());
     expect.soft(actualStatus).toBe(expectedStatus);
+  }
+);
+
+Then('I validate the delete modification success message', async ({ projectOverviewPage, projectDetailsIRASPage }) => {
+  await expect.soft(projectOverviewPage.modification_saved_success_message_header_text).toBeVisible();
+  const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
+  const modificationIDExpected = irasIDExpected + '/' + 1;
+  const expectedDeleteModificationSuccessText =
+    projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.delete_modification_success_message_text.replace(
+      '{{modificationNumber}}',
+      modificationIDExpected
+    );
+  const actualDeleteModificationSuccessText = confirmStringNotNull(
+    await projectOverviewPage.delete_modification_success_message_text.textContent()
+  );
+  expect.soft(expectedDeleteModificationSuccessText).toBe(actualDeleteModificationSuccessText);
+});
+
+Then(
+  'I validate the deleted modification does not appear in the modification in the post approval tab',
+  async ({ projectOverviewPage, projectDetailsIRASPage }) => {
+    const modificationTableData = await projectOverviewPage.getAllModificationTableData();
+    const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
+    const modificationIDExpected = irasIDExpected + '/' + 1;
+    expect(modificationTableData).not.toContain(modificationIDExpected);
+  }
+);
+
+When(
+  'I click a {string} on the project overview page and validate the downlaoded file in the download folder',
+  async ({ page, commonItemsPage, projectOverviewPage }, fieldName: string) => {
+    const downloadPath = path.resolve(process.env.HOME || process.env.USERPROFILE || '', 'Downloads');
+    const columnIndex = await projectOverviewPage.getProjectColumnIndex(fieldName);
+    const rowCount = await commonItemsPage.tableBodyRows.count();
+    const testNum = await getRandomNumber(0, rowCount - 1);
+    const fieldLocator = commonItemsPage.tableBodyRows
+      .nth(testNum)
+      .getByRole('cell')
+      .nth(columnIndex)
+      .getByRole('link');
+    const actualFileNameArray = await fieldLocator.allTextContents();
+    const actualFileName = actualFileNameArray[0].trim();
+    const [download] = await Promise.all([page.waitForEvent('download'), fieldLocator.click()]);
+    const suggestedFileName = download.suggestedFilename();
+    const filePath = path.join(downloadPath, suggestedFileName);
+    await download.saveAs(filePath);
+    const expectedFileName = path.basename(filePath);
+    expect.soft(actualFileName).toBe(expectedFileName);
   }
 );
 
