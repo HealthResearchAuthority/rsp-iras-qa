@@ -1,8 +1,8 @@
 {
   "Add_Document_Details_Modifications_Page": {
-    "page_title": "Add document details for - Health research UK",
+    "page_title": "Add document details for - Plan and manage health and care research",
     "page_title_first_part": "Add document details for",
-    "page_title_second_part": "- Health research UK",
+    "page_title_second_part": "- Plan and manage health and care research",
     "heading": "Add document details for",
     "hint_label": "Some of the documents you've added need additional details.",
     "document_status": "Incomplete"
@@ -13,13 +13,17 @@
   "Document_Status_Complete": {
     "status": "Completed"
   },
+  "Document_Name_Prefix": {
+    "prefix": "_"
+  },
   "Add_Document_Details_For_Specific_Document_Modifications_Page": {
     "page_title_first_part": "Add document details for",
-    "page_title_second_part": "- Health research UK",
+    "page_title_second_part": "- Plan and manage health and care research",
     "heading": "Add document details for",
     "save_and_continue": "Save and continue",
     "save_changes": "Save changes",
     "delete_label": "Delete",
+    "document_name_label": "Document name",
     "document_type_dropdown_label": "Document type",
     "back_link": "Back",
     "document_previously_approved_hint_text": "Has a previous version of this document been approved?",
@@ -31,6 +35,7 @@
     "sub_document_type_label": "Sub document type"
   },
   "Valid_Data_Fields": {
+    "document_name_text": "DocName",
     "document_type_dropdown": "Protocol / Clinical Investigation Plan",
     "sponsor_document_version_text": "1.1",
     "sponsor_document_day_text": "10",
@@ -39,6 +44,7 @@
     "document_previously_approved_radio": "Yes"
   },
   "New_Valid_Data_Fields": {
+    "document_name_text": "DocName",
     "document_type_dropdown": "Protocol / Clinical Investigation Plan",
     "sponsor_document_version_text": "1.5",
     "sponsor_document_day_text": "20",

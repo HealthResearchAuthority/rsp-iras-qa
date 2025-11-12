@@ -1100,7 +1100,14 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, commonItemsPage, myResearchProjectsPage },
+    {
+      searchModificationsPage,
+      manageReviewBodiesPage,
+      manageUsersPage,
+      commonItemsPage,
+      myResearchProjectsPage,
+      projectOverviewPage,
+    },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -1124,6 +1131,10 @@ Then(
       My_Research_Page: {
         dataset: myResearchProjectsPage.myResearchProjectsPageTestData.Advanced_Filters,
         labels: myResearchProjectsPage.myResearchProjectsPageTestData.My_Research_Projects_Page,
+      },
+      Post_Approval_Page: {
+        dataset: projectOverviewPage.projectOverviewPageTestData.Advanced_Filters,
+        labels: projectOverviewPage.projectOverviewPageTestData.Post_Approval_Page_Label_Texts,
       },
     };
     const { dataset, labels } = pageMap[pageKey];
@@ -1172,7 +1183,7 @@ Then(
 Then(
   'I validate {string} displayed on {string} in advanced filters',
   async (
-    { commonItemsPage, searchModificationsPage, myResearchProjectsPage },
+    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
@@ -1188,6 +1199,10 @@ Then(
       errorMessageFieldDataset =
         myResearchProjectsPage.myResearchProjectsPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
       page = myResearchProjectsPage;
+    } else if (pageKey === 'Post_Approval_Page') {
+      errorMessageFieldDataset =
+        projectOverviewPage.projectOverviewPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
+      page = projectOverviewPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
@@ -1217,6 +1232,15 @@ Then(
         } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Created_From_Error') {
           const actualMessage =
             await myResearchProjectsPage.date_project_created_from_date_error_messaage.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await projectOverviewPage.date_submitted_to_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_From_Error') {
+          const actualMessage = await projectOverviewPage.date_submitted_from_date_error_message.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else {
           throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);

@@ -47,7 +47,7 @@ export default class ReviewYourDocumentInfomationModificationsPage {
     this.list_row = this.page.locator('.govuk-summary-list__row');
     this.document_name_row = this.list_row.filter({
       has: this.page.getByText(
-        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information.document_name_label
+        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information.file_name_label
       ),
     });
     this.document_name_text = this.document_name_row.getByRole('definition').locator('text=file');

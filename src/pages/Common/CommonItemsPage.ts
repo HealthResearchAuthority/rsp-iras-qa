@@ -206,6 +206,7 @@ export default class CommonItemsPage {
       .or(this.page.getByTestId('Search_IrasId'))
       .or(this.page.getByTestId('SearchTerm'))
       .or(this.page.getByTestId('Search.SearchNameTerm'))
+      .or(this.page.getByTestId('Search.ModificationId'))
       .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
@@ -284,7 +285,9 @@ export default class CommonItemsPage {
       });
     this.upload_files_input = this.page.locator('input[type="file"]');
     this.search_results_count = this.page.locator('.search-filter-panel__count');
-    this.advanced_filter_panel = this.page.getByTestId('filter-panel');
+    this.advanced_filter_panel = this.page
+      .getByTestId('filter-panel')
+      .or(this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label, exact: true }));
     this.advanced_filter_headings = this.advanced_filter_panel.getByRole('heading');
     this.date_from_filter_group = this.page.getByTestId('FromDate');
     this.date_from_label = this.date_from_filter_group.getByText(this.searchFilterResultsData.date_from_label);

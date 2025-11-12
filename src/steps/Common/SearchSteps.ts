@@ -18,6 +18,7 @@ When(
       manageSponsorOrganisationPage,
       userListSponsorOrganisationPage,
       myResearchProjectsPage,
+      projectOverviewPage,
     },
     searchType: string,
     searchQueryName: string
@@ -54,6 +55,9 @@ When(
           .Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'my research') {
       searchQueryDataset = myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'modifications in post approval') {
+      searchQueryDataset =
+        projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
