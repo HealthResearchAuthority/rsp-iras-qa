@@ -385,18 +385,15 @@ Then(
   'I enter {string} into the search field for post approval page',
   async ({ projectOverviewPage, modificationsCommonPage, commonItemsPage }, searchDatasetName: string) => {
     const dataset = projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchDatasetName];
-    // Get the modification record and extract the first modification ID to use as the search key
     if (searchDatasetName === 'Full_Modification_ID') {
       const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
       const modificationIds = modificationRecord.get('modificationIdValue');
       const searchKey: string = modificationIds && modificationIds.length > 0 ? modificationIds[0] : '';
       await modificationsCommonPage.setModificationID(modificationIds[0]);
-      // fill the modification id in the search box
       expect(searchKey).toBeTruthy();
       await commonItemsPage.setSearchKey(searchKey);
-      await commonItemsPage.search_text.fill(searchKey); // check search_text locator//done
+      await commonItemsPage.search_text.fill(searchKey);
     } else {
-      //await manageUsersPage.user_search_text.fill(dataset['search_input_text']);//create user_search_text locator
       await commonItemsPage.search_text.fill(dataset['search_input_text']);
     }
   }
