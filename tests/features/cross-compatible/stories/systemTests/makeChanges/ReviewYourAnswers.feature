@@ -13,6 +13,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -48,6 +49,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -87,6 +89,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -127,6 +130,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -167,6 +171,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -206,6 +211,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -244,6 +250,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -284,6 +291,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -324,6 +332,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -358,6 +367,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -405,6 +415,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -466,6 +477,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -512,6 +524,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -571,6 +584,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -603,6 +617,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
@@ -640,6 +655,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot

@@ -272,6 +272,8 @@ Given(
     const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
+    } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
+      await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
     } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
@@ -507,6 +509,8 @@ Then(
       editYourProfilePage,
       addDocumentDetailsForSpecificDocumentModificationsPage,
       projectIdentificationEnterReferenceNumbersPage,
+      contactDetailsModificationPage,
+      projectPersonnelChangeChiefInvestigatorPage,
       chooseARecordTypeToSearchPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
@@ -611,6 +615,16 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = projectIdentificationEnterReferenceNumbersPage;
+    } else if (pageKey == 'Contact_Details_Modification_Page') {
+      errorMessageFieldDataset =
+        contactDetailsModificationPage.contactDetailsModificationPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = contactDetailsModificationPage;
+    } else if (pageKey == 'Project_Personnel_Change_Chief_Investigator_Page') {
+      errorMessageFieldDataset =
+        projectPersonnelChangeChiefInvestigatorPage.projectPersonnelChangeChiefInvestigatorModificationPageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = projectPersonnelChangeChiefInvestigatorPage;
     } else if (pageKey == 'Choose_A_Record_Type_To_Search_Page') {
       errorMessageFieldDataset =
         chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Error_Validation[
@@ -1132,7 +1146,14 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, commonItemsPage },
+    {
+      searchModificationsPage,
+      manageReviewBodiesPage,
+      manageUsersPage,
+      commonItemsPage,
+      myResearchProjectsPage,
+      projectOverviewPage,
+    },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -1152,6 +1173,14 @@ Then(
       Manage_Users_Page: {
         dataset: manageUsersPage.manageUsersPageTestData.Advanced_Filters,
         labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
+      },
+      My_Research_Page: {
+        dataset: myResearchProjectsPage.myResearchProjectsPageTestData.Advanced_Filters,
+        labels: myResearchProjectsPage.myResearchProjectsPageTestData.My_Research_Projects_Page,
+      },
+      Post_Approval_Page: {
+        dataset: projectOverviewPage.projectOverviewPageTestData.Advanced_Filters,
+        labels: projectOverviewPage.projectOverviewPageTestData.Post_Approval_Page_Label_Texts,
       },
     };
     const { dataset, labels } = pageMap[pageKey];
@@ -1177,7 +1206,11 @@ Then(
           await validateFilter(key, async (k) =>
             commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
-        } else if (key.startsWith('date_submitted') || key.startsWith('date_last_logged_in')) {
+        } else if (
+          key.startsWith('date_submitted') ||
+          key.startsWith('date_last_logged_in') ||
+          key.startsWith('date_project_created')
+        ) {
           if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
             await validateFilter(key, async (k) =>
               commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
@@ -1196,7 +1229,7 @@ Then(
 Then(
   'I validate {string} displayed on {string} in advanced filters',
   async (
-    { commonItemsPage, searchModificationsPage },
+    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
@@ -1208,6 +1241,14 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = searchModificationsPage;
+    } else if (pageKey == 'My_Research_Page') {
+      errorMessageFieldDataset =
+        myResearchProjectsPage.myResearchProjectsPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
+      page = myResearchProjectsPage;
+    } else if (pageKey === 'Post_Approval_Page') {
+      errorMessageFieldDataset =
+        projectOverviewPage.projectOverviewPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
+      page = projectOverviewPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
@@ -1227,6 +1268,25 @@ Then(
           expect(actualMessage).toEqual(expectedMessage);
         } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
           const actualMessage = await commonItemsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Created_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Created_To_Error'
+        ) {
+          const actualMessage = await myResearchProjectsPage.date_project_created_to_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Created_From_Error') {
+          const actualMessage =
+            await myResearchProjectsPage.date_project_created_from_date_error_messaage.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await projectOverviewPage.date_submitted_to_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_From_Error') {
+          const actualMessage = await projectOverviewPage.date_submitted_from_date_error_message.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else {
           throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);

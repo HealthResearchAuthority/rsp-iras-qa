@@ -9,6 +9,7 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -90,7 +91,6 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     Examples:
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
-
 
   @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
   Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
@@ -502,10 +502,10 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
       | Correction_Of_Typographical_Errors | OGG_File                         | single invalid   |
       | Correction_Of_Typographical_Errors | PS_File                          | single invalid   |
       | Correction_Of_Typographical_Errors | RAW_File                         | single invalid   |
-      #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
       | Correction_Of_Typographical_Errors | WAV_File                         | single invalid   |
       | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
       | Protocol_Non_Substantial_Changes   | JSON_File                        | single invalid   |
+      #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
@@ -932,3 +932,120 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
       | Other_Minor_Change_To_Study_Documents        | PNG_File              | Invalid_Date_No_Day_No_Year           | No_Sponsor_Document_Date_Day_Year_Error    |
       | Post_Trial_Information_For_Participants      | PNG_File              | Invalid_Date_No_Month_No_Year         | No_Sponsor_Document_Date_Month_Year_Error  |
       | Post_Trial_Information_For_Participants      | PNG_File              | Invalid_Date_No_Date_No_Month_No_Year | No_Sponsor_Document_Date_Error             |
+
+  @rsp-4980 @ValidateSummaryAndFieldErrorMessagesContactDetailsModification
+  Scenario Outline: Validate the error messages displayed on contact details modification page for invalid email formats
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I fill the contact details modifications page with '<Modification_Data>' for 'create' action
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Contact_Details_Modification_Page'
+
+    Examples:
+      | Modification_Data                            | Field_And_Summary_Error_Message                |
+      | Invalid_Email_CI_Data_One_Start_With_Dot     | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Double_Dot         | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_TLD                | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Reserved_Domain    | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Punycode           | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Max_Char           | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_SC_Data_One_Start_With_Dot     | Sponsor_Contact_Invalid_Email_Error_Message    |
+      | Invalid_Email_SC_Data_One_Double_Dot         | Sponsor_Contact_Invalid_Email_Error_Message    |
+      | Invalid_Email_SC_Data_One_TLD                | Sponsor_Contact_Invalid_Email_Error_Message    |
+      | Invalid_Email_SC_Data_One_Reserved_Domain    | Sponsor_Contact_Invalid_Email_Error_Message    |
+      | Invalid_Email_SC_Data_One_Punycode           | Sponsor_Contact_Invalid_Email_Error_Message    |
+      | Invalid_Email_SC_Data_One_Max_Char           | Sponsor_Contact_Invalid_Email_Error_Message    |
+      | Invalid_Email_Other_Data_One_Start_With_Dot  | Other_Email_Field_Invalid_Email_Error_Message  |
+      | Invalid_Email_Other_Data_One_Double_Dot      | Other_Email_Field_Invalid_Email_Error_Message  |
+      | Invalid_Email_Other_Data_One_TLD             | Other_Email_Field_Invalid_Email_Error_Message  |
+      | Invalid_Email_Other_Data_One_Reserved_Domain | Other_Email_Field_Invalid_Email_Error_Message  |
+      | Invalid_Email_Other_Data_One_Punycode        | Other_Email_Field_Invalid_Email_Error_Message  |
+      | Invalid_Email_Other_Data_One_Max_Char        | Other_Email_Field_Invalid_Email_Error_Message  |
+
+  @rsp-4982 @ValidateSummaryAndFieldErrorMessagesProjectPersonnelChangeChiefInvestigatorModification
+  Scenario Outline: Validate the error messages displayed on project personnel new chief investigator modification page for invalid email formats
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I fill the change chief investigator modifications page with '<Modification_Data>' for 'create' action
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Personnel_Change_Chief_Investigator_Page'
+
+    Examples:
+      | Modification_Data                                              | Field_And_Summary_Error_Message                |
+      | Invalid_Email_CI_Data_One_Start_With_Dot                       | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Double_Dot                           | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_TLD                                  | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Reserved_Domain                      | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Punycode                             | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Max_Char                             | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Start_With_Dot  | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Double_Dot      | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_TLD             | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Reserved_Domain | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Punycode        | Chief_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Max_Char        | Chief_Investigator_Invalid_Email_Error_Message |
+
+  @rsp-4982 @ValidateSummaryAndFieldErrorMessagesProjectPersonnelChangePrincipalInvestigatorModification
+  Scenario Outline: Validate the error messages displayed on project personnel new principal investigator modification page for invalid email formats
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I fill the change principal investigator modifications page with '<Modification_Data>' for 'create' action
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Personnel_Change_Principal_Investigator_Page'
+
+    Examples:
+      | Modification_Data                                              | Field_And_Summary_Error_Message                    |
+      | Invalid_Email_CI_Data_One_Start_With_Dot                       | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Double_Dot                           | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_TLD                                  | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Reserved_Domain                      | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Punycode                             | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Data_One_Max_Char                             | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Start_With_Dot  | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Double_Dot      | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_TLD             | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Reserved_Domain | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Punycode        | Principal_Investigator_Invalid_Email_Error_Message |
+      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Max_Char        | Principal_Investigator_Invalid_Email_Error_Message |

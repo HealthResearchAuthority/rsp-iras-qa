@@ -49,6 +49,44 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Add_Project                   | Field_Error_Message                       |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Blank            | Add_Project                   | Field_Error_Message_Iras_Id_Mandatory     |
 
+  @rsp-5185 @IRASIDNotInHARPInvalid
+  Scenario Outline: Validate project not currently eligible message displayed when user enter iras id not in harp system
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I capture the page screenshot
+    Then I validate that the project not currently eligible to use the service page is displayed
+    And I capture the page screenshot
+    When I click the 'Return_To_IRAS_ID' button on the 'IRAS_ID_Error_Page'
+    Then I can see the project details iras page
+
+    Examples:
+      | Project_Details_IRAS |
+      | IRAS_ID_Not_In_HARP  |
+
+  @rsp-5185 @IRASIDAlreadyExistInvalid
+  Scenario: Validate project not currently eligible message displayed when user enter iras id not in harp system
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I capture the page screenshot
+    When I click the 'Home' link on the 'Banner'
+    When I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the existing iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I capture the page screenshot
+    Then I validate that the project record already exists page is displayed
+    And I capture the page screenshot
+    When I click the 'Return_To_IRAS_ID' button on the 'IRAS_ID_Error_Page'
+    Then I can see the project details iras page
+
   @rsp-1858
   Scenario Outline: Validate breadcrumb navigations in project details iras id page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
@@ -380,6 +418,7 @@ Feature: Create Amendment - Create Project
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project details title page
     And I have navigated to the my research projects page
     And I can see the my research projects page
@@ -388,6 +427,7 @@ Feature: Create Amendment - Create Project
     Then I can see the project details iras page
     And I fill the existing iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
 
     Examples:
@@ -402,6 +442,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project details title page
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
@@ -428,6 +469,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -455,6 +497,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -494,6 +537,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     And I capture the page screenshot
@@ -521,6 +565,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -768,6 +813,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I capture the page screenshot
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
@@ -815,6 +861,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -844,6 +891,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I capture the page screenshot
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
@@ -883,11 +931,12 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I validate the guidance content displayed on project identifiers page
     And I capture the page screenshot
 
-  @rsp-1866 @DeleteProjectRecord
+  @rsp-1866 @rsp-5185 @DeleteProjectRecord
   Scenario Outline: Verify that user is able to delete the created project record
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -895,6 +944,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
@@ -920,6 +970,7 @@ Feature: Create Amendment - Create Project
     And I fill the existing iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I can see the project identifiers page
     And I capture the page screenshot
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
