@@ -1924,7 +1924,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
 
-  @rsp-3888 @DeleteAllDocumentsModification @runn
+  @rsp-3888 @DeleteAllDocumentsModification
   Scenario Outline: Validate the user is able to delete all documents after uploading
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

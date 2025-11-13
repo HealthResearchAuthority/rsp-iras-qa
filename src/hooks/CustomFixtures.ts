@@ -91,6 +91,7 @@ import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeCh
 import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/ContactDetailsModificationPage';
 import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangeChiefInvestigatorPage';
 import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangePrincipalInvestigatorPage';
+import SponsorWorkspacePage from '../pages/IRAS/reviewResearch/userAdministration/SponsorWorkspacePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -182,6 +183,7 @@ type CustomFixtures = {
   contactDetailsModificationPage: ContactDetailsModificationPage;
   projectPersonnelChangeChiefInvestigatorPage: ProjectPersonnelChangeChiefInvestigatorPage;
   projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
+  sponsorWorkspacePage: SponsorWorkspacePage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -538,6 +540,10 @@ export const test = base.extend<CustomFixtures>({
 
   projectPersonnelChangePrincipalInvestigatorPage: async ({ page }, use) => {
     await use(new ProjectPersonnelChangePrincipalInvestigatorPage(page));
+  },
+
+  sponsorWorkspacePage: async ({ page }, use) => {
+    await use(new SponsorWorkspacePage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
