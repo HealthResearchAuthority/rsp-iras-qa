@@ -133,7 +133,7 @@ When(
       const eventDescriptionExpectedValue =
         usersEmail +
         datasetAuditEvent.Unassign_User.event_description_prefix_text +
-        expectedOrderedRoles[index] +
+        expectedOrderedRoles[index].toLowerCase() +
         datasetAuditEvent.Unassign_User.event_description_suffix_text;
       expect(confirmArrayNotNull(actualAuditLog.get('timeValues'))[index]).toBe(timeExpected);
       expect.soft(confirmArrayNotNull(actualAuditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);

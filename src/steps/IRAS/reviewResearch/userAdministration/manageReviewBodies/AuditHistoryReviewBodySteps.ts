@@ -56,12 +56,14 @@ Then(
     const timeValues: any = auditLog.get('timeValues');
     const eventValues: any = auditLog.get('eventValues');
     const adminEmailValues: any = auditLog.get('adminEmailValues');
-    expect(timeValues[rowIndex]).toBe(timeExpected);
-    expect(eventValues[rowIndex]).toBe(eventDescriptionExpectedValue);
-    expect(adminEmailValues[rowIndex]).toBe(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
-        .system_admin_email_text
-    );
+    expect.soft(timeValues[rowIndex]).toBe(timeExpected);
+    expect.soft(eventValues[rowIndex]).toBe(eventDescriptionExpectedValue);
+    expect
+      .soft(adminEmailValues[rowIndex])
+      .toBe(
+        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+          .system_admin_email_text
+      );
   }
 );
 
@@ -161,44 +163,52 @@ Then(
     const timeValues: any = auditLog.get('timeValues');
     const eventValues: any = auditLog.get('eventValues');
     const adminEmailValues: any = auditLog.get('adminEmailValues');
-    expect(timeValues[organisationIndex]).toBe(timeExpected);
-    expect(eventValues[organisationIndex]).toBe(orgNameEventDescriptionExpectedValue);
-    expect(adminEmailValues[organisationIndex]).toBe(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
-        .system_admin_email_text
-    );
-    expect(timeValues[emailIndex]).toBe(timeExpected);
-    expect(eventValues[emailIndex]).toBe(emailEventDescriptionExpectedValue);
-    expect(adminEmailValues[emailIndex]).toBe(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
-        .system_admin_email_text
-    );
-    expect(timeValues[descriptionIndex]).toBe(timeExpected);
+    expect.soft(timeValues[organisationIndex]).toBe(timeExpected);
+    expect.soft(eventValues[organisationIndex]).toBe(orgNameEventDescriptionExpectedValue);
+    expect
+      .soft(adminEmailValues[organisationIndex])
+      .toBe(
+        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+          .system_admin_email_text
+      );
+    expect.soft(timeValues[emailIndex]).toBe(timeExpected);
+    expect.soft(eventValues[emailIndex]).toBe(emailEventDescriptionExpectedValue);
+    expect
+      .soft(adminEmailValues[emailIndex])
+      .toBe(
+        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+          .system_admin_email_text
+      );
+    expect.soft(timeValues[descriptionIndex]).toBe(timeExpected);
     const description = await reviewBodyProfilePage.getDescription();
     if (description) {
-      expect(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
+      expect.soft(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
     } else {
       const descriptionEventDescriptionExpectedValue =
         dataset.description_event_description_text +
         '(null)' +
         ' to ' +
         (await reviewBodyProfilePage.getNewDescription());
-      expect(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
+      expect.soft(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
     }
-    expect(adminEmailValues[descriptionIndex]).toBe(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
-        .system_admin_email_text
-    );
+    expect
+      .soft(adminEmailValues[descriptionIndex])
+      .toBe(
+        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+          .system_admin_email_text
+      );
     if (
       (await reviewBodyProfilePage.getCountries()).join(', ') !==
       (await reviewBodyProfilePage.getNewCountries()).join(', ')
     ) {
-      expect(timeValues[countryIndex]).toBe(timeExpected);
-      expect(eventValues[countryIndex]).toBe(countryEventDescriptionExpectedValue);
-      expect(adminEmailValues[countryIndex]).toBe(
-        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
-          .system_admin_email_text
-      );
+      expect.soft(timeValues[countryIndex]).toBe(timeExpected);
+      expect.soft(eventValues[countryIndex]).toBe(countryEventDescriptionExpectedValue);
+      expect
+        .soft(adminEmailValues[countryIndex])
+        .toBe(
+          auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+            .system_admin_email_text
+        );
     }
   }
 );

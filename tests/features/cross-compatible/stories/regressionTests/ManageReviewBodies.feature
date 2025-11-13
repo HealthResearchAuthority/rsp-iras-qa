@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
 
-        @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+        @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory @CreatedRevBodyCleanup @KNOWN-ISSUE-RSP-5003 @fail
         Scenario Outline: Verify the user can view the audit history after disabling a newly created review body and the the user list page
                 # create review body from manage review body page
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
@@ -79,7 +79,7 @@ Feature: User Administration: Manage Review Bodies
                         | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
                         | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
 
-        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @RevBodyStatusSetup @KNOWN-ISSUE-RSP-5003 @fail
         Scenario Outline: Verify the user can view the audit history after enabling a review body
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -160,10 +160,10 @@ Feature: User Administration: Manage Review Bodies
                 And I click the '<Navigation_Link>' link on the 'Review_Body_Audit_History_Page'
                 And I capture the page screenshot
                 And I can see the review body profile page
-                And I click the '<Navigation_Link>' link on the 'Review_Body_Profile_Page'
+                And I click the 'Manage_Review_Bodies_Breadcrumb' link on the 'Review_Body_Profile_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
-                When I click the '<Navigation_Link>' link on the 'Manage_Review_Bodies_Page'
+                When I click the 'System_Admin_Breadcrumb' link on the 'Manage_Review_Bodies_Page'
                 Then I can see the 'System_Administration_Page'
                 Then I capture the page screenshot
                 And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -195,7 +195,7 @@ Feature: User Administration: Manage Review Bodies
                         | Field_Name_Two | Field_Name_Three | Field_Name_Four | Navigation_Link | Status_Enabled | Status_Disabled |
                         | Country        | Email_Address    | Description     | Back            | Enabled        | Disabled        |
 
-        @RegressionTestVerifyBackAndChangeLinksCreateAndCheckCreateReviewBody
+        @RegressionTestVerifyBackAndChangeLinksCreateAndCheckCreateReviewBody @CreatedRevBodyCleanup
         Scenario Outline: Verify the user can navigate via the change links and back links
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
                 Then I can see the 'Create_Review_Body_Page'
@@ -233,7 +233,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Continue' button on the 'Create_Review_Body_Page'
                 Then I can see the check and create review body page for '<Add_Review_Body>'
                 And I capture the page screenshot
-                When I click the 'Back' link on the 'Check_Create_Review_Body_Page'
+                When I click the 'Back' button on the 'Check_Create_Review_Body_Page'
                 Then I can see the Add new review body page for '<Add_Review_Body>'
                 And I capture the page screenshot
                 And I fill the new review body page using '<Add_Another_Review_Body>'
@@ -338,9 +338,8 @@ Feature: User Administration: Manage Review Bodies
                 And I search and click on view edit link for the removed user from the review body in the manage user page
                 Then I can see the user profile page of the removed user from the review body
                 Examples:
-                        | Status_Enabled | Status_Disabled |
-                        | Enabled        | Disabled        |
-
+                        | Status_Enabled |
+                        | Enabled        |
 
         @RegressionTestUserListReviewBodyManageUsersLink
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link

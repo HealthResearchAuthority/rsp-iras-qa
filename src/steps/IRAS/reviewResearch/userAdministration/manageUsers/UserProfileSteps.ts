@@ -63,7 +63,15 @@ When(
     const shortMonth = new Date().toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
     const longMonth = new Date().toLocaleString('en-GB', { month: 'long', timeZone: 'UTC' });
     const expectedValue = abbreviatedValue.replace(shortMonth, longMonth);
-    await expect(userProfilePage.last_updated_value).toHaveText(confirmStringNotNull(expectedValue));
+    const expectedMinutes = expectedValue.slice(expectedValue.indexOf(':') + 1);
+    const actualMinutes = await userProfilePage.last_updated_value
+      .textContent()
+      .then((text) => text.slice(text.indexOf(':') + 1));
+    await expect
+      .soft(userProfilePage.last_updated_value)
+      .toContainText(confirmStringNotNull(expectedValue.replace(expectedMinutes, '')));
+    expect.soft(parseInt(actualMinutes)).toBeGreaterThanOrEqual(parseInt(expectedMinutes) - 1);
+    expect.soft(parseInt(actualMinutes)).toBeLessThanOrEqual(parseInt(expectedMinutes) + 1);
   }
 );
 

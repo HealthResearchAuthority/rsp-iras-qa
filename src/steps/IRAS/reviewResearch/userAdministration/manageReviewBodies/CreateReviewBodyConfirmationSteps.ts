@@ -20,6 +20,8 @@ Then(
       createReviewBodyConfirmationPage.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page
         .confirmation_email_note_end;
     await createReviewBodyConfirmationPage.assertOnCreateReviewbodyConfirmationPage();
-    await expect(createReviewBodyConfirmationPage.confirmation_email_note).toHaveText(expectedConfirmationEmailNote);
+    await expect
+      .soft(createReviewBodyConfirmationPage.confirmation_email_note)
+      .toHaveText(expectedConfirmationEmailNote);
   }
 );

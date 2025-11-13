@@ -122,6 +122,11 @@ export default class CreateUserProfilePage {
     this._review_bodies = value;
   }
 
+  //Page Methods
+  async goto() {
+    await this.page.goto('admin/users/createuser');
+  }
+
   async assertOnCreateUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
   }

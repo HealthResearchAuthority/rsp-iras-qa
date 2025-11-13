@@ -253,33 +253,26 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
   ).toBeVisible();
 });
 
-Given(
-  'I click the {string} link on the {string}',
-  async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
-    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
-    const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
-    if (pageKey === 'Progress_Bar') {
-      await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
-    } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
-      await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
-    } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
-      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
-    } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
-      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
-    } else if (linkKey.includes('_Filter_Panel')) {
-      await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
-    } else if (
-      (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
-      linkKey === 'Back_To_Users'
-    ) {
-      await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (noOfLinksFound > 1 && linkKey != 'Back') {
-      await commonItemsPage.govUkLink.getByText(linkValue).first().click();
-    } else {
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
-    }
+Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
+  if (pageKey === 'Progress_Bar') {
+    await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
+  } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
+    await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
+  } else if (linkKey.includes('_Filter_Panel')) {
+    await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
+  } else if (
+    (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
+    linkKey === 'Back_To_Users'
+  ) {
+    await commonItemsPage.govUkLink.getByText(linkValue).click();
+  } else if (noOfLinksFound > 1 && linkKey != 'Back') {
+    await commonItemsPage.govUkLink.getByText(linkValue).first().click();
+  } else {
+    await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
-);
+});
 
 Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
   const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
@@ -828,21 +821,6 @@ When(
   }
 );
 
-When(
-  'I enter the {string} as the search query into the search field',
-  async ({ commonItemsPage }, searchKey: string) => {
-    if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
-      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
-      const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
-      await commonItemsPage.setUserListBeforeSearch(userValues);
-      await commonItemsPage.setSearchKey(searchKey);
-      await commonItemsPage.search_text.fill(searchKey);
-    } else {
-      throw new Error(`There are no items in list to search`);
-    }
-  }
-);
-
 Given(
   'I have navigated to the {string}',
   async (
@@ -853,6 +831,7 @@ Given(
       createApplicationPage,
       systemAdministrationPage,
       manageUsersPage,
+      createUserProfilePage,
       manageReviewBodiesPage,
       userProfilePage,
       reviewBodyProfilePage,
@@ -889,6 +868,10 @@ Given(
       case 'Manage_Users_Page':
         await manageUsersPage.goto();
         await manageUsersPage.assertOnManageUsersPage();
+        break;
+      case 'Create_User_Profile_Page':
+        await createUserProfilePage.goto();
+        await createUserProfilePage.assertOnCreateUserProfilePage();
         break;
       case 'Manage_Review_Bodies_Page':
         await manageReviewBodiesPage.goto();

@@ -20,10 +20,10 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And I select a 'QA Automation' User to View and Edit which is '<Status>'
     Then I can see the user profile page
     And I capture the page screenshot
-    And I click the 'Back' link on the 'User_Profile_Page'
+    And I click the 'Manage_Users_Breadcrumb' link on the 'User_Profile_Page'
     Then I can see the 'Manage_Users_Page'
     And I capture the page screenshot
-    And I click the 'Back' link on the 'Manage_Users_Page'
+    And I click the 'System_Admin_Breadcrumb' link on the 'Manage_Users_Page'
     Then I have navigated to the 'Home_Page'
     And I capture the page screenshot
 
@@ -88,13 +88,18 @@ Feature: User Administration: Manage user profiles, view and edit user profile
   Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
     And I select a 'QA Automation' User to View and Edit which is '<Status>'
     Then I can see the user profile page
+    And I capture the page screenshot
     When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
     Then I can see the edit user profile page
+    And I capture the page screenshot
     And I uncheck the previously selected checkboxes on the edit user profile page for '<Edit_User_Profile>' when the role is selected as study-wide reviewer or team manager or workflow co-ordinator
     And I update user profile with '<Invalid_Data_Edit_User>'
+    And I capture the page screenshot
     And I click the 'Save' button on the 'Edit_User_Profile_Page'
+    And I capture the page screenshot
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Edit_User_Profile_Page'
 
     Examples:
