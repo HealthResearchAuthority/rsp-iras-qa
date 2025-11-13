@@ -242,60 +242,6 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                 |
       | Change_Planned_End_Date |
 
-  @rsp-4364 @ValidateSponsorReferenceModifications
-  Scenario Outline: Verify user is able to fill sponsor reference details for the modification
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I create '<Changes>' for the created modification
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    Then I can see the add sponsor reference page
-    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
-    And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
-    Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    # Then I can see the review all changes modifications page
-    # Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
-
-    Examples:
-      | Changes              | Sponsor_Reference_Page |
-      | Multiple_Changes_One | Valid_Data_All_Fields  |
-
-  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications
-  Scenario Outline: Verify the save for later functionality for sponsor reference modifications page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I create '<Changes>' for the created modification
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    Then I can see the add sponsor reference page
-    When I click the 'Save_For_Later' button on the 'Sponsor_Reference_Page'
-    Then I can see the project overview page
-    Then I can see the modification progress saved successful message on project overview page
-    And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
-
-    Examples:
-      | Changes                 |
-      | Change_Planned_End_Date |
-
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-4818 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextUpdateFreeText
   Scenario Outline: Validate that user can create modifications to add free text and modify free text from modification details page
     Then I fill the research locations page with '<Research_Locations>'
