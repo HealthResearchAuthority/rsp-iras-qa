@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as confirmProjectDetailsPageTestData from '../../../resources/test_data/iras/make_changes/confirm_project_details_data.json';
 
 //Declare Page Objects
-export default class ProjectDetailsIRASPage {
+export default class ConfirmProjectDetailsPage {
   readonly page: Page;
   readonly confirmProjectDetailsPageTestData: typeof confirmProjectDetailsPageTestData;
   readonly pageHeading: Locator;
@@ -37,7 +37,7 @@ export default class ProjectDetailsIRASPage {
   }
 
   //Page Methods
-  async assertOnProjectDetailsIRASPage() {
+  async assertOnConfirmProjectDetailsPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(
       this.page.getByText(this.confirmProjectDetailsPageTestData.Confirm_Project_Details_Page.guidance_text_one)

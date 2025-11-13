@@ -26,7 +26,7 @@ Feature: Post Approval Page
     Scenario Outline: Validate modification status transition from in draft to approved and submitted date field for non reviewable modification
         And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
         And I can see the select area of change page
-        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I validate the project information labels using dataset displayed on modifications page
         And I create '<Changes>' for the created modification
         When I click the 'Save_For_Later' button on the 'Modification_Details_Page'
         Then I can see the project overview page
@@ -37,13 +37,13 @@ Feature: Post Approval Page
         And I capture the page screenshot
         And I click on the modification id hyperlink in the post approval tab
         And I can see the modifications details page
-        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I validate the project information labels using dataset displayed on modifications page
         When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
         Then I can see the add sponsor reference page
         Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
         When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
         Then I can see the review all changes modifications page
-        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I validate the project information labels using dataset displayed on modifications page
         Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
         Then I click the 'Submit_To_Regulator' button on the 'Modification_Sent_To_Sponsor_Page'
         Then I can see the project overview page

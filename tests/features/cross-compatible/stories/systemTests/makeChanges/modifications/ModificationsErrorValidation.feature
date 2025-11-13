@@ -505,7 +505,7 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
       | Correction_Of_Typographical_Errors | WAV_File                         | single invalid   |
       | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
       | Protocol_Non_Substantial_Changes   | JSON_File                        | single invalid   |
-      #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
+  #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
@@ -566,7 +566,7 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     And I capture the page screenshot
     And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
@@ -626,7 +626,7 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     And I capture the page screenshot
     And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
@@ -685,7 +685,7 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     And I capture the page screenshot
     And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
@@ -743,7 +743,7 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
     And I capture the page screenshot
@@ -797,7 +797,7 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
     And I capture the page screenshot
@@ -903,7 +903,7 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
     And I capture the page screenshot
     And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page

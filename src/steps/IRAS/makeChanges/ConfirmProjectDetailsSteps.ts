@@ -5,7 +5,7 @@ import { removeUnwantedWhitespace, confirmStringNotNull } from '../../../utils/U
 const { Then } = createBdd(test);
 
 Then('I can see the confirm project details page', async ({ confirmProjectDetailsPage }) => {
-  await confirmProjectDetailsPage.assertOnProjectDetailsIRASPage();
+  await confirmProjectDetailsPage.assertOnConfirmProjectDetailsPage();
 });
 
 Then(

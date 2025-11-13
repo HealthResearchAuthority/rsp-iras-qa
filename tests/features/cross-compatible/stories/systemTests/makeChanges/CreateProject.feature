@@ -1000,7 +1000,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_All_Fields        |
       | Valid_Data_Title_Empty_Field |
 
-  @rsp-5302 @ValidateConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6183 @KNOWN_DEFECT_RSP-5747
+  @rsp-5302 @ValidateConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6183 @KNOWN_DEFECT_RSP-5747 @fail
   Scenario: Validate confirm project details page and confirm the project journey displays the project titles
     And I capture the page screenshot
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -1044,7 +1044,7 @@ Feature: Create Amendment - Create Project
     And I can see project details along with 'Valid_Data_All_Fields' sponsor organisation and 'Valid_Planned_End_Date' on the project overview page
     And I capture the page screenshot
 
-  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6187
+  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6187 @fail
   Scenario: Validate return to iras id button and back button functionality in confirm project details page
     And I capture the page screenshot
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
