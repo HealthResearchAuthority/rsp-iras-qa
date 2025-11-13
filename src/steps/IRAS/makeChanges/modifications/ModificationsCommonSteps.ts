@@ -524,7 +524,7 @@ Then(
 );
 
 Then(
-  'I validate the status {string} is displayed on modifications page',
+  'I validate the status {string} is displayed on the page',
   async ({ modificationsCommonPage }, statusDataset: string) => {
     const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
     const expectedStatus = dataset.status;
