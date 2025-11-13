@@ -40,7 +40,7 @@
   },
   "Confirm_Project_Details_Page": {
     "Add_Project": "Add project",
-    "Return_to_Iras_Id":"Return to IRAS ID"
+    "Return_to_Iras_Id": "Return to IRAS ID"
   },
   "Project_Details_Title_Page": {
     "Save_Continue": "Save and continue",
@@ -78,6 +78,7 @@
   "Confirmation_Page": {
     "Confirm": "Confirm",
     "Return_To_Project_Overview": "Return to project overview",
+    "Submit_To_Regulator": "Submit to regulator",
     "Delete_Project": "Delete project",
     "Keep_Project": "Keep project",
     "Delete_Modification": "Delete modification",
@@ -169,7 +170,10 @@
   },
   "Post_Approval_Page": {
     "Modification_Id": "Modification ID",
-    "Modification_Type": "Modification type"
+    "Modification_Type": "Modification type",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
   },
   "Project_Documents_Page": {
     "document_type_project_documents": "Document type",
@@ -301,15 +305,19 @@
     "Status": "Status",
     "Last_Logged_In": "Last logged in"
   },
-  "View_Edit_User_Profile_Page": {
-    "Disable_User": "Disable user",
-    "Enable_User": "Enable user"
-  },
   "Complete_Your_Profile_Page": {
     "Save_Continue": "Save and continue"
   },
   "Check_Your_Profile_Page": {
     "Add_Profile": "Add user profile"
+  },
+  "View_Edit_User_Profile_Page": {
+    "Disable_User": "Disable user",
+    "Enable_User": "Enable user"
+  },
+  "Modification_Sent_To_Sponsor_Page": {
+    "Return_To_Project_Overview": "Return to project overview",
+    "Submit_To_Regulator": "Submit to regulator"
   },
   "Edit_Your_Profile_Page": {
     "Save": "Save"
@@ -338,5 +346,8 @@
     "Search": "Search",
     "Advanced_Filters": "Advanced filters",
     "Apply_Filters": "Apply filters"
+  },
+  "IRAS_ID_Error_Page": {
+    "Return_To_IRAS_ID": "Return to IRAS ID"
   }
 }

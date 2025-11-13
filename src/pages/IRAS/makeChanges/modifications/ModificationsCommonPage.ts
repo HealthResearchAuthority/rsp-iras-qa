@@ -4,7 +4,10 @@ import PlannedEndDateChangePage from './PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
-import { confirmStringNotNull, convertDate } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, convertDate, validateDateRange } from '../../../../utils/UtilFunctions';
+import ContactDetailsModificationPage from './ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from './ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from './ProjectPersonnelChangePrincipalInvestigatorPage';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
@@ -35,6 +38,8 @@ export default class ModificationsCommonPage {
   readonly allCategoryValues: Locator;
   readonly allReviewTypeValues: Locator;
   readonly modificationStatusLabel: Locator;
+  readonly modificationRows: Locator;
+  readonly listCell: Locator;
 
   private rankingForChanges: Record<
     string,
@@ -133,6 +138,8 @@ export default class ModificationsCommonPage {
       })
       .locator('[class$="value"]');
     this.changes_free_text_summary_error = this.page.locator('.govuk-error-summary__list');
+    this.modificationRows = this.page.locator('tbody').getByRole('row');
+    this.listCell = this.page.getByRole('cell');
   }
 
   //Getters & Setters for Private Variables
@@ -148,8 +155,8 @@ export default class ModificationsCommonPage {
   async assertOnModificationsPage(dataset: any) {
     const pageHeader = dataset['page_header'];
     const pageComponentLabel = dataset['page_component_label'];
-    await expect(this.pageHeading.getByText(pageHeader)).toBeVisible();
-    await expect(this.page.getByText(pageComponentLabel)).toBeVisible();
+    await expect(this.pageHeading.getByText(pageHeader).first()).toBeVisible();
+    await expect(this.page.getByText(pageComponentLabel).first()).toBeVisible();
   }
   async validatePageHeading(pageHeadingText: any) {
     await expect(this.pageHeading.getByText(pageHeadingText)).toBeVisible();
@@ -168,6 +175,16 @@ export default class ModificationsCommonPage {
     const commonItemsPage = new CommonItemsPage(this.page);
     if (dataset.specific_change_dropdown === 'Change to planned end date') {
       await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Contact details') {
+      await new ContactDetailsModificationPage(this.page).fillContactDetailsModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Change of chief investigator') {
+      await new ProjectPersonnelChangeChiefInvestigatorPage(
+        this.page
+      ).fillPersonnelChangeChiefInvestigatorModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Change of principal investigator') {
+      await new ProjectPersonnelChangePrincipalInvestigatorPage(
+        this.page
+      ).fillPersonnelChangePrincipalInvestigatorModificationsPage(dataset, 'create');
     } else if (
       this.modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset.specific_change_dropdown)
     ) {
@@ -219,9 +236,16 @@ export default class ModificationsCommonPage {
     const changeRankings = ranking[changeName];
     if (changeRankings && changeRankings.length > 0) {
       const { expectedModificationType, expectedCategory, expectedReviewType } = changeRankings[0];
-      expect.soft(actualModificationType).toBe(expectedModificationType);
-      expect.soft(actualCategory).toBe(expectedCategory);
-      expect.soft(actualReviewType).toBe(expectedReviewType);
+      try {
+        expect(actualModificationType).toBe(expectedModificationType);
+        expect(actualCategory).toBe(expectedCategory);
+        expect(actualReviewType).toBe(expectedReviewType);
+      } catch (error) {
+        console.log('Error in Change Name: ' + changeName + error);
+        expect.soft(actualModificationType).toBe(expectedModificationType);
+        expect.soft(actualCategory).toBe(expectedCategory);
+        expect.soft(actualReviewType).toBe(expectedReviewType);
+      }
     } else {
       throw new Error(`No ranking data found for changeName: ${changeName}`);
     }
@@ -435,8 +459,16 @@ export default class ModificationsCommonPage {
     }
     if (affectsNonNhsOnly) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
-    } else if (affectsNhs && requiresResources === 'no') {
+    } else if (
+      affectsNhs &&
+      requiresResources === 'no' &&
+      modificationsCommonPageTestData.Nhs_Resource_Implications.includes(dataset.specific_change_dropdown)
+    ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+    } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_b;
+    } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_a;
     } else if (affectsNhs && requiresResources === 'yes' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'yes' && affectedOrgs === 'all') {
@@ -481,6 +513,8 @@ export default class ModificationsCommonPage {
     const values = Object.values(await this.getrankingForChanges()).flatMap((value) =>
       Array.isArray(value) ? value : [value]
     );
+    let category: null | string;
+    let categoryOrder = [];
     const reviewType = values.some(
       (reviewTypeValue) =>
         reviewTypeValue.expectedReviewType ===
@@ -509,15 +543,24 @@ export default class ModificationsCommonPage {
     } else {
       modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification;
     }
-    const categoryOrder = [
-      this.modificationsCommonPageTestData.Label_Texts.category_a,
-      this.modificationsCommonPageTestData.Label_Texts.category_b,
-      this.modificationsCommonPageTestData.Label_Texts.category_c,
-      this.modificationsCommonPageTestData.Label_Texts.category_n_a,
-    ];
-    const category = categoryOrder.find((categoryValue) =>
-      values.some((value) => value.expectedCategory === categoryValue)
-    );
+    const categories = new Set(values.map((v) => v.expectedCategory));
+    const hasCategoryA = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_a);
+    const hasCategoryB = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_b);
+    const hasCategoryC = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_c);
+    if (hasCategoryB && hasCategoryC && !hasCategoryA) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_b_c;
+    } else {
+      categoryOrder = [
+        this.modificationsCommonPageTestData.Label_Texts.category_a,
+        this.modificationsCommonPageTestData.Label_Texts.category_b,
+        this.modificationsCommonPageTestData.Label_Texts.category_c,
+        this.modificationsCommonPageTestData.Label_Texts.category_new_site,
+        this.modificationsCommonPageTestData.Label_Texts.category_n_a,
+      ];
+      category = categoryOrder.find((categoryValue) =>
+        values.some((value) => value.expectedCategory === categoryValue)
+      );
+    }
     this.setOverallRanking(modificationType, category, reviewType);
   }
 
@@ -713,5 +756,127 @@ export default class ModificationsCommonPage {
       ['statusValue', statusValue],
     ]);
     return modificationMap;
+  }
+
+  async getModificationRowNumberPostApprovalPage(rowNumber?: number): Promise<Map<string, string[]>> {
+    const modificationIdValue: string[] = [];
+    const submittedDateValue: string[] = [];
+    const statusValue: string[] = [];
+    const columnValue = this.tableRows.nth(rowNumber).getByRole('cell');
+    const displayedModificationId = confirmStringNotNull(await columnValue.nth(0).textContent());
+    modificationIdValue.push(displayedModificationId);
+    const displayedSubmittedDate = confirmStringNotNull(await columnValue.nth(4).textContent());
+    submittedDateValue.push(displayedSubmittedDate);
+    const displayedStatus = confirmStringNotNull(await columnValue.nth(5).textContent());
+    statusValue.push(displayedStatus);
+    const modificationMap = new Map([
+      ['modificationIdValue', modificationIdValue],
+      ['submittedDateValue', submittedDateValue],
+      ['statusValue', statusValue],
+    ]);
+    return modificationMap;
+  }
+
+  async validateSearchResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    validateSearch: boolean = true,
+    rowNumber: number = 1
+  ) {
+    const modificationId = await this.getModificationRowNumberPostApprovalPage(rowNumber);
+    const modificationIDActual = modificationId.get('modificationIdValue');
+    if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+      const modificationIdExpected = searchCriteriaDataset['search_input_text'];
+      expect(modificationIDActual.includes(modificationIdExpected));
+    }
+    const hasNextPage =
+      (await commonItemsPage.pagination_next_link.isVisible()) &&
+      !(await commonItemsPage.pagination_next_link.isDisabled());
+    if (hasNextPage) {
+      await commonItemsPage.next_button.click();
+    }
+  }
+
+  async getRowDataAdvancedFiltersSearch(row: any) {
+    return {
+      modificationId: confirmStringNotNull(await row.getByRole('cell').nth(0).textContent()),
+      modificationType: confirmStringNotNull(await row.getByRole('cell').nth(1).textContent()),
+      dateSubmitted: confirmStringNotNull(await row.getByRole('cell').nth(4).textContent()),
+      status: confirmStringNotNull(await row.getByRole('cell').nth(5).textContent()),
+    };
+  }
+
+  async validateResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    filterDataset?: any,
+    validateSearch: boolean = true
+  ) {
+    for (let pageIndex = 1; pageIndex < 2; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
+        const { modificationType, dateSubmitted, status } = await this.getRowDataAdvancedFiltersSearch(row);
+        if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+          this.validateSearchResults(commonItemsPage, searchCriteriaDataset, true, rowIndex);
+        }
+        this.validateFilters(modificationType, dateSubmitted, status, filterDataset);
+      }
+      const hasNextPage =
+        (await commonItemsPage.pagination_next_link.isVisible()) &&
+        !(await commonItemsPage.pagination_next_link.isDisabled());
+      if (hasNextPage) {
+        await commonItemsPage.pagination_next_link.click();
+      }
+    }
+  }
+
+  async validateFilters(
+    modificationTypeActual: string,
+    dateSubmittedActual: string,
+    statusActual: string,
+    filterDataset: any
+  ) {
+    if (!filterDataset) return;
+    const statusExpected = filterDataset['status_radio'];
+    if (statusExpected) {
+      const statusMatches = statusExpected.some((statusLabel: string) =>
+        statusActual.toLowerCase().includes(statusLabel.toLowerCase())
+      );
+      expect.soft(statusMatches).toBeTruthy();
+    }
+    const modificationTypeExpected = filterDataset['modification_type_radio'];
+    if (modificationTypeExpected) {
+      const typeMatches = modificationTypeExpected.some((modificationTypeLabel: string) =>
+        modificationTypeActual.toLowerCase().includes(modificationTypeLabel.toLowerCase())
+      );
+      expect.soft(typeMatches).toBeTruthy();
+    }
+    const hasFromDate =
+      'date_submitted_from_day_text' in filterDataset &&
+      'date_submitted_from_month_dropdown' in filterDataset &&
+      'date_submitted_from_year_text' in filterDataset;
+    const hasToDate =
+      'date_submitted_to_day_text' in filterDataset &&
+      'date_submitted_to_month_dropdown' in filterDataset &&
+      'date_submitted_to_year_text' in filterDataset;
+
+    if (hasFromDate && hasToDate && dateSubmittedActual != null) {
+      const filterFromDate = `${filterDataset['date_submitted_from_day_text']} ${filterDataset['date_submitted_from_month_dropdown']} ${filterDataset['date_submitted_from_year_text']}`;
+      const filterToDate = `${filterDataset['date_submitted_to_day_text']} ${filterDataset['date_submitted_to_month_dropdown']} ${filterDataset['date_submitted_to_year_text']}`;
+      if (filterFromDate !== '' && filterToDate !== '') {
+        await this.validateDateFilter(filterFromDate, filterToDate, dateSubmittedActual);
+      }
+    }
+  }
+
+  async validateDateFilter(filterFromDate: string, filterToDate: string, submittedDateActual: string) {
+    const submittedDateActualOnlyDate = submittedDateActual.substring(0, 11);
+    const isDateSubmittedInDateInValidRange = await validateDateRange(
+      submittedDateActualOnlyDate,
+      filterFromDate,
+      filterToDate
+    );
+    expect(isDateSubmittedInDateInValidRange).toBe(true);
   }
 }

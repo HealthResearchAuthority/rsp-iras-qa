@@ -127,6 +127,9 @@
     "Back": "Back",
     "Project_Documents": "Project documents"
   },
+  "Post_Approval_Page": {
+    "Clear_All_Filters": "Clear all filters"
+  },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
     "Manage_Users": "Manage users",
@@ -268,7 +271,9 @@
     "Back": "Back",
     "Add_User": "Add user"
   },
-  "Check_Add_User_Sponsor_Org_Page": { "Back": "Back" },
+  "Check_Add_User_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
   "Profile_Settings_Page": {
     "One_Login_Account": "One Login account",
     "Change": "Change"
@@ -291,5 +296,13 @@
   },
   "Add_Documents_Details_Page": {
     "Delete": "Delete"
+  },
+  "IRAS_ID_Error_Page": {
+    "Follow_Existing_Processes": "follow existing processes",
+    "HRA_Support_Site": "HRA support site"
+  },
+  "Sponsor_Workspace_Page": {
+    "My_Account": "My account",
+    "Authorisations": "Authorisations"
   }
 }
