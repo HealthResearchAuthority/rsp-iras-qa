@@ -78,10 +78,8 @@ AfterScenario(
     name: 'Remove sponsor organisation from the system',
     tags: '@SetupNewSponsorOrgGoLive',
   },
-  async function ({ manageSponsorOrganisationPage, setupNewSponsorOrganisationPage }) {
-    const usedSponsorOrg =
-      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation
-        .Sponsor_Organisation_Unused.sponsor_organisation_text;
+  async function ({ manageSponsorOrganisationPage, checkSetupSponsorOrganisationPage }) {
+    const usedSponsorOrg = await checkSetupSponsorOrganisationPage.getOrgName();
     const sponsor_id = (
       await manageSponsorOrganisationPage.sqlGetOrganisationIdFromRTSByName(usedSponsorOrg)
     ).toString();
