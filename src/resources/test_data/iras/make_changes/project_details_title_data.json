@@ -231,5 +231,8 @@
     "planned_project_end_day_text": "1",
     "planned_project_end_month_dropdown": "January",
     "planned_project_end_year_text": ""
+  },
+  "Valid_Planned_End_Date": {
+    "planned_project_end_date": "01 January 2030"
   }
 }
