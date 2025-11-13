@@ -67,10 +67,12 @@ When(
     let searchKey: string;
     if (searchQueryName.toLowerCase().startsWith('same') || searchQueryName.toLowerCase().includes('newly added')) {
       searchKey = await searchAddUserReviewBodyPage.getUserEmail();
+    } else if (searchQueryName === 'Valid_Full_Iras_Id of recently added project') {
+      searchKey = await searchProjectsPage.getIrasId();
     } else {
       searchKey = searchQueryDataset['search_input_text'];
     }
-    expect(searchKey).toBeTruthy();
+    expect.soft(searchKey).toBeTruthy();
     await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }

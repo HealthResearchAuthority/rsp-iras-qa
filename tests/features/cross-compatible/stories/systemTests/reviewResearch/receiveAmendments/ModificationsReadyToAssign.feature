@@ -404,7 +404,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     # Need to integrate with modification creation process to have a fresh dataset for assignment
     # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
-    @WFCAssignModificationSWR @rsp-4076 @rsp-4849 @skip
+    @WFCAssignModificationSWR @rsp-4076 @rsp-4849
     Scenario Outline: Validate the workflow co-ordinator can assign a study-wide reviewer to a modification from the modifications ready to assign page
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot

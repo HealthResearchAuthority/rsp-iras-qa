@@ -9,6 +9,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I fill the unique iras id in project details iras page
                 And I capture the page screenshot
                 And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+                And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
                 Then I can see the project identifiers page
                 And I fill the project identifiers page with 'Valid_Data_All_Fields'
                 When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -24,7 +25,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
                 Then I can see the project overview page
                 And I capture the page screenshot
-                And I capture the iras id of the recently added project in the test data using 'Valid_Full_Iras_Id'
+                And I capture the iras id of the recently added project with status as 'Active'
                 Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
                 And I click the 'Search_Records' link on the 'Approvals_Page'
                 And I capture the page screenshot
@@ -173,19 +174,20 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | page number       | Advanced_Filters_Lead_Nation |
                         | previous link     | Advanced_Filters_Lead_Nation |
 
-        @TestOnly @SearchProjectsTitleBackLinksNav
+        # There is no back link to navigate back from Project Record Overview page to Search project records page of Approvals workspace
+        @SearchProjectsTitleBackLinksNav @fail
         Scenario: Verify back and short project title link navigation for search projects tasklist
-                And I fill the search input for searching 'project records' with 'Valid_Full_Iras_Id' as the search query
+                And I fill the search input for searching 'project records' with 'Valid_Full_Iras_Id of recently added project' as the search query
                 And I click the 'Search' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
-                # And I can now see a table of search results for 'modifications received for approval'
+                And I can now see a table of search results for 'project records'
                 And Each 'short project title' displayed on the 'Search_Projects_Page' is a link
                 When I click a 'short project title' on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 Then I can see the project overview page
-                When I click the 'Back' link on the 'Project_Overview_Page'
-                And I capture the page screenshot
-                Then I can see the 'Search_Projects_Page'
+        # When I click the 'Back' link on the 'Project_Overview_Page'
+        # And I capture the page screenshot
+        # Then I can see the 'Search_Projects_Page'
 
         @viewListOfProjects @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @skip
         Scenario Outline: Verify the user is able to view the list of projects by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button

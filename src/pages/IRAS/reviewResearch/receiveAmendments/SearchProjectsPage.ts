@@ -15,6 +15,7 @@ export default class SearchProjectsPage {
   readonly searchProjectsPageTestData: typeof searchProjectsPageTestData;
   readonly linkTextData: typeof linkTextData;
   private _modifications_list_after_search: string[];
+  private _iras_id: string;
   readonly mainPageContent: Locator;
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
@@ -76,6 +77,7 @@ export default class SearchProjectsPage {
     this.page = page;
     this.searchProjectsPageTestData = searchProjectsPageTestData;
     this._modifications_list_after_search = [];
+    this._iras_id = '';
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
@@ -302,6 +304,14 @@ export default class SearchProjectsPage {
     this._modifications_list_after_search = value;
   }
 
+  async getIrasId(): Promise<string> {
+    return this._iras_id;
+  }
+
+  async setIrasId(value: string): Promise<void> {
+    this._iras_id = value;
+  }
+
   //Page Methods
 
   async assertOnSearchProjectsPage() {
@@ -315,10 +325,10 @@ export default class SearchProjectsPage {
     await this.assertOnSearchProjectsPage();
   }
 
-  async saveIrasID(unusedSponsorOrgName: string) {
-    // await this.setUnusedOrgName(unusedSponsorOrgName);
+  async saveIrasID(irasId: string) {
+    await this.setIrasId(irasId);
     const filePath = path.resolve(pathToTestDataJson);
-    await this.updateIrasIdTestDataJson(filePath, unusedSponsorOrgName);
+    await this.updateIrasIdTestDataJson(filePath, irasId);
   }
 
   async updateIrasIdTestDataJson(filePath: string, updateVal: string) {
@@ -328,7 +338,7 @@ export default class SearchProjectsPage {
         data.Search_Queries.Valid_Full_Iras_Id.search_input_text = updateVal;
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {
-        throw new Error(`${error} Error updating unused sponsor organisation name to testdata json file:`);
+        throw new Error(`${error} Error updating iras id to testdata json file:`);
       }
     })();
   }

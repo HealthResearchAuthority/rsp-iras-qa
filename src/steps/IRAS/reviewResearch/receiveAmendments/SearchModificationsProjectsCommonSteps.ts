@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
+import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 Then(
   'I can now see a table of search results for {string}',
@@ -46,13 +47,11 @@ Then(
 );
 
 When(
-  'I capture the iras id of the recently added project in the test data using {string}',
-  async ({ searchProjectsPage }, searchQueryName: string) => {
-    const searchQueryDataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[searchQueryName];
-    for (const key in searchQueryDataset) {
-      if (Object.hasOwn(searchQueryDataset, key)) {
-        await searchProjectsPage.saveIrasID(searchQueryDataset[key]);
-      }
-    }
+  'I capture the iras id of the recently added project with status as {string}',
+  async ({ searchProjectsPage, projectOverviewUnfinishedProjectsPage }, status: string) => {
+    const iIrasIdText = confirmStringNotNull(await projectOverviewUnfinishedProjectsPage.irasid_text.textContent());
+    await searchProjectsPage.saveIrasID(iIrasIdText.replaceAll('IRAS ID: ', ''));
+    const statusText = confirmStringNotNull(await projectOverviewUnfinishedProjectsPage.status_text.textContent());
+    expect.soft(statusText).toBe(status);
   }
 );
