@@ -58,6 +58,24 @@ export default class ModificationReviewChangesPage {
   readonly new_full_project_title_text_row: Locator;
   readonly new_full_project_title_text: Locator;
   readonly new_full_project_title_text_change_link: Locator;
+  readonly select_details_to_change_row: Locator;
+  readonly select_details_to_change_value: Locator;
+  readonly select_details_to_change_change_link: Locator;
+  readonly chief_investigator_email_row: Locator;
+  readonly chief_investigator_email_value: Locator;
+  readonly chief_investigator_email_change_link: Locator;
+  readonly sponsor_contact_email_row: Locator;
+  readonly sponsor_contact_email_value: Locator;
+  readonly sponsor_contact_email_change_link: Locator;
+  readonly name_text_row: Locator;
+  readonly name_text_value: Locator;
+  readonly name_text_change_link: Locator;
+  readonly email_text_row: Locator;
+  readonly email_text_value: Locator;
+  readonly email_text_change_link: Locator;
+  readonly principal_investigator_email_row: Locator;
+  readonly principal_investigator_email_value: Locator;
+  readonly principal_investigator_email_change_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -235,6 +253,41 @@ export default class ModificationReviewChangesPage {
       .locator('..')
       .locator('.govuk-summary-list__value');
     this.new_full_project_title_text_change_link = this.new_full_project_title_text_row.locator('..').getByRole('link');
+    this.select_details_to_change_value = this.select_details_to_change_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.select_details_to_change_change_link = this.select_details_to_change_row.locator('..').getByRole('link');
+    this.chief_investigator_email_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.chief_investigator_email
+    );
+    this.chief_investigator_email_value = this.chief_investigator_email_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.chief_investigator_email_change_link = this.chief_investigator_email_row.locator('..').getByRole('link');
+    this.sponsor_contact_email_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.sponsor_contact_email
+    );
+    this.sponsor_contact_email_value = this.sponsor_contact_email_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.sponsor_contact_email_change_link = this.sponsor_contact_email_row.locator('..').getByRole('link');
+    this.name_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.name_text);
+    this.name_text_value = this.name_text_row.locator('..').locator('.govuk-summary-list__value');
+    this.name_text_change_link = this.name_text_row.locator('..').getByRole('link');
+    this.email_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.email_text, {
+      exact: true,
+    });
+    this.email_text_value = this.email_text_row.locator('..').locator('.govuk-summary-list__value');
+    this.email_text_change_link = this.email_text_row.locator('..').getByRole('link');
+    this.principal_investigator_email_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.principal_investigator_email
+    );
+    this.principal_investigator_email_value = this.principal_investigator_email_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.principal_investigator_email_change_link = this.principal_investigator_email_row
+      .locator('..')
+      .getByRole('link');
   }
 
   //Page Methods
@@ -298,6 +351,24 @@ export default class ModificationReviewChangesPage {
         break;
       case 'new_full_project_title':
         await this.new_full_project_title_text_change_link.click();
+        break;
+      case 'select_details_to_change':
+        await this.select_details_to_change_change_link.click();
+        break;
+      case 'chief_investigator_email':
+        await this.chief_investigator_email_change_link.click();
+        break;
+      case 'sponsor_contact_email':
+        await this.sponsor_contact_email_change_link.click();
+        break;
+      case 'name_text':
+        await this.name_text_change_link.click();
+        break;
+      case 'email_text':
+        await this.email_text_change_link.click();
+        break;
+      case 'principal_investigator_email':
+        await this.principal_investigator_email_change_link.click();
         break;
       default:
         throw new Error(`${changeLink} is not a valid option`);

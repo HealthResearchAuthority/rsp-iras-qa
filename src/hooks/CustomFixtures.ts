@@ -88,6 +88,10 @@ import CheckYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement
 import ProjectIdentificationSelectChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectChangePage';
 import ProjectIdentificationSelectReferenceToChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectReferenceToChangePage';
 import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationEnterReferenceNumbersPage';
+import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangePrincipalInvestigatorPage';
+import SponsorWorkspacePage from '../pages/IRAS/reviewResearch/userAdministration/SponsorWorkspacePage';
 import ConfirmProjectDetailsPage from '../pages/IRAS/makeChanges/ConfirmProjectDetailsPage';
 
 type CustomFixtures = {
@@ -174,10 +178,14 @@ type CustomFixtures = {
   editYourProfilePage: EditYourProfilePage;
   completeYourProfilePage: CompleteYourProfilePage;
   checkYourProfilePage: CheckYourProfilePage;
-  confirmProjectDetailsPage: ConfirmProjectDetailsPage;
   projectIdentificationSelectChangePage: ProjectIdentificationSelectChangePage;
   projectIdentificationSelectReferenceToChangePage: ProjectIdentificationSelectReferenceToChangePage;
   projectIdentificationEnterReferenceNumbersPage: ProjectIdentificationEnterReferenceNumbersPage;
+  contactDetailsModificationPage: ContactDetailsModificationPage;
+  projectPersonnelChangeChiefInvestigatorPage: ProjectPersonnelChangeChiefInvestigatorPage;
+  projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
+  sponsorWorkspacePage: SponsorWorkspacePage;
+  confirmProjectDetailsPage: ConfirmProjectDetailsPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -524,6 +532,22 @@ export const test = base.extend<CustomFixtures>({
     await use(new ProjectIdentificationEnterReferenceNumbersPage(page));
   },
 
+  contactDetailsModificationPage: async ({ page }, use) => {
+    await use(new ContactDetailsModificationPage(page));
+  },
+
+  projectPersonnelChangeChiefInvestigatorPage: async ({ page }, use) => {
+    await use(new ProjectPersonnelChangeChiefInvestigatorPage(page));
+  },
+
+  projectPersonnelChangePrincipalInvestigatorPage: async ({ page }, use) => {
+    await use(new ProjectPersonnelChangePrincipalInvestigatorPage(page));
+  },
+
+  sponsorWorkspacePage: async ({ page }, use) => {
+    await use(new SponsorWorkspacePage(page));
+  },
+
   confirmProjectDetailsPage: async ({ page }, use) => {
     await use(new ConfirmProjectDetailsPage(page));
   },
@@ -532,6 +556,7 @@ export const test = base.extend<CustomFixtures>({
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
   },
+
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {
