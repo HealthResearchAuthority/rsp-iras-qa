@@ -40,6 +40,19 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityConfirmProjectDetails @ApplicantUser
+  Scenario: Confirm Project details
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the confirm project details page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityProjectDetailsTitle @ApplicantUser
   Scenario: Project Details - Short project title and Planned end date
     Given I have navigated to the my research projects page

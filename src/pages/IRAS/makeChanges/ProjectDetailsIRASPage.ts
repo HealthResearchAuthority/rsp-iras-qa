@@ -66,11 +66,7 @@ export default class ProjectDetailsIRASPage {
     return this._full_project_title;
   }
 
-  async getValidIRASAndProjectTitlesFromLegacySharepoint(): Promise<{
-    foundIRASID: string | null;
-    foundShortProjectTitle: string | null;
-    foundFullProjectTitle: string | null;
-  }> {
+  async getValidIRASAndProjectTitlesFromLegacySharepoint() {
     const sharePointDriveId = `${process.env.sharepoint_drive_id}`;
     const csvFilePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_file_path;
     const maxRetries = new CommonItemsPage(this.page).commonTestData.sharepoint_max_retries;

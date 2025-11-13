@@ -298,3 +298,86 @@ Then(
     expect(modificationTableData).not.toContain(modificationIDExpected);
   }
 );
+
+Then(
+  'I can see the iras id and short project title on project overview page',
+  async ({ projectDetailsIRASPage, projectOverviewPage }) => {
+    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_iras_id_label.textContent());
+    const actualIrasIdUpdated = actualIrasId
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.project_iras_id_label, '')
+      .trim();
+    const expectedShortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+    const actualShortProjectTitle = confirmStringNotNull(
+      await projectOverviewPage.project_short_title_label.textContent()
+    );
+    const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
+      actualShortProjectTitle
+        .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label, '')
+        .trim()
+    );
+    expect.soft(actualIrasIdUpdated).toBe(expectedIrasId);
+    expect.soft(actualShortProjectTitleUpdated).toBe(expectedShortProjectTitle);
+  }
+);
+
+Then(
+  'I can see project details along with {string} sponsor organisation and {string} on the project overview page',
+  async (
+    { projectDetailsIRASPage, projectOverviewPage, projectIdentifiersPage, projectDetailsTitlePage },
+    datasetNameSponsorOrg: string,
+    datasetNamePlannedProjectEndDate: string
+  ) => {
+    const datasetSponsorOrg = projectIdentifiersPage.projectIdentifiersPageTestData[datasetNameSponsorOrg];
+    const datasetPlannedProjectEndDate =
+      projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetNamePlannedProjectEndDate];
+
+    const expectedSponsorOrg = datasetSponsorOrg.primary_sponsor_organisation_text;
+    const actualSponsorOrg = confirmStringNotNull(
+      await projectOverviewPage.project_details_tab_primary_sponsor_org.textContent()
+    );
+    const actualSponsorOrgUpdated = actualSponsorOrg
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.primary_sponsor_org_label, '')
+      .trim();
+
+    const expectedPlannedEndDate = datasetPlannedProjectEndDate.planned_project_end_date;
+    const actualPlannedEndDate = confirmStringNotNull(
+      await projectOverviewPage.project_details_tab_planned_project_end_date.textContent()
+    );
+    const actualPlannedEndDateUpdated = actualPlannedEndDate
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.planned_project_end_date_label, '')
+      .trim();
+
+    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_details_tab_iras_id.textContent());
+    const actualIrasIdUpdated = actualIrasId
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.iras_id_label, '')
+      .trim();
+
+    const expectedShortProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
+    const actualShortProjectTitle = confirmStringNotNull(
+      await projectOverviewPage.project_details_tab_short_project_title.textContent()
+    );
+    const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
+      actualShortProjectTitle
+        .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.short_project_title_label, '')
+        .trim()
+    );
+
+    const expectedFullProjectTitle = (await projectDetailsIRASPage.getFullProjectTitle()).trimEnd();
+    const actualFullProjectTitle = confirmStringNotNull(
+      await projectOverviewPage.project_details_tab_full_project_title.textContent()
+    );
+    const actualFullProjectTitleUpdated = await removeUnwantedWhitespace(
+      actualFullProjectTitle
+        .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.full_project_title_label, '')
+        .trim()
+    );
+
+    expect.soft(actualIrasIdUpdated).toBe(expectedIrasId);
+    expect.soft(actualShortProjectTitleUpdated).toBe(expectedShortProjectTitle);
+    expect.soft(actualFullProjectTitleUpdated).toBe(expectedFullProjectTitle);
+    expect.soft(actualSponsorOrgUpdated).toBe(expectedSponsorOrg);
+    expect.soft(actualPlannedEndDateUpdated).toBe(expectedPlannedEndDate);
+  }
+);

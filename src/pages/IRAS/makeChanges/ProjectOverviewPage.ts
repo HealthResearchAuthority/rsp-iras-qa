@@ -12,6 +12,7 @@ export default class ProjectOverviewPage {
   readonly projectStatusTag: Locator;
   readonly project_details_hint_label: Locator;
   readonly project_details_heading: Locator;
+  readonly project_iras_id_label: Locator;
   readonly project_short_title_label: Locator;
   readonly modification_saved_success_message_text: Locator;
   readonly modification_saved_success_message_header_text: Locator;
@@ -58,6 +59,12 @@ export default class ProjectOverviewPage {
   readonly search_project_documents: Locator;
   readonly results_count_project_documents: Locator;
   readonly modification_table_data: Locator;
+  readonly project_details_tab_primary_sponsor_org_label: Locator;
+  readonly project_details_tab_primary_sponsor_org: Locator;
+  readonly project_details_tab_full_project_title_label: Locator;
+  readonly project_details_tab_full_project_title: Locator;
+  readonly project_details_tab_planned_project_end_date_label: Locator;
+  readonly project_details_tab_planned_project_end_date: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -77,7 +84,8 @@ export default class ProjectOverviewPage {
     this.project_details_heading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_heading);
-    this.project_short_title_label = this.page.locator('div[class="govuk-grid-row"] p').nth(1);
+    this.project_iras_id_label = this.page.locator('div[class="govuk-inset-text"] p').nth(0);
+    this.project_short_title_label = this.page.locator('div[class="govuk-inset-text"] p').nth(1);
     this.information_alert_banner = this.page.getByRole('alert');
     this.modification_saved_success_message_header_text = this.page
       .getByTestId('govuk-notification-banner-title')
@@ -113,6 +121,27 @@ export default class ProjectOverviewPage {
       { exact: true }
     );
     this.project_details_tab_short_project_title = this.project_details_tab_short_project_title_label
+      .locator('..')
+      .locator(this.tab_row_value);
+    this.project_details_tab_primary_sponsor_org_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Details_Tab.primary_sponsor_org_label,
+      { exact: true }
+    );
+    this.project_details_tab_primary_sponsor_org = this.project_details_tab_primary_sponsor_org_label
+      .locator('..')
+      .locator(this.tab_row_value);
+    this.project_details_tab_full_project_title_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Details_Tab.full_project_title_label,
+      { exact: true }
+    );
+    this.project_details_tab_full_project_title = this.project_details_tab_full_project_title_label
+      .locator('..')
+      .locator(this.tab_row_value);
+    this.project_details_tab_planned_project_end_date_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Details_Tab.planned_project_end_date_label,
+      { exact: true }
+    );
+    this.project_details_tab_planned_project_end_date = this.project_details_tab_planned_project_end_date_label
       .locator('..')
       .locator(this.tab_row_value);
     this.project_team_tab_chief_investigator_label = this.tab_row_label.getByText(

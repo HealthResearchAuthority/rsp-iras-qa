@@ -6,8 +6,8 @@
     "guidance_text_two": "Selecting 'Add project' will create a record for your project. Any future modifications will then be made using this service."
   },
   "Label_Texts": {
-    "iras_id_title": "IRAS ID",
-    "short_project_title": "Short project title",
-    "full_project_title": "Full project title"
+    "iras_id_label": "IRAS ID",
+    "short_project_label": "Short project title",
+    "full_project_label": "Full project title"
   }
 }

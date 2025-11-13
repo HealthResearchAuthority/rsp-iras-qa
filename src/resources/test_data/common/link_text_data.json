@@ -222,6 +222,9 @@
     "Delete_Modification": "Delete modification",
     "Change": "Change"
   },
+  "Confirm_Project_Details_Page": {
+    "Back": "Back"
+  },
   "Project_Created_Confirmation_Page": {
     "View_Project_Overview": "View project overview"
   },
