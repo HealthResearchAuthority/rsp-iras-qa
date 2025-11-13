@@ -111,7 +111,7 @@ Feature: User Administration: Edit Manage Users
         Then I can see the 'System_Administration_Page'
         And I capture the page screenshot
 
-    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN-DEFECT-RSP-5915
+    @RegressionTestEditUserErrorMessagesInvalidData
     Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Users_Page'

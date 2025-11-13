@@ -289,7 +289,7 @@ Feature: User Administration: Create Manage Users
             | Add_User_Profile                                   |
             | Valid_Data_In_All_Fields_Role_System_Administrator |
 
-    @RegressionTestCreateUserErrorMessagesInvalidData @KNOWN-DEFECT-RSP-5915
+    @RegressionTestCreateUserErrorMessagesInvalidData
     Scenario Outline: Validate relevant error messages are displayed for invalid data entry on the create user profile page
         Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation

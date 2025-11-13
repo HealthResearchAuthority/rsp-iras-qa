@@ -84,7 +84,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | first_name_text | Operations | Enabled | User_First_Name_Text_One |
       | last_name_text  | Operations | Enabled | User_Last_Name_Text_One  |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData @KNOWN-DEFECT-RSP-5915
+  @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
   Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Manage_Users_Page'

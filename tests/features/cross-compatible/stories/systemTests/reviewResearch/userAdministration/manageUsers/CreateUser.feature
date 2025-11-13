@@ -333,7 +333,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Email_Data_Multiple_Sub_Domains |
       | Valid_Email_Data_Domain               |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs @KNOWN-DEFECT-RSP-5915
+  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs
   Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
