@@ -2581,3 +2581,220 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Post_Trial_Information_For_Participants      |
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
+
+  @rsp-5341 @ValidateChangesAndModificationAdditionAndDeletionInStatusIndraft
+  Scenario Outline: Validate changes can be added or removed and modification can be deleted when the modification is in draft status
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I create '<Primary_Change>' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    #remove changes
+    When I click the 'Remove' link on the 'Modification_Details_Page'
+    And I click the 'Remove_Change' button on the 'Confirm_Remove_Modification_Page'
+    And I capture the page screenshot
+    And I can see the modifications details page
+    # delete modification from the modification details page
+    And the 'Delete_Modification' link should be 'available' on the 'Modification_Details_Page'
+    When I click the 'Delete_Modification' link on the 'Modification_Details_Page'
+    And I click the 'Delete_Modification' button on the 'Confirmation_Page'
+    And I validate the delete modification success message
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I validate the deleted modification does not appear in the modification in the post approval tab
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # add changes
+    And I create '<Secondary_Change>' for the created modification
+    When I click the 'Save_For_Later' button on the 'Modification_Details_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
+    Then I can see the modification progress saved successful message on project overview page
+    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
+    Then I validate submitted date field value for 'Modification_Status_Indraft' modifications and confirm 'In draft' status
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    And I can see the modifications details page
+    And I validate the status 'Modification_Status_Indraft' is displayed on the page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes modifications page
+    And I validate the status 'Modification_Status_Indraft' is displayed on the page
+    #delete modification from review all changes page
+    And the 'Delete_Modification' link should be 'available' on the 'Review_All_Changes_Page'
+    When I click the 'Delete_Modification' link on the 'Review_All_Changes_Page'
+    And I click the 'Delete_Modification' button on the 'Confirmation_Page'
+    And I validate the delete modification success message
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I validate the deleted modification does not appear in the modification in the post approval tab
+    And I capture the page screenshot
+
+    Examples:
+      | Primary_Change                           | Secondary_Change                                       |
+      | Change_To_Planned_End_Date               | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
+      | Other_Minor_Change_To_Project_Management | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One     |
+
+  @rsp-5341 @ValidateDocumentsAdditionAndDeletionInStatusIndraft
+  Scenario Outline: Validate the user is able to add and delete documents when the modification is in draft status
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I capture the page screenshot
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the modification progress saved successful message on project overview page
+    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
+    And I click on the modification id hyperlink in the post approval tab
+    And I can see the modifications details page
+    When I click the 'Add_Another_Change' button on the 'Modification_Details_Page'
+    And I can see the select area of change page
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    And I delete the documents one by one from the documents added page of '<Specific_Change>' modifications in reference to the uploaded '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+
+    Examples:
+      | Specific_Change                              | Document_Upload_Files |
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+      | GDPR_Wording                                 | Multiple_Files_Three  |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+
+  @rsp-5341 @ValidateModificationStatusesInDraftAndWithSponsor
+  Scenario Outline: Validate modification status transition from in draft to with sponsor for reviewable and non reviewable modifications
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I create '<Changes>' for the created modification
+    When I click the 'Save_For_Later' button on the 'Modification_Details_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
+    Then I can see the modification progress saved successful message on project overview page
+    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
+    Then I validate submitted date field value for 'Modification_Status_Indraft' modifications and confirm 'In draft' status
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    And I can see the modifications details page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes modifications page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    Then I click the 'Return_To_Project_Overview' button on the 'Modification_Sent_To_Sponsor_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the modification status as 'Modification_Status_With_Sponsor' on the post approval page
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    Then I can see the review all changes modifications page
+    And the 'Delete_Modification' link should be 'not available' on the 'Review_All_Changes_Page'
+    And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
+    And I capture the page screenshot
+
+    Examples:
+      | Changes                                                            |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One             |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two                 |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable |
+
+  @rsp-5341 @ValidateModificationStatusesInDraftAndWithRegulator
+  Scenario Outline: Validate modification status transition from in draft to with regulator for reviewable modification and combination of reviewable non reviewable modifications
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I create '<Changes>' for the created modification
+    When I click the 'Save_For_Later' button on the 'Modification_Details_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
+    Then I can see the modification progress saved successful message on project overview page
+    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
+    Then I validate submitted date field value for 'Modification_Status_Indraft' modifications and confirm 'In draft' status
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    And I can see the modifications details page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes modifications page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    Then I click the 'Submit_To_Regulator' button on the 'Modification_Sent_To_Sponsor_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the modification status as 'Modification_Status_With_Regulator' on the post approval page
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    Then I can see the review all changes modifications page
+    And the 'Delete_Modification' link should be 'not available' on the 'Review_All_Changes_Page'
+    And I validate the status 'Modification_Status_With_Regulator' is displayed on the page
+    And I capture the page screenshot
+
+    Examples:
+      | Changes                                                            |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two                 |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable |
