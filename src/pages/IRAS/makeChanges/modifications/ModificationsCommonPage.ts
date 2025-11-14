@@ -469,6 +469,11 @@ export default class ModificationsCommonPage {
       modificationsCommonPageTestData.Nhs_Resource_Implications.includes(dataset.specific_change_dropdown)
     ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+    } else if (
+      affectsNhs &&
+      modificationsCommonPageTestData.Ranking_Category.nhs_always_c.includes(dataset.specific_change_dropdown)
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_c;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {
@@ -482,7 +487,6 @@ export default class ModificationsCommonPage {
     }
     return category;
   }
-
   async getModificationCategoryForNonApplicability(changeDataset, researchLocationDataset: any): Promise<string> {
     let category: string | undefined;
     if (modificationsCommonPageTestData.Non_Applicability_Changes.includes(changeDataset.specific_change_dropdown)) {
