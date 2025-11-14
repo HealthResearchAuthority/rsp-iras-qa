@@ -271,6 +271,25 @@ Then(
 );
 
 Then(
+  'I validate the change details are displayed as per the {string} dataset under the tabs sections',
+  async ({ modificationsCommonPage }, datasetName) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeNames = Object.keys(changesDataset).reverse();
+    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
+      const changeName = changeNames[changeIndex];
+      const expectedData = changesDataset[changeName];
+      const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
+      const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
+        cardTitle,
+        cardTitle,
+        expectedData
+      );
+      validateCardData(expectedData, actualData.cardData);
+    }
+  }
+);
+
+Then(
   'I validate sponsor details are displayed with {string}',
   async ({ modificationsCommonPage, sponsorReferencePage, reviewAllChangesPage }, datasetName) => {
     const expectedData = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
@@ -279,7 +298,7 @@ Then(
       reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
       expectedData
     );
-    validateCardData(Object.keys(expectedData), actualData.cardData);
+    validateCardData(expectedData, actualData.cardData);
   }
 );
 

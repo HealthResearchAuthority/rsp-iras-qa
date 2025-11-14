@@ -305,5 +305,9 @@
   "Sponsor_Workspace_Page": {
     "My_Account": "My account",
     "Authorisations": "Authorisations"
+  },
+  "Sponsor_Check_And_Authorise_Page": {
+    "Sponsor_Details": "Sponsor details",
+    "Modification_Details": "Modification details"
   }
 }

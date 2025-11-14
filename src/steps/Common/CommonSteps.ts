@@ -275,6 +275,11 @@ Given(
       await commonItemsPage.govUkLink.getByText(linkValue).click();
     } else if (noOfLinksFound > 1 && linkKey != 'Back') {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
+    } else if (
+      pageKey === 'Sponsor_Check_And_Authorise_Page' &&
+      (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details')
+    ) {
+      await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
@@ -697,6 +702,7 @@ When(
       checkAddUserSponsorOrganisationPage,
       manageSponsorOrganisationPage,
       loginPage,
+      modificationsCommonPage,
     },
     inputType: string
   ) => {
@@ -734,6 +740,9 @@ When(
         break;
       case 'automation sponsor email':
         searchValue = loginPage.loginPageTestData.Sponsor_User.username;
+        break;
+      case 'modification id':
+        searchValue = await modificationsCommonPage.getModificationID();
         break;
       default:
         searchValue = inputType;

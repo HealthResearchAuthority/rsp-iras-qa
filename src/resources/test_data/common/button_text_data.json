@@ -347,5 +347,11 @@
   },
   "IRAS_ID_Error_Page": {
     "Return_To_IRAS_ID": "Return to IRAS ID"
+  },
+  "Sponsor_Authorisations_Page": {
+    "Search": "Search"
+  },
+  "Sponsor_Check_And_Authorise_Page": {
+    "Confirm_Selection": "Confirm selection"
   }
 }
