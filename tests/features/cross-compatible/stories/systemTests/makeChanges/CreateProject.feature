@@ -19,6 +19,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     When I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I capture the page screenshot
 
@@ -33,6 +34,7 @@ Feature: Create Amendment - Create Project
     And I fill the project details iras page with '<Project_Details_IRAS>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
     And I capture the page screenshot
 
@@ -107,6 +109,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     When I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I can see the project details title page
     Then I can see the '<Validation_Text>' ui labels on the project details title page
     And I validate the planned project end date '<Dropdown_Values>'
@@ -141,6 +144,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -168,6 +172,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill todays date for planned project end date in project details title page
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -184,6 +189,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I can see the project details title page
     And I cannot see a '<Navigation_Link>' link on the 'Project_Details_Title_Page'
     And I capture the page screenshot
@@ -215,6 +221,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -265,6 +272,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I can see the chief investigator page
@@ -309,6 +317,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I can see the chief investigator page
@@ -327,6 +336,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
@@ -362,6 +372,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -381,6 +392,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -399,6 +411,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -610,6 +623,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -672,6 +686,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -722,6 +737,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -784,6 +800,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -982,3 +999,71 @@ Feature: Create Amendment - Create Project
       | Project_Details_Title        |
       | Valid_Data_All_Fields        |
       | Valid_Data_Title_Empty_Field |
+
+  @rsp-5302 @ValidateConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6183 @KNOWN_DEFECT_RSP-5747 @fail
+  Scenario: Validate confirm project details page and confirm the project journey displays the project titles
+    And I capture the page screenshot
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
+    And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I can see the project details iras page
+    And I capture the page screenshot
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the confirm project details page
+    And I confirm the values displayed in the confirm project details page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I capture the page screenshot
+    Then I can see the project details title page
+    Then I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I capture the page screenshot
+    Then I can see the chief investigator page
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I can see the research locations page
+    And I capture the page screenshot
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I capture the page screenshot
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of 'Valid_Data_All_Fields' page 'Valid_Data_All_Fields' page 'Valid_Data_All_Fields' and 'Valid_Data_All_Fields' page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    And I capture the page screenshot
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
+    And I can see the iras id and short project title on project overview page
+    And I can see project details along with 'Valid_Data_All_Fields' sponsor organisation and 'Valid_Planned_End_Date' on the project overview page
+    And I capture the page screenshot
+
+  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6187 @fail
+  Scenario: Validate return to iras id button and back button functionality in confirm project details page
+    And I capture the page screenshot
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
+    And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I can see the project details iras page
+    And I capture the page screenshot
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the confirm project details page
+    And I confirm the values displayed in the confirm project details page
+    And I capture the page screenshot
+    And I click the 'Return_to_Iras_Id' button on the 'Confirm_Project_Details_Page'
+    And I can see the project details iras page
+    And I capture the page screenshot
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the confirm project details page
+    And I click the 'Back' link on the 'Confirm_Project_Details_Page'
+    And I capture the page screenshot
+    And I can see the project details iras page

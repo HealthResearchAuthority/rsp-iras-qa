@@ -1,9 +1,9 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace, getRandomNumber } from '../../../utils/UtilFunctions';
 import { Locator } from '@playwright/test';
-
-const { Then } = createBdd(test);
+import path from 'node:path';
+const { When, Then } = createBdd(test);
 
 Then('I can see the project overview page', async ({ projectOverviewPage }) => {
   await projectOverviewPage.assertOnProjectOverviewPage();
@@ -296,5 +296,195 @@ Then(
     const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
     const modificationIDExpected = irasIDExpected + '/' + 1;
     expect(modificationTableData).not.toContain(modificationIDExpected);
+  }
+);
+
+When(
+  'I click a {string} on the project overview page and validate the downlaoded file in the download folder',
+  async ({ page, commonItemsPage, projectOverviewPage }, fieldName: string) => {
+    const downloadPath = path.resolve(process.env.HOME || process.env.USERPROFILE || '', 'Downloads');
+    const columnIndex = await projectOverviewPage.getProjectColumnIndex(fieldName);
+    const rowCount = await commonItemsPage.tableBodyRows.count();
+    const testNum = await getRandomNumber(0, rowCount - 1);
+    const fieldLocator = commonItemsPage.tableBodyRows
+      .nth(testNum)
+      .getByRole('cell')
+      .nth(columnIndex)
+      .getByRole('link');
+    const actualFileNameArray = await fieldLocator.allTextContents();
+    const actualFileName = actualFileNameArray[0].trim();
+    const [download] = await Promise.all([page.waitForEvent('download'), fieldLocator.click()]);
+    const suggestedFileName = download.suggestedFilename();
+    const filePath = path.join(downloadPath, suggestedFileName);
+    await download.saveAs(filePath);
+    const expectedFileName = path.basename(filePath);
+    expect.soft(actualFileName).toBe(expectedFileName);
+  }
+);
+
+When(
+  'I enter values in the {string} of the post approval page',
+  async ({ projectOverviewPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = projectOverviewPage.projectOverviewPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key.includes('date')) {
+          if (!(await projectOverviewPage.date_submitted_from_day_text.isVisible())) {
+            await projectOverviewPage.date_submitted_from_day_text_chevron.click();
+          }
+          await commonItemsPage.fillUIComponent(dataset, key, projectOverviewPage);
+        } else {
+          await projectOverviewPage[key + '_chevron'].click();
+          await commonItemsPage.fillUIComponent(dataset, key, projectOverviewPage);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I can see the results matching the search {string} and filter criteria {string} for post approval page',
+  async (
+    { projectOverviewPage, modificationsCommonPage, commonItemsPage },
+    searchDatasetName: string,
+    filterDatasetName: string
+  ) => {
+    const searchCriteriaDataset =
+      projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchDatasetName];
+    const filterDataset = projectOverviewPage.projectOverviewPageTestData.Advanced_Filters[filterDatasetName];
+    let validateSearch = false;
+    if (searchDatasetName !== 'Empty_Search_Data') {
+      validateSearch = true;
+    }
+    await modificationsCommonPage.validateResults(
+      commonItemsPage,
+      searchCriteriaDataset,
+      filterDataset,
+      validateSearch
+    );
+  }
+);
+
+Then(
+  'I can now see the table of modifications contains the expected search results for {string}',
+  async ({ projectOverviewPage, modificationsCommonPage, commonItemsPage }, searchDatasetName: string) => {
+    const searchDataset =
+      projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchDatasetName];
+    if (searchDatasetName === 'Full_Modification_ID') {
+      const modificationIDExpected = await modificationsCommonPage.getModificationID();
+      const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+      const modificationIDActual = modificationRecord.get('modificationIdValue');
+      expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
+    } else {
+      await modificationsCommonPage.validateResults(commonItemsPage, searchDataset, true);
+    }
+  }
+);
+
+Then(
+  'I enter {string} into the search field for post approval page',
+  async ({ projectOverviewPage, modificationsCommonPage, commonItemsPage }, searchDatasetName: string) => {
+    const dataset = projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchDatasetName];
+    if (searchDatasetName === 'Full_Modification_ID') {
+      const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+      const modificationIds = modificationRecord.get('modificationIdValue');
+      const searchKey: string = modificationIds && modificationIds.length > 0 ? modificationIds[0] : '';
+      await modificationsCommonPage.setModificationID(modificationIds[0]);
+      expect(searchKey).toBeTruthy();
+      await commonItemsPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey);
+    } else {
+      await commonItemsPage.search_text.fill(dataset['search_input_text']);
+    }
+  }
+);
+
+When('I open each of the advanced filters in post approval page', async ({ projectOverviewPage, commonItemsPage }) => {
+  const expectedFilterHeadings = projectOverviewPage.projectOverviewPageTestData.Post_Approval_Page.filter_headings;
+  for (const heading of expectedFilterHeadings) {
+    await commonItemsPage.advanced_filter_headings.getByText(heading, { exact: true }).click();
+  }
+});
+
+Then(
+  'I can see the iras id and short project title on project overview page',
+  async ({ projectDetailsIRASPage, projectOverviewPage }) => {
+    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_iras_id_label.textContent());
+    const actualIrasIdUpdated = actualIrasId
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.project_iras_id_label, '')
+      .trim();
+    const expectedShortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+    const actualShortProjectTitle = confirmStringNotNull(
+      await projectOverviewPage.project_short_title_label.textContent()
+    );
+    const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
+      actualShortProjectTitle
+        .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label, '')
+        .trim()
+    );
+    expect.soft(actualIrasIdUpdated).toBe(expectedIrasId);
+    expect.soft(actualShortProjectTitleUpdated).toBe(expectedShortProjectTitle);
+  }
+);
+
+Then(
+  'I can see project details along with {string} sponsor organisation and {string} on the project overview page',
+  async (
+    { projectDetailsIRASPage, projectOverviewPage, projectIdentifiersPage, projectDetailsTitlePage },
+    datasetNameSponsorOrg: string,
+    datasetNamePlannedProjectEndDate: string
+  ) => {
+    const datasetSponsorOrg = projectIdentifiersPage.projectIdentifiersPageTestData[datasetNameSponsorOrg];
+    const datasetPlannedProjectEndDate =
+      projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetNamePlannedProjectEndDate];
+
+    const expectedSponsorOrg = datasetSponsorOrg.primary_sponsor_organisation_text;
+    const actualSponsorOrg = confirmStringNotNull(
+      await projectOverviewPage.project_details_tab_primary_sponsor_org.textContent()
+    );
+    const actualSponsorOrgUpdated = actualSponsorOrg
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.primary_sponsor_org_label, '')
+      .trim();
+
+    const expectedPlannedEndDate = datasetPlannedProjectEndDate.planned_project_end_date;
+    const actualPlannedEndDate = confirmStringNotNull(
+      await projectOverviewPage.project_details_tab_planned_project_end_date.textContent()
+    );
+    const actualPlannedEndDateUpdated = actualPlannedEndDate
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.planned_project_end_date_label, '')
+      .trim();
+
+    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_details_tab_iras_id.textContent());
+    const actualIrasIdUpdated = actualIrasId
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.iras_id_label, '')
+      .trim();
+
+    const expectedShortProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
+    const actualShortProjectTitle = confirmStringNotNull(
+      await projectOverviewPage.project_details_tab_short_project_title.textContent()
+    );
+    const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
+      actualShortProjectTitle
+        .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.short_project_title_label, '')
+        .trim()
+    );
+
+    const expectedFullProjectTitle = (await projectDetailsIRASPage.getFullProjectTitle()).trimEnd();
+    const actualFullProjectTitle = confirmStringNotNull(
+      await projectOverviewPage.project_details_tab_full_project_title.textContent()
+    );
+    const actualFullProjectTitleUpdated = await removeUnwantedWhitespace(
+      actualFullProjectTitle
+        .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.full_project_title_label, '')
+        .trim()
+    );
+
+    expect.soft(actualIrasIdUpdated).toBe(expectedIrasId);
+    expect.soft(actualShortProjectTitleUpdated).toBe(expectedShortProjectTitle);
+    expect.soft(actualFullProjectTitleUpdated).toBe(expectedFullProjectTitle);
+    expect.soft(actualSponsorOrgUpdated).toBe(expectedSponsorOrg);
+    expect.soft(actualPlannedEndDateUpdated).toBe(expectedPlannedEndDate);
   }
 );

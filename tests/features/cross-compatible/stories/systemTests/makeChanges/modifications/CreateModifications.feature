@@ -1,5 +1,6 @@
 @ApplicantUser @createModifications @SystemTest @jsEnabled
 Feature: Create Modification- This feature file help an applicant to complete the modification journey and can sent to sponsor
+Feature: Create Modification- This feature file help an applicant to complete the modification journey and can sent to sponsor
 
   Background:
     Given I have navigated to the my research projects page
@@ -36,12 +37,12 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
@@ -49,7 +50,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And the 'Change' link should be 'available' on the 'Review_All_Changes_Page'
     And the 'Delete_Modification' link should be 'available' on the 'Review_All_Changes_Page'
     And the now sent to sponsor heading and hint text should be 'available' on the review all changes page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -93,17 +94,17 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -137,17 +138,17 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -155,14 +156,14 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I modify the current changes with '<New_Changes>' for the created modification
     And I capture the page screenshot
     Then I can see the review all changes modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the change details are displayed as per the '<New_Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I modify the current sponsor details with 'Valid_Data_All_Fields_Changes' for the created modification
     And I capture the page screenshot
     Then I can see the review all changes modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields_Changes'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
@@ -187,8 +188,8 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Changes                           | New_Changes                              | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408
-  Scenario Outline: Validate that user can create modifications to add free text for reviewable modifications
+  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408_5408
+  Scenario Outline: Validate that user can create and submit reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -205,7 +206,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate all fields on modification page '<Changes>'
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
@@ -216,7 +217,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I capture the page screenshot
     Then I can see the review all changes page
     And I validate the change details are displayed as per the '<Changes>' dataset
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
@@ -263,7 +264,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I can see the modifications details page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I validate all fields on modification page '<Changes>'
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
@@ -306,7 +307,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496
-  Scenario Outline: Validate that user can create modifications to add free text for reviewable and non reviewable modifications
+  Scenario Outline: Validate that user can create modifications for reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -323,7 +324,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate all fields on modification page '<Changes>'
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
@@ -333,7 +334,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -367,7 +368,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
     And I click the 'Delete_Modification' link on the 'Modification_Details_Page'
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate all field values on delete modification confirmation screen
     And I capture the page screenshot
     And I click the 'Delete_Modification' button on the 'Confirmation_Page'
