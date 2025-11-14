@@ -16,6 +16,8 @@
     "category_a": "A",
     "category_b": "B",
     "category_c": "C",
+    "category_b_c": "B/C",
+    "category_new_site": "New site",
     "review_type_review_required": "Review required",
     "review_type_no_review_required": "No review required",
     "changes_free_textbox_label": "Enter details here describing this change",

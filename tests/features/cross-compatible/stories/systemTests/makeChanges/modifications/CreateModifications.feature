@@ -1,6 +1,5 @@
 @ApplicantUser @createModifications @SystemTest @jsEnabled
 Feature: Create Modification- This feature file help an applicant to complete the modification journey and can sent to sponsor
-Feature: Create Modification- This feature file help an applicant to complete the modification journey and can sent to sponsor
 
   Background:
     Given I have navigated to the my research projects page
