@@ -1151,135 +1151,29 @@
       "change_status": "Change ready for submission"
     }
   },
-  "Participating_Organisation_One_non_reviewable": {
-    "Early_Closure_Or_Withdrawal_Of_Research_Sites_One": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Early closure or withdrawal of research sites",
-      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "will_some_or_all_organisations_be_affected_question_radio": "All",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-      "change_status": "Change ready for submission"
-    },
-    "Early_Closure_Or_Withdrawal_Of_Research_Sites_Two": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Early closure or withdrawal of research sites",
-      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "will_some_or_all_organisations_be_affected_question_radio": "Some",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-      "change_status": "Change ready for submission"
-    },
-    "Early_Closure_Or_Withdrawal_Of_Research_Sites_Three": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Early closure or withdrawal of research sites",
-      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
-      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
-      "change_status": "Change ready for submission"
+  "Contact_Details_Chief_Investigator": {
+    "Contact_Details_Chief_Investigator": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Chief investigator",
+      "chief_investigator_email_text": "ci_test_modified@test.com"
     }
   },
-  "Participating_Organisations_Changes_Bulk_Free_Text_Reviewable_Set": {
-    "Addition_Of_New_Participating_Organisation_Type_one": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Addition of new participating organisation type",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
-      "will_some_or_all_organisations_be_affected_question_radio": "Some",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
-      "change_status": "Change ready for submission"
-    },
-    "Addition_Of_New_Participating_Organisation_Type_two": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Addition of new participating organisation type",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
-      "will_some_or_all_organisations_be_affected_question_radio": "All",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
-      "change_status": "Change ready for submission"
-    },
-    "Addition_Of_New_Participating_Organisation_Type_three": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Addition of new participating organisation type",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
-      "where_organisation_change_affect_non_nhs_question_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "change_status": "Change ready for submission"
-    },
-    "Change_To_Activities_Undertaken_By_An_Existing_Participating_Organisation_Type_One": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Change to activities undertaken by an existing participating organisation type",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
-      "will_some_or_all_organisations_be_affected_question_radio": "Some",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
-      "change_status": "Change ready for submission"
-    },
-    "Change_To_Activities_Undertaken_By_An_Existing_Participating_Organisation_Type_Two": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Change to activities undertaken by an existing participating organisation type",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
-      "will_some_or_all_organisations_be_affected_question_radio": "All",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
-      "change_status": "Change ready for submission"
-    },
-    "Change_To_Activities_Undertaken_By_An_Existing_Participating_Organisation_Type_Three": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Change to activities undertaken by an existing participating organisation type",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
-      "where_organisation_change_affect_non_nhs_question_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "change_status": "Change ready for submission"
-    },
-    "Other_Change_To_Participating_Organisations_One": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Other change to participating organisations",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
-      "will_some_or_all_organisations_be_affected_question_radio": "Some",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
-      "change_status": "Change ready for submission"
-    },
-    "Other_Change_To_Participating_Organisations_Two": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Other change to participating organisations",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
-      "will_some_or_all_organisations_be_affected_question_radio": "All",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
-      "change_status": "Change ready for submission"
-    },
-    "Other_Change_To_Participating_Organisations_Three": {
-      "area_of_change_dropdown": "Participating organisations",
-      "specific_change_dropdown": "Other change to participating organisations",
-      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
-      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
-      "where_organisation_change_affect_non_nhs_question_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "change_status": "Change ready for submission"
+  "Contact_Details_Sponsor_Contact": {
+    "Contact_Details_Sponsor_Contact": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Sponsor contact",
+      "sponsor_contact_email_text": "sponsor_test_modified@test.com"
+    }
+  },
+  "Contact_Details_Other": {
+    "Contact_Details_Other": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Other",
+      "contact_name_text": "New modified contact name",
+      "contact_email_text": "other_contact_test_modified@test.com"
     }
   }
 }
