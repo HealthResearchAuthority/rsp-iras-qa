@@ -78,11 +78,7 @@
     "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
     "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
     "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
-    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
-    "Early closure or withdrawal of research sites",
-    "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
-    "PICs - Early closure or withdrawal of Participant Identification Centres",
-    "Addition of sites undertaking the same activities as existing sites"
+    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
   ],
   "Modifications_To_Add_Administrative_Details": ["Project identification"],
   "Applicability_Changes": [
