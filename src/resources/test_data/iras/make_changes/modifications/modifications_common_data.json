@@ -26,7 +26,8 @@
     "changes_label": "Changes",
     "change_label": "Change",
     "change_ready_for_submission_status_label": "Change ready for submission",
-    "current_chief_investigator_email_label": "Current chief investigator email:"
+    "current_chief_investigator_email_label": "Current chief investigator email:",
+    "dateCreated": "Date created"
   },
   "Modification_Change_Question_Label_Texts": {
     "planned_project_end_date_label": "Change to planned end date",
@@ -1030,6 +1031,18 @@
   },
   "Modification_Status_Approved": {
     "status": "Approved"
+  },
+  "Modification_Status_With_Sponsor": {
+    "status": "With sponsor"
+  },
+  "Modification_Status_Authorised": {
+    "status": "Authorised"
+  },
+  "Modification_Status_Not_Authorised": {
+    "status": "Not authorised"
+  },
+"Modification_Status_With_Regulator": {
+    "status": "With review body"
   },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
     "Other_Minor_Change_To_Participant_Procedures": {

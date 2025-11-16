@@ -85,22 +85,22 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset under the tabs sections
     And I capture the page screenshot
-    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
+    And I validate confirmation screen for modification not authorised by sponsor
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    And I can see the searched modification to be present in the list with 'Authorised' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id from sponsor authorisations page
     And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
-    And I validate the status 'Modification_Status_With_Regulator' is displayed on the page
+    And I validate the status 'Modification_Status_Not_Authorised' is displayed on the page
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -170,22 +170,22 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset under the tabs sections
     And I capture the page screenshot
-    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate confirmation screen for modification has been authorised by sponsor and approved
+    And I validate confirmation screen for modification not authorised by sponsor
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    And I can see the searched modification to be present in the list with 'Authorised' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id from sponsor authorisations page
     And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
-    And I validate the status 'Modification_Status_Approved' is displayed on the page
+    And I validate the status 'Modification_Status_Not_Authorised' is displayed on the page
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -254,22 +254,22 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset under the tabs sections
     And I capture the page screenshot
-    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
+    And I validate confirmation screen for modification not authorised by sponsor
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    And I can see the searched modification to be present in the list with 'Authorised' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id from sponsor authorisations page
     And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
-    And I validate the status 'Modification_Status_With_Regulator' is displayed on the page
+    And I validate the status 'Modification_Status_Not_Authorised' is displayed on the page
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot

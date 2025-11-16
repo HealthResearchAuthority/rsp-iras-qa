@@ -36,12 +36,6 @@ Then(
     const modificationIDActual = confirmStringNotNull(
       await modificationsCommonPage.modification_id_value.textContent()
     );
-    if (await modificationsCommonPage.status_value.isVisible()) {
-      const statusActual = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
-      expect
-        .soft(statusActual)
-        .toBe(modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.draft_status_value);
-    }
     expect.soft(irasIDActual).toBe(irasIDExpected);
     expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
@@ -539,7 +533,7 @@ Then(
 );
 
 Then(
-  'I validate the status {string} is displayed on modifications page',
+  'I validate the status {string} is displayed on the page',
   async ({ modificationsCommonPage }, statusDataset: string) => {
     const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
     const expectedStatus = dataset.status;

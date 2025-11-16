@@ -8,21 +8,17 @@ Then('I can see the sponsor check and authorise page', async ({ sponsorCheckAndA
 });
 
 Then(
-  'I validate the date created and status in sponsor check and authorise page',
-  async ({ sponsorCheckAndAuthorisePage, sponsorAuthorisationsPage }) => {
+  'I validate the date created for modification in sponsor check and authorise page',
+  async ({ modificationsCommonPage }) => {
     const dateCreatedExpected = new Date().toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
     });
-    const statusExpected =
-      sponsorAuthorisationsPage.sponsorAuthorisationsPageTestData.Sponsor_Authorisations_Page.withSponsorStatus;
     const dateCreatedActual = await removeUnwantedWhitespace(
-      await sponsorCheckAndAuthorisePage.dateCreatedValue.textContent()
+      await modificationsCommonPage.dateCreatedValue.textContent()
     );
-    const statusActual = await removeUnwantedWhitespace(await sponsorCheckAndAuthorisePage.statusValue.textContent());
     expect.soft(dateCreatedActual).toBe(dateCreatedExpected);
-    expect.soft(statusActual).toBe(statusExpected);
   }
 );
 

@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as sponsorAuthorisationsPageTestData from '../../../resources/test_data/iras/make_changes/sponsor_authorisations_page_data.json';
 import CommonItemsPage from '../../Common/CommonItemsPage';
+import ModificationsCommonPage from './modifications/ModificationsCommonPage';
 
 //Declare Page Objects
 export default class SponsorAuthorisationsPage {
@@ -27,48 +28,67 @@ export default class SponsorAuthorisationsPage {
   }
 
   async getModificationStatusForSponsor(status: string) {
+    const modificationsCommonPage = new ModificationsCommonPage(this.page);
     if (status.toLowerCase() == 'with sponsor') {
-      return this.sponsorAuthorisationsPageTestData.Sponsor_Authorisations_Page.withSponsorStatus;
-    } else if (status.toLowerCase() == 'with review body') {
-      return this.sponsorAuthorisationsPageTestData.Sponsor_Authorisations_Page.withReviewBodyStatus;
+      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
+    } else if (status.toLowerCase() == 'authorised') {
+      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Authorised.status;
     } else if (status.toLowerCase() == 'not authorised') {
-      return this.sponsorAuthorisationsPageTestData.Sponsor_Authorisations_Page.notAuthorisedStatus;
+      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Not_Authorised.status;
     }
   }
 
-  async findmodification(
+  async findModification(
     commonItemsPage: CommonItemsPage,
     modificationID: string,
-    modificationStatusForSponsor?: string
+    options?: {
+      statusForSponsor?: string;
+      dateActionedSponsor?: string;
+    }
   ) {
     let hasNextPage = true;
     while (hasNextPage) {
       const rows = await commonItemsPage.tableBodyRows.all();
       for (const row of rows) {
-        const match = await this.isMatchingRow(commonItemsPage, row, modificationID, modificationStatusForSponsor);
-        if (match) {
-          return row;
-        }
+        const match =
+          (options?.statusForSponsor &&
+            (await this.isMatchingRowForStatus(commonItemsPage, row, modificationID, options.statusForSponsor))) ||
+          (options?.dateActionedSponsor &&
+            (await this.isMatchingRowForDateActioned(
+              commonItemsPage,
+              row,
+              modificationID,
+              options.dateActionedSponsor
+            )));
+        if (match) return row;
       }
       hasNextPage = await commonItemsPage.shouldGoToNextPage();
-      if (hasNextPage) {
-        await commonItemsPage.goToNextPage();
-      }
+      if (hasNextPage) await commonItemsPage.goToNextPage();
     }
-    throw new Error(`No matching record found`);
+    expect.soft(false, `No matching record found for modificationID: ${modificationID}`).toBe(true);
   }
 
-  async isMatchingRow(
+  async isMatchingRowForStatus(
     commonItemsPage: CommonItemsPage,
     row: any,
     modificationID: string,
-    modificationStatusForSponsor?: string
+    statusForSponsor?: string
   ): Promise<boolean> {
-    const columns = await row.locator(this.tableCell);
+    const columns = row.locator(this.tableCell);
     const idText = (await columns.nth(0).innerText()).trim();
     const statusText = (await columns.nth(5).innerText()).trim();
-    const idMatch = idText === modificationID;
-    const statusMatch = modificationStatusForSponsor ? statusText === modificationStatusForSponsor : true;
-    return idMatch && statusMatch;
+    return idText === modificationID && (statusForSponsor ? statusText === statusForSponsor : true);
+  }
+
+  async isMatchingRowForDateActioned(
+    commonItemsPage: CommonItemsPage,
+    row: any,
+    modificationID: string,
+    dateActionedSponsor?: string
+  ): Promise<boolean> {
+    const columns = row.locator(this.tableCell);
+    const idText = (await columns.nth(0).innerText()).trim();
+    const dateActioned = (await columns.nth(2).innerText()).trim();
+    return idText === modificationID && (dateActionedSponsor ? dateActioned === dateActionedSponsor : true);
   }
 }

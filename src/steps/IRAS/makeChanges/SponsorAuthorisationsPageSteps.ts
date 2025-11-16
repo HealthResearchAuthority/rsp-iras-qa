@@ -12,13 +12,28 @@ Then(
   async ({ sponsorAuthorisationsPage, modificationsCommonPage, commonItemsPage }, status: string) => {
     const modificationStatusForSponsor = await sponsorAuthorisationsPage.getModificationStatusForSponsor(status);
     const modificationID = await modificationsCommonPage.getModificationID();
-    const foundRecords = await sponsorAuthorisationsPage.findmodification(
-      commonItemsPage,
-      modificationID,
-      modificationStatusForSponsor
-    );
-    expect(foundRecords).toBeDefined();
-    expect(foundRecords).toHaveCount(1);
+    const foundRecords = await sponsorAuthorisationsPage.findModification(commonItemsPage, modificationID, {
+      statusForSponsor: modificationStatusForSponsor,
+    });
+    expect.soft(foundRecords).toBeDefined();
+    expect.soft(foundRecords).toHaveCount(1);
+  }
+);
+
+Then(
+  'I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page',
+  async ({ sponsorAuthorisationsPage, modificationsCommonPage, commonItemsPage }) => {
+    const dateActionedBySponsor = new Date().toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+    const modificationID = await modificationsCommonPage.getModificationID();
+    const foundRecords = await sponsorAuthorisationsPage.findModification(commonItemsPage, modificationID, {
+      dateActionedSponsor: dateActionedBySponsor,
+    });
+    expect.soft(foundRecords).toBeDefined();
+    expect.soft(foundRecords).toHaveCount(1);
   }
 );
 

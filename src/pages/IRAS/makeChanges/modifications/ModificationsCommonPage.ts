@@ -40,6 +40,7 @@ export default class ModificationsCommonPage {
   readonly modificationStatusLabel: Locator;
   readonly modificationRows: Locator;
   readonly listCell: Locator;
+  readonly dateCreatedValue: Locator;
 
   private rankingForChanges: Record<
     string,
@@ -140,6 +141,11 @@ export default class ModificationsCommonPage {
     this.changes_free_text_summary_error = this.page.locator('.govuk-error-summary__list');
     this.modificationRows = this.page.locator('tbody').getByRole('row');
     this.listCell = this.page.getByRole('cell');
+    this.dateCreatedValue = this.page
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
+      .locator('..')
+      .locator('[class$="value"]');
   }
 
   //Getters & Setters for Private Variables

@@ -7,8 +7,6 @@ export default class SponsorCheckAndAuthorisePage {
   readonly sponsorCheckAndAuthorisePageTestData: typeof sponsorCheckAndAuthorisePageTestData;
   readonly mainPageContent: Locator;
   readonly pageHeading: Locator;
-  readonly dateCreatedValue: Locator;
-  readonly statusValue: Locator;
   readonly outcomeBodyLabel: Locator;
   readonly outcome_selection_radio: Locator;
 
@@ -22,16 +20,6 @@ export default class SponsorCheckAndAuthorisePage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.sponsorCheckAndAuthorisePageTestData.Sponsor_Check_And_Authorise_Page.pageHeading);
-    this.dateCreatedValue = this.page
-      .locator('[class$="key"]')
-      .getByText(this.sponsorCheckAndAuthorisePageTestData.Sponsor_Check_And_Authorise_Page.dateCreated)
-      .locator('..')
-      .locator('[class$="value"]');
-    this.statusValue = this.page
-      .locator('[class$="key"]')
-      .getByText(this.sponsorCheckAndAuthorisePageTestData.Sponsor_Check_And_Authorise_Page.status)
-      .locator('..')
-      .locator('[class$="value"]');
     this.outcomeBodyLabel = this.page
       .getByText(this.sponsorCheckAndAuthorisePageTestData.Sponsor_Check_And_Authorise_Page.outcomeHeading, {
         exact: true,

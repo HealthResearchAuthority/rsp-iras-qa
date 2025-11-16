@@ -1,8 +1,5 @@
 {
   "Sponsor_Authorisations_Page": {
-    "pageHeading": "Authorisations",
-    "withSponsorStatus": "With sponsor",
-    "withReviewBodyStatus": "With review body",
-    "notAuthorisedStatus": "Not authorised"
+    "pageHeading": "Authorisations"
   }
 }
