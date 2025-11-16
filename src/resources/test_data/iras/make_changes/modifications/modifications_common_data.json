@@ -112,11 +112,7 @@
     "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
     "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
     "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
-    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
-    "Early closure or withdrawal of research sites",
-    "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
-    "PICs - Early closure or withdrawal of Participant Identification Centres",
-    "Addition of sites undertaking the same activities as existing sites"
+    "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
   ],
   "Non_Applicability_Changes": [
     "Chief investigator: conflict of interest",
@@ -229,11 +225,7 @@
       "Project identification",
       "Contact details",
       "Change of chief investigator",
-      "Change of principal investigator",
-      "Early closure or withdrawal of research sites",
-      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
-      "PICs - Early closure or withdrawal of Participant Identification Centres",
-      "Addition of sites undertaking the same activities as existing sites"
+      "Change of principal investigator"
     ]
   },
   "Ranking_Modification_Type": {
@@ -243,8 +235,7 @@
       "Change of sponsor’s legal representative",
       "Project identification",
       "Contact details",
-      "Change of principal investigator",
-      "Addition of sites undertaking the same activities as existing sites"
+      "Change of principal investigator"
     ],
     "Minor_Modifications": [
       "Other significant change to participant procedures",
@@ -274,10 +265,7 @@
       "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
       "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
       "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
-      "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
-      "Early closure or withdrawal of research sites",
-      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
-      "PICs - Early closure or withdrawal of Participant Identification Centres"
+      "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated"
     ],
     "Non_Notifiable_Modifications": [
       "Changes to the research team",
@@ -1149,31 +1137,6 @@
         "Wales"
       ],
       "change_status": "Change ready for submission"
-    }
-  },
-  "Contact_Details_Chief_Investigator": {
-    "Contact_Details_Chief_Investigator": {
-      "area_of_change_dropdown": "Administrative details for the project",
-      "specific_change_dropdown": "Contact details",
-      "select_contact_details_to_change_radio": "Chief investigator",
-      "chief_investigator_email_text": "ci_test_modified@test.com"
-    }
-  },
-  "Contact_Details_Sponsor_Contact": {
-    "Contact_Details_Sponsor_Contact": {
-      "area_of_change_dropdown": "Administrative details for the project",
-      "specific_change_dropdown": "Contact details",
-      "select_contact_details_to_change_radio": "Sponsor contact",
-      "sponsor_contact_email_text": "sponsor_test_modified@test.com"
-    }
-  },
-  "Contact_Details_Other": {
-    "Contact_Details_Other": {
-      "area_of_change_dropdown": "Administrative details for the project",
-      "specific_change_dropdown": "Contact details",
-      "select_contact_details_to_change_radio": "Other",
-      "contact_name_text": "New modified contact name",
-      "contact_email_text": "other_contact_test_modified@test.com"
     }
   }
 }
