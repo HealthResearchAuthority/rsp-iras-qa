@@ -29,13 +29,13 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
 
                 Examples:
-                        | Sort_Button | Sort_Field |
-                        # | Modification_Id     | modification id     |
-                        # | Short_Project_Title | short project title |
-                        # | Modification_Type   | modification type   |
-                        # | Chief_Investigator  | chief investigator  |
-                        # | Lead_Nation         | lead nation         |
-                        | Status      | status     |
+                        | Sort_Button         | Sort_Field          |
+                        | Modification_Id     | modification id     |
+                        | Short_Project_Title | short project title |
+                        | Modification_Type   | modification type   |
+                        | Chief_Investigator  | chief investigator  |
+                        | Lead_Nation         | lead nation         |
+                        | Status              | status              |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
