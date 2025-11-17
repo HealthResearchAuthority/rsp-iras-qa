@@ -91,6 +91,8 @@ import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeCh
 import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/ContactDetailsModificationPage';
 import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangeChiefInvestigatorPage';
 import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangePrincipalInvestigatorPage';
+import SponsorWorkspacePage from '../pages/IRAS/reviewResearch/userAdministration/SponsorWorkspacePage';
+import ConfirmProjectDetailsPage from '../pages/IRAS/makeChanges/ConfirmProjectDetailsPage';
 import ChooseARecordTypeToSearchPage from '../pages/IRAS/reviewResearch/approvals/ChooseARecordTypeToSearchPage';
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
 import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchProjectsPage';
@@ -185,6 +187,8 @@ type CustomFixtures = {
   contactDetailsModificationPage: ContactDetailsModificationPage;
   projectPersonnelChangeChiefInvestigatorPage: ProjectPersonnelChangeChiefInvestigatorPage;
   projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
+  sponsorWorkspacePage: SponsorWorkspacePage;
+  confirmProjectDetailsPage: ConfirmProjectDetailsPage;
   chooseARecordTypeToSearchPage: ChooseARecordTypeToSearchPage;
   teamManagerDashboardPage: TeamManagerDashboardPage;
   searchProjectsPage: SearchProjectsPage;
@@ -543,6 +547,14 @@ export const test = base.extend<CustomFixtures>({
 
   projectPersonnelChangePrincipalInvestigatorPage: async ({ page }, use) => {
     await use(new ProjectPersonnelChangePrincipalInvestigatorPage(page));
+  },
+
+  sponsorWorkspacePage: async ({ page }, use) => {
+    await use(new SponsorWorkspacePage(page));
+  },
+
+  confirmProjectDetailsPage: async ({ page }, use) => {
+    await use(new ConfirmProjectDetailsPage(page));
   },
 
   chooseARecordTypeToSearchPage: async ({ page }, use) => {

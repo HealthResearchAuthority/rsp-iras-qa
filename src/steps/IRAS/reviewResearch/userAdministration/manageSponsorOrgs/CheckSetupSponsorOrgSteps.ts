@@ -19,3 +19,12 @@ Then(
     );
   }
 );
+
+Then(
+  'I keep note of the organisation name for sponsor organisation setup',
+  async ({ checkSetupSponsorOrganisationPage }) => {
+    await checkSetupSponsorOrganisationPage.setOrgName(
+      confirmStringNotNull(await checkSetupSponsorOrganisationPage.organisation_name_value.textContent())
+    );
+  }
+);

@@ -721,6 +721,7 @@ When(
       checkSetupSponsorOrganisationPage,
       checkAddUserSponsorOrganisationPage,
       manageSponsorOrganisationPage,
+      loginPage,
     },
     inputType: string
   ) => {
@@ -755,6 +756,9 @@ When(
         break;
       case 'email of the newly added user in the selected sponsor organisation':
         searchValue = await checkAddUserSponsorOrganisationPage.getUserEmail();
+        break;
+      case 'automation sponsor email':
+        searchValue = loginPage.loginPageTestData.Sponsor_User.username;
         break;
       default:
         searchValue = inputType;
