@@ -1134,30 +1134,5 @@
       ],
       "change_status": "Change ready for submission"
     }
-  },
-  "Contact_Details_Chief_Investigator": {
-    "Contact_Details_Chief_Investigator": {
-      "area_of_change_dropdown": "Administrative details for the project",
-      "specific_change_dropdown": "Contact details",
-      "select_contact_details_to_change_radio": "Chief investigator",
-      "chief_investigator_email_text": "ci_test_modified@test.com"
-    }
-  },
-  "Contact_Details_Sponsor_Contact": {
-    "Contact_Details_Sponsor_Contact": {
-      "area_of_change_dropdown": "Administrative details for the project",
-      "specific_change_dropdown": "Contact details",
-      "select_contact_details_to_change_radio": "Sponsor contact",
-      "sponsor_contact_email_text": "sponsor_test_modified@test.com"
-    }
-  },
-  "Contact_Details_Other": {
-    "Contact_Details_Other": {
-      "area_of_change_dropdown": "Administrative details for the project",
-      "specific_change_dropdown": "Contact details",
-      "select_contact_details_to_change_radio": "Other",
-      "contact_name_text": "New modified contact name",
-      "contact_email_text": "other_contact_test_modified@test.com"
-    }
   }
 }

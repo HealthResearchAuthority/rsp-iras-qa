@@ -14,6 +14,8 @@ export default class ReviewYourAnswersPage {
   readonly iras_id_text: Locator;
   readonly short_project_title_row: Locator;
   readonly short_project_title_text: Locator;
+  readonly full_project_title_row: Locator;
+  readonly full_project_title_text: Locator;
   readonly short_project_title_change_link: Locator;
   readonly short_project_title_enter_link: Locator;
   readonly planned_project_end_date_row: Locator;
@@ -69,6 +71,10 @@ export default class ReviewYourAnswersPage {
       has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.short_project_label),
     });
     this.short_project_title_text = this.short_project_title_row.getByRole('definition').first();
+    this.full_project_title_row = this.list_row.filter({
+      has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.full_project_label),
+    });
+    this.full_project_title_text = this.full_project_title_row.getByRole('definition').first();
     this.short_project_title_change_link = this.short_project_title_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
