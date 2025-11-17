@@ -205,7 +205,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
-    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate the project information labels using dataset displayed on modifications page
     And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
@@ -300,7 +300,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the modification page matching with the specific change using '<Changes>' dataset
     And I capture the page screenshot
-    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate the project information labels using dataset displayed on modifications page
     And I click the 'Save_For_Later' button on the 'Modification_Enter_Free_Text_Page'
     Then I can see the project overview page
     And I capture the page screenshot
@@ -337,19 +337,19 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     Then I can see the project identification select change modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I fill the project identification select change modification page using '<Valid_Data_Change>' dataset
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Project_Identification_Select_Change_Page'
     Then I can see the project identification select reference modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I fill the project identification select reference modification page using '<Valid_Data_Change>' dataset
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Project_Identification_SelectReference_To_Change_Page'
     Then I can see the project identification enter reference modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I fill the project identification enter reference modification page using '<Valid_Data_Change>' dataset
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
@@ -358,7 +358,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Review_Changes_Planned_End_Date_Page'
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
@@ -405,7 +405,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the project identification select change modification page
     And I capture the page screenshot
-    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate the project information labels using dataset displayed on modifications page
     And I click the 'Save_For_Later' button on the 'Project_Identification_Select_Change_Page'
     Then I can see the project overview page
     And I capture the page screenshot
@@ -439,7 +439,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
     Then I can see the project identification enter reference modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     When I click the 'Save_For_Later' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     Then I can see the project overview page
     And I capture the page screenshot
@@ -473,11 +473,11 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
     Then I can see the project identification select reference modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I fill the project identification select reference modification page using '<Changes>' dataset
     When I click the 'Save_Continue' button on the 'Project_Identification_SelectReference_To_Change_Page'
     Then I can see the project identification enter reference modification page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I can validate the ui labels on project identification enter reference numbers page using '<Label_Text_Data>' dataset
     When I click the 'Save_For_Later' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     Then I can see the project overview page
@@ -507,7 +507,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
-    And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the ui labels for planned project end date page in modifications using '<Current_Planned_End_Date>' dataset
 
     Examples:
@@ -598,7 +598,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Modifications_Page'
     And I capture the page screenshot
     Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
-    And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the ui labels for which organisation this change affect page in modifications
 
     Examples:
@@ -706,7 +706,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Selection_Page'
     Then I can see the change planned end date affected organisation questions page
     And I capture the page screenshot
-    And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the ui labels using '<Label_Text_Affected_Org_Questions>' on affected organisation questions page
 
     Examples:
@@ -790,7 +790,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
     And I can see the modification review changes page
     And I capture the page screenshot
-    And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
     # Save and continue will be covered in future story rsp-4271
 
@@ -1080,7 +1080,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the ui labels on modification details page using 'Modification_Details_Label_Texts'
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
@@ -1110,7 +1110,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the modification unfinished error page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
     When I click the 'Return_To_Modification_Details' button on the 'Modification_Unfinished_Error_Page'
     Then I can see the modifications details page
@@ -1140,7 +1140,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     When I click the 'Remove' link on the 'Modification_Details_Page'
     Then I can see the confirm remove modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
     And I click the 'Remove_Change' button on the 'Confirm_Remove_Modification_Page'
     And I capture the page screenshot
@@ -1463,7 +1463,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
     And I capture the page screenshot
     And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
@@ -1516,7 +1516,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
     And I capture the page screenshot
     And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
@@ -1570,7 +1570,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
     And I capture the page screenshot
     And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
@@ -1630,7 +1630,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
     And I capture the page screenshot
     And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
@@ -1692,7 +1692,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
     And I capture the page screenshot
@@ -1755,7 +1755,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
     And I capture the page screenshot
@@ -1806,13 +1806,13 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the add documents for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the ui labels for add documents modifications page
     Then I upload 'PNG_File' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I can see the review uploaded documents for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
 
     Examples:
       | Specific_Change                              |
@@ -1987,7 +1987,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
@@ -2085,7 +2085,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I can see the 'Contact_Details_Select_Change_Page' page for modifications
     And I capture the page screenshot
-    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Modifications_Page'
     Then I can see the project overview page
@@ -2248,7 +2248,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I can see the 'Project_Personnel_Select_Change_Page' page for modifications
     And I capture the page screenshot
-    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Modifications_Page'
     Then I can see the project overview page
@@ -2400,7 +2400,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
     And I capture the page screenshot
-    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Modifications_Page'
     Then I can see the project overview page

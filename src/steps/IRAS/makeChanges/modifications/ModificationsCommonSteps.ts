@@ -24,14 +24,10 @@ Then(
 );
 
 Then(
-  'I validate the project information labels using {string} dataset displayed on modifications page',
-  async (
-    { modificationsCommonPage, projectDetailsIRASPage, projectDetailsTitlePage },
-    projectTitleDatasetName: string
-  ) => {
+  'I validate the project information labels using dataset displayed on modifications page',
+  async ({ modificationsCommonPage, projectDetailsIRASPage }) => {
     const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
-    const shortProjectTitleExpected =
-      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
+    const shortProjectTitleExpected = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const modificationIDExpected = irasIDExpected + '/' + 1;
     const irasIDActual = await modificationsCommonPage.iras_id_value.textContent();
     const shortProjectTitleActual = confirmStringNotNull(
