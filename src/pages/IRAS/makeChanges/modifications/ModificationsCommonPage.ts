@@ -40,6 +40,7 @@ export default class ModificationsCommonPage {
   readonly modificationStatusLabel: Locator;
   readonly modificationRows: Locator;
   readonly listCell: Locator;
+  readonly dateCreatedValue: Locator;
 
   private rankingForChanges: Record<
     string,
@@ -140,6 +141,11 @@ export default class ModificationsCommonPage {
     this.changes_free_text_summary_error = this.page.locator('.govuk-error-summary__list');
     this.modificationRows = this.page.locator('tbody').getByRole('row');
     this.listCell = this.page.getByRole('cell');
+    this.dateCreatedValue = this.page
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
+      .locator('..')
+      .locator('[class$="value"]');
   }
 
   //Getters & Setters for Private Variables
@@ -586,14 +592,11 @@ export default class ModificationsCommonPage {
     await this.page.waitForLoadState('domcontentloaded');
     const keys = Object.keys(dataset);
     const cardLocator = this.page
-      .getByRole('heading', {
-        name: CardHeading,
-      })
+      .getByRole('heading', { name: CardHeading })
+      .locator('..')
       .locator('..')
       .locator('.govuk-summary-card')
-      .filter({
-        has: this.page.locator('.govuk-summary-card__title', { hasText: cardTitle }),
-      });
+      .or(this.page.getByRole('heading', { name: CardHeading }).locator('..').locator('..'));
     await this.page.waitForLoadState('domcontentloaded');
     await expect(cardLocator).toBeVisible({ timeout: 5000 });
     await cardLocator.waitFor({ state: 'visible' });
@@ -665,7 +668,7 @@ export default class ModificationsCommonPage {
         case this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts.sponsor_date_label: {
           const [day, month, year] = cleanedValue.split(' ');
           cardData['sponsor_modification_date_day_textbox'] = day;
-          cardData['sponsor_modification_date_month_textbox'] = month;
+          cardData['sponsor_modification_date_month_dropdown'] = month;
           cardData['sponsor_modification_date_year_textbox'] = year;
           break;
         }

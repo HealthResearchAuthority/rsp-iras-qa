@@ -26,7 +26,8 @@
     "changes_label": "Changes",
     "change_label": "Change",
     "change_ready_for_submission_status_label": "Change ready for submission",
-    "current_chief_investigator_email_label": "Current chief investigator email:"
+    "current_chief_investigator_email_label": "Current chief investigator email:",
+    "dateCreated": "Date created"
   },
   "Ranking_Category": {
     "always_n_a": [
@@ -1102,11 +1103,20 @@
   "Modification_Status_Approved": {
     "status": "Approved"
   },
+  "Modification_Status_Not_Approved": {
+    "status": "Not approved"
+  },
   "Modification_Status_With_Sponsor": {
     "status": "With sponsor"
   },
   "Modification_Status_With_Review_Body": {
     "status": "With review body"
+  },
+  "Modification_Status_Authorised": {
+    "status": "Authorised"
+  },
+  "Modification_Status_Not_Authorised": {
+    "status": "Not authorised"
   },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
     "Other_Minor_Change_To_Participant_Procedures": {

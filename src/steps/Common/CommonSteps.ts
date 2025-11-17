@@ -690,6 +690,7 @@ When(
       checkAddUserSponsorOrganisationPage,
       manageSponsorOrganisationPage,
       loginPage,
+      modificationsCommonPage,
     },
     inputType: string
   ) => {
@@ -727,6 +728,9 @@ When(
         break;
       case 'automation sponsor email':
         searchValue = loginPage.loginPageTestData.Sponsor_User.username;
+        break;
+      case 'modification id':
+        searchValue = await modificationsCommonPage.getModificationID();
         break;
       default:
         searchValue = inputType;

@@ -77,6 +77,21 @@
     "short_project_title_label": "Short project title",
     "confirmation_body": "Deleting a project cannot be undone."
   },
+  "Modification_Authorised_Submitted_Review": {
+    "page_heading": "The modification has been authorised and submitted for review",
+    "what_happens_next_label": "What happens next",
+    "confirmation_body": "The modification has been authorised, submitted and is awaiting approval."
+  },
+  "Modification_Authorised_Approved": {
+    "page_heading": "Modification authorised and approved",
+    "what_happens_next_label": "What happens next",
+    "confirmation_body": "The modification has been authorised, submitted and approved. No further review or approval is needed."
+  },
+  "Modification_Not_Authorised": {
+    "page_heading": "Modification not authorised",
+    "what_happens_next_label": "What happens next",
+    "confirmation_body": "The modification has been recorded as not authorised. If the modification is still required the researcher will need to create a new modification."
+  },
   "add_remove_user_review_Body_confirmation_success_header_label": "User has been successfully",
   "enable_disable_confirmation_header_label": "Confirm that you want to",
   "disable_success_confirmation_header_label": "successfully disabled",
