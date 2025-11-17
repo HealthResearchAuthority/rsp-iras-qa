@@ -2785,12 +2785,12 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
-    Then I can see the modification status as 'Modification_Status_With_Regulator' on the post approval page
+    Then I can see the modification status as 'Modification_Status_With_Review_Body' on the post approval page
     And I capture the page screenshot
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the review all changes modifications page
     And the 'Delete_Modification' link should be 'not available' on the 'Review_All_Changes_Page'
-    And I validate the status 'Modification_Status_With_Regulator' is displayed on the page
+    And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
     And I capture the page screenshot
 
     Examples:
