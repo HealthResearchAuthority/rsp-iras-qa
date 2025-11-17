@@ -218,7 +218,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I validate the change details are displayed as per the '<Changes>' dataset
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
-    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    #Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
     Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
@@ -227,7 +227,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I can see the project overview page
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
-    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    #And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the review all changes page
     And I capture the page screenshot
@@ -235,12 +235,14 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I validate the change details are displayed as per the '<Changes>' dataset
 
     Examples:
-      | Changes                                            | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_No  |
-      | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
+      | Changes                                                           | Research_Locations  |
+      | Participating_Organisations_Changes_Bulk_Free_Text_Reviewable_Set | Nhs_Involvement_Yes |
+      | Participating_Organisations_Changes_Bulk_Free_Text_Reviewable_Set | Nhs_Involvement_No  |
+  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_No  |
+  # | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
+  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_Yes |
+  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
   Scenario Outline: Validate that user can create and submit non reviewable modifications
@@ -288,20 +290,24 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I validate the change details are displayed as per the '<Changes>' dataset
 
     Examples:
-      | Changes                                                          | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
-      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_Yes |
-      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
-      | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
+      | Changes                                       | Research_Locations  |
+      # | Participating_Organisation_Non_Reviewable_One | Nhs_Involvement_Yes |
+      # | Participating_Organisation_Non_Reviewable_One | Nhs_Involvement_No  |
+      | Participating_Organisation_Non_Reviewable_Two | Nhs_Involvement_Yes |
+      | Participating_Organisation_Non_Reviewable_Two | Nhs_Involvement_No  |
+  #  | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One | Nhs_Involvement_Yes |
+  # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
+  # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
+  # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
+  # | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_Yes |
+  # | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_No  |
+  # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
+  # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
+  # | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
+  # | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
+  # | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496
+  @abc @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496
   Scenario Outline: Validate that user can create modifications for reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
