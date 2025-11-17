@@ -443,38 +443,40 @@ export default class ModificationsCommonPage {
     return modificationType;
   }
 
-  async getModificationCategoryForApplicability(dataset: any): Promise<string | undefined> {
-    const { specific_change_dropdown, which_organisation_change_affect_checkbox } = dataset;
-    const { Ranking_Category, Nhs_Resource_Implications, Label_Texts } = this.modificationsCommonPageTestData;
-
-    const isRankingCategoryAlwaysNa = Ranking_Category.always_n_a.includes(specific_change_dropdown);
-    const affectsNhs = which_organisation_change_affect_checkbox.some(
+  async getModificationCategoryForApplicability(dataset: any): Promise<string> {
+    let category: string | undefined;
+    let requiresResources: string | undefined;
+    let affectedOrgs: string | undefined;
+    const affectsNonNhsOnly =
+      dataset.which_organisation_change_affect_checkbox.some((item: string) => item.toLowerCase() === 'non-nhs/hsc') &&
+      dataset.which_organisation_change_affect_checkbox.length === 1;
+    const affectsNhs = dataset.which_organisation_change_affect_checkbox.some(
       (item: string) => item.toLowerCase() === 'nhs/hsc'
     );
-    const affectsNonNhsOnly =
-      which_organisation_change_affect_checkbox.length === 1 &&
-      which_organisation_change_affect_checkbox[0].toLowerCase() === 'non-nhs/hsc';
-
-    if (affectsNonNhsOnly || isRankingCategoryAlwaysNa) {
-      return Label_Texts.category_n_a;
+    if (affectsNhs) {
+      requiresResources = dataset.will_nhs_hsc_organisations_require_additional_resources_question_radio.toLowerCase();
+      affectedOrgs = dataset.will_some_or_all_organisations_be_affected_question_radio.toLowerCase();
     }
-    if (!affectsNhs) return undefined;
-    const requiresResources =
-      dataset.will_nhs_hsc_organisations_require_additional_resources_question_radio.toLowerCase();
-    const affectedOrgs = dataset.will_some_or_all_organisations_be_affected_question_radio.toLowerCase();
-    if (Ranking_Category.nhs_always_c.includes(specific_change_dropdown)) {
-      return Label_Texts.category_c;
+    if (affectsNonNhsOnly) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
+    } else if (
+      affectsNhs &&
+      requiresResources === 'no' &&
+      modificationsCommonPageTestData.Nhs_Resource_Implications.includes(dataset.specific_change_dropdown)
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+    } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_b;
+    } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_a;
+    } else if (affectsNhs && requiresResources === 'yes' && affectedOrgs === 'some') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_b;
+    } else if (affectsNhs && requiresResources === 'yes' && affectedOrgs === 'all') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_a;
+    } else {
+      category = undefined;
     }
-    if (requiresResources === 'no') {
-      if (Nhs_Resource_Implications.includes(specific_change_dropdown)) return Label_Texts.category_c;
-      if (affectedOrgs === 'some') return Label_Texts.category_b;
-      if (affectedOrgs === 'all') return Label_Texts.category_a;
-    }
-    if (requiresResources === 'yes') {
-      if (affectedOrgs === 'some') return Label_Texts.category_b;
-      if (affectedOrgs === 'all') return Label_Texts.category_a;
-    }
-    return undefined;
+    return category;
   }
 
   async getModificationCategoryForNonApplicability(changeDataset, researchLocationDataset: any): Promise<string> {
