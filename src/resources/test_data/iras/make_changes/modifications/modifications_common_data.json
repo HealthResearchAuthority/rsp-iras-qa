@@ -1034,8 +1034,8 @@
   "Modification_Status_With_Sponsor": {
     "status": "With sponsor"
   },
-  "Modification_Status_With_Regulator": {
-    "status": "With regulator"
+  "Modification_Status_With_Review_Body": {
+    "status": "With review body"
   },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
     "Other_Minor_Change_To_Participant_Procedures": {
