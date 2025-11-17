@@ -37,6 +37,7 @@ Feature: Receive Amendments: Search Modifications
                         | Modification_Type   | modification type   |
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
+                        | Status              | status              |
 
         @RegressionSearchModificationsAdvancedFilters @rsp-4011
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
