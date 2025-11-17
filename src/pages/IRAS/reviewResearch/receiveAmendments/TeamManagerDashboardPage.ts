@@ -1,6 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as teamManagerDashboardPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/team_manager_dashboard_page_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
+import { connect } from '../../../../utils/DbConfig';
+import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
 
 //Declare Page Objects
 export default class TeamManagerDashboardPage {
@@ -126,5 +128,27 @@ export default class TeamManagerDashboardPage {
   async assertOnTeamManagerDashboardPage() {
     await expect(this.page_heading).toBeVisible();
     expect.soft(await this.page.title()).toBe(this.teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page.title);
+  }
+
+  async sqlGetModificationByLeadNation(lead_nation: string) {
+    const option = 'project_record_answer_option_lead_nation_' + lead_nation.toLowerCase();
+    const leadNationOption = teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page[option];
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(`
+SELECT NationQuery.ModificationIdentifier, ProjectRecordAnswers.Response, NationQuery.CreatedDate, NationQuery.[Status]
+FROM (
+    SELECT pm.ModificationIdentifier, pm.CreatedDate, pm.[Status], pr.Id
+    FROM dbo.ProjectModifications pm
+    INNER JOIN dbo.ProjectRecords pr ON pr.Id = pm.ProjectRecordId
+    INNER JOIN dbo.ProjectRecordAnswers pra ON pra.ProjectRecordId = pr.Id
+    WHERE pra.QuestionId = 'IQA0005' AND pra.SelectedOptions = '${leadNationOption}'
+) AS NationQuery
+INNER JOIN dbo.ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
+WHERE ProjectRecordAnswers.QuestionId = 'IQA0002'
+ORDER BY NationQuery.CreatedDate ASC;
+`);
+
+    await sqlConnection.close();
+    return queryResult.recordset.map((row) => row.ModificationIdentifier);
   }
 }

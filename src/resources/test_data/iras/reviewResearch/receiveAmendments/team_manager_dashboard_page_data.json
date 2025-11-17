@@ -8,7 +8,11 @@
     "advanced_filter_label": "Advanced filters",
     "maxPagesToVisit": 2,
     "days_since_suffix": "days",
-    "iras_id_search_box_label": "Enter the IRAS ID to search for all modifications received"
+    "iras_id_search_box_label": "Enter the IRAS ID to search for all modifications received",
+    "project_record_answer_option_lead_nation_england": "OPT0018",
+    "project_record_answer_option_lead_nation_nothern_ireland": "OPT0019",
+    "project_record_answer_option_lead_nation_scotland": "OPT0020",
+    "project_record_answer_option_lead_nation_wales": "OPT0021"
   },
 
   "Column_Label_Texts": {

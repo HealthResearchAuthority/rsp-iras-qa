@@ -20,9 +20,11 @@ Then(
 
 Then(
   'I see only modifications where the lead nation is the country linked to the {string}',
-  async ({ teamManagerDashboardPage }, user: string) => {
-    // PLACEHOLDER FOR FUTURE UPDATE AFTER DB ENABLER
-    const expectedLeadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
-    console.log(expectedLeadNation);
+  async ({ teamManagerDashboardPage, commonItemsPage }, user: string) => {
+    const leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
+    const modificationsByLeadNation = await teamManagerDashboardPage.sqlGetModificationByLeadNation(leadNation);
+    const actualList = await commonItemsPage.getActualModificationListValues(commonItemsPage.tableBodyRows, 1);
+    const normalize = (arr: any[]) => arr.map((item) => item.toString().trim()).sort();
+    expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
   }
 );

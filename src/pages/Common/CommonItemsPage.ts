@@ -1720,4 +1720,24 @@ export default class CommonItemsPage {
     // Convert back to strings
     return sortedNumbers.map((num) => num.toString());
   }
+  async getActualModificationListValues(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      for (const row of await tableBodyRows.all()) {
+        const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent())
+          .replaceAll(/\s+/g, ' ')
+          .trim();
+        actualListValues.push(actualListValue);
+      }
+      const hasNext = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNext) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    return actualListValues;
+  }
 }

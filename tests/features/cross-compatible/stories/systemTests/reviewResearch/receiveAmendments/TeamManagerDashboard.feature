@@ -9,13 +9,13 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
                 Then the country linked to the '<User>' appears as the lead nation in the page description
-                # And I see only modifications where the lead nation is the country linked to the '<User>'
+                And I see only modifications where the lead nation is the country linked to the '<User>'
                 Examples:
-                        | User         |
-                        | Team_Manager |
-        # | Team_Manager_NI |
-        # | Team_Manager_S  |
-        # | Team_Manager_W  |
+                        | User            |
+                        | Team_Manager    |
+                        | Team_Manager_NI |
+                        | Team_Manager_S  |
+                        | Team_Manager_W  |
 
         @searchTasklistByIrasIdWithResults @rsp-5125 @skip
         Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID

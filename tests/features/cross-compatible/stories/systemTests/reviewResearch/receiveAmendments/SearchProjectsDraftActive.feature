@@ -26,11 +26,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I click the 'Save_For_Later' button on the 'Review_Your_Answers_Page'
                 Then I can see the project status as 'Project_Status_Draft' on the project overview for unfinished project page
                 And I capture the page screenshot
-                # And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
-                # And I have navigated to the my research projects page
-                # Then I can see the my research projects page
-                # Then I can see the project status as 'Project_Status_Draft' on the my research page
-                # And I capture the page screenshot
                 And I capture the iras id of the recently added project with status as 'In draft'
                 Given I have navigated to the 'Approvals_Page' as 'System_Admin'
                 And I click the 'Search_Records' link on the 'Approvals_Page'
