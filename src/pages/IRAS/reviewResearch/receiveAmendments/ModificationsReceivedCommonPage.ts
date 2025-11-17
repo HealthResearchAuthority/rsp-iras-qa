@@ -264,6 +264,13 @@ export default class ModificationsReceivedCommonPage {
           columnIndex = 3;
         }
         break;
+      case 'status':
+        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+          columnIndex = 5;
+        } else {
+          columnIndex = 4;
+        }
+        break;
       case 'modification type':
         columnIndex = 2;
         break;

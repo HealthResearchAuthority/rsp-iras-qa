@@ -237,7 +237,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Invalid_Date_From                 | Invalid_Date_From_Error                 |
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-    @SortTasklistByColumn @rsp-4091
+    @SortTasklistByColumn @rsp-4091 @rsp-4822 @KNOWN-DEFECT-RSP-6204 @KNOWN-DEFECT-RSP-6229
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -261,6 +261,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Short_Project_Title   | short project title   | ascending    | descending     |
             | Date_Submitted        | date submitted        | descending   | ascending      |
             | Days_Since_Submission | days since submission | ascending    | descending     |
+            | Status                | status                | ascending    | descending     |
 
     @tasklistErrorStateValidation @rsp-4111
     Scenario: Verify that the user must select a modifiation before continuing

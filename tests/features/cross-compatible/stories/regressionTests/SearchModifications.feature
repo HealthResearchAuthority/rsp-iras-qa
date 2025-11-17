@@ -10,7 +10,7 @@ Feature: Receive Amendments: Search Modifications
                 Then I can see the 'Search_Modifications_Page'
                 And I capture the page screenshot
 
-        @RegressionSearchModificationsSortByColumn @rsp-4090
+        @RegressionSearchModificationsSortByColumn @rsp-4090 @KNOWN-DEFECT-RSP-6229
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'

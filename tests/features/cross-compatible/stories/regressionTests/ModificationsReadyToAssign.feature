@@ -79,7 +79,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then the number of search results has returned to the original number
         And I 'cannot' see active filters displayed
 
-    @RegressionLeadNationSortTasklistByColumn @rsp-4091 @rsp-4201
+    @RegressionLeadNationSortTasklistByColumn @rsp-4091 @rsp-4201 @rsp-4822 @KNOWN-DEFECT-RSP-6204 @KNOWN-DEFECT-RSP-6229
     Scenario Outline: Verify lead nation and that the user can sort the modifications tasklist by ascending and descending order for each column
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
@@ -104,6 +104,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Workflow_Coordinator_NI | Short_Project_Title   | short project title   | ascending    | descending     |
             | Workflow_Coordinator_S  | Date_Submitted        | date submitted        | descending   | ascending      |
             | Workflow_Coordinator_W  | Days_Since_Submission | days since submission | ascending    | descending     |
+            | Workflow_Coordinator    | Status                | status                | ascending    | descending     |
 
     @RegressionSearchTasklistWithNoResults @rsp-4104
     Scenario Outline: Verify the tasklist page displays the no results found message, when no records on the system match the search criteria

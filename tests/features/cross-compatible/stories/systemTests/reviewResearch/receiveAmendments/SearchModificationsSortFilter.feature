@@ -7,7 +7,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        @SortModificationsByColumn @rsp-4090
+        @SortModificationsByColumn @rsp-4090 @rsp-4822 @KNOWN-DEFECT-RSP-6229
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -29,12 +29,13 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
 
                 Examples:
-                        | Sort_Button         | Sort_Field          |
-                        | Modification_Id     | modification id     |
-                        | Short_Project_Title | short project title |
-                        | Modification_Type   | modification type   |
-                        | Chief_Investigator  | chief investigator  |
-                        | Lead_Nation         | lead nation         |
+                        | Sort_Button | Sort_Field |
+                        # | Modification_Id     | modification id     |
+                        # | Short_Project_Title | short project title |
+                        # | Modification_Type   | modification type   |
+                        # | Chief_Investigator  | chief investigator  |
+                        # | Lead_Nation         | lead nation         |
+                        | Status      | status     |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button

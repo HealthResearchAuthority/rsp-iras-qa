@@ -144,7 +144,8 @@
     "Short_Project_Title": "Short project title",
     "Modification_Type": "Modification type",
     "Chief_Investigator": "Chief Investigator",
-    "Lead_Nation": "Lead Nation"
+    "Lead_Nation": "Lead Nation",
+    "Status": "Status"
   },
   "Modifications_Tasklist_Page": {
     "Apply_Filters": "Apply filters",
@@ -155,6 +156,7 @@
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
+    "Status": "Status",
     "Continue_to_assign_modifications": "Continue to assign modifications"
   },
   "My_Modifications_Tasklist_Page": {
