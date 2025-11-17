@@ -93,7 +93,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    And I can see the searched modification to be present in the list with 'Authorised' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id from sponsor authorisations page
@@ -123,6 +123,10 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Northern_Ireland |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Wales            |
+      | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_England          |
+      | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Northern_Ireland |
+      | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
+      | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
   @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the non reviewable modifications
@@ -178,7 +182,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    And I can see the searched modification to be present in the list with 'Authorised' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with 'Approved' status in the sponsor authorisations page
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id from sponsor authorisations page
@@ -207,6 +211,8 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
       | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
       | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
       | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
+      | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
+      | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
   @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the combination of reviewable and non reviewable modifications
@@ -262,7 +268,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    And I can see the searched modification to be present in the list with 'Authorised' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id from sponsor authorisations page

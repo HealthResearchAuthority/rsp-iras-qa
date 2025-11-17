@@ -1103,6 +1103,9 @@
   "Modification_Status_Approved": {
     "status": "Approved"
   },
+  "Modification_Status_Not_Approved": {
+    "status": "Not approved"
+  },
   "Modification_Status_With_Sponsor": {
     "status": "With sponsor"
   },
