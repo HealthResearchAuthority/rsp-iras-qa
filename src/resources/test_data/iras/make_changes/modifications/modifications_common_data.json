@@ -1041,7 +1041,7 @@
   "Modification_Status_Not_Authorised": {
     "status": "Not authorised"
   },
-"Modification_Status_With_Regulator": {
+  "Modification_Status_With_Review_Body": {
     "status": "With review body"
   },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
