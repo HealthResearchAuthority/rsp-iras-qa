@@ -495,7 +495,11 @@ export default class ModificationsCommonPage {
   async getModificationCategoryForNonApplicability(changeDataset, researchLocationDataset: any): Promise<string> {
     let category: string | undefined;
     if (modificationsCommonPageTestData.Non_Applicability_Changes.includes(changeDataset.specific_change_dropdown)) {
-      if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'Yes') {
+      if (
+        modificationsCommonPageTestData.Ranking_Category.always_n_a.includes(changeDataset.specific_change_dropdown)
+      ) {
+        category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
+      } else if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'Yes') {
         category = this.modificationsCommonPageTestData.Label_Texts.category_c;
       } else if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'No') {
         category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
@@ -553,8 +557,22 @@ export default class ModificationsCommonPage {
     ) {
       modificationType =
         this.modificationsCommonPageTestData.Label_Texts.modification_type_modification_of_important_detail;
-    } else {
+    } else if (
+      values.some(
+        (modificationTypeValue) =>
+          modificationTypeValue.expectedModificationType ===
+          this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification
+      )
+    ) {
       modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification;
+    } else if (
+      values.some(
+        (modificationTypeValue) =>
+          modificationTypeValue.expectedModificationType ===
+          this.modificationsCommonPageTestData.Label_Texts.modification_type_non_notifiable
+      )
+    ) {
+      modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_non_notifiable;
     }
     const categories = new Set(values.map((v) => v.expectedCategory));
     const hasCategoryA = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_a);
