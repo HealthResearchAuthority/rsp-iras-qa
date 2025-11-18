@@ -225,8 +225,8 @@
     "Delete_Modification": "Delete modification",
     "Change": "Change"
   },
-  "Modification_Post_Submission_Page": {
-    "Documents": "Documents"
+  "Confirm_Project_Details_Page": {
+    "Back": "Back"
   },
   "Project_Created_Confirmation_Page": {
     "View_Project_Overview": "View project overview"
@@ -272,7 +272,9 @@
     "Back": "Back",
     "Add_User": "Add user"
   },
-  "Check_Add_User_Sponsor_Org_Page": { "Back": "Back" },
+  "Check_Add_User_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
   "Profile_Settings_Page": {
     "One_Login_Account": "One Login account",
     "Change": "Change"
@@ -299,5 +301,12 @@
   "IRAS_ID_Error_Page": {
     "Follow_Existing_Processes": "follow existing processes",
     "HRA_Support_Site": "HRA support site"
+  },
+  "Sponsor_Workspace_Page": {
+    "My_Account": "My account",
+    "Authorisations": "Authorisations"
+  },
+  "Modification_Post_Submission_Page": {
+    "Documents": "Documents"
   }
 }

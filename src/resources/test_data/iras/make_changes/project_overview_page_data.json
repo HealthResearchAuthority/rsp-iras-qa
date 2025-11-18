@@ -1,6 +1,7 @@
 {
   "Project_Overview_Page": {
     "heading": "Project overview",
+    "project_iras_id_label": "IRAS ID:",
     "short_project_title_label": "Short project title:",
     "project_details_heading": "Project details",
     "project_details_hint_label": "View and edit key information about this project.",
@@ -31,7 +32,6 @@
     "status": "Draft"
   },
   "Valid_Data_All_Fields": {
-    "short_project_title_text": "QA_Automation - This is a short project title",
     "planned_project_end_day_text": "1",
     "planned_project_end_month_dropdown": "January",
     "planned_project_end_year_text": "2030"
@@ -86,7 +86,10 @@
   },
   "Project_Details_Tab": {
     "iras_id_label": "IRAS ID",
-    "short_project_title_label": "Short project title"
+    "primary_sponsor_org_label": "Primary sponsor organisation",
+    "short_project_title_label": "Short project title",
+    "full_project_title_label": "Full project title",
+    "planned_project_end_date_label": "Project end date"
   },
   "Project_Team_Tab": {
     "chief_investigator_label": "Chief Investigator",
@@ -103,7 +106,6 @@
     "post_approvals_tab_modification_type": "Modification type",
     "post_approvals_tab_review_type": "Review type",
     "post_approvals_tab_category": "Category",
-    "date_submitted": "Date submitted",
     "post_approvals_tab_date_submitted": "Date submitted"
   },
   "Project_Documents_Tab": {
