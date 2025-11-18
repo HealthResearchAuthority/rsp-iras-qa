@@ -4,7 +4,7 @@ async function globalSetup() {
   process.env.BASE_URL = 'https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/';
 
   const req = await request.newContext({
-    baseURL: 'https://cmsportal-dev.azurewebsites.net/umbraco/api/',
+    baseURL: 'https://cmsportal-automationtest.azurewebsites.net/umbraco/api/',
     extraHTTPHeaders: {
       accept: 'application/json',
     },
