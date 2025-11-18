@@ -2,11 +2,11 @@ import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
 import { expect, Locator } from '@playwright/test';
 import fs from 'node:fs';
-import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull, generateUniqueValue } from '../../../../../utils/UtilFunctions';
+import path from 'node:path';
+const { Then, When } = createBdd(test);
 
-const { Then } = createBdd(test);
-
-Then(
+When(
   'I can see the add document details for {string} page',
   async ({ selectAreaOfChangePage, addDocumentDetailsModificationsPage }, specificChangeDatsetName: string) => {
     const dataset =
@@ -83,10 +83,49 @@ Then(
       //Enter document details
       for (const key in dataset) {
         if (Object.hasOwn(dataset, key)) {
-          await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
+          if (key === 'document_name_text') {
+            const prefix =
+              addDocumentDetailsForSpecificDocumentModificationsPage
+                .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Document_Name_Prefix.prefix;
+            const uniqueDocName = await generateUniqueValue(dataset[key], prefix);
+            const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage[key];
+            await locator.fill(uniqueDocName);
+          } else {
+            await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
+          }
         }
       }
       await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
+    }
+  }
+);
+Then(
+  'I click on the document link with status {string} and delete the uploaded document in the add document details for specific document page',
+  async ({ commonItemsPage, confirmationPage, addDocumentDetailsModificationsPage }, docStatusDataset: string) => {
+    const statusDataset =
+      addDocumentDetailsModificationsPage.addDocumentDetailsModificationsPageTestData[docStatusDataset];
+    const status = statusDataset.status;
+    const displayedDocumentsListMap =
+      await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
+    const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
+    const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
+    for (
+      let displayedDocumentsListIndex = 0;
+      displayedDocumentsListIndex < displayedDocumentsList.length;
+      displayedDocumentsListIndex++
+    ) {
+      if (displayedStatusesList[displayedDocumentsListIndex] === status) {
+        const documentName = displayedDocumentsList[displayedDocumentsListIndex];
+        await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
+      }
+      await addDocumentDetailsModificationsPage.documentlink.getByText('Delete', { exact: true }).first().click();
+      await expect(
+        confirmationPage.confirmation_header_common_label.getByText(
+          confirmationPage.confirmationPageTestData.Delete_Document_Confirmation_Labels
+            .delete_single_document_page_heading
+        )
+      ).toBeVisible();
+      await commonItemsPage.clickButton('Confirmation_Page', 'Delete_Document');
     }
   }
 );
@@ -215,6 +254,36 @@ Then(
     for (const key of Object.keys(dataset)) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I click on the document link with status {string} and download the uploaded document in the add document details for specific document page',
+  async ({ addDocumentDetailsModificationsPage, page }, docStatusDataset: string) => {
+    const statusDataset =
+      addDocumentDetailsModificationsPage.addDocumentDetailsModificationsPageTestData[docStatusDataset];
+    const status = statusDataset.status;
+    const displayedDocumentsListMap =
+      await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
+    const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
+    const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
+    for (let index = 0; index < displayedDocumentsList.length; index++) {
+      if (displayedStatusesList[index] === status) {
+        const documentName = displayedDocumentsList[index];
+        await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
+        const fileNameLocator = addDocumentDetailsModificationsPage.documentlink;
+        const actualFileNameArray = await fileNameLocator.allTextContents();
+        const actualFileName = actualFileNameArray[1].trim();
+        const fieldLocator = addDocumentDetailsModificationsPage.documentlink.getByText(actualFileName);
+        const downloadPath = path.resolve(process.env.HOME || process.env.USERPROFILE || '', 'Downloads');
+        const [download] = await Promise.all([page.waitForEvent('download'), fieldLocator.click()]);
+        const suggestedFileName = download.suggestedFilename();
+        const savedFilePath = path.join(downloadPath, suggestedFileName);
+        await download.saveAs(savedFilePath);
+        const expectedFileName = path.basename(savedFilePath);
+        expect.soft(actualFileName).toBe(expectedFileName);
       }
     }
   }

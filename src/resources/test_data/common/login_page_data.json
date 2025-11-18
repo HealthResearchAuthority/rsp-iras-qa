@@ -41,6 +41,24 @@
     "mfa": "`${process.env.TEAM_MANAGER_MFA_KEY}`",
     "authPath": "team_manager"
   },
+  "Team_Manager_NI": {
+    "username": "FutureIRAS.TeamManager_NI@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_NI_PASS}`",
+    "mfa": "`${process.env.TEAM_MANAGER_NI_MFA_KEY}`",
+    "authPath": "team_manager_ni"
+  },
+  "Team_Manager_S": {
+    "username": "FutureIRAS.TeamManager_S@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_S_PASS}`",
+    "mfa": "`${process.env.TEAM_MANAGER_S_MFA_KEY}`",
+    "authPath": "team_manager_s"
+  },
+  "Team_Manager_W": {
+    "username": "FutureIRAS.TeamManager_W@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_W_PASS}`",
+    "mfa": "`${process.env.TEAM_MANAGER_W_MFA_KEY}`",
+    "authPath": "team_manager_w"
+  },
   "Workflow_Coordinator": {
     "username": "FutureIRAS.WorkflowCoordinator@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_PASS}`",
@@ -64,6 +82,22 @@
     "password": "`${process.env.WORKFLOW_COORDINATOR_W_PASS}`",
     "mfa": "`${process.env.WORKFLOW_COORDINATOR_W_MFA_KEY}`",
     "authPath": "workflow_coordinator_w"
+  },
+  "Sponsor_User": {
+    "username": "FutureIRAS.Sponsor@hra.nhs.uk",
+    "password": "`${process.env.SPONSOR_USER_PASS}`",
+    "mfa": "`${process.env.SPONSOR_USER_MFA_KEY}`",
+    "authPath": "sponsor_user"
+  },
+  "One_Login_Account_User": {
+    "username": "hagnenulta@necub.com",
+    "password": "`${process.env.ONE_LOGIN_ACCOUNT_USER_PASS}`",
+    "mfa": "`${process.env.ONE_LOGIN_ACCOUNT_USER_MFA_KEY}`",
+    "authPath": "one_login_account_user"
+  },
+  "DB_User": {
+    "username": "testhrasysadmin",
+    "password": "`${process.env.DB_USER_PASS}`"
   },
   "Login_Page": {
     "header": "Create your GOV.UK One Login or sign in"

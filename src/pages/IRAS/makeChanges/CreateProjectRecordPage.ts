@@ -20,5 +20,14 @@ export default class CreateProjectRecordPage {
   async assertOnCreateProjectRecordPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.createProjectRecordPageTestData.Create_Project_Record_Page.heading);
+    await expect(
+      this.page.getByText(this.createProjectRecordPageTestData.Create_Project_Record_Page.guidance_text_one)
+    ).toBeVisible();
+    await expect(
+      this.page.getByText(this.createProjectRecordPageTestData.Create_Project_Record_Page.guidance_text_two)
+    ).toBeVisible();
+    await expect(
+      this.page.getByText(this.createProjectRecordPageTestData.Create_Project_Record_Page.guidance_text_three)
+    ).toBeVisible();
   }
 }

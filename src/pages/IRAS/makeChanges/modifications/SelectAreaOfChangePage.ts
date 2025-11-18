@@ -91,4 +91,21 @@ export default class ModificationsSelectAreaOfChangePage {
       .first()
       .click();
   }
+
+  async selectAreaOfChangeAndSaveLater(dataset: any) {
+    const commonItemsPage = new CommonItemsPage(this.page);
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'area_of_change_dropdown' || key === 'specific_change_dropdown') {
+          await commonItemsPage.fillUIComponent(dataset, key, this);
+        }
+      }
+    }
+    const saveForLaterButton = commonItemsPage.buttonTextData['Select_Area_Of_Change_Page']['Save_For_Later'];
+    await commonItemsPage.govUkButton
+      .getByText(saveForLaterButton, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(saveForLaterButton, { exact: true }))
+      .first()
+      .click();
+  }
 }

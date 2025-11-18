@@ -1,0 +1,114 @@
+import { createBdd } from 'playwright-bdd';
+import { test, expect } from '../../../../../hooks/CustomFixtures';
+const { When, Then } = createBdd(test);
+
+When(
+  'I can see the {string} should be present in the list with {string} status in the manage sponsor organisation page',
+  async (
+    { manageSponsorOrganisationPage, checkSetupSponsorOrganisationPage, commonItemsPage },
+    inputType: string,
+    status: string
+  ) => {
+    const sponsorOrgStatus = await manageSponsorOrganisationPage.getSponsorStatus(status);
+    const sponsorOrgName = await manageSponsorOrganisationPage.getSponsorOrgName(
+      inputType,
+      checkSetupSponsorOrganisationPage,
+      commonItemsPage
+    );
+    const foundRecords = await manageSponsorOrganisationPage.findSponsorOrg(
+      commonItemsPage,
+      sponsorOrgName,
+      sponsorOrgStatus
+    );
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
+    await manageSponsorOrganisationPage.setSponsorOrgRow(foundRecords);
+  }
+);
+
+Then(
+  'I can see the sponsor organisation added successful message on manage sponsor organisation page',
+  async ({ manageSponsorOrganisationPage, commonItemsPage }) => {
+    await expect
+      .soft(manageSponsorOrganisationPage.sponsor_organisation_added_success_message_header_text)
+      .toBeVisible();
+    await expect.soft(manageSponsorOrganisationPage.sponsor_organisation_added_success_message_text).toBeVisible();
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);
+
+Then(
+  'I can see the sponsor organisation disabled successful message on manage sponsor organisation page',
+  async ({ manageSponsorOrganisationPage, commonItemsPage }) => {
+    await expect
+      .soft(manageSponsorOrganisationPage.sponsor_organisation_disabled_success_message_header_text)
+      .toBeVisible();
+    await expect.soft(manageSponsorOrganisationPage.sponsor_organisation_disabled_success_message_text).toBeVisible();
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);
+
+Then(
+  'I can see the sponsor organisation enabled successful message on manage sponsor organisation page',
+  async ({ manageSponsorOrganisationPage, commonItemsPage }) => {
+    await expect
+      .soft(manageSponsorOrganisationPage.sponsor_organisation_enabled_success_message_header_text)
+      .toBeVisible();
+    await expect.soft(manageSponsorOrganisationPage.sponsor_organisation_enabled_success_message_text).toBeVisible();
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);
+
+When(
+  'I capture the name of the recently added sponsor organisation in the test data using {string}',
+  async ({ setupNewSponsorOrganisationPage }, sponsorDatasetName: string) => {
+    const dataset =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
+        sponsorDatasetName
+      ];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await setupNewSponsorOrganisationPage.saveUnusedSponsorOrgTosetupNewSponsorOrganisation(dataset[key]);
+      }
+    }
+  }
+);

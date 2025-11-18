@@ -9,6 +9,7 @@ export default class EditReviewBodyPage {
   readonly editReviewBodyPageData: typeof editReviewBodyPageData;
   readonly buttonTextData: typeof buttonTextData;
   private _unique_org_name: string;
+  private _unique_org_timestamp: string;
   readonly page_heading: Locator;
   readonly validation_error: Locator;
   readonly organisation_name_text: Locator;
@@ -29,6 +30,7 @@ export default class EditReviewBodyPage {
     this.editReviewBodyPageData = editReviewBodyPageData;
     this.buttonTextData = buttonTextData;
     this._unique_org_name = '';
+    this._unique_org_timestamp = '';
 
     //Locators
     this.page_heading = this.page
@@ -89,5 +91,13 @@ export default class EditReviewBodyPage {
 
   async setUniqueOrgName(value: string): Promise<void> {
     this._unique_org_name = value;
+  }
+
+  async getUniqueOrgTimestamp(): Promise<string> {
+    return this._unique_org_timestamp;
+  }
+
+  async setUniqueOrgTimestamp(value: string): Promise<void> {
+    this._unique_org_timestamp = value;
   }
 }

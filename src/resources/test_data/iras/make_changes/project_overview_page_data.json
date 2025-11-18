@@ -1,65 +1,117 @@
 {
   "Project_Overview_Page": {
     "heading": "Project overview",
+    "project_iras_id_label": "IRAS ID:",
     "short_project_title_label": "Short project title:",
     "project_details_heading": "Project details",
     "project_details_hint_label": "View and edit key information about this project.",
     "modification_saved_success_message_header_text": "Success",
     "modification_saved_success_message_text": "Modification progress successfully saved",
+    "delete_modification_success_message_text": "Modification {{modificationNumber}} has been successfully deleted",
     "project_overview_irasid_header": "IRAS ID:",
     "project_overview_shorttitle_header": "Short project title:",
     "project_details_irasid": "IRAS ID",
     "project_details_short_project_title": "Short project title",
-    "key_project_roles_heading": "Key project roles",
+    "project_team_heading": "Project team",
     "chief_investigator": "Chief Investigator",
     "primary_sponsor_organisation": "Primary sponsor organisation",
     "sponsor_contact": "Sponsor contact",
     "research_locations_heading": "Research locations",
+    "post_approvals_heading": "Post approvals",
     "participating_nations": "Participating nations",
     "nhs_hsc_organisations": "NHS / HSC organisations",
     "lead_nation": "Lead nation",
     "maxPagesToVisit": 2
   },
-  "Modification_URL": {
-    "URL": "https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/projectoverview/postapproval?projectRecordId=20250905085329"
+  "Project_URL": {
+    "Test_Project": "projectoverview/projectdetails?projectRecordId=20250905085329",
+    "Kilmarnock_Cancer_Research": "projectoverview/projectdetails?projectRecordId=20250930093915",
+    "Swansea_ACL_Trials": "projectoverview/projectdetails?projectRecordId=20251003104402"
   },
   "Modification_Status_Draft": {
     "status": "Draft"
   },
   "Valid_Data_All_Fields": {
-    "short_project_title_text": "QA_Automation - This is a short project title",
     "planned_project_end_day_text": "1",
     "planned_project_end_month_dropdown": "January",
     "planned_project_end_year_text": "2030"
   },
   "Valid_Research_Locations_Details_Nhs": {
-    "participating_nations": "England Northern Ireland Scotland Wales",
-    "nhs_hsc_organisations": "Yes",
-    "lead_nation": "England"
+    "Research_Locations": {
+      "participating_nations": "England Northern Ireland Scotland Wales",
+      "nhs_hsc_organisations": "Yes",
+      "lead_nation": "England"
+    }
   },
   "Valid_Research_Locations_Details_Non_Nhs": {
-    "participating_nations": "Northern Ireland Scotland Wales",
-    "nhs_hsc_organisations": "No",
-    "lead_nation": ""
+    "Research_Locations": {
+      "participating_nations": "Northern Ireland Scotland Wales",
+      "nhs_hsc_organisations": "No",
+      "lead_nation": ""
+    }
   },
-  "Label_Texts": {
-    "project_details_title": "Project details",
-    "project_documents_title": "Project documents",
-    "key_project_roles_title": "Key project roles",
-    "research_locations_title": "Research locations",
-    "post_approval_title": "Post approval",
-    "project_history_title": "Project history"
+  "Kilmarnock_Cancer_Research": {
+    "status": "Submitted",
+    "Project_Details": {
+      "iras_id": "98931",
+      "short_project_title_text": "Kilmarnock Cancer Research"
+    },
+    "Project_Team": {
+      "chief_investigator_email_text": "chris.test@bmail.com",
+      "primary_sponsor_organisation_text": "FIFE",
+      "sponsor_contact_email_text": "chris.sponsor@bmail.com"
+    },
+    "Research_Locations": {
+      "participating_nations": "Scotland",
+      "nhs_hsc_organisations": "Yes",
+      "lead_nation": "Scotland"
+    }
   },
-  "Label_Texts_Post_Approval": {
-    "modification_id": "Modification ID",
-    "modification_type": "Modification type",
-    "review_type": "Review type",
-    "category": "Category",
-    "status": "Status"
+  "Swansea_ACL_Trials": {
+    "status": "Submitted",
+    "Project_Details": {
+      "iras_id": "46782",
+      "short_project_title_text": "Swansea ACL Trials"
+    },
+    "Project_Team": {
+      "chief_investigator_email_text": "david.bishop@bmail.com",
+      "primary_sponsor_organisation_text": "Swansea University",
+      "sponsor_contact_email_text": ""
+    },
+    "Research_Locations": {
+      "participating_nations": "Wales",
+      "nhs_hsc_organisations": "Yes",
+      "lead_nation": "Wales"
+    }
   },
-  "Label_Texts_Project_Documents": {
+  "Project_Details_Tab": {
+    "iras_id_label": "IRAS ID",
+    "primary_sponsor_org_label": "Primary sponsor organisation",
+    "short_project_title_label": "Short project title",
+    "full_project_title_label": "Full project title",
+    "planned_project_end_date_label": "Project end date"
+  },
+  "Project_Team_Tab": {
+    "chief_investigator_label": "Chief Investigator",
+    "primary_sponsor_org_label": "Primary sponsor organisation",
+    "sponsor_contact_label": "Sponsor contact"
+  },
+  "Research_Locations_Tab": {
+    "participating_nations_label": "Participating nations",
+    "nhs_hsc_organisations_label": "NHS / HSC organisations",
+    "lead_nation_label": "Lead nation"
+  },
+  "Post_Approval_Tab": {
+    "post_approvals_tab_modification_id": "Modification ID",
+    "post_approvals_tab_modification_type": "Modification type",
+    "post_approvals_tab_review_type": "Review type",
+    "post_approvals_tab_category": "Category",
+    "post_approvals_tab_date_submitted": "Date submitted"
+  },
+  "Project_Documents_Tab": {
     "document_type_project_documents": "Document type",
     "document_name_project_documents": "Document name",
+    "file_name_project_documents": "File name",
     "version_project_documents": "Version",
     "document_date_project_documents": "Document date",
     "status_project_documents": "Status",
@@ -67,5 +119,89 @@
     "action_project_documents": "Action",
     "search_project_documents": "Search",
     "advanced_filters_project_documents": "Advanced filters"
+  },
+  "Post_Approval_Search_Queries": {
+    "Partial_Modification_ID": { "search_input_text": "123" },
+    "Partial_Modification_ID_With_Slash": { "search_input_text": "/10" },
+    "Empty_Search_Data": { "search_input_text": "" },
+    "Non_Existant_Modification_ID": { "search_input_text": "000000" },
+    "Leading_White_Space_Modification_ID": { "search_input_text": " 123" },
+    "Trailing_White_Space_Modification_ID": { "search_input_text": "561 " }
+  },
+
+  "Max_Pages_To_Validate": 2,
+
+  "Post_Approval_Page": {
+    "filter_headings": ["Modification type", "Review type", "Category", "Date submitted", "Status"]
+  },
+  "Post_Approval_Page_Label_Texts": {
+    "status_label": "Status",
+    "modification_type_label": "Modification type",
+    "date_submitted_label": "Date submitted",
+    "review_type": "Review type",
+    "category": "Category",
+    "radio_hint_label": "Select one option",
+    "date_submitted_from_date_hint_text": "Enter the date you want to search from",
+    "date_submitted_from_date_help_text": "For example, 28 February 2023",
+    "date_submitted_to_date_hint_text": "Enter the date you want to search to",
+    "date_submitted_to_date_help_text": "For example, 12 October 2024",
+    "date_submitted_day_label": "Day",
+    "date_submitted_month_label": "Month",
+    "date_submitted_year_label": "Year"
+  },
+  "Advanced_Filters": {
+    "Advanced_Filter_All_Fields": {
+      "status_radio": ["In draft"],
+      "date_submitted_from_day_text": "11",
+      "date_submitted_from_month_dropdown": "September",
+      "date_submitted_from_year_text": "2025",
+      "date_submitted_to_day_text": "03",
+      "date_submitted_to_month_dropdown": "November",
+      "date_submitted_to_year_text": "2025",
+      "modification_type_radio": ["Modification of an important detail"]
+    },
+  "Advanced_Filter_Status_Only": {
+      "status_radio": ["In draft"]
+    },
+  "Advanced_Filter_Submitted_Date_Field_Only": {
+      "date_submitted_from_day_text": "11",
+      "date_submitted_from_month_dropdown": "September",
+      "date_submitted_from_year_text": "2025",
+      "date_submitted_to_day_text": "03",
+      "date_submitted_to_month_dropdown": "November",
+      "date_submitted_to_year_text": "2025"
+    },
+  "Advanced_Filter_Modification_Type_Only": {
+      "modification_type_radio": ["Minor modification"]
+    },
+  "Invalid_Date_Range_To_Before_From": {
+      "date_submitted_from_day_text": "3",
+      "date_submitted_from_month_dropdown": "July",
+      "date_submitted_from_year_text": "2025",
+      "date_submitted_to_day_text": "3",
+      "date_submitted_to_month_dropdown": "January",
+      "date_submitted_to_year_text": "2000"
+    },
+  "Invalid_Date_From": {
+      "date_submitted_from_day_text": "",
+      "date_submitted_from_month_dropdown": "July",
+      "date_submitted_from_year_text": "2025"
+    },
+  "Invalid_Date_To": {
+      "date_submitted_to_day_text": "3",
+      "date_submitted_to_month_dropdown": "January",
+      "date_submitted_to_year_text": "9"
+    }
+  },
+  "Error_Validation": {
+    "Post_Approval_Invalid_Date_Range_To_Before_From_Error": {
+      "date_submitted_to_day_text": "The date you’ve selected is before the search above"
+    },
+    "Post_Approval_Invalid_Date_From_Error": {
+      "date_submitted_from_day_text": "'Search from' date must be in the correct format"
+    },
+    "Post_Approval_Invalid_Date_To_Error": {
+      "date_submitted_to_day_text": "'Search to' date must be in the correct format"
+    }
   }
 }
