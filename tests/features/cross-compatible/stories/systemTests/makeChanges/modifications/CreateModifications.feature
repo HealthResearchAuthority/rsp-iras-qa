@@ -401,10 +401,29 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I validate the ui labels on modification details page using 'Modification_Details_Label_Texts'
     Then I validate all fields on modification page '<Changes>'
     When I click the 'Add_documents' button on the 'Modification_Details_Page'
-
-
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page' -- DONE
+    Then I can see the add documents for '<Specific_Change>' page
+    And I upload '<Document_Upload_Files>' documents
     And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I can see the add document details for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
     Then I can see the add sponsor reference page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
@@ -412,6 +431,9 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I can see the review all changes page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
+    And I can see the 'supporting_documents_table' ui labels on the review all changes page
+    And I can validate the '<Document_Upload_Files>' are displayed in the supporting documents table on the review all changes page
+    And the 'Add_documents' button should be 'available' on the 'Review_All_Changes_Page'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
     Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
@@ -426,17 +448,21 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
+    Then I click the 'Documents' link on the 'Modification_Post_Submission_Page'
+    And I can see the 'documents_table' ui labels on the modification post submission page
+    And I can validate the '<Document_Upload_Files>' are displayed in the supporting documents table on the modification post submission page
+    And I click the 'Download_all' button on the 'Modification_Post_Submission_Page'
 
     Examples:
-      | Changes                                                          | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
-      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_Yes |
-      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
-      | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
+      | Changes                                                          | Research_Locations  |  | Document_Upload_Files |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_Yes |  | Multiple_Files_Three  |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |  | Multiple_Files        |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |  | Multiple_Files        |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |  | Multiple_Files        |
+      # | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_Yes |  | Multiple_Files        |
+      # | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_No  |  | Multiple_Files        |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |  | Multiple_Files        |
+      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |  | Multiple_Files        |
+      # | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |  | Multiple_Files        |
+      # | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |  | Multiple_Files        |
+      # | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |  | Multiple_Files        |

@@ -225,6 +225,9 @@
     "Delete_Modification": "Delete modification",
     "Change": "Change"
   },
+  "Modification_Post_Submission_Page": {
+    "Documents": "Documents"
+  },
   "Project_Created_Confirmation_Page": {
     "View_Project_Overview": "View project overview"
   },

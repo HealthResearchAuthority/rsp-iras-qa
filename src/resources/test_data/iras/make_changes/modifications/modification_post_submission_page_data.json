@@ -1,0 +1,18 @@
+{
+  "Modification_Post_Submission_Page": {
+    "heading": "Modification details",
+    "title": "Modification details",
+    "sponsor_details_tab": {},
+    "modification_details_tab": {},
+    "documents_tab": {
+      "document_type_label": "Document type",
+      "document_name_label": "Document name",
+      "file_name_label": "File name",
+      "document_version_label": "Document version",
+      "document_date_label": "Document date",
+      "status_label": "Status",
+      "action_label": "Action"
+    },
+    "history_tab": {}
+  }
+}
