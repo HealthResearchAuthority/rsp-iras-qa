@@ -17,7 +17,7 @@
     "category_b": "B",
     "category_c": "C",
     "category_b_c": "B/C",
-    "category_new_site": "New Site",
+    "category_new_site": "New site",
     "review_type_review_required": "Review required",
     "review_type_no_review_required": "No review required",
     "changes_free_textbox_label": "Enter details here describing this change",
@@ -1378,7 +1378,7 @@
       "change_status": "Change ready for submission"
     }
   },
-  "Participating_Organisation_Non_Reviewable_One": {
+  "Multiple_Changes_Participating_Organisations_Non_Reviewable_Three": {
     "Early_Closure_Or_Withdrawal_Of_Research_Sites_One": {
       "area_of_change_dropdown": "Participating organisations",
       "specific_change_dropdown": "Early closure or withdrawal of research sites",
@@ -1464,7 +1464,7 @@
       "change_status": "Change ready for submission"
     }
   },
-  "Participating_Organisation_Non_Reviewable_Two": {
+  "Multiple_Changes_Participating_Organisations_Non_Reviewable_Four": {
     "PICs_Addition_Of_Participant_Identification_Centres_Undertaking_The_Same_Activities_As_Existing_PICs_One": {
       "area_of_change_dropdown": "Participating organisations",
       "specific_change_dropdown": "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
@@ -1494,7 +1494,7 @@
       "change_status": "Change ready for submission"
     }
   },
-  "Participating_Organisations_Changes_Bulk_Free_Text_Reviewable_Set": {
+  "Multiple_Changes_Participating_Organisations_Reviewable_Set_Four": {
     "Addition_Of_New_Participating_Organisation_Type_one": {
       "area_of_change_dropdown": "Participating organisations",
       "specific_change_dropdown": "Addition of new participating organisation type",
