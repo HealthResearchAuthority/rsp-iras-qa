@@ -761,6 +761,27 @@ export default class ModificationsCommonPage {
     return modificationMap;
   }
 
+  async getModificationRankingPostApprovalPage(): Promise<Map<string, string[]>> {
+    const modificationTypeValue: string[] = [];
+    const categoryValue: string[] = [];
+    const reviewTypeValue: string[] = [];
+    const columns = this.tableRows.nth(1).getByRole('cell');
+    const modificationType = confirmStringNotNull(await columns.nth(1).textContent());
+    modificationTypeValue.push(modificationType);
+
+    const category = confirmStringNotNull(await columns.nth(3).textContent());
+    categoryValue.push(category);
+
+    const reviewType = confirmStringNotNull(await columns.nth(2).textContent());
+    reviewTypeValue.push(reviewType);
+    const modificationRankingMap = new Map([
+      ['modificationType', modificationTypeValue],
+      ['rankingCategory', categoryValue],
+      ['reviewType', reviewTypeValue],
+    ]);
+    return modificationRankingMap;
+  }
+
   async getModificationRowNumberPostApprovalPage(rowNumber?: number): Promise<Map<string, string[]>> {
     const modificationIdValue: string[] = [];
     const submittedDateValue: string[] = [];

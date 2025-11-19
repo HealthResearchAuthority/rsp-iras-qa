@@ -93,7 +93,6 @@
     "Other minor change to project management",
     "Other significant change to project management",
     "Principal investigator: conflict of interest",
-    "Changes to the research team",
     "Change to background information that affects scientific value of the project",
     "Change to the endpoint or the main objective",
     "Change to the inclusion or exclusion criteria: non-significant",
@@ -1041,7 +1040,7 @@
   "Modification_Status_Not_Authorised": {
     "status": "Not authorised"
   },
-"Modification_Status_With_Regulator": {
+  "Modification_Status_With_Regulator": {
     "status": "With review body"
   },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
@@ -1123,6 +1122,48 @@
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Change to the use of human biological samples in the project: non-significant (for example, change to the logistical, transporting or storing arrangements)",
       "changes_free_text": "This is a free text change for Change to the use of human biological samples in the project: non-significant (for example, change to the logistical, transporting or storing arrangements).",
+      "change_status": "Change ready for submission"
+    },
+    "Participant_Procedures_Non_Significant_Change": {
+      "area_of_change_dropdown": "Participant procedures",
+      "specific_change_dropdown": "Participant procedures: non-significant change",
+      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Multiple_Modifications": {
+    "Planned_End_Date_NHS_All_Yes_All_Countries": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "01",
+      "planned_project_end_month_dropdown": "January",
+      "planned_project_end_year_text": "2030",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    },
+    "Changes_To_The_Research_Team": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Changes to the research team",
+      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
       "change_status": "Change ready for submission"
     },
     "Participant_Procedures_Non_Significant_Change": {

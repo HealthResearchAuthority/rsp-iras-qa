@@ -2581,3 +2581,24 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Post_Trial_Information_For_Participants      |
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
+
+  @rsp-5573 @run_1
+  Scenario Outline: Validate that user can create and submit reviewable modifications
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I create multiple modifications using '<Changes>' dataset
+    And I capture the page screenshot
+    Then I validate overall modification ranking on post approval tab
+
+    Examples:
+      | Changes                | Research_Locations  |
+      | Multiple_Modifications | Nhs_Involvement_Yes |

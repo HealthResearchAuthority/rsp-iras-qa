@@ -18,3 +18,20 @@ Then(
     await expect(sponsorWorkspacePage.mainPageContent.getByText(authorisationsBodyLabel)).toBeVisible();
   }
 );
+
+Then(
+  'I can see the list of modifications received for sponsor approval is sorted by {string} order of the {string}',
+  async ({ commonItemsPage, sponsorWorkspacePage }, sortDirection: string, sortField: string) => {
+    let sortedModsList: string[];
+    const searchColumnIndex = await sponsorWorkspacePage.getColumnIndex(sortField);
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
+    if (sortField.toLowerCase() == 'modification id') {
+      sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
+    } else if (sortDirection.toLowerCase() == 'ascending') {
+      sortedModsList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    } else {
+      sortedModsList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+    }
+    expect.soft(actualList).toEqual(sortedModsList);
+  }
+);

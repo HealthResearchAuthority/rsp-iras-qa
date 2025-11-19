@@ -24,4 +24,31 @@ export default class SponsorWorkspacePage {
   async assertOnSponsorWorkspacePage() {
     await expect.soft(this.pageHeading).toBeVisible();
   }
+
+  async getColumnIndex(columnName: string): Promise<number> {
+    let columnIndex: number;
+    switch (columnName.toLowerCase()) {
+      case 'modification id':
+        columnIndex = 0;
+        break;
+      case 'short project title':
+        columnIndex = 1;
+        break;
+      case 'date received':
+        columnIndex = 2;
+        break;
+      case 'date actioned':
+        columnIndex = 3;
+        break;
+      case 'chief investigator':
+        columnIndex = 4;
+        break;
+      case 'status':
+        columnIndex = 5;
+        break;
+      default:
+        throw new Error(`${columnName} is not a valid option`);
+    }
+    return columnIndex;
+  }
 }

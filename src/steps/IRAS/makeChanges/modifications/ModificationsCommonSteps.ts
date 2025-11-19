@@ -311,6 +311,24 @@ Then(
   }
 );
 
+Then('I validate overall modification ranking on post approval tab', async ({ modificationsCommonPage }) => {
+  const modificationTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).modificationType;
+  const categoryExpected = (await modificationsCommonPage.getOverallRankingForChanges()).category;
+  const reviewTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).reviewType;
+  const modificationRankingDetails = await modificationsCommonPage.getModificationRankingPostApprovalPage();
+  const modificationTypeValue = modificationRankingDetails.get('modificationType');
+  const modificationTypeActual = Array.isArray(modificationTypeValue)
+    ? modificationTypeValue.join(', ')
+    : modificationTypeValue;
+  const categoryValue = modificationRankingDetails.get('rankingCategory');
+  const categoryActual = Array.isArray(categoryValue) ? categoryValue.join(', ') : categoryValue;
+  const reviewTypeValue = modificationRankingDetails.get('reviewType');
+  const reviewTypeActual = Array.isArray(reviewTypeValue) ? reviewTypeValue.join(', ') : reviewTypeValue;
+  expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
+  expect.soft(categoryActual).toBe(categoryExpected);
+  expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
+});
+
 Then(
   'I click on the modification id hyperlink in the post approval tab',
   async ({ modificationsCommonPage, commonItemsPage }) => {
@@ -553,6 +571,56 @@ Then(
       const buttonValue = commonItemsPage.buttonTextData.Project_Overview_Page.Create_New_Modification;
       await commonItemsPage.govUkButton.getByText(confirmStringNotNull(buttonValue)).click();
       await selectAreaOfChangePage.selectAreaOfChangeAndSaveLater(modificationDataset);
+    }
+  }
+);
+
+Then(
+  'I create multiple modifications using {string} dataset',
+  async (
+    {
+      commonItemsPage,
+      modificationsCommonPage,
+      selectAreaOfChangePage,
+      projectIdentificationSelectChangePage,
+      projectIdentificationSelectReferenceToChangePage,
+      projectIdentificationEnterReferenceNumbersPage,
+      sponsorReferencePage,
+    },
+    datasetName
+  ) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeNames = Object.keys(changesDataset);
+    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
+      const changeName = changeNames[changeIndex];
+      const changeDataset = changesDataset[changeName];
+      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+      await modificationsCommonPage.createChangeModification(
+        {
+          projectIdentificationSelectChangePage,
+          projectIdentificationSelectReferenceToChangePage,
+          projectIdentificationEnterReferenceNumbersPage,
+        },
+        changeName,
+        changeDataset
+      );
+      // await commonItemsPage.clickButton('Modification_Details_Page', 'Save_Continue');
+
+      await commonItemsPage.clickButton('Modification_Details_Page', 'Save_Continue_Review');
+      const sponsorReferenceDataset = sponsorReferencePage.sponsorReferencePageTestData['Valid_Data_All_Fields'];
+      for (const key in sponsorReferenceDataset) {
+        if (Object.hasOwn(sponsorReferenceDataset, key)) {
+          await commonItemsPage.fillUIComponent(sponsorReferenceDataset, key, sponsorReferencePage);
+        }
+      }
+      await commonItemsPage.clickButton('Sponsor_Reference_Page', 'Save_Continue_Review');
+      await commonItemsPage.clickButton('Review_All_Changes_Page', 'Send_Modification_To_Sponsor');
+      await commonItemsPage.clickButton('Confirmation_Page', 'Return_To_Project_Overview');
+
+      // Only click "Add Another Change" if it's not the last iteration
+      if (changeIndex < changeNames.length - 1) {
+        await commonItemsPage.clickButton('Project_Overview_Page', 'Create_New_Modification');
+      }
     }
   }
 );
