@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { convertDate, confirmStringNotNull } from '../../../utils/UtilFunctions';
+import { convertDate, confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -19,6 +19,7 @@ Then(
       chiefInvestigatorPage,
       researchLocationsPage,
       projectIdentifiersPage,
+      confirmProjectDetailsPage,
     },
     datasetNameProjectTitle: string,
     datasetNameChiefInvestigator: string,
@@ -32,6 +33,26 @@ Then(
       projectIdentifiersPage.projectIdentifiersPageTestData[datasetNameProjectIdentifier];
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
     expect(confirmStringNotNull(await reviewYourAnswersPage.iras_id_text.textContent())).toBe(irasIdRunTime);
+    const expectedShortProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
+    const actualShortProjectTitle = confirmStringNotNull(
+      await confirmProjectDetailsPage.short_project_title_row.textContent()
+    );
+    const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
+      actualShortProjectTitle
+        .replace(confirmProjectDetailsPage.confirmProjectDetailsPageTestData.Label_Texts.short_project_label, '')
+        .trim()
+    );
+    const expectedFullProjectTitle = (await projectDetailsIRASPage.getFullProjectTitle()).trimEnd();
+    const actualFullProjectTitle = confirmStringNotNull(
+      await confirmProjectDetailsPage.full_project_title_row.textContent()
+    );
+    const actualFullProjectTitleUpdated = await removeUnwantedWhitespace(
+      actualFullProjectTitle
+        .replace(confirmProjectDetailsPage.confirmProjectDetailsPageTestData.Label_Texts.full_project_label, '')
+        .trim()
+    );
+    expect.soft(actualShortProjectTitleUpdated).toBe(expectedShortProjectTitle);
+    expect.soft(actualFullProjectTitleUpdated).toBe(expectedFullProjectTitle);
     for (const key in datasetProjectTitle) {
       if (Object.hasOwn(datasetProjectTitle, key)) {
         if (
