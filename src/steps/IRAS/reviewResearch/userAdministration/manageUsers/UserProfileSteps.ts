@@ -70,8 +70,8 @@ When(
     await expect
       .soft(userProfilePage.last_updated_value)
       .toContainText(confirmStringNotNull(expectedValue.replace(expectedMinutes, '')));
-    expect.soft(parseInt(actualMinutes)).toBeGreaterThanOrEqual(parseInt(expectedMinutes) - 1);
-    expect.soft(parseInt(actualMinutes)).toBeLessThanOrEqual(parseInt(expectedMinutes) + 1);
+    expect.soft(Number.parseInt(actualMinutes)).toBeGreaterThanOrEqual(Number.parseInt(expectedMinutes) - 1);
+    expect.soft(Number.parseInt(actualMinutes)).toBeLessThanOrEqual(Number.parseInt(expectedMinutes) + 1);
   }
 );
 
