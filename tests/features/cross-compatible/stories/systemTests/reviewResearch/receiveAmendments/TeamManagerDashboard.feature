@@ -4,7 +4,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
 
-        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @Complete-After-DB-Connection @TestLNTM
+        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @Complete-After-DB-Connection
         Scenario Outline: Verify the team manger is able to view existing list of modifications for a specific lead nation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot

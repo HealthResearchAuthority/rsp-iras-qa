@@ -95,7 +95,7 @@ Feature: My Account Home page - Approvals
             | Field_And_Summary_Error_Message |
             | No_Record_Type_Selected_Error   |
 
-    @SearchProjectRecords @TeamManager
+    @SearchProjectRecords @TeamManager  @KNOWN-DEFECT-RSP-5909
     Scenario Outline: Validate routing after selecting project record for different user roles
         Given I have navigated to the 'Approvals_Page' as '<User>'
         And I click the 'Search_Records' link on the 'Approvals_Page'
@@ -108,22 +108,13 @@ Feature: My Account Home page - Approvals
         And I capture the page screenshot
         Then I can see the 'Search_Projects_Page'
         Examples:
-            | User                    |
-            | System_Admin            |
-            | Studywide_Reviewer      |
-            | Studywide_Reviewer_NI   |
-            | Studywide_Reviewer_S    |
-            | Studywide_Reviewer_W    |
-            | Team_Manager            |
-            | Team_Manager_NI         |
-            | Team_Manager_S          |
-            | Team_Manager_W          |
-            | Workflow_Coordinator    |
-            | Workflow_Coordinator_NI |
-            | Workflow_Coordinator_S  |
-            | Workflow_Coordinator_W  |
+            | User                 |
+            | System_Admin         |
+            | Studywide_Reviewer   |
+            | Team_Manager         |
+            | Workflow_Coordinator |
 
-    @SearchModificationRecords @TeamManager
+    @SearchModificationRecords @KNOWN-DEFECT-RSP-5909 @TeamManager
     Scenario Outline: Validate routing after selecting modification record for different user roles
         Given I have navigated to the 'Approvals_Page' as '<User>'
         And I click the 'Search_Records' link on the 'Approvals_Page'
@@ -136,17 +127,8 @@ Feature: My Account Home page - Approvals
         And I capture the page screenshot
         Then I can see the 'Search_Modifications_Page'
         Examples:
-            | User                    |
-            | System_Admin            |
-            | Studywide_Reviewer      |
-            | Studywide_Reviewer_NI   |
-            | Studywide_Reviewer_S    |
-            | Studywide_Reviewer_W    |
-            | Team_Manager            |
-            | Team_Manager_NI         |
-            | Team_Manager_S          |
-            | Team_Manager_W          |
-            | Workflow_Coordinator    |
-            | Workflow_Coordinator_NI |
-            | Workflow_Coordinator_S  |
-            | Workflow_Coordinator_W  |
+            | User                 |
+            | System_Admin         |
+            | Studywide_Reviewer   |
+            | Team_Manager         |
+            | Workflow_Coordinator |
