@@ -288,7 +288,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
-    
+
     Examples:
       | Changes                                                          | Research_Locations  |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_Yes |

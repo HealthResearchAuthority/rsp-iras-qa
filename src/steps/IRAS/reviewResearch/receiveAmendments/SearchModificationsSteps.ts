@@ -1,46 +1,9 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull, confirmStringNotNull, sortArray } from '../../../../utils/UtilFunctions';
-import config from '../../../../../playwright.config';
+
 import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
 const { When, Then } = createBdd(test);
-
-When(
-  'I enter {string} into the search field for search modifications page',
-  async ({ searchModificationsPage }, datasetName: string) => {
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
-    await searchModificationsPage.iras_id_search_text.fill(dataset['iras_id_text']);
-  }
-);
-
-When(
-  'I select advanced filters in the search modifications page using {string}',
-  async ({ searchModificationsPage, commonItemsPage, $tags }, filterDatasetName: string) => {
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    const isJsEnabled =
-      ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) && !$tags.includes('@jsDisabled');
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
-        if (key === 'sponsor_organisation_text') {
-          if (isJsEnabled) {
-            await commonItemsPage.selectSponsorOrgJsEnabled(dataset, key, commonItemsPage);
-          } else {
-            await searchModificationsPage.selectSponsorOrgJsDisabled(
-              dataset,
-              key,
-              commonItemsPage,
-              searchModificationsPage
-            );
-          }
-          delete dataset['sponsor_organisation_jsenabled_text'];
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
-        }
-      }
-    }
-  }
-);
 
 Then(
   'I can see the {string} ui labels in search modifications page',

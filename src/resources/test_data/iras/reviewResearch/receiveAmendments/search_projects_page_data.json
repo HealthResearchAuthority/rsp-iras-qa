@@ -111,16 +111,36 @@
     }
   },
   "Advanced_Filters": {
-    "Advanced_Filters_Nth": {
-      "chief_investigator_name_text": "ci@hra.nhs.uk",
-      "short_project_title_text": "QA Automation",
-      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+    "Advanced_Filters_All_Except_Short_Project_Title": {
+      "chief_investigator_name_text": "ci_test@test.com",
+      "sponsor_organisation_text": "University of Southampton",
       "lead_nation_checkbox": [
         "England",
+        "Northern Ireland",
+        "Scotland",
         "Wales"
       ],
       "participating_nation_checkbox": [
         "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filters_All": {
+      "chief_investigator_name_text": "ci_test@test.com",
+      "sponsor_organisation_text": "University of Southampton",
+      "short_project_title_text": "QA Automation",
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
         "Wales"
       ]
     },
@@ -693,7 +713,7 @@
       "search_input_text": "98"
     },
     "Valid_Full_Iras_Id": {
-      "search_input_text": "318943"
+      "search_input_text": "353762"
     }
   }
 }

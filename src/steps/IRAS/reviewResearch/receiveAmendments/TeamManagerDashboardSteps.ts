@@ -14,14 +14,17 @@ Then(
     const actualPageDescription = await teamManagerDashboardPage.page_description
       .textContent()
       .then((description: string) => description.trim());
-    expect(actualPageDescription.endsWith(expectedLeadNation)).toBeTruthy();
+    expect.soft(actualPageDescription.endsWith(expectedLeadNation)).toBeTruthy();
   }
 );
 
 Then(
   'I see only modifications where the lead nation is the country linked to the {string}',
   async ({ teamManagerDashboardPage, commonItemsPage }, user: string) => {
-    const leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
+    let leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
+    if (leadNation === 'Northern Ireland') {
+      leadNation = 'Northern_Ireland';
+    }
     const modificationsByLeadNation = await teamManagerDashboardPage.sqlGetModificationByLeadNation(leadNation);
     const actualList = await commonItemsPage.getActualModificationListValues(commonItemsPage.tableBodyRows, 1);
     const normalize = (arr: any[]) => arr.map((item) => item.toString().trim()).sort();

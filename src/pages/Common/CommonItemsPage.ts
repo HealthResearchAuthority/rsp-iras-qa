@@ -126,6 +126,7 @@ export default class CommonItemsPage {
   readonly sponsor_organisation_suggestion_list_labels: Locator;
   readonly sponsor_organisation_suggestion_listbox: Locator;
   readonly sponsor_organisation_text: Locator;
+  readonly search_projects_modifications_sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
@@ -349,6 +350,10 @@ export default class CommonItemsPage {
           .select_a_sponsor_organisation_hint_text,
       })
     );
+    this.search_projects_modifications_sponsor_organisation_jsdisabled_search_button =
+      this.sponsor_organisation_fieldset.getByRole('button', {
+        name: 'Search',
+      });
     this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset
       .getByRole('button', {
         name: 'Search',
@@ -1737,6 +1742,18 @@ export default class CommonItemsPage {
       } else {
         dataFound = true;
       }
+    }
+    return actualListValues;
+  }
+
+  async getActualListValuesShortProjectTitle(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = (await row.getByRole('cell').nth(columnIndex).textContent()).replaceAll(/\n|\t/g, '');
+      // const actualListValue = confirmStringNotNull(
+      //   await row.getByRole('cell').nth(columnIndex).textContent()
+      // ).replaceAll(/\n|\t/g, '');
+      actualListValues.push(actualListValue);
     }
     return actualListValues;
   }

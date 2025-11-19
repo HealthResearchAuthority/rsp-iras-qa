@@ -47,7 +47,7 @@ Feature: Receive Amendments: Search Modifications
 
         @RegressionSearchModificationsAdvancedFilters @rsp-4011
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
@@ -57,7 +57,7 @@ Feature: Receive Amendments: Search Modifications
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -91,7 +91,7 @@ Feature: Receive Amendments: Search Modifications
 
         @RegressionSearchModificationsFilterSort @rsp-4011
         Scenario Outline: Verify that the user can view the list of modifications by performing a search, applying advanced filters, and sorting the results in both ascending and descending order
-                When I enter 'Valid_Iras_Id_Prefix' into the search field for search modifications page
+                When I enter 'Valid_Iras_Id_Prefix' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -106,7 +106,7 @@ Feature: Receive Amendments: Search Modifications
                 Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using 'Advanced_Filters_Checkboxes'
+                And I select advanced filters in the 'Search_Modifications_Page' using 'Advanced_Filters_Checkboxes'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -131,11 +131,11 @@ Feature: Receive Amendments: Search Modifications
 
         @RegressionSearchModificationsNoResultsFound @RegressionInvalidIrasIdAndAdvancedFilters
         Scenario Outline: Verify the user can see no matching results found message when no records match the search and filter criteria
-                When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Invalid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot

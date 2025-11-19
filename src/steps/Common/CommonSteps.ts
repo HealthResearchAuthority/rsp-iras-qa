@@ -1157,6 +1157,7 @@ Then(
       commonItemsPage,
       myResearchProjectsPage,
       projectOverviewPage,
+      searchProjectsPage,
     },
     actionToPerform: string,
     filterDatasetName: string,
@@ -1169,6 +1170,10 @@ Then(
       Search_Modifications_Page: {
         dataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
         labels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
+      },
+      Search_Projects_Page: {
+        dataset: searchProjectsPage.searchProjectsPageTestData.Advanced_Filters,
+        labels: searchProjectsPage.searchProjectsPageTestData.Search_Projects_Page,
       },
       Manage_Review_Bodies_Page: {
         dataset: manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters,

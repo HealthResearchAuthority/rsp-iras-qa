@@ -3,9 +3,9 @@ import * as linkTextData from '../../../../resources/test_data/common/link_text_
 import * as searchProjectsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_projects_page_data.json';
 import path from 'node:path';
 import * as fse from 'fs-extra';
-import { returnDataFromJSON } from '../../../../utils/UtilFunctions';
-// import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
-// import CommonItemsPage from '../../../Common/CommonItemsPage';
+import { confirmStringNotNull, returnDataFromJSON } from '../../../../utils/UtilFunctions';
+import { connect } from '../../../../utils/DbConfig';
+import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/receiveAmendments/search_projects_page_data.json';
 
@@ -14,7 +14,7 @@ export default class SearchProjectsPage {
   readonly page: Page;
   readonly searchProjectsPageTestData: typeof searchProjectsPageTestData;
   readonly linkTextData: typeof linkTextData;
-  private _modifications_list_after_search: string[];
+  private _projects_list_after_search: string[];
   private _iras_id: string;
   readonly mainPageContent: Locator;
   readonly page_heading: Locator;
@@ -76,7 +76,7 @@ export default class SearchProjectsPage {
   constructor(page: Page) {
     this.page = page;
     this.searchProjectsPageTestData = searchProjectsPageTestData;
-    this._modifications_list_after_search = [];
+    this._projects_list_after_search = [];
     this._iras_id = '';
 
     //Locators
@@ -296,12 +296,12 @@ export default class SearchProjectsPage {
 
   //Getters & Setters for Private Variables
 
-  async getModificationIdListAfterSearch(): Promise<string[]> {
-    return this._modifications_list_after_search;
+  async getIrasIdListAfterSearch(): Promise<string[]> {
+    return this._projects_list_after_search;
   }
 
-  async setModificationIdListAfterSearch(value: string[]): Promise<void> {
-    this._modifications_list_after_search = value;
+  async setIrasIdListAfterSearch(value: string[]): Promise<void> {
+    this._projects_list_after_search = value;
   }
 
   async getIrasId(): Promise<string> {
@@ -342,105 +342,54 @@ export default class SearchProjectsPage {
       }
     })();
   }
+
+  async sqlGetIrasIdByStatus(status: string) {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(`
+    SELECT TOP 1
+       ProjectRecords.IrasId
+    FROM  ProjectRecords 
+    INNER JOIN ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+    WHERE 
+        ProjectRecordAnswers.QuestionId = 'IQA0005' AND 
+        ProjectRecordAnswers.SelectedOptions IN ('OPT0021', 'OPT0020', 'OPT0019','OPT0018') AND 
+        ProjectRecords.[Status]='${status}' ORDER BY ProjectRecords.CreatedDate DESC; 
+`);
+    await sqlConnection.close();
+    return queryResult.recordset.map((row) => row.IrasId);
+  }
+
+  async getAllProjectsFromTheTable(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    const irasIdValues: string[] = [];
+    const shortProjectTitleValues: string[] = [];
+    const leadNationValues: string[] = [];
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(3000);
+    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
+    for (let i = 0; i < 3; i++) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const irasId = confirmStringNotNull(await columns.nth(0).textContent());
+        irasIdValues.push(irasId);
+        const shortProjectTitle = confirmStringNotNull(await columns.nth(1).textContent());
+        shortProjectTitleValues.push(shortProjectTitle);
+        const leadNation = confirmStringNotNull(await columns.nth(2).textContent());
+        leadNationValues.push(leadNation);
+        searchResultValues.push(irasId + '|' + shortProjectTitle + '|' + leadNation);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    const searchResultMap = new Map([
+      ['searchResultValues', searchResultValues],
+      ['irasIdValues', irasIdValues],
+      ['shortProjectTitleValues', shortProjectTitleValues],
+      ['leadNationValues', leadNationValues],
+    ]);
+    return searchResultMap;
+  }
 }
-
-// async getAllModificationsTheTable(): Promise<Map<string, string[]>> {
-//   const searchResultValues: string[] = [];
-//   const modificationIdValues: string[] = [];
-//   const shortProjectTitleValues: string[] = [];
-//   const modificationTypeValues: string[] = [];
-//   const chiefInvestigatorNameValues: string[] = [];
-//   const leadNationValues: string[] = [];
-//   await this.page.waitForLoadState('domcontentloaded');
-//   await this.page.waitForTimeout(3000);
-//   //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
-//   for (let i = 0; i < 3; i++) {
-//     const rowCount = await this.tableRows.count();
-//     for (let i = 1; i < rowCount; i++) {
-//       const columns = this.tableRows.nth(i).getByRole('cell');
-//       const modificationId = confirmStringNotNull(await columns.nth(0).textContent());
-//       modificationIdValues.push(modificationId);
-//       const shortProjectTitle = confirmStringNotNull(await columns.nth(1).textContent());
-//       shortProjectTitleValues.push(shortProjectTitle);
-//       const modificationType = confirmStringNotNull(await columns.nth(2).textContent());
-//       modificationTypeValues.push(modificationType);
-//       const chiefInvestigatorName = confirmStringNotNull(await columns.nth(3).textContent());
-//       chiefInvestigatorNameValues.push(chiefInvestigatorName);
-//       const leadNation = confirmStringNotNull(await columns.nth(4).textContent());
-//       leadNationValues.push(leadNation);
-//       searchResultValues.push(
-//         modificationId +
-//           '|' +
-//           shortProjectTitle +
-//           '|' +
-//           modificationType +
-//           '|' +
-//           chiefInvestigatorName +
-//           '|' +
-//           leadNation
-//       );
-//     }
-//     if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
-//       await this.next_button.click();
-//       await this.page.waitForLoadState('domcontentloaded');
-//     }
-//   }
-//   const searchResultMap = new Map([
-//     ['searchResultValues', searchResultValues],
-//     ['modificationIdValues', modificationIdValues],
-//     ['shortProjectTitleValues', shortProjectTitleValues],
-//     ['modificationTypeValues', modificationTypeValues],
-//     ['chiefInvestigatorNameValues', chiefInvestigatorNameValues],
-//     ['leadNationValues', leadNationValues],
-//   ]);
-//   return searchResultMap;
-// }
-
-// async clickFilterChevronModifications<PageObject>(dataset: JSON, key: string, page: PageObject) {
-//   const button = page[`${key}_chevron`];
-//   const fromDate = dataset['date_submitted_from_day_text'];
-//   const isToDateKey = key === 'date_submitted_to_day_text';
-//   const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
-//   if (button && shouldClick) {
-//     await button.click();
-//   }
-// }
-
-// async selectSponsorOrgJsDisabled<PageObject>(
-//   dataset: JSON,
-//   key: string,
-//   commonItemsPage: CommonItemsPage,
-//   page: PageObject
-// ) {
-//   await commonItemsPage.fillUIComponent(dataset, key, page);
-//   await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
-//   await this.page.waitForTimeout(2000);
-//   if (dataset[key] !== '') {
-//     await commonItemsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
-//   }
-// }
-
-// async getHintLabel(dataset: JSON, key: string): Promise<string> {
-//   const numberOfCheckboxesSelected = dataset[key].length;
-//   const hintLabel =
-//     numberOfCheckboxesSelected +
-//     ' ' +
-//     this.searchProjectsPageTestData.Search_Projects_Page.selected_checkboxes_hint_label;
-//   return hintLabel;
-// }
-
-// async getActualResultsCountLabel(commonItemsPage: CommonItemsPage) {
-//   return confirmStringNotNull(await commonItemsPage.search_results_count.textContent());
-// }
-
-// async getExpectedResultsCountLabel(commonItemsPage: CommonItemsPage, count: number) {
-//   const testData = commonItemsPage.commonTestData;
-//   const expectedResultCountLabel = testData.result_count_heading;
-//   return count + expectedResultCountLabel;
-// }
-
-// async getExpectedResultsCountLabelNoResults(commonItemsPage: CommonItemsPage) {
-//   const expectedResultCountLabel = commonItemsPage.commonTestData.result_count_heading;
-//   return '0' + expectedResultCountLabel;
-// }
-// }

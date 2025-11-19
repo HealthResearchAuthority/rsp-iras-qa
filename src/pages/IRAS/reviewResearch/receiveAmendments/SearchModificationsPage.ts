@@ -401,7 +401,7 @@ export default class SearchModificationsPage {
     page: PageObject
   ) {
     await commonItemsPage.fillUIComponent(dataset, key, page);
-    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.click();
     await this.page.waitForTimeout(2000);
     if (dataset[key] !== '') {
       await commonItemsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
