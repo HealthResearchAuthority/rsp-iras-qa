@@ -17,17 +17,14 @@ Feature: My Account Home page - Approvals
         And I click the '<Sub_Heading>' link on the 'Approvals_Page'
         And I capture the page screenshot
         And I can see the '<Page>'
-        When I click the 'Approvals' link in the breadcrumbs on the 'Search_Modifications_Page'
+        When I click the 'Approvals' link in the breadcrumbs on the '<Page>'
         Then I can see the approvals home page
         When I click the 'My_Account' link in the breadcrumbs on the 'Approvals_Page'
-        When I click the 'Back' link on the 'Approvals_Page'
         Then I can see the 'Home_Page'
         Examples:
             | Sub_Heading            | Page                                |
             | Search_Records         | Choose_A_Record_Type_To_Search_Page |
             | Modifications_Tasklist | Modifications_Tasklist_Page         |
-            | My_Tasklist            | My_Modifications_Tasklist_Page      |
-            | Team_Manager_Dashboard | Team_Manager_Dashboard_Page         |
 
     @ApprovalsPage @StudyWideReviewer
     Scenario: Validate the approvals page when logged in as a study-wide reviewer and make sure the study-wide reviewer has access to the pages under approvals workspace
@@ -37,10 +34,9 @@ Feature: My Account Home page - Approvals
         And I click the '<Sub_Heading>' link on the 'Approvals_Page'
         And I capture the page screenshot
         And I can see the '<Page>'
-        When I click the 'Approvals' link in the breadcrumbs on the 'Search_Modifications_Page'
+        When I click the 'Approvals' link in the breadcrumbs on the '<Page>'
         Then I can see the approvals home page
         When I click the 'My_Account' link in the breadcrumbs on the 'Approvals_Page'
-        When I click the 'Back' link on the 'Approvals_Page'
         Then I can see the 'Home_Page'
         Examples:
             | Sub_Heading    | Page                                |
@@ -55,10 +51,9 @@ Feature: My Account Home page - Approvals
         And I click the '<Sub_Heading>' link on the 'Approvals_Page'
         And I capture the page screenshot
         And I can see the '<Page>'
-        When I click the 'Approvals' link in the breadcrumbs on the 'Search_Modifications_Page'
+        When I click the 'Approvals' link in the breadcrumbs on the '<Page>'
         Then I can see the approvals home page
         When I click the 'My_Account' link in the breadcrumbs on the 'Approvals_Page'
-        When I click the 'Back' link on the 'Approvals_Page'
         Then I can see the 'Home_Page'
         Examples:
             | Sub_Heading            | Page                                |
@@ -73,10 +68,9 @@ Feature: My Account Home page - Approvals
         And I click the '<Sub_Heading>' link on the 'Approvals_Page'
         And I capture the page screenshot
         And I can see the '<Page>'
-        When I click the 'Approvals' link in the breadcrumbs on the 'Search_Modifications_Page'
+        When I click the 'Approvals' link in the breadcrumbs on the '<Page>'
         Then I can see the approvals home page
         When I click the 'My_Account' link in the breadcrumbs on the 'Approvals_Page'
-        When I click the 'Back' link on the 'Approvals_Page'
         Then I can see the 'Home_Page'
         Examples:
             | Sub_Heading            | Page                                |
