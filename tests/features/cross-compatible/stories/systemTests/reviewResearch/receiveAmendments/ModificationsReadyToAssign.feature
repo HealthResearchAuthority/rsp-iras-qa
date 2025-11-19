@@ -237,7 +237,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Invalid_Date_From                 | Invalid_Date_From_Error                 |
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-    @SortTasklistByColumn @rsp-4091 @rsp-4822 @KNOWN-DEFECT-RSP-6204 @KNOWN-DEFECT-RSP-6229
+    @SortTasklistByColumn @rsp-4091 @rsp-4822
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot

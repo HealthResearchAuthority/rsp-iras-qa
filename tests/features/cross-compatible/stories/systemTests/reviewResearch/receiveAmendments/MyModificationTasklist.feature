@@ -59,7 +59,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
         And I capture the page screenshot
         Then I can see the approvals home page
 
-    @SortMyTasklistByColumn @rsp-4842 @rsp-4822 @KNOWN-DEFECT-RSP-6204 @KNOWN-DEFECT-RSP-6229
+    @SortMyTasklistByColumn @rsp-4842 @rsp-4822
     Scenario Outline: Verify the user is able to sort the my modifications tasklist by ascending and descending order for each table column
         When I click the '<Sort_Button>' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot

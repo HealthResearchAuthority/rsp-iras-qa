@@ -1,14 +1,22 @@
 import { Locator, Page } from '@playwright/test';
 import * as modificationsReceivedCommonPagePageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_received_common_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
+import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../../utils/DbConfig';
+import { IResult } from 'mssql';
 
 //Declare Page Objects
 export default class ModificationsReceivedCommonPage {
   readonly page: Page;
   readonly modificationsReceivedCommonPagePageTestData: typeof modificationsReceivedCommonPagePageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
+  readonly dbConfigData: typeof dbConfigData;
   private _days_since_submission_from_filter: number;
   private _days_since_submission_to_filter: number;
+  private _iras_id: string;
+  private _modification_id: string;
+  private _short_project_title: string;
+  private _status: string;
   readonly days_since_submission_from_text: Locator;
   readonly days_since_submission_filter_input: Locator;
   readonly days_since_submission_label: Locator;
@@ -21,8 +29,13 @@ export default class ModificationsReceivedCommonPage {
     this.page = page;
     this.modificationsReceivedCommonPagePageTestData = modificationsReceivedCommonPagePageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
+    this.dbConfigData = dbConfigData;
     this._days_since_submission_from_filter = 0;
     this._days_since_submission_to_filter = 0;
+    this._iras_id = '';
+    this._modification_id = '';
+    this._short_project_title = '';
+    this._status = '';
 
     //Locators
     this.days_since_submission_from_text = this.page.getByTestId('Search_FromDaysSinceSubmission');
@@ -63,6 +76,39 @@ export default class ModificationsReceivedCommonPage {
     this._days_since_submission_to_filter = value;
   }
 
+  async getIrasId(): Promise<string> {
+    return this._iras_id;
+  }
+
+  async setIrasId(value: string): Promise<void> {
+    this._iras_id = value;
+  }
+
+  async getModificationId(): Promise<string> {
+    return this._modification_id;
+  }
+
+  async setModificationId(value: string): Promise<void> {
+    this._modification_id = value;
+  }
+
+  async getShortProjectTitle(): Promise<string> {
+    return this._short_project_title;
+  }
+
+  async setShortProjectTitle(value: string): Promise<void> {
+    this._short_project_title = value;
+  }
+
+  async getStatus(): Promise<string> {
+    return this._status;
+  }
+
+  async setStatus(value: string): Promise<void> {
+    this._status = value;
+  }
+
+  // Page Methods
   async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
     const listAsDates: Date[] = [];
     const sortedListAsStrings: string[] = [];
@@ -109,7 +155,13 @@ export default class ModificationsReceivedCommonPage {
     }
 
     for (const nums of listAsNums) {
-      const days = `${nums} ${this.modificationsReceivedCommonPagePageTestData.Tasklist_Page.days_since_suffix}`;
+      let suffix: string;
+      if (nums == 1) {
+        suffix = this.modificationsReceivedCommonPagePageTestData.Tasklist_Page.day_since_suffix;
+      } else {
+        suffix = this.modificationsReceivedCommonPagePageTestData.Tasklist_Page.days_since_suffix;
+      }
+      const days = `${nums} ${suffix}`;
       sortedListAsStrings.push(days);
     }
     return sortedListAsStrings;
@@ -287,5 +339,33 @@ export default class ModificationsReceivedCommonPage {
         throw new Error(`${columnName} is not a valid option`);
     }
     return columnIndex;
+  }
+
+  async setModificationValues(modificationQueryResult: IResult<any>, projectQueryResult: IResult<any>): Promise<void> {
+    await this.setIrasId(projectQueryResult.recordset[0].IrasId);
+    await this.setModificationId(modificationQueryResult.recordset[0].ModificationIdentifier);
+    await this.setShortProjectTitle(projectQueryResult.recordset[0].ShortProjectTitle);
+    await this.setStatus(modificationQueryResult.recordset[0].Status);
+  }
+
+  // SQL STATEMENTS //
+  async sqlGetSpecificModificationByStatus(status: string, optionalReviewNullQueryInput: string): Promise<void> {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const modificationQueryResult = await sqlConnection.query(
+      `SELECT TOP (1) * FROM ProjectModifications WHERE [Status] = '${status}'${optionalReviewNullQueryInput} ORDER BY NEWID()`
+    );
+    if (modificationQueryResult.recordset.length == 0) {
+      await sqlConnection.close();
+      throw new Error(`No modification found in the system with ${status} status`);
+    } else {
+      const projectRecordId = modificationQueryResult.recordset[0].ProjectRecordId;
+      const projectQueryResult = await sqlConnection.query(
+        `SELECT ShortProjectTitle, IrasId FROM ProjectRecords WHERE Id ='${projectRecordId}'`
+      );
+      await sqlConnection.close();
+      console.dir(modificationQueryResult);
+      console.dir(projectQueryResult);
+      await this.setModificationValues(modificationQueryResult, projectQueryResult);
+    }
   }
 }

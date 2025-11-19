@@ -240,3 +240,46 @@ Given(
     await expect(modificationsReceivedCommonPage.days_since_submission_suffix_label).toBeVisible();
   }
 );
+
+When(
+  'I enter an iras id for a modification with status {string} into the search field',
+  async ({ commonItemsPage, modificationsReceivedCommonPage, modificationsCommonPage }, statusType: string) => {
+    let status: string;
+    let optionalReviewNullQueryInput: string = '';
+    if (statusType == 'Modification_Status_Received') {
+      status = modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
+      optionalReviewNullQueryInput = ' AND ReviewerId IS NULL';
+    } else if (statusType == 'Modification_Status_Review_In_Progress') {
+      status = modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
+      optionalReviewNullQueryInput = ' AND ReviewerId IS NOT NULL';
+    } else {
+      status = modificationsCommonPage.modificationsCommonPageTestData[statusType].status;
+    }
+    await modificationsReceivedCommonPage.sqlGetSpecificModificationByStatus(status, optionalReviewNullQueryInput);
+    await commonItemsPage.search_text.fill(`${await modificationsReceivedCommonPage.getIrasId()}`);
+  }
+);
+
+Then(
+  'I can see the modification is displayed in the {string} list with {string} status',
+  async (
+    { commonItemsPage, modificationsReceivedCommonPage, modificationsCommonPage },
+    pageType: string,
+    statusInput: string
+  ) => {
+    const statusExpected = modificationsCommonPage.modificationsCommonPageTestData[statusInput].status;
+    const modIdColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(
+      pageType,
+      'modification id'
+    );
+    const statusColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, 'status');
+    const rowLocator = commonItemsPage.tableBodyRows.filter({
+      has: commonItemsPage.page
+        .getByRole('cell')
+        .nth(modIdColumnIndex)
+        .getByText(`${await modificationsReceivedCommonPage.getModificationId()}`, { exact: true }),
+    });
+    const actualStatus = await rowLocator.getByRole('cell').nth(statusColumnIndex).textContent();
+    expect.soft(actualStatus).toEqual(statusExpected);
+  }
+);

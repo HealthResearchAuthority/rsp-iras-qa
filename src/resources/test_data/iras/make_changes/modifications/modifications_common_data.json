@@ -1112,6 +1112,12 @@
   "Modification_Status_With_Review_Body": {
     "status": "With review body"
   },
+  "Modification_Status_Received": {
+    "status": "Received"
+  },
+  "Modification_Status_Review_In_Progress": {
+    "status": "Review in progress"
+  },
   "Modification_Status_Authorised": {
     "status": "Authorised"
   },
