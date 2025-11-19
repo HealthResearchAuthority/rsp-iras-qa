@@ -60,6 +60,13 @@ export default class ReviewAllChangesPage {
   readonly supporting_documents_document_date_label: Locator;
   readonly supporting_documents_status_label: Locator;
   readonly supporting_documents_action_label: Locator;
+  readonly documentRows: Locator;
+  readonly documentTypeCell: Locator;
+  readonly documentNameCell: Locator;
+  readonly fileNameCell: Locator;
+  readonly documentVersionCell: Locator;
+  readonly documentDateCell: Locator;
+  readonly documentStatusCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -72,6 +79,13 @@ export default class ReviewAllChangesPage {
       .getByText(this.reviewAllChangesPageTestData.Review_All_Changes_Page.heading);
     this.row_label = this.page.locator('.govuk-summary-list__key');
     this.row_value = this.page.locator('.govuk-summary-list__value');
+    this.documentRows = this.page.locator('.govuk-table__row');
+    this.documentTypeCell = this.page.locator('td:nth-child(1)');
+    this.documentNameCell = this.page.locator('td:nth-child(2)');
+    this.fileNameCell = this.page.locator('td:nth-child(3)');
+    this.documentVersionCell = this.page.locator('td:nth-child(4)');
+    this.documentDateCell = this.page.locator('td:nth-child(5)');
+    this.documentStatusCell = this.page.locator('td:nth-child(6)');
     //Summary Section
     this.iras_id_label = this.row_label.getByText(
       this.reviewAllChangesPageTestData.Review_All_Changes_Page.Summary.iras_id_label,
@@ -269,7 +283,7 @@ export default class ReviewAllChangesPage {
     this.supporting_documents_status_label = this.page.getByRole('button', {
       name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_status_label.trim(),
     });
-    this.supporting_documents_action_label = this.page.getByRole('button', {
+    this.supporting_documents_action_label = this.page.getByRole('columnheader', {
       name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_action_label.trim(),
     });
   }

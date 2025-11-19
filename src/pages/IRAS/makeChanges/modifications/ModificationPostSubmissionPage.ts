@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import * as modificationPostSubmissionPageTestData from '../../../../resources/test_data/iras/make_changes/modifications/modification_post_submission_page_data.json';
 
 //Declare Page Objects
@@ -69,7 +69,9 @@ export default class ModificationPostSubmissionPage {
     //Locators
     this.pageHeading = this.page
       .getByRole('heading')
-      .getByText(this.modificationPostSubmissionPageTestData.Modification_Post_Submission_Page.heading);
+      .getByText(this.modificationPostSubmissionPageTestData.Modification_Post_Submission_Page.heading, {
+        exact: true,
+      });
     this.row_label = this.page.locator('.govuk-summary-list__key');
     this.row_value = this.page.locator('.govuk-summary-list__value');
     //Summary Section
@@ -272,19 +274,20 @@ export default class ModificationPostSubmissionPage {
     //   this.supporting_documents_action_label = this.page.getByRole('button', {
     //     name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_action_label.trim(),
     //   });
-    // }
+  }
 
-    // //Page Methods
-    // async gotoReviewAllChangesPage(modificationName: string) {
-    //   await this.page.goto(
-    //     `modifications/reviewallchanges?${this.reviewAllChangesPageTestData.Modification_Url[modificationName]}`
-    //   );
-    // }
-    //this needs to be updated once code drop is available
-    // async assertOnModificationPostSubmissionPage() {
-    //   await expect(this.pageHeading).toBeVisible();
-    //   expect(await this.page.title()).toBe(
-    //     this.modificationPostSubmissionPageTestData.Modification_Post_Submission_Page.title
-    //   );
+  // //Page Methods
+  // async gotoReviewAllChangesPage(modificationName: string) {
+  //   await this.page.goto(
+  //     `modifications/reviewallchanges?${this.reviewAllChangesPageTestData.Modification_Url[modificationName]}`
+  //   );
+  // }
+
+  async assertOnModificationPostSubmissionPage() {
+    await expect(this.pageHeading).toBeVisible();
+    //The below code will need to be tested as part of RSP-5532
+    // expect(await this.page.title()).toBe(
+    //   this.modificationPostSubmissionPageTestData.Modification_Post_Submission_Page.title
+    // );
   }
 }
