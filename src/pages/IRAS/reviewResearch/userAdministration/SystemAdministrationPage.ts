@@ -66,7 +66,7 @@ export default class SystemAdministrationPage {
 
   async assertOnSystemAdministrationPage() {
     await expect.soft(this.pageHeading).toBeVisible();
-    expect.soft(await this.page.title()).toBe(this.systemAdminPageTestData.System_Admin_Page.title); // Temporarily commented out due to title mismatch
+    expect.soft(await this.page.title()).toBe(this.systemAdminPageTestData.System_Admin_Page.title);
     await expect.soft(this.manage_review_bodies_hint_label).toBeVisible();
     await expect.soft(this.manage_users_hint_label).toBeVisible();
     await expect.soft(this.manage_sponsor_organisations_hint_label).toBeVisible();
