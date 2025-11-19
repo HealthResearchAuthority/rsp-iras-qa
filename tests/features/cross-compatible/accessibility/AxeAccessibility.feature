@@ -2581,3 +2581,33 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityApprovalsPage @TeamManager
+  Scenario: Approvals page
+    Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityChooseRecordTypePage @TeamManager
+  Scenario: Choose Record Type page
+    Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I can see the 'Choose_A_Record_Type_To_Search_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySearchProjectsPage @TeamManager
+  Scenario: Search projects page
+    Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I can see the 'Choose_A_Record_Type_To_Search_Page'
+    And I select the radio button for 'Project_Record' in the choose a record type to search page
+    And I capture the page screenshot
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
+    Then I can see the 'Search_Projects_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations

@@ -1,4 +1,4 @@
-@Approvals @SystemTest @rsp-5450 @rsp-5451 @Test545051
+@Approvals @SystemTest @rsp-5450 @rsp-5451
 Feature: My Account Home page - Approvals
 
     Background:
