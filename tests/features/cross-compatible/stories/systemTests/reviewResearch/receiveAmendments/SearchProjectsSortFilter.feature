@@ -69,7 +69,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Valid_Iras_Id_Prefix | Lead_Nation         | Lead nation         |
 
         @SortProjectsByColumn @DefaultSorting
-        Scenario Outline: Verify default sorting of projects by IRAS ID, and check ascending and descending order for iras id column after applying filters
+        Scenario Outline: Verify default sorting of projects by IRAS ID, Short Project Title and Lead Nation and check ascending and descending order for each column after applying filters
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 And I select advanced filters in the 'Search_Projects_Page' using '<Advanced_Filters>'
@@ -81,53 +81,25 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I capture the page screenshot
                 When I click the '<Sort_Button>' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'descending' order of the '<Sort_Field>'
+                Then I can see the list of 'project records' is sorted by '<Sort_Order_First>' order of the '<Sort_Field>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'descending' order of the '<Sort_Field>'
+                Then I can see the list of 'project records' is sorted by '<Sort_Order_First>' order of the '<Sort_Field>'
                 When I click the '<Sort_Button>' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
+                And I can see the list of 'project records' is sorted by '<Sort_Order_Second>' order of the '<Sort_Field>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'project records' is sorted by '<Sort_Order_Second>' order of the '<Sort_Field>'
 
                 Examples:
-                        | Advanced_Filters             | Sort_Button | Sort_Field |
-                        | Advanced_Filters_Lead_Nation | Iras_Id     | iras id    |
+                        | Advanced_Filters             | Sort_Button         | Sort_Field          | Sort_Order_First | Sort_Order_Second |
+                        | Advanced_Filters_Lead_Nation | Iras_Id             | iras id             | descending       | ascending         |
+                        | Advanced_Filters_Lead_Nation | Short_Project_Title | short project title | ascending        | descending        |
+                        | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         | ascending        | descending        |
 
-        @SortProjectsByColumn
-        Scenario Outline:Verify that the user can sort projects by Short Project Title and Lead Nation, and check ascending and descending order for Short Project Title and Lead Nation column after applying filters
-                And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
-                And I capture the page screenshot
-                And I select advanced filters in the 'Search_Projects_Page' using '<Advanced_Filters>'
-                And I capture the page screenshot
-                And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
-                And I capture the page screenshot
-                And I can now see a table of search results for 'project records'
-                And I can see the list of 'project records' is sorted by 'ascending' order of the 'iras id'
-                And I capture the page screenshot
-                When I click the '<Sort_Button>' button on the 'Search_Projects_Page'
-                And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
-                When I click the '<Sort_Button>' button on the 'Search_Projects_Page'
-                And I capture the page screenshot
-                Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I can see the list of 'project records' is sorted by 'descending' order of the '<Sort_Field>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'descending' order of the '<Sort_Field>'
-
-                Examples:
-                        | Advanced_Filters             | Sort_Button         | Sort_Field          |
-                        | Advanced_Filters_Lead_Nation | Short_Project_Title | short project title |
-                        | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         |
-
-        @ViewListOfProjects @ViewListOfProjectsPaginationFirstPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationNextLinkClick
+        @ViewListOfProjects @ViewListOfProjectsPaginationFirstPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationNextLinkClick @TestTijiPagination
         Scenario Outline: Verify pagination in the list of projects page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -149,7 +121,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | page number       | Advanced_Filters_Lead_Nation |
                         | next link         | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfProjects @ViewListOfProjectsPaginationLastPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationPreviousLinkClick
+        @ViewListOfProjects @ViewListOfProjectsPaginationLastPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationPreviousLinkClick @TestTijiPagination
         Scenario Outline: Verify pagination in the list of projects page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
