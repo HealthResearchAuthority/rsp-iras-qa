@@ -307,26 +307,26 @@ export default class ModificationsCommonPage {
       areaOfChangeSubHeading: string;
       individualChangeStatus: string;
     }> = [];
-
     const totalCards = await changeCards.count();
     const relevantCards: Locator[] = [];
-
     // Collect all cards except the first one (index starts at 1)
     for (let cardIndex = 1; cardIndex < totalCards; cardIndex++) {
       relevantCards.push(changeCards.nth(cardIndex));
     }
-
     let changeIndex = 0;
     for (const card of relevantCards) {
+      const actualSpecificChangeValueLocator = card
+        .locator(this.keyLocator, {
+          hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
+        })
+        .locator(this.valueLocator);
+      await expect.soft(actualSpecificChangeValueLocator).toBeVisible();
+      if (!(await actualSpecificChangeValueLocator.isVisible())) {
+        break;
+      }
       const actualSpecificChangeValue = confirmStringNotNull(
-        await card
-          .locator(this.keyLocator, {
-            hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
-          })
-          .locator(this.valueLocator)
-          .textContent()
+        await actualSpecificChangeValueLocator.textContent()
       ).trim();
-
       const actualAreaOfChangeSubHeading = confirmStringNotNull(
         await card
           .getByText(
@@ -336,20 +336,16 @@ export default class ModificationsCommonPage {
       )
         .trim()
         .split('\n')[0];
-
       const actualChangeStatus = confirmStringNotNull(
         await card.locator(this.modificationStatusLabel).textContent()
       ).trim();
-
       actualValuesArray.push({
         specificChangeValue: actualSpecificChangeValue,
         areaOfChangeSubHeading: actualAreaOfChangeSubHeading,
         individualChangeStatus: actualChangeStatus,
       });
-
       changeIndex++;
     }
-
     return actualValuesArray;
   }
 
@@ -899,5 +895,44 @@ export default class ModificationsCommonPage {
       filterToDate
     );
     expect(isDateSubmittedInDateInValidRange).toBe(true);
+  }
+
+  async validateCardData(expectedData: any, actualData: any) {
+    const compareArrays = (expected: any[], actual: any[]) => {
+      if (expected.length !== actual.length) return false;
+      return expected.every((val, index) => val === actual[index]);
+    };
+    for (const key of Object.keys(expectedData)) {
+      if (key.includes('change_status')) {
+        continue;
+      }
+      const expectedValue = expectedData[key];
+      const actualValue = actualData[key];
+      if (Array.isArray(expectedValue)) {
+        const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
+        const sortedActual = [...(actualValue || [])].sort(
+          (a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b)
+        );
+        expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
+      } else {
+        expect.soft(actualValue).toStrictEqual(expectedValue);
+      }
+    }
+  }
+
+  async getModificationStatus(status: string) {
+    if (status.toLowerCase() == 'with sponsor') {
+      return this.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
+    } else if (status.toLowerCase() == 'authorised') {
+      return this.modificationsCommonPageTestData.Modification_Status_Authorised.status;
+    } else if (status.toLowerCase() == 'not authorised') {
+      return this.modificationsCommonPageTestData.Modification_Status_Not_Authorised.status;
+    } else if (status.toLowerCase() == 'with review body') {
+      return this.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
+    } else if (status.toLowerCase() == 'approved') {
+      return this.modificationsCommonPageTestData.Modification_Status_Approved.status;
+    } else if (status.toLowerCase() == 'not approved') {
+      return this.modificationsCommonPageTestData.Modification_Status_Not_Approved.status;
+    }
   }
 }

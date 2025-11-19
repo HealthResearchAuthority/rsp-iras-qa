@@ -10,7 +10,7 @@ Then('I can see the sponsor authorisations page', async ({ sponsorAuthorisations
 Then(
   'I can see the searched modification to be present in the list with {string} status in the sponsor authorisations page',
   async ({ sponsorAuthorisationsPage, modificationsCommonPage, commonItemsPage }, status: string) => {
-    const modificationStatusForSponsor = await sponsorAuthorisationsPage.getModificationStatusForSponsor(status);
+    const modificationStatusForSponsor = await modificationsCommonPage.getModificationStatus(status);
     const modificationID = await modificationsCommonPage.getModificationID();
     const foundRecords = await sponsorAuthorisationsPage.findModification(commonItemsPage, modificationID, {
       statusForSponsor: modificationStatusForSponsor,
@@ -25,7 +25,7 @@ Then(
   async ({ sponsorAuthorisationsPage, modificationsCommonPage, commonItemsPage }) => {
     const dateActionedBySponsor = new Date().toLocaleDateString('en-GB', {
       day: 'numeric',
-      month: 'long',
+      month: 'short',
       year: 'numeric',
     });
     const modificationID = await modificationsCommonPage.getModificationID();

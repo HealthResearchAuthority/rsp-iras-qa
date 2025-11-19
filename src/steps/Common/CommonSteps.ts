@@ -504,6 +504,7 @@ Then(
       projectIdentificationEnterReferenceNumbersPage,
       contactDetailsModificationPage,
       projectPersonnelChangeChiefInvestigatorPage,
+      sponsorCheckAndAuthorisePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -617,6 +618,10 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = projectPersonnelChangeChiefInvestigatorPage;
+    } else if (pageKey == 'Sponsor_Check_And_Authorise_Page') {
+      errorMessageFieldDataset =
+        sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = sponsorCheckAndAuthorisePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
