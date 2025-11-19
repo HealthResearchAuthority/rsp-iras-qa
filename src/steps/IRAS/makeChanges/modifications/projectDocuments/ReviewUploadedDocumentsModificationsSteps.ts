@@ -86,7 +86,7 @@ Then(
         await addDocumentDetailsModificationsPage.assertOnAddDocumentsDetailsModificationsPage(
           specificChangeTitleLabel
         );
-        await commonItemsPage.govUkLink.getByText('Back').click();
+        await commonItemsPage.govUkBackLink.getByText('Back').click();
       } else {
         break;
       }

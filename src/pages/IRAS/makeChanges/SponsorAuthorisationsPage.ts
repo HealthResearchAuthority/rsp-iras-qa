@@ -35,6 +35,12 @@ export default class SponsorAuthorisationsPage {
       return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Authorised.status;
     } else if (status.toLowerCase() == 'not authorised') {
       return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Not_Authorised.status;
+    } else if (status.toLowerCase() == 'with review body') {
+      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
+    } else if (status.toLowerCase() == 'approved') {
+      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Approved.status;
+    } else if (status.toLowerCase() == 'not approved') {
+      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Not_Approved.status;
     }
   }
 

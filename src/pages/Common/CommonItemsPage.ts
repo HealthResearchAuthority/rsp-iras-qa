@@ -148,6 +148,7 @@ export default class CommonItemsPage {
   readonly govUkBreadCrumbsLink: Locator;
   readonly myAccountGovUkBreadCrumbsLink: Locator;
   readonly page_heading: Locator;
+  readonly govUkBackLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -189,6 +190,7 @@ export default class CommonItemsPage {
     this.govUkLink = this.page.getByRole('link');
     this.myAccountGovUkBreadCrumbsLink = this.page.locator('.govuk-breadcrumbs__link');
     this.govUkBreadCrumbsLink = this.page.locator('a.govuk-breadcrumbs__link');
+    this.govUkBackLink = this.page.locator('.govuk-back-link');
     this.fieldGroup = this.page.locator('.govuk-form-group');
     this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message');
