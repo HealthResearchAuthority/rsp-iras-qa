@@ -2545,3 +2545,39 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityTeamManagerDashboardEng
+  Scenario: Team Manager of England accesses the Team Manager dashboard
+    Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager'
+    And I capture the page screenshot
+    Then the country linked to the 'Team_Manager' appears as the lead nation in the page description
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityTeamManagerDashboardNI
+  Scenario: Team Manager of Northern Ireland accesses the Team Manager dashboard
+    Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager_NI'
+    And I capture the page screenshot
+    Then the country linked to the 'Team_Manager_NI' appears as the lead nation in the page description
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityTeamManagerDashboardSco
+  Scenario: Team Manager of Scotland accesses the Team Manager dashboard
+    Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager_S'
+    And I capture the page screenshot
+    Then the country linked to the 'Team_Manager_S' appears as the lead nation in the page description
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityTeamManagerDashboardW
+  Scenario: Team Manager of Wales accesses the Team Manager dashboard
+    Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager_W'
+    And I capture the page screenshot
+    Then the country linked to the 'Team_Manager_W' appears as the lead nation in the page description
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations

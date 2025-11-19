@@ -1,4 +1,4 @@
-@Approvals @SystemTest
+@Approvals @SystemTest @rsp-5450 @rsp-5451 @Test545051
 Feature: My Account Home page - Approvals
 
     Background:
@@ -94,3 +94,59 @@ Feature: My Account Home page - Approvals
         Examples:
             | Field_And_Summary_Error_Message |
             | No_Record_Type_Selected_Error   |
+
+    @SearchProjectRecords @TeamManager
+    Scenario Outline: Validate routing after selecting project record for different user roles
+        Given I have navigated to the 'Approvals_Page' as '<User>'
+        And I click the 'Search_Records' link on the 'Approvals_Page'
+        And I capture the page screenshot
+        And I can see the 'Choose_A_Record_Type_To_Search_Page'
+        And I capture the page screenshot
+        And I select the radio button for 'Project_Record' in the choose a record type to search page
+        And I capture the page screenshot
+        And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+        And I capture the page screenshot
+        Then I can see the 'Search_Projects_Page'
+        Examples:
+            | User                    |
+            | System_Admin            |
+            | Studywide_Reviewer      |
+            | Studywide_Reviewer_NI   |
+            | Studywide_Reviewer_S    |
+            | Studywide_Reviewer_W    |
+            | Team_Manager            |
+            | Team_Manager_NI         |
+            | Team_Manager_S          |
+            | Team_Manager_W          |
+            | Workflow_Coordinator    |
+            | Workflow_Coordinator_NI |
+            | Workflow_Coordinator_S  |
+            | Workflow_Coordinator_W  |
+
+    @SearchModificationRecords @TeamManager
+    Scenario Outline: Validate routing after selecting modification record for different user roles
+        Given I have navigated to the 'Approvals_Page' as '<User>'
+        And I click the 'Search_Records' link on the 'Approvals_Page'
+        And I capture the page screenshot
+        And I can see the 'Choose_A_Record_Type_To_Search_Page'
+        And I capture the page screenshot
+        And I select the radio button for 'Modification_Record' in the choose a record type to search page
+        And I capture the page screenshot
+        And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+        And I capture the page screenshot
+        Then I can see the 'Search_Modifications_Page'
+        Examples:
+            | User                    |
+            | System_Admin            |
+            | Studywide_Reviewer      |
+            | Studywide_Reviewer_NI   |
+            | Studywide_Reviewer_S    |
+            | Studywide_Reviewer_W    |
+            | Team_Manager            |
+            | Team_Manager_NI         |
+            | Team_Manager_S          |
+            | Team_Manager_W          |
+            | Workflow_Coordinator    |
+            | Workflow_Coordinator_NI |
+            | Workflow_Coordinator_S  |
+            | Workflow_Coordinator_W  |
