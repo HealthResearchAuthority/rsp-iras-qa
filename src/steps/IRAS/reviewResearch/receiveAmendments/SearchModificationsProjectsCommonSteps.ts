@@ -128,7 +128,8 @@ Then(
     const irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
-    const projectsList = await searchProjectsPage.getAllProjectsFromTheTable();
+    const totalPagesCount = await commonItemsPage.getNumberofTotalPages();
+    const projectsList = await searchProjectsPage.getAllProjectsFromTheTable(totalPagesCount);
     const searchResults = confirmArrayNotNull(projectsList.get('searchResultValues'));
     const irasIds = confirmArrayNotNull(projectsList.get('irasIdValues'));
     await searchProjectsPage.setIrasIdListAfterSearch(irasIds);
@@ -191,5 +192,16 @@ Then(
     } else {
       throw new Error(`Expected Search Results but No Search Results are Displayed`);
     }
+  }
+);
+
+Then(
+  'The search projects page returns to its original empty state with no results displayed',
+  async ({ commonItemsPage, searchProjectsPage }) => {
+    await expect.soft(searchProjectsPage.page_heading).toBeVisible();
+    await expect.soft(searchProjectsPage.page_guidance_text).toBeVisible();
+    await expect.soft(commonItemsPage.advanced_filter_chevron).toBeVisible();
+    await expect.soft(searchProjectsPage.results_table).not.toBeVisible();
+    await expect.soft(commonItemsPage.search_no_results_container).not.toBeVisible();
   }
 );

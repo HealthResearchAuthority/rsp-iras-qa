@@ -891,6 +891,7 @@ Given(
       profileSettingsPage,
       editYourProfilePage,
       teamManagerDashboardPage,
+      searchProjectsPage,
     },
     page: string
   ) => {
@@ -953,6 +954,11 @@ Given(
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
         break;
+      case 'Search_Projects_Page':
+        await searchProjectsPage.goto();
+        await searchProjectsPage.assertOnSearchProjectsPage();
+        break;
+
       case 'Manage_Sponsor_Organisations_Page':
         await manageSponsorOrganisationPage.goto();
         await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
@@ -1238,7 +1244,7 @@ Then(
 Then(
   'I validate {string} displayed on {string} in advanced filters',
   async (
-    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage },
+    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage, searchProjectsPage },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
@@ -1247,6 +1253,12 @@ Then(
     if (pageKey === 'Search_Modifications_Page') {
       errorMessageFieldDataset =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = searchModificationsPage;
+    } else if (pageKey === 'Search_Projects_Page') {
+      errorMessageFieldDataset =
+        searchProjectsPage.searchProjectsPageTestData.Search_Projects_Page.Error_Validation[
           errorMessageFieldAndSummaryDatasetName
         ];
       page = searchModificationsPage;

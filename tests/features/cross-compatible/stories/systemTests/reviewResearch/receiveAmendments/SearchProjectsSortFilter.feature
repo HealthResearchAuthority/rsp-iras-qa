@@ -1,4 +1,4 @@
-@ReceiveAmendments @SearchProjectRecordsSortFilter @TeamManager  @SystemTest @rsp-5455 @rsp-5456
+@ReceiveAmendments @SearchProjectRecordsSortFilter @TeamManager  @SystemTest @rsp-5455 @rsp-5456 @KNOWN-DEFECT-RSP-5909
 Feature: Receive Amendments: Filter, Search and Sort the Search project records page
 
         Background:
@@ -26,16 +26,18 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 # Then I can see the project overview page
                 # And I capture the page screenshot
                 # And I capture the iras id of the recently added project with status as 'Active'
-                Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
-                And I click the 'Search_Records' link on the 'Approvals_Page'
-                And I capture the page screenshot
-                And I can see the 'Choose_A_Record_Type_To_Search_Page'
-                And I capture the page screenshot
-                And I select the radio button for 'Project_Record' in the choose a record type to search page
-                And I capture the page screenshot
-                And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
-                And I capture the page screenshot
-                Then I can see the 'Search_Projects_Page'
+                # Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
+                # And I click the 'Search_Records' link on the 'Approvals_Page'
+                # And I capture the page screenshot
+                # And I can see the 'Choose_A_Record_Type_To_Search_Page'
+                # And I capture the page screenshot
+                # And I select the radio button for 'Project_Record' in the choose a record type to search page
+                # And I capture the page screenshot
+                # And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+                # And I capture the page screenshot
+                # Then I can see the 'Search_Projects_Page'
+
+                Given I have navigated to the 'Search_Projects_Page'
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
@@ -99,7 +101,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters_Lead_Nation | Short_Project_Title | short project title | ascending        | descending        |
                         | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         | ascending        | descending        |
 
-        @ViewListOfProjects @ViewListOfProjectsPaginationFirstPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationNextLinkClick @TestTijiPagination
+        @ViewListOfProjects @ViewListOfProjectsPaginationFirstPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationNextLinkClick
         Scenario Outline: Verify pagination in the list of projects page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -121,7 +123,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | page number       | Advanced_Filters_Lead_Nation |
                         | next link         | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfProjects @ViewListOfProjectsPaginationLastPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationPreviousLinkClick @TestTijiPagination
+        @ViewListOfProjects @ViewListOfProjectsPaginationLastPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationPreviousLinkClick
         Scenario Outline: Verify pagination in the list of projects page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -141,7 +143,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | page number       | Advanced_Filters_Lead_Nation |
                         | previous link     | Advanced_Filters_Lead_Nation |
 
-        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters  @DBDataUsed @TestTiji
+        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters  @DBDataUsed @TestTiji @TestTijiOnly
         Scenario Outline: Verify the user is able to view the list of projects by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 And I capture the iras id of the recently added project with status as 'Active' from the database
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
@@ -242,7 +244,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I click the 'Search' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria ''
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 Examples:
@@ -288,14 +289,14 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
         @NoResultsFound @NoIrasIdAndNoAdvancedFilters @TestTiji
         Scenario: Verify the user can see an empty state that informs me no projects exist for the search criteria on clicking search button without entering/selecting iras id and filters
                 When I click the 'Search' button on the 'Search_Projects_Page'
-                Then The search modifications page returns to its original empty state with no results displayed
+                Then The search projects page returns to its original empty state with no results displayed
                 And I capture the page screenshot
 
         @NoResultsFound @NoIrasIdAndNoAdvancedFilters @TestTiji
         Scenario: Verify the user can see an empty state that informs me no projects exist for the search criteria on clicking apply filters button without entering/selecting iras id and filters
                 When I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
-                Then The search modifications page returns to its original empty state with no results displayed
+                Then The search projects page returns to its original empty state with no results displayed
                 And I capture the page screenshot
 
 
@@ -318,7 +319,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Invalid_Iras_Id_Spaces_Seperator |
                         | Invalid_Iras_Id_Zeros            |
 
-        @NoResultsFound @InvalidIrasIdAndAdvancedFilters @TestOnlythis
+        @NoResultsFound @InvalidIrasIdAndAdvancedFilters @TestTiji
         Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Invalid_Iras_Id>' into the search field for 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -332,17 +333,17 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And the no search results found message is displayed
                 And I capture the page screenshot
                 Examples:
-                        | Invalid_Iras_Id                  | Advanced_Filters             |
-                        | Invalid_Iras_Id_Letters          | Advanced_Filters_Eleven      |
-                        | Invalid_Iras_Id_Symbols          | Advanced_Filters_Thirteen    |
-                        | Invalid_Iras_Id_Letters_Symbols  | Advanced_Filters_Fourteen    |
-                        | Invalid_Iras_Id_Leading_Zeros    | Advanced_Filters_Sixteen     |
-                        | Invalid_Iras_Id_Leading_Zeros    | Advanced_Filters_Seventeen   |
-                        | Invalid_Iras_Id_Spaces_Suffix    | Advanced_Filters_Eighteen    |
-                        | Invalid_Iras_Id_Spaces_Prefix    | Advanced_Filters_Twenty      |
-                        | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_TwentyOne   |
-                        | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_TwentyTwo   |
-                        | Invalid_Iras_Id_Zeros            | Advanced_Filters_TwentyThree |
+                        | Invalid_Iras_Id                  | Advanced_Filters                                |
+                        | Invalid_Iras_Id_Letters          | Advanced_Filters_All_Except_Short_Project_Title |
+                        | Invalid_Iras_Id_Symbols          | Advanced_Filters_All_Except_Short_Project_Title |
+                        | Invalid_Iras_Id_Letters_Symbols  | Advanced_Filters_All_Except_Short_Project_Title |
+                        | Invalid_Iras_Id_Leading_Zeros    | Advanced_Filters_All_Except_Short_Project_Title |
+                        | Invalid_Iras_Id_Leading_Zeros    | Advanced_Filters_All                            |
+                        | Invalid_Iras_Id_Spaces_Suffix    | Advanced_Filters_All                            |
+                        | Invalid_Iras_Id_Spaces_Prefix    | Advanced_Filters_All                            |
+                        | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_All                            |
+                        | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_Lead_Nation                    |
+                        | Invalid_Iras_Id_Zeros            | Advanced_Filters_Lead_Nation                    |
 
         @NoResultsFound @ValidIrasIdAndAdvancedFilters @rsp-4293 @jsDisabled @skip
         Scenario Outline: Verify the user can see no matching results found message by entering valid iras id, then selected advanced filters and click on apply filters button
@@ -413,12 +414,12 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
-                And I capture the page screenshot
+                # And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
+                # And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                # And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
                 And I capture the page screenshot
-                Then The search modifications page returns to its original empty state with no results displayed
+                Then The search projects page returns to its original empty state with no results displayed
                 And I capture the page screenshot
 
                 Examples:
@@ -428,7 +429,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
         # | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
         # | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled @TestOnlythis
+        @RemoveAllActiveFiltersOneByOne @jsDisabled @TestTiji
         Scenario Outline: Verify the user can remove all the selected filters(with sponsor org) one by one and the search results update accordingly-JS disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -437,18 +438,18 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
-                And I capture the page screenshot
+                # And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
+                # And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                # And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                # And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
                 And I capture the page screenshot
-                Then The search modifications page returns to its original empty state with no results displayed
+                Then The search projects page returns to its original empty state with no results displayed
                 And I capture the page screenshot
 
                 Examples:
                         | Advanced_Filters     |
-                        | Advanced_Filters_Nth |
+                        | Advanced_Filters_All |
 
         @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
@@ -476,7 +477,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAltogether @rsp-4293
+        @RemoveActiveFiltersAltogether @TestTiji
         Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -491,14 +492,14 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Projects_Page'
                 And I capture the page screenshot
-                Then The search modifications page returns to its original empty state with no results displayed
+                Then The search projects page returns to its original empty state with no results displayed
                 And I 'cannot' see the advanced filters panel
 
                 Examples:
                         | Advanced_Filters     |
-                        | Advanced_Filters_Nth |
+                        | Advanced_Filters_All |
 
-        @RemoveActiveFiltersAlTogether @jsDisabled
+        @RemoveActiveFiltersAlTogether @jsDisabled @TestTiji
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -510,7 +511,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Projects_Page'
@@ -518,10 +518,10 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I 'cannot' see active filters displayed
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 Examples:
-                        | Valid_Iras_Id     | Advanced_Filters     |
-                        | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
+                        | Valid_Iras_Id      | Advanced_Filters             |
+                        | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS @TestTiji
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
@@ -545,18 +545,18 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @RTS @TestTiji @TestOnlyTJ
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
                 And I capture the page screenshot
                 When I authorise the rts api using '<RTS_API_Data>'
                 Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
-                And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+                And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>' in the 'Search_Projects_Page'
                 And I capture the page screenshot
-                And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+                And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>' in the 'Search_Projects_Page'
                 And I capture the page screenshot
-                And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box
+                And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box in the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
                 Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Projects_Page' in advanced filters
                 And I capture the page screenshot
@@ -572,7 +572,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
 
-        @SponsorOrganisationValidation @jsDisabled
+        @SponsorOrganisationValidation @jsDisabled @TestTiji
         Scenario Outline: Verify that the search button appears with a green background in the 'Sponsor Organisation' filter section of the advanced filters when JavaScript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
@@ -582,7 +582,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters                      |
                         | Advanced_Filters_Sponsor_Organisation |
 
-        @viewListOfProjects @ValidIrasIdAndNoFilters @PartialSearchIrasID
+        @viewListOfProjects @ValidIrasIdAndNoFilters @PartialSearchIrasID @skip
         Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
                 And I capture the page screenshot

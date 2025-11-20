@@ -71,7 +71,12 @@ Then(
   async ({ commonItemsPage, searchModificationsPage }) => {
     const rowCount = await searchModificationsPage.tableRows.count();
     const totalPagesCount = await commonItemsPage.getNumberofTotalPages();
-    const expectedResultCount = (totalPagesCount - 1) * 20 + (rowCount - 1);
+    let expectedResultCount: number;
+    if (totalPagesCount > 0) {
+      expectedResultCount = (totalPagesCount - 1) * 20 + (rowCount - 1);
+    } else {
+      expectedResultCount = rowCount - 1;
+    }
     const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(
       commonItemsPage,
       expectedResultCount
@@ -252,11 +257,12 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with valid {string} for sponsor organisation search box and validate the search results along with {string}',
+  'With javascript disabled, I search with valid {string} for sponsor organisation search box and validate the search results along with {string} in the {string}',
   async (
     { searchModificationsPage, commonItemsPage, rtsPage },
     sponsorOrganisationDatasetName: string,
-    searchHintsDatasetName
+    searchHintsDatasetName,
+    pageValue: string
   ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
@@ -268,7 +274,11 @@ Then(
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
     await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+      await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    } else if (pageValue === 'Search_Modifications_Page' || pageValue === 'Search_Projects_Page') {
+      await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.click();
+    }
     const sponsorOrganisationNameListActualWithSpaces =
       await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_labels.allTextContents();
     const sponsorOrganisationNameListActual = sponsorOrganisationNameListActualWithSpaces.map((str) => str.trim());
@@ -290,18 +300,23 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with invalid {string} for sponsor organisation search box and validate the search results along with {string}',
+  'With javascript disabled, I search with invalid {string} for sponsor organisation search box and validate the search results along with {string} in the {string}',
   async (
     { searchModificationsPage, commonItemsPage },
     sponsorOrganisationDatasetName: string,
-    searchHintsDatasetName
+    searchHintsDatasetName,
+    pageValue: string
   ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const searchHintDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchHintsDatasetName];
     await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+      await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    } else if (pageValue === 'Search_Modifications_Page' || pageValue === 'Search_Projects_Page') {
+      await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.click();
+    }
     const noResultFoundLabelActual = confirmStringNotNull(
       await searchModificationsPage.sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
     ).trim();
@@ -311,12 +326,16 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box',
-  async ({ searchModificationsPage, commonItemsPage }, sponsorOrganisationDatasetName: string) => {
+  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box in the {string}',
+  async ({ searchModificationsPage, commonItemsPage }, sponsorOrganisationDatasetName: string, pageValue: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+      await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    } else if (pageValue === 'Search_Modifications_Page' || pageValue === 'Search_Projects_Page') {
+      await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.click();
+    }
   }
 );
 
