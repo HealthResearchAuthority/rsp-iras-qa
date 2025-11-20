@@ -244,26 +244,47 @@ Given(
 When(
   'I enter an iras id for a modification with status {string} into the search field',
   async ({ commonItemsPage, modificationsReceivedCommonPage, modificationsCommonPage }, statusType: string) => {
-    let status: string;
-    let optionalReviewNullQueryInput: string = '';
-    if (statusType == 'Modification_Status_Received') {
-      status = modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
-      optionalReviewNullQueryInput = ' AND ReviewerId IS NULL';
-    } else if (statusType == 'Modification_Status_Review_In_Progress') {
-      status = modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
-      optionalReviewNullQueryInput = ' AND ReviewerId IS NOT NULL';
-    } else {
-      status = modificationsCommonPage.modificationsCommonPageTestData[statusType].status;
-    }
+    const [status, optionalReviewNullQueryInput] = await modificationsReceivedCommonPage.getModificationStatusSqlInput(
+      statusType,
+      modificationsCommonPage.modificationsCommonPageTestData
+    );
     await modificationsReceivedCommonPage.sqlGetSpecificModificationByStatus(status, optionalReviewNullQueryInput);
     await commonItemsPage.search_text.fill(`${await modificationsReceivedCommonPage.getIrasId()}`);
   }
 );
 
+When(
+  'I enter an iras id for {string} lead nation modification assigned to {string} with status {string} into the search field',
+  async (
+    { commonItemsPage, modificationsReceivedCommonPage, modificationsCommonPage, loginPage },
+    leadNation: string,
+    assignedUser: string,
+    statusType: string
+  ) => {
+    const [status, optionalReviewNullQueryInput] = await modificationsReceivedCommonPage.getModificationStatusSqlInput(
+      statusType,
+      modificationsCommonPage.modificationsCommonPageTestData
+    );
+    const optionalReviewerIdQueryInput =
+      await modificationsReceivedCommonPage.getModificationNationReviewerEmailSqlInput(
+        assignedUser,
+        loginPage.loginPageTestData
+      );
+    await modificationsReceivedCommonPage.sqlGetSpecificModificationByNationStatus(
+      leadNation,
+      status,
+      optionalReviewNullQueryInput,
+      optionalReviewerIdQueryInput
+    );
+    await commonItemsPage.search_text.fill(`${await modificationsReceivedCommonPage.getIrasId()}`);
+  }
+);
+
 Then(
-  'I can see the modification is displayed in the {string} list with {string} status',
+  'I {string} see the modification displayed in the {string} list with {string} status',
   async (
     { commonItemsPage, modificationsReceivedCommonPage, modificationsCommonPage },
+    visibility: string,
     pageType: string,
     statusInput: string
   ) => {
@@ -272,14 +293,20 @@ Then(
       pageType,
       'modification id'
     );
-    const statusColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, 'status');
     const rowLocator = commonItemsPage.tableBodyRows.filter({
       has: commonItemsPage.page
         .getByRole('cell')
         .nth(modIdColumnIndex)
         .getByText(`${await modificationsReceivedCommonPage.getModificationId()}`, { exact: true }),
     });
-    const actualStatus = await rowLocator.getByRole('cell').nth(statusColumnIndex).textContent();
-    expect.soft(actualStatus).toEqual(statusExpected);
+
+    if (visibility.toLowerCase() == 'cannot') {
+      expect.soft(rowLocator).toBeHidden();
+    } else {
+      const statusColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, 'status');
+      const actualStatus = await rowLocator.getByRole('cell').nth(statusColumnIndex).textContent();
+      expect.soft(rowLocator).toBeVisible();
+      expect.soft(actualStatus).toEqual(statusExpected);
+    }
   }
 );

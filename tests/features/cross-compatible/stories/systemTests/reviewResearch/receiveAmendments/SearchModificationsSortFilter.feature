@@ -690,12 +690,12 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
 
-        @searchModificationStatus @rsp-4822 @KNOWN-DEFECT-RSP-6266
+        @searchModificationStatus @rsp-4822
         Scenario Outline: Verify that modifications status' display as expected on the search modifictions page
                 When I enter an iras id for a modification with status '<Status>' into the search field
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I can now see a table of search results for modifications received for approval
-                Then I can see the modification is displayed in the 'Search_Modifications_Page' list with '<Status>' status
+                Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with '<Status>' status
 
                 Examples:
                         | Status                                 |

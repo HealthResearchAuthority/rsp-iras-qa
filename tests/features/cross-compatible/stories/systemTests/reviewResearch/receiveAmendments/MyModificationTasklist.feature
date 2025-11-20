@@ -286,3 +286,16 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Invalid_Date_From                 | Invalid_Date_From_Error                   |
             | Invalid_Date_To                   | Invalid_Date_To_Error                     |
             | Invalid_Date_From_Days_From       | Date_Days_Simultaneous_Summary_Only_Error |
+
+    @searchMyModificationsTasklistStatus @rsp-4822
+    Scenario Outline: Verify that modifications status' display as expected on the my modifications tasklist page
+        When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
+        And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+        Then I '<Visibility>' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with '<Status>' status
+
+        Examples:
+            | Status                                 | User               | Visibility |
+            | Modification_Status_Approved           | nobody             | cannot     |
+            | Modification_Status_Not_Approved       | nobody             | cannot     |
+            | Modification_Status_Received           | nobody             | cannot     |
+            | Modification_Status_Review_In_Progress | Studywide_Reviewer | can        |

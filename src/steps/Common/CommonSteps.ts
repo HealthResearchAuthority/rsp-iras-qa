@@ -44,6 +44,7 @@ When(
       searchModificationsPage,
       modificationsReadyToAssignPage,
       myModificationsTasklistPage,
+      teamManagerDashboardPage,
       manageSponsorOrganisationPage,
       setupNewSponsorOrganisationPage,
       checkAddUserSponsorOrganisationPage,
@@ -100,6 +101,14 @@ When(
         break;
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
+        break;
+      case 'Team_Manager_Dashboard_Page':
+        await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
         await commonItemsPage.setNoOfResultsBeforeSearch(
           await commonItemsPage.extractNumFromSearchResultCount(
             await commonItemsPage.search_results_count.textContent()
@@ -842,6 +851,7 @@ Given(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      teamManagerDashboardPage,
       approvalsPage,
       myModificationsTasklistPage,
       manageSponsorOrganisationPage,
@@ -900,6 +910,15 @@ Given(
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.goto();
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
+        break;
+      case 'Team_Manager_Dashboard_Page':
+        await teamManagerDashboardPage.goto();
+        await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
         await commonItemsPage.setNoOfResultsBeforeSearch(
           await commonItemsPage.extractNumFromSearchResultCount(
             await commonItemsPage.search_results_count.textContent()

@@ -289,28 +289,40 @@ export default class ModificationsReceivedCommonPage {
     let columnIndex: number;
     switch (columnName.toLowerCase()) {
       case 'modification id':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 1;
         } else {
           columnIndex = 0;
         }
         break;
       case 'short project title':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 2;
         } else {
           columnIndex = 1;
         }
         break;
       case 'date submitted':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 3;
         } else {
           columnIndex = 2;
         }
         break;
       case 'days since submission':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 4;
         } else {
           columnIndex = 3;
@@ -322,6 +334,8 @@ export default class ModificationsReceivedCommonPage {
           pageType.toLowerCase() == 'search_modifications_page'
         ) {
           columnIndex = 5;
+        } else if (pageType.toLowerCase() == 'team_manager_dashboard_page') {
+          columnIndex = 6;
         } else {
           columnIndex = 4;
         }
@@ -335,10 +349,37 @@ export default class ModificationsReceivedCommonPage {
       case 'lead nation':
         columnIndex = 4;
         break;
+      case 'studywide reviewer':
+        columnIndex = 5;
+        break;
       default:
         throw new Error(`${columnName} is not a valid option`);
     }
     return columnIndex;
+  }
+
+  async getModificationStatusSqlInput(statusType: string, dataset: any): Promise<[string, string]> {
+    let status: string;
+    let optionalReviewNullQueryInput: string = '';
+    if (statusType == 'Modification_Status_Received') {
+      status = dataset.Modification_Status_With_Review_Body.status;
+      optionalReviewNullQueryInput = ' AND ReviewerId IS NULL';
+    } else if (statusType == 'Modification_Status_Review_In_Progress') {
+      status = dataset.Modification_Status_With_Review_Body.status;
+      optionalReviewNullQueryInput = ' AND ReviewerId IS NOT NULL';
+    } else {
+      status = dataset[statusType].status;
+    }
+    return [status, optionalReviewNullQueryInput];
+  }
+
+  async getModificationNationReviewerEmailSqlInput(assignedUser: string, dataset: any): Promise<string> {
+    let optionalReviewerIdQueryInput: string = '';
+    if (assignedUser.toLowerCase() != 'nobody') {
+      const email = dataset[assignedUser].username;
+      optionalReviewerIdQueryInput = ` AND ReviewerEmail = '${email}'`;
+    }
+    return optionalReviewerIdQueryInput;
   }
 
   async setModificationValues(modificationQueryResult: IResult<any>, projectQueryResult: IResult<any>): Promise<void> {
@@ -351,21 +392,54 @@ export default class ModificationsReceivedCommonPage {
   // SQL STATEMENTS //
   async sqlGetSpecificModificationByStatus(status: string, optionalReviewNullQueryInput: string): Promise<void> {
     const sqlConnection = await connect(dbConfigData.Application_Service);
-    const modificationQueryResult = await sqlConnection.query(
+    const modificationStatusQueryResult = await sqlConnection.query(
       `SELECT TOP (1) * FROM ProjectModifications WHERE [Status] = '${status}'${optionalReviewNullQueryInput} ORDER BY NEWID()`
     );
-    if (modificationQueryResult.recordset.length == 0) {
-      await sqlConnection.close();
+    await sqlConnection.close();
+    if (modificationStatusQueryResult.recordset.length == 0) {
       throw new Error(`No modification found in the system with ${status} status`);
     } else {
-      const projectRecordId = modificationQueryResult.recordset[0].ProjectRecordId;
-      const projectQueryResult = await sqlConnection.query(
-        `SELECT ShortProjectTitle, IrasId FROM ProjectRecords WHERE Id ='${projectRecordId}'`
-      );
-      await sqlConnection.close();
-      console.dir(modificationQueryResult);
-      console.dir(projectQueryResult);
-      await this.setModificationValues(modificationQueryResult, projectQueryResult);
+      const projectRecordId = modificationStatusQueryResult.recordset[0].ProjectRecordId;
+      const projectQueryResult = await this.sqlGetSpecificProjectById(projectRecordId);
+      console.dir(modificationStatusQueryResult);
+      await this.setModificationValues(modificationStatusQueryResult, projectQueryResult);
     }
+  }
+
+  async sqlGetSpecificModificationByNationStatus(
+    leadNationKey: string,
+    status: string,
+    optionalReviewNullQueryInput: string,
+    optionalReviewerIdQueryInput: string
+  ): Promise<void> {
+    const leadNation = dbConfigData.Lead_Nations[leadNationKey];
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const modificationNationStatusQueryResult = await sqlConnection.query(
+      `SELECT TOP (1) ProjectModifications.* FROM ProjectModifications
+INNER JOIN ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = ProjectModifications.ProjectRecordId
+WHERE ProjectRecordAnswers.QuestionId = 'IQA0005' AND ProjectRecordAnswers.SelectedOptions = '${leadNation}' 
+AND ProjectModifications.[Status] = '${status}'${optionalReviewNullQueryInput}${optionalReviewerIdQueryInput} ORDER BY NEWID()`
+    );
+    await sqlConnection.close();
+    if (modificationNationStatusQueryResult.recordset.length == 0) {
+      throw new Error(
+        `No suitable modification found in the system with ${leadNation} lead nation and ${status} status`
+      );
+    } else {
+      const projectRecordId = modificationNationStatusQueryResult.recordset[0].ProjectRecordId;
+      const projectQueryResult = await this.sqlGetSpecificProjectById(projectRecordId);
+      console.dir(modificationNationStatusQueryResult);
+      await this.setModificationValues(modificationNationStatusQueryResult, projectQueryResult);
+    }
+  }
+
+  async sqlGetSpecificProjectById(projectRecordId: string): Promise<IResult<any>> {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const projectQueryResult = await sqlConnection.query(
+      `SELECT ShortProjectTitle, IrasId FROM ProjectRecords WHERE Id ='${projectRecordId}'`
+    );
+    await sqlConnection.close();
+    console.dir(projectQueryResult);
+    return projectQueryResult;
   }
 }
