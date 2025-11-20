@@ -3,7 +3,7 @@ import { test } from '../../../../../hooks/CustomFixtures';
 import { expect } from '@playwright/test';
 
 const { Then } = createBdd(test);
-
+//Below step definition is not required anymore. To be deleted in the future.
 Then(
   'I can see the add documents for {string} page',
   async ({ addDocumentsModificationsPage, selectAreaOfChangePage }, specificChangeDatsetName: string) => {
@@ -13,6 +13,10 @@ Then(
     await addDocumentsModificationsPage.assertOnAddDocumentsModificationsPage(specificChangeTitleLabel);
   }
 );
+
+Then('I can see add supporting documents page', async ({ addDocumentsModificationsPage }) => {
+  await addDocumentsModificationsPage.assertOnAddSupportDocumentsPage();
+});
 
 Then('I validate the ui labels for add documents modifications page', async ({ addDocumentsModificationsPage }) => {
   await expect

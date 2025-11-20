@@ -307,5 +307,8 @@
   "Sponsor_Workspace_Page": {
     "My_Account": "My account",
     "Authorisations": "Authorisations"
+  },
+  "Modification_Post_Submission_Page": {
+    "Documents": "Documents"
   }
 }

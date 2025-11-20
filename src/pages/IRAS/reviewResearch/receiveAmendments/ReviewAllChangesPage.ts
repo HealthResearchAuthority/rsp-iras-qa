@@ -53,6 +53,13 @@ export default class ReviewAllChangesPage {
   readonly sponsor_summary_of_changes: Locator;
   readonly now_send_to_sponsor_heading: Locator;
   readonly now_send_to_sponsor_hint_label: Locator;
+  readonly supporting_documents_document_type_label: Locator;
+  readonly supporting_documents_document_name_label: Locator;
+  readonly supporting_documents_file_name_label: Locator;
+  readonly supporting_documents_document_version_label: Locator;
+  readonly supporting_documents_document_date_label: Locator;
+  readonly supporting_documents_status_label: Locator;
+  readonly supporting_documents_action_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -243,6 +250,28 @@ export default class ReviewAllChangesPage {
     this.now_send_to_sponsor_hint_label = this.page
       .getByRole('paragraph')
       .getByText(this.reviewAllChangesPageTestData.Review_All_Changes_Page.now_send_to_sponsor_hint_label);
+    //Supporting documents Section
+    this.supporting_documents_document_type_label = this.page.getByRole('button', {
+      name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_document_type_label.trim(),
+    });
+    this.supporting_documents_document_name_label = this.page.getByRole('button', {
+      name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_document_name_label.trim(),
+    });
+    this.supporting_documents_file_name_label = this.page.getByRole('button', {
+      name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_file_name_label.trim(),
+    });
+    this.supporting_documents_document_version_label = this.page.getByRole('button', {
+      name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_document_version_label.trim(),
+    });
+    this.supporting_documents_document_date_label = this.page.getByRole('button', {
+      name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_document_date_label.trim(),
+    });
+    this.supporting_documents_status_label = this.page.getByRole('columnheader', {
+      name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_status_label.trim(),
+    });
+    this.supporting_documents_action_label = this.page.getByRole('columnheader', {
+      name: this.reviewAllChangesPageTestData.Review_All_Changes_Page.supporting_documents_table.supporting_documents_action_label.trim(),
+    });
   }
 
   //Page Methods

@@ -90,6 +90,7 @@ Then(
             const uniqueDocName = await generateUniqueValue(dataset[key], prefix);
             const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage[key];
             await locator.fill(uniqueDocName);
+            await addDocumentDetailsModificationsPage.setUniqueDocNames(uniqueDocName);
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
           }

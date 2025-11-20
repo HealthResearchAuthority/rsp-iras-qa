@@ -35,6 +35,16 @@
       "sponsor_reference_label": "Sponsor reference (optional)",
       "sponsor_date_label": "Date (optional)",
       "sponsor_summary_of_changes_label": "Brief summary of changes"
+    },
+    "supporting_documents_label": "Supporting documents",
+    "supporting_documents_table": {
+      "supporting_documents_document_type_label": "Document type",
+      "supporting_documents_document_name_label": "Document name",
+      "supporting_documents_file_name_label": "File name",
+      "supporting_documents_document_version_label": "Version",
+      "supporting_documents_document_date_label": "Document date",
+      "supporting_documents_status_label": "Status",
+      "supporting_documents_action_label": "Action"
     }
   },
   "Modification_Url": {

@@ -269,6 +269,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).click();
   } else if (noOfLinksFound > 1 && linkKey != 'Back') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
+  } else if (pageKey === 'Modification_Post_Submission_Page' && linkKey === 'Documents') {
+    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
   } else {
     await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
@@ -1251,7 +1253,7 @@ Then(
     await commonItemsPage.upload_files_input.setInputFiles(documentPath);
     if (typeof documentPath === 'string') {
       const fileName = path.basename(documentPath);
-      await expect(commonItemsPage.page.getByText(fileName)).toBeVisible();
+      await expect(commonItemsPage.page.getByText(fileName).first()).toBeVisible();
     } else {
       await expect(
         commonItemsPage.page.getByText(
@@ -1882,6 +1884,95 @@ Given(
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+    }
+  }
+);
+
+Then(
+  'I can validate the {string} are displayed in the supporting documents table',
+  async (
+    {
+      commonItemsPage,
+      addDocumentDetailsForSpecificDocumentModificationsPage,
+      addDocumentDetailsModificationsPage,
+      modificationsCommonPage,
+    },
+    datasetName: string
+  ) => {
+    const dataset = commonItemsPage.documentUploadTestData[datasetName];
+    const originalUploadedFiles = dataset.map((path: string) => path.split('/').pop());
+    const expectedDocDetails =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Valid_Data_Fields;
+    const monthMap: Record<string, string> = {
+      January: 'Jan',
+      February: 'Feb',
+      March: 'Mar',
+      April: 'Apr',
+      May: 'May',
+      June: 'Jun',
+      July: 'Jul',
+      August: 'Aug',
+      September: 'Sep',
+      October: 'Oct',
+      November: 'Nov',
+      December: 'Dec',
+    };
+
+    const expectedDocDate = `${expectedDocDetails.sponsor_document_day_text} ${monthMap[expectedDocDetails.sponsor_document_month_dropdown]} ${expectedDocDetails.sponsor_document_year_text}`;
+    const documentRows = modificationsCommonPage.documentRows;
+    const rowCount = await documentRows.count();
+    const actualDocsInTable: string[] = [];
+
+    for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+      const actualDocType = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentTypeCell)
+        .innerText();
+      const actualDocName = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentNameCell)
+        .innerText();
+      const actualFileName = await documentRows.nth(rowIndex).locator(modificationsCommonPage.fileNameCell).innerText();
+      const actualDocVersion = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentVersionCell)
+        .innerText();
+      const actualDocDate = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentDateCell)
+        .innerText();
+      expect.soft(actualDocType).toBe(expectedDocDetails.document_type_dropdown);
+      expect.soft(actualDocVersion).toBe(expectedDocDetails.sponsor_document_version_text);
+      expect.soft(actualDocDate).toBe(expectedDocDate);
+      const actualUniqueDocNames = await addDocumentDetailsModificationsPage.getUniqueDocNames();
+      expect.soft(actualUniqueDocNames).toContain(actualDocName);
+
+      if (originalUploadedFiles.includes(actualFileName)) {
+        actualDocsInTable.push(actualFileName);
+      }
+    }
+    for (const doc of originalUploadedFiles) {
+      expect.soft(actualDocsInTable).toContain(doc);
+    }
+  }
+);
+
+Then(
+  'I can see the {string} status displayed for all documents in the table',
+  async ({ modificationsCommonPage, commonItemsPage }, status: string) => {
+    const documentStatus = await modificationsCommonPage.getModificationStatus(status);
+    const statusValues: string[] = [];
+    const rowsCount = await commonItemsPage.tableBodyRows.count();
+    for (let rowIndex = 0; rowIndex < rowsCount; rowIndex++) {
+      const statusColumnValue = await commonItemsPage.tableBodyRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentStatusCell)
+        .innerText();
+      statusValues.push(statusColumnValue);
+    }
+    for (const value of statusValues) {
+      expect.soft(value).toBe(documentStatus);
     }
   }
 );
