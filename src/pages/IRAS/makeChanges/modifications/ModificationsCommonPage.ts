@@ -447,15 +447,28 @@ export default class ModificationsCommonPage {
     let category: string | undefined;
     let requiresResources: string | undefined;
     let affectedOrgs: string | undefined;
+    const specficChangeAdditionOfSites = 'Addition of sites undertaking the same activities as existing sites';
+    const specficChangeAdditionOfCentre =
+      'PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs';
     const affectsNonNhsOnly =
       dataset.which_organisation_change_affect_checkbox.some((item: string) => item.toLowerCase() === 'non-nhs/hsc') &&
       dataset.which_organisation_change_affect_checkbox.length === 1;
     const affectsNhs = dataset.which_organisation_change_affect_checkbox.some(
       (item: string) => item.toLowerCase() === 'nhs/hsc'
     );
-    if (affectsNhs) {
-      requiresResources = dataset.will_nhs_hsc_organisations_require_additional_resources_question_radio.toLowerCase();
-      affectedOrgs = dataset.will_some_or_all_organisations_be_affected_question_radio.toLowerCase();
+    if (
+      (affectsNhs && dataset.specific_change_dropdown === specficChangeAdditionOfSites) ||
+      (affectsNhs && dataset.specific_change_dropdown === specficChangeAdditionOfCentre)
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_new_site;
+      return category;
+    }
+    {
+      if (affectsNhs) {
+        requiresResources =
+          dataset.will_nhs_hsc_organisations_require_additional_resources_question_radio.toLowerCase();
+        affectedOrgs = dataset.will_some_or_all_organisations_be_affected_question_radio.toLowerCase();
+      }
     }
     if (affectsNonNhsOnly) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
