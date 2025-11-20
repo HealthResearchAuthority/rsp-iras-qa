@@ -27,7 +27,8 @@
     "change_label": "Change",
     "change_ready_for_submission_status_label": "Change ready for submission",
     "current_chief_investigator_email_label": "Current chief investigator email:",
-    "dateCreated": "Date created"
+    "dateCreated": "Date created",
+    "ViewDetailsLink": "View details"
   },
   "Ranking_Category": {
     "always_n_a": [

@@ -39,7 +39,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285 @fail
   Scenario Outline: Validate that sponsor can authorise the reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -83,7 +83,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset under the tabs sections
+    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
@@ -128,7 +128,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
       | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285 @fail
   Scenario Outline: Validate that sponsor can authorise the non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -172,7 +172,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset under the tabs sections
+    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
@@ -214,7 +214,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285 @fail
   Scenario Outline: Validate that sponsor can authorise the combination of reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -258,7 +258,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset under the tabs sections
+    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
