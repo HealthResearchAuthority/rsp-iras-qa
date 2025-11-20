@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull, getAuthState } from '../../../../utils/UtilFunctions';
+import { Locator } from '@playwright/test';
 import * as fs from 'node:fs';
 
 const { Given, When, Then } = createBdd(test);
@@ -136,5 +137,44 @@ Then(
     expect(actualSponsorRef).toBe(expectedSponsorRef);
     expect(actualSponsorDate).toBe(expectedSponsorDate);
     expect(actualSumaryChanges).toBe(expectedSumaryChanges);
+  }
+);
+
+Then(
+  'I can see the {string} ui labels on the review all changes page',
+  async ({ reviewAllChangesPage }, datasetName: string) => {
+    const dataset = reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        const locator: Locator = reviewAllChangesPage[key];
+        await expect(locator).toBeVisible();
+      }
+    }
+  }
+);
+
+Then(
+  'I can validate the {string} are displayed in the supporting documents table on the review all changes page',
+  async ({ reviewAllChangesPage, commonItemsPage, modificationsCommonPage }, datasetName: string) => {
+    const dataset = commonItemsPage.documentUploadTestData[datasetName];
+    const actualStatus = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
+    const rows = reviewAllChangesPage.locator('table tbody tr');
+    const rowCount = await rows.count();
+
+    const actualDocsInTable: string[] = [];
+
+    for (let i = 0; i < rowCount; i++) {
+      const docName = await rows.nth(i).locator(`td:nth-child(2)`).innerText();
+      const status = await rows.nth(i).locator(`td:nth-child(4)`).innerText();
+
+      if (dataset.includes(docName)) {
+        actualDocsInTable.push(docName);
+        expect(status).toBe(actualStatus);
+      }
+    }
+
+    for (const doc of dataset) {
+      expect.soft(actualDocsInTable).toContain(doc);
+    }
   }
 );

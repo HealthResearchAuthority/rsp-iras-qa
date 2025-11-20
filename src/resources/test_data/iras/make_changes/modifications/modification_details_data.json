@@ -15,6 +15,8 @@
   },
   "Modification_Details_Label_Texts": {
     "add_summary_heading_label": "Add summary and review modification before sending to sponsor",
-    "add_summary_sub_label": "You'll have the option to add a brief summary and edit your modification before sending it to the sponsor on the next page."
+    "add_summary_sub_label": "You'll have the option to add a brief summary and edit your modification before sending it to the sponsor on the next page.",
+    "supporting_documents_label": "If any of the changes you're making involve an update to any project documents, make sure you add a copy of the original and updated documents.",
+    "continue_to_add_supporting_documents_label": "Check that all the changes you want to make appear above with the status 'Change ready for submission'. If any of these changes involve making an update to any project documents, make sure you upload a copy of the original and updated documents in the next step."
   }
 }
