@@ -3,7 +3,6 @@ import { test, expect } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull, getAuthState } from '../../../../utils/UtilFunctions';
 import { Locator } from '@playwright/test';
 import * as fs from 'node:fs';
-//import addDocumentDetailsForSpecificDocumentModificationsPage from '../../../../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -150,42 +149,6 @@ Then(
         const locator: Locator = reviewAllChangesPage[key];
         await expect(locator).toBeVisible();
       }
-    }
-  }
-);
-
-Then(
-  'I can validate the {string} are displayed in the supporting documents table on the review all changes page',
-  async (
-    { reviewAllChangesPage, commonItemsPage, addDocumentDetailsForSpecificDocumentModificationsPage },
-    datasetName: string
-  ) => {
-    const dataset = commonItemsPage.documentUploadTestData[datasetName];
-    const originalUploadedFiles = dataset.map((path) => path.split('/').pop());
-    const actualDocDetails =
-      addDocumentDetailsForSpecificDocumentModificationsPage
-        .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Valid_Data_Fields;
-    const documentRows = reviewAllChangesPage.documentRows;
-    const rowCount = await documentRows.count();
-    const actualDocsInTable: string[] = [];
-    const actualRowValuesInTable: string[] = [];
-    for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
-      const docType = await documentRows.nth(rowIndex).locator(reviewAllChangesPage.documentTypeCell).innerText();
-      const docName = await documentRows.nth(rowIndex).locator(reviewAllChangesPage.documentNameCell).innerText();
-      const fileName = await documentRows.nth(rowIndex).locator(reviewAllChangesPage.fileNameCell).innerText();
-      const docVersion = await documentRows.nth(rowIndex).locator(reviewAllChangesPage.documentVersionCell).innerText();
-      const docDate = await documentRows.nth(rowIndex).locator(reviewAllChangesPage.documentDateCell).innerText();
-      const docStatus = await documentRows.nth(rowIndex).locator(reviewAllChangesPage.documentStatusCell).innerText();
-      actualRowValuesInTable.push(docType, docName, docVersion, docDate, docStatus);
-      if (originalUploadedFiles.includes(fileName)) {
-        actualDocsInTable.push(fileName);
-      }
-    }
-    for (const doc of originalUploadedFiles) {
-      expect.soft(actualDocsInTable).toContain(doc);
-    }
-    for (const cellValues of actualDocDetails) {
-      expect.soft(actualRowValuesInTable).toContain(cellValues);
     }
   }
 );

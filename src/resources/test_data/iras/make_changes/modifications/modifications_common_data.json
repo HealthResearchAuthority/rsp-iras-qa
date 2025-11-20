@@ -1108,6 +1108,9 @@
   "Modification_Status_With_Review_Body": {
     "status": "With review body"
   },
+  "Document_Status_Complete": {
+    "status": "Complete"
+  },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
     "Other_Minor_Change_To_Participant_Procedures": {
       "area_of_change_dropdown": "Participant procedures",

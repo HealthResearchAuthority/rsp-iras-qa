@@ -10,8 +10,7 @@
       "file_name_label": "File name",
       "document_version_label": "Document version",
       "document_date_label": "Document date",
-      "status_label": "Status",
-      "action_label": "Action"
+      "status_label": "Status"
     },
     "history_tab": {}
   }
