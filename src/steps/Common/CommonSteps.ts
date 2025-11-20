@@ -1917,7 +1917,7 @@ Then(
     datasetName: string
   ) => {
     const dataset = commonItemsPage.documentUploadTestData[datasetName];
-    const originalUploadedFiles = dataset.map((path) => path.split('/').pop());
+    const originalUploadedFiles = dataset.map((path: string) => path.split('/').pop());
     const expectedDocDetails =
       addDocumentDetailsForSpecificDocumentModificationsPage
         .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Valid_Data_Fields;
@@ -1984,7 +1984,7 @@ Then(
     for (let rowIndex = 0; rowIndex < rowsCount; rowIndex++) {
       const statusColumnValue = await commonItemsPage.tableBodyRows
         .nth(rowIndex)
-        .locator('td:nth-child(6)')
+        .locator(modificationsCommonPage.documentStatusCell)
         .innerText();
       statusValues.push(statusColumnValue);
     }

@@ -75,8 +75,7 @@ export default class AddDocumentDetailsModificationsPage {
     return DocumentsMap;
   }
 
-  //Getters & Setters for Private Variable to capture the unique document names generated while adding document details during upload document journey
-  async setUniqueDocNames(uniqueDocName): Promise<void> {
+  async setUniqueDocNames(uniqueDocName: string): Promise<void> {
     this.generatedUniqueDocNames.push(uniqueDocName);
   }
 

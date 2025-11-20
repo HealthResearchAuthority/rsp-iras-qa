@@ -444,7 +444,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    When I click the 'Add_documents' button on the 'Modification_Details_Page'
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
     Then I can see add supporting documents page
     And I upload '<Document_Upload_Files>' documents
     And I capture the page screenshot
@@ -480,7 +480,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    When I click the 'Add_documents' button on the 'Modification_Details_Page'
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
     Then I can see add supporting documents page
     And I upload '<Document_Upload_Files_Invalid>' documents
     And I capture the page screenshot
@@ -503,7 +503,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | JSON_File                        | single invalid   | Nhs_Involvement_Yes |
 
 
-  @rsp-5478 @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920 @Testonly
+  @rsp-5478 @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -521,7 +521,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    When I click the 'Add_documents' button on the 'Modification_Details_Page'
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
     Then I can see add supporting documents page
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
