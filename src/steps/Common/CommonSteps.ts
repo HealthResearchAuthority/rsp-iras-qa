@@ -253,6 +253,34 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
   ).toBeVisible();
 });
 
+Then(
+  'I can see {string} button {string} on the {string}',
+  async ({ commonItemsPage }, buttonKey: string, availability: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    if (availability.toLowerCase() === 'enabled') {
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeVisible();
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeEnabled();
+    } else if (availability.toLowerCase() === 'disabled') {
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeDisabled();
+    }
+  }
+);
+
 Given(
   'I click the {string} link on the {string}',
   async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
