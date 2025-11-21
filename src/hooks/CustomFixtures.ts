@@ -93,6 +93,7 @@ import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChang
 import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangePrincipalInvestigatorPage';
 import SponsorWorkspacePage from '../pages/IRAS/makeChanges/SponsorWorkspacePage';
 import ConfirmProjectDetailsPage from '../pages/IRAS/makeChanges/ConfirmProjectDetailsPage';
+import ModificationPostSubmissionPage from '../pages/IRAS/makeChanges/modifications/ModificationPostSubmissionPage';
 import SponsorAuthorisationsPage from '../pages/IRAS/makeChanges/SponsorAuthorisationsPage';
 import SponsorCheckAndAuthorisePage from '../pages/IRAS/makeChanges/SponsorCheckAndAuthorisePage';
 import SponsorModificationPage from '../pages/IRAS/makeChanges/SponsorModificationPage';
@@ -189,6 +190,7 @@ type CustomFixtures = {
   projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
   sponsorWorkspacePage: SponsorWorkspacePage;
   confirmProjectDetailsPage: ConfirmProjectDetailsPage;
+  modificationPostSubmissionPage: ModificationPostSubmissionPage;
   sponsorAuthorisationsPage: SponsorAuthorisationsPage;
   sponsorCheckAndAuthorisePage: SponsorCheckAndAuthorisePage;
   sponsorModificationPage: SponsorModificationPage;
@@ -469,6 +471,9 @@ export const test = base.extend<CustomFixtures>({
 
   reviewAllChangesPage: async ({ page }, use) => {
     await use(new ReviewAllChangesPage(page));
+  },
+  modificationPostSubmissionPage: async ({ page }, use) => {
+    await use(new ModificationPostSubmissionPage(page));
   },
 
   modificationsDetailsPage: async ({ page }, use) => {

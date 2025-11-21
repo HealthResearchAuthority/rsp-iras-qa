@@ -15,7 +15,9 @@ export default class AddDocumentsModificationsPage {
     this.addDocumentsModificationsPageTestData = addDocumentsModificationsPageTestData;
 
     //Locators
-    this.pageHeading = this.page.getByRole('heading');
+    this.pageHeading = this.page
+      .getByRole('heading')
+      .getByText(this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.heading);
     this.pageLabels = this.page.getByRole('paragraph');
     this.upload_files_input = this.page.getByTestId('Files');
   }
@@ -38,5 +40,13 @@ export default class AddDocumentsModificationsPage {
 
     const expectedLabel = this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.hint_label;
     await expect.soft(this.pageLabels.getByText(expectedLabel, { exact: true })).toBeVisible();
+  }
+  async assertOnAddSupportDocumentsPage() {
+    await expect.soft(this.pageHeading).toBeVisible();
+    const expectedPageTitle =
+      this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title_first_part +
+      ' ' +
+      this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title_second_part;
+    expect.soft(await this.page.title()).toBe(expectedPageTitle);
   }
 }

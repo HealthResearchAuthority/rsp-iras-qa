@@ -121,7 +121,7 @@ Feature: My Account Home page
       | Label_Texts_Applicant_User_Role | My_research           | Back            |
 
   @rsp-5228 @rsp-4846 @MyAccountHomepage @SponsorUser @SetupNewSponsorOrgGoLive
-  Scenario: Validate the My Account Home page of front stage user
+  Scenario: Validate the My Account Home page of sponsor user
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -202,23 +202,23 @@ Feature: My Account Home page
       | Sponsor_User         | My_Research_Access_Denied_Page           |
       | Sponsor_User         | System_Administration_Access_Denied_Page |
       | Sponsor_User         | Approvals_Access_Denied_Page             |
-      # | System_Admin         | Sponsor_Access_Denied_Page                      |
-      #| Studywide_Reviewer   | Sponsor_Access_Denied_Page                      |
-      #| Studywide_Reviewer   | Cag_Members_Access_Denied_Page                  |
-      #| Studywide_Reviewer   | Cat_Access_Denied_Page                          |
-      #| Studywide_Reviewer   | Reg_Members_Access_Denied_Page                  |
-      #| Studywide_Reviewer   | Technical_Assurence_Access_Denied_Page          |
-      #| Studywide_Reviewer   | Technical_Assurence_Reviewers_Access_Denied_Page|
-      #| Team_Manager         | Sponsor_Access_Denied_Page                      |
-      #| Team_Manager         | Cag_Members_Access_Denied_Page                  |
-      #| Team_Manager         | Cat_Access_Denied_Page                          |
-      #| Team_Manager         | Reg_Members_Access_Denied_Page                  |
-      #| Team_Manager         | Technical_Assurence_Access_Denied_Page          |
-      #| Team_Manager         | Technical_Assurence_Reviewers_Access_Denied_Page|
-      #| Workflow_Coordinator | Sponsor_Access_Denied_Page                      |
-      #| Workflow_Coordinator | Cag_Members_Access_Denied_Page                  |
-      #| Workflow_Coordinator | Cat_Access_Denied_Page                          |
-      #| Workflow_Coordinator | Reg_Members_Access_Denied_Page                  |
-      #| Workflow_Coordinator | Technical_Assurence_Access_Denied_Page          |
-      #| Workflow_Coordinator | Technical_Assurence_Reviewers_Access_Denied_Page|
-      #| Workflow_Coordinator | Member_Management_Access_Denied_Page            |
+# | System_Admin         | Sponsor_Access_Denied_Page                      |
+#| Studywide_Reviewer   | Sponsor_Access_Denied_Page                      |
+#| Studywide_Reviewer   | Cag_Members_Access_Denied_Page                  |
+#| Studywide_Reviewer   | Cat_Access_Denied_Page                          |
+#| Studywide_Reviewer   | Reg_Members_Access_Denied_Page                  |
+#| Studywide_Reviewer   | Technical_Assurence_Access_Denied_Page          |
+#| Studywide_Reviewer   | Technical_Assurence_Reviewers_Access_Denied_Page|
+#| Team_Manager         | Sponsor_Access_Denied_Page                      |
+#| Team_Manager         | Cag_Members_Access_Denied_Page                  |
+#| Team_Manager         | Cat_Access_Denied_Page                          |
+#| Team_Manager         | Reg_Members_Access_Denied_Page                  |
+#| Team_Manager         | Technical_Assurence_Access_Denied_Page          |
+#| Team_Manager         | Technical_Assurence_Reviewers_Access_Denied_Page|
+#| Workflow_Coordinator | Sponsor_Access_Denied_Page                      |
+#| Workflow_Coordinator | Cag_Members_Access_Denied_Page                  |
+#| Workflow_Coordinator | Cat_Access_Denied_Page                          |
+#| Workflow_Coordinator | Reg_Members_Access_Denied_Page                  |
+#| Workflow_Coordinator | Technical_Assurence_Access_Denied_Page          |
+#| Workflow_Coordinator | Technical_Assurence_Reviewers_Access_Denied_Page|
+#| Workflow_Coordinator | Member_Management_Access_Denied_Page            |

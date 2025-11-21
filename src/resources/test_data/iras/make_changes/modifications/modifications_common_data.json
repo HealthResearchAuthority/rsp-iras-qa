@@ -1119,6 +1119,9 @@
   "Modification_Status_Not_Authorised": {
     "status": "Not authorised"
   },
+  "Document_Status_Complete": {
+    "status": "Complete"
+  },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
     "Other_Minor_Change_To_Participant_Procedures": {
       "area_of_change_dropdown": "Participant procedures",

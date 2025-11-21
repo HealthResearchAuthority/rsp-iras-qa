@@ -1,6 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { expect, test } from '../../../../hooks/CustomFixtures';
-import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { test } from '../../../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
@@ -8,16 +7,6 @@ Then(
   'I can see the project identification select change modification page',
   async ({ projectIdentificationSelectChangePage }) => {
     await projectIdentificationSelectChangePage.assertOnProjectIdentificationSelectChangePage();
-  }
-);
-
-Then(
-  'I can see the page heading is changed for {string} on participating organisation page',
-  async ({ selectAreaOfChangePage, participatingOrganisationsPage }, datasetName) => {
-    const dataset = selectAreaOfChangePage.selectAreaOfChangePageTestData.Select_Specific_Change[datasetName];
-    const expectedPageHeading = dataset['specific_change_dropdown'];
-    const actualPageHeading = confirmStringNotNull(await participatingOrganisationsPage.pageHeading.textContent());
-    expect(actualPageHeading).toBe(expectedPageHeading);
   }
 );
 

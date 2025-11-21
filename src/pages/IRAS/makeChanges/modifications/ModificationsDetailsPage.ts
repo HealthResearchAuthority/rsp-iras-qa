@@ -10,6 +10,10 @@ export default class ModificationsDetailsPage {
   readonly removeModificationSuccessMessageText: Locator;
   readonly modificationUnfinishedErrorPageHeading: Locator;
   readonly modificationUnfinishedHintLabel: Locator;
+  readonly supporting_documents_label: Locator;
+  readonly supporting_documents_sub_label: Locator;
+  readonly add_summary_heading_label: Locator;
+  readonly add_summary_sub_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -31,6 +35,18 @@ export default class ModificationsDetailsPage {
     });
     this.modificationUnfinishedHintLabel = this.page.getByText(
       modificationsDetailsPageTestData.Modification_Unfinished_Error_Page.modification_unfinished_hint_label
+    );
+    this.supporting_documents_label = this.page.getByText(
+      modificationsDetailsPageTestData.Modification_Details_Label_Texts.supporting_documents_label
+    );
+    this.supporting_documents_sub_label = this.page.getByText(
+      modificationsDetailsPageTestData.Modification_Details_Label_Texts.supporting_documents_sub_label
+    );
+    this.add_summary_heading_label = this.page.getByText(
+      modificationsDetailsPageTestData.Modification_Details_Label_Texts.add_summary_heading_label
+    );
+    this.add_summary_sub_label = this.page.getByText(
+      modificationsDetailsPageTestData.Modification_Details_Label_Texts.add_summary_sub_label
     );
   }
 
