@@ -28,9 +28,8 @@
   },
 
   "Search_Queries": {
-    "Existing_IRAS_ID_Single": { "search_input_text": "520397" },
-    "Existing_IRAS_ID_Multi": { "search_input_text": "916481" },
-    "Existing_Partial_IRAS_ID": { "search_input_text": "458" },
+    "Existing_IRAS_ID": { "search_input_text": "" },
+    "Existing_Partial_IRAS_ID": { "search_input_text": "" },
     "Existing_Title_Single": { "short_project_title_text": "Eight 11.08" },
     "Existing_Title_Multi": { "short_project_title_text": "Five 11.08" },
     "Existing_Title_Partial": { "short_project_title_text": "This is a short" },

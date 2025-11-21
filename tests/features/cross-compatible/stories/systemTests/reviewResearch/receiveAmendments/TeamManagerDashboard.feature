@@ -17,20 +17,20 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Team_Manager_S  |
                         | Team_Manager_W  |
 
-        @searchTasklistByIrasIdWithResults @rsp-5125 @skip
+        @searchTasklistByIrasIdWithResults @rsp-5125 @TestOnlyTiji
         Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+                Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
-                When I fill the search input for searching 'tasklist' with '<Search_Input>' as the search query
+                And I capture the modification id where the lead nation is the country linked to the '<User>' and with status '<Status>'
+                When I fill the search input for searching 'team manager dashboard' with '<Search_Input>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Input>'
 
                 Examples:
-                        | Search_Input             |
-                        | Existing_IRAS_ID_Single  |
-                        | Existing_IRAS_ID_Multi   |
-                        | Existing_Partial_IRAS_ID |
+                        | Search_Input             | User         | Status           |
+                        | Existing_IRAS_ID         | Team_Manager | With review body |
+                        | Existing_Partial_IRAS_ID | Team_Manager | With review body |
 
         # @filterTasklistByShortTitle @rsp-5125 @skip
         # Scenario Outline: Verify the user is able to filter the modifications tasklist by the short project title
@@ -53,7 +53,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
         #                 | Existing_Title_Multi   |
         #                 | Existing_Title_Partial |
 
-        # study-wide reviewer,status
+        # study-wide reviewer,status-out of scope
 
         @filterTasklistByDateSubmitted @rsp-5125
         Scenario Outline: Verify the user is able to filter the modifications tasklist by the date submitted
@@ -270,7 +270,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Short_Project_Title   | short project title   | ascending    | descending     |
                         | Date_Submitted        | date submitted        | descending   | ascending      |
                         | Days_Since_Submission | days since submission | ascending    | descending     |
-        # study-wide reviewer,status
+        # study-wide reviewer,status-out of scope
 
         @tasklistErrorStateValidation @rsp-5122
         Scenario: Verify that the user must select a modifiation before continuing

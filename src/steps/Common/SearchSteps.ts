@@ -20,6 +20,7 @@ When(
       myResearchProjectsPage,
       projectOverviewPage,
       searchProjectsPage,
+      teamManagerDashboardPage,
     },
     searchType: string,
     searchQueryName: string
@@ -61,6 +62,8 @@ When(
     } else if (searchType.toLowerCase() == 'modifications in post approval') {
       searchQueryDataset =
         projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'team manager dashboard') {
+      searchQueryDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }

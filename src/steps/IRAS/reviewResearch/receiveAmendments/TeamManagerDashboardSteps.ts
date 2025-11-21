@@ -31,3 +31,15 @@ Then(
     expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
   }
 );
+
+Then(
+  'I capture the modification id where the lead nation is the country linked to the {string} and with status {string}',
+  async ({ teamManagerDashboardPage }, user: string, status: string) => {
+    let leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
+    if (leadNation === 'Northern Ireland') {
+      leadNation = 'Northern_Ireland';
+    }
+    const modificationId = await teamManagerDashboardPage.sqlGetModificationByLeadNationAndStatus(leadNation, status);
+    await teamManagerDashboardPage.saveModificationId(modificationId.toString());
+  }
+);

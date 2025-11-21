@@ -54,12 +54,16 @@ Given(
     let shortProjectTitleIndex: number;
     let dateSubmittedIndex: number;
     let daysSinceSubmissionIndex: number;
+    // let studywideReviewerIndex: number;
+    // let statusIndex: number;
     if (pageType.toLowerCase() == 'ready to assign') {
       searchInputDataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries;
       modificationIdIndex = 1;
       shortProjectTitleIndex = 2;
       dateSubmittedIndex = 3;
       daysSinceSubmissionIndex = 4;
+      // studywideReviewerIndex = 5;
+      // statusIndex = 6;
       await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
     } else {
       searchInputDataset = myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries;
@@ -67,9 +71,10 @@ Given(
       shortProjectTitleIndex = 1;
       dateSubmittedIndex = 2;
       daysSinceSubmissionIndex = 3;
-      await expect(myModificationsTasklistPage.results_table).toBeVisible();
+      // statusIndex = 4;
+      await expect.soft(myModificationsTasklistPage.results_table).toBeVisible();
     }
-    expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
+    expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
     const noOfResults = await commonItemsPage.extractNumFromSearchResultCount(
       await commonItemsPage.search_results_count.textContent()
     );
@@ -87,76 +92,89 @@ Given(
       commonItemsPage.tableBodyRows,
       daysSinceSubmissionIndex
     );
+    // const statusValue = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, statusIndex);
     if (searchInput.toLowerCase().includes('single')) {
-      await expect(commonItemsPage.search_results_count).toHaveText(
-        commonItemsPage.searchFilterResultsData.search_single_result_count
-      );
-      expect(await commonItemsPage.tableBodyRows.all()).toHaveLength(1);
-      expect(
-        await modificationsReceivedCommonPage.checkSingleValueEquals(
-          visibleIrasIds,
-          shortTitles,
-          daysSinceSubmission,
-          datesSubmitted,
-          searchInputDataset,
-          searchInput
+      await expect
+        .soft(commonItemsPage.search_results_count)
+        .toHaveText(commonItemsPage.searchFilterResultsData.search_single_result_count);
+      expect.soft(await commonItemsPage.tableBodyRows.all()).toHaveLength(1);
+      expect
+        .soft(
+          await modificationsReceivedCommonPage.checkSingleValueEquals(
+            visibleIrasIds,
+            shortTitles,
+            daysSinceSubmission,
+            datesSubmitted,
+            searchInputDataset,
+            searchInput
+          )
         )
-      ).toBeTruthy();
+        .toBeTruthy();
     } else if (searchInput.toLowerCase().includes('multi')) {
-      expect(noOfResults).toBeGreaterThan(1);
-      expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
+      expect.soft(noOfResults).toBeGreaterThan(1);
+      expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
       if (searchInput.toLowerCase().includes('date')) {
-        expect(
-          commonItemsPage.checkDateMultiDateSearchResultValues(datesSubmitted, searchInputDataset, searchInput)
-        ).toBeTruthy();
+        expect
+          .soft(commonItemsPage.checkDateMultiDateSearchResultValues(datesSubmitted, searchInputDataset, searchInput))
+          .toBeTruthy();
       }
       if (searchInput.toLowerCase().includes('days')) {
         for (const day of daysSinceSubmission) {
           if (Number.parseInt(day) == 1) {
-            expect(
-              day.endsWith(
-                modificationsReceivedCommonPage.modificationsReceivedCommonPagePageTestData.Tasklist_Page
-                  .day_since_suffix
+            expect
+              .soft(
+                day.endsWith(
+                  modificationsReceivedCommonPage.modificationsReceivedCommonPagePageTestData.Tasklist_Page
+                    .day_since_suffix
+                )
               )
-            ).toBeTruthy();
+              .toBeTruthy();
           } else {
-            expect(
-              day.endsWith(
-                modificationsReceivedCommonPage.modificationsReceivedCommonPagePageTestData.Tasklist_Page
-                  .days_since_suffix
+            expect
+              .soft(
+                day.endsWith(
+                  modificationsReceivedCommonPage.modificationsReceivedCommonPagePageTestData.Tasklist_Page
+                    .days_since_suffix
+                )
               )
-            ).toBeTruthy();
+              .toBeTruthy();
           }
         }
-        expect(
-          await modificationsReceivedCommonPage.checkDaysSearchResultValues(
-            daysSinceSubmission,
-            searchInputDataset,
-            searchInput
+        expect
+          .soft(
+            await modificationsReceivedCommonPage.checkDaysSearchResultValues(
+              daysSinceSubmission,
+              searchInputDataset,
+              searchInput
+            )
           )
-        ).toBeTruthy();
+          .toBeTruthy();
       }
       if (searchInput.toLowerCase().includes('title') || searchInput.toLowerCase().includes('iras')) {
-        expect(
-          await modificationsReceivedCommonPage.checkMultiValuesStartsWith(
+        expect
+          .soft(
+            await modificationsReceivedCommonPage.checkMultiValuesStartsWith(
+              visibleIrasIds,
+              shortTitles,
+              searchInputDataset,
+              searchInput
+            )
+          )
+          .toBeTruthy();
+      }
+    } else if (searchInput.toLowerCase().includes('partial')) {
+      expect.soft(noOfResults).toBeGreaterThan(1);
+      expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
+      expect
+        .soft(
+          await modificationsReceivedCommonPage.checkPartialValuesContain(
             visibleIrasIds,
             shortTitles,
             searchInputDataset,
             searchInput
           )
-        ).toBeTruthy();
-      }
-    } else if (searchInput.toLowerCase().includes('partial')) {
-      expect(noOfResults).toBeGreaterThan(1);
-      expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
-      expect(
-        await modificationsReceivedCommonPage.checkPartialValuesContain(
-          visibleIrasIds,
-          shortTitles,
-          searchInputDataset,
-          searchInput
         )
-      ).toBeTruthy();
+        .toBeTruthy();
     } else {
       throw new Error(`${searchInput} does not contain any result identifier`);
     }
