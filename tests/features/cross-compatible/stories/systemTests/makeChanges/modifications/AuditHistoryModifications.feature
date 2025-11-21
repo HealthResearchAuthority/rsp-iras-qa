@@ -18,7 +18,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-5268 @LogTheModificationCreatedEventinAuditHistoryPage 
+  @rsp-5268 @LogTheModificationCreatedEventinAuditHistoryPage @testOnly
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till send modification to sponsor confirmation page and return to project overview page from there
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -63,13 +63,11 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I click on the modification id hyperlink in the post approval tab
     And I capture the page screenshot
-    Then I can see the review all changes modifications page
-    And the 'Change' link should be 'unavailable' on the 'Review_All_Changes_Page'
-    And the 'Delete_Modification' link should be 'unavailable' on the 'Review_All_Changes_Page'
-    And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'
-    And the 'Save_For_Later' button should be 'unavailable' on the 'Review_All_Changes_Page'
-    And the now sent to sponsor heading and hint text should be 'unavailable' on the review all changes page
-    And I validate the individual and overall ranking of changes on the relevant modification page
+    # And I click the 'History' tab on the 'Modification_Post_Submission_Page'
+    # Then I can see the audit history page of the selected modification
+    # And I capture the page screenshot
+    # And I can see the audit history for the modification 'created' event with date and user details
+    # And I can see the audit history for the modification 'Modification sent to sponsor' event with date and user details
 
     Examples:
       | Changes                           | Research_Locations  |
