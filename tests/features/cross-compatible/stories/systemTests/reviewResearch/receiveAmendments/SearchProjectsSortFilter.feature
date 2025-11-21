@@ -145,7 +145,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
         # | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title   |
         # | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title |
 
-        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled
+        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @ActiveFilters @jsDisabled
         Scenario Outline: Verify the user is able to view the list of projects by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -221,7 +221,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters                                |
                         | Advanced_Filters_All_Except_Short_Project_Title |
 
-
         @NoResultsFound @NoIrasIdAndNoAdvancedFilters @fail @KNOWN-DEFECT-RSP-5909
         Scenario: Verify the user can see an empty state that informs me no projects exist for the search criteria on clicking search button without entering/selecting iras id and filters
                 When I click the 'Search' button on the 'Search_Projects_Page'
@@ -255,7 +254,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Invalid_Iras_Id_Spaces_Seperator |
                         | Invalid_Iras_Id_Zeros            |
 
-        @NoResultsFound @InvalidIrasIdAndAdvancedFilters
+        @NoResultsFound @InvalidIrasIdAndAdvancedFilters @skip @skipremove
         Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Invalid_Iras_Id>' into the search field for 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -315,7 +314,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters_All        |
 
 
-        @RemoveActiveFiltersOneByOne @jsDisabled
+        @RemoveActiveFiltersOneByOne @jsDisabled @skip @skipremove
         Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -359,7 +358,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters_All |
 
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled
+        @RemoveAllActiveFiltersOneByOne @jsDisabled @skip @skipremove
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -402,7 +401,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters     |
                         | Advanced_Filters_All |
 
-        @RemoveActiveFiltersAlTogether @jsDisabled
+        @RemoveActiveFiltersAlTogether @jsDisabled @skip @skipremove
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -424,7 +423,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Valid_Iras_Id      | Advanced_Filters             |
                         | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS @skip @skipremove
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'
@@ -448,7 +447,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @RTS @skip @skipremove
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'
@@ -475,7 +474,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
 
-        @SponsorOrganisationValidation @jsDisabled
+        @SponsorOrganisationValidation @jsDisabled @skip @skipremove
         Scenario Outline: Verify that the search button appears with a green background in the 'Sponsor Organisation' filter section of the advanced filters when JavaScript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'
@@ -485,7 +484,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filters                      |
                         | Advanced_Filters_Sponsor_Organisation |
 
-        @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters
+        @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @skip @skipremove
         Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes(not selected any checkboxes)
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -553,7 +552,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                         | Advanced_Filter_No_Lead_Nation_Selected          |
                         | Advanced_Filter_No_Participating_Nation_Selected |
 
-        @VerifyHintTextForAdvanceFilters
+        @VerifyHintTextForAdvanceFilters @skip @skipremove
         Scenario Outline: Validate hint labels for advanced filters in search modifications page
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'
