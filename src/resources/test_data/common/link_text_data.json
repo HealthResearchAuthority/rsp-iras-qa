@@ -316,5 +316,8 @@
   },
   "Team_Manager_Dashboard_Page": {
     "Approvals": "Approvals"
+  },
+  "Search_Projects_Page": {
+    "Clear_All_Filters": "Clear all filters"
   }
 }

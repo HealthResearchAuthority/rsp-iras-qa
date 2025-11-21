@@ -6,18 +6,6 @@ import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
 const { Then } = createBdd(test);
 
 Then(
-  'I can see the {string} ui labels in search modifications page',
-  async ({ searchModificationsPage }, datasetName: string) => {
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        await expect.soft(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
-      }
-    }
-  }
-);
-
-Then(
   'I verify the hint text based on the {string} for search modifications page',
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
@@ -319,14 +307,24 @@ Then(
 );
 
 Then(
-  'the search button appears with a green background in the sponsor Organisation filter',
-  async ({ commonItemsPage }) => {
-    expect
-      .soft(
-        await commonItemsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
-          (e: any) => getComputedStyle(e).backgroundColor
+  'the search button appears with a green background in the sponsor Organisation filter in the {string}',
+  async ({ commonItemsPage }, pageValue: string) => {
+    if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+      expect
+        .soft(
+          await commonItemsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
+            (e: any) => getComputedStyle(e).backgroundColor
+          )
         )
-      )
-      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+        .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    } else if (pageValue === 'Search_Modifications_Page' || pageValue === 'Search_Projects_Page') {
+      expect
+        .soft(
+          await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.evaluate(
+            (e: any) => getComputedStyle(e).backgroundColor
+          )
+        )
+        .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    }
   }
 );

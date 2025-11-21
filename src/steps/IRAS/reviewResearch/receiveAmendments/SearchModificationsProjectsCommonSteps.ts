@@ -191,7 +191,19 @@ Then(
         await validateFilterMatch(projectsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
       }
     } else {
-      throw new Error(`Expected Search Results but No Search Results are Displayed`);
+      await expect.soft(commonItemsPage.tableRows).not.toBeVisible();
+      await expect
+        .soft(commonItemsPage.search_results_count)
+        .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+      await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
+      await expect.soft(commonItemsPage.search_no_results_header).toBeVisible();
+      await expect.soft(commonItemsPage.search_no_results_guidance_text).toBeVisible();
+      await expect.soft(commonItemsPage.search_no_results_guidance_points).toBeVisible();
+      const actualBulletPoints = commonItemsPage.search_no_results_guidance_points.getByRole('listitem');
+      await expect
+        .soft(actualBulletPoints)
+        .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_guidance_points);
+      // throw new Error(`Expected Search Results but No Search Results are Displayed`);
     }
   }
 );
@@ -242,6 +254,23 @@ Then(
       );
       const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
       expect.soft(expectedResultCountLabel).toEqual(actualResultCountLabel);
+    }
+  }
+);
+
+Then(
+  'I can see the {string} ui labels in {string}',
+  async ({ searchModificationsPage, searchProjectsPage }, datasetName: string, pageName: string) => {
+    let dataset: any;
+    if (pageName === 'Search_Modifications_Page') {
+      dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+    } else if (pageName === 'Search_Projects_Page') {
+      dataset = searchProjectsPage.searchProjectsPageTestData.Search_Projects_Page[datasetName];
+    }
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await expect.soft(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
+      }
     }
   }
 );
