@@ -67,10 +67,11 @@ When(
 );
 
 When(
-  'I capture the iras id of the recently added project with status as {string} from the database',
+  'I capture the iras id and short project title of the recently added project with status as {string} from the database',
   async ({ searchProjectsPage }, status: string) => {
-    const IrasIdByStatus = await searchProjectsPage.sqlGetIrasIdByStatus(status);
-    await searchProjectsPage.saveIrasID(IrasIdByStatus.toString());
+    const result = await searchProjectsPage.sqlGetIrasIdShortProjectTitleByStatus(status);
+    const { IrasId, ShortProjectTitle } = result[0];
+    await searchProjectsPage.saveIrasIDShortProjectTitle(IrasId.toString(), ShortProjectTitle.toString());
   }
 );
 
@@ -203,5 +204,44 @@ Then(
     await expect.soft(commonItemsPage.advanced_filter_chevron).toBeVisible();
     await expect.soft(searchProjectsPage.results_table).not.toBeVisible();
     await expect.soft(commonItemsPage.search_no_results_container).not.toBeVisible();
+  }
+);
+
+When(
+  'I expand the chevrons for {string} in {string}',
+  async ({ searchModificationsPage, searchProjectsPage }, filterDatasetName: string, pageName: string) => {
+    let dataset: any;
+    if (pageName === 'Search_Modifications_Page') {
+      dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
+    } else if (pageName === 'Search_Projects_Page') {
+      dataset = searchProjectsPage.searchProjectsPageTestData.Advanced_Filters[filterDatasetName];
+    }
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'the result count displayed at the top accurately reflects the number of records shown in the search {string} page',
+  async ({ commonItemsPage, searchModificationsPage }, recordType: string) => {
+    if (recordType === 'modifications' || recordType === 'projects') {
+      const rowCount = await searchModificationsPage.tableRows.count();
+      const totalPagesCount = await commonItemsPage.getTotalPages();
+      let expectedResultCount: number;
+      if (totalPagesCount > 0) {
+        expectedResultCount = (totalPagesCount - 1) * 20 + (rowCount - 1);
+      } else {
+        expectedResultCount = rowCount - 1;
+      }
+      const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(
+        commonItemsPage,
+        expectedResultCount
+      );
+      const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
+      expect.soft(expectedResultCountLabel).toEqual(actualResultCountLabel);
+    }
   }
 );

@@ -16,6 +16,7 @@ export default class SearchProjectsPage {
   readonly linkTextData: typeof linkTextData;
   private _projects_list_after_search: string[];
   private _iras_id: string;
+  private _short_title: string;
   readonly mainPageContent: Locator;
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
@@ -78,6 +79,7 @@ export default class SearchProjectsPage {
     this.searchProjectsPageTestData = searchProjectsPageTestData;
     this._projects_list_after_search = [];
     this._iras_id = '';
+    this._short_title = '';
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
@@ -312,6 +314,14 @@ export default class SearchProjectsPage {
     this._iras_id = value;
   }
 
+  async getShortProjectTitle(): Promise<string> {
+    return this._short_title;
+  }
+
+  async setShortProjectTitle(value: string): Promise<void> {
+    this._short_title = value;
+  }
+
   //Page Methods
 
   async assertOnSearchProjectsPage() {
@@ -331,6 +341,26 @@ export default class SearchProjectsPage {
     await this.updateIrasIdTestDataJson(filePath, irasId);
   }
 
+  async saveIrasIDShortProjectTitle(irasId: string, title: string) {
+    await this.setIrasId(irasId);
+    await this.setShortProjectTitle(title);
+    const filePath = path.resolve(pathToTestDataJson);
+    await this.updateIrasIdShortProjectTitleTestDataJson(filePath, irasId, title);
+  }
+
+  async updateIrasIdShortProjectTitleTestDataJson(filePath: string, irasId: string, title: string) {
+    (async () => {
+      try {
+        const data = await returnDataFromJSON(filePath);
+        data.Search_Queries.Valid_Full_Iras_Id.search_input_text = irasId;
+        data.Advanced_Filters.Advanced_Filters_Short_Project_Title.short_project_title_text = title;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating iras id to testdata json file:`);
+      }
+    })();
+  }
+
   async updateIrasIdTestDataJson(filePath: string, updateVal: string) {
     (async () => {
       try {
@@ -343,20 +373,43 @@ export default class SearchProjectsPage {
     })();
   }
 
-  async sqlGetIrasIdByStatus(status: string) {
+  async saveShortProjectTitle(title: string) {
+    await this.setShortProjectTitle(title);
+    const filePath = path.resolve(pathToTestDataJson);
+    await this.updateShortProjectTitleTestDataJson(filePath, title);
+  }
+
+  async updateShortProjectTitleTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await returnDataFromJSON(filePath);
+        data.Advanced_Filters.Advanced_Filters_Short_Project_Title.short_project_title_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating iras id to testdata json file:`);
+      }
+    })();
+  }
+
+  async sqlGetIrasIdShortProjectTitleByStatus(status: string) {
     const sqlConnection = await connect(dbConfigData.Application_Service);
     const queryResult = await sqlConnection.query(`
-    SELECT TOP 1
-       ProjectRecords.IrasId
-    FROM  ProjectRecords 
-    INNER JOIN ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
-    WHERE 
-        ProjectRecordAnswers.QuestionId = 'IQA0005' AND 
-        ProjectRecordAnswers.SelectedOptions IN ('OPT0021', 'OPT0020', 'OPT0019','OPT0018') AND 
-        ProjectRecords.[Status]='${status}' ORDER BY ProjectRecords.CreatedDate DESC; 
-`);
+        SELECT TOP 1
+            ProjectRecords.IrasId,
+            ProjectRecords.ShortProjectTitle
+        FROM ProjectRecords
+        INNER JOIN ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+        WHERE 
+            ProjectRecordAnswers.QuestionId = 'IQA0005' AND 
+            ProjectRecordAnswers.SelectedOptions IN ('OPT0021', 'OPT0020', 'OPT0019','OPT0018') AND 
+            ProjectRecords.[Status] = '${status}'
+        ORDER BY ProjectRecords.CreatedDate DESC;
+    `);
     await sqlConnection.close();
-    return queryResult.recordset.map((row) => row.IrasId);
+    return queryResult.recordset.map((row) => ({
+      IrasId: row.IrasId,
+      ShortProjectTitle: row.ShortProjectTitle,
+    }));
   }
 
   async getAllProjectsFromTheTable(totalPagesCount: number): Promise<Map<string, string[]>> {
