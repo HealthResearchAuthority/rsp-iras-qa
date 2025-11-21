@@ -18,7 +18,12 @@ import AdultsLackingCapacityPage from '../IRAS/questionSet/AdultsLackingCapacity
 import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
-import { confirmArrayNotNull, confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import {
+  confirmArrayNotNull,
+  confirmStringNotNull,
+  removeUnwantedWhitespace,
+  getReportFolderName,
+} from '../../utils/UtilFunctions';
 import sharp from 'sharp';
 
 //Declare Page Objects
@@ -766,9 +771,36 @@ export default class CommonItemsPage {
     return selfHealedLocator;
   }
 
-  async captureScreenshot(page: Page, $step: any, $testInfo: any) {
-    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
-    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
+  async captureScreenshot(page: Page, $testInfo: any, $step?: any) {
+    const fileName = new Date().toISOString().replaceAll(/[-:.TZ]/g, '') + '.png';
+    const screenshotDir = './test-reports/' + getReportFolderName() + '/cucumber/html/screenshots';
+    const screenshotPath = path.join(screenshotDir, fileName);
+    try {
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+    } catch (error) {
+      if (error.message.includes('Cannot take screenshot larger')) {
+        await this.captureLargeSizeScreenshot(page, screenshotPath);
+      } else {
+        console.error(error);
+      }
+    }
+    const relativePath = path.join('../screenshots/', fileName).replaceAll(/\\/g, '/');
+    const htmlPreview = `<a href="${relativePath}" target="_blank">View screenshot</a>`;
+    if ($step) {
+      await $testInfo.attach(`[step] ${$step.title}`, {
+        body: htmlPreview,
+        contentType: 'text/html',
+      });
+    } else {
+      try {
+        await $testInfo.attach('Screenshot', {
+          body: htmlPreview,
+          contentType: 'text/html',
+        });
+      } catch (error) {
+        void error;
+      }
+    }
   }
 
   async captureComponentScreenshot(locator: Locator, $step: any, $testInfo: any) {
@@ -1636,11 +1668,18 @@ export default class CommonItemsPage {
 
   async clickLink(page: string, linkName: string) {
     const linkLabel = this.linkTextData[page][linkName];
-    await this.govUkLink
-      .getByText(linkLabel, { exact: true })
-      .or(this.genericButton.getByText(linkLabel, { exact: true }))
-      .first()
-      .click();
+    if (
+      page === 'Sponsor_Check_And_Authorise_Page' &&
+      (linkName === 'Sponsor_Details' || linkName === 'Modification_Details')
+    ) {
+      await this.page.locator('label', { hasText: linkLabel }).click();
+    } else {
+      await this.govUkLink
+        .getByText(linkLabel, { exact: true })
+        .or(this.genericButton.getByText(linkLabel, { exact: true }))
+        .first()
+        .click();
+    }
   }
 
   async clickErrorSummaryLinkSpecific<PageObject>(key: string, page: PageObject, errorMsg: string) {

@@ -137,6 +137,7 @@ Then(
       );
       modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
       await commonItemsPage.clickButton('Modifications_Page', 'Return_To_Modification');
+      await commonItemsPage.clickLink('Sponsor_Check_And_Authorise_Page', 'Modification_Details');
     }
   }
 );
