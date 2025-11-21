@@ -368,7 +368,7 @@ export default class SearchProjectsPage {
     await this.page.waitForTimeout(3000);
     let iteration: number;
     if (totalPagesCount < 3) {
-      iteration = totalPagesCount + 1;
+      iteration = totalPagesCount;
     } else {
       iteration = 3;
     }

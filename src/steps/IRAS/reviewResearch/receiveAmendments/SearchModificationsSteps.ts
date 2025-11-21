@@ -70,7 +70,7 @@ Then(
   'the result count displayed at the top accurately reflects the number of records shown in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }) => {
     const rowCount = await searchModificationsPage.tableRows.count();
-    const totalPagesCount = await commonItemsPage.getNumberofTotalPages();
+    const totalPagesCount = await commonItemsPage.getTotalPages();
     let expectedResultCount: number;
     if (totalPagesCount > 0) {
       expectedResultCount = (totalPagesCount - 1) * 20 + (rowCount - 1);

@@ -120,15 +120,15 @@ When(
   }
 );
 
-// date_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
+// Chief investigator name, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays project records based on the search {string} and filter criteria {string}',
   async ({ commonItemsPage, searchProjectsPage }, irasIdDatasetName, filterDatasetName) => {
     const testData = searchProjectsPage.searchProjectsPageTestData;
     const irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
-    const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
-    const totalPagesCount = await commonItemsPage.getNumberofTotalPages();
+    const { short_project_title_text: projectTitle } = filterDataset;
+    const totalPagesCount = await commonItemsPage.getTotalPages();
     const projectsList = await searchProjectsPage.getAllProjectsFromTheTable(totalPagesCount);
     const searchResults = confirmArrayNotNull(projectsList.get('searchResultValues'));
     const irasIds = confirmArrayNotNull(projectsList.get('irasIdValues'));
@@ -173,7 +173,7 @@ Then(
 
     if (searchResults.length !== 0) {
       // Combined search validation
-      const searchTerms = [irasId, ciName, projectTitle].filter(Boolean);
+      const searchTerms = [irasId, projectTitle].filter(Boolean);
       if (searchTerms.length > 1) {
         await validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
       }
