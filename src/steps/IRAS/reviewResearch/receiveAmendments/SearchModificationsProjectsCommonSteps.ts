@@ -245,8 +245,12 @@ Then(
       let expectedResultCount: number;
       if (totalPagesCount > 0) {
         expectedResultCount = (totalPagesCount - 1) * 20 + (rowCount - 1);
-      } else {
-        expectedResultCount = rowCount - 1;
+      } else if (totalPagesCount == 0) {
+        if (rowCount != 0) {
+          expectedResultCount = rowCount - 1;
+        } else {
+          expectedResultCount = rowCount;
+        }
       }
       const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(
         commonItemsPage,

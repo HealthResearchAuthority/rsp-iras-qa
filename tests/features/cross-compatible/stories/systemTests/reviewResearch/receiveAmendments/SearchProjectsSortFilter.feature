@@ -525,7 +525,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search project records 
                 And I capture the page screenshot
                 And I select advanced filters in the 'Search_Projects_Page' using '<Advanced_Filters>'
                 And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
-                # And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
+                And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'
                 And I capture the page screenshot
                 And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
