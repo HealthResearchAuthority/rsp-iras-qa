@@ -2747,7 +2747,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two                 |
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable |
 
-  @rsp-5432 @ProjectDocumentsTabStatusReviewable
+  @rsp-5342 @ProjectDocumentsTabStatusReviewable
   Scenario Outline: Validate that user can create and submit reviewable modifications with documents and validate the status of the documents in Project documents tab
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2851,7 +2851,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                                            | Research_Locations  |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
 
-  @rsp-5432 @ProjectDocumentsTabStatusNonReviewable
+  @rsp-5342 @ProjectDocumentsTabStatusNonReviewable
   Scenario Outline: Validate that user can create and submit non reviewable modifications with documents and validate the status of the documents in Project documents tab
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

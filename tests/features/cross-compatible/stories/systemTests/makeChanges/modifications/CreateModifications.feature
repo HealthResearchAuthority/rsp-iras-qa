@@ -187,7 +187,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Changes                           | New_Changes                              | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
 
-  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @rsp-5432 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408_5408_5285 @fail
+  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @rsp-5342 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408_5408_5285 @fail
   Scenario Outline: Validate that user can create and submit reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -279,7 +279,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Multiple_Changes_Reviewable_Set_Three              | Nhs_Involvement_Yes |
       | Multiple_Changes_Reviewable_Set_Three              | Nhs_Involvement_No  |
 
-  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @rsp-5432 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496_5285 @fail
+  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @rsp-5342 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496_5285 @fail
   Scenario Outline: Validate that user can create and submit non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -376,7 +376,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
-  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5432 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496_5285 @fail
+  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5342 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496_5285 @fail
   Scenario Outline: Validate that user can create modifications for reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
