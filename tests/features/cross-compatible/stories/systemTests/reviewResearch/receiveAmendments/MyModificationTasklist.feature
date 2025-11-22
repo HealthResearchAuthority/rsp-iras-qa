@@ -87,106 +87,106 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
         When I fill the search input for searching 'my tasklist' with '<Search_Input>' as the search query
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Search_Input>'
+        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Search_Input>' with '<Status>'
 
         Examples:
-            | Search_Input             |
-            | Existing_IRAS_ID_Single  |
-            | Existing_IRAS_ID_Multi   |
-            | Existing_Partial_IRAS_ID |
+            | Search_Input             | Status           |
+            | Existing_IRAS_ID_Single  | With review body |
+            | Existing_IRAS_ID_Multi   | With review body |
+            | Existing_Partial_IRAS_ID | With review body |
 
     @filterMyTasklistByShortTitle @rsp-4821
     Scenario Outline: Verify the user is able to filter the my modifications tasklist by the short project title
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with '<Title_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Title_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Title_Filter_Input>'
+        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Title_Filter_Input>' with '<Status>'
         And I 'cannot' see the advanced filters panel
 
         Examples:
-            | Title_Filter_Input     |
-            | Existing_Title_Single  |
-            | Existing_Title_Multi   |
-            | Existing_Title_Partial |
+            | Title_Filter_Input     | Status           |
+            | Existing_Title_Single  | With review body |
+            | Existing_Title_Multi   | With review body |
+            | Existing_Title_Partial | With review body |
 
     @filterMyTasklistByDateSubmitted @rsp-4821
     Scenario Outline: Verify the user is able to filter the my modifications tasklist by the date submitted
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
         And I can see the date from and date to filters have the expected hint text
-        When I fill the 'my' modifications tasklist search and filter options with '<Date_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Date_Filter_Input>'
+        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Date_Filter_Input>' with '<Status>'
         And I 'cannot' see the advanced filters panel
 
         Examples:
-            | Date_Filter_Input |
-            | Date_Range_Single |
-            | Date_Range_Multi  |
-            | Date_From_Multi   |
-            | Date_To_Multi     |
+            | Date_Filter_Input | Status           |
+            | Date_Range_Single | With review body |
+            | Date_Range_Multi  | With review body |
+            | Date_From_Multi   | With review body |
+            | Date_To_Multi     | With review body |
 
     @filterMyTasklistByDaysSinceSubmission @rsp-4821 @UPDATE-AFTER-RSP-4808
     Scenario Outline: Verify the user is able to filter the my modifications tasklist by the days since submission
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
         And I can see the days since submission filter has the expected hint text
-        When I fill the 'my' modifications tasklist search and filter options with '<Days_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Days_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Days_Filter_Input>'
+        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Days_Filter_Input>' with '<Status>'
         And I 'cannot' see the advanced filters panel
         When I click the 'Date_Submitted' button on the 'Modifications_Tasklist_Page'
-        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Days_Filter_Input>'
+        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Days_Filter_Input>' with '<Status>'
 
         Examples:
-            | Days_Filter_Input |
-            | Days_Range_Multi  |
+            | Days_Filter_Input | Status           |
+            | Days_Range_Multi  | With review body |
             # | Days_Specific_Single | REQUIRES DATA SETUP
-            | Days_From_Multi   |
-            | Days_To_Multi     |
+            | Days_From_Multi   | With review body |
+            | Days_To_Multi     | With review body |
 
     @searchFilterComboMyTasklist @rsp-4821
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with '<Search_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Search_Filter_Input>'
+        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
         And I 'cannot' see the advanced filters panel
 
         Examples:
-            | Search_Filter_Input             | Button        |
-            | IRAS_ID_Title_Single            | Apply_Filters |
-            | Title_Date_Range_Single         | Search        |
-            | IRAS_ID_Title_Date_Range_Single | Apply_Filters |
-            | IRAS_ID_Title_Multi             | Search        |
-            | Title_Date_Range_Multi          | Apply_Filters |
-            | IRAS_ID_Title_Date_Range_Multi  | Search        |
-            | Title_Days_Range_Multi          | Apply_Filters |
+            | Search_Filter_Input             | Button        | Status           |
+            | IRAS_ID_Title_Single            | Apply_Filters | With review body |
+            | Title_Date_Range_Single         | Search        | With review body |
+            | IRAS_ID_Title_Date_Range_Single | Apply_Filters | With review body |
+            | IRAS_ID_Title_Multi             | Search        | With review body |
+            | Title_Date_Range_Multi          | Apply_Filters | With review body |
+            | IRAS_ID_Title_Date_Range_Multi  | Search        | With review body |
+            | Title_Days_Range_Multi          | Apply_Filters | With review body |
 
     @searchMyTasklistWithNoResults @rsp-4821
     Scenario Outline: Verify the my tasklist page displays the no results found message, when no records on the system match the search criteria
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
-        When I fill the 'my' modifications tasklist search and filter options with '<Search_Filter_Input>'
+        And I open each of the 'modification tasklist' filters
+        When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -203,9 +203,9 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario Outline: Verify the active filters display as expected on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with '<Search_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the '<Button>' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -225,9 +225,9 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with 'Date_From_Multi'
+        When I fill the 'assign modifications tasklist' search and filter options with 'Date_From_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -235,8 +235,8 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
         Then the number of search results has 'decreased' from the 'original' number
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
-        When I fill the 'my' modifications tasklist search and filter options with 'Existing_Title_Partial'
+        And I open each of the 'modification tasklist' filters
+        When I fill the 'assign modifications tasklist' search and filter options with 'Existing_Title_Partial'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -253,9 +253,9 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario: Verify that the clear all filters option returns my tasklist to its original state
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with 'Title_Date_Range_Multi'
+        When I fill the 'assign modifications tasklist' search and filter options with 'Title_Date_Range_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -270,9 +270,9 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario Outline: Verify that correct validation is in place for the date submitted filter on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with '<Date_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot

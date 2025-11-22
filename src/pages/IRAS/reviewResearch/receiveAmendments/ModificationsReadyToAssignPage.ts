@@ -34,6 +34,7 @@ export default class ModificationsReadyToAssignPage {
   readonly modification_checkbox: Locator;
   readonly results_table: Locator;
   readonly iras_id_search_text: Locator;
+  readonly study_wide_reviewer_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -106,6 +107,7 @@ export default class ModificationsReadyToAssignPage {
       this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.iras_id_search_box_label,
       { exact: true }
     );
+    this.study_wide_reviewer_text = this.page.locator('input[name="Search.ReviewerName"]'); //workaround use above after fix
   }
 
   //Getters & Setters for Private Variables

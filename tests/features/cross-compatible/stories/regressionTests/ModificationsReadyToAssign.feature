@@ -7,11 +7,11 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
         And I can see the date from and date to filters have the expected hint text
         And I can see the days since submission filter has the expected hint text
-        When I fill the 'assign' modifications tasklist search and filter options with '<Search_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -36,9 +36,9 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'assign' modifications tasklist search and filter options with 'Date_From_Multi'
+        When I fill the 'assign modifications tasklist' search and filter options with 'Date_From_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -46,8 +46,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then the number of search results has 'decreased' from the 'original' number
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
-        When I fill the 'assign' modifications tasklist search and filter options with 'Existing_Title_Partial'
+        And I open each of the 'modification tasklist' filters
+        When I fill the 'assign modifications tasklist' search and filter options with 'Existing_Title_Partial'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -66,9 +66,9 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'assign' modifications tasklist search and filter options with 'Title_Date_Range_Multi'
+        When I fill the 'assign modifications tasklist' search and filter options with 'Title_Date_Range_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -111,8 +111,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
-        When I fill the 'assign' modifications tasklist search and filter options with '<Search_Filter_Input>'
+        And I open each of the 'modification tasklist' filters
+        When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -130,9 +130,9 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'assign' modifications tasklist search and filter options with '<Date_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot

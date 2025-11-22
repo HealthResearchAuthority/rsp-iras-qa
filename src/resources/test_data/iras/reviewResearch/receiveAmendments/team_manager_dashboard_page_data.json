@@ -12,7 +12,8 @@
     "project_record_answer_option_lead_nation_england": "OPT0018",
     "project_record_answer_option_lead_nation_northern_ireland": "OPT0019",
     "project_record_answer_option_lead_nation_scotland": "OPT0020",
-    "project_record_answer_option_lead_nation_wales": "OPT0021"
+    "project_record_answer_option_lead_nation_wales": "OPT0021",
+    "filter_headings": ["Date submitted", "Days since submission", "Study-wide reviewer"]
   },
   "Column_Label_Texts": {
     "short_project_title_column_label": "Short project title",
@@ -27,41 +28,41 @@
     "day_to_label": "Day",
     "month_to_label": "Month",
     "year_to_label": "Year",
-    "short_project_title_label": "Enter the name of the short project title"
+    "study_wide_reviewer_label": "Enter the name of the study wide reviewer"
   },
   "Search_Queries": {
     "Existing_IRAS_ID_Single": {
-      "search_input_text": "339090"
+      "search_input_text": "210996"
     },
     "Existing_IRAS_ID_Multi": {
       "search_input_text": "259143"
     },
     "Existing_Partial_IRAS_ID": {
-      "search_input_text": "339"
+      "search_input_text": "210"
     },
-    "Existing_Title_Single": {
-      "short_project_title_text": "Study title 16"
+    "Existing_Study_Wide_Reviewer_Single": {
+      "study_wide_reviewer_text": "Study-wide reviewer HRA England"
     },
-    "Existing_Title_Multi": {
-      "short_project_title_text": "Five 11.08"
+    "Existing_Study_Wide_Reviewer_Multi": {
+      "study_wide_reviewer_text": "Study-wide reviewer HRA England"
     },
-    "Existing_Title_Partial": {
-      "short_project_title_text": "This is a short"
+    "Existing_Study_Wide_Reviewer_Partial": {
+      "study_wide_reviewer_text": "Study-wide reviewer"
     },
     "Date_Range_Single": {
-      "day_from_text": "11",
-      "month_from_dropdown": "September",
+      "day_from_text": "18",
+      "month_from_dropdown": "November",
       "year_from_text": "2025",
-      "day_to_text": "11",
-      "month_to_dropdown": "September",
+      "day_to_text": "18",
+      "month_to_dropdown": "November",
       "year_to_text": "2025"
     },
     "Date_Range_Multi": {
       "day_from_text": "1",
       "month_from_dropdown": "July",
       "year_from_text": "2025",
-      "day_to_text": "9",
-      "month_to_dropdown": "September",
+      "day_to_text": "30",
+      "month_to_dropdown": "November",
       "year_to_text": "2025"
     },
     "Date_From_Multi": {
@@ -70,8 +71,8 @@
       "year_from_text": "2025"
     },
     "Date_To_Multi": {
-      "day_to_text": "12",
-      "month_to_dropdown": "August",
+      "day_to_text": "30",
+      "month_to_dropdown": "November",
       "year_to_text": "2025"
     },
     "Days_Range_Multi": {
@@ -92,8 +93,8 @@
       "search_input_text": "9800012",
       "short_project_title_text": "Project title 12"
     },
-    "Title_Date_Range_Single": {
-      "short_project_title_text": "Check 4103",
+    "Study_Wide_Reviewer_Date_Range_Single": {
+      "study_wide_reviewer_text": "Study-wide reviewer",
       "day_from_text": "4",
       "month_from_dropdown": "August",
       "year_from_text": "2025",
@@ -101,9 +102,9 @@
       "month_to_dropdown": "August",
       "year_to_text": "2025"
     },
-    "IRAS_ID_Title_Date_Range_Single": {
+    "IRAS_ID_Study_Wide_Reviewer_Date_Range_Single": {
       "search_input_text": "2567879",
-      "short_project_title_text": "cardiology",
+      "study_wide_reviewer_text": "Study-wide reviewer",
       "day_from_text": "21",
       "month_from_dropdown": "September",
       "year_from_text": "2025",
@@ -189,34 +190,19 @@
   },
   "Modification_Id": {
     "Modification_Id_Ln_England_Pn_England_One": {
-      "modification_id_checkbox": [
-        "1234587/19"
-      ]
+      "modification_id_checkbox": ["1234587/19"]
     },
     "Modification_Id_Ln_England_Pn_England_Two": {
-      "modification_id_checkbox": [
-        "1234587/2"
-      ]
+      "modification_id_checkbox": ["1234587/2"]
     },
     "Modification_Id_Ln_England_Pn_England_Three_Four": {
-      "modification_id_checkbox": [
-        "1234587/3",
-        "1234587/4"
-      ]
+      "modification_id_checkbox": ["1234587/3", "1234587/4"]
     },
     "Modification_Id_Ln_England_Pn_England_Five_Six": {
-      "modification_id_checkbox": [
-        "1234587/5",
-        "1234587/6"
-      ]
+      "modification_id_checkbox": ["1234587/5", "1234587/6"]
     },
     "Modification_Id_Ln_England_Pn_England_All_Assigned_From_WFC_To_SWR": {
-      "modification_id_checkbox": [
-        "1234587/1",
-        "1234587/2",
-        "1234587/3",
-        "1234587/4"
-      ]
+      "modification_id_checkbox": ["1234587/1", "1234587/2", "1234587/3", "1234587/4"]
     }
   },
   "Team_Manager_Nations": {

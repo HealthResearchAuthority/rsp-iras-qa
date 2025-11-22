@@ -32,10 +32,16 @@ Then(
 );
 
 Given(
-  'I open each of the modification tasklist filters',
-  async ({ modificationsReceivedCommonPage, commonItemsPage }) => {
-    const expectedFilterHeadings =
-      modificationsReceivedCommonPage.modificationsReceivedCommonPagePageTestData.Tasklist_Page.filter_headings;
+  'I open each of the {string} filters',
+  async ({ modificationsReceivedCommonPage, commonItemsPage, teamManagerDashboardPage }, pageValue: string) => {
+    let expectedFilterHeadings: any;
+    if (pageValue === 'modification tasklist') {
+      expectedFilterHeadings =
+        modificationsReceivedCommonPage.modificationsReceivedCommonPagePageTestData.Tasklist_Page.filter_headings;
+    } else if (pageValue === 'team manager dashboard') {
+      expectedFilterHeadings =
+        teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page.filter_headings;
+    }
     for (const heading of expectedFilterHeadings) {
       await commonItemsPage.advanced_filter_headings.getByText(heading, { exact: true }).click();
     }
@@ -61,6 +67,7 @@ Given(
     let shortProjectTitleIndex: number;
     let dateSubmittedIndex: number;
     let daysSinceSubmissionIndex: number;
+    let studyWideReviewerIndex: number;
     let statusIndex: number;
     if (pageType.toLowerCase() == 'ready to assign') {
       searchInputDataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries;
@@ -76,6 +83,7 @@ Given(
       shortProjectTitleIndex = 2;
       dateSubmittedIndex = 3;
       daysSinceSubmissionIndex = 4;
+      studyWideReviewerIndex = 5;
       statusIndex = 6;
       await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
     } else {
@@ -107,15 +115,32 @@ Given(
     );
 
     const statuses: string[] = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, statusIndex);
-
-    if (statusValue === 'With review body') {
+    if (
+      pageType.toLowerCase() == 'ready to assign and reassign in team manager dashboard' &&
+      statusValue === 'With review body'
+    ) {
       const allValidStatuses = statuses.every((s) => {
         const normalized = s.trim().toLowerCase();
         return normalized === 'received' || normalized === 'review in progress';
       });
       expect.soft(allValidStatuses).toBe(true);
+    } else if (pageType.toLowerCase() == 'ready to assign' && statusValue === 'With review body') {
+      const allValidStatuses = statuses.every((s) => {
+        const normalized = s.trim().toLowerCase();
+        return normalized === 'received';
+      });
+      expect.soft(allValidStatuses).toBe(true);
+    } else if (pageType.toLowerCase() == 'assigned to me' && statusValue === 'With review body') {
+      const allValidStatuses = statuses.every((s) => {
+        const normalized = s.trim().toLowerCase();
+        return normalized === 'review in progress';
+      });
+      expect.soft(allValidStatuses).toBe(true);
     }
-
+    const studyWideReviewers = await commonItemsPage.getActualListValues(
+      commonItemsPage.tableBodyRows,
+      studyWideReviewerIndex
+    );
     if (searchInput.toLowerCase().includes('single')) {
       await expect
         .soft(commonItemsPage.search_results_count)
@@ -128,6 +153,7 @@ Given(
             shortTitles,
             daysSinceSubmission,
             datesSubmitted,
+            studyWideReviewers,
             searchInputDataset,
             searchInput
           )
@@ -179,6 +205,7 @@ Given(
             await modificationsReceivedCommonPage.checkMultiValuesStartsWith(
               visibleIrasIds,
               shortTitles,
+              studyWideReviewers,
               searchInputDataset,
               searchInput
             )
@@ -193,6 +220,7 @@ Given(
           await modificationsReceivedCommonPage.checkPartialValuesContain(
             visibleIrasIds,
             shortTitles,
+            studyWideReviewers,
             searchInputDataset,
             searchInput
           )
@@ -205,17 +233,27 @@ Given(
 );
 
 When(
-  'I fill the {string} modifications tasklist search and filter options with {string}',
+  'I fill the {string} search and filter options with {string}',
   async (
-    { commonItemsPage, modificationsReadyToAssignPage, myModificationsTasklistPage, modificationsReceivedCommonPage },
+    {
+      commonItemsPage,
+      modificationsReadyToAssignPage,
+      myModificationsTasklistPage,
+      modificationsReceivedCommonPage,
+      teamManagerDashboardPage,
+    },
     pageType: string,
     datasetName: string
   ) => {
     let modificationPage: ModificationsReadyToAssignPage | MyModificationsTasklistPage;
     let dataset: any;
     let daysSinceSubmissionIndex: number;
-    if (pageType.toLowerCase() == 'assign') {
+    if (pageType.toLowerCase() == 'assign modifications tasklist') {
       dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[datasetName];
+      daysSinceSubmissionIndex = 4;
+      modificationPage = modificationsReadyToAssignPage;
+    } else if (pageType.toLowerCase() == 'ready to assign and reassign in team manager dashboard') {
+      dataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[datasetName];
       daysSinceSubmissionIndex = 4;
       modificationPage = modificationsReadyToAssignPage;
     } else {
@@ -275,9 +313,9 @@ When(
 Given(
   'I can see the days since submission filter has the expected hint text',
   async ({ modificationsReceivedCommonPage }) => {
-    await expect(modificationsReceivedCommonPage.days_since_submission_label).toBeVisible();
-    await expect(modificationsReceivedCommonPage.days_since_submission_hint_label).toBeVisible();
-    await expect(modificationsReceivedCommonPage.days_since_submission_to_separator).toBeVisible();
-    await expect(modificationsReceivedCommonPage.days_since_submission_suffix_label).toBeVisible();
+    await expect.soft(modificationsReceivedCommonPage.days_since_submission_label).toBeVisible();
+    await expect.soft(modificationsReceivedCommonPage.days_since_submission_hint_label).toBeVisible();
+    await expect.soft(modificationsReceivedCommonPage.days_since_submission_to_separator).toBeVisible();
+    await expect.soft(modificationsReceivedCommonPage.days_since_submission_suffix_label).toBeVisible();
   }
 );

@@ -128,6 +128,7 @@ export default class ModificationsReceivedCommonPage {
     shortTitles: string[],
     daysSinceSubmission: string[],
     datesSubmitted: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -138,6 +139,11 @@ export default class ModificationsReceivedCommonPage {
     if (searchInput.toLowerCase().includes('title')) {
       valuesMatch =
         shortTitles.toString().toLowerCase() == searchInputDataset[searchInput].short_project_title_text.toLowerCase();
+    }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      valuesMatch =
+        studyWideReviewers.toString().toLowerCase() ==
+        searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase();
     }
     if (searchInput.toLowerCase().includes('days')) {
       const actualDay = daysSinceSubmission.toString();
@@ -156,6 +162,7 @@ export default class ModificationsReceivedCommonPage {
   async checkMultiValuesStartsWith(
     irasIds: string[],
     shortTitles: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -178,12 +185,23 @@ export default class ModificationsReceivedCommonPage {
         }
       }
     }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      for (const swr of studyWideReviewers) {
+        valuesStartWith = swr
+          .toLowerCase()
+          .startsWith(searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase());
+        if (!valuesStartWith) {
+          return valuesStartWith;
+        }
+      }
+    }
     return valuesStartWith;
   }
 
   async checkPartialValuesContain(
     irasIds: string[],
     shortTitles: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -201,6 +219,16 @@ export default class ModificationsReceivedCommonPage {
         valuesContain = title
           .toLowerCase()
           .includes(searchInputDataset[searchInput].short_project_title_text.toLowerCase());
+        if (!valuesContain) {
+          return valuesContain;
+        }
+      }
+    }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      for (const swr of studyWideReviewers) {
+        valuesContain = swr
+          .toLowerCase()
+          .includes(searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase());
         if (!valuesContain) {
           return valuesContain;
         }

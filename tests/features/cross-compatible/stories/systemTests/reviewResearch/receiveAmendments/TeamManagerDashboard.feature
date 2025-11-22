@@ -4,7 +4,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
 
-        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @Complete-After-DB-Connection
+        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed
         Scenario Outline: Verify the team manger is able to view existing list of modifications for a specific lead nation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
@@ -17,7 +17,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Team_Manager_S  |
                         | Team_Manager_W  |
 
-        @searchTasklistByIrasIdWithResults @rsp-5125
+        @searchTasklistByIrasIdWithResults @rsp-5125 @DBDataUsed
         Scenario Outline: Verify the user is able to search the team manager dashboard by the iras ID
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
@@ -34,69 +34,68 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Existing_Partial_IRAS_ID | Team_Manager | With review body | Partial            |
 
 
-        # @filterTasklistByShortTitle @rsp-5125 @skip
-        # Scenario Outline: Verify the user is able to filter the modifications tasklist by the short project title
-        #         Given I have navigated to the 'Team_Manager_Dashboard_Page'
-        #         And I capture the page screenshot
-        #         And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
-        #         And I 'can' see the advanced filters panel
-        #         And I open each of the modification tasklist filters
-        #         And I capture the page screenshot
-        #         When I fill the 'assign' modifications tasklist search and filter options with '<Title_Filter_Input>'
-        #         And I capture the page screenshot
-        #         And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
-        #         And I capture the page screenshot
-        #         Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Title_Filter_Input>'
-        #         And I 'cannot' see the advanced filters panel
-
-        #         Examples:
-        #                 | Title_Filter_Input     |
-        #                 | Existing_Title_Single  |
-        #                 | Existing_Title_Multi   |
-        #                 | Existing_Title_Partial |
-
-        # study-wide reviewer,status-out of scope
-
-        @filterTasklistByDateSubmitted @rsp-5125
-        Scenario Outline: Verify the user is able to filter the modifications tasklist by the date submitted
+        @filterTasklistBySWR @rsp-5125
+        Scenario Outline: Verify the user is able to filter the team manager dashboard by the study-wide reviewer
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
+                And I open each of the 'team manager dashboard' filters
                 And I capture the page screenshot
-                And I can see the date from and date to filters have the expected hint text
-                When I fill the 'assign' modifications tasklist search and filter options with '<Date_Filter_Input>'
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Study_Wide_Reviewer_Filter_Input>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Date_Filter_Input>' with '<Status>'
+                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Study_Wide_Reviewer_Filter_Input>' with '<Status>'
+                And I 'cannot' see the advanced filters panel
+
+                Examples:
+                        | Study_Wide_Reviewer_Filter_Input     | Status           |
+                        | Existing_Study_Wide_Reviewer_Multi   | With review body |
+                        | Existing_Study_Wide_Reviewer_Partial | With review body |
+
+        # status-out of scope
+
+        @filterTasklistByDateSubmitted @rsp-5125 @DBSetupReqd
+        Scenario Outline: Verify the user is able to filter the team manager dashboard by the date submitted
+                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
+                And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
+                And I 'can' see the advanced filters panel
+                And I open each of the 'team manager dashboard' filters
+                And I capture the page screenshot
+                And I can see the date from and date to filters have the expected hint text
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Date_Filter_Input>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
+                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Date_Filter_Input>' with '<Status>'
                 And I 'cannot' see the advanced filters panel
 
                 Examples:
                         | Date_Filter_Input | Status           |
-                        | Date_Range_Single | With review body |
                         | Date_Range_Multi  | With review body |
                         | Date_From_Multi   | With review body |
                         | Date_To_Multi     | With review body |
+        #  date submitted need to capture from db to avoid any failures
 
-        @filterTasklistByDaysSinceSubmission @rsp-5125 @UPDATE-AFTER-RSP-4808
-        Scenario Outline: Verify the user is able to filter the modifications tasklist by the days since submission
+        @filterTasklistByDaysSinceSubmission @rsp-5125 @UPDATE-AFTER-RSP-4808 @DBSetupReqd @TestOnlyTiji
+        Scenario Outline: Verify the user is able to filter the team manager dashboard by the days since submission
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
+                And I open each of the 'team manager dashboard' filters
                 And I capture the page screenshot
                 And I can see the days since submission filter has the expected hint text
-                When I fill the 'assign' modifications tasklist search and filter options with '<Days_Filter_Input>'
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Days_Filter_Input>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Days_Filter_Input>' with '<Status>'
+                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Days_Filter_Input>' with '<Status>'
                 And I 'cannot' see the advanced filters panel
                 When I click the 'Date_Submitted' button on the 'Team_Manager_Dashboard_Page'
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Days_Filter_Input>' with '<Status>'
+                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Days_Filter_Input>' with '<Status>'
 
                 Examples:
                         | Days_Filter_Input | Status           |
@@ -111,9 +110,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
+                And I open each of the 'modification tasklist' filters
                 And I capture the page screenshot
-                When I fill the 'assign' modifications tasklist search and filter options with '<Search_Filter_Input>'
+                When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
                 And I capture the page screenshot
                 And I click the '<Button>' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -121,14 +120,14 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I 'cannot' see the advanced filters panel
 
                 Examples:
-                        | Search_Filter_Input     | Button        | Status           |
+                        | Search_Filter_Input                   | Button        | Status           |
                         # | IRAS_ID_Title_Single            | Apply_Filters |
-                        | Title_Date_Range_Single | Search        | With review body |
-                        # | IRAS_ID_Title_Date_Range_Single | Apply_Filters |
+                        | Study_Wide_Reviewer_Date_Range_Single | Search        | With review body |
+                        # | IRAS_ID_Study_Wide_Reviewer_Date_Range_Single | Apply_Filters |
                         # | IRAS_ID_Title_Multi             | Search        |
-                        | Title_Date_Range_Multi  | Apply_Filters | With review body |
+                        | Title_Date_Range_Multi                | Apply_Filters | With review body |
                         # | IRAS_ID_Title_Date_Range_Multi  | Search        |
-                        | Title_Days_Range_Multi  | Apply_Filters | With review body |
+                        | Title_Days_Range_Multi                | Apply_Filters | With review body |
 
         # study-wide reviewer,status
 
@@ -138,8 +137,8 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
-                When I fill the 'assign' modifications tasklist search and filter options with '<Search_Filter_Input>'
+                And I open each of the 'modification tasklist' filters
+                When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -158,9 +157,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
+                And I open each of the 'modification tasklist' filters
                 And I capture the page screenshot
-                When I fill the 'assign' modifications tasklist search and filter options with '<Search_Filter_Input>'
+                When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
                 And I capture the page screenshot
                 And I click the '<Button>' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -169,7 +168,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
 
                 Examples:
                         | Search_Filter_Input | Button        |
-                        # | Title_Date_Range_Single | Search        |
+                        # | Study_Wide_Reviewer_Date_Range_Single | Search        |
                         # | Title_Date_Range_Multi  | Apply_Filters |
                         | Date_From_Multi     | Search        |
                         | Days_Range_Multi    | Search        |
@@ -183,9 +182,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
+                And I open each of the 'modification tasklist' filters
                 And I capture the page screenshot
-                When I fill the 'assign' modifications tasklist search and filter options with 'Date_From_Multi'
+                When I fill the 'assign modifications tasklist' search and filter options with 'Date_From_Multi'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see active filters displayed
@@ -193,8 +192,8 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 Then the number of search results has 'decreased' from the 'original' number
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
-                When I fill the 'assign' modifications tasklist search and filter options with 'Existing_Title_Partial'
+                And I open each of the 'modification tasklist' filters
+                When I fill the 'assign modifications tasklist' search and filter options with 'Existing_Title_Partial'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -214,9 +213,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
+                And I open each of the 'modification tasklist' filters
                 And I capture the page screenshot
-                When I fill the 'assign' modifications tasklist search and filter options with 'Title_Date_Range_Multi'
+                When I fill the 'assign modifications tasklist' search and filter options with 'Title_Date_Range_Multi'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see active filters displayed
@@ -233,9 +232,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the modification tasklist filters
+                And I open each of the 'modification tasklist' filters
                 And I capture the page screenshot
-                When I fill the 'assign' modifications tasklist search and filter options with '<Date_Filter_Input>'
+                When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
