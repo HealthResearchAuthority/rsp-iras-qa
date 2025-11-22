@@ -33,13 +33,23 @@ Then(
 );
 
 Then(
-  'I capture the modification id where the lead nation is the country linked to the {string} and with status {string}',
-  async ({ teamManagerDashboardPage }, user: string, status: string) => {
+  'I capture the modification id of {string} where the lead nation is the country linked to the {string} and with status {string}',
+  async ({ teamManagerDashboardPage }, modificationCount: string, user: string, status: string) => {
+    let countValue: string;
     let leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
     if (leadNation === 'Northern Ireland') {
       leadNation = 'Northern_Ireland';
     }
-    const modificationId = await teamManagerDashboardPage.sqlGetModificationByLeadNationAndStatus(leadNation, status);
-    await teamManagerDashboardPage.saveModificationId(modificationId.toString());
+    if (modificationCount === 'Single' || modificationCount === 'Partial') {
+      countValue = '=';
+    } else {
+      countValue = '>';
+    }
+    const modificationId = await teamManagerDashboardPage.sqlGetModificationByLeadNationAndStatusCount(
+      leadNation,
+      status,
+      countValue
+    );
+    await teamManagerDashboardPage.saveModificationId(modificationId.toString(), modificationCount);
   }
 );

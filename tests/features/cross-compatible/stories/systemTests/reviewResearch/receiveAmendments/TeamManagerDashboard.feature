@@ -17,20 +17,22 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Team_Manager_S  |
                         | Team_Manager_W  |
 
-        @searchTasklistByIrasIdWithResults @rsp-5125 @TestOnlyTiji
-        Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
+        @searchTasklistByIrasIdWithResults @rsp-5125
+        Scenario Outline: Verify the user is able to search the team manager dashboard by the iras ID
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
-                And I capture the modification id where the lead nation is the country linked to the '<User>' and with status '<Status>'
+                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
                 When I fill the search input for searching 'team manager dashboard' with '<Search_Input>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Input>'
+                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Search_Input>' with '<Status>'
 
                 Examples:
-                        | Search_Input             | User         | Status           |
-                        | Existing_IRAS_ID         | Team_Manager | With review body |
-                        | Existing_Partial_IRAS_ID | Team_Manager | With review body |
+                        | Search_Input             | User         | Status           | Modification_Count |
+                        | Existing_IRAS_ID_Single  | Team_Manager | With review body | Single             |
+                        | Existing_IRAS_ID_Multi   | Team_Manager | With review body | Multi              |
+                        | Existing_Partial_IRAS_ID | Team_Manager | With review body | Partial            |
+
 
         # @filterTasklistByShortTitle @rsp-5125 @skip
         # Scenario Outline: Verify the user is able to filter the modifications tasklist by the short project title
@@ -68,15 +70,15 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Date_Filter_Input>'
+                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Date_Filter_Input>' with '<Status>'
                 And I 'cannot' see the advanced filters panel
 
                 Examples:
-                        | Date_Filter_Input |
-                        | Date_Range_Single |
-                        | Date_Range_Multi  |
-                        | Date_From_Multi   |
-                        | Date_To_Multi     |
+                        | Date_Filter_Input | Status           |
+                        | Date_Range_Single | With review body |
+                        | Date_Range_Multi  | With review body |
+                        | Date_From_Multi   | With review body |
+                        | Date_To_Multi     | With review body |
 
         @filterTasklistByDaysSinceSubmission @rsp-5125 @UPDATE-AFTER-RSP-4808
         Scenario Outline: Verify the user is able to filter the modifications tasklist by the days since submission
@@ -91,17 +93,17 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Days_Filter_Input>'
+                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Days_Filter_Input>' with '<Status>'
                 And I 'cannot' see the advanced filters panel
                 When I click the 'Date_Submitted' button on the 'Team_Manager_Dashboard_Page'
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Days_Filter_Input>'
+                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Days_Filter_Input>' with '<Status>'
 
                 Examples:
-                        | Days_Filter_Input |
-                        | Days_Range_Multi  |
+                        | Days_Filter_Input | Status           |
+                        | Days_Range_Multi  | With review body |
                         # | Days_Specific_Single | REQUIRES DATA SETUP
-                        | Days_From_Multi   |
-                        | Days_To_Multi     |
+                        | Days_From_Multi   | With review body |
+                        | Days_To_Multi     | With review body |
 
         @searchFilterComboTasklist @rsp-5122 @rsp-5125
         Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
@@ -115,18 +117,18 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the '<Button>' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Filter_Input>'
+                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
                 And I 'cannot' see the advanced filters panel
 
                 Examples:
-                        | Search_Filter_Input     | Button        |
+                        | Search_Filter_Input     | Button        | Status           |
                         # | IRAS_ID_Title_Single            | Apply_Filters |
-                        | Title_Date_Range_Single | Search        |
+                        | Title_Date_Range_Single | Search        | With review body |
                         # | IRAS_ID_Title_Date_Range_Single | Apply_Filters |
                         # | IRAS_ID_Title_Multi             | Search        |
-                        | Title_Date_Range_Multi  | Apply_Filters |
+                        | Title_Date_Range_Multi  | Apply_Filters | With review body |
                         # | IRAS_ID_Title_Date_Range_Multi  | Search        |
-                        | Title_Days_Range_Multi  | Apply_Filters |
+                        | Title_Days_Range_Multi  | Apply_Filters | With review body |
 
         # study-wide reviewer,status
 

@@ -30,11 +30,14 @@
     "short_project_title_label": "Enter the name of the short project title"
   },
   "Search_Queries": {
-    "Existing_IRAS_ID": {
-      "search_input_text": "248763"
+    "Existing_IRAS_ID_Single": {
+      "search_input_text": "339090"
+    },
+    "Existing_IRAS_ID_Multi": {
+      "search_input_text": "259143"
     },
     "Existing_Partial_IRAS_ID": {
-      "search_input_text": "248"
+      "search_input_text": "339"
     },
     "Existing_Title_Single": {
       "short_project_title_text": "Study title 16"

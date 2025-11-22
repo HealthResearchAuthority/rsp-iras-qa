@@ -43,27 +43,40 @@ Given(
 );
 
 Given(
-  'I can now see the table of modifications {string} contains the expected search results for {string}',
+  'I can now see the table of modifications {string} contains the expected search results for {string} with {string}',
   async (
-    { modificationsReadyToAssignPage, myModificationsTasklistPage, modificationsReceivedCommonPage, commonItemsPage },
+    {
+      modificationsReadyToAssignPage,
+      myModificationsTasklistPage,
+      modificationsReceivedCommonPage,
+      teamManagerDashboardPage,
+      commonItemsPage,
+    },
     pageType: string,
-    searchInput: string
+    searchInput: string,
+    statusValue: string
   ) => {
     let searchInputDataset: any;
     let modificationIdIndex: number;
     let shortProjectTitleIndex: number;
     let dateSubmittedIndex: number;
     let daysSinceSubmissionIndex: number;
-    // let studywideReviewerIndex: number;
-    // let statusIndex: number;
+    let statusIndex: number;
     if (pageType.toLowerCase() == 'ready to assign') {
       searchInputDataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries;
       modificationIdIndex = 1;
       shortProjectTitleIndex = 2;
       dateSubmittedIndex = 3;
       daysSinceSubmissionIndex = 4;
-      // studywideReviewerIndex = 5;
-      // statusIndex = 6;
+      statusIndex = 6;
+      await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
+    } else if (pageType.toLowerCase() == 'ready to assign and reassign in team manager dashboard') {
+      searchInputDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries;
+      modificationIdIndex = 1;
+      shortProjectTitleIndex = 2;
+      dateSubmittedIndex = 3;
+      daysSinceSubmissionIndex = 4;
+      statusIndex = 6;
       await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
     } else {
       searchInputDataset = myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries;
@@ -71,7 +84,7 @@ Given(
       shortProjectTitleIndex = 1;
       dateSubmittedIndex = 2;
       daysSinceSubmissionIndex = 3;
-      // statusIndex = 4;
+      statusIndex = 4;
       await expect.soft(myModificationsTasklistPage.results_table).toBeVisible();
     }
     expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
@@ -92,7 +105,17 @@ Given(
       commonItemsPage.tableBodyRows,
       daysSinceSubmissionIndex
     );
-    // const statusValue = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, statusIndex);
+
+    const statuses: string[] = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, statusIndex);
+
+    if (statusValue === 'With review body') {
+      const allValidStatuses = statuses.every((s) => {
+        const normalized = s.trim().toLowerCase();
+        return normalized === 'received' || normalized === 'review in progress';
+      });
+      expect.soft(allValidStatuses).toBe(true);
+    }
+
     if (searchInput.toLowerCase().includes('single')) {
       await expect
         .soft(commonItemsPage.search_results_count)
@@ -163,8 +186,8 @@ Given(
           .toBeTruthy();
       }
     } else if (searchInput.toLowerCase().includes('partial')) {
-      expect.soft(noOfResults).toBeGreaterThan(1);
-      expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
+      expect.soft(noOfResults).toBeGreaterThanOrEqual(1);
+      expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThanOrEqual(1);
       expect
         .soft(
           await modificationsReceivedCommonPage.checkPartialValuesContain(

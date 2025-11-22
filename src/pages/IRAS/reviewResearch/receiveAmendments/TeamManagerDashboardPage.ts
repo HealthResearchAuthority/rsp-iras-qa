@@ -167,34 +167,46 @@ ORDER BY NationQuery.CreatedDate ASC;
     return queryResult.recordset.map((row) => row.ModificationIdentifier);
   }
 
-  async sqlGetModificationByLeadNationAndStatus(lead_nation: string, status: string) {
+  async sqlGetModificationByLeadNationAndStatusCount(lead_nation: string, status: string, countValue: string) {
     const option = 'project_record_answer_option_lead_nation_' + lead_nation.toLowerCase();
     const leadNationOption = teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page[option];
     const sqlConnection = await connect(dbConfigData.Application_Service);
     const queryResult = await sqlConnection.query(`
-SELECT TOP 1
-    NationQuery.ModificationIdentifier, 
+      SELECT TOP 1
+    NationQuery.ModificationIdentifier,
     NationQuery.IrasId,
-    ProjectRecordAnswers.Response, 
-    NationQuery.CreatedDate, 
-    NationQuery.[Status] 
+    ProjectRecordAnswers.Response,
+    NationQuery.CreatedDate,
+    NationQuery.[Status]
 FROM (
-    SELECT 
-        ProjectModifications.ModificationIdentifier, 
-        ProjectModifications.CreatedDate, 
-        ProjectModifications.[Status], 
-        ProjectRecords.Id, 
-        ProjectRecords.IrasId
+    SELECT
+        ProjectModifications.ModificationIdentifier,
+        ProjectModifications.CreatedDate,
+        ProjectModifications.[Status],
+        ProjectRecords.Id,
+        ProjectRecords.IrasId,
+        ProjectRecordAnswers.ProjectRecordId,
+        ProjectRecordAnswers.QuestionId,
+        ProjectRecordAnswers.SelectedOptions,
+        ProjectRecordAnswers.Response,
+        ProjectRecords.[Status] AS ProjectRecordStatus,
+        COUNT(*) OVER (PARTITION BY ProjectRecords.IrasId) AS IrasIdCount
     FROM ProjectModifications
-    INNER JOIN ProjectRecords ON ProjectRecords.Id = ProjectModifications.ProjectRecordId
-    INNER JOIN ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
-    WHERE 
-        ProjectRecordAnswers.QuestionId = 'IQA0005' AND 
-        ProjectRecordAnswers.SelectedOptions = '${leadNationOption}' AND 
-        ProjectRecords.[Status]='Active'  AND ProjectModifications.[Status]= '${status}'     
+    INNER JOIN ProjectRecords
+        ON ProjectRecords.Id = ProjectModifications.ProjectRecordId
+    INNER JOIN ProjectRecordAnswers
+        ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+    WHERE
+        ProjectRecordAnswers.QuestionId = 'IQA0005' AND
+        ProjectRecordAnswers.SelectedOptions ='${leadNationOption}' AND
+        ProjectRecords.[Status] = 'Active' AND
+        ProjectModifications.[Status] = '${status}' 
 ) AS NationQuery
-INNER JOIN ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
-WHERE ProjectRecordAnswers.QuestionId = 'IQA0002' 
+INNER JOIN ProjectRecordAnswers
+    ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
+WHERE
+    ProjectRecordAnswers.QuestionId = 'IQA0002'
+    AND NationQuery.IrasIdCount ${countValue} 1
 ORDER BY NationQuery.CreatedDate DESC;
 `);
 
@@ -202,21 +214,26 @@ ORDER BY NationQuery.CreatedDate DESC;
     return queryResult.recordset.map((row) => row.IrasId);
   }
 
-  async saveModificationId(modificationId: string) {
+  async saveModificationId(modificationId: string, countval: string) {
     await this.setModificationId(modificationId);
     const filePath = path.resolve(pathToTestDataJson);
-    await this.updateModificationIdTestDataJson(filePath, modificationId);
+    await this.updateModificationIdTestDataJson(filePath, modificationId, countval);
   }
 
-  async updateModificationIdTestDataJson(filePath: string, updateVal: string) {
+  async updateModificationIdTestDataJson(filePath: string, updateVal: string, countval: string) {
     (async () => {
       try {
         const data = await returnDataFromJSON(filePath);
-        data.Search_Queries.Existing_IRAS_ID.search_input_text = updateVal;
-        data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 3);
+        if (countval === 'Single') {
+          data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
+        } else if (countval === 'Partial') {
+          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 3);
+        } else if (countval === 'Multi') {
+          data.Search_Queries.Existing_IRAS_ID_Multi.search_input_text = updateVal;
+        }
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {
-        throw new Error(`${error} Error updating iras id to testdata json file:`);
+        throw new Error(`${error} Error updating modification id to testdata json file:`);
       }
     })();
   }
