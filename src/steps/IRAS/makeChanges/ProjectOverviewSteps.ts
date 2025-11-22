@@ -488,3 +488,17 @@ Then(
     expect.soft(actualPlannedEndDateUpdated).toBe(expectedPlannedEndDate);
   }
 );
+
+Then(
+  'I validate the status of each document is {string} in the project documents page',
+  async ({ projectOverviewPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const expectedStatus = dataset.status;
+    const rowCount = await commonItemsPage.tableRows.count();
+    for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+      const row = commonItemsPage.tableRows.nth(rowIndex);
+      const actualStatus = await projectOverviewPage.getStatus(row);
+      expect.soft(actualStatus).toEqual(expectedStatus);
+    }
+  }
+);
