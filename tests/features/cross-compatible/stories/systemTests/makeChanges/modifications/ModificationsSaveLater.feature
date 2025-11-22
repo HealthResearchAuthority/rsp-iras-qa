@@ -2746,3 +2746,212 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two                 |
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable |
+
+  @rsp-5432 @ProjectDocumentsTabStatusReviewable
+  Scenario Outline: Validate that user can create and submit reviewable modifications with documents and validate the status of the documents in Project documents tab
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files_Three' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    # Check if you are able to delete the document in uploaded status
+    And I delete the documents one by one from the uploaded 'Multiple_Files_Three' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    # Add documents again here since all documents are deleted
+    And I upload 'Multiple_Files_Three' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    # Click save for later to check Incomplete status in project documents tab
+    When I click the 'Save_For_Later' button on the 'Add_Document_Details_Page'
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    # Checking document status Incomplete in project documents tab
+    And I validate the status of each document is 'Document_Status_Incomplete' in the project documents page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    # Click save for later to check Complete status in project documents tab
+    When I click the 'Save_For_Later' button on the 'Add_Document_Details_Page'
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    # Checking document status Complete in project documents tab
+    And I validate the status of each document is 'Document_Status_Complete' in the project documents page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I can see the review your document information page
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I can see the 'supporting_documents_table' ui labels on the review all changes page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'Complete' status displayed for all documents in the table
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    Then I can see the project overview page
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    # Checking document status With Sponsor in project documents tab
+    And I validate the status of each document is 'Document_Status_With_Sponsor' in the project documents page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click on the modification id hyperlink in the post approval tab
+    Then I can see the modification post submission page
+    And I capture the page screenshot
+    And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
+    And I can see the 'documents_table' ui labels on the modification post submission page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'With sponsor' status displayed for all documents in the table
+
+    Examples:
+      | Changes                                            | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+
+  @rsp-5432 @ProjectDocumentsTabStatusNonReviewable
+  Scenario Outline: Validate that user can create and submit non reviewable modifications with documents and validate the status of the documents in Project documents tab
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files_Three' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    # Check document status is Uploaded
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    # Check if you are able to delete the document in uploaded status
+    And I delete the documents one by one from the uploaded 'Multiple_Files_Three' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    # Add documents again here since all documents are deleted
+    And I upload 'Multiple_Files_Three' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    # Click save for later to check Incomplete status in project documents tab
+    When I click the 'Save_For_Later' button on the 'Add_Document_Details_Page'
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    # Checking document status Incomplete in project documents tab
+    And I validate the status of each document is 'Document_Status_Incomplete' in the project documents page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    # Click save for later to check Complete status in project documents tab
+    When I click the 'Save_For_Later' button on the 'Add_Document_Details_Page'
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    # Checking document status Complete in project documents tab
+    And I validate the status of each document is 'Document_Status_Complete' in the project documents page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click on the modification id hyperlink in the post approval tab
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I can see the review your document information page
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I can see the 'supporting_documents_table' ui labels on the review all changes page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'Complete' status displayed for all documents in the table
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    Then I can see the project overview page
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    # Checking document status With Sponsor in project documents tab
+    And I validate the status of each document is 'Document_Status_With_Sponsor' in the project documents page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click on the modification id hyperlink in the post approval tab
+    Then I can see the modification post submission page
+    And I capture the page screenshot
+    And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
+    And I can see the 'documents_table' ui labels on the modification post submission page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'With sponsor' status displayed for all documents in the table
+
+    Examples:
+      | Changes                                                | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One | Nhs_Involvement_Yes |
