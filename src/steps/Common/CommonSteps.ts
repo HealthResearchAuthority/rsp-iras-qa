@@ -1001,6 +1001,7 @@ Given(
       myModificationsTasklistPage,
       modificationsReadyToAssignPage,
       teamManagerDashboardPage,
+      manageUsersPage,
     },
     page: string,
     user: string
@@ -1062,6 +1063,11 @@ Given(
           await teamManagerDashboardPage.page.context().addCookies(authState.cookies);
           await teamManagerDashboardPage.goto();
           await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
+          break;
+        case 'Manage_Users_Page':
+          await manageUsersPage.page.context().addCookies(authState.cookies);
+          await manageUsersPage.goto();
+          await manageUsersPage.assertOnManageUsersPage();
           break;
         default:
           throw new Error(`${page} is not a valid option`);

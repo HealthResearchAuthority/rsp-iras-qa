@@ -96,8 +96,8 @@ export default class MyModificationsTasklistPage {
     this.year_to_text = this.date_to_filter_input.getByLabel(
       this.myModificationsTasklistPageTestData.Filter_Labels.year_to_label
     );
-    this.days_since_submission_from_text = this.page.getByTestId('Search_FromDaysSinceSubmission');
-    this.days_since_submission_to_text = this.page.getByTestId('Search_ToDaysSinceSubmission');
+    this.days_since_submission_from_text = this.page.getByTestId('Search.FromDaysSinceSubmission');
+    this.days_since_submission_to_text = this.page.getByTestId('Search.ToDaysSinceSubmission');
     // this.short_project_title_text = this.page.getByLabel(
     //   this.myModificationsTasklistPageTestData.Filter_Labels.short_project_title_label
     // );

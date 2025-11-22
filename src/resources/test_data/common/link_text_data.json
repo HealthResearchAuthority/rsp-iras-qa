@@ -315,7 +315,10 @@
     "Approvals": "Approvals"
   },
   "Team_Manager_Dashboard_Page": {
-    "Approvals": "Approvals"
+    "Approvals": "Approvals",
+    "Study_Wide_Reviewer_Filter_Panel": "Study-wide reviewer",
+    "Date_Submitted_Filter_Panel": "Date submitted",
+    "Clear_All_Filters": "Clear all filters"
   },
   "Search_Projects_Page": {
     "Clear_All_Filters": "Clear all filters"

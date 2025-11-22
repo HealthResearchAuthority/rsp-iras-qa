@@ -25,7 +25,7 @@ export default class ModificationsReceivedCommonPage {
     this._days_since_submission_to_filter = 0;
 
     //Locators
-    this.days_since_submission_from_text = this.page.getByTestId('Search_FromDaysSinceSubmission');
+    this.days_since_submission_from_text = this.page.getByTestId('Search.FromDaysSinceSubmission');
     this.days_since_submission_filter_input = this.page
       .locator('.search-filter-section__content')
       .filter({ has: this.days_since_submission_from_text });

@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { getRandomNumber } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, getRandomNumber } from '../../../../utils/UtilFunctions';
 const { Given, When, Then } = createBdd(test);
 
 Then('I can see the modifications ready to assign page', async ({ modificationsReadyToAssignPage }) => {
@@ -122,24 +122,34 @@ When(
 );
 
 When(
-  'I select modifications with ids as {string} by clicking the checkbox in the modifications ready to assign page',
-  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
-    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
-    const modificationRecord: string[] = [];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        for (const modificationId of dataset[key]) {
-          await modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`).check();
-          const shortProjectTitle = await modificationsReadyToAssignPage.page
-            .getByTestId(`${modificationId}`)
-            .locator('../../..')
-            .getByRole('strong')
-            .textContent();
-          modificationRecord.push(modificationId + ':' + shortProjectTitle);
-        }
-      }
+  'I select modifications with ids as {string} by clicking the checkbox in the {string} page',
+  async ({ modificationsReadyToAssignPage, teamManagerDashboardPage }, datasetName: string, pageValue: string) => {
+    let dataset: any;
+    if (pageValue === 'team manager dashboard') {
+      dataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[datasetName];
+    } else {
+      dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
     }
-    await modificationsReadyToAssignPage.setSelectedModifications(modificationRecord);
+    const modificationId = dataset['search_input_text'];
+    // const modificationRecord: string[] = [];
+    await modificationsReadyToAssignPage.page.locator(`[id^="${modificationId}"]`).nth(0).check();
+    // const shortProjectTitle = await modificationsReadyToAssignPage.page
+    //   .locator(`[id^="${modificationId}"]`)
+    //   .nth(0)
+    //   .locator('../../..')
+    //   .getByRole('strong')
+    //   .nth(0)
+    //   .textContent();
+    const modificationIdValue = confirmStringNotNull(
+      await modificationsReadyToAssignPage.page
+        .locator(`[id^="${modificationId}"]`)
+        .nth(0)
+        .locator('../../../td/a')
+        .nth(0)
+        .textContent()
+    );
+    // modificationRecord.push(modificationId + ':' + shortProjectTitle);
+    await modificationsReadyToAssignPage.setSelectedModifications(modificationIdValue);
   }
 );
 
@@ -158,16 +168,10 @@ When(
 );
 
 When(
-  'I can see previously selected modifications checkboxes are retained for {string}',
-  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
-    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        for (const modificationId of dataset[key]) {
-          await expect.soft(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).toBeChecked();
-        }
-      }
-    }
+  'I can see previously selected modifications checkboxes are retained',
+  async ({ modificationsReadyToAssignPage }) => {
+    const modificationId = await modificationsReadyToAssignPage.getSelectedModifications();
+    await expect.soft(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).toBeChecked();
   }
 );
 

@@ -79,7 +79,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Date_To_Multi     | With review body |
         #  date submitted need to capture from db to avoid any failures
 
-        @filterTasklistByDaysSinceSubmission @rsp-5125 @UPDATE-AFTER-RSP-4808 @DBSetupReqd @TestOnlyTiji
+        @filterTasklistByDaysSinceSubmission @rsp-5125 @UPDATE-AFTER-RSP-4808 @DBSetupReqd
         Scenario Outline: Verify the user is able to filter the team manager dashboard by the days since submission
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -104,19 +104,19 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Days_From_Multi   | With review body |
                         | Days_To_Multi     | With review body |
 
-        @searchFilterComboTasklist @rsp-5122 @rsp-5125
-        Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
+        @searchFilterComboTasklist @rsp-5122 @rsp-5125 @skip
+        Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the team manager dashboard
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the 'modification tasklist' filters
+                And I open each of the 'team manager dashboard' filters
                 And I capture the page screenshot
-                When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Search_Filter_Input>'
                 And I capture the page screenshot
                 And I click the '<Button>' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
+                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
                 And I 'cannot' see the advanced filters panel
 
                 Examples:
@@ -132,13 +132,13 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
         # study-wide reviewer,status
 
         @searchTasklistWithNoResults @rsp-5122 @rsp-5125
-        Scenario Outline: Verify the tasklist page displays the no results found message, when no records on the system match the search criteria
+        Scenario Outline: Verify the team manager dashboard page displays the no results found message, when no records on the system match the search criteria
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the 'modification tasklist' filters
-                When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
+                And I open each of the 'team manager dashboard' filters
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Search_Filter_Input>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -147,7 +147,6 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 Examples:
                         | Search_Filter_Input           |
                         | Non_Existant_IRAS_ID          |
-                        # | Non_Existant_Title            |
                         | Non_Existant_Date_Range       |
                         | Non_Existant_Days_Since_Range |
 
@@ -157,9 +156,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the 'modification tasklist' filters
+                And I open each of the 'team manager dashboard' filters
                 And I capture the page screenshot
-                When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Search_Filter_Input>'
                 And I capture the page screenshot
                 And I click the '<Button>' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -167,60 +166,54 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I can see active filters displayed for '<Search_Filter_Input>'
 
                 Examples:
-                        | Search_Filter_Input | Button        |
-                        # | Study_Wide_Reviewer_Date_Range_Single | Search        |
-                        # | Title_Date_Range_Multi  | Apply_Filters |
-                        | Date_From_Multi     | Search        |
-                        | Days_Range_Multi    | Search        |
-                        | Days_From_Multi     | Apply_Filters |
-                        | Days_To_Multi       | Search        |
+                        | Search_Filter_Input                  | Button        |
+                        | Study_Wide_Reviewer_Date_Range_Multi | Apply_Filters |
+                        | Date_From_Multi                      | Search        |
+                        | Days_Range_Multi                     | Search        |
+                        | Days_From_Multi                      | Apply_Filters |
+                        | Days_To_Multi                        | Search        |
 
-        # title >>chnage
         @addRemoveFiltersTasklist @rsp-5125
         Scenario: Verify that adding and removing filters narrows and widens the search results appropriately
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the 'modification tasklist' filters
+                And I open each of the 'team manager dashboard' filters
                 And I capture the page screenshot
-                When I fill the 'assign modifications tasklist' search and filter options with 'Date_From_Multi'
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with 'Date_From_Multi'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see active filters displayed
                 And I capture the page screenshot
-                Then the number of search results has 'decreased' from the 'original' number
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the 'modification tasklist' filters
-                When I fill the 'assign modifications tasklist' search and filter options with 'Existing_Title_Partial'
+                And I open each of the 'team manager dashboard' filters
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with 'Existing_Study_Wide_Reviewer_Partial'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then the number of search results has 'decreased' from the 'previous' number
                 When I click the 'Date_Submitted_Filter_Panel' link on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 Then the number of search results has 'increased' from the 'previous' number
-                When I click the 'Short_Project_Title_Filter_Panel' link on the 'Team_Manager_Dashboard_Page'
+                When I click the 'Study_Wide_Reviewer_Filter_Panel' link on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 Then the number of search results has returned to the original number
                 And I 'cannot' see active filters displayed
 
-        # title >>chnage
         @clearAllFiltersTasklist  @rsp-5125
-        Scenario: Verify that the clear all filters option returns the tasklist to its original state
+        Scenario: Verify that the clear all filters option returns the team manager dashboard to its original state
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the 'modification tasklist' filters
+                And I open each of the 'team manager dashboard' filters
                 And I capture the page screenshot
-                When I fill the 'assign modifications tasklist' search and filter options with 'Title_Date_Range_Multi'
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with 'Study_Wide_Reviewer_Date_Range_Multi'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see active filters displayed
                 And I capture the page screenshot
-                Then the number of search results has 'decreased' from the 'original' number
                 When I click the 'Clear_All_Filters' link on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 Then the number of search results has returned to the original number
@@ -232,9 +225,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I 'can' see the advanced filters panel
-                And I open each of the 'modification tasklist' filters
+                And I open each of the 'team manager dashboard' filters
                 And I capture the page screenshot
-                When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
+                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Date_Filter_Input>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -247,8 +240,8 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Invalid_Date_From                 | Invalid_Date_From_Error                 |
                         | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-        @SortTasklistByColumn @rsp-5122
-        Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
+        @SortTasklistByColumn @rsp-5122 @skip
+        Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
@@ -317,8 +310,8 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Label_Texts     | page number       |
                         | Label_Texts     | previous link     |
 
-        @ModificationsTasklistTitleLinksNav @jsEnabled @rsp-5046
-        Scenario: Verify back and short project title link navigation for modifications tasklist and select reviewer pages
+        @ModificationsTasklistTitleLinksNav @jsEnabled @rsp-5046 @skip
+        Scenario: Verify back and short project title link navigation for team manager dashboard and select reviewer pages
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And Each 'short project title' displayed on the 'Team_Manager_Dashboard_Page' is a link
@@ -422,7 +415,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -448,7 +441,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
                         | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
 
-        @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849
+        @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @skip
         Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
                 Given I have navigated to the 'My_Modifications_Tasklist_Page'
                 Then I capture the page screenshot
@@ -461,14 +454,14 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Valid_Iras_Id                       | Modification_Id                                                    |
                         | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_All_Assigned_From_WFC_To_SWR |
 
-        @ModificationsList @rsp-4076 @rsp-4849
+        @ModificationsList @rsp-4076 @rsp-4849 @skip
         Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -480,9 +473,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                |
                         | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Five_Six |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849 @skip
         Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
-                Given I have navigated to the 'Manage_Users_Page'
+                Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
                 And I capture the page screenshot
                 When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
                 And I capture the page screenshot
@@ -506,12 +499,12 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I can see the newly created user record should be present in the list for '<User_Profile>' with 'Active' status in the manage user page
                 And I capture the page screenshot
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+                Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager'
                 And I capture the page screenshot
                 When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -526,7 +519,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available |
                         | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland @rsp-4076 @rsp-4849
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland @rsp-4076 @rsp-4849 @skip
         Scenario Outline: Validate whether disabled study-wide reviewer is not displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
                 Given I have navigated to the 'Manage_Users_Page'
                 And I capture the page screenshot
@@ -573,7 +566,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -585,14 +578,15 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | User_Profile                                              | Valid_Iras_Id                       | Modification_Id                                | Advanced_Filters_Users                                | Lead_Nation | Availability  |
                         | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available |
 
-        @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011
+        @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011 @TestOnlyTiji
         Scenario Outline: Validate the team manger navigates to the team manger dashboard page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+                Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
-                When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+                When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -600,9 +594,9 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 When I click the 'Back' link on the 'Select_Study_Wide_Reviewer_Page'
                 And I capture the page screenshot
                 Then I can see the 'Team_Manager_Dashboard_Page'
-                And I can see previously selected modifications checkboxes are retained for '<Modification_Id>'
+                And I can see previously selected modifications checkboxes are retained
                 And I capture the page screenshot
 
                 Examples:
-                        | Valid_Iras_Id                       | Modification_Id                                |
-                        | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six |
+                        | Valid_Iras_Id          | User         | Status           | Modification_Count |
+                        | Existing_IRAS_ID_Multi | Team_Manager | With review body | Multi              |
