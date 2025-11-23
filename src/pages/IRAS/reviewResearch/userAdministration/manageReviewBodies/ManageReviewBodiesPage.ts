@@ -1,18 +1,21 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as manageReviewBodiesPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/manage_review_body_page_data.json';
+import * as dbConfigData from '../../../../../resources/test_data/common/database/db_config_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 import CommonItemsPage from '../../../../Common/CommonItemsPage';
 import ReviewBodyProfilePage from './ReviewBodyProfilePage';
 import CreateReviewBodyPage from './CreateReviewBodyPage';
+import { connect } from '../../../../../utils/DbConfig';
 
 //Declare Page Objects
 export default class ManageReviewBodiesPage {
   readonly page: Page;
   readonly manageReviewBodiesPageData: typeof manageReviewBodiesPageData;
+  readonly linkTextData: typeof linkTextData;
+  readonly dbConfigData: typeof dbConfigData;
   private _org_name: string[];
   private _row_val: Locator;
-  readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
   readonly addNewReviewBodyRecordLink: Locator;
   readonly mainPageContent: Locator;
@@ -43,6 +46,7 @@ export default class ManageReviewBodiesPage {
     this.page = page;
     this.manageReviewBodiesPageData = manageReviewBodiesPageData;
     this.linkTextData = linkTextData;
+    this.dbConfigData = dbConfigData;
     this._org_name = [];
 
     //Locators
@@ -313,5 +317,22 @@ export default class ManageReviewBodiesPage {
         break;
       }
     }
+  }
+
+  // SQL STATEMENTS //
+  async sqlUpdateAutomatedReviewBodyStatus(newStatus: string): Promise<void> {
+    let currentStatus: number;
+    let updatedStatus: number;
+    if (newStatus.toLowerCase() == 'disabled') {
+      currentStatus = 1;
+      updatedStatus = 0;
+    } else {
+      currentStatus = 0;
+      updatedStatus = 1;
+    }
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    await sqlConnection.query(`UPDATE RegulatoryBodies SET IsActive = ${updatedStatus} WHERE Id in 
+(SELECT TOP (1) Id FROM RegulatoryBodies WHERE RegulatoryBodyName LIKE '%QA Automation%' AND IsActive = ${currentStatus} ORDER BY NEWID())`);
+    await sqlConnection.close();
   }
 }

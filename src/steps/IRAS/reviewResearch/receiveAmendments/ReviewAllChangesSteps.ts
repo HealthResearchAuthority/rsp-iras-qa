@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull, getAuthState } from '../../../../utils/UtilFunctions';
+import { Locator } from '@playwright/test';
 import * as fs from 'node:fs';
 
 const { Given, When, Then } = createBdd(test);
@@ -136,5 +137,18 @@ Then(
     expect(actualSponsorRef).toBe(expectedSponsorRef);
     expect(actualSponsorDate).toBe(expectedSponsorDate);
     expect(actualSumaryChanges).toBe(expectedSumaryChanges);
+  }
+);
+
+Then(
+  'I can see the {string} ui labels on the review all changes page',
+  async ({ reviewAllChangesPage }, datasetName: string) => {
+    const dataset = reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        const locator: Locator = reviewAllChangesPage[key];
+        await expect(locator).toBeVisible();
+      }
+    }
   }
 );

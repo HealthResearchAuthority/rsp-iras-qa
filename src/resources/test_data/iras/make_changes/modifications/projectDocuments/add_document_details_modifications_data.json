@@ -11,7 +11,7 @@
     "status": "Incomplete"
   },
   "Document_Status_Complete": {
-    "status": "Completed"
+    "status": "Complete"
   },
   "Document_Name_Prefix": {
     "prefix": "_"

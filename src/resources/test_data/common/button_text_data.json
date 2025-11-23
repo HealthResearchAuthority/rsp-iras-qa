@@ -68,7 +68,8 @@
     "Continue": "Continue"
   },
   "Check_Create_User_Profile_Page": {
-    "Create_Profile": "Create profile"
+    "Create_Profile": "Create profile",
+    "Back": "Back"
   },
   "User_Profile_Page": {
     "Disable_User_Record": "Disable user record",
@@ -88,7 +89,8 @@
     "Continue": "Continue"
   },
   "Check_Create_Review_Body_Page": {
-    "Create_Profile": "Create profile"
+    "Create_Profile": "Create profile",
+    "Back": "Back"
   },
   "Edit_Review_Body_Page": {
     "Save": "Save"
@@ -241,7 +243,8 @@
   "Modification_Details_Page": {
     "Add_Another_Change": "Add another change to this modification",
     "Save_Continue_Review": "Save and continue to review",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Add_Documents": "Add documents"
   },
   "Sponsor_Reference_Page": {
     "Save_Continue_Review": "Save and continue to review",
@@ -249,7 +252,11 @@
   },
   "Review_All_Changes_Page": {
     "Send_Modification_To_Sponsor": "Send modification to sponsor",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Add_Documents": "Add documents"
+  },
+  "Modification_Post_Submission_Page": {
+    "Download_All": "Download all"
   },
   "Add_Document_Details_Page": {
     "Save_Continue": "Save and continue",

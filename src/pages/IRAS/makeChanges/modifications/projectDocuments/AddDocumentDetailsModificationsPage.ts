@@ -15,6 +15,7 @@ export default class AddDocumentDetailsModificationsPage {
   readonly documentlink: Locator;
   private displayedDocuments: string[];
   private displayedStatuses: string[];
+  private generatedUniqueDocNames: string[] = [];
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -72,5 +73,13 @@ export default class AddDocumentDetailsModificationsPage {
       ['displayedStatuses', this.displayedStatuses],
     ]);
     return DocumentsMap;
+  }
+
+  async setUniqueDocNames(uniqueDocName: string): Promise<void> {
+    this.generatedUniqueDocNames.push(uniqueDocName);
+  }
+
+  async getUniqueDocNames(): Promise<string[]> {
+    return this.generatedUniqueDocNames;
   }
 }
