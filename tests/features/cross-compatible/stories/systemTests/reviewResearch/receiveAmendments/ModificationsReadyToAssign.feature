@@ -412,7 +412,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -421,7 +421,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
         And I capture the page screenshot
-        Then I can see the modifications assignment confirmation page for '<Study_Wide_Reviewer>'
+        And I can see the modifications assignment confirmation page for 'Workflow_Coordinator' with reviewer 'Study_Wide_Reviewer_HRA_England'
         And I capture the page screenshot
         And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
         And I capture the page screenshot
@@ -429,7 +429,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can see previously assigned modification is no longer displayed in the modifications ready to assign table for '<Modification_Id>'
+        Then I can see previously assigned modification is no longer displayed
         And I capture the page screenshot
 
         Examples:
@@ -458,7 +458,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -501,7 +501,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -563,7 +563,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -582,7 +582,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot

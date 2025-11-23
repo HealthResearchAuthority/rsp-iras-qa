@@ -154,16 +154,10 @@ When(
 );
 
 When(
-  'I can see previously assigned modification is no longer displayed in the modifications ready to assign table for {string}',
-  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
-    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        for (const modificationId of dataset[key]) {
-          await expect(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).not.toBeVisible();
-        }
-      }
-    }
+  'I can see previously assigned modification is no longer displayed',
+  async ({ modificationsReadyToAssignPage }) => {
+    const modificationId = await modificationsReadyToAssignPage.getSelectedModifications();
+    await expect.soft(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).not.toBeVisible();
   }
 );
 
@@ -194,5 +188,29 @@ Then(
     const expectedLeadNation =
       modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
     console.log(expectedLeadNation);
+  }
+);
+
+When(
+  'I can see previously assigned modification is displayed in {string} with status {string} and reviewer {string}',
+  async (
+    { modificationsReadyToAssignPage, selectStudyWideReviewerPage },
+    pageValue: string,
+    statusValue: string,
+    datasetName: string
+  ) => {
+    const dataset = await selectStudyWideReviewerPage.selectStudywideReviewerPageData.Study_Wide_Reviewer[datasetName];
+    const reviewerValue = dataset['study_wide_reviewer_dropdown'];
+    const modificationId = await modificationsReadyToAssignPage.getSelectedModifications();
+    if (pageValue === 'Team_Manager_Dashboard_Page') {
+      await expect.soft(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).toBeVisible();
+      const modificationRow = modificationsReadyToAssignPage.page.locator('tbody tr', {
+        has: modificationsReadyToAssignPage.page.locator('a.govuk-link', { hasText: `${modificationId}` }),
+      });
+      const reviewerName = modificationRow.locator('td', { hasText: `${reviewerValue}` });
+      await expect.soft(reviewerName).toBeVisible();
+      const modificationStatus = modificationRow.locator('td', { hasText: `${statusValue}` });
+      await expect.soft(modificationStatus).toBeVisible();
+    }
   }
 );

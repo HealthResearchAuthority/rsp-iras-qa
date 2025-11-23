@@ -310,7 +310,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | Label_Texts     | page number       |
                         | Label_Texts     | previous link     |
 
-        @ModificationsTasklistTitleLinksNav @jsEnabled @rsp-5046 @skip
+        @ModificationsTasklistTitleLinksNav @jsEnabled @rsp-5046 @skip @TestOnlyTiji
         Scenario: Verify back and short project title link navigation for team manager dashboard and select reviewer pages
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -408,14 +408,15 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
 
         # Need to integrate with modification creation process to have a fresh dataset for assignment
         # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
-        @WFCAssignModificationSWR @rsp-4076 @rsp-4849 @skip
-        Scenario Outline: Validate the team manager can assign a study-wide reviewer to a modification from the modifications ready to assign page
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+        @TMAssignModificationSWR @rsp-4076 @rsp-4849
+        Scenario Outline: Validate the team manager can assign a study-wide reviewer to a modification from the team manger dashboard page
+                Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
-                When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'team manager dashboard' page
+                When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -424,22 +425,20 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                 And I capture the page screenshot
                 And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
                 And I capture the page screenshot
-                Then I can see the modifications assignment confirmation page for '<Study_Wide_Reviewer>'
+                Then I can see the modifications assignment confirmation page for 'Team_Manager' with reviewer '<Study_Wide_Reviewer>'
                 And I capture the page screenshot
-                And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
+                And  I click the 'Back_To_Dashboard' link on the 'Modifications_Assignment_Confirmation_Page_Team_Manager'
                 And I capture the page screenshot
                 Then I can see the 'Team_Manager_Dashboard_Page'
-                When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I can see previously assigned modification is no longer displayed in the modifications ready to assign table for '<Modification_Id>'
+                Then I can see previously assigned modification is displayed in 'Team_Manager_Dashboard_Page' with status 'Review in progress' and reviewer '<Study_Wide_Reviewer>'
                 And I capture the page screenshot
 
                 Examples:
-                        | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                  |
-                        | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_One        |
-                        | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
-                        | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
+                        | Valid_Iras_Id           | Study_Wide_Reviewer             | User         | Status           | Modification_Count |
+                        | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager | With review body | Single             |
 
         @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @skip
         Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
@@ -578,7 +577,7 @@ Feature: Receive Amendments: Team Mnager's dashboard page that displays modifica
                         | User_Profile                                              | Valid_Iras_Id                       | Modification_Id                                | Advanced_Filters_Users                                | Lead_Nation | Availability  |
                         | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available |
 
-        @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011 @TestOnlyTiji
+        @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011
         Scenario Outline: Validate the team manger navigates to the team manger dashboard page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
