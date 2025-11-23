@@ -2348,7 +2348,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    Then I click on the searched modification id from sponsor authorisations page
+    Then I click on the searched modification id
     And I can see the sponsor check and authorise page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -2403,7 +2403,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    Then I click on the searched modification id from sponsor authorisations page
+    Then I click on the searched modification id
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
     And I validate confirmation screen for modification not authorised by sponsor
@@ -2460,7 +2460,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    Then I click on the searched modification id from sponsor authorisations page
+    Then I click on the searched modification id
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
     And I validate confirmation screen for modification has been authorised by sponsor and approved
@@ -2517,7 +2517,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    Then I click on the searched modification id from sponsor authorisations page
+    Then I click on the searched modification id
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
     And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
@@ -2574,13 +2574,13 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    Then I click on the searched modification id from sponsor authorisations page
+    Then I click on the searched modification id
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    Then I click on the searched modification id from sponsor authorisations page
+    Then I click on the searched modification id
     And I can see the modification page for sponsor view
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan

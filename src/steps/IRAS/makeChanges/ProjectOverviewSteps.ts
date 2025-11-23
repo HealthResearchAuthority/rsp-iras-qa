@@ -488,3 +488,16 @@ Then(
     expect.soft(actualPlannedEndDateUpdated).toBe(expectedPlannedEndDate);
   }
 );
+
+Then(
+  'I can see the searched modification to be present in the list with {string} status in project overview page',
+  async ({ projectOverviewPage, modificationsCommonPage, commonItemsPage }, status: string) => {
+    const modificationStatus = await modificationsCommonPage.getModificationStatus(status);
+    const modificationID = await modificationsCommonPage.getModificationID();
+    const foundRecords = await projectOverviewPage.findModification(commonItemsPage, modificationID, {
+      status: modificationStatus,
+    });
+    expect.soft(foundRecords).toBeDefined();
+    expect.soft(foundRecords).toHaveCount(1);
+  }
+);

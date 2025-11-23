@@ -210,3 +210,11 @@ When(
     await myResearchProjectsPage.validateResults(commonItemsPage, {}, filterDataset, false);
   }
 );
+
+Then(
+  'I click on the short project title for the searched iras id from my research projects page',
+  async ({ myResearchProjectsPage, projectDetailsIRASPage }) => {
+    const shortProjectTitleLabel = await projectDetailsIRASPage.getShortProjectTitle();
+    await myResearchProjectsPage.page.getByText(shortProjectTitleLabel, { exact: true }).click();
+  }
+);

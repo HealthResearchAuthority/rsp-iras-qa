@@ -36,11 +36,3 @@ Then(
     expect.soft(foundRecords).toHaveCount(1);
   }
 );
-
-Then(
-  'I click on the searched modification id from sponsor authorisations page',
-  async ({ sponsorAuthorisationsPage, modificationsCommonPage }) => {
-    const modificationID = await modificationsCommonPage.getModificationID();
-    await sponsorAuthorisationsPage.page.getByText(modificationID, { exact: true }).click();
-  }
-);
