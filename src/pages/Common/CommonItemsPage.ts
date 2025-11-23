@@ -784,7 +784,7 @@ export default class CommonItemsPage {
         console.error(error);
       }
     }
-    const relativePath = path.join('../screenshots/', fileName).replaceAll(/\\/g, '/');
+    const relativePath = path.join('../screenshots/', fileName).replaceAll('\\', '/');
     const htmlPreview = `<a href="${relativePath}" target="_blank">View screenshot</a>`;
     if ($step) {
       await $testInfo.attach(`[step] ${$step.title}`, {
@@ -797,8 +797,8 @@ export default class CommonItemsPage {
           body: htmlPreview,
           contentType: 'text/html',
         });
-      } catch (error) {
-        void error;
+      } catch {
+        /* intentionally ignored */
       }
     }
   }

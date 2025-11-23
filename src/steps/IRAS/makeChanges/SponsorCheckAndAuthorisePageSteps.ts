@@ -93,8 +93,7 @@ Then(
         }
       }
     }
-    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
-      const changeName = changeNames[changeIndex];
+    for (const changeName of changeNames) {
       const expectedData = changesDataset[changeName];
       const cardTitle = `${expectedData.area_of_change_dropdown}`;
       await modificationsCommonPage.page
