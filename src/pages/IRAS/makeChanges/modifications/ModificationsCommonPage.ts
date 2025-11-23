@@ -467,12 +467,9 @@ export default class ModificationsCommonPage {
     const affectsNhs = dataset.which_organisation_change_affect_checkbox.some(
       (item: string) => item.toLowerCase() === 'nhs/hsc'
     );
-    {
-      if (affectsNhs) {
-        requiresResources =
-          dataset.will_nhs_hsc_organisations_require_additional_resources_question_radio.toLowerCase();
-        affectedOrgs = dataset.will_some_or_all_organisations_be_affected_question_radio.toLowerCase();
-      }
+    if (affectsNhs) {
+      requiresResources = dataset.will_nhs_hsc_organisations_require_additional_resources_question_radio.toLowerCase();
+      affectedOrgs = dataset.will_some_or_all_organisations_be_affected_question_radio.toLowerCase();
     }
     if (affectsNonNhsOnly) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
