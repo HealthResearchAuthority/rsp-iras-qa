@@ -40,6 +40,13 @@ export default class ModificationsCommonPage {
   readonly modificationStatusLabel: Locator;
   readonly modificationRows: Locator;
   readonly listCell: Locator;
+  readonly documentRows: Locator;
+  readonly documentTypeCell: Locator;
+  readonly documentNameCell: Locator;
+  readonly fileNameCell: Locator;
+  readonly documentVersionCell: Locator;
+  readonly documentDateCell: Locator;
+  readonly documentStatusCell: Locator;
   readonly dateCreatedValue: Locator;
 
   private rankingForChanges: Record<
@@ -141,6 +148,13 @@ export default class ModificationsCommonPage {
     this.changes_free_text_summary_error = this.page.locator('.govuk-error-summary__list');
     this.modificationRows = this.page.locator('tbody').getByRole('row');
     this.listCell = this.page.getByRole('cell');
+    this.documentRows = this.page.locator('#projectDocumentsTable tbody tr');
+    this.documentTypeCell = this.page.locator('td:nth-child(1)');
+    this.documentNameCell = this.page.locator('td:nth-child(2)');
+    this.fileNameCell = this.page.locator('td:nth-child(3)');
+    this.documentVersionCell = this.page.locator('td:nth-child(4)');
+    this.documentDateCell = this.page.locator('td:nth-child(5)');
+    this.documentStatusCell = this.page.locator('td:nth-child(6)');
     this.dateCreatedValue = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
@@ -895,6 +909,14 @@ export default class ModificationsCommonPage {
       filterToDate
     );
     expect(isDateSubmittedInDateInValidRange).toBe(true);
+  }
+
+  async getModificationStatus(status: string) {
+    if (status.toLowerCase() == 'with sponsor') {
+      return this.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
+    } else if (status.toLowerCase() == 'complete') {
+      return this.modificationsCommonPageTestData.Document_Status_Complete.status;
+    }
   }
 
   async validateCardData(expectedData: any, actualData: any) {

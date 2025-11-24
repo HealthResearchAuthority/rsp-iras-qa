@@ -317,6 +317,9 @@
     "My_Account": "My account",
     "Authorisations": "Authorisations"
   },
+  "Modification_Post_Submission_Page": {
+    "Documents": "Documents"
+  },
   "Sponsor_Check_And_Authorise_Page": {
     "Sponsor_Details": "Sponsor details",
     "Modification_Details": "Modification details"

@@ -1113,6 +1113,9 @@
   "Modification_Status_With_Review_Body": {
     "status": "With review body"
   },
+  "Document_Status_Complete": {
+    "status": "Complete"
+  },
   "Modification_Status_Received": {
     "status": "Received"
   },

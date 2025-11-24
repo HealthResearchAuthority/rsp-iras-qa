@@ -261,6 +261,7 @@
     "Add_Another_Change": "Add another change to this modification",
     "Save_Continue_Review": "Save and continue to review",
     "Save_For_Later": "Save for later",
+    "Add_Documents": "Add documents",
     "Save_And_Continue": "Save and continue"
   },
   "Modification_Outcome_Check_Send_Page": {
@@ -272,7 +273,11 @@
   },
   "Review_All_Changes_Page": {
     "Send_Modification_To_Sponsor": "Send modification to sponsor",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Add_Documents": "Add documents"
+  },
+  "Modification_Post_Submission_Page": {
+    "Download_All": "Download all"
   },
   "Add_Document_Details_Page": {
     "Save_Continue": "Save and continue",
