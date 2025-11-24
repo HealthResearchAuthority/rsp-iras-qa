@@ -35,7 +35,11 @@
       "Insurance renewal - no change to the level or breadth of cover",
       "Translated versions of participant-facing documents"
     ],
-    "nhs_always_c": ["GDPR wording - Unaccepted alternative wording used", "Other minor change to project management"]
+    "nhs_always_c": ["GDPR wording - Unaccepted alternative wording used", "Other minor change to project management"],
+    "new_site": [
+      "Addition of sites undertaking the same activities as existing sites",
+      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
+    ]
   },
   "Modification_Change_Question_Label_Texts": {
     "planned_project_end_date_label": "Change to planned end date",
@@ -364,10 +368,6 @@
     "Other non-significant change to the project design",
     "Other non-significant change to project documents",
     "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below"
-  ],
-  "New_Site_Modifications": [
-    "Addition of sites undertaking the same activities as existing sites",
-    "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
   ],
   "Invalid_Data": {
     "Max_Length_Changes_Free_Text": {

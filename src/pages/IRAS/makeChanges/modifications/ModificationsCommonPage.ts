@@ -481,7 +481,7 @@ export default class ModificationsCommonPage {
       category = this.modificationsCommonPageTestData.Label_Texts.category_c;
     } else if (
       affectsNhs &&
-      modificationsCommonPageTestData.New_Site_Modifications.includes(dataset.specific_change_dropdown)
+      modificationsCommonPageTestData.Ranking_Category.new_site.includes(dataset.specific_change_dropdown)
     ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_new_site;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
