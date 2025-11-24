@@ -974,6 +974,7 @@ Given(
       approvalsPage,
       myModificationsTasklistPage,
       modificationsReadyToAssignPage,
+      searchModificationsPage,
       teamManagerDashboardPage,
     },
     page: string,
@@ -1027,6 +1028,11 @@ Given(
           await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
           await modificationsReadyToAssignPage.goto();
           await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+          break;
+        case 'Search_Modifications_Page':
+          await searchModificationsPage.page.context().addCookies(authState.cookies);
+          await searchModificationsPage.goto();
+          await searchModificationsPage.assertOnSearchModificationsPage();
           break;
         case 'Team_Manager_Dashboard_Page':
           await teamManagerDashboardPage.page.context().addCookies(authState.cookies);

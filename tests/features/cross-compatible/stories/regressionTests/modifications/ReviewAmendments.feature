@@ -1,6 +1,6 @@
-@TBDTAG @RegressionTest @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @KNOWN_DEFECT_RSP-5285 @KNOWN_DEFECT_RSP-5184 @failTest
-Feature: Review Amendments- As a studywide reviewer I want to receive and reveiw amendments
-    # Add before hook to delete known re-usable rts ids
+@RegressionReviewAmendments @RegressionTest @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @KNOWN_DEFECT_RSP-5285 @KNOWN_DEFECT_RSP-5184 @fail
+Feature: Review Amendments- As a studywide reviewer I want to receive and review amendments
+
     Background:
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -39,7 +39,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and reveiw
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @backstageReadonlyModifications @rsp-5380 @onlyTest
+    @backstageReadonlyModifications @rsp-5380
     Scenario Outline: Ensure the modification record is read-only in backstage and reflects all the data
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -82,7 +82,6 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and reveiw
         And I capture the page screenshot
         When I have navigated to the '<Backstage_Page>' as '<Backstage_User>'
         And I enter 'new iras id' into the search field
-        # When I enter an iras id for 'England' lead nation modification assigned to 'nobody' with status 'Modification_Status_Received' into the search field
         And I click the 'Search' button on the '<Backstage_Page>'
         Then I 'can' see the modification displayed in the '<Backstage_Page>' list with 'Modification_Status_Received' status
         When I click the modification id displayed on the '<Backstage_Page>'
@@ -105,10 +104,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and reveiw
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Northern_Ireland | Team_Manager_Dashboard_Page | Team_Manager_NI      |
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Scotland         | Search_Modifications_Page   | Studywide_Reviewer_S |
 
-    # Issue 16 on Team 1 cosmetic defect RSP-5184 causing failure Modification heading
-    # Other than that above can be run with known defects @KNOWN_DEFECT_RSP-5285 @KNOWN_DEFECT_RSP-5184
-
-    @reviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @only
+    @reviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @KNOWN_DEFECT_RSP-6266 @KNOWN_DEFECT_RSP-6314 @KNOWN_DEFECT_RSP-6315
     Scenario Outline: Verify the modification approvals workflow
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -200,7 +196,3 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and reveiw
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Northern_Ireland | Studywide_Reviewer_NI           | Workflow_Coordinator_NI | Studywide_Reviewer_NI | Not_Approved | Lack_Of_Evidence | Modification_Status_Not_Approved |
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Scotland         | Studywide_Reviewer_S            | Workflow_Coordinator_S  | Studywide_Reviewer_S  | Approved     | Blank            | Modification_Status_Approved     |
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Wales            | Studywide_Reviewer_W            | Workflow_Coordinator_W  | Studywide_Reviewer_W  | Not_Approved | Lack_Of_Evidence | Modification_Status_Not_Approved |
-
-# Regression my tasklist only - displays With review body instead of review in progress
-# Issue mods assigned to NI user not appearing in UI, but are in DB, investigate scotland wales too
-# Search page not showing Not approved modififcations
