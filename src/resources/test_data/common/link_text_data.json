@@ -238,7 +238,15 @@
     "Back": "Back",
     "Change": "Change",
     "Remove": "Remove",
-    "Delete_Modification": "Delete modification"
+    "Delete_Modification": "Delete modification",
+    "Continue": "Continue",
+    "Sponsor_Details": "Sponsor details",
+    "Modification_Details": "Modification details",
+    "Documents": "Documents",
+    "History": "History"
+  },
+  "Modification_Review_Outcome_Sent_Page": {
+    "Back_To_Tasklist": "Back to Task list"
   },
   "Modification_Unfinished_Error_Page": {
     "Back": "Back"

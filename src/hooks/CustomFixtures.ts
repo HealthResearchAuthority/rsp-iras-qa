@@ -97,6 +97,7 @@ import SponsorAuthorisationsPage from '../pages/IRAS/makeChanges/SponsorAuthoris
 import SponsorCheckAndAuthorisePage from '../pages/IRAS/makeChanges/SponsorCheckAndAuthorisePage';
 import SponsorModificationPage from '../pages/IRAS/makeChanges/SponsorModificationPage';
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
+import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -194,6 +195,7 @@ type CustomFixtures = {
   sponsorCheckAndAuthorisePage: SponsorCheckAndAuthorisePage;
   sponsorModificationPage: SponsorModificationPage;
   teamManagerDashboardPage: TeamManagerDashboardPage;
+  modificationOutcomeCheckSendPage: ModificationOutcomeCheckSendPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -574,6 +576,10 @@ export const test = base.extend<CustomFixtures>({
 
   teamManagerDashboardPage: async ({ page }, use) => {
     await use(new TeamManagerDashboardPage(page));
+  },
+
+  modificationOutcomeCheckSendPage: async ({ page }, use) => {
+    await use(new ModificationOutcomeCheckSendPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

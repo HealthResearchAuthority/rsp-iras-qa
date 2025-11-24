@@ -17,6 +17,8 @@ export default class ModificationsReceivedCommonPage {
   private _modification_id: string;
   private _short_project_title: string;
   private _status: string;
+  private _decision_outcome: string;
+  private _rowWithModification: Locator;
   readonly days_since_submission_from_text: Locator;
   readonly days_since_submission_filter_input: Locator;
   readonly days_since_submission_label: Locator;
@@ -36,8 +38,10 @@ export default class ModificationsReceivedCommonPage {
     this._modification_id = '';
     this._short_project_title = '';
     this._status = '';
+    this._decision_outcome = '';
 
     //Locators
+    this._rowWithModification = this.page.getByText('');
     this.days_since_submission_from_text = this.page.getByTestId('Search_FromDaysSinceSubmission');
     this.days_since_submission_filter_input = this.page
       .locator('.search-filter-section__content')
@@ -106,6 +110,22 @@ export default class ModificationsReceivedCommonPage {
 
   async setStatus(value: string): Promise<void> {
     this._status = value;
+  }
+
+  async getDecisionOutcome(): Promise<string> {
+    return this._decision_outcome;
+  }
+
+  async setDecisionOutcome(value: string): Promise<void> {
+    this._decision_outcome = value;
+  }
+
+  async getRowLocator(): Promise<Locator> {
+    return this._rowWithModification;
+  }
+
+  async setRowLocator(element: Locator): Promise<void> {
+    this._rowWithModification = element;
   }
 
   // Page Methods
@@ -383,7 +403,7 @@ export default class ModificationsReceivedCommonPage {
   }
 
   async setModificationValues(modificationQueryResult: IResult<any>, projectQueryResult: IResult<any>): Promise<void> {
-    await this.setIrasId(projectQueryResult.recordset[0].IrasId);
+    await this.setIrasId(projectQueryResult.recordset[0].IrasId.toString());
     await this.setModificationId(modificationQueryResult.recordset[0].ModificationIdentifier);
     await this.setShortProjectTitle(projectQueryResult.recordset[0].ShortProjectTitle);
     await this.setStatus(modificationQueryResult.recordset[0].Status);

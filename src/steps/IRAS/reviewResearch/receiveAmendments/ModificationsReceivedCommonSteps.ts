@@ -299,6 +299,7 @@ Then(
         .nth(modIdColumnIndex)
         .getByText(`${await modificationsReceivedCommonPage.getModificationId()}`, { exact: true }),
     });
+    await modificationsReceivedCommonPage.setRowLocator(rowLocator);
 
     if (visibility.toLowerCase() == 'cannot') {
       expect.soft(rowLocator).toBeHidden();
@@ -310,3 +311,24 @@ Then(
     }
   }
 );
+
+Then(
+  'I click the modification id displayed on the {string}',
+  async ({ modificationsReceivedCommonPage }, pageType: string) => {
+    const modIdColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(
+      pageType,
+      'modification id'
+    );
+    const rowLocator = await modificationsReceivedCommonPage.getRowLocator();
+    await rowLocator
+      .getByRole('cell')
+      .nth(modIdColumnIndex)
+      .getByText(`${await modificationsReceivedCommonPage.getModificationId()}`, { exact: true })
+      .click();
+  }
+);
+
+When('I select the modification in order to assign it', async ({ modificationsReceivedCommonPage }) => {
+  const rowLocator = await modificationsReceivedCommonPage.getRowLocator();
+  await rowLocator.getByTestId(await modificationsReceivedCommonPage.getModificationId()).click();
+});

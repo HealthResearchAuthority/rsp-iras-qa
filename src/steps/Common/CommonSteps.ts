@@ -705,6 +705,7 @@ When(
       manageSponsorOrganisationPage,
       loginPage,
       modificationsCommonPage,
+      projectDetailsIRASPage,
     },
     inputType: string
   ) => {
@@ -745,6 +746,9 @@ When(
         break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
+        break;
+      case 'new iras id':
+        searchValue = await projectDetailsIRASPage.getUniqueIrasId();
         break;
       default:
         searchValue = inputType;
@@ -970,6 +974,7 @@ Given(
       approvalsPage,
       myModificationsTasklistPage,
       modificationsReadyToAssignPage,
+      teamManagerDashboardPage,
     },
     page: string,
     user: string
@@ -1014,6 +1019,7 @@ Given(
           await accessDeniedPage.assertOnAccessDeniedPage();
           break;
         case 'My_Modifications_Tasklist_Page':
+          await myModificationsTasklistPage.page.context().addCookies(authState.cookies);
           await myModificationsTasklistPage.goto();
           await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
           break;
@@ -1022,6 +1028,12 @@ Given(
           await modificationsReadyToAssignPage.goto();
           await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
           break;
+        case 'Team_Manager_Dashboard_Page':
+          await teamManagerDashboardPage.page.context().addCookies(authState.cookies);
+          await teamManagerDashboardPage.goto();
+          await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
+          break;
+
         default:
           throw new Error(`${page} is not a valid option`);
       }

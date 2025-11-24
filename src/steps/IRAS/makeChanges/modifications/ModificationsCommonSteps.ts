@@ -25,7 +25,7 @@ Then(
 
 Then(
   'I validate the project information labels using dataset displayed on modifications page',
-  async ({ modificationsCommonPage, projectDetailsIRASPage }) => {
+  async ({ modificationsCommonPage, projectDetailsIRASPage, modificationsReceivedCommonPage }) => {
     const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
     const shortProjectTitleExpected = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const modificationIDExpected = irasIDExpected + '/' + 1;
@@ -40,6 +40,9 @@ Then(
     expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
+    await modificationsReceivedCommonPage.setIrasId(shortProjectTitleExpected);
+    await modificationsReceivedCommonPage.setModificationId(modificationIDExpected);
+    await modificationsReceivedCommonPage.setShortProjectTitle(shortProjectTitleExpected);
   }
 );
 
