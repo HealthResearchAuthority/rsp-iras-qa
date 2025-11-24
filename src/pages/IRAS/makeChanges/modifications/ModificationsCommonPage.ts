@@ -911,14 +911,6 @@ export default class ModificationsCommonPage {
     expect(isDateSubmittedInDateInValidRange).toBe(true);
   }
 
-  async getModificationStatus(status: string) {
-    if (status.toLowerCase() == 'with sponsor') {
-      return this.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
-    } else if (status.toLowerCase() == 'complete') {
-      return this.modificationsCommonPageTestData.Document_Status_Complete.status;
-    }
-  }
-
   async validateCardData(expectedData: any, actualData: any) {
     const compareArrays = (expected: any[], actual: any[]) => {
       if (expected.length !== actual.length) return false;
@@ -945,6 +937,8 @@ export default class ModificationsCommonPage {
   async getModificationStatus(status: string) {
     if (status.toLowerCase() == 'with sponsor') {
       return this.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
+    } else if (status.toLowerCase() == 'complete') {
+      return this.modificationsCommonPageTestData.Document_Status_Complete.status;
     } else if (status.toLowerCase() == 'authorised') {
       return this.modificationsCommonPageTestData.Modification_Status_Authorised.status;
     } else if (status.toLowerCase() == 'not authorised') {
