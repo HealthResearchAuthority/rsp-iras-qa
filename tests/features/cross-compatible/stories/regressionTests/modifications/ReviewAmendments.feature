@@ -104,7 +104,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and review
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Northern_Ireland | Team_Manager_Dashboard_Page | Team_Manager_NI      |
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Scotland         | Search_Modifications_Page   | Studywide_Reviewer_S |
 
-    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @KNOWN_DEFECT_RSP-6266 @KNOWN_DEFECT_RSP-6314 @KNOWN_DEFECT_RSP-6315
+    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @KNOWN_DEFECT_RSP-6266 @KNOWN_DEFECT_RSP-6314 @KNOWN_DEFECT_RSP-6315
     Scenario Outline: Verify the modification approvals workflow
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
