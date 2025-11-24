@@ -83,7 +83,8 @@
     "Keep_Project": "Keep project",
     "Delete_Modification": "Delete modification",
     "Delete_Documents": "Delete documents",
-    "Delete_Document": "Delete document"
+    "Delete_Document": "Delete document",
+    "Return_To_Authorisations": "Return to authorisations"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -194,7 +195,8 @@
   "Modifications_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
-    "Save_Changes": "Save changes"
+    "Save_Changes": "Save changes",
+    "Return_To_Modification": "Return to modification"
   },
   "Affected_Organisation_Selection_Page": {
     "Save_Continue": "Save and continue",
@@ -354,5 +356,11 @@
   },
   "IRAS_ID_Error_Page": {
     "Return_To_IRAS_ID": "Return to IRAS ID"
+  },
+  "Sponsor_Authorisations_Page": {
+    "Search": "Search"
+  },
+  "Sponsor_Check_And_Authorise_Page": {
+    "Confirm_Selection": "Confirm selection"
   }
 }
