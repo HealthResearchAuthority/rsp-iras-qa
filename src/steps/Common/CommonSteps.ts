@@ -701,6 +701,7 @@ When(
       manageSponsorOrganisationPage,
       loginPage,
       modificationsCommonPage,
+      projectDetailsIRASPage,
     },
     inputType: string
   ) => {
@@ -741,6 +742,9 @@ When(
         break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
+        break;
+      case 'iras id':
+        searchValue = await projectDetailsIRASPage.getUniqueIrasId();
         break;
       default:
         searchValue = inputType;

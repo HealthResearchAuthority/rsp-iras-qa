@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as projectOverviewPageTestData from '../../../resources/test_data/iras/make_changes/project_overview_page_data.json';
 import { confirmStringNotNull } from '../../../utils/UtilFunctions';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
+import CommonItemsPage from '../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ProjectOverviewPage {
@@ -117,6 +118,7 @@ export default class ProjectOverviewPage {
   readonly project_details_tab_full_project_title: Locator;
   readonly project_details_tab_planned_project_end_date_label: Locator;
   readonly project_details_tab_planned_project_end_date: Locator;
+  readonly tableCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -517,6 +519,7 @@ export default class ProjectOverviewPage {
         hasText: this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_from_date_hint_text,
       })
       .locator('.govuk-error-message');
+    this.tableCell = this.page.locator('td');
   }
 
   //Page Methods
@@ -542,5 +545,38 @@ export default class ProjectOverviewPage {
       columnIndex = 1;
     }
     return columnIndex;
+  }
+
+  async findModification(
+    commonItemsPage: CommonItemsPage,
+    modificationID: string,
+    options?: {
+      status?: string;
+    }
+  ) {
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const rows = await commonItemsPage.tableBodyRows.all();
+      for (const row of rows) {
+        const match =
+          options?.status && (await this.isMatchingRowForStatus(commonItemsPage, row, modificationID, options.status));
+        if (match) return row;
+      }
+      hasNextPage = await commonItemsPage.shouldGoToNextPage();
+      if (hasNextPage) await commonItemsPage.goToNextPage();
+    }
+    expect.soft(false, `No matching record found for modificationID: ${modificationID}`).toBe(true);
+  }
+
+  async isMatchingRowForStatus(
+    commonItemsPage: CommonItemsPage,
+    row: any,
+    modificationID: string,
+    status?: string
+  ): Promise<boolean> {
+    const columns = row.locator(this.tableCell);
+    const idText = (await columns.nth(0).innerText()).trim();
+    const statusText = (await columns.nth(5).innerText()).trim();
+    return idText === modificationID && (status ? statusText === status : true);
   }
 }
