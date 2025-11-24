@@ -16,6 +16,7 @@
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "role_checkbox": [
       "Applicant",
+      "Sponsor",
       "Study-wide reviewer",
       "System administrator",
       "Team manager",
@@ -56,7 +57,7 @@
     "title_text": "Title must be 250 characters or less",
     "job_title_text": "Job title must be 250 characters or less",
     "first_name_text": "First name must be 250 characters or less",
-    "telephone_text": "Telephone must be 11 digits or less",
+    "telephone_text": "Telephone must be 13 digits or less",
     "last_name_text": "Last name must be 250 characters or less",
     "organisation_text": "Organisation must be 250 characters or less"
   },
@@ -64,7 +65,7 @@
     "telephone_text": "Telephone must only contain numbers"
   },
   "Incorrect_Format_Invalid_Character_Limit_Telephone_Error": {
-    "telephone_text": ["Telephone must be 11 digits or less", "Telephone must only contain numbers"]
+    "telephone_text": ["Telephone must be 13 digits or less", "Telephone must only contain numbers"]
   },
   "Edit_User_Profile": {
     "email_address_prefix": "QAAutomation",
@@ -332,7 +333,7 @@
     "title_text": "Exploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",
     "first_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
     "last_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250charss",
-    "telephone_text": "9123456789014",
+    "telephone_text": "+91234567890145920413",
     "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
     "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
   },
@@ -344,6 +345,6 @@
   "Incorrect_Format_Invalid_Character_Limit_Telephone_Data": {
     "first_name_text": "First Name Test",
     "last_name_text": "Test Last Name",
-    "telephone_text": "+12345678901"
+    "telephone_text": "*1234567890123"
   }
 }

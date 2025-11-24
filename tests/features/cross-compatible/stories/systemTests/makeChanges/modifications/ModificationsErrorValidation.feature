@@ -1,5 +1,5 @@
 @ApplicantUser @ModificationsErrorValidation @SystemTest @jsEnabled
-Feature: Create Modifications - ModificationsErrorValidation: This feature file helps check all the error handling that is in place for when a modification record is created to until it is submitted to a sponsor
+Feature: ModificationsErrorValidation: This feature file helps check the error handling that is in place during modification journey
 
   Background:
     Given I have navigated to the my research projects page
@@ -67,30 +67,6 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
 
-  @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
-  Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I create '<Changes>' for the created modification
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    Then I can see the add sponsor reference page
-    Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Sponsor_Reference_Page'
-
-    Examples:
-      | Changes                           |
-      | Multiple_Changes_Planned_End_Date |
 
   @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
   Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
@@ -426,9 +402,9 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
       | Planned_End_Date_Change | Change_Field         | Field_Error_Message | Summary_Error_Message | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
       | Invalid_Date_Today      | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
-  @4684 @3877 @ValidateDocumentUploadDuplicateFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  @rsp-5478 @4684 @3877 @ValidateDocumentUploadDuplicateFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video or non video file that has already been uploaded
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -440,36 +416,31 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
     And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload '<Document_Upload_Files>' documents
     And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
-    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files_New>' documents
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I upload '<Document_Upload_Files_New>' documents
+    And I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     And I capture the page screenshot
 
-    Examples:
-      | Specific_Change                    | Document_Upload_Files      | Document_Upload_Files_New  | Upload_Type      |
-      | Correction_Of_Typographical_Errors | MP4_File                   | MP4_File                   | single invalid   |
-      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid | multiple invalid |
-      | Correction_Of_Typographical_Errors | PNG_File                   | PNG_File                   | single invalid   |
-      | Protocol_Non_Substantial_Changes   | Multiple_Files_Three       | Multiple_Files_Three       | multiple invalid |
 
-  @4684 @3877 @ValidateDocumentUploadInvalidFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+    Examples:
+      | Changes                           | Document_Upload_Files      | Document_Upload_Files_New  | Upload_Type      | Research_Locations  |
+      | Multiple_Changes_Planned_End_Date | PNG_File                   | PNG_File                   | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Planned_End_Date | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid | multiple invalid | Nhs_Involvement_Yes |
+      | Multiple_Changes_Planned_End_Date | MP4_File                   | MP4_File                   | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Planned_End_Date | Multiple_Files_Three       | Multiple_Files_Three       | multiple invalid | Nhs_Involvement_Yes |
+
+  @rsp-5478 @4684 @3877 @ValidateDocumentUploadInvalidFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video or non video file with an invalid format
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -481,35 +452,36 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
     And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files_Invalid>' documents
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload '<Document_Upload_Files_Invalid>' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I validate 'Invalid_Format_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files_Invalid    | Upload_Type      |
-      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Invalid     | multiple invalid |
-      | Correction_Of_Typographical_Errors | ASF_File                         | single invalid   |
-      | Correction_Of_Typographical_Errors | FLAC_File                        | single invalid   |
-      | Correction_Of_Typographical_Errors | MP3_File                         | single invalid   |
-      | Correction_Of_Typographical_Errors | MPEG1_File                       | single invalid   |
-      | Correction_Of_Typographical_Errors | OGG_File                         | single invalid   |
-      | Correction_Of_Typographical_Errors | PS_File                          | single invalid   |
-      | Correction_Of_Typographical_Errors | RAW_File                         | single invalid   |
-      | Correction_Of_Typographical_Errors | WAV_File                         | single invalid   |
-      | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
-      | Protocol_Non_Substantial_Changes   | JSON_File                        | single invalid   |
-  #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
+      | Changes                                            | Document_Upload_Files_Invalid    | Upload_Type      | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | ASF_File                         | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Multiple_Files_Video_Invalid     | multiple invalid | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | FLAC_File                        | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | MP3_File                         | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | MPEG1_File                       | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | OGG_File                         | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | PS_File                          | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | RAW_File                         | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | WAV_File                         | single invalid   | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Multiple_Invalid_Files_Non_Video | multiple invalid | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | JSON_File                        | single invalid   | Nhs_Involvement_Yes |
 
-  @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
+
+  @rsp-5478 @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -521,24 +493,25 @@ Feature: Create Modifications - ModificationsErrorValidation: This feature file 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
     And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                              |
-      | Correction_Of_Typographical_Errors           |
-      | CRF_Other_Study_Data_Records                 |
-      | GDPR_Wording                                 |
-      | Other_Minor_Change_To_Study_Documents        |
-      | Post_Trial_Information_For_Participants      |
-      | Protocol_Non_Substantial_Changes             |
-      | Translations_Addition_Of_Translated_Versions |
+      | Changes                                            | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
 
   @rsp-4314 @ValidateErrorNonRECStudyTypeOptionalDocumentVersionDate
   Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing, using document types applicable to Non-REC study types where document version and date are optional, for documents uploaded with an Incomplete status

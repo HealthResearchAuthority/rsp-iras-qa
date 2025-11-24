@@ -1,14 +1,15 @@
 {
   "Add_Documents_Modifications_Page": {
-    "page_title": "Add documents - Plan and manage health and care research",
-    "page_title_first_part": "Add documents for",
+    "page_title": "Add supporting documents - Plan and manage health and care research",
+    "page_title_first_part": "Add supporting documents",
     "page_title_second_part": "- Plan and manage health and care research",
-    "heading": "Add documents for",
+    "heading": "Add supporting documents",
     "hint_label": "Upload your documents here. You’ll add document details in the next step.\nDocuments must be less than 100MB and one of these file types: mp4, mov, avi, mkv, wmv, mpeg, mpg, webm, png, gif, bmp, svg, jpg, jpeg, doc, docx, dot, dotx, pdf, rtf, odt, ofd, xps, xls, xlsx, csv, ppt, pptx, txt, xml, html, htm, vcf, eml, msg",
     "upload_document_header": "Upload document",
     "choose_files_button_label": "Choose files",
     "upload_document_component_hint_label": "or drop files",
-    "no_files_chosen_label": "No files chosen"
+    "no_files_chosen_label": "No files chosen",
+    "delete_label": "Delete"
   },
   "Field_Error_Upload_Documents_Mandatory": {
     "upload_files_input": "Please upload at least one document"
@@ -18,5 +19,8 @@
   },
   "Duplicate_File_Upload_Error": {
     "upload_files_input": " has already been uploaded"
+  },
+  "Document_Status_Uploaded": {
+    "status": "Uploaded"
   }
 }

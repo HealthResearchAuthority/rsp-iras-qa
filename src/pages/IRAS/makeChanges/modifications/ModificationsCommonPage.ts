@@ -40,6 +40,13 @@ export default class ModificationsCommonPage {
   readonly modificationStatusLabel: Locator;
   readonly modificationRows: Locator;
   readonly listCell: Locator;
+  readonly documentRows: Locator;
+  readonly documentTypeCell: Locator;
+  readonly documentNameCell: Locator;
+  readonly fileNameCell: Locator;
+  readonly documentVersionCell: Locator;
+  readonly documentDateCell: Locator;
+  readonly documentStatusCell: Locator;
   readonly dateCreatedValue: Locator;
 
   private rankingForChanges: Record<
@@ -141,6 +148,18 @@ export default class ModificationsCommonPage {
     this.changes_free_text_summary_error = this.page.locator('.govuk-error-summary__list');
     this.modificationRows = this.page.locator('tbody').getByRole('row');
     this.listCell = this.page.getByRole('cell');
+    this.documentRows = this.page.locator('#projectDocumentsTable tbody tr');
+    this.documentTypeCell = this.page.locator('td:nth-child(1)');
+    this.documentNameCell = this.page.locator('td:nth-child(2)');
+    this.fileNameCell = this.page.locator('td:nth-child(3)');
+    this.documentVersionCell = this.page.locator('td:nth-child(4)');
+    this.documentDateCell = this.page.locator('td:nth-child(5)');
+    this.documentStatusCell = this.page.locator('td:nth-child(6)');
+    this.dateCreatedValue = this.page
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
+      .locator('..')
+      .locator('[class$="value"]');
     this.dateCreatedValue = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
@@ -307,26 +326,26 @@ export default class ModificationsCommonPage {
       areaOfChangeSubHeading: string;
       individualChangeStatus: string;
     }> = [];
-
     const totalCards = await changeCards.count();
     const relevantCards: Locator[] = [];
-
     // Collect all cards except the first one (index starts at 1)
     for (let cardIndex = 1; cardIndex < totalCards; cardIndex++) {
       relevantCards.push(changeCards.nth(cardIndex));
     }
-
     let changeIndex = 0;
     for (const card of relevantCards) {
+      const actualSpecificChangeValueLocator = card
+        .locator(this.keyLocator, {
+          hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
+        })
+        .locator(this.valueLocator);
+      await expect.soft(actualSpecificChangeValueLocator).toBeVisible();
+      if (!(await actualSpecificChangeValueLocator.isVisible())) {
+        break;
+      }
       const actualSpecificChangeValue = confirmStringNotNull(
-        await card
-          .locator(this.keyLocator, {
-            hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
-          })
-          .locator(this.valueLocator)
-          .textContent()
+        await actualSpecificChangeValueLocator.textContent()
       ).trim();
-
       const actualAreaOfChangeSubHeading = confirmStringNotNull(
         await card
           .getByText(
@@ -336,20 +355,16 @@ export default class ModificationsCommonPage {
       )
         .trim()
         .split('\n')[0];
-
       const actualChangeStatus = confirmStringNotNull(
         await card.locator(this.modificationStatusLabel).textContent()
       ).trim();
-
       actualValuesArray.push({
         specificChangeValue: actualSpecificChangeValue,
         areaOfChangeSubHeading: actualAreaOfChangeSubHeading,
         individualChangeStatus: actualChangeStatus,
       });
-
       changeIndex++;
     }
-
     return actualValuesArray;
   }
 
@@ -471,6 +486,11 @@ export default class ModificationsCommonPage {
       modificationsCommonPageTestData.Nhs_Resource_Implications.includes(dataset.specific_change_dropdown)
     ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+    } else if (
+      affectsNhs &&
+      modificationsCommonPageTestData.Ranking_Category.new_site.includes(dataset.specific_change_dropdown)
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_new_site;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {
@@ -920,5 +940,46 @@ export default class ModificationsCommonPage {
       filterToDate
     );
     expect(isDateSubmittedInDateInValidRange).toBe(true);
+  }
+
+  async validateCardData(expectedData: any, actualData: any) {
+    const compareArrays = (expected: any[], actual: any[]) => {
+      if (expected.length !== actual.length) return false;
+      return expected.every((val, index) => val === actual[index]);
+    };
+    for (const key of Object.keys(expectedData)) {
+      if (key.includes('change_status')) {
+        continue;
+      }
+      const expectedValue = expectedData[key];
+      const actualValue = actualData[key];
+      if (Array.isArray(expectedValue)) {
+        const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
+        const sortedActual = [...(actualValue || [])].sort(
+          (a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b)
+        );
+        expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
+      } else {
+        expect.soft(actualValue).toStrictEqual(expectedValue);
+      }
+    }
+  }
+
+  async getModificationStatus(status: string) {
+    if (status.toLowerCase() == 'with sponsor') {
+      return this.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
+    } else if (status.toLowerCase() == 'authorised') {
+      return this.modificationsCommonPageTestData.Modification_Status_Authorised.status;
+    } else if (status.toLowerCase() == 'not authorised') {
+      return this.modificationsCommonPageTestData.Modification_Status_Not_Authorised.status;
+    } else if (status.toLowerCase() == 'with review body') {
+      return this.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
+    } else if (status.toLowerCase() == 'approved') {
+      return this.modificationsCommonPageTestData.Modification_Status_Approved.status;
+    } else if (status.toLowerCase() == 'not approved') {
+      return this.modificationsCommonPageTestData.Modification_Status_Not_Approved.status;
+    } else if (status.toLowerCase() == 'complete') {
+      return this.modificationsCommonPageTestData.Document_Status_Complete.status;
+    }
   }
 }

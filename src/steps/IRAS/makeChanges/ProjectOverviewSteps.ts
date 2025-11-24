@@ -495,6 +495,33 @@ Then(
 );
 
 Then(
+  'I validate the status of each document is {string} in the project documents page',
+  async ({ projectOverviewPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const expectedStatus = dataset.status;
+    const rowCount = await commonItemsPage.tableRows.count();
+    for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+      const row = commonItemsPage.tableRows.nth(rowIndex);
+      const actualStatus = await projectOverviewPage.getStatus(row);
+      expect.soft(actualStatus).toEqual(expectedStatus);
+    }
+  }
+);
+
+Then(
+  'I can see the searched modification to be present in the list with {string} status in project overview page',
+  async ({ projectOverviewPage, modificationsCommonPage, commonItemsPage }, status: string) => {
+    const modificationStatus = await modificationsCommonPage.getModificationStatus(status);
+    const modificationID = await modificationsCommonPage.getModificationID();
+    const foundRecords = await projectOverviewPage.findModification(commonItemsPage, modificationID, {
+      status: modificationStatus,
+    });
+    expect.soft(foundRecords).toBeDefined();
+    expect.soft(foundRecords).toHaveCount(1);
+  }
+);
+
+Then(
   'I can see the list of modifications submitted for sponsor approval is sorted by {string} order of the {string}',
   async function ({ commonItemsPage, projectOverviewPage }, sortDirection: string, sortField: string) {
     const searchColumnIndex = await projectOverviewPage.getColumnIndexProjectApproval(sortField);

@@ -224,27 +224,6 @@ Then(
   }
 );
 
-const validateCardData = (expectedData: any, actualData: any) => {
-  const compareArrays = (expected: any[], actual: any[]) => {
-    if (expected.length !== actual.length) return false;
-    return expected.every((val, index) => val === actual[index]);
-  };
-  for (const key of Object.keys(expectedData)) {
-    if (key.includes('change_status')) {
-      continue;
-    }
-    const expectedValue = expectedData[key];
-    const actualValue = actualData[key];
-    if (Array.isArray(expectedValue)) {
-      const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
-      const sortedActual = [...(actualValue || [])].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
-      expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
-    } else {
-      expect.soft(actualValue).toStrictEqual(expectedValue);
-    }
-  }
-};
-
 Then(
   'I validate the change details are displayed as per the {string} dataset',
   async ({ modificationsCommonPage, reviewAllChangesPage }, datasetName) => {
@@ -259,7 +238,31 @@ Then(
         reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading,
         expectedData
       );
-      validateCardData(expectedData, actualData.cardData);
+      modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
+    }
+  }
+);
+
+Then(
+  'I validate the change details are displayed as per the {string} dataset under the tabs sections',
+  async ({ modificationsCommonPage }, datasetName) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeNames = Object.keys(changesDataset).reverse();
+    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
+      const changeName = changeNames[changeIndex];
+      const expectedData = changesDataset[changeName];
+      const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
+      const headingLocator = modificationsCommonPage.page.getByRole('heading', { name: cardTitle });
+      if (await headingLocator.isVisible()) {
+        const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
+          cardTitle,
+          cardTitle,
+          expectedData
+        );
+        modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
+      } else {
+        await expect.soft(headingLocator, `Heading "${cardTitle}" should be visible`).toBeVisible();
+      }
     }
   }
 );
@@ -292,7 +295,7 @@ Then(
       reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
       expectedData
     );
-    validateCardData(expectedData, actualData.cardData);
+    modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
   }
 );
 
@@ -574,6 +577,11 @@ Then(
     }
   }
 );
+
+Then('I click on the searched modification id', async ({ modificationsCommonPage }) => {
+  const modificationID = await modificationsCommonPage.getModificationID();
+  await modificationsCommonPage.page.getByText(modificationID, { exact: true }).click();
+});
 
 Then(
   'I create multiple modifications using {string} dataset',

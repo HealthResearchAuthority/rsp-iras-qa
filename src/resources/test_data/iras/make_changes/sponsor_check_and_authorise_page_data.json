@@ -7,6 +7,27 @@
     "outcomeBody": "When you've finished checking the modification, select an outcome. Selecting 'Authorise' will authorise and submit the modification. If you select 'Not authorised' the researcher will need to prepare a new modification if changes are still required"
   },
 
+  "Summary_Only_Error_Select_Outcome": {
+    "summaryErrorMessage": "Select an outcome"
+  },
+
+  "Sponsor_Authorised": {
+    "outcome_selection_radio": "Authorised"
+  },
+
+  "Sponsor_Not_Authorised": {
+    "outcome_selection_radio": "Not authorised"
+  }
+}
+{
+  "Sponsor_Check_And_Authorise_Page": {
+    "pageHeading": "Check and authorise",
+    "overallModificationRankingHeading": "Overall modification ranking",
+    "overallModificationRankingSubHeading": "Ranking",
+    "outcomeHeading": "Outcome",
+    "outcomeBody": "When you've finished checking the modification, select an outcome. Selecting 'Authorise' will authorise and submit the modification. If you select 'Not authorised' the researcher will need to prepare a new modification if changes are still required"
+  },
+
   "Sponsor_Authorised": {
     "outcome_selection_radio": "Authorised"
   },
