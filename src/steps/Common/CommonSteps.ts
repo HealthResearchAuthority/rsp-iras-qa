@@ -274,33 +274,31 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
   ).toBeVisible();
 });
 
-Given(
-  'I click the {string} link on the {string}',
-  async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
-    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
-    const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
-    if (pageKey === 'Progress_Bar') {
-      await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
-    } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
-      await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
-    } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
-      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
-    } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
-      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
-    } else if (linkKey.includes('_Filter_Panel')) {
-      await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
-    } else if (
-      (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
-      linkKey === 'Back_To_Users'
-    ) {
-      await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (noOfLinksFound > 1 && linkKey != 'Back') {
-      await commonItemsPage.govUkLink.getByText(linkValue).first().click();
-    } else {
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
-    }
+Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
+  if (pageKey === 'Progress_Bar') {
+    await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
+  } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
+    await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
+  } else if (linkKey.includes('_Filter_Panel')) {
+    await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
+  } else if (
+    (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
+    linkKey === 'Back_To_Users'
+  ) {
+    await commonItemsPage.govUkLink.getByText(linkValue).click();
+  } else if (noOfLinksFound > 1 && linkKey != 'Back') {
+    await commonItemsPage.govUkLink.getByText(linkValue).first().click();
+  } else if (
+    (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
+    (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details' || linkKey === 'Documents')
+  ) {
+    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
+  } else {
+    await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
-);
+});
 
 Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
   const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
@@ -520,6 +518,7 @@ Then(
       projectIdentificationEnterReferenceNumbersPage,
       contactDetailsModificationPage,
       projectPersonnelChangeChiefInvestigatorPage,
+      sponsorCheckAndAuthorisePage,
       chooseARecordTypeToSearchPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
@@ -634,6 +633,10 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = projectPersonnelChangeChiefInvestigatorPage;
+    } else if (pageKey == 'Sponsor_Check_And_Authorise_Page') {
+      errorMessageFieldDataset =
+        sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = sponsorCheckAndAuthorisePage;
     } else if (pageKey == 'Choose_A_Record_Type_To_Search_Page') {
       errorMessageFieldDataset =
         chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Error_Validation[
@@ -731,6 +734,8 @@ When(
       checkAddUserSponsorOrganisationPage,
       manageSponsorOrganisationPage,
       loginPage,
+      modificationsCommonPage,
+      projectDetailsIRASPage,
     },
     inputType: string
   ) => {
@@ -768,6 +773,12 @@ When(
         break;
       case 'automation sponsor email':
         searchValue = loginPage.loginPageTestData.Sponsor_User.username;
+        break;
+      case 'modification id':
+        searchValue = await modificationsCommonPage.getModificationID();
+        break;
+      case 'iras id':
+        searchValue = await projectDetailsIRASPage.getUniqueIrasId();
         break;
       default:
         searchValue = inputType;
@@ -862,21 +873,6 @@ When(
   }
 );
 
-When(
-  'I enter the {string} as the search query into the search field',
-  async ({ commonItemsPage }, searchKey: string) => {
-    if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
-      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
-      const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
-      await commonItemsPage.setUserListBeforeSearch(userValues);
-      await commonItemsPage.setSearchKey(searchKey);
-      await commonItemsPage.search_text.fill(searchKey);
-    } else {
-      throw new Error(`There are no items in list to search`);
-    }
-  }
-);
-
 Given(
   'I have navigated to the {string}',
   async (
@@ -887,6 +883,7 @@ Given(
       createApplicationPage,
       systemAdministrationPage,
       manageUsersPage,
+      createUserProfilePage,
       manageReviewBodiesPage,
       userProfilePage,
       reviewBodyProfilePage,
@@ -925,6 +922,10 @@ Given(
       case 'Manage_Users_Page':
         await manageUsersPage.goto();
         await manageUsersPage.assertOnManageUsersPage();
+        break;
+      case 'Create_User_Profile_Page':
+        await createUserProfilePage.goto();
+        await createUserProfilePage.assertOnCreateUserProfilePage();
         break;
       case 'Manage_Review_Bodies_Page':
         await manageReviewBodiesPage.goto();
@@ -1347,7 +1348,7 @@ Then(
     await commonItemsPage.upload_files_input.setInputFiles(documentPath);
     if (typeof documentPath === 'string') {
       const fileName = path.basename(documentPath);
-      await expect(commonItemsPage.page.getByText(fileName)).toBeVisible();
+      await expect(commonItemsPage.page.getByText(fileName).first()).toBeVisible();
     } else {
       await expect(
         commonItemsPage.page.getByText(
@@ -1983,6 +1984,123 @@ Given(
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+    }
+  }
+);
+
+Then(
+  'I can validate the {string} are displayed in the supporting documents table',
+  async (
+    {
+      commonItemsPage,
+      addDocumentDetailsForSpecificDocumentModificationsPage,
+      addDocumentDetailsModificationsPage,
+      modificationsCommonPage,
+    },
+    datasetName: string
+  ) => {
+    const dataset = commonItemsPage.documentUploadTestData[datasetName];
+    const originalUploadedFiles = dataset.map((path: string) => path.split('/').pop());
+    const expectedDocDetails =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Valid_Data_Fields;
+    const monthMap: Record<string, string> = {
+      January: 'Jan',
+      February: 'Feb',
+      March: 'Mar',
+      April: 'Apr',
+      May: 'May',
+      June: 'Jun',
+      July: 'Jul',
+      August: 'Aug',
+      September: 'Sep',
+      October: 'Oct',
+      November: 'Nov',
+      December: 'Dec',
+    };
+
+    const expectedDocDate = `${expectedDocDetails.sponsor_document_day_text} ${monthMap[expectedDocDetails.sponsor_document_month_dropdown]} ${expectedDocDetails.sponsor_document_year_text}`;
+    const documentRows = modificationsCommonPage.documentRows;
+    const rowCount = await documentRows.count();
+    const actualDocsInTable: string[] = [];
+
+    for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+      const actualDocType = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentTypeCell)
+        .innerText();
+      const actualDocName = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentNameCell)
+        .innerText();
+      const actualFileName = await documentRows.nth(rowIndex).locator(modificationsCommonPage.fileNameCell).innerText();
+      const actualDocVersion = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentVersionCell)
+        .innerText();
+      const actualDocDate = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentDateCell)
+        .innerText();
+      expect.soft(actualDocType).toBe(expectedDocDetails.document_type_dropdown);
+      expect.soft(actualDocVersion).toBe(expectedDocDetails.sponsor_document_version_text);
+      expect.soft(actualDocDate).toBe(expectedDocDate);
+      const actualUniqueDocNames = await addDocumentDetailsModificationsPage.getUniqueDocNames();
+      expect.soft(actualUniqueDocNames).toContain(actualDocName);
+
+      if (originalUploadedFiles.includes(actualFileName)) {
+        actualDocsInTable.push(actualFileName);
+      }
+    }
+    for (const doc of originalUploadedFiles) {
+      expect.soft(actualDocsInTable).toContain(doc);
+    }
+  }
+);
+
+Then(
+  'I can see the {string} status displayed for all documents in the table',
+  async ({ modificationsCommonPage, commonItemsPage }, status: string) => {
+    const documentStatus = await modificationsCommonPage.getModificationStatus(status);
+    const statusValues: string[] = [];
+    const rowsCount = await commonItemsPage.tableBodyRows.count();
+    for (let rowIndex = 0; rowIndex < rowsCount; rowIndex++) {
+      const statusColumnValue = await commonItemsPage.tableBodyRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentStatusCell)
+        .innerText();
+      statusValues.push(statusColumnValue);
+    }
+    for (const value of statusValues) {
+      expect.soft(value).toBe(documentStatus);
+    }
+  }
+);
+
+Then(
+  'I can see {string} button {string} on the {string}',
+  async ({ commonItemsPage }, buttonKey: string, availability: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    if (availability.toLowerCase() === 'enabled') {
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeVisible();
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeEnabled();
+    } else if (availability.toLowerCase() === 'disabled') {
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeDisabled();
     }
   }
 );

@@ -203,5 +203,14 @@
     "Post_Approval_Invalid_Date_To_Error": {
       "date_submitted_to_day_text": "'Search to' date must be in the correct format"
     }
+  },
+  "Document_Status_Incomplete": {
+    "status": "Incomplete"
+  },
+  "Document_Status_Complete": {
+    "status": "Complete"
+  },
+  "Document_Status_With_Sponsor": {
+    "status": "With sponsor"
   }
 }

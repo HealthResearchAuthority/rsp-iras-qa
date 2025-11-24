@@ -149,7 +149,7 @@ Feature: My Account Home page
       | Label_Texts_Applicant_User_Role | My_research           | Back            |
 
   @rsp-5228 @rsp-4846 @MyAccountHomepage @SponsorUser @SetupNewSponsorOrgGoLive
-  Scenario: Validate the My Account Home page of front stage user
+  Scenario: Validate the My Account Home page of sponsor user
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
