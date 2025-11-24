@@ -203,7 +203,6 @@ Then(
       await expect
         .soft(actualBulletPoints)
         .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_guidance_points);
-      // throw new Error(`Expected Search Results but No Search Results are Displayed`);
     }
   }
 );
@@ -246,7 +245,7 @@ Then(
       if (totalPagesCount > 0) {
         expectedResultCount = (totalPagesCount - 1) * 20 + (rowCount - 1);
       } else if (totalPagesCount == 0) {
-        if (rowCount != 0) {
+        if (rowCount > 0) {
           expectedResultCount = rowCount - 1;
         } else {
           expectedResultCount = rowCount;

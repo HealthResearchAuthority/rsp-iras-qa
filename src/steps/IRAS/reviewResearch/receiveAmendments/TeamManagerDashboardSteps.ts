@@ -32,9 +32,9 @@ Then(
       arr
         .map((item) => item.toString().trim())
         .sort((a, b) => {
-          const numA = parseFloat(a);
-          const numB = parseFloat(b);
-          if (!isNaN(numA) && !isNaN(numB)) {
+          const numA = Number.parseFloat(a);
+          const numB = Number.parseFloat(b);
+          if (!Number.isNaN(numA) && !Number.isNaN(numB)) {
             return numA - numB; // Numeric comparison
           }
 
