@@ -27,7 +27,19 @@ Then(
     }
     const modificationsByLeadNation = await teamManagerDashboardPage.sqlGetModificationByLeadNation(leadNation);
     const actualList = await commonItemsPage.getActualModificationListValues(commonItemsPage.tableBodyRows, 1);
-    const normalize = (arr: any[]) => arr.map((item) => item.toString().trim()).sort();
+
+    const normalize = (arr: any[]) =>
+      arr
+        .map((item) => item.toString().trim())
+        .sort((a, b) => {
+          const numA = parseFloat(a);
+          const numB = parseFloat(b);
+          if (!isNaN(numA) && !isNaN(numB)) {
+            return numA - numB; // Numeric comparison
+          }
+
+          return 0; // Keeps original order for non-numeric values
+        });
     expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
   }
 );

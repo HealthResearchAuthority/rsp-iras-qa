@@ -105,7 +105,7 @@ Then(
       expect.soft(isValid).toBeTruthy();
     };
 
-    if (searchResults.length !== 0) {
+    if (searchResults.length > 0) {
       // Combined search validation
       const searchTerms = [irasId, ciName, projectTitle].filter(Boolean);
       if (searchTerms.length > 1) {

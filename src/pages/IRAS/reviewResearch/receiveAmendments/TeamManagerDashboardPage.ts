@@ -104,10 +104,7 @@ export default class TeamManagerDashboardPage {
     );
     this.days_since_submission_from_text = this.page.getByTestId('Search.FromDaysSinceSubmission');
     this.days_since_submission_to_text = this.page.getByTestId('Search.ToDaysSinceSubmission');
-    // this.short_project_title_text = this.page.getByLabel(
-    //   this.modificationsReadyToAssignPageTestData.Filter_Labels.short_project_title_label
-    // );
-    this.short_project_title_text = this.page.locator('input[name="Search.ShortProjectTitle"]'); //workaround use above after fix
+    this.short_project_title_text = this.page.locator('input[name="Search.ShortProjectTitle"]');
     this.search_button_label = this.page.getByText('Search');
     this.modification_checkbox = this.page.locator('input[name="selectedModificationIds"][type="checkbox"]');
     this.results_table = this.page.getByTestId('modificationsTasklistTable');
@@ -292,7 +289,6 @@ ORDER BY NationQuery.CreatedDate DESC;
   }
 
   async saveIrasId(irasId: string, countval: string) {
-    // await this.setModificationId(irasId);
     const filePath = path.resolve(pathToTestDataJson);
     await this.updateModificationIdTestDataJson(filePath, irasId, countval);
   }

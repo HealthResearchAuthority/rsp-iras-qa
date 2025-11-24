@@ -27,22 +27,11 @@ export default class SearchProjectsPage {
   readonly search_box_label: Locator;
   readonly listCell: Locator;
   readonly chief_investigator_name_text: Locator;
-  // readonly date_submitted_from_day_text: Locator;
-  // readonly date_submitted_from_month_dropdown: Locator;
-  // readonly date_submitted_from_year_text: Locator;
-  // readonly date_submitted_to_day_text: Locator;
-  // readonly date_submitted_to_month_dropdown: Locator;
-  // readonly date_submitted_to_year_text: Locator;
   readonly short_project_title_text: Locator;
   readonly lead_nation_label: Locator;
   readonly lead_nation_fieldset: Locator;
   readonly lead_nation_checkbox: Locator;
-  // readonly modification_type_label: Locator;
-  // readonly modification_type_fieldset: Locator;
-  // readonly modification_type_checkbox: Locator;
   readonly chief_investigator_name_text_chevron: Locator;
-  // readonly date_submitted_from_day_text_chevron: Locator;
-  // readonly date_submitted_to_day_text_chevron: Locator;
   readonly lead_nation_checkbox_chevron: Locator;
   readonly modification_type_checkbox_chevron: Locator;
   readonly short_project_title_text_chevron: Locator;
@@ -50,21 +39,15 @@ export default class SearchProjectsPage {
   readonly tableRows: Locator;
   readonly chief_investigator_name_label: Locator;
   readonly chief_investigator_name_fieldset: Locator;
-  // readonly date_submitted_from_date_fieldset: Locator;
-  // readonly date_submitted_to_date_fieldset: Locator;
   readonly short_project_title_fieldset: Locator;
   readonly sponsor_organisation_jsdisabled_result_hint_label: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_labels: Locator;
   readonly sponsor_organisation_jsdisabled_narrow_down_label: Locator;
   readonly sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
-  // readonly date_submitted_to_date_error: Locator;
   readonly lead_nation_checkbox_hint_label: Locator;
   readonly modification_type_checkbox_hint_label: Locator;
-  // readonly date_submitted_to_date_help_text: Locator;
-  // readonly date_submitted_from_date_help_text: Locator;
   readonly lead_nation_checkbox_selected_hint_label: Locator;
   readonly modification_type_checkbox_selected_hint_label: Locator;
-  // readonly date_submitted_from_date_error: Locator;
   readonly results_table: Locator;
   readonly participating_nation_label: Locator;
   readonly participating_nation_fieldset: Locator;
@@ -108,69 +91,6 @@ export default class SearchProjectsPage {
       .getByText(this.searchProjectsPageTestData.Search_Projects_Page.chief_investigator_name_label, {
         exact: true,
       });
-
-    // this.date_submitted_from_day_text_chevron = this.page
-    //   .getByRole('heading')
-    //   .getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_label, {
-    //     exact: true,
-    //   });
-    // this.date_submitted_from_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
-    //   has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_from_date_hint_text),
-    // });
-    // this.date_submitted_from_date_help_text = this.page.locator('#Search_FromDate-hint');
-    // this.date_submitted_to_date_help_text = this.page.locator('#Search_ToDate-hint');
-    // this.date_submitted_from_day_text = this.date_submitted_from_date_fieldset
-    //   .locator('.govuk-form-group', {
-    //     has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_day_label),
-    //   })
-    //   .getByRole('textbox');
-    // this.date_submitted_from_month_dropdown = this.date_submitted_from_date_fieldset
-    //   .locator('.govuk-form-group', {
-    //     has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_month_label),
-    //   })
-    //   .getByRole('combobox');
-    // this.date_submitted_from_year_text = this.date_submitted_from_date_fieldset
-    //   .locator('.govuk-form-group', {
-    //     has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_year_label),
-    //   })
-    //   .getByRole('textbox');
-    // this.date_submitted_from_date_error = this.page
-    //   .locator('.govuk-fieldset')
-    //   .locator('.govuk-form-group')
-    //   .filter({
-    //     hasText: this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_from_date_hint_text,
-    //   })
-    //   .locator('.govuk-error-message');
-    // this.date_submitted_to_day_text_chevron = this.page
-    //   .getByRole('heading')
-    //   .getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_label, {
-    //     exact: true,
-    //   });
-    // this.date_submitted_to_date_error = this.page
-    //   .locator('.govuk-fieldset')
-    //   .locator('.govuk-form-group')
-    //   .filter({
-    //     hasText: this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_to_date_hint_text,
-    //   })
-    //   .locator('.govuk-error-message');
-    // this.date_submitted_to_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
-    //   has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_to_date_hint_text),
-    // });
-    // this.date_submitted_to_day_text = this.date_submitted_to_date_fieldset
-    //   .locator('.govuk-form-group', {
-    //     has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_day_label),
-    //   })
-    //   .getByRole('textbox');
-    // this.date_submitted_to_month_dropdown = this.date_submitted_to_date_fieldset
-    //   .locator('.govuk-form-group', {
-    //     has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_month_label),
-    //   })
-    //   .getByRole('combobox');
-    // this.date_submitted_to_year_text = this.date_submitted_to_date_fieldset
-    //   .locator('.govuk-form-group', {
-    //     has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.date_submitted_year_label),
-    //   })
-    //   .getByRole('textbox');
     this.lead_nation_label = this.page
       .getByRole('heading', { level: 2 })
       .getByText(this.searchProjectsPageTestData.Search_Projects_Page.lead_nation_label, { exact: true });
@@ -203,40 +123,6 @@ export default class SearchProjectsPage {
       .getByText(this.searchProjectsPageTestData.Search_Projects_Page.lead_nation_label, {
         exact: true,
       });
-    // this.modification_type_label = this.page
-    //   .getByRole('heading', { level: 2 })
-    //   .getByText(this.searchProjectsPageTestData.Search_Projects_Page.modification_type_label, {
-    //     exact: true,
-    //   });
-    // this.modification_type_fieldset = this.modification_type_label
-    //   .locator('..')
-    //   .locator('..')
-    //   .locator('.govuk-fieldset')
-    //   .locator('.govuk-form-group', {
-    //     has: this.page.getByText(this.searchProjectsPageTestData.Search_Projects_Page.modification_type_hint_text),
-    //   });
-    // this.modification_type_checkbox_hint_label = this.modification_type_label
-    //   .locator('..')
-    //   .locator('..')
-    //   .locator('.govuk-fieldset')
-    //   .locator('.govuk-form-group')
-    //   .getByText(
-    //     this.searchProjectsPageTestData.Search_Projects_Page.Advanced_Filters_Hint_Labels
-    //       .modification_type_checkbox_hint_label,
-    //     { exact: true }
-    //   );
-    // this.modification_type_checkbox_selected_hint_label = this.modification_type_label
-    //   .locator('..')
-    //   .locator('..')
-    //   .locator('.govuk-fieldset')
-    //   .locator('.govuk-form-group')
-    //   .getByText(this.searchProjectsPageTestData.Search_Projects_Page.selected_checkboxes_hint_label);
-    // this.modification_type_checkbox = this.modification_type_fieldset.getByRole('checkbox');
-    // this.modification_type_checkbox_chevron = this.page
-    //   .getByRole('heading')
-    //   .getByText(this.searchProjectsPageTestData.Search_Projects_Page.modification_type_label, {
-    //     exact: true,
-    //   });
     this.participating_nation_label = this.page
       .getByRole('heading', { level: 2 })
       .getByText(this.searchProjectsPageTestData.Search_Projects_Page.participating_nation_label, {

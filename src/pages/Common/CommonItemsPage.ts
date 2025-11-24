@@ -1755,9 +1755,9 @@ export default class CommonItemsPage {
     const irasIdsAsNumbers = irasIds.map((id) => Number.parseInt(id));
     let sortedNumbers: number[];
     if (sortDirection.toLowerCase() === 'ascending') {
-      sortedNumbers = irasIdsAsNumbers.sort((a, b) => a - b);
+      sortedNumbers = irasIdsAsNumbers.toSorted((a, b) => a - b);
     } else {
-      sortedNumbers = irasIdsAsNumbers.sort((a, b) => b - a);
+      sortedNumbers = irasIdsAsNumbers.toSorted((a, b) => b - a);
     }
     // Convert back to strings
     return sortedNumbers.map((num) => num.toString());
@@ -1786,10 +1786,7 @@ export default class CommonItemsPage {
   async getActualListValuesShortProjectTitle(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
     const actualListValues: string[] = [];
     for (const row of await tableBodyRows.all()) {
-      const actualListValue = (await row.getByRole('cell').nth(columnIndex).textContent()).replaceAll(/\n|\t/g, '');
-      // const actualListValue = confirmStringNotNull(
-      //   await row.getByRole('cell').nth(columnIndex).textContent()
-      // ).replaceAll(/\n|\t/g, '');
+      const actualListValue = (await row.getByRole('cell').nth(columnIndex).textContent()).replaceAll(/[\n\t]/g, '');
       actualListValues.push(actualListValue);
     }
     return actualListValues;
