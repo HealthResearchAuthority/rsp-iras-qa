@@ -479,6 +479,11 @@ export default class ModificationsCommonPage {
       modificationsCommonPageTestData.Nhs_Resource_Implications.includes(dataset.specific_change_dropdown)
     ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+    } else if (
+      affectsNhs &&
+      modificationsCommonPageTestData.Ranking_Category.new_site.includes(dataset.specific_change_dropdown)
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_new_site;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {

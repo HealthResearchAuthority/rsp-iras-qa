@@ -270,14 +270,16 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
     And I can see the 'With sponsor' status displayed for all documents in the table
     Examples:
-      | Changes                                            | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_No  |
-      | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
-      | Multiple_Changes_Reviewable_Set_Three              | Nhs_Involvement_Yes |
-      | Multiple_Changes_Reviewable_Set_Three              | Nhs_Involvement_No  |
+      | Changes                                                          | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One               | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One               | Nhs_Involvement_No  |
+      | Other_Minor_Change_To_Project_Management                         | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two               | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two               | Nhs_Involvement_No  |
+      | Multiple_Changes_Reviewable_Set_Three                            | Nhs_Involvement_Yes |
+      | Multiple_Changes_Reviewable_Set_Three                            | Nhs_Involvement_No  |
+      | Multiple_Changes_Participating_Organisations_Reviewable_Set_Four | Nhs_Involvement_Yes |
+      | Multiple_Changes_Participating_Organisations_Reviewable_Set_Four | Nhs_Involvement_No  |
 
   @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @rsp-5342 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496_5285 @fail
   Scenario Outline: Validate that user can create and submit non reviewable modifications
@@ -361,20 +363,24 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I can see the 'With sponsor' status displayed for all documents in the table
 
     Examples:
-      | Changes                                                          | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
-      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_Yes |
-      | Multiple_Changes_Non_Reviewable_Set_One                          | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
-      | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
-      | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
-      | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
+      | Changes                                                           | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One            | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One            | Nhs_Involvement_No  |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two            | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two            | Nhs_Involvement_No  |
+      | Multiple_Changes_Non_Reviewable_Set_One                           | Nhs_Involvement_Yes |
+      | Multiple_Changes_Non_Reviewable_Set_One                           | Nhs_Involvement_No  |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability  | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability  | Nhs_Involvement_No  |
+      | Change_Of_Sponsor_legal_Representative                            | Nhs_Involvement_Yes |
+      | Modification_To_Add_Administrative_Details                        | Nhs_Involvement_Yes |
+      | Modification_To_Add_Administrative_Details                        | Nhs_Involvement_No  |
+      | Multiple_Changes_Non_Reviewable_Set_Two                           | Nhs_Involvement_Yes |
+      | Multiple_Changes_Non_Reviewable_Set_Two                           | Nhs_Involvement_No  |
+      | Multiple_Changes_Participating_Organisations_Non_Reviewable_Three | Nhs_Involvement_Yes |
+      | Multiple_Changes_Participating_Organisations_Non_Reviewable_Three | Nhs_Involvement_No  |
+      | Multiple_Changes_Participating_Organisations_Non_Reviewable_Four  | Nhs_Involvement_Yes |
+      | Multiple_Changes_Participating_Organisations_Non_Reviewable_Four  | Nhs_Involvement_No  |
 
   @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5342 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496_5285 @fail
   Scenario Outline: Validate that user can create modifications for reviewable and non reviewable modifications
