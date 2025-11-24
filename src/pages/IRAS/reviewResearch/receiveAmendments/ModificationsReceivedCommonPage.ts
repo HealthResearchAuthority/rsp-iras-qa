@@ -1,12 +1,14 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReceivedCommonPagePageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_received_common_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
+import * as commonTestData from '../../../../resources/test_data/common/common_data.json';
 
 //Declare Page Objects
 export default class ModificationsReceivedCommonPage {
   readonly page: Page;
   readonly modificationsReceivedCommonPagePageTestData: typeof modificationsReceivedCommonPagePageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
+  readonly commonTestData: typeof commonTestData;
   private _days_since_submission_from_filter: number;
   private _days_since_submission_to_filter: number;
   readonly days_since_submission_from_text: Locator;
@@ -15,16 +17,21 @@ export default class ModificationsReceivedCommonPage {
   readonly days_since_submission_hint_label: Locator;
   readonly days_since_submission_to_separator: Locator;
   readonly days_since_submission_suffix_label: Locator;
+  readonly pageHeading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.modificationsReceivedCommonPagePageTestData = modificationsReceivedCommonPagePageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
+    this.commonTestData = commonTestData;
     this._days_since_submission_from_filter = 0;
     this._days_since_submission_to_filter = 0;
 
     //Locators
+    this.pageHeading = this.page
+      .getByRole('heading', { level: 1 })
+      .getByText(this.commonTestData.modification_details_page_heading);
     this.days_since_submission_from_text = this.page.getByTestId('Search.FromDaysSinceSubmission');
     this.days_since_submission_filter_input = this.page
       .locator('.search-filter-section__content')
@@ -265,31 +272,63 @@ export default class ModificationsReceivedCommonPage {
     let columnIndex: number;
     switch (columnName.toLowerCase()) {
       case 'modification id':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 1;
         } else {
           columnIndex = 0;
         }
         break;
       case 'short project title':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 2;
         } else {
           columnIndex = 1;
         }
         break;
       case 'date submitted':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 3;
         } else {
           columnIndex = 2;
         }
         break;
       case 'days since submission':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 4;
         } else {
           columnIndex = 3;
+        }
+        break;
+      case 'study-wide reviewer':
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
+          columnIndex = 5;
+        } else {
+          columnIndex = 4;
+        }
+        break;
+      case 'status':
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
+          columnIndex = 6;
+        } else {
+          columnIndex = 5;
         }
         break;
       case 'modification type':
@@ -327,5 +366,9 @@ export default class ModificationsReceivedCommonPage {
         throw new Error(`${columnName} is not a valid option`);
     }
     return columnIndex;
+  }
+
+  async assertOnModificationDetailsPage() {
+    await expect.soft(this.pageHeading).toBeVisible();
   }
 }

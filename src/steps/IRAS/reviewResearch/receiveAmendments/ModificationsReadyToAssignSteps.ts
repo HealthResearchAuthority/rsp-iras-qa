@@ -131,15 +131,15 @@ When(
       dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
     }
     const modificationId = dataset['search_input_text'];
-    // const modificationRecord: string[] = [];
+    const modificationRecord: string[] = [];
     await modificationsReadyToAssignPage.page.locator(`[id^="${modificationId}"]`).nth(0).check();
-    // const shortProjectTitle = await modificationsReadyToAssignPage.page
-    //   .locator(`[id^="${modificationId}"]`)
-    //   .nth(0)
-    //   .locator('../../..')
-    //   .getByRole('strong')
-    //   .nth(0)
-    //   .textContent();
+    const shortProjectTitle = await modificationsReadyToAssignPage.page
+      .locator(`[id^="${modificationId}"]`)
+      .nth(0)
+      .locator('../../..')
+      .getByRole('strong')
+      .nth(0)
+      .textContent();
     const modificationIdValue = confirmStringNotNull(
       await modificationsReadyToAssignPage.page
         .locator(`[id^="${modificationId}"]`)
@@ -148,7 +148,8 @@ When(
         .nth(0)
         .textContent()
     );
-    // modificationRecord.push(modificationId + ':' + shortProjectTitle);
+    modificationRecord.push(modificationIdValue + ':' + shortProjectTitle);
+    await modificationsReadyToAssignPage.setSelectedModificationsIdTitle(modificationRecord);
     await modificationsReadyToAssignPage.setSelectedModifications(modificationIdValue);
   }
 );
@@ -194,7 +195,7 @@ Then(
 When(
   'I can see previously assigned modification is displayed in {string} with status {string} and reviewer {string}',
   async (
-    { modificationsReadyToAssignPage, selectStudyWideReviewerPage },
+    { modificationsReadyToAssignPage, selectStudyWideReviewerPage, myModificationsTasklistPage },
     pageValue: string,
     statusValue: string,
     datasetName: string
@@ -212,5 +213,7 @@ When(
       const modificationStatus = modificationRow.locator('td', { hasText: `${statusValue}` });
       await expect.soft(modificationStatus).toBeVisible();
     }
+    const irasId = modificationId.toString().split('/')[0];
+    await myModificationsTasklistPage.saveModificationId(irasId);
   }
 );

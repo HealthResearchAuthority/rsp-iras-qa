@@ -27,7 +27,7 @@ Then(
     } else {
       sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect(actualList).toEqual(sortedList);
+    expect.soft(actualList).toEqual(sortedList);
   }
 );
 

@@ -29,12 +29,12 @@ Then(
       userDetailsdataset.first_name_text +
       ' ' +
       userDetailsdataset.last_name_text;
-    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
-      expectedConfirmationHeader
-    );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
-      validationLabelsDataset.disable_confirmation_body_label
-    );
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedConfirmationHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
 

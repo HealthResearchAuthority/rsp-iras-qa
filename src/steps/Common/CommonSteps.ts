@@ -61,6 +61,8 @@ When(
       chooseARecordTypeToSearchPage,
       teamManagerDashboardPage,
       searchProjectsPage,
+      projectOverviewPage,
+      modificationsReceivedCommonPage,
     },
     page: string
   ) => {
@@ -169,6 +171,13 @@ When(
       case 'Search_Projects_Page':
         await searchProjectsPage.assertOnSearchProjectsPage();
         break;
+      case 'Project_Overview_Page':
+        await projectOverviewPage.assertOnProjectOverviewPage();
+        break;
+      case 'Modification_Details_Page':
+        await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
+        break;
+
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -1046,6 +1055,7 @@ Given(
           await accessDeniedPage.assertOnAccessDeniedPage();
           break;
         case 'My_Modifications_Tasklist_Page':
+          await myModificationsTasklistPage.page.context().addCookies(authState.cookies);
           await myModificationsTasklistPage.goto();
           await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
           break;

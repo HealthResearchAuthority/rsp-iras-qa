@@ -8,6 +8,7 @@ export default class ModificationsReadyToAssignPage {
   readonly modificationsReadyToAssignPageTestData: typeof modificationsReadyToAssignPageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
   private _modification_record: string;
+  private _modification_id_title: string[];
   readonly modifications_tasklist_link: Locator;
   readonly short_project_title_column_label: Locator;
   readonly modification_id_column_label: Locator;
@@ -42,6 +43,7 @@ export default class ModificationsReadyToAssignPage {
     this.modificationsReadyToAssignPageTestData = modificationsReadyToAssignPageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
     this._modification_record = '';
+    this._modification_id_title = [];
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
@@ -118,6 +120,14 @@ export default class ModificationsReadyToAssignPage {
 
   async setSelectedModifications(value: string): Promise<void> {
     this._modification_record = value;
+  }
+
+  async getSelectedModificationsIdTitle(): Promise<string[]> {
+    return this._modification_id_title;
+  }
+
+  async setSelectedModificationsIdTitle(value: string[]): Promise<void> {
+    this._modification_id_title = value;
   }
 
   //Page Methods

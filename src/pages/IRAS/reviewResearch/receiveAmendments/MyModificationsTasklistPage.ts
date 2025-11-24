@@ -1,6 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as myModificationsTasklistPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/my_modifications_tasklist_page_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
+import path from 'node:path';
+import * as fse from 'fs-extra';
+import { returnDataFromJSON } from '../../../../utils/UtilFunctions';
+const pathToTestDataJson =
+  './src/resources/test_data/iras/reviewResearch/receiveAmendments/my_modifications_tasklist_page_data.json';
 
 //Declare Page Objects
 export default class MyModificationsTasklistPage {
@@ -120,5 +125,22 @@ export default class MyModificationsTasklistPage {
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.title);// Temporarily commented out due to title mismatch
+  }
+
+  async saveModificationId(modificationId: string) {
+    const filePath = path.resolve(pathToTestDataJson);
+    await this.updateModificationIdTestDataJson(filePath, modificationId);
+  }
+
+  async updateModificationIdTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await returnDataFromJSON(filePath);
+        data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating modification id to testdata json file:`);
+      }
+    })();
   }
 }

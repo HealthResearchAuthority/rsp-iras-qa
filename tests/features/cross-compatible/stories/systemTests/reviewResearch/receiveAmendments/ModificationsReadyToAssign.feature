@@ -445,7 +445,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can see the modifications assigned from WFC to SWR are now visible in my task list for '<Modification_Id>'
+        Then I can see the modifications assigned from WFC or TM to SWR are now visible in my task list with status 'Review in progress'
 
         Examples:
             | Valid_Iras_Id                       | Modification_Id                                                    |

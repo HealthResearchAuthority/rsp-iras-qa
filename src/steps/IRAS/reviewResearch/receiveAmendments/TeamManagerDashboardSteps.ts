@@ -53,3 +53,35 @@ Then(
     await teamManagerDashboardPage.saveModificationId(modificationId.toString(), modificationCount);
   }
 );
+
+Then(
+  'I capture the modification id of {string} where the lead nation is the country linked to the {string} with status {string} and SWR {string}',
+  async (
+    { teamManagerDashboardPage, selectStudyWideReviewerPage },
+    modificationCount: string,
+    user: string,
+    status: string,
+    datasetName: string
+  ) => {
+    let countValue: string;
+    let leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
+    if (leadNation === 'Northern Ireland') {
+      leadNation = 'Northern_Ireland';
+    }
+    if (modificationCount === 'Single' || modificationCount === 'Partial') {
+      countValue = '=';
+    } else {
+      countValue = '>';
+    }
+
+    const dataset = selectStudyWideReviewerPage.selectStudywideReviewerPageData.Study_Wide_Reviewer[datasetName];
+    const swrName = dataset['study_wide_reviewer_dropdown'];
+    const irasId = await teamManagerDashboardPage.sqlGetIrasIdByLeadNationAndStatusCountSWR(
+      leadNation,
+      status,
+      countValue,
+      swrName
+    );
+    await teamManagerDashboardPage.saveIrasId(irasId.toString(), modificationCount);
+  }
+);

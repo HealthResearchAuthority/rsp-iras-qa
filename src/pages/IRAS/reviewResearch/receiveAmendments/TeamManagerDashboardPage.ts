@@ -214,6 +214,59 @@ ORDER BY NationQuery.CreatedDate DESC;
     return queryResult.recordset.map((row) => row.IrasId);
   }
 
+  async sqlGetIrasIdByLeadNationAndStatusCountSWR(
+    lead_nation: string,
+    status: string,
+    countValue: string,
+    swrName: string
+  ) {
+    const option = 'project_record_answer_option_lead_nation_' + lead_nation.toLowerCase();
+    const leadNationOption = teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page[option];
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(`
+      SELECT TOP 1   
+      NationQuery.ModificationIdentifier,
+    NationQuery.IrasId,
+    ProjectRecordAnswers.Response,
+    NationQuery.CreatedDate,
+    NationQuery.[Status],
+    NationQuery.ReviewerName
+FROM (
+    SELECT
+        ProjectModifications.ModificationIdentifier,
+        ProjectModifications.CreatedDate,
+        ProjectModifications.[Status],
+         ProjectModifications.ReviewerName,
+        ProjectRecords.Id,
+        ProjectRecords.IrasId,
+        ProjectRecordAnswers.ProjectRecordId,
+        ProjectRecordAnswers.QuestionId,
+        ProjectRecordAnswers.SelectedOptions,
+        ProjectRecordAnswers.Response,
+        ProjectRecords.[Status] AS ProjectRecordStatus,
+        COUNT(*) OVER (PARTITION BY ProjectRecords.IrasId) AS IrasIdCount
+    FROM ProjectModifications
+    INNER JOIN ProjectRecords
+        ON ProjectRecords.Id = ProjectModifications.ProjectRecordId
+    INNER JOIN ProjectRecordAnswers
+        ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+    WHERE
+        ProjectRecordAnswers.QuestionId = 'IQA0005' AND
+        ProjectRecordAnswers.SelectedOptions ='${leadNationOption}' AND
+        ProjectRecords.[Status] = 'Active' AND
+        ProjectModifications.[Status] = '${status}' AND ProjectModifications.ReviewerName = '${swrName}'
+) AS NationQuery
+INNER JOIN ProjectRecordAnswers
+    ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
+WHERE
+    ProjectRecordAnswers.QuestionId = 'IQA0002'
+    AND NationQuery.IrasIdCount ${countValue} 1
+ORDER BY NationQuery.CreatedDate DESC;
+`);
+    await sqlConnection.close();
+    return queryResult.recordset.map((row) => row.IrasId);
+  }
+
   async saveModificationId(modificationId: string, countval: string) {
     await this.setModificationId(modificationId);
     const filePath = path.resolve(pathToTestDataJson);
@@ -230,6 +283,33 @@ ORDER BY NationQuery.CreatedDate DESC;
           data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 3);
         } else if (countval === 'Multi') {
           data.Search_Queries.Existing_IRAS_ID_Multi.search_input_text = updateVal;
+        }
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating modification id to testdata json file:`);
+      }
+    })();
+  }
+
+  async saveIrasId(irasId: string, countval: string) {
+    // await this.setModificationId(irasId);
+    const filePath = path.resolve(pathToTestDataJson);
+    await this.updateModificationIdTestDataJson(filePath, irasId, countval);
+  }
+
+  async updateIrasIdTestDataJson(filePath: string, updateVal: string, countval: string) {
+    (async () => {
+      try {
+        const data = await returnDataFromJSON(filePath);
+        if (countval === 'Single') {
+          data.Search_Queries.IRAS_ID_Study_Wide_Reviewer_Date_Range_Single.search_input_text = updateVal;
+        } else if (countval === 'Partial') {
+          data.Search_Queries.IRAS_ID_Study_Wide_Reviewer_Date_Range_Partial.search_input_text = updateVal.substring(
+            0,
+            3
+          );
+        } else if (countval === 'Multi') {
+          data.Search_Queries.IRAS_ID_Study_Wide_Reviewer_Date_Range_Multi.search_input_text = updateVal;
         }
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {
