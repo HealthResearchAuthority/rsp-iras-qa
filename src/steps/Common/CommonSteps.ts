@@ -271,6 +271,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
   } else if (pageKey === 'Modification_Post_Submission_Page' && linkKey === 'Documents') {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
+  } else if (pageKey === 'Modification_Post_Submission_Page' && linkKey === 'History') {
+    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
   } else {
     await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
@@ -448,7 +450,15 @@ Then(
 
 Then(
   'I capture the current time for {string}',
-  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage, sponsorOrganisationProfilePage }, page: string) => {
+  async (
+    {
+      auditHistoryReviewBodyPage,
+      auditHistoryUserPage,
+      sponsorOrganisationProfilePage,
+      modificationPostSubmissionPage,
+    },
+    page: string
+  ) => {
     const currentTime = await getTimeFormatted();
     switch (page) {
       case 'Audit_History_Review_Body_Page':
@@ -459,6 +469,9 @@ Then(
         break;
       case 'Sponsor_Organisation_Profile_Page':
         await sponsorOrganisationProfilePage.setUpdatedTime(currentTime);
+        break;
+      case 'Modification_Audit_History__Page':
+        await modificationPostSubmissionPage.setUpdatedTime(currentTime);
         break;
       default:
         throw new Error(`${page} is not a valid option`);
