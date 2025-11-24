@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
 const { Given, When, Then } = createBdd(test);
-import { confirmArrayNotNull } from '../../utils/UtilFunctions';
+import { confirmArrayNotNull, confirmStringNotNull } from '../../utils/UtilFunctions';
 
 When(
   'I fill the search input for searching {string} with {string} as the search query',
@@ -97,3 +97,18 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
     expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThanOrEqual(1);
   }
 });
+
+Then(
+  'I fill the search input with the search key {string}',
+  async ({ commonItemsPage, projectDetailsIRASPage, modificationsCommonPage }, searchKey: string) => {
+    let searchKeyValue: string | null;
+    if (searchKey.toLocaleLowerCase() === 'project id') {
+      searchKeyValue = confirmStringNotNull(await projectDetailsIRASPage.getUniqueIrasId());
+    } else if (searchKey.toLocaleLowerCase() === 'modification id') {
+      searchKeyValue = confirmStringNotNull(await modificationsCommonPage.getModificationID());
+    } else if (searchKey.toLocaleLowerCase() === 'short project title') {
+      searchKeyValue = confirmStringNotNull(await projectDetailsIRASPage.getShortProjectTitle());
+    }
+    await commonItemsPage.search_text.fill(searchKeyValue);
+  }
+);

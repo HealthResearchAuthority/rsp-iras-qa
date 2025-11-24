@@ -177,7 +177,7 @@ Feature: Sponsor Workspace
     And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
-  @rsp-5190 @ReviewableModificationSponsorAuthorised
+  @ReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the reviewable modifications
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -267,7 +267,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
+  @ReviewableModificationSponsorNotAuthorised
   Scenario Outline: Validate that sponsor can authorise the reviewable modifications
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -360,8 +360,8 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @rsp-5190 @ValidateModificationListPage
-  Scenario: I validate the modification list as a sponsor
+  @rsp-5190 @ValidateModificationListPageSortingPagination
+  Scenario: Verify that a sponsor user can access the modification authorization list page, view all modification records, apply sorting on the list, and navigate through records using pagination.
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'

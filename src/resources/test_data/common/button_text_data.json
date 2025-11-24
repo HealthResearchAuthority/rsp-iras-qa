@@ -211,7 +211,10 @@
     "Save_Changes": "Save changes"
   },
   "Project_Overview_Page": {
-    "Create_New_Modification": "Create new modification"
+    "Create_New_Modification": "Create new modification",
+    "Modification_Type": "Modification type",
+    "Review_Type": "Review type",
+    "Category": "Category"
   },
   "Add_Document_Modifications_Page": {
     "Save_Continue": "Save and continue",

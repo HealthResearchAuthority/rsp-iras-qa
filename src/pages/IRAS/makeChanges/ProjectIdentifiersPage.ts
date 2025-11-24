@@ -21,11 +21,13 @@ export default class ProjectIdentifiersPage {
   readonly primary_sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_min_error_message: Locator;
   readonly primary_sponsor_organisation_filled_text: Locator;
+  private _updated_time: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.projectIdentifiersPageTestData = projectIdentifiersPageTestData;
+    this._updated_time = '';
 
     //Locators
     this.pageHeading = this.page.getByTestId('title');
@@ -60,5 +62,13 @@ export default class ProjectIdentifiersPage {
   async assertOnProjectIdentifiersPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.projectIdentifiersPageTestData.Project_Identifiers_Page.heading);
+  }
+
+  async getUpdatedTime(): Promise<string> {
+    return this._updated_time;
+  }
+
+  async setUpdatedTime(value: string): Promise<void> {
+    this._updated_time = value;
   }
 }

@@ -187,7 +187,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Changes                           | New_Changes                              | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408_5408
+  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @rsp-5573 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408_5408
   Scenario Outline: Validate that user can create and submit reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -215,37 +215,37 @@ Feature: Create Modification- This feature file help an applicant to complete th
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes page
-    # And I validate the change details are displayed as per the '<Changes>' dataset
+    And I validate the change details are displayed as per the '<Changes>' dataset
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
-    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     And I capture the page screenshot
     Then I can see the project overview page
-    # And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+    And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     Then I validate overall modification ranking on post approval tab
-    # And I click on the modification id hyperlink in the post approval tab
-    # Then I can see the review all changes page
-    # And I capture the page screenshot
-    # And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate the change details are displayed as per the '<Changes>' dataset
+    And I click on the modification id hyperlink in the post approval tab
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    And I validate the individual and overall ranking of changes on the relevant modification page
+    And I validate the change details are displayed as per the '<Changes>' dataset
 
     Examples:
-      | Changes                                  | Research_Locations  |
-      # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_No  |
-      | Other_Minor_Change_To_Project_Management | Nhs_Involvement_Yes |
-      # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_Yes |
-      # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
-      | Multiple_Changes_Reviewable_Set_Three    | Nhs_Involvement_Yes |
-      | Multiple_Changes_Reviewable_Set_Three    | Nhs_Involvement_No  |
+      | Changes                                            | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_No  |
+      | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
+      | Multiple_Changes_Reviewable_Set_Three              | Nhs_Involvement_Yes |
+      | Multiple_Changes_Reviewable_Set_Three              | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
+  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @rsp-5573 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496 @run
   Scenario Outline: Validate that user can create and submit non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -282,6 +282,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I capture the page screenshot
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    Then I validate overall modification ranking on post approval tab
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
     And I click on the modification id hyperlink in the post approval tab
@@ -344,6 +345,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     And I capture the page screenshot
     Then I can see the project overview page
+    Then I validate overall modification ranking on post approval tab
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'

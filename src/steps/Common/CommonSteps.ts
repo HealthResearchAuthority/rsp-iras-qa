@@ -458,7 +458,16 @@ Then(
 
 Then(
   'I capture the current time for {string}',
-  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage, sponsorOrganisationProfilePage }, page: string) => {
+  async (
+    {
+      auditHistoryReviewBodyPage,
+      auditHistoryUserPage,
+      sponsorOrganisationProfilePage,
+      projectIdentifiersPage,
+      reviewYourAnswersPage,
+    },
+    page: string
+  ) => {
     const currentTime = await getTimeFormatted();
     switch (page) {
       case 'Audit_History_Review_Body_Page':
@@ -469,6 +478,12 @@ Then(
         break;
       case 'Sponsor_Organisation_Profile_Page':
         await sponsorOrganisationProfilePage.setUpdatedTime(currentTime);
+        break;
+      case 'Project_Identifier_Page':
+        await projectIdentifiersPage.setUpdatedTime(currentTime);
+        break;
+      case 'Review_Answers_Page':
+        await reviewYourAnswersPage.setUpdatedTime(currentTime);
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -1424,7 +1439,10 @@ When(
   async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
     const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
-    const testNum = await getRandomNumber(0, rowCount - 1);
+    let testNum = 0;
+    if (rowCount > 1) {
+      testNum = await getRandomNumber(0, rowCount - 1);
+    }
     const fieldLocator = commonItemsPage.tableBodyRows
       .nth(testNum)
       .getByRole('cell')

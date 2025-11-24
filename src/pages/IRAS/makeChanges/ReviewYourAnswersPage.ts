@@ -50,12 +50,14 @@ export default class ReviewYourAnswersPage {
   readonly primary_sponsor_organisation_text: Locator;
   readonly primary_sponsor_organisation_change_link: Locator;
   readonly primary_sponsor_orgainisation_enter_link: Locator;
+  private _updated_time: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.reviewYourAnswersPageTestData = reviewYourAnswersPageTestData;
     this.linkTextData = linkTextData;
+    this._updated_time = '';
 
     //Locators
     this.pageHeading = this.page
@@ -254,5 +256,13 @@ export default class ReviewYourAnswersPage {
     return await removeUnwantedWhitespace(
       await page[key].getByRole('link').evaluate((el) => el.firstChild.textContent)
     );
+  }
+
+  async getUpdatedTime(): Promise<string> {
+    return this._updated_time;
+  }
+
+  async setUpdatedTime(value: string): Promise<void> {
+    this._updated_time = value;
   }
 }

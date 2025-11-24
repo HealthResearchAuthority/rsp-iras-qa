@@ -21,7 +21,10 @@
     "participating_nations": "Participating nations",
     "nhs_hsc_organisations": "NHS / HSC organisations",
     "lead_nation": "Lead nation",
-    "maxPagesToVisit": 2
+    "maxPagesToVisit": 2,
+    "event_description_project_draft": "Project record draft started",
+    "event_description_project_created": "Project record created",
+    "audit_modification_id": "Not applicable"
   },
   "Project_URL": {
     "Test_Project": "projectoverview/projectdetails?projectRecordId=20250905085329",
@@ -160,10 +163,10 @@
       "date_submitted_to_year_text": "2025",
       "modification_type_radio": ["Modification of an important detail"]
     },
-  "Advanced_Filter_Status_Only": {
+    "Advanced_Filter_Status_Only": {
       "status_radio": ["In draft"]
     },
-  "Advanced_Filter_Submitted_Date_Field_Only": {
+    "Advanced_Filter_Submitted_Date_Field_Only": {
       "date_submitted_from_day_text": "11",
       "date_submitted_from_month_dropdown": "September",
       "date_submitted_from_year_text": "2025",
@@ -171,10 +174,10 @@
       "date_submitted_to_month_dropdown": "November",
       "date_submitted_to_year_text": "2025"
     },
-  "Advanced_Filter_Modification_Type_Only": {
+    "Advanced_Filter_Modification_Type_Only": {
       "modification_type_radio": ["Minor modification"]
     },
-  "Invalid_Date_Range_To_Before_From": {
+    "Invalid_Date_Range_To_Before_From": {
       "date_submitted_from_day_text": "3",
       "date_submitted_from_month_dropdown": "July",
       "date_submitted_from_year_text": "2025",
@@ -182,12 +185,12 @@
       "date_submitted_to_month_dropdown": "January",
       "date_submitted_to_year_text": "2000"
     },
-  "Invalid_Date_From": {
+    "Invalid_Date_From": {
       "date_submitted_from_day_text": "",
       "date_submitted_from_month_dropdown": "July",
       "date_submitted_from_year_text": "2025"
     },
-  "Invalid_Date_To": {
+    "Invalid_Date_To": {
       "date_submitted_to_day_text": "3",
       "date_submitted_to_month_dropdown": "January",
       "date_submitted_to_year_text": "9"
