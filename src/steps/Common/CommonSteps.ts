@@ -10,7 +10,13 @@ import {
   writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import {
+  confirmArrayNotNull,
+  confirmStringNotNull,
+  getAuthState,
+  getTimeFormatted,
+  getRandomNumber,
+} from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import * as fs from 'node:fs';
 import path from 'node:path';
@@ -37,8 +43,21 @@ When(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
-      selectStudyWideReviewerPage,
       myModificationsTasklistPage,
+      manageSponsorOrganisationPage,
+      setupNewSponsorOrganisationPage,
+      checkAddUserSponsorOrganisationPage,
+      searchAddUserSponsorOrganisationPage,
+      sponsorOrganisationProfilePage,
+      viewEditUserProfilePage,
+      userListSponsorOrganisationPage,
+      selectStudyWideReviewerPage,
+      accessDeniedPage,
+      profileCommonPage,
+      profileSettingsPage,
+      editYourProfilePage,
+      completeYourProfilePage,
+      checkYourProfilePage,
     },
     page: string
   ) => {
@@ -68,7 +87,7 @@ When(
         await manageUsersPage.assertOnManageUsersPage();
         break;
       case 'Review_Body_User_List_Page':
-        await userListReviewBodyPage.assertOnUserListReviewBodyPage();
+        await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
         break;
       case 'Search_Add_User_Review_Body_Page':
         await searchAddUserReviewBodyPage.assertOnSearchAddUserReviewBodyPage();
@@ -97,6 +116,46 @@ When(
         break;
       case 'Select_Study_Wide_Reviewer_Page':
         await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
+        break;
+      case 'Manage_Sponsor_Organisations_Page':
+        await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
+        break;
+      case 'Setup_New_Sponsor_Organisation_Page':
+        await setupNewSponsorOrganisationPage.assertOnSetupNewSponsorOrganisationsPage();
+        break;
+      case 'Check_Add_User_Sponsor_Org_Page':
+        await checkAddUserSponsorOrganisationPage.assertOnCheckAddUserSponsorOrganisationPage();
+        break;
+      case 'Search_Add_User_Sponsor_Org_Page':
+        await searchAddUserSponsorOrganisationPage.assertOnSearchAddUserSponsorOrganisationPage();
+        break;
+      case 'Sponsor_Organisation_Profile_Page':
+        await sponsorOrganisationProfilePage.assertOnSponsorOrganisationProfilePage();
+        break;
+      case 'View_Edit_User_Profile_Page':
+        await viewEditUserProfilePage.assertOnViewEditUserProfilePage();
+        break;
+      case 'Sponsor_Org_User_List_Page':
+        await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage(commonItemsPage);
+        break;
+      case 'Access_Denied_Page':
+        await accessDeniedPage.assertOnAccessDeniedPage();
+        break;
+      case 'Profile_Settings_Page':
+        await profileSettingsPage.assertOnProfileSettingsPage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Edit_Your_Profile_Page':
+        await editYourProfilePage.assertOnEditProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Complete_Your_Profile_Page':
+        await completeYourProfilePage.assertOnCompleteProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Check_Your_Profile_Page':
+        await checkYourProfilePage.assertOnCheckProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -163,22 +222,24 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+  let button: Locator;
   if (
     (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
-    (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview')
+    (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview') ||
+    (pageKey === 'Setup_New_Sponsor_Organisation_Page' && buttonKey === 'Save_Continue')
   ) {
-    await commonItemsPage.govUkButton
+    button = commonItemsPage.govUkButton
       .getByText(buttonValue)
       .or(commonItemsPage.genericButton.getByText(buttonValue))
-      .first()
-      .click();
+      .first();
   } else {
-    await commonItemsPage.govUkButton
+    button = commonItemsPage.govUkButton
       .getByText(buttonValue, { exact: true })
       .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first()
-      .click();
+      .first();
   }
+  await commonItemsPage.page.waitForTimeout(500);
+  await button.click();
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
@@ -192,31 +253,31 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
   ).toBeVisible();
 });
 
-Given(
-  'I click the {string} link on the {string}',
-  async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
-    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
-    const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
-    if (pageKey === 'Progress_Bar') {
-      await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
-    } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
-      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
-    } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
-      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
-    } else if (linkKey.includes('_Filter_Panel')) {
-      await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
-    } else if (
-      (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
-      linkKey === 'Back_To_Users'
-    ) {
-      await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (noOfLinksFound > 1) {
-      await commonItemsPage.govUkLink.getByText(linkValue).first().click();
-    } else {
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
-    }
+Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
+  if (pageKey === 'Progress_Bar') {
+    await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
+  } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
+    await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
+  } else if (linkKey.includes('_Filter_Panel')) {
+    await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
+  } else if (
+    (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
+    linkKey === 'Back_To_Users'
+  ) {
+    await commonItemsPage.govUkLink.getByText(linkValue).click();
+  } else if (noOfLinksFound > 1 && linkKey != 'Back') {
+    await commonItemsPage.govUkLink.getByText(linkValue).first().click();
+  } else if (
+    (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
+    (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details' || linkKey === 'Documents')
+  ) {
+    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
+  } else {
+    await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
-);
+});
 
 Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
   const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
@@ -390,14 +451,17 @@ Then(
 
 Then(
   'I capture the current time for {string}',
-  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage }, page: string) => {
-    const currentTime = await getCurrentTimeFormatted();
+  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage, sponsorOrganisationProfilePage }, page: string) => {
+    const currentTime = await getTimeFormatted();
     switch (page) {
       case 'Audit_History_Review_Body_Page':
         await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
         break;
       case 'Audit_History_User_Page':
         await auditHistoryUserPage.setUpdatedTime(currentTime);
+        break;
+      case 'Sponsor_Organisation_Profile_Page':
+        await sponsorOrganisationProfilePage.setUpdatedTime(currentTime);
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -426,6 +490,14 @@ Then(
       myModificationsTasklistPage,
       sponsorReferencePage,
       projectIdentifiersPage,
+      setupNewSponsorOrganisationPage,
+      completeYourProfilePage,
+      editYourProfilePage,
+      addDocumentDetailsForSpecificDocumentModificationsPage,
+      projectIdentificationEnterReferenceNumbersPage,
+      contactDetailsModificationPage,
+      projectPersonnelChangeChiefInvestigatorPage,
+      sponsorCheckAndAuthorisePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -504,6 +576,45 @@ Then(
       errorMessageFieldDataset =
         sponsorReferencePage.sponsorReferencePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = sponsorReferencePage;
+    } else if (pageKey === 'Setup_New_Sponsor_Organisation_Page') {
+      errorMessageFieldDataset =
+        setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = commonItemsPage;
+    } else if (pageKey == 'Complete_Your_Profile_Page') {
+      errorMessageFieldDataset =
+        completeYourProfilePage.completeYourProfilePageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = completeYourProfilePage;
+    } else if (pageKey == 'Edit_Your_Profile_Page') {
+      errorMessageFieldDataset =
+        editYourProfilePage.editYourProfilePageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = completeYourProfilePage;
+    } else if (pageKey == 'Add_Document_Details_For_Specific_Document_Modifications_Page') {
+      errorMessageFieldDataset =
+        addDocumentDetailsForSpecificDocumentModificationsPage
+          .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = addDocumentDetailsForSpecificDocumentModificationsPage;
+    } else if (pageKey == 'Project_Identification_Enter_Reference_Numbers_Page') {
+      errorMessageFieldDataset =
+        projectIdentificationEnterReferenceNumbersPage.projectIdentificationEnterReferenceNumbersPageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = projectIdentificationEnterReferenceNumbersPage;
+    } else if (pageKey == 'Contact_Details_Modification_Page') {
+      errorMessageFieldDataset =
+        contactDetailsModificationPage.contactDetailsModificationPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = contactDetailsModificationPage;
+    } else if (pageKey == 'Project_Personnel_Change_Chief_Investigator_Page') {
+      errorMessageFieldDataset =
+        projectPersonnelChangeChiefInvestigatorPage.projectPersonnelChangeChiefInvestigatorModificationPageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = projectPersonnelChangeChiefInvestigatorPage;
+    } else if (pageKey == 'Sponsor_Check_And_Authorise_Page') {
+      errorMessageFieldDataset =
+        sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = sponsorCheckAndAuthorisePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -523,6 +634,7 @@ Then(
     if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
       for (const key in errorMessageFieldDataset) {
         if (Object.hasOwn(errorMessageFieldDataset, key)) {
+          const expectedMessage = errorMessageFieldDataset[key];
           let fieldErrorMessagesActualValues: any;
           if (pageKey == 'Review_Your_Answers_Page') {
             expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
@@ -546,14 +658,24 @@ Then(
               const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
               await expect(element).toBeInViewport();
             }
+          } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
+            let actualMessage = confirmStringNotNull(
+              await commonItemsPage.sponsor_organisation_jsdisabled_min_error_message.textContent()
+            );
+            if (actualMessage.includes('Error: ')) {
+              actualMessage = actualMessage.replace('Error: ', '');
+            }
+            expect.soft(actualMessage).toEqual(expectedMessage);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+            await expect(element).toBeInViewport();
           } else {
             fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
             if (fieldErrorMessagesActualValues.includes('Error: ')) {
               fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
             }
-            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+            expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
             const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-            await expect(element).toBeInViewport();
+            await expect.soft(element).toBeInViewport();
           }
         }
       }
@@ -569,7 +691,19 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    {
+      commonItemsPage,
+      reviewBodyProfilePage,
+      createReviewBodyPage,
+      createUserProfilePage,
+      editReviewBodyPage,
+      checkSetupSponsorOrganisationPage,
+      checkAddUserSponsorOrganisationPage,
+      manageSponsorOrganisationPage,
+      loginPage,
+      modificationsCommonPage,
+      projectDetailsIRASPage,
+    },
     inputType: string
   ) => {
     let searchValue: string;
@@ -580,12 +714,43 @@ When(
       case 'name of the new review body':
         searchValue = await createReviewBodyPage.getUniqueOrgName();
         break;
+      case 'timestamp of the edited review body':
+        searchValue = await editReviewBodyPage.getUniqueOrgTimestamp();
+        break;
+      case 'name of the newly added sponsor organisation':
+        searchValue = await checkSetupSponsorOrganisationPage.getOrgName();
+        break;
+      case 'name of the previously added sponsor organisation':
+        searchValue = await manageSponsorOrganisationPage.findExistingSponsorOrganisations();
+        await manageSponsorOrganisationPage.saveExistingSponsorOrganisation(searchValue);
+        break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();
+        break;
+      case 'an active review body name':
+        await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus('Active');
+        searchValue = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'a disabled review body name':
+        await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus('Disabled');
+        searchValue = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'email of the newly added user in the selected sponsor organisation':
+        searchValue = await checkAddUserSponsorOrganisationPage.getUserEmail();
+        break;
+      case 'automation sponsor email':
+        searchValue = loginPage.loginPageTestData.Sponsor_User.username;
+        break;
+      case 'modification id':
+        searchValue = await modificationsCommonPage.getModificationID();
+        break;
+      case 'iras id':
+        searchValue = await projectDetailsIRASPage.getUniqueIrasId();
         break;
       default:
         searchValue = inputType;
     }
+    await commonItemsPage.setSearchKey(searchValue);
     await commonItemsPage.search_text.fill(searchValue);
   }
 );
@@ -641,9 +806,9 @@ When(
     const currentPageLink = commonItemsPage.pagination
       .getByRole('link', { name: currentPageLabel, exact: true })
       .first();
-    await expect(currentPageLink).toHaveAttribute('aria-current');
+    await expect.soft(currentPageLink).toHaveAttribute('aria-current');
     const currentPageLinkHref = await currentPageLink.getAttribute('href');
-    expect(currentUrl).toContain(currentPageLinkHref);
+    expect.soft(currentUrl).toContain(currentPageLinkHref);
     await commonItemsPage.previous_button.click();
   }
 );
@@ -661,27 +826,12 @@ When(
         );
       } else if (fieldKey === 'Full_Name') {
         await userListReviewBodyPage.setSearchQueryFullNameByPosition(position, fieldKey, commonItemsPage);
-        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
+        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position, commonItemsPage);
       } else if (fieldKey === 'Organisation_Name') {
         const orgList = await manageReviewBodiesPage.getReviewBodyListByPosition(position, commonItemsPage);
         await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
         searchKey = await manageReviewBodiesPage.getSearchQueryOrgName(position);
       }
-      await commonItemsPage.setSearchKey(searchKey);
-      await commonItemsPage.search_text.fill(searchKey);
-    } else {
-      throw new Error(`There are no items in list to search`);
-    }
-  }
-);
-
-When(
-  'I enter the {string} as the search query into the search field',
-  async ({ userListReviewBodyPage, commonItemsPage }, searchKey: string) => {
-    if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
-      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
-      const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
-      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
       await commonItemsPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {
@@ -700,6 +850,7 @@ Given(
       createApplicationPage,
       systemAdministrationPage,
       manageUsersPage,
+      createUserProfilePage,
       manageReviewBodiesPage,
       userProfilePage,
       reviewBodyProfilePage,
@@ -708,6 +859,10 @@ Given(
       modificationsReadyToAssignPage,
       approvalsPage,
       myModificationsTasklistPage,
+      manageSponsorOrganisationPage,
+      profileCommonPage,
+      profileSettingsPage,
+      editYourProfilePage,
     },
     page: string
   ) => {
@@ -732,6 +887,10 @@ Given(
       case 'Manage_Users_Page':
         await manageUsersPage.goto();
         await manageUsersPage.assertOnManageUsersPage();
+        break;
+      case 'Create_User_Profile_Page':
+        await createUserProfilePage.goto();
+        await createUserProfilePage.assertOnCreateUserProfilePage();
         break;
       case 'Manage_Review_Bodies_Page':
         await manageReviewBodiesPage.goto();
@@ -770,6 +929,20 @@ Given(
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
         break;
+      case 'Manage_Sponsor_Organisations_Page':
+        await manageSponsorOrganisationPage.goto();
+        await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
+        break;
+      case 'Profile_Settings_Page':
+        await profileSettingsPage.goto();
+        await profileSettingsPage.assertOnProfileSettingsPage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Edit_Your_Profile_Page':
+        await editYourProfilePage.goto();
+        await editYourProfilePage.assertOnEditProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -781,6 +954,7 @@ Given(
   async (
     {
       homePage,
+      loginPage,
       systemAdministrationPage,
       accessDeniedPage,
       myResearchProjectsPage,
@@ -791,50 +965,57 @@ Given(
     page: string,
     user: string
   ) => {
-    const authStatePath = getAuthState(user);
-    const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
-    switch (page) {
-      case 'Home_Page':
-        await homePage.page.context().addCookies(authState.cookies);
-        await homePage.goto();
-        await homePage.assertOnHomePage();
-        break;
-      case 'System_Administration_Page':
-        await systemAdministrationPage.page.context().addCookies(authState.cookies);
-        await systemAdministrationPage.goto();
-        await systemAdministrationPage.assertOnSystemAdministrationPage();
-        break;
-      case 'System_Administration_Access_Denied_Page':
-        await systemAdministrationPage.page.context().addCookies(authState.cookies);
-        await systemAdministrationPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'Approvals_Access_Denied_Page':
-        await approvalsPage.page.context().addCookies(authState.cookies);
-        await approvalsPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'My_Research_Page':
-        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
-        await myResearchProjectsPage.goto();
-        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
-        break;
-      case 'My_Research_Access_Denied_Page':
-        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
-        await myResearchProjectsPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'My_Modifications_Tasklist_Page':
-        await myModificationsTasklistPage.goto();
-        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
-        break;
-      case 'Modifications_Tasklist_Page':
-        await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
-        await modificationsReadyToAssignPage.goto();
-        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
+    if (user == 'One_Login_Account_User') {
+      await homePage.page.context().clearCookies();
+      await homePage.goto();
+      await homePage.startNowBtn.click();
+      await loginPage.assertOnLoginPage();
+    } else {
+      const authStatePath = getAuthState(user);
+      const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
+      switch (page) {
+        case 'Home_Page':
+          await homePage.page.context().addCookies(authState.cookies);
+          await homePage.goto();
+          await homePage.assertOnHomePage();
+          break;
+        case 'System_Administration_Page':
+          await systemAdministrationPage.page.context().addCookies(authState.cookies);
+          await systemAdministrationPage.goto();
+          await systemAdministrationPage.assertOnSystemAdministrationPage();
+          break;
+        case 'System_Administration_Access_Denied_Page':
+          await systemAdministrationPage.page.context().addCookies(authState.cookies);
+          await systemAdministrationPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'Approvals_Access_Denied_Page':
+          await approvalsPage.page.context().addCookies(authState.cookies);
+          await approvalsPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'My_Research_Page':
+          await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+          await myResearchProjectsPage.goto();
+          await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+          break;
+        case 'My_Research_Access_Denied_Page':
+          await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+          await myResearchProjectsPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'My_Modifications_Tasklist_Page':
+          await myModificationsTasklistPage.goto();
+          await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+          break;
+        case 'Modifications_Tasklist_Page':
+          await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
+          await modificationsReadyToAssignPage.goto();
+          await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+          break;
+        default:
+          throw new Error(`${page} is not a valid option`);
+      }
     }
   }
 );
@@ -878,7 +1059,11 @@ Then(
       maxPagesToValidate = totalPages;
     }
     let totalItems: number;
-    if (pagename === 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+    if (
+      pagename === 'My_Research_Projects_Page' ||
+      pagename === 'Post_Approval_Page' ||
+      pagename === 'Sponsor_Org_User_List_Page'
+    ) {
       totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
     } else {
       totalItems = await commonItemsPage.getTotalItems();
@@ -902,7 +1087,11 @@ Then(
       validatePageUntil = totalPages;
     }
     let totalItems: number;
-    if (pagename == 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+    if (
+      pagename == 'My_Research_Projects_Page' ||
+      pagename === 'Post_Approval_Page' ||
+      pagename === 'Sponsor_Org_User_List_Page'
+    ) {
       totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
     } else {
       totalItems = await commonItemsPage.getTotalItems();
@@ -917,7 +1106,14 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, commonItemsPage },
+    {
+      searchModificationsPage,
+      manageReviewBodiesPage,
+      manageUsersPage,
+      commonItemsPage,
+      myResearchProjectsPage,
+      projectOverviewPage,
+    },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -937,6 +1133,14 @@ Then(
       Manage_Users_Page: {
         dataset: manageUsersPage.manageUsersPageTestData.Advanced_Filters,
         labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
+      },
+      My_Research_Page: {
+        dataset: myResearchProjectsPage.myResearchProjectsPageTestData.Advanced_Filters,
+        labels: myResearchProjectsPage.myResearchProjectsPageTestData.My_Research_Projects_Page,
+      },
+      Post_Approval_Page: {
+        dataset: projectOverviewPage.projectOverviewPageTestData.Advanced_Filters,
+        labels: projectOverviewPage.projectOverviewPageTestData.Post_Approval_Page_Label_Texts,
       },
     };
     const { dataset, labels } = pageMap[pageKey];
@@ -962,7 +1166,11 @@ Then(
           await validateFilter(key, async (k) =>
             commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
-        } else if (key.startsWith('date_submitted') || key.startsWith('date_last_logged_in')) {
+        } else if (
+          key.startsWith('date_submitted') ||
+          key.startsWith('date_last_logged_in') ||
+          key.startsWith('date_project_created')
+        ) {
           if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
             await validateFilter(key, async (k) =>
               commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
@@ -981,7 +1189,7 @@ Then(
 Then(
   'I validate {string} displayed on {string} in advanced filters',
   async (
-    { commonItemsPage, searchModificationsPage },
+    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
@@ -993,6 +1201,14 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = searchModificationsPage;
+    } else if (pageKey == 'My_Research_Page') {
+      errorMessageFieldDataset =
+        myResearchProjectsPage.myResearchProjectsPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
+      page = myResearchProjectsPage;
+    } else if (pageKey === 'Post_Approval_Page') {
+      errorMessageFieldDataset =
+        projectOverviewPage.projectOverviewPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
+      page = projectOverviewPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
@@ -1011,14 +1227,37 @@ Then(
           const actualMessage = await searchModificationsPage.date_submitted_from_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
+          const actualMessage = await commonItemsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Created_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Created_To_Error'
+        ) {
+          const actualMessage = await myResearchProjectsPage.date_project_created_to_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Created_From_Error') {
           const actualMessage =
-            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+            await myResearchProjectsPage.date_project_created_from_date_error_messaage.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await projectOverviewPage.date_submitted_to_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_From_Error') {
+          const actualMessage = await projectOverviewPage.date_submitted_from_date_error_message.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else {
           throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
         }
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
+        if (key.includes('sponsor_organisation')) {
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, commonItemsPage);
+          await expect(element).toBeInViewport();
+        } else {
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
+        }
       }
     }
   }
@@ -1031,7 +1270,7 @@ Then(
     await commonItemsPage.upload_files_input.setInputFiles(documentPath);
     if (typeof documentPath === 'string') {
       const fileName = path.basename(documentPath);
-      await expect(commonItemsPage.page.getByText(fileName)).toBeVisible();
+      await expect(commonItemsPage.page.getByText(fileName).first()).toBeVisible();
     } else {
       await expect(
         commonItemsPage.page.getByText(
@@ -1047,18 +1286,18 @@ Then(
 );
 
 Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
-  expect(commonItemsPage.tableRows).not.toBeVisible();
-  await expect(commonItemsPage.search_results_count).toHaveText(
-    commonItemsPage.searchFilterResultsData.search_no_results_count
-  );
-  await expect(commonItemsPage.search_no_results_container).toBeVisible();
-  await expect(commonItemsPage.search_no_results_header).toBeVisible();
-  await expect(commonItemsPage.search_no_results_guidance_text).toBeVisible();
-  await expect(commonItemsPage.search_no_results_guidance_points).toBeVisible();
+  await expect.soft(commonItemsPage.tableRows).not.toBeVisible();
+  await expect
+    .soft(commonItemsPage.search_results_count)
+    .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+  await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
+  await expect.soft(commonItemsPage.search_no_results_header).toBeVisible();
+  await expect.soft(commonItemsPage.search_no_results_guidance_text).toBeVisible();
+  await expect.soft(commonItemsPage.search_no_results_guidance_points).toBeVisible();
   const actualBulletPoints = commonItemsPage.search_no_results_guidance_points.getByRole('listitem');
-  await expect(actualBulletPoints).toHaveText(
-    commonItemsPage.searchFilterResultsData.search_no_results_guidance_points
-  );
+  await expect
+    .soft(actualBulletPoints)
+    .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_guidance_points);
 });
 
 Then('I {string} see the advanced filters panel', async ({ commonItemsPage }, visibility: string) => {
@@ -1162,23 +1401,29 @@ When('I can see the date from and date to filters have the expected hint text', 
 });
 
 Then(
-  'Each of the short project titles displayed on the {string} are links',
-  async ({ commonItemsPage }, page: string) => {
-    let columnIndex: number;
-    switch (page) {
-      case 'My_Modifications_Tasklist_Page':
-        columnIndex = 1;
-        break;
-      case 'Modifications_Tasklist_Page':
-        columnIndex = 2;
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
-    }
+  'Each {string} displayed on the {string} is a link',
+  async ({ commonItemsPage, modificationsReceivedCommonPage }, columnName: string, page: string) => {
+    const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(page, columnName);
     for (const row of await commonItemsPage.tableBodyRows.all()) {
+      await row.getByRole('cell').nth(columnIndex).getByRole('link').highlight();
       const shortTitleTextLink = row.getByRole('cell').nth(columnIndex).getByRole('link');
       expect(shortTitleTextLink).toBeVisible();
     }
+  }
+);
+
+When(
+  'I click a {string} on the {string}',
+  async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
+    const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
+    const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
+    const testNum = await getRandomNumber(0, rowCount - 1);
+    const fieldLocator = commonItemsPage.tableBodyRows
+      .nth(testNum)
+      .getByRole('cell')
+      .nth(columnIndex)
+      .getByRole('link');
+    await fieldLocator.click();
   }
 );
 
@@ -1251,6 +1496,528 @@ Then(
         const element = await commonItemsPage.clickErrorSummaryLink(errorDataset, key, page);
         await expect(element).toBeInViewport();
       }
+    }
+  }
+);
+
+Then(
+  'I click the view edit link of the {string}',
+  async ({ manageReviewBodiesPage, manageSponsorOrganisationPage }, recordType: string) => {
+    if (recordType === 'newly created review body') {
+      const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
+      await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
+    } else if (
+      recordType === 'newly added sponsor organisation' ||
+      recordType === 'previously added sponsor organisation'
+    ) {
+      const createdSponsorOrgRow = await manageSponsorOrganisationPage.getSponsorOrgRow();
+      await createdSponsorOrgRow.locator(manageSponsorOrganisationPage.actionsLink).click();
+    }
+  }
+);
+
+Then(
+  'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
+  async ({ commonItemsPage }, sortListType: string, sortDirection: string, sortField: string, currentPage: string) => {
+    let sortedList: string[];
+    let columnIndex: number;
+    const lowerSortListType = sortListType.toLowerCase();
+    const lowerSortField = sortField.toLowerCase();
+    const lowerSortDirection = sortDirection.toLowerCase();
+    const lowerCurrentPage = currentPage.toLowerCase();
+    if (lowerSortListType === 'manage sponsor organisations' || lowerSortListType === 'manage review bodies') {
+      switch (lowerSortField) {
+        case 'organisation name':
+          columnIndex = 0;
+          break;
+        case 'country':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        default:
+          throw new Error(`${lowerSortField} is not a valid option`);
+      }
+      let actualList: string[] = [];
+      if (lowerSortField == 'country') {
+        const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+        for (const country of originalList) {
+          if (country.includes(',')) {
+            actualList.push(country.slice(0, country.indexOf(',')));
+          } else {
+            actualList.push(country);
+          }
+        }
+      } else {
+        actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+      }
+      if (lowerSortDirection == 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+        if (lowerSortField == 'status' && lowerCurrentPage == 'first') {
+          expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
+        }
+      } else {
+        sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+        if (lowerSortField == 'status' && lowerCurrentPage == 'first') {
+          expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
+        }
+      }
+      expect.soft(actualList).toEqual(sortedList);
+    }
+  }
+);
+
+Then(
+  'the system displays {string} matching the search criteria',
+  async ({ commonItemsPage }, searchListType: string) => {
+    if (searchListType.toLowerCase() === 'sponsor organisations' || searchListType.toLowerCase() === 'review bodies') {
+      const searchKey = await commonItemsPage.getSearchKey();
+      const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
+      const orgList = await commonItemsPage.getAllOrgNamesFromTheTable();
+      const orgListAfterSearch: string[] = confirmArrayNotNull(orgList.get('searchResultValues'));
+      const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+        orgListAfterSearch,
+        searchTerms
+      );
+      expect.soft(searchResult).toBeTruthy();
+      expect.soft(orgListAfterSearch).toEqual(searchResult);
+    }
+  }
+);
+
+When(
+  'I enter the {string} of the {string} user shown on the current {string} users list, into the search field',
+  async ({ userListReviewBodyPage, commonItemsPage }, fieldKey: string, position: string, orgType: string) => {
+    if (orgType === 'review body' || orgType === 'sponsor organisation') {
+      if ((await commonItemsPage.userListTableRows.count()) >= 2) {
+        let searchKey: string = '';
+        if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
+          searchKey = await userListReviewBodyPage.getSearchQueryFNameLNameEmail(position, fieldKey, commonItemsPage);
+        } else if (fieldKey === 'Full_Name') {
+          searchKey = await userListReviewBodyPage.getSearchQueryFullName(position, commonItemsPage);
+        }
+        const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+        const userValues: any = userListBeforeSearch.get('searchResultValues');
+        await commonItemsPage.setUserListBeforeSearch(userValues);
+        await commonItemsPage.setSearchKey(searchKey);
+        commonItemsPage.search_text.fill(searchKey);
+      } else {
+        throw new Error(`There are no items in list to search`);
+      }
+    }
+  }
+);
+
+Then(
+  'I can see the user list page of the {string}',
+  async (
+    {
+      userListReviewBodyPage,
+      reviewBodyProfilePage,
+      sponsorOrganisationProfilePage,
+      userListSponsorOrganisationPage,
+      commonItemsPage,
+    },
+    orgType: string
+  ) => {
+    if (orgType === 'review body') {
+      await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
+      const organisationName = await reviewBodyProfilePage.getOrgName();
+      await expect(userListReviewBodyPage.page_heading).toHaveText(
+        userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
+      );
+    } else if (orgType === 'sponsor organisation') {
+      await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage(commonItemsPage);
+      const organisationName = await sponsorOrganisationProfilePage.getOrgName();
+      await expect(userListSponsorOrganisationPage.page_heading).toHaveText(
+        userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
+          .heading_prefix_label + organisationName
+      );
+    }
+    if ((await commonItemsPage.userListTableRows.count()) >= 2) {
+      const userList = await commonItemsPage.getUsers();
+      const emailAddress: any = userList.get('emailAddressValues');
+      await commonItemsPage.setUserEmail(emailAddress);
+      const firstName: any = userList.get('firstNameValues');
+      await commonItemsPage.setUserFirstName(firstName);
+      const lastName: any = userList.get('lastNameValues');
+      await commonItemsPage.setUserLastName(lastName);
+      await commonItemsPage.setFirstName(firstName[0]);
+      await commonItemsPage.setLastName(lastName[0]);
+      await commonItemsPage.setEmail(emailAddress[0]);
+      if (await commonItemsPage.firstPage.isVisible()) {
+        await commonItemsPage.firstPage.click();
+      }
+    }
+  }
+);
+
+Then(
+  'I can see no users in the {string} with a message to add users to the {string}',
+  async ({ commonItemsPage }, orgTypeValOne: string, orgTypeValTwo: string) => {
+    if (
+      (orgTypeValOne && orgTypeValTwo) === 'review body' ||
+      (orgTypeValOne && orgTypeValTwo) === 'sponsor organisation'
+    ) {
+      expect(await commonItemsPage.userListTableRows.count()).toBe(0);
+    }
+  }
+);
+
+Then(
+  'I can see the user list of the selected {string} is sorted by default in the alphabetical order of the {string}',
+  async ({ commonItemsPage }, orgType: string, sortField: string) => {
+    let firstNameValues: any;
+    if (orgType === 'review body' || orgType === 'sponsor organisation') {
+      if (sortField.toLowerCase() === 'first name') {
+        firstNameValues = await commonItemsPage.getUserFirstName();
+      } else {
+        throw new Error(`${sortField} is not a valid option`);
+      }
+      const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      expect(firstNameValues).toEqual(sortedList);
+    }
+  }
+);
+
+Then(
+  'I can see the {string} list sorted byby {string} order of the {string} on the {string} page',
+  async (
+    { manageUsersPage, commonItemsPage },
+    listType: string,
+    sortDirection: string,
+    sortField: string,
+    currentPage: string
+  ) => {
+    let sortedUserList: string[];
+    let userColumnIndex: number;
+    if (listType === 'manage users' || listType === 'sponsor organisation users') {
+      switch (sortField.toLowerCase()) {
+        case 'first name':
+          userColumnIndex = 0;
+          break;
+        case 'last name':
+          userColumnIndex = 1;
+          break;
+        case 'email address':
+          userColumnIndex = 2;
+          break;
+        case 'status':
+          userColumnIndex = 3;
+          break;
+        case 'last logged in':
+          userColumnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+      const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, userColumnIndex);
+      if (sortField.toLowerCase() == 'last logged in') {
+        sortedUserList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+      } else if (sortDirection.toLowerCase() == 'ascending') {
+        sortedUserList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+        }
+      } else {
+        sortedUserList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+        }
+      }
+      expect.soft(actualList).toEqual(sortedUserList);
+    }
+  }
+);
+
+Then(
+  'I can see the {string} ui labels on the {string} profile page',
+  async (
+    { commonItemsPage, reviewBodyProfilePage, sponsorOrganisationProfilePage, viewEditUserProfilePage },
+    datasetName: string,
+    orgType: string
+  ) => {
+    const orgTypeMap: Record<string, { page: any; data: any }> = {
+      'manage review body': {
+        page: reviewBodyProfilePage,
+        data: reviewBodyProfilePage.reviewBodyProfilePageData,
+      },
+      'sponsor organisation': {
+        page: sponsorOrganisationProfilePage,
+        data: sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData,
+      },
+      'user in sponsor organisation': {
+        page: viewEditUserProfilePage,
+        data: viewEditUserProfilePage.viewEditUserProfilePageTestData,
+      },
+    };
+    const orgConfig = orgTypeMap[orgType];
+    if (orgConfig) {
+      const dataset = orgConfig.data[datasetName];
+      const page = orgConfig.page;
+      for (const key of Object.keys(dataset)) {
+        const labelVal = await commonItemsPage.getUiLabel(key, page);
+        expect.soft(labelVal).toBe(dataset[key]);
+      }
+    }
+  }
+);
+
+Then(
+  'the add users to {string} search has returned results with the {string}',
+  async ({ searchAddUserReviewBodyPage }, orgType: string, searchQueryName: string) => {
+    if (orgType === 'review body' || orgType === 'sponsor organisation') {
+      const searchQueryValue =
+        searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
+          searchQueryName
+        ]['search_input_text'];
+      const allResultRow = await searchAddUserReviewBodyPage.search_result_table_row.all();
+      switch (searchQueryName) {
+        case 'Existing_QA_User_First_Name':
+          for (const element of allResultRow) {
+            const firstNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_first_name);
+            await expect(firstNameTableCell).toContainText(searchQueryValue);
+          }
+          break;
+        case 'Existing_QA_User_Last_Name':
+          for (const element of allResultRow) {
+            const lastNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_last_name);
+            await expect(lastNameTableCell).toContainText(searchQueryValue);
+          }
+          break;
+        case 'Existing_QA_User_Full_Name':
+          for (const element of allResultRow) {
+            const firstNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_first_name);
+            const lastNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_last_name);
+            await expect(firstNameTableCell).toContainText(
+              searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries
+                .Existing_QA_User_First_Name['search_input_text']
+            );
+            await expect(lastNameTableCell).toContainText(
+              searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries
+                .Existing_QA_User_Last_Name['search_input_text']
+            );
+          }
+          break;
+        case 'Existing_QA_User_Email':
+          for (const element of allResultRow) {
+            const emailTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_email);
+            await expect(emailTableCell).toContainText(searchQueryValue);
+          }
+          break;
+        default:
+          throw new Error(`${searchQueryName} is not a valid option`);
+      }
+    }
+  }
+);
+
+When(
+  'I can see that the add users to {string} search page contains {string}',
+  async ({ searchAddUserReviewBodyPage, reviewBodyProfilePage }, orgType: string, searchResult: string) => {
+    if (orgType === 'review body' || orgType === 'sponsor organisation') {
+      if (searchResult.toLowerCase() == 'no_results') {
+        await expect(searchAddUserReviewBodyPage.no_search_results_heading).toBeVisible();
+        await expect(searchAddUserReviewBodyPage.no_search_results_guidance_text).toBeVisible();
+        await expect(searchAddUserReviewBodyPage.back_to_users_link).toBeVisible();
+        await expect(searchAddUserReviewBodyPage.manage_users_link).toBeVisible();
+        const expectedBackToUsersText = `${searchAddUserReviewBodyPage.linkTextData.Search_Add_User_Review_Body_Page.Back_To_Users}${await reviewBodyProfilePage.getOrgName()}`;
+        await expect(searchAddUserReviewBodyPage.back_to_users_link).toHaveText(expectedBackToUsersText);
+      } else {
+        const expectedTableHeadings =
+          searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body_Page
+            .search_table_headings;
+        await expect(searchAddUserReviewBodyPage.no_search_results_heading).not.toBeVisible();
+        await expect(searchAddUserReviewBodyPage.no_search_results_guidance_text).not.toBeVisible();
+        await expect(searchAddUserReviewBodyPage.back_to_users_link).not.toBeVisible();
+        await expect(searchAddUserReviewBodyPage.manage_users_link).not.toBeVisible();
+        await expect(searchAddUserReviewBodyPage.search_result_table).toBeVisible();
+        await expect(searchAddUserReviewBodyPage.search_result_table_header).toHaveText(expectedTableHeadings);
+        await searchAddUserReviewBodyPage.setUserFirstName(
+          confirmStringNotNull(
+            await searchAddUserReviewBodyPage.search_result_table_row
+              .first()
+              .locator(searchAddUserReviewBodyPage.search_result_table_first_name)
+              .textContent()
+          )
+        );
+        await searchAddUserReviewBodyPage.setUserLastName(
+          confirmStringNotNull(
+            await searchAddUserReviewBodyPage.search_result_table_row
+              .first()
+              .locator(searchAddUserReviewBodyPage.search_result_table_last_name)
+              .textContent()
+          )
+        );
+        await searchAddUserReviewBodyPage.setUserEmail(
+          confirmStringNotNull(
+            await searchAddUserReviewBodyPage.search_result_table_row
+              .first()
+              .locator(searchAddUserReviewBodyPage.search_result_table_email)
+              .textContent()
+          )
+        );
+        await searchAddUserReviewBodyPage.setUserStatus(
+          confirmStringNotNull(
+            await searchAddUserReviewBodyPage.search_result_table_row
+              .first()
+              .locator(searchAddUserReviewBodyPage.search_result_table_status)
+              .textContent()
+          )
+        );
+      }
+    }
+  }
+);
+
+Given(
+  'I see that the newly added user appears in the user list page for the {string}',
+  async ({ searchAddUserReviewBodyPage, commonItemsPage }, orgType: string) => {
+    if (orgType === 'review body' || orgType === 'sponsor organisation') {
+      await expect(commonItemsPage.userListTableBodyRows).toHaveCount(1);
+      await expect(commonItemsPage.first_name_value_first_row).toHaveText(
+        await searchAddUserReviewBodyPage.getUserFirstName()
+      );
+      await expect(commonItemsPage.last_name_value_first_row).toHaveText(
+        await searchAddUserReviewBodyPage.getUserLastName()
+      );
+      await expect(commonItemsPage.email_address_value_first_row).toHaveText(
+        await searchAddUserReviewBodyPage.getUserEmail()
+      );
+      await expect(commonItemsPage.status_value_first_row).toHaveText(
+        await searchAddUserReviewBodyPage.getUserStatus()
+      );
+    }
+  }
+);
+
+Given(
+  'I click the {string} link in the breadcrumbs on the {string}',
+  async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+    const noOfLinksFound = await commonItemsPage.govUkBreadCrumbsLink.getByText(linkValue).count();
+    if (noOfLinksFound > 1) {
+      await commonItemsPage.govUkLink.getByText(linkValue).first().click();
+    } else {
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+    }
+  }
+);
+
+Then(
+  'I can validate the {string} are displayed in the supporting documents table',
+  async (
+    {
+      commonItemsPage,
+      addDocumentDetailsForSpecificDocumentModificationsPage,
+      addDocumentDetailsModificationsPage,
+      modificationsCommonPage,
+    },
+    datasetName: string
+  ) => {
+    const dataset = commonItemsPage.documentUploadTestData[datasetName];
+    const originalUploadedFiles = dataset.map((path: string) => path.split('/').pop());
+    const expectedDocDetails =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Valid_Data_Fields;
+    const monthMap: Record<string, string> = {
+      January: 'Jan',
+      February: 'Feb',
+      March: 'Mar',
+      April: 'Apr',
+      May: 'May',
+      June: 'Jun',
+      July: 'Jul',
+      August: 'Aug',
+      September: 'Sep',
+      October: 'Oct',
+      November: 'Nov',
+      December: 'Dec',
+    };
+
+    const expectedDocDate = `${expectedDocDetails.sponsor_document_day_text} ${monthMap[expectedDocDetails.sponsor_document_month_dropdown]} ${expectedDocDetails.sponsor_document_year_text}`;
+    const documentRows = modificationsCommonPage.documentRows;
+    const rowCount = await documentRows.count();
+    const actualDocsInTable: string[] = [];
+
+    for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+      const actualDocType = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentTypeCell)
+        .innerText();
+      const actualDocName = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentNameCell)
+        .innerText();
+      const actualFileName = await documentRows.nth(rowIndex).locator(modificationsCommonPage.fileNameCell).innerText();
+      const actualDocVersion = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentVersionCell)
+        .innerText();
+      const actualDocDate = await documentRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentDateCell)
+        .innerText();
+      expect.soft(actualDocType).toBe(expectedDocDetails.document_type_dropdown);
+      expect.soft(actualDocVersion).toBe(expectedDocDetails.sponsor_document_version_text);
+      expect.soft(actualDocDate).toBe(expectedDocDate);
+      const actualUniqueDocNames = await addDocumentDetailsModificationsPage.getUniqueDocNames();
+      expect.soft(actualUniqueDocNames).toContain(actualDocName);
+
+      if (originalUploadedFiles.includes(actualFileName)) {
+        actualDocsInTable.push(actualFileName);
+      }
+    }
+    for (const doc of originalUploadedFiles) {
+      expect.soft(actualDocsInTable).toContain(doc);
+    }
+  }
+);
+
+Then(
+  'I can see the {string} status displayed for all documents in the table',
+  async ({ modificationsCommonPage, commonItemsPage }, status: string) => {
+    const documentStatus = await modificationsCommonPage.getModificationStatus(status);
+    const statusValues: string[] = [];
+    const rowsCount = await commonItemsPage.tableBodyRows.count();
+    for (let rowIndex = 0; rowIndex < rowsCount; rowIndex++) {
+      const statusColumnValue = await commonItemsPage.tableBodyRows
+        .nth(rowIndex)
+        .locator(modificationsCommonPage.documentStatusCell)
+        .innerText();
+      statusValues.push(statusColumnValue);
+    }
+    for (const value of statusValues) {
+      expect.soft(value).toBe(documentStatus);
+    }
+  }
+);
+
+Then(
+  'I can see {string} button {string} on the {string}',
+  async ({ commonItemsPage }, buttonKey: string, availability: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    if (availability.toLowerCase() === 'enabled') {
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeVisible();
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeEnabled();
+    } else if (availability.toLowerCase() === 'disabled') {
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeDisabled();
     }
   }
 );

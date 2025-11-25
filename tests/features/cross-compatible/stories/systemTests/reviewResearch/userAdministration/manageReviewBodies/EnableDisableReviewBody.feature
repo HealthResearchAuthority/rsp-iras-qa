@@ -8,7 +8,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     Then I can see the 'Create_Review_Body_Page'
 
-  @rsp-2573 @DisableReviewBody @fail
+  @rsp-2573 @DisableReviewBody @fail  @rsp-4381 @ActiveFilterRemainAppliedAfterDisableReviewBody
   Scenario Outline: Verify the user is able to disable a review body
     When I fill the new review body page using '<Add_Review_Body>'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -19,7 +19,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Enabled>' status
     When I click the view edit link
     And I capture the page screenshot
-    Then I can see the '<Disable_Label_Texts>' ui labels on the manage review body profile page
+    Then I can see the '<Disable_Label_Texts>' ui labels on the 'manage review body' profile page
     And I capture the page screenshot
     When I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
     Then I can see a 'Confirm' button on the 'Confirmation_Page'
@@ -30,6 +30,9 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I capture the page screenshot
     When I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
     Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Disabled>' status
     And I capture the page screenshot
 
@@ -60,7 +63,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
       | Add_Review_Body          | Navigation_Link | Disable_Label_Texts | Status_Enabled |
       | Valid_Data_In_All_Fields | Back            | Disable_Label_Texts | enabled        |
 
-  @rsp-2929 @EnableReviewBody @fail
+  @rsp-2929 @EnableReviewBody @fail @rsp-4381 @ActiveFilterRemainAppliedAfterEnableReviewBody
   Scenario Outline: Verify the user is able to enable a disabled review body
     When I fill the new review body page using '<Add_Review_Body>'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -75,7 +78,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Disabled>' status
     And I capture the page screenshot
     When I click the view edit link
-    Then I can see the '<Enable_Label_Texts>' ui labels on the manage review body profile page
+    Then I can see the '<Enable_Label_Texts>' ui labels on the 'manage review body' profile page
     And I capture the page screenshot
     When I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
     Then I can see a 'Confirm' button on the 'Confirmation_Page'
@@ -86,6 +89,9 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I capture the page screenshot
     When I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
     Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Enabled>' status
     And I capture the page screenshot
 

@@ -9,6 +9,7 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
   readonly pageLabels: Locator;
   readonly table: Locator;
   readonly rows: Locator;
+  readonly document_name_text: Locator;
   readonly document_type_dropdown: Locator;
   readonly sponsor_document_version_text: Locator;
   readonly sponsor_document_date_fieldset: Locator;
@@ -38,6 +39,14 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
       name: this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
         .Add_Document_Details_For_Specific_Document_Modifications_Page.document_type_dropdown_label,
     });
+    this.document_name_text = this.page
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+            .Add_Document_Details_For_Specific_Document_Modifications_Page.document_name_label
+        ),
+      })
+      .getByRole('textbox');
     this.sponsor_document_version_text = this.page
       .locator('.govuk-form-group', {
         has: this.page.getByText(
@@ -52,14 +61,7 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
           .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_label
       ),
     });
-    this.sponsor_document_day_text = this.sponsor_document_date_fieldset
-      .locator('.govuk-form-group', {
-        has: this.page.getByText(
-          this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
-            .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_day_label
-        ),
-      })
-      .getByRole('textbox');
+    this.sponsor_document_day_text = this.page.getByTestId('Questions[4].Day');
     this.sponsor_document_month_dropdown = this.sponsor_document_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(

@@ -1,7 +1,9 @@
 @RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression @BackStage
 Feature: User Administration: Create Manage Users
 
-    Background:
+
+    @RegressionTestCreateUserEvents @RevBodyUserListCleanup
+    Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
         Given I have navigated to the 'Home_Page'
         And I click the 'System_Administration' link on the 'Home_Page'
         And I can see the system administration home page
@@ -10,9 +12,6 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
-
-    @RegressionTestCreateUserEvents
-    Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -64,7 +63,7 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I capture the name of the newly added user in the user list page of the review body
         When I enter 'name of the newly created user' into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
@@ -72,12 +71,13 @@ Feature: User Administration: Create Manage Users
         Then the system displays search results matching the search criteria
 
         Examples:
-            | Add_User_Profile                                   | Field_Name | Organisation_Name                                                  | Advanced_Filters_Users                                                     | Search_Queries            | Advanced_Filters_Review_Bodies |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | Health Research Authority (HRA)                                    | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active      | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
-            | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | National Research Service Permissions Coordination Centre (NRSPCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Sco_Active     |
+            | Add_User_Profile                                   | Field_Name | Organisation_Name                                                  | Advanced_Filters_Users                                                     | Search_Queries      | Advanced_Filters_Review_Bodies |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | Health Research Authority (HRA)                                    | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active      | the new users email | Advanced_Filter_Eng_Active     |
+            | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | National Research Service Permissions Coordination Centre (NRSPCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | the new users email | Advanced_Filter_Sco_Active     |
 
     @RegressionTestCreateUserEvents
     Scenario Outline: Verify the user is able to create new user profiles with various roles like applicant or system administrator or team manager, with an audit history log
+        Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -119,6 +119,7 @@ Feature: User Administration: Create Manage Users
 
     @RegressionTestAddAnotherUser
     Scenario Outline: Verify the user is able to continue adding users via the link provided on the Confirmation screen
+        Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -144,9 +145,9 @@ Feature: User Administration: Create Manage Users
             | Add_User_Profile                                   | Add_Another_User_Profile                                   |
             | Valid_Data_In_All_Fields_Role_System_Administrator | Valid_Data_In_All_Fields_Role_System_Administrator_Another |
 
-    # order and role name is different>> when a role is unassigned(underscore)
-    @RegressionTestUnassignUserRoles @KNOWN-DEFECT-RSP-3938
+    @RegressionTestUnassignUserRoles @fail @KNOWN-DEFECT-RSP-5927
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
+        Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -189,6 +190,7 @@ Feature: User Administration: Create Manage Users
 
     @RegressionTestEnableDisableUserProfile
     Scenario Outline: Verify the user is able to disable, then re-enable a user profile, with an audit history log
+        Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -267,18 +269,19 @@ Feature: User Administration: Create Manage Users
 
     @RegressionTestCreateUserProfileBackLinks
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' back to system admin page via the 'Back' links
+        Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Check_Create_User_Profile_Page'
+        When I click the 'Back' button on the 'Check_Create_User_Profile_Page'
         Then I can see the add a new user profile page
         And I capture the page screenshot
         When I click the 'Back' link on the 'Create_User_Profile_Page'
         Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Manage_Users_Page'
+        When I click the 'System_Admin_Breadcrumb' link on the 'Manage_Users_Page'
         Then I can see the 'System_Administration_Page'
         And I capture the page screenshot
 
@@ -288,6 +291,7 @@ Feature: User Administration: Create Manage Users
 
     @RegressionTestCreateUserErrorMessagesInvalidData
     Scenario Outline: Validate relevant error messages are displayed for invalid data entry on the create user profile page
+        Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -314,6 +318,7 @@ Feature: User Administration: Create Manage Users
 
     @RegressionTestCreateUserErrorMessagesInvalidDataEmails
     Scenario Outline: Validate error messages are displayed for invalid data in the email address field of create user profile page
+        Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
@@ -326,4 +331,3 @@ Feature: User Administration: Create Manage Users
             | Invalid_Email_Data_Double_Dot                             | Incorrect_Format_Field_Email_Address_Error |
             | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | Incorrect_Format_Field_Email_Address_Error |
             | Invalid_Email_Data_Reserved_Domain                        | Incorrect_Format_Field_Email_Address_Error |
-

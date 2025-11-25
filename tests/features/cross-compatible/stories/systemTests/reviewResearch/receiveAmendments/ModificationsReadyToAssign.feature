@@ -243,17 +243,17 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can see the tasklist of modifications 'ready to assign' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist on the 'Modifications_Tasklist_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then I can see the tasklist of modifications 'ready to assign' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist on the 'Modifications_Tasklist_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-        And I can see the tasklist of modifications 'ready to assign' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist on the 'Modifications_Tasklist_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        And I can see the tasklist of modifications 'ready to assign' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist on the 'Modifications_Tasklist_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
 
         Examples:
             | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
@@ -305,6 +305,37 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Validation_Text | Navigation_Method |
             | Label_Texts     | page number       |
             | Label_Texts     | previous link     |
+
+    @ModificationsTasklistTitleLinksNav @jsEnabled @rsp-5046
+    Scenario: Verify back and short project title link navigation for modifications tasklist and select reviewer pages
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        And Each 'short project title' displayed on the 'Modifications_Tasklist_Page' is a link
+        When I click a 'short project title' on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the project overview page
+        When I click the 'Back' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        And I can see the 'Modifications_Tasklist_Page'
+        When I select check all checkbox on the current page and validate all checkboxes are checked
+        And I capture the page screenshot
+        And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the 'Select_Study_Wide_Reviewer_Page'
+        And Each 'short project title' displayed on the 'Select_Study_Wide_Reviewer_Page' is a link
+        When I click a 'short project title' on the 'Select_Study_Wide_Reviewer_Page'
+        And I capture the page screenshot
+        Then I can see the project overview page
+        When I click the 'Back' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        Then I can see the 'Modifications_Tasklist_Page'
+        And Each 'modification id' displayed on the 'Modifications_Tasklist_Page' is a link
+        When I click a 'modification id' on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the review all changes modifications page
+        When I click the 'Back' link on the 'Review_All_Changes_Page'
+        And I capture the page screenshot
+        Then I can see the 'Modifications_Tasklist_Page'
 
     @ModificationsTasklistRandomSelection @rsp-4105 @KNOWN-DEFECT-RSP-4971
     Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
@@ -371,6 +402,40 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
+    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+    Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page
+        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see the advanced filters panel
+        And I open each of the modification tasklist filters
+        And I capture the page screenshot
+        When I fill the 'my' modifications tasklist search and filter options with 'Date_From_Multi'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see active filters displayed
+        And I capture the page screenshot
+        Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
+        When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Modifications_Tasklist_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        And I 'can' see active filters displayed
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Modifications_Tasklist_Page'
+        Then I can see the approvals home page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the 'Modifications_Tasklist_Page'
+        And I 'cannot' see the advanced filters panel
+        And I capture the page screenshot
+
+        Examples:
+            | Validation_Text | Navigation_Method |
+            | Label_Texts     | page number       |
+            | Label_Texts     | next link         |
+
     # Need to integrate with modification creation process to have a fresh dataset for assignment
     # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
     @WFCAssignModificationSWR @rsp-4076 @rsp-4849 @skip
@@ -406,8 +471,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
 
-    # UI issues:- Page heading is not matching/Guidance text is missing
-    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5212
+    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849
     Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
         Given I have navigated to the 'My_Modifications_Tasklist_Page'
         Then I capture the page screenshot

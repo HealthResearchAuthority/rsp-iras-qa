@@ -8,7 +8,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Users_Page'
 
-    @VerifyValidSearchAndAdvancedFilterManageUser
+    @VerifyValidSearchAndAdvancedFilterManageUser @rsp-5250
     Scenario Outline: Verify the user is able to view the list of users by entering a valid first name, last name,email address selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
@@ -36,8 +36,9 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Empty_Search_Data           | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Empty_Search_Data           | Advanced_Filter_Last_Logged_In_From_Date_Only                                       |
             | Empty_Search_Data           | Advanced_Filter_Last_Logged_In_To_Date_Only                                         |
+            | Existing_QA_User_First_Name | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    @VerifySearchButtonClickAndAdvancedFilterManageUser
+    @VerifySearchButtonClickAndAdvancedFilterManageUser @rsp-5250
     Scenario Outline: Verify the user is able to view the list of users by entering valid first name, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
@@ -55,8 +56,9 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Search_Queries              | Advanced_Filters                                                                    |
             | Existing_QA_User_First_Name | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Empty_Search_Data           | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
+            | Existing_QA_User_First_Name | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    @VerifyApplyingFilterFirstAndSearch
+    @VerifyApplyingFilterFirstAndSearch @rsp-5250
     Scenario Outline: Verify the user can view the list of users by selecting advanced filters and click on apply filters button then entering valid first name and click on search button
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -85,6 +87,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Existing_QA_User_First_Name | Advanced_Filter_Eight                                                               |
             | Existing_QA_User_First_Name | Advanced_Filter_Nine                                                                |
             | Existing_QA_User_First_Name | Advanced_Filter_Ten                                                                 |
+            | Existing_QA_User_First_Name | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
     @ValidateLastLoggedInInvalidDateErrorMessageManageUser
     Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date
@@ -107,17 +110,20 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         Then the no search results found message is displayed
 
-    @VerifyNoResultsFoundInvalidSearchAdvancedFiltersManageUser
-    Scenario: Verify the user can see no matching results found message on click on apply filter button with invalid filter/search criteria
+    @VerifyNoResultsFoundInvalidSearchAdvancedFiltersManageUser @rsp-5250
+    Scenario Outline: Verify the user can see no matching results found message on click on apply filter button with invalid filter/search criteria
         When I enter 'Non_Existant_User_Data' into the search field for manage users page
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
-        Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All' in the 'Manage_Users_Page'
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot
         Then the no search results found message is displayed
+            | Advanced_Filters                                                                    |
+            | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
     @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFiltersManageUser
     Scenario: When javascript disabled verify the hint text for country advanced filters when user select multiple checkboxes
@@ -179,7 +185,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Seven                                                               |
             | Advanced_Filter_Nine                                                                |
 
-    @ValidateClearAllFilters
+    @ValidateClearAllFilters @rsp-5250
     Scenario: Validate clear all filters removes all active filters in mange users page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -196,8 +202,10 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Advanced_Filter_Last_Logged_In_From_Date_Only                                       |
             | Advanced_Filter_Last_Logged_In_To_Date_Only                                         |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    @RemoveAllActiveFiltersOneByOne  @iBossSecurityIssue @fail
+    # @iBossSecurityIssue @fail
+    @RemoveAllActiveFiltersOneByOne @rsp-5250
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -214,6 +222,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filters                                                                    | Advanced_Filters_Remove                                                             |
             | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Advanced_Filter_Two                                                                 | Advanced_Filter_Two_All                                                             |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
     @rsp-4418 @ValidateActiveReviewbodies
     Scenario Outline: Validate the review body checkbox in the advanced filters of manage users page incorporates all currently enabled review bodies from the manage review bodies page
@@ -267,8 +276,8 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
 
     # Few failures due to data issues- to be re executed once data issues are fixed(review body and country)
-    @rsp-4418 @ValidateFilters @DataIssues
-    Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters (Roles:-Studywide Reviewer,Workflow_Coordinator), and clicking the 'Apply filters' button
+    @rsp-4418 @rsp-5250 @ValidateFilters @DataIssues
+    Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters (Roles:-Studywide Reviewer,Workflow Coordinator,Sponsor), and clicking the 'Apply filters' button
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -288,8 +297,91 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filters                                                    |
             | Advanced_Filter_Country_No_Review_Body_No_Role_Studywide_Reviewer   |
             | Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor              |
 
-    @ValidateLastLoggedInInvalidDateErrorMessageManageUser @rsp-4819 
+    @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+    Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from mange user page
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Manage_Users_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Manage_Users_Page'
+        Then I can see the 'System_Administration_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
+        Then I can see the 'Manage_Users_Page'
+        And I 'cannot' see active filters displayed
+        And I capture the page screenshot
+
+        Examples:
+            | Navigation_Method | Advanced_Filters     |
+            | page number       | Advanced_Filter_Nine |
+
+    @rsp-4381 @ActiveFilterRemainAppliedAfterCreateNewUserProfile
+    Scenario Outline: Verify that the active filter remains applied after creating a new user profile with valid data
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        And I capture the page screenshot
+        Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+
+        Examples:
+            | Add_User_Profile                                   | Validation_Text_Manage_Users_List | Status_Enabled | Advanced_Filters     |
+            | Valid_Data_In_All_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Nine |
+
+    @rsp-4381 @ActiveFilterRemainAppliedAfterEditTheManageUser
+    Scenario Outline: Verify that the active filter remains applied after edit the manage user and save their changes
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I can see the user profile page
+        And I capture the page screenshot
+        When I click the change link against 'Title' on the user profile page
+        Then I can see the edit user profile page
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Edit_User_Profile_Page'
+        Then I can see the user profile page
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'User_Profile_Page'
+        Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+
+        Examples:
+            | Advanced_Filters     |
+            | Advanced_Filter_Nine |
+
+    @ValidateLastLoggedInInvalidDateErrorMessageManageUser @rsp-4819
     Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date in manage user page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Date_Submitted_Invalid_Data>'
@@ -298,19 +390,18 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         Then I validate '<Field_And_Summary_Error_Message>' displayed on advanced filters in 'Manage_Users_Page'
         And I capture the page screenshot
-       
+
         Examples:
-            | Date_Submitted_Invalid_Data                  | Field_And_Summary_Error_Message           |
-            | Last_Logged_In_To_Date_Before_From_Date      | Invalid_Date_Range_To_Before_From_Error   |
-            | Last_Logged_In_No_Month_From_Date            | Invalid_Date_From_Error                   | 
-            | Last_Logged_In_No_Day_From_Date              | Invalid_Date_From_Error                   |     
-            | Last_Logged_In_No_Year_From_Date             | Invalid_Date_From_Error                   |
-            | Last_Logged_In_No_Month_To_Date              | Invalid_Date_To_Error                     |
-            | Last_Logged_In_No_Day_To_Date                | Invalid_Date_To_Error                     |
-            | Last_Logged_In_No_Year_To_Date               | Invalid_Date_To_Error                     | 
-            | Last_Logged_In_Invalid_Year_Number_From_Date | Invalid_Date_From_Error                   | 
-            | Last_Logged_In_Invalid_Year_Number_To_Date   | Invalid_Date_To_Error                     |  
-            | Last_Logged_In_Invalid_Day_Number_To_Date    | Invalid_Date_To_Error                     | 
-            | Last_Logged_In_Invalid_Day_Letters_To_Date   | Invalid_Date_To_Error                     |    
-            | Last_Logged_In_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                     |
-   
+            | Date_Submitted_Invalid_Data                  | Field_And_Summary_Error_Message         |
+            | Last_Logged_In_To_Date_Before_From_Date      | Invalid_Date_Range_To_Before_From_Error |
+            | Last_Logged_In_No_Month_From_Date            | Invalid_Date_From_Error                 |
+            | Last_Logged_In_No_Day_From_Date              | Invalid_Date_From_Error                 |
+            | Last_Logged_In_No_Year_From_Date             | Invalid_Date_From_Error                 |
+            | Last_Logged_In_No_Month_To_Date              | Invalid_Date_To_Error                   |
+            | Last_Logged_In_No_Day_To_Date                | Invalid_Date_To_Error                   |
+            | Last_Logged_In_No_Year_To_Date               | Invalid_Date_To_Error                   |
+            | Last_Logged_In_Invalid_Year_Number_From_Date | Invalid_Date_From_Error                 |
+            | Last_Logged_In_Invalid_Year_Number_To_Date   | Invalid_Date_To_Error                   |
+            | Last_Logged_In_Invalid_Day_Number_To_Date    | Invalid_Date_To_Error                   |
+            | Last_Logged_In_Invalid_Day_Letters_To_Date   | Invalid_Date_To_Error                   |
+            | Last_Logged_In_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                   |

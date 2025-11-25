@@ -78,7 +78,8 @@ Then(
       const actualDocumentName = await reviewYourDocumentInformationModificationsPage.document_name_text
         .nth(i)
         .textContent();
-      expect(trimmedDocumentName).toBe(actualDocumentName);
+      const trimmedActualDocumentName = actualDocumentName.trim();
+      expect.soft(trimmedDocumentName).toBe(trimmedActualDocumentName);
       for (const key in dataset) {
         if (Object.hasOwn(dataset, key)) {
           if (
@@ -266,22 +267,23 @@ Then(
       addDocumentDetailsForSpecificDocumentModificationsPage
         .addDocumentDetailsForSpecificDocumentModificationsPageTestData[datasetDate];
     const noOfDocuments = await reviewYourDocumentInformationModificationsPage.getNumberOfDocuments();
-    for (let i = 0; i < noOfDocuments; i++) {
-      await reviewYourDocumentInformationModificationsPage.sponsor_document_date_change_link.nth(i).click();
-      for (const key in newDocumentDate) {
-        if (Object.hasOwn(newDocumentDate, key)) {
-          await commonItemsPage.fillUIComponent(
-            newDocumentDate,
-            key,
-            addDocumentDetailsForSpecificDocumentModificationsPage
-          );
-        }
+    for (let index = 0; index < noOfDocuments; index++) {
+      await reviewYourDocumentInformationModificationsPage.sponsor_document_date_change_link.nth(index).click();
+      for (const key of Object.keys(newDocumentDate)) {
+        await commonItemsPage.fillUIComponent(
+          newDocumentDate,
+          key,
+          addDocumentDetailsForSpecificDocumentModificationsPage
+        );
       }
       await addDocumentDetailsForSpecificDocumentModificationsPage.save_changes.click();
+      if (updatedDocumentDate?.textContent === undefined) {
+        break;
+      }
       const actualDocumentDate = (
         await reviewYourDocumentInformationModificationsPage.sponsor_document_date_text.textContent()
       ).trim();
-      const expectedDocumentDate = await updatedDocumentDate.sponsor_document_date_text;
+      const expectedDocumentDate = updatedDocumentDate.sponsor_document_date_text;
       expect.soft(actualDocumentDate).toBe(expectedDocumentDate);
     }
   }

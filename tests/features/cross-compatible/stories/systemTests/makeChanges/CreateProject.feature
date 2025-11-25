@@ -5,8 +5,8 @@ Feature: Create Amendment - Create Project
     Given I have navigated to the my research projects page
     And I can see the my research projects page
 
-  @rsp-1858 @rsp-1862
-  Scenario Outline: Validate user is able to amend a project using an iras id
+  @rsp-1858 @rsp-1862 @rsp-1903 @ValidateUserAbleToCreateProjectUsingIRAS
+  Scenario Outline: Validate user is able to create a project using an iras id
     And I can see the my research projects page
     And I capture the page screenshot
     When I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
@@ -19,12 +19,12 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     When I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
-    Then I can see the project details title page
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     And I capture the page screenshot
 
     Examples:
       | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Link |
-      | Label_Texts     | Create_Project_Record   | Start                    | Add_Project                   | Back            |
       | Label_Texts     | Create_Project_Record   | Start                    | Add_Project                   | Back            |
 
   @rsp-1858 @rsp-1860 @invalidIrasIdValidations
@@ -34,6 +34,7 @@ Feature: Create Amendment - Create Project
     And I fill the project details iras page with '<Project_Details_IRAS>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
     And I capture the page screenshot
 
@@ -49,6 +50,44 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Add_Project                   | Field_Error_Message                       |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Add_Project                   | Field_Error_Message                       |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Blank            | Add_Project                   | Field_Error_Message_Iras_Id_Mandatory     |
+
+  @rsp-5185 @IRASIDNotInHARPInvalid
+  Scenario Outline: Validate project not currently eligible message displayed when user enter iras id not in harp system
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I capture the page screenshot
+    Then I validate that the project not currently eligible to use the service page is displayed
+    And I capture the page screenshot
+    When I click the 'Return_To_IRAS_ID' button on the 'IRAS_ID_Error_Page'
+    Then I can see the project details iras page
+
+    Examples:
+      | Project_Details_IRAS |
+      | IRAS_ID_Not_In_HARP  |
+
+  @rsp-5185 @IRASIDAlreadyExistInvalid
+  Scenario: Validate project not currently eligible message displayed when user enter iras id not in harp system
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I capture the page screenshot
+    When I click the 'Home' link on the 'Banner'
+    When I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the existing iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I capture the page screenshot
+    Then I validate that the project record already exists page is displayed
+    And I capture the page screenshot
+    When I click the 'Return_To_IRAS_ID' button on the 'IRAS_ID_Error_Page'
+    Then I can see the project details iras page
 
   @rsp-1858
   Scenario Outline: Validate breadcrumb navigations in project details iras id page
@@ -70,6 +109,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     When I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I can see the project details title page
     Then I can see the '<Validation_Text>' ui labels on the project details title page
     And I validate the planned project end date '<Dropdown_Values>'
@@ -104,6 +144,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -131,6 +172,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill todays date for planned project end date in project details title page
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -147,6 +189,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I can see the project details title page
     And I cannot see a '<Navigation_Link>' link on the 'Project_Details_Title_Page'
     And I capture the page screenshot
@@ -178,6 +221,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -228,6 +272,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I can see the chief investigator page
@@ -272,6 +317,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I can see the chief investigator page
@@ -284,30 +330,33 @@ Feature: Create Amendment - Create Project
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Navigation_Link |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Back            |
 
-  @rsp-1901
+  @rsp-1901 @rsp-2922 @ValidateUserAbleToFillResearchLocationsPage
   Scenario Outline: Validate user is able to fill research locations page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
     When I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
+    And I capture the page screenshot
     Then I can see the '<Validation_Text>' ui labels on the research locations page
     Then I fill the research locations page with '<Research_Locations>'
-    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I validate the guidance content displayed based on the data entered using '<Research_Locations>' dataset on the research locations page
+    And I capture the page screenshot
+    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
     Then I can see the review your application page
     And I capture the page screenshot
     When I navigate 'back'
-    Then I can see the project identifiers page
-    When I navigate 'back'
+    Then I can see the research locations page
     Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
+    And I capture the page screenshot
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Chief_Investigator    | Research_Locations                     |
@@ -323,6 +372,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -342,6 +392,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -360,6 +411,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -379,6 +431,7 @@ Feature: Create Amendment - Create Project
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project details title page
     And I have navigated to the my research projects page
     And I can see the my research projects page
@@ -387,6 +440,7 @@ Feature: Create Amendment - Create Project
     Then I can see the project details iras page
     And I fill the existing iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
 
     Examples:
@@ -401,6 +455,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project details title page
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
@@ -419,7 +474,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_Only_Title_Field |
       | Valid_Data_Only_Date_Fields |
 
-  @rsp-1863 @rsp-4874  @rsp-4209 @saveLaterProjectRoles
+  @rsp-1863 @rsp-4874 @rsp-4209 @saveLaterProjectRoles
   Scenario Outline: Verify product details are saved when user saves the record on create project - chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -427,6 +482,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -454,6 +510,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -493,6 +550,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     And I capture the page screenshot
@@ -520,6 +578,7 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -564,6 +623,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -626,6 +686,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -669,13 +730,17 @@ Feature: Create Amendment - Create Project
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-  @rsp-3939 @rsp-4200 @searchSelectSponsorOrgJsDisabled @jsDisabled
+  @rsp-3939 @rsp-4200 @rsp-3940 @searchSelectSponsorOrgJsDisabled @jsDisabled
   Scenario Outline: Validate user is able to search and select sponsor organisation in project identifiers page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with '<Project_Identifiers>'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -691,9 +756,6 @@ Feature: Create Amendment - Create Project
     Then I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with '<Project_Identifiers>'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers>' page
@@ -731,19 +793,14 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
 
-  @rsp-3939 @rsp-4200 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
+  @rsp-3939 @rsp-4200 @rsp-3940 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
   Scenario Outline: Validate the primary sponsor organisation search results in project identifiers page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
-    And I fill the project details title page with '<Project_Details_Title>'
-    When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I fill the chief investigator page with '<Chief_Investigator>'
-    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
-    Then I fill the research locations page with '<Research_Locations>'
-    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -765,3 +822,248 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Field_Error_Primary_Sponsor_Organisation |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Primary_Sponsor_Organisation |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Primary_Sponsor_Organisation |
+
+  @rsp-5340 @validateProjectRecordFromInDraftToActiveStatus
+  Scenario: Validate project status transition from in draft to active in the my research page and project overview page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    And I capture the page screenshot
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Identifiers_Page'
+    And I can see the project overview for unfinished projects page
+    Then I can see the project status as 'Project_Status_Draft' on the project overview for unfinished project page
+    And I capture the page screenshot
+    And I validate the iras id displayed on the project overview unfinished projects page
+    And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
+    And I have navigated to the my research projects page
+    Then I can see the my research projects page
+    Then I can see the project status as 'Project_Status_Draft' on the my research page
+    And I capture the page screenshot
+    And I click on the respective 'Valid_Project_Title' on the my research page
+    And I capture the page screenshot
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
+    And I click the enter link 'Project_Title' on review your answers page
+    Then I can see the project details title page
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Project_Details_Title_Page'
+    Then I can see the review your answers page
+    And I click the enter link 'chief_investigator_email' on review your answers page
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
+    Then I can see the review your answers page
+    And I click the enter link 'nations_participating' on review your answers page
+    Then I can see the research locations page
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    And I capture the page screenshot
+
+  @rsp-5340 @validateActiveProjectCanCreateModification @jsEnabled
+  Scenario Outline: Validate project status with active status can create modification
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Participating_Organisation' from area of change dropdown and 'Addition_Of_Sites_Option' from specific change dropdown
+    When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
+    And I can see the modification progress saved successful message on project overview page
+    And I can see the project overview page
+    And I capture the page screenshot
+
+  @rsp-5340 @validateProjectRecordInDraftStatusRetains
+  Scenario: Validate project status in draft is retained if partial project information is saved
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    And I capture the page screenshot
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Identifiers_Page'
+    And I can see the project overview for unfinished projects page
+    Then I can see the project status as 'Project_Status_Draft' on the project overview for unfinished project page
+    And I capture the page screenshot
+    And I validate the iras id displayed on the project overview unfinished projects page
+    And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
+    And I have navigated to the my research projects page
+    Then I can see the my research projects page
+    Then I can see the project status as 'Project_Status_Draft' on the my research page
+    And I capture the page screenshot
+    And I click on the respective 'Valid_Project_Title' on the my research page
+    And I capture the page screenshot
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
+    And I click the enter link 'Project_Title' on review your answers page
+    Then I can see the project details title page
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Project_Details_Title_Page'
+    Then I can see the review your answers page
+    And I click the 'Save_For_Later' button on the 'Review_Your_Answers_Page'
+    Then I can see the project status as 'Project_Status_Draft' on the project overview for unfinished project page
+    And I capture the page screenshot
+    And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
+    And I have navigated to the my research projects page
+    Then I can see the my research projects page
+    Then I can see the project status as 'Project_Status_Draft' on the my research page
+    And I capture the page screenshot
+
+  @rsp-1900 @validateGuidanceContentProjectIdentifiersPage
+  Scenario: Validate the guidance content displayed on project identifiers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    And I validate the guidance content displayed on project identifiers page
+    And I capture the page screenshot
+
+  @rsp-1866 @rsp-5185 @DeleteProjectRecord
+  Scenario Outline: Verify that user is able to delete the created project record
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
+    And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
+    And I can see the delete project confirmation page based on '<Project_Details_Title>' entered for short project title
+    And I capture the page screenshot
+    When I click the 'Keep_Project' button on the 'Confirmation_Page'
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
+    And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
+    When I click the 'Delete_Project' button on the 'Confirmation_Page'
+    And I can see the my research projects page
+    And I can see the project delete success message on my research page
+    And I capture the page screenshot
+    And I validate deleted project does not exist in the my research projects list
+    And I capture the page screenshot
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the existing iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I can see the project identifiers page
+    And I capture the page screenshot
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I can see the project details title page
+    And I capture the page screenshot
+
+    Examples:
+      | Project_Details_Title        |
+      | Valid_Data_All_Fields        |
+      | Valid_Data_Title_Empty_Field |
+
+  @rsp-5302 @ValidateConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6183 @KNOWN_DEFECT_RSP-5747 @fail
+  Scenario: Validate confirm project details page and confirm the project journey displays the project titles
+    And I capture the page screenshot
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
+    And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I can see the project details iras page
+    And I capture the page screenshot
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the confirm project details page
+    And I confirm the values displayed in the confirm project details page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I capture the page screenshot
+    Then I can see the project details title page
+    Then I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I capture the page screenshot
+    Then I can see the chief investigator page
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I can see the research locations page
+    And I capture the page screenshot
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I capture the page screenshot
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of 'Valid_Data_All_Fields' page 'Valid_Data_All_Fields' page 'Valid_Data_All_Fields' and 'Valid_Data_All_Fields' page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    And I capture the page screenshot
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
+    And I can see the iras id and short project title on project overview page
+    And I can see project details along with 'Valid_Data_All_Fields' sponsor organisation and 'Valid_Planned_End_Date' on the project overview page
+    And I capture the page screenshot
+
+  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6187 @fail
+  Scenario: Validate return to iras id button and back button functionality in confirm project details page
+    And I capture the page screenshot
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
+    And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I can see the project details iras page
+    And I capture the page screenshot
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the confirm project details page
+    And I confirm the values displayed in the confirm project details page
+    And I capture the page screenshot
+    And I click the 'Return_to_Iras_Id' button on the 'Confirm_Project_Details_Page'
+    And I can see the project details iras page
+    And I capture the page screenshot
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the confirm project details page
+    And I click the 'Back' link on the 'Confirm_Project_Details_Page'
+    And I capture the page screenshot
+    And I can see the project details iras page

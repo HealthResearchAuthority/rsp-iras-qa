@@ -16,6 +16,7 @@ Feature: Create Amendment - Create Project - Smoke Tests
     And I capture the page screenshot
     And I fill the unique iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I capture the page screenshot
     Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'

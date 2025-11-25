@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
 import {
   confirmStringNotNull,
@@ -15,6 +16,7 @@ export default class ManageUsersPage {
   readonly page: Page;
   readonly manageUsersPageTestData: typeof manageUsersPageTestData;
   readonly linkTextData: typeof linkTextData;
+  readonly buttonTextData: typeof buttonTextData;
   private _unique_email: string;
   private _review_bodies: string[];
   readonly page_heading: Locator;
@@ -31,6 +33,7 @@ export default class ManageUsersPage {
   readonly find_user_title: Locator;
   readonly search_box: Locator;
   readonly search_button_label: Locator;
+  readonly search_button: Locator;
   readonly first_name_from_list_label: Locator;
   readonly users_list_rows: Locator;
   readonly last_name_from_list_label: Locator;
@@ -99,6 +102,8 @@ export default class ManageUsersPage {
   constructor(page: Page) {
     this.page = page;
     this.manageUsersPageTestData = manageUsersPageTestData;
+    this.linkTextData = linkTextData;
+    this.buttonTextData = buttonTextData;
     this._unique_email = '';
     this._review_bodies = [];
 
@@ -135,6 +140,9 @@ export default class ManageUsersPage {
     this.search_box_label = this.page.locator('label[for="Search.SearchQuery"]');
     this.search_box = this.page.getByTestId('Search.SearchQuery');
     this.search_button_label = this.page.getByText('Search');
+    this.search_button = this.page
+      .getByRole('button')
+      .getByText(this.buttonTextData.Manage_Users_Page.Search, { exact: true });
     this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.userListRows = this.page.locator('tbody').getByRole('row');
@@ -534,10 +542,9 @@ export default class ManageUsersPage {
     const userEmail = data.Create_User_Profile.email_address_unique;
     const userStatus = await manageUsersPage.getUserStatus(status);
     if (await commonItemsPage.clear_all_filters_link.isHidden()) {
-      await manageUsersPage.goto(
-        manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size,
-        userEmail
-      );
+      await this.user_search_text.fill(userEmail);
+      await this.search_button.click();
+      await expect(this.userListRows).toBeVisible();
     }
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     await manageUsersPage.setUniqueEmail(userEmail);

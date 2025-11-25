@@ -118,3 +118,28 @@ When(
     await participatingOrganisationsPage.validateResults(commonItemsPage, searchCriteriaDataset, true);
   }
 );
+
+Then(
+  'I validate the guidance content displayed on modifications participating organisations page',
+  async ({ commonItemsPage, participatingOrganisationsPage }) => {
+    const collapsibleDetailsComponent = commonItemsPage.details_component
+      .getByText(
+        participatingOrganisationsPage.participatingOrganisationsPageTestData.Participating_Organisations_Page
+          .guidance_header_cant_find_organisation
+      )
+      .locator('..');
+    await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
+    await collapsibleDetailsComponent.click();
+    await commonItemsPage.verifyDetailsExpanded('open', commonItemsPage.details_component);
+    const cantFindOrganisationDetailsBody = (await commonItemsPage.details_component.textContent())
+      .replaceAll(/\s+/g, ' ')
+      .trim();
+    expect(cantFindOrganisationDetailsBody).toContain(
+      participatingOrganisationsPage.participatingOrganisationsPageTestData.Participating_Organisations_Page
+        .guidance_body_cant_find_organisation
+    );
+    await collapsibleDetailsComponent.click();
+    await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
+    await collapsibleDetailsComponent.click();
+  }
+);

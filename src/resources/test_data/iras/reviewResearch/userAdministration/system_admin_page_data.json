@@ -1,10 +1,11 @@
 {
   "System_Admin_Page": {
-    "title": "",
+    "title": "System administration - Plan and manage health and care research",
     "pageHeading": "System administration"
   },
   "Label_Texts": {
     "manage_review_bodies_hint_label": "View, add, disable or edit review body records.",
-    "manage_users_hint_label": "View, add, disable or edit review individual user records."
+    "manage_users_hint_label": "View, add, disable or edit review individual user records.",
+    "manage_sponsor_organisations_hint_label": "View, add, disable or edit sponsor organisations."
   }
 }

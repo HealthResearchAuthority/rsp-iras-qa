@@ -9,6 +9,7 @@ Feature: Create Modifications - Change to planned end date regression
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -50,7 +51,7 @@ Feature: Create Modifications - Change to planned end date regression
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
     When I click the 'Back' link on the 'Review_Changes_Planned_End_Date_Page'
@@ -92,21 +93,21 @@ Feature: Create Modifications - Change to planned end date regression
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     When I click the 'Back' link on the 'Planned_End_Date_Change_Page'
     And I capture the page screenshot
-    And I can see the review changes planned end date page
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    And I can see the modification review changes page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Modifications_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
 
     Examples:
@@ -129,15 +130,15 @@ Feature: Create Modifications - Change to planned end date regression
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the change planned end date affected organisation questions page
     And I capture the page screenshot
     And I fill the affected organisation questions page with '<Affected_Org_Questions_Change>'
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
 
     Examples:
@@ -165,9 +166,9 @@ Feature: Create Modifications - Change to planned end date regression
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
@@ -198,9 +199,9 @@ Feature: Create Modifications - Change to planned end date regression
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     Then I fill todays date in planned project end date for modifications

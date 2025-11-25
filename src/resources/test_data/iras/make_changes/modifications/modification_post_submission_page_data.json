@@ -1,0 +1,17 @@
+{
+  "Modification_Post_Submission_Page": {
+    "heading": "Modification",
+    "title": "Modification - Plan and manage health and care research",
+    "sponsor_details_tab": {},
+    "modification_details_tab": {},
+    "documents_tab": {
+      "document_type_label": "Document type",
+      "document_name_label": "Document name",
+      "file_name_label": "File name",
+      "document_version_label": "Document version",
+      "document_date_label": "Document date",
+      "status_label": "Status"
+    },
+    "history_tab": {}
+  }
+}

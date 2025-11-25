@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
 
-        @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+        @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory @CreatedRevBodyCleanup @KNOWN-ISSUE-RSP-5003 @fail
         Scenario Outline: Verify the user can view the audit history after disabling a newly created review body and the the user list page
                 # create review body from manage review body page
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
@@ -67,9 +67,9 @@ Feature: User Administration: Manage Review Bodies
                 And I capture the page screenshot
                 # user list page of the review body
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I capture the page screenshot
-                And I can see no users in the review body with a message to add users to the review body
+                And I can see no users in the 'review body' with a message to add users to the 'review body'
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
@@ -79,7 +79,7 @@ Feature: User Administration: Manage Review Bodies
                         | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
                         | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
 
-        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @RevBodyStatusSetup @KNOWN-ISSUE-RSP-5003 @fail
         Scenario Outline: Verify the user can view the audit history after enabling a review body
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -160,10 +160,10 @@ Feature: User Administration: Manage Review Bodies
                 And I click the '<Navigation_Link>' link on the 'Review_Body_Audit_History_Page'
                 And I capture the page screenshot
                 And I can see the review body profile page
-                And I click the '<Navigation_Link>' link on the 'Review_Body_Profile_Page'
+                And I click the 'Manage_Review_Bodies_Breadcrumb' link on the 'Review_Body_Profile_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
-                When I click the '<Navigation_Link>' link on the 'Manage_Review_Bodies_Page'
+                When I click the 'System_Admin_Breadcrumb' link on the 'Manage_Review_Bodies_Page'
                 Then I can see the 'System_Administration_Page'
                 Then I capture the page screenshot
                 And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -179,7 +179,7 @@ Feature: User Administration: Manage Review Bodies
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -187,15 +187,15 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I capture the page screenshot
-                And I can see the user list of the selected review body is sorted by default in the alphabetical order of the 'First Name'
+                And I can see the user list of the selected 'review body' is sorted by default in the alphabetical order of the 'First Name'
 
                 Examples:
                         | Field_Name_Two | Field_Name_Three | Field_Name_Four | Navigation_Link | Status_Enabled | Status_Disabled |
                         | Country        | Email_Address    | Description     | Back            | Enabled        | Disabled        |
 
-        @RegressionTestVerifyBackAndChangeLinksCreateAndCheckCreateReviewBody
+        @RegressionTestVerifyBackAndChangeLinksCreateAndCheckCreateReviewBody @CreatedRevBodyCleanup
         Scenario Outline: Verify the user can navigate via the change links and back links
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
                 Then I can see the 'Create_Review_Body_Page'
@@ -233,7 +233,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Continue' button on the 'Create_Review_Body_Page'
                 Then I can see the check and create review body page for '<Add_Review_Body>'
                 And I capture the page screenshot
-                When I click the 'Back' link on the 'Check_Create_Review_Body_Page'
+                When I click the 'Back' button on the 'Check_Create_Review_Body_Page'
                 Then I can see the Add new review body page for '<Add_Review_Body>'
                 And I capture the page screenshot
                 And I fill the new review body page using '<Add_Another_Review_Body>'
@@ -306,7 +306,7 @@ Feature: User Administration: Manage Review Bodies
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -314,8 +314,8 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                Then I can see the user list page of the review body
-                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+                Then I can see the user list page of the 'review body'
+                When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
@@ -338,9 +338,8 @@ Feature: User Administration: Manage Review Bodies
                 And I search and click on view edit link for the removed user from the review body in the manage user page
                 Then I can see the user profile page of the removed user from the review body
                 Examples:
-                        | Status_Enabled | Status_Disabled |
-                        | Enabled        | Disabled        |
-
+                        | Status_Enabled |
+                        | Enabled        |
 
         @RegressionTestUserListReviewBodyManageUsersLink
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
@@ -351,7 +350,7 @@ Feature: User Administration: Manage Review Bodies
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -359,8 +358,8 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                Then I can see the user list page of the review body
-                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+                Then I can see the user list page of the 'review body'
+                When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
@@ -373,8 +372,8 @@ Feature: User Administration: Manage Review Bodies
                 And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
                 And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
-                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+                Then I can see the user list page of the 'review body'
+                When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
                 Then the system displays search results matching the search criteria
@@ -406,7 +405,7 @@ Feature: User Administration: Manage Review Bodies
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -414,7 +413,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
@@ -433,7 +432,7 @@ Feature: User Administration: Manage Review Bodies
                 Then the system displays no results found message in the user list page of the review body
                 When I click the 'Back_To_Users' link on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 Examples:
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
@@ -448,7 +447,7 @@ Feature: User Administration: Manage Review Bodies
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -456,7 +455,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
                 Then the system displays search results matching the search criteria
@@ -482,7 +481,7 @@ Feature: User Administration: Manage Review Bodies
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -490,7 +489,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
                 Then the system displays search results matching the search criteria
@@ -498,7 +497,7 @@ Feature: User Administration: Manage Review Bodies
                 And I capture the page screenshot
                 Then I can see the check and remove user profile page
                 And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 Examples:
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
@@ -512,7 +511,7 @@ Feature: User Administration: Manage Review Bodies
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -520,14 +519,14 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
                 When I click the 'Remove' link on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
                 Then I can see the check and remove user profile page
                 And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
-                Then I can see the user list page of the review body
+                Then I can see the user list page of the 'review body'
                 Examples:
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |

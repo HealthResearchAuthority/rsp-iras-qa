@@ -38,6 +38,10 @@
   "Project_Details_IRAS_Page": {
     "Add_Project": "Add project"
   },
+  "Confirm_Project_Details_Page": {
+    "Add_Project": "Add project",
+    "Return_to_Iras_Id": "Return to IRAS ID"
+  },
   "Project_Details_Title_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
@@ -64,7 +68,8 @@
     "Continue": "Continue"
   },
   "Check_Create_User_Profile_Page": {
-    "Create_Profile": "Create profile"
+    "Create_Profile": "Create profile",
+    "Back": "Back"
   },
   "User_Profile_Page": {
     "Disable_User_Record": "Disable user record",
@@ -72,13 +77,21 @@
   },
   "Confirmation_Page": {
     "Confirm": "Confirm",
-    "Return_To_Project_Overview": "Return to project overview"
+    "Return_To_Project_Overview": "Return to project overview",
+    "Submit_To_Regulator": "Submit to regulator",
+    "Delete_Project": "Delete project",
+    "Keep_Project": "Keep project",
+    "Delete_Modification": "Delete modification",
+    "Delete_Documents": "Delete documents",
+    "Delete_Document": "Delete document",
+    "Return_To_Authorisations": "Return to authorisations"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
   },
   "Check_Create_Review_Body_Page": {
-    "Create_Profile": "Create profile"
+    "Create_Profile": "Create profile",
+    "Back": "Back"
   },
   "Edit_Review_Body_Page": {
     "Save": "Save"
@@ -158,7 +171,10 @@
   },
   "Post_Approval_Page": {
     "Modification_Id": "Modification ID",
-    "Modification_Type": "Modification type"
+    "Modification_Type": "Modification type",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
   },
   "Project_Documents_Page": {
     "document_type_project_documents": "Document type",
@@ -179,7 +195,8 @@
   "Modifications_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
-    "Save_Changes": "Save changes"
+    "Save_Changes": "Save changes",
+    "Return_To_Modification": "Return to modification"
   },
   "Affected_Organisation_Selection_Page": {
     "Save_Continue": "Save and continue",
@@ -228,14 +245,20 @@
   "Modification_Details_Page": {
     "Add_Another_Change": "Add another change to this modification",
     "Save_Continue_Review": "Save and continue to review",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Add_Documents": "Add documents"
   },
   "Sponsor_Reference_Page": {
-    "Save_Continue_Review": "Save and continue to review"
+    "Save_Continue_Review": "Save and continue to review",
+    "Save_For_Later": "Save for later"
   },
   "Review_All_Changes_Page": {
     "Send_Modification_To_Sponsor": "Send modification to sponsor",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Add_Documents": "Add documents"
+  },
+  "Modification_Post_Submission_Page": {
+    "Download_All": "Download all"
   },
   "Add_Document_Details_Page": {
     "Save_Continue": "Save and continue",
@@ -255,5 +278,89 @@
   "Project_Overview_Unfinished_Projects_Page": {
     "Edit_Project_Record": "Edit project record",
     "Delete_Project": "Delete project"
+  },
+  "Manage_Sponsor_Organisations_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters",
+    "Org_Name": "Organisation name",
+    "Country": "Country",
+    "Status": "Status"
+  },
+  "Setup_New_Sponsor_Organisation_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Setup_Sponsor_Organisation_Page": {
+    "Save_Profile": "Save profile",
+    "Cancel": "Cancel"
+  },
+  "Sponsor_Organisation_Profile_Page": {
+    "Disable": "Disable",
+    "Enable": "Enable"
+  },
+  "Search_Add_User_Sponsor_Org_Page": {
+    "Search": "Search"
+  },
+  "Check_Add_User_Sponsor_Org_Page": {
+    "Add_User": "Add user"
+  },
+  "Sponsor_Org_User_List_Page": {
+    "Search": "Search",
+    "First_Name": "First name",
+    "Last_Name": "Last name",
+    "Email_Address": "Email address",
+    "Status": "Status",
+    "Last_Logged_In": "Last logged in"
+  },
+  "Complete_Your_Profile_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Your_Profile_Page": {
+    "Add_Profile": "Add user profile"
+  },
+  "View_Edit_User_Profile_Page": {
+    "Disable_User": "Disable user",
+    "Enable_User": "Enable user"
+  },
+  "Modification_Sent_To_Sponsor_Page": {
+    "Return_To_Project_Overview": "Return to project overview",
+    "Submit_To_Regulator": "Submit to regulator"
+  },
+  "Edit_Your_Profile_Page": {
+    "Save": "Save"
+  },
+  "Modification_Enter_Free_Text_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_Select_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_SelectReference_To_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Project_Identification_Enter_Reference_Numbers_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "My_Research_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
+  },
+  "IRAS_ID_Error_Page": {
+    "Return_To_IRAS_ID": "Return to IRAS ID"
+  },
+  "Sponsor_Authorisations_Page": {
+    "Search": "Search"
+  },
+  "Sponsor_Check_And_Authorise_Page": {
+    "Confirm_Selection": "Confirm selection"
   }
 }

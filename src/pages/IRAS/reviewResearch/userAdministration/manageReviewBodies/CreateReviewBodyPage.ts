@@ -1,13 +1,17 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as createReviewBodyPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/create_review_body_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+import * as dbConfigData from '../../../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../../../utils/DbConfig';
 
 //Declare Page Objects
 export default class CreateReviewBodyPage {
   readonly page: Page;
   readonly createReviewBodyPageData: typeof createReviewBodyPageData;
   readonly buttonTextData: typeof buttonTextData;
+  readonly dbConfigData: typeof dbConfigData;
   private _unique_org_name: string;
+  private _unique_org_timestamp: string;
   readonly page_heading: Locator;
   readonly validation_error: Locator;
   readonly char_count_error: Locator;
@@ -29,7 +33,9 @@ export default class CreateReviewBodyPage {
     this.page = page;
     this.createReviewBodyPageData = createReviewBodyPageData;
     this.buttonTextData = buttonTextData;
+    this.dbConfigData = dbConfigData;
     this._unique_org_name = '';
+    this._unique_org_timestamp = '';
 
     //Locators
     this.page_heading = this.page
@@ -81,5 +87,20 @@ export default class CreateReviewBodyPage {
 
   async setUniqueOrgName(value: string): Promise<void> {
     this._unique_org_name = value;
+  }
+
+  async getUniqueOrgTimestamp(): Promise<string> {
+    return this._unique_org_timestamp;
+  }
+
+  async setUniqueOrgTimestamp(value: string): Promise<void> {
+    this._unique_org_timestamp = value;
+  }
+
+  // SQL STATEMENTS //
+  async sqlDeleteAutomatedReviewBodyByUniqueName(revBodyName: string): Promise<void> {
+    const sqlApplicationConnection = await connect(dbConfigData.Application_Service);
+    await sqlApplicationConnection.query(`DELETE FROM RegulatoryBodies WHERE RegulatoryBodyName = '${revBodyName}'`);
+    await sqlApplicationConnection.close();
   }
 }
