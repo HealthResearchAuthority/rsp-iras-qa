@@ -1,7 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as sponsorAuthorisationsPageTestData from '../../../resources/test_data/iras/make_changes/sponsor_authorisations_page_data.json';
 import CommonItemsPage from '../../Common/CommonItemsPage';
-import ModificationsCommonPage from './modifications/ModificationsCommonPage';
 
 //Declare Page Objects
 export default class SponsorAuthorisationsPage {
@@ -25,23 +24,6 @@ export default class SponsorAuthorisationsPage {
   //Page Methods
   async assertOnSponsorAuthorisationsPageTestData() {
     await expect.soft(this.pageHeading).toBeVisible();
-  }
-
-  async getModificationStatusForSponsor(status: string) {
-    const modificationsCommonPage = new ModificationsCommonPage(this.page);
-    if (status.toLowerCase() == 'with sponsor') {
-      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
-    } else if (status.toLowerCase() == 'authorised') {
-      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Authorised.status;
-    } else if (status.toLowerCase() == 'not authorised') {
-      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Not_Authorised.status;
-    } else if (status.toLowerCase() == 'with review body') {
-      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
-    } else if (status.toLowerCase() == 'approved') {
-      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Approved.status;
-    } else if (status.toLowerCase() == 'not approved') {
-      return modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_Not_Approved.status;
-    }
   }
 
   async findModification(
