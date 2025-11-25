@@ -688,3 +688,30 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
+
+        @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+        Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from the Search Modifications page
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                And I capture the page screenshot
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                When I click the 'Back' link on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the approvals home page
+                And I click the 'Search' link on the 'Approvals_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+                And I 'cannot' see active filters displayed
+                And I capture the page screenshot
+
+                Examples:
+                        | Navigation_Method | Advanced_Filters             |
+                        | page number       | Advanced_Filters_Lead_Nation |
+                        | previous link     | Advanced_Filters_Lead_Nation |
+
