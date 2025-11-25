@@ -8,13 +8,13 @@ When(
   'I can see all the selected modifications on that page including details such as the short project title and the modification id',
   async ({ modificationsReadyToAssignPage, commonItemsPage }) => {
     const modificationRecordActual: string[] = [];
-    const modificationRecordExpected = await modificationsReadyToAssignPage.getSelectedModifications();
+    const modificationRecordExpected = await modificationsReadyToAssignPage.getSelectedModificationsIdTitle();
     for (const row of await commonItemsPage.tableBodyRows.all()) {
       const modification_id = confirmStringNotNull(await row.getByRole('cell').nth(0).textContent());
-      const shortProjectTitle = confirmStringNotNull(await row.getByRole('link').textContent());
+      const shortProjectTitle = confirmStringNotNull(await row.getByRole('link').nth(1).textContent());
       modificationRecordActual.push(modification_id + ':' + shortProjectTitle);
     }
-    expect(modificationRecordExpected).toEqual(modificationRecordActual);
+    expect.soft(modificationRecordExpected).toEqual(modificationRecordActual);
   }
 );
 
@@ -53,9 +53,9 @@ Then(
     const uniqueDropdownValues = [...new Set(normalizedValues)];
 
     if (availability.toLowerCase() === 'available' && leadNation.toLowerCase() === 'england') {
-      expect(uniqueDropdownValues).toContain(userFullName);
+      expect.soft(uniqueDropdownValues).toContain(userFullName);
     } else {
-      expect(uniqueDropdownValues).not.toContain(userFullName);
+      expect.soft(uniqueDropdownValues).not.toContain(userFullName);
     }
   }
 );

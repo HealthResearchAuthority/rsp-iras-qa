@@ -59,6 +59,10 @@ When(
       editYourProfilePage,
       completeYourProfilePage,
       checkYourProfilePage,
+      chooseARecordTypeToSearchPage,
+      searchProjectsPage,
+      projectOverviewPage,
+      modificationsReceivedCommonPage,
     },
     page: string
   ) => {
@@ -166,6 +170,19 @@ When(
         await checkYourProfilePage.assertOnCheckProfilePage();
         await profileCommonPage.assertCommonProfilePageItems();
         break;
+      case 'Choose_A_Record_Type_To_Search_Page':
+        await chooseARecordTypeToSearchPage.assertOnChooseARecordTypeToSearchPage();
+        break;
+      case 'Search_Projects_Page':
+        await searchProjectsPage.assertOnSearchProjectsPage();
+        break;
+      case 'Project_Overview_Page':
+        await projectOverviewPage.assertOnProjectOverviewPage();
+        break;
+      case 'Modification_Details_Page':
+        await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
+        break;
+
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -510,6 +527,8 @@ Then(
       contactDetailsModificationPage,
       projectPersonnelChangeChiefInvestigatorPage,
       sponsorCheckAndAuthorisePage,
+      chooseARecordTypeToSearchPage,
+      teamManagerDashboardPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -627,6 +646,16 @@ Then(
       errorMessageFieldDataset =
         sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = sponsorCheckAndAuthorisePage;
+    } else if (pageKey == 'Choose_A_Record_Type_To_Search_Page') {
+      errorMessageFieldDataset =
+        chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = chooseARecordTypeToSearchPage;
+    } else if (pageKey == 'Team_Manager_Dashboard_Page') {
+      errorMessageFieldDataset =
+        teamManagerDashboardPage.teamManagerDashboardPageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = teamManagerDashboardPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -868,13 +897,14 @@ Given(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
-      teamManagerDashboardPage,
       approvalsPage,
       myModificationsTasklistPage,
       manageSponsorOrganisationPage,
       profileCommonPage,
       profileSettingsPage,
       editYourProfilePage,
+      teamManagerDashboardPage,
+      searchProjectsPage,
     },
     page: string
   ) => {
@@ -950,6 +980,11 @@ Given(
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
         break;
+      case 'Search_Projects_Page':
+        await searchProjectsPage.goto();
+        await searchProjectsPage.assertOnSearchProjectsPage();
+        break;
+
       case 'Manage_Sponsor_Organisations_Page':
         await manageSponsorOrganisationPage.goto();
         await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
@@ -984,6 +1019,7 @@ Given(
       modificationsReadyToAssignPage,
       searchModificationsPage,
       teamManagerDashboardPage,
+      manageUsersPage,
     },
     page: string,
     user: string
@@ -1042,12 +1078,21 @@ Given(
           await searchModificationsPage.goto();
           await searchModificationsPage.assertOnSearchModificationsPage();
           break;
+        case 'Approvals_Page':
+          await approvalsPage.page.context().addCookies(authState.cookies);
+          await approvalsPage.goto();
+          await approvalsPage.assertOnApprovalsPage();
+          break;
         case 'Team_Manager_Dashboard_Page':
           await teamManagerDashboardPage.page.context().addCookies(authState.cookies);
           await teamManagerDashboardPage.goto();
           await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
           break;
-
+        case 'Manage_Users_Page':
+          await manageUsersPage.page.context().addCookies(authState.cookies);
+          await manageUsersPage.goto();
+          await manageUsersPage.assertOnManageUsersPage();
+          break;
         default:
           throw new Error(`${page} is not a valid option`);
       }
@@ -1148,6 +1193,7 @@ Then(
       commonItemsPage,
       myResearchProjectsPage,
       projectOverviewPage,
+      searchProjectsPage,
     },
     actionToPerform: string,
     filterDatasetName: string,
@@ -1160,6 +1206,10 @@ Then(
       Search_Modifications_Page: {
         dataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
         labels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
+      },
+      Search_Projects_Page: {
+        dataset: searchProjectsPage.searchProjectsPageTestData.Advanced_Filters,
+        labels: searchProjectsPage.searchProjectsPageTestData.Search_Projects_Page,
       },
       Manage_Review_Bodies_Page: {
         dataset: manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters,
@@ -1224,7 +1274,7 @@ Then(
 Then(
   'I validate {string} displayed on {string} in advanced filters',
   async (
-    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage },
+    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage, searchProjectsPage },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
@@ -1233,6 +1283,12 @@ Then(
     if (pageKey === 'Search_Modifications_Page') {
       errorMessageFieldDataset =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = searchModificationsPage;
+    } else if (pageKey === 'Search_Projects_Page') {
+      errorMessageFieldDataset =
+        searchProjectsPage.searchProjectsPageTestData.Search_Projects_Page.Error_Validation[
           errorMessageFieldAndSummaryDatasetName
         ];
       page = searchModificationsPage;
@@ -1450,9 +1506,14 @@ Then(
 When(
   'I click a {string} on the {string}',
   async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
+    let testNum: number;
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
     const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
-    const testNum = await getRandomNumber(0, rowCount - 1);
+    if (rowCount > 1) {
+      testNum = await getRandomNumber(0, rowCount - 1);
+    } else if (rowCount == 1) {
+      testNum = 0;
+    }
     const fieldLocator = commonItemsPage.tableBodyRows
       .nth(testNum)
       .getByRole('cell')

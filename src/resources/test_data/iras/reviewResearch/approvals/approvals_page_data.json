@@ -1,8 +1,14 @@
 {
   "Approvals_Page": {
-    "pageHeading": "Approvals"
-  },
-  "Label_Texts": {
-    "search_hint_label": "Search modifications received for approval."
+    "title": "Approvals - Plan and manage health and care research",
+    "pageHeading": "Approvals",
+    "search_records_link": "Search records",
+    "search_records_hint_label": "Search modification and project records",
+    "modification_tasklist_link": "Modification tasklist",
+    "modification_tasklist_hint_label": "See modifications tasklist.",
+    "studywide_reviewer_my_tasklist_link": "My tasklist",
+    "studywide_reviewer_my_tasklist_hint_label": "See my tasklist.",
+    "team_manager_dashboard_link": "Team manager dashboard",
+    "team_manager_dashboard_hint_label": "See team manager dashboard."
   }
 }

@@ -880,7 +880,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Search_Modifications_Page'
     And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
     And I click the 'Search' button on the 'Search_Modifications_Page'
-    And I can now see a table of search results for modifications received for approval
+    And I can now see a table of search results for 'modifications received for approval'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -890,7 +890,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Search_Modifications_Page'
     Then I can see the 'Search_Modifications_Page'
     When I enter 'Valid_Iras_Id_Nth' into the search field
-    And I select advanced filters in the search modifications page using 'Advanced_Filters_Nth'
+    And I select advanced filters in the 'Search_Modifications_Page' using 'Advanced_Filters_Nth'
     And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
     Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Nth' in the 'Search_Modifications_Page'
     And the system displays modification records based on the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth'
@@ -910,8 +910,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Modifications_Tasklist_Page'
     And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
     And I 'can' see the advanced filters panel
-    And I open each of the modification tasklist filters
-    When I fill the 'assign' modifications tasklist search and filter options with 'Title_Date_Range_Single'
+    And I open each of the 'modification tasklist' filters
+    When I fill the 'assign modifications tasklist' search and filter options with 'Title_Date_Range_Single'
     And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -922,7 +922,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'My_Modifications_Tasklist_Page'
     And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
     And I 'can' see the advanced filters panel
-    And I open each of the modification tasklist filters
+    And I open each of the 'modification tasklist' filters
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -932,8 +932,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'My_Modifications_Tasklist_Page'
     And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
     And I 'can' see the advanced filters panel
-    And I open each of the modification tasklist filters
-    When I fill the 'my' modifications tasklist search and filter options with 'Title_Date_Range_Single'
+    And I open each of the 'modification tasklist' filters
+    When I fill the 'assign modifications tasklist' search and filter options with 'Title_Date_Range_Single'
     And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -951,7 +951,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I enter 'Valid_Iras_Id_Ln_England_Pn_England' into the search field in the modifications ready to assign page
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-    When I select modifications with ids as 'Modification_Id_Ln_England_Pn_England_Five_Six' by clicking the checkbox in the modifications ready to assign page
+    When I select modifications with ids as 'Modification_Id_Ln_England_Pn_England_Five_Six' by clicking the checkbox in the 'modifications ready to assign' page
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
     When I Scan the page with the Axe Accessibilty Tool
@@ -963,12 +963,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I enter 'Valid_Iras_Id_Ln_England_Pn_England' into the search field in the modifications ready to assign page
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-    When I select modifications with ids as 'Modification_Id_Ln_England_Pn_England_One' by clicking the checkbox in the modifications ready to assign page
+    When I select modifications with ids as 'Modification_Id_Ln_England_Pn_England_One' by clicking the checkbox in the 'modifications ready to assign' page
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
     And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
     And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
-    Then I can see the modifications assignment confirmation page for 'Study_Wide_Reviewer_HRA_England'
+    Then I can see the modifications assignment confirmation page for 'Workflow_Coordinator' with reviewer 'Study_Wide_Reviewer_HRA_England'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -1389,6 +1389,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
 
   @axeAccessibilityProjectConfirmationPage @ApplicantUser
   Scenario: Create Project confirmation page
@@ -2589,6 +2590,410 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     Then I click on the searched modification id from sponsor authorisations page
     And I can see the modification page for sponsor view
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySponsorAuthorisasionListPage @SponsorUser @SetupNewSponsorOrgGoLive
+  Scenario: Sponsor authorisation page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I can see the sponsor authorisations page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySponsorCheckAndAuthorisePage @SponsorUser @SetupNewSponsorOrgGoLive
+  Scenario: Sponsor check and authorise page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    Then I click on the searched modification id from sponsor authorisations page
+    And I can see the sponsor check and authorise page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySponsorNotAuthorisedConfirmationPage @SponsorUser @SetupNewSponsorOrgGoLive
+  Scenario: Sponsor not authorised confirmation page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    Then I click on the searched modification id from sponsor authorisations page
+    And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate confirmation screen for modification not authorised by sponsor
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySponsorAuthorisedAndApprovedConfirmationPage @SponsorUser @SetupNewSponsorOrgGoLive
+  Scenario: Sponsor authorised and approved confirmation page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    Then I click on the searched modification id from sponsor authorisations page
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate confirmation screen for modification has been authorised by sponsor and approved
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySponsorAuthorisedAndWithReviewBodyConfirmationPage @SponsorUser @SetupNewSponsorOrgGoLive
+  Scenario: Sponsor authorised and with review body confirmation page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    Then I click on the searched modification id from sponsor authorisations page
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySponsorPostAuthorisationsPage @SponsorUser @SetupNewSponsorOrgGoLive
+  Scenario: Sponsor post authorisations modifications page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    Then I click on the searched modification id from sponsor authorisations page
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    Then I click on the searched modification id from sponsor authorisations page
+    And I can see the modification page for sponsor view
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityTeamManagerDashboardEng
+  Scenario: Team Manager of England accesses the Team Manager dashboard
+    Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager'
+    And I capture the page screenshot
+    Then the country linked to the 'Team_Manager' appears as the lead nation in the page description
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityTeamManagerDashboardNI
+  Scenario: Team Manager of Northern Ireland accesses the Team Manager dashboard
+    Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager_NI'
+    And I capture the page screenshot
+    Then the country linked to the 'Team_Manager_NI' appears as the lead nation in the page description
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityTeamManagerDashboardSco
+  Scenario: Team Manager of Scotland accesses the Team Manager dashboard
+    Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager_S'
+    And I capture the page screenshot
+    Then the country linked to the 'Team_Manager_S' appears as the lead nation in the page description
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityTeamManagerDashboardW
+  Scenario: Team Manager of Wales accesses the Team Manager dashboard
+    Given I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager_W'
+    And I capture the page screenshot
+    Then the country linked to the 'Team_Manager_W' appears as the lead nation in the page description
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityApprovalsPage @TeamManager
+  Scenario: Approvals page
+    Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityChooseRecordTypePage @TeamManager
+  Scenario: Choose Record Type page
+    Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I can see the 'Choose_A_Record_Type_To_Search_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySearchProjectsPage @TeamManager
+  Scenario: Search projects page
+    Given I have navigated to the 'Approvals_Page' as 'Team_Manager'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I can see the 'Choose_A_Record_Type_To_Search_Page'
+    And I select the radio button for 'Project_Record' in the choose a record type to search page
+    And I capture the page screenshot
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
+    Then I can see the 'Search_Projects_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

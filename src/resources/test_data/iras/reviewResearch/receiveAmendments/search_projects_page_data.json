@@ -1,0 +1,345 @@
+{
+  "Search_Projects_Page": {
+    "page_heading": "Search",
+    "page_guidance_text": "Enter the IRAS ID to search for a project record.",
+    "title": "Search - Approvals - Plan and manage health and care research",
+    "iras_id_search_box_label": "IRAS ID",
+    "search_button_label": "Search",
+    "chief_investigator_name_label": "Chief Investigator name",
+    "chief_investigator_hint_text": "Enter the name of the Chief Investigator",
+    "lead_nation_label": "Lead nation",
+    "lead_nation_hint_text": "selected",
+    "lead_nation_checkbox": [
+      "England",
+      "Northern Ireland",
+      "Scotland",
+      "Wales"
+    ],
+    "participating_nation_label": "Participating nation",
+    "participating_nation_hint_text": "selected",
+    "participating_nation_checkbox": [
+      "England",
+      "Northern Ireland",
+      "Scotland",
+      "Wales"
+    ],
+    "short_project_title_label": "Short project title",
+    "short_project_title_hint_text": "Enter the name of the short project title",
+    "sponsor_organisation_label": "Sponsor organisation",
+    "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
+    "Advanced_Filters_Hint_Labels": {
+      "lead_nation_checkbox_hint_label": "Select all that apply",
+      "participating_nation_checkbox_hint_label": "Select all that apply"
+    },
+    "selected_checkboxes_hint_label": "selected",
+    "active_filters_label": "Active filters",
+    "Suggestion_List_Common_Headers": {
+      "suggestion_header": "Suggestions",
+      "suggestion_footer": "Continue entering to improve suggestions",
+      "continue_entering_suggestion": "Continue entering to get suggestions",
+      "no_suggestion_found": "No suggestions found."
+    },
+    "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
+      "search_hint_header_prefix": "Results for",
+      "search_hint_footer_prefix": "sponsor organisations match your search for",
+      "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
+      "no_suggestion_found": "No suggestions found for"
+    },
+    "Error_Validation": {
+      "Sponsor_Organisation_Min_Char_Error": {
+        "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
+      }
+    }
+  },
+  "Advanced_Filters": {
+    "Advanced_Filters_All_Except_Short_Project_Title": {
+      "chief_investigator_name_text": "ci_test@test.com",
+      "sponsor_organisation_text": "University of Southampton",
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filters_Short_Project_Title": {
+      "short_project_title_text": "Job Crafting in Nurses"
+    },
+    "Advanced_Filters_All": {
+      "chief_investigator_name_text": "ci_test@test.com",
+      "sponsor_organisation_text": "University of Southampton",
+      "short_project_title_text": "QA Automation",
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filters_All_Chief_Investigator_Name_Filter": {
+      "chief_investigator_name_text": "ci_test@test.com"
+    },
+    "Advanced_Filters_All_After_Remove_Chief_Investigator_Name_Filter": {
+      "sponsor_organisation_text": "University of Southampton",
+      "short_project_title_text": "QA Automation",
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filters_All_Sponsor_Organisation_Filter": {
+      "sponsor_organisation_text": "University of Southampton"
+    },
+    "Advanced_Filters_All_After_Remove_Sponsor_Organisation_Filter": {
+      "chief_investigator_name_text": "ci_test@test.com",
+      "short_project_title_text": "QA Automation",
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filters_All_Short_Project_Title_Filter": {
+      "short_project_title_text": "QA Automation"
+    },
+    "Advanced_Filters_All_After_Remove_Short_Project_Title_Filter": {
+      "chief_investigator_name_text": "ci_test@test.com",
+      "sponsor_organisation_text": "University of Southampton",
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filters_Checkboxes": {
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filters_Sponsor_Organisation": {
+      "sponsor_organisation_text": "University of Southampton"
+    },
+    "Advanced_Filters_Lead_Nation": {
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filter_No_Lead_Nation_Selected": {
+      "lead_nation_checkbox": []
+    },
+    "Advanced_Filter_One_Lead_Nation_Selected": {
+      "lead_nation_checkbox": [
+        "England"
+      ]
+    },
+    "Advanced_Filter_Two_Lead_Nation_Selected": {
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland"
+      ]
+    },
+    "Advanced_Filter_Three_Lead_Nation_Selected": {
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland"
+      ]
+    },
+    "Advanced_Filter_Four_Lead_Nation_Selected": {
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filter_No_Participating_Nation_Selected": {
+      "participating_nation_checkbox": []
+    },
+    "Advanced_Filter_One_Participating_Nation_Selected": {
+      "participating_nation_checkbox": [
+        "England"
+      ]
+    },
+    "Advanced_Filter_Two_Participating_Nation_Selected": {
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland"
+      ]
+    },
+    "Advanced_Filter_Three_Participating_Nation_Selected": {
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland"
+      ]
+    },
+    "Advanced_Filter_Four_Participating_Nation_Selected": {
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    },
+    "Advanced_Filters_Automation_No_SpOrg": {
+      "chief_investigator_name_text": "ci_test",
+      "short_project_title_text": "QA_Automation",
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
+    }
+  },
+  "Sponsor_Organisation": {
+    "Sponsor_Organisation_Invalid_Data": {
+      "sponsor_organisation_text": "test invalid data"
+    },
+    "Sponsor_Organisation_Text_Blank": {
+      "sponsor_organisation_text": ""
+    },
+    "Sponsor_Organisation_Text_Min_Spaces": {
+      "sponsor_organisation_text": " "
+    },
+    "Sponsor_Organisation_Min_Char": {
+      "sponsor_organisation_text": "nh"
+    },
+    "Sponsor_Organisation_Partial_Text_NHS": {
+      "sponsor_organisation_text": "nhs"
+    },
+    "Sponsor_Organisation_Full_Text_Aalborg": {
+      "sponsor_organisation_text": "Aalborg University Hospital"
+    },
+    "Sponsor_Organisation_Text_Partial_Brackets": {
+      "sponsor_organisation_text": "(Sp"
+    },
+    "Sponsor_Organisation_Text_Partial_Dot_Comma": {
+      "sponsor_organisation_text": ".,L"
+    },
+    "Sponsor_Organisation_Text_Partial_Slash": {
+      "sponsor_organisation_text": "A/S"
+    },
+    "Sponsor_Organisation_Text_Partial_Hyphen": {
+      "sponsor_organisation_text": "e-T"
+    },
+    "Sponsor_Organisation_Text_Partial_Start_Space": {
+      "sponsor_organisation_text": " nh"
+    },
+    "Sponsor_Organisation_Text_Partial_End_Space": {
+      "sponsor_organisation_text": "hs "
+    },
+    "Sponsor_Organisation_Text_Brackets": {
+      "sponsor_organisation_text": "L'Institut d'Investigacions Biomediques August Pi i Sunyer (IDIBAPS) (Spain)"
+    },
+    "Sponsor_Organisation_Text_Amp": {
+      "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A."
+    },
+    "Sponsor_Organisation_Text_Dot_Comma": {
+      "sponsor_organisation_text": "Eisai Co.,Ltd."
+    },
+    "Sponsor_Organisation_Text_Slash": {
+      "sponsor_organisation_text": "Y-mAbs Therapeutics A/S"
+    },
+    "Sponsor_Organisation_Text_Hyphen": {
+      "sponsor_organisation_text": "e-Therapeutics"
+    },
+    "Sponsor_Organisation_Text_Exactly_Five_Results": {
+      "sponsor_organisation_text": "Asi"
+    }
+  },
+  "Search_Queries": {
+    "Valid_Iras_Id_Prefix": {
+      "search_input_text": "98"
+    },
+    "Valid_Full_Iras_Id": {
+      "search_input_text": "293856"
+    },
+    "Invalid_Iras_Id_Letters": {
+      "search_input_text": "abcdefg"
+    },
+    "Invalid_Iras_Id_Symbols": {
+      "search_input_text": "!£$%^&*"
+    },
+    "Invalid_Iras_Id_Letters_Symbols": {
+      "search_input_text": "a!b£c£D%"
+    },
+    "Invalid_Iras_Id_Min_Length": {
+      "search_input_text": "12"
+    },
+    "Invalid_Iras_Id_Leading_Zeros": {
+      "search_input_text": "000123"
+    },
+    "Invalid_Iras_Id_Zeros": {
+      "search_input_text": "000000"
+    },
+    "Invalid_Iras_Id_Spaces": {
+      "search_input_text": "    "
+    },
+    "Invalid_Iras_Id_Spaces_Suffix": {
+      "search_input_text": "1234  "
+    },
+    "Invalid_Iras_Id_Spaces_Prefix": {
+      "search_input_text": " 1234"
+    },
+    "Invalid_Iras_Id_Spaces_Seperator": {
+      "search_input_text": "12 34"
+    },
+    "Invalid_Iras_Id_Blank": {
+      "search_input_text": ""
+    }
+  }
+}

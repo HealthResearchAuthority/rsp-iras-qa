@@ -1,58 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull, confirmStringNotNull, sortArray } from '../../../../utils/UtilFunctions';
-import config from '../../../../../playwright.config';
-import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
-const { When, Then } = createBdd(test);
-
-When(
-  'I enter {string} into the search field for search modifications page',
-  async ({ searchModificationsPage }, datasetName: string) => {
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
-    await searchModificationsPage.iras_id_search_text.fill(dataset['iras_id_text']);
-  }
-);
-
-When(
-  'I select advanced filters in the search modifications page using {string}',
-  async ({ searchModificationsPage, commonItemsPage, $tags }, filterDatasetName: string) => {
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    const isJsEnabled =
-      ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) && !$tags.includes('@jsDisabled');
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
-        if (key === 'sponsor_organisation_text') {
-          if (isJsEnabled) {
-            await commonItemsPage.selectSponsorOrgJsEnabled(dataset, key, commonItemsPage);
-          } else {
-            await searchModificationsPage.selectSponsorOrgJsDisabled(
-              dataset,
-              key,
-              commonItemsPage,
-              searchModificationsPage
-            );
-          }
-          delete dataset['sponsor_organisation_jsenabled_text'];
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
-        }
-      }
-    }
-  }
-);
-
-Then(
-  'I can see the {string} ui labels in search modifications page',
-  async ({ searchModificationsPage }, datasetName: string) => {
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        await expect.soft(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
-      }
-    }
-  }
-);
+const { Then } = createBdd(test);
 
 Then(
   'I verify the hint text based on the {string} for search modifications page',
@@ -91,37 +40,14 @@ Then(
   }
 );
 
-When(
-  'I expand the chevrons for {string} in search modifications page',
-  async ({ searchModificationsPage }, filterDatasetName: string) => {
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
-      }
-    }
-  }
-);
-
-Then(
-  'the result count displayed at the top accurately reflects the number of records shown in the search modifications page',
-  async ({ commonItemsPage, searchModificationsPage }) => {
-    const rowCount = await searchModificationsPage.tableRows.count();
-    const totalPagesCount = await commonItemsPage.getNumberofTotalPages();
-    const expectedResultCount = (totalPagesCount - 1) * 20 + (rowCount - 1);
-    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(
-      commonItemsPage,
-      expectedResultCount
-    );
-    const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
-    expect.soft(expectedResultCountLabel).toEqual(actualResultCountLabel);
-  }
-);
-
 // date_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records based on the search {string} and filter criteria {string}',
-  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName, filterDatasetName) => {
+  async (
+    { commonItemsPage, searchModificationsPage, modificationsReceivedCommonPage },
+    irasIdDatasetName,
+    filterDatasetName
+  ) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
@@ -131,80 +57,55 @@ Then(
     const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
     await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
 
-    const validateCombinedSearchTerms = async (
-      searchResults: string[],
-      searchTerms: string[],
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
-      expect.soft(filteredResults).toEqual(searchResults);
-      const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-        searchResults,
-        searchTerms
-      );
-      expect.soft(validatedResults).toBeTruthy();
-      expect.soft(searchResults).toHaveLength(validatedResults.length);
-    };
-
-    const validateSingleFieldMatch = async (
-      modificationsList: Map<string, string[]>,
-      fieldKey: string,
-      searchTerm: string,
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
-      const match = await commonItemsPage.validateSearchResults(values, searchTerm);
-      expect.soft(match).toBeTruthy();
-    };
-
-    const validateMultiWordFieldMatch = async (
-      modificationsList: Map<string, string[]>,
-      fieldKey: string,
-      searchTerm: string,
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
-      const terms = await commonItemsPage.splitSearchTerm(searchTerm);
-      const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(values, terms);
-      expect.soft(match).toBeTruthy();
-      expect.soft(values).toHaveLength(match.length);
-    };
-
-    const validateFilterMatch = async (
-      modificationsList: Map<string, string[]>,
-      fieldKey: string,
-      allowedValues: string[],
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
-      const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
-      expect.soft(isValid).toBeTruthy();
-    };
-
-    if (searchResults.length !== 0) {
+    if (searchResults.length > 0) {
       // Combined search validation
       const searchTerms = [irasId, ciName, projectTitle].filter(Boolean);
       if (searchTerms.length > 1) {
-        await validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
+        await modificationsReceivedCommonPage.validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
       }
       // Individual search field validations
       if (irasId) {
-        await validateSingleFieldMatch(modificationsList, 'modificationIdValues', irasId, commonItemsPage);
+        await modificationsReceivedCommonPage.validateSingleFieldMatch(
+          modificationsList,
+          'modificationIdValues',
+          irasId,
+          commonItemsPage
+        );
       }
       if (projectTitle) {
-        await validateSingleFieldMatch(modificationsList, 'shortProjectTitleValues', projectTitle, commonItemsPage);
+        await modificationsReceivedCommonPage.validateSingleFieldMatch(
+          modificationsList,
+          'shortProjectTitleValues',
+          projectTitle,
+          commonItemsPage
+        );
       }
       if (ciName) {
-        await validateMultiWordFieldMatch(modificationsList, 'chiefInvestigatorNameValues', ciName, commonItemsPage);
+        await modificationsReceivedCommonPage.validateMultiWordFieldMatch(
+          modificationsList,
+          'chiefInvestigatorNameValues',
+          ciName,
+          commonItemsPage
+        );
       }
       // Filter validations
       const allowedModifications = filterDataset['modification_type_checkbox'];
       if (allowedModifications) {
-        await validateFilterMatch(modificationsList, 'modificationTypeValues', allowedModifications, commonItemsPage);
+        await modificationsReceivedCommonPage.validateFilterMatch(
+          modificationsList,
+          'modificationTypeValues',
+          allowedModifications,
+          commonItemsPage
+        );
       }
       const allowedLeadNations = filterDataset['lead_nation_checkbox'];
       if (allowedLeadNations) {
-        await validateFilterMatch(modificationsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
+        await modificationsReceivedCommonPage.validateFilterMatch(
+          modificationsList,
+          'leadNationValues',
+          allowedLeadNations,
+          commonItemsPage
+        );
       }
     } else {
       throw new Error(`Expected Search Results but No Search Results are Displayed`);
@@ -289,11 +190,12 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with valid {string} for sponsor organisation search box and validate the search results along with {string}',
+  'With javascript disabled, I search with valid {string} for sponsor organisation search box and validate the search results along with {string} in the {string}',
   async (
     { searchModificationsPage, commonItemsPage, rtsPage },
     sponsorOrganisationDatasetName: string,
-    searchHintsDatasetName
+    searchHintsDatasetName,
+    pageValue: string
   ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
@@ -305,7 +207,11 @@ Then(
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
     await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+      await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    } else if (pageValue === 'Search_Modifications_Page' || pageValue === 'Search_Projects_Page') {
+      await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.click();
+    }
     const sponsorOrganisationNameListActualWithSpaces =
       await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_labels.allTextContents();
     const sponsorOrganisationNameListActual = sponsorOrganisationNameListActualWithSpaces.map((str) => str.trim());
@@ -327,18 +233,23 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with invalid {string} for sponsor organisation search box and validate the search results along with {string}',
+  'With javascript disabled, I search with invalid {string} for sponsor organisation search box and validate the search results along with {string} in the {string}',
   async (
     { searchModificationsPage, commonItemsPage },
     sponsorOrganisationDatasetName: string,
-    searchHintsDatasetName
+    searchHintsDatasetName,
+    pageValue: string
   ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const searchHintDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchHintsDatasetName];
     await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+      await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    } else if (pageValue === 'Search_Modifications_Page' || pageValue === 'Search_Projects_Page') {
+      await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.click();
+    }
     const noResultFoundLabelActual = confirmStringNotNull(
       await searchModificationsPage.sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
     ).trim();
@@ -348,12 +259,16 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box',
-  async ({ searchModificationsPage, commonItemsPage }, sponsorOrganisationDatasetName: string) => {
+  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box in the {string}',
+  async ({ searchModificationsPage, commonItemsPage }, sponsorOrganisationDatasetName: string, pageValue: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+      await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    } else if (pageValue === 'Search_Modifications_Page' || pageValue === 'Search_Projects_Page') {
+      await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.click();
+    }
   }
 );
 
@@ -369,42 +284,24 @@ Then(
 );
 
 Then(
-  'the search button appears with a green background in the sponsor Organisation filter',
-  async ({ commonItemsPage }) => {
-    expect
-      .soft(
-        await commonItemsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
-          (e: any) => getComputedStyle(e).backgroundColor
+  'the search button appears with a green background in the sponsor Organisation filter in the {string}',
+  async ({ commonItemsPage }, pageValue: string) => {
+    if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+      expect
+        .soft(
+          await commonItemsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
+            (e: any) => getComputedStyle(e).backgroundColor
+          )
         )
-      )
-      .toBe(commonItemsPage.commonTestData.rgb_green_color);
-  }
-);
-
-Then(
-  'I can now see a table of search results for modifications received for approval',
-  async ({ searchModificationsPage, commonItemsPage }) => {
-    await expect.soft(searchModificationsPage.results_table).toBeVisible();
-    expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
-  }
-);
-
-Then(
-  'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
-  async ({ commonItemsPage, modificationsReceivedCommonPage }, sortDirection: string, sortField: string) => {
-    let sortedModsList: string[];
-    const searchColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(
-      'Search_Modifications_Page',
-      sortField
-    );
-    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
-    if (sortField.toLowerCase() == 'modification id') {
-      sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
-    } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedModsList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    } else {
-      sortedModsList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+        .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    } else if (pageValue === 'Search_Modifications_Page' || pageValue === 'Search_Projects_Page') {
+      expect
+        .soft(
+          await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.evaluate(
+            (e: any) => getComputedStyle(e).backgroundColor
+          )
+        )
+        .toBe(commonItemsPage.commonTestData.rgb_green_color);
     }
-    expect.soft(actualList).toEqual(sortedModsList);
   }
 );

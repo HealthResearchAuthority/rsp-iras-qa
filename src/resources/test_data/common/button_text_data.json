@@ -148,6 +148,14 @@
     "Lead_Nation": "Lead Nation",
     "Status": "Status"
   },
+  "Search_Projects_Page": {
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Iras_Id": "IRAS ID",
+    "Short_Project_Title": "Short project title",
+    "Lead_Nation": "Lead Nation"
+  },
   "Modifications_Tasklist_Page": {
     "Apply_Filters": "Apply filters",
     "Search": "Search",
@@ -183,6 +191,18 @@
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
     "Status": "Status"
+  },
+  "Team_Manager_Dashboard_Page": {
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Date_Submitted": "Date submitted",
+    "Days_Since_Submission": "Days since submission",
+    "Study_Wide_Reviewer": "Study-wide reviewer",
+    "Status": "Status",
+    "Continue": "Continue to assign modifications"
   },
   "Post_Approval_Page": {
     "Modification_Id": "Modification ID",
@@ -381,5 +401,8 @@
   },
   "Sponsor_Check_And_Authorise_Page": {
     "Confirm_Selection": "Confirm selection"
+  },
+  "Choose_A_Record_Type_To_Search_Page": {
+    "Next": "Next"
   }
 }

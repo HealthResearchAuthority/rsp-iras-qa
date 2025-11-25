@@ -7,7 +7,8 @@ export default class ModificationsReadyToAssignPage {
   readonly page: Page;
   readonly modificationsReadyToAssignPageTestData: typeof modificationsReadyToAssignPageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
-  private _modification_record: string[];
+  private _modification_record: string;
+  private _modification_id_title: string[];
   readonly modifications_tasklist_link: Locator;
   readonly short_project_title_column_label: Locator;
   readonly modification_id_column_label: Locator;
@@ -34,13 +35,15 @@ export default class ModificationsReadyToAssignPage {
   readonly modification_checkbox: Locator;
   readonly results_table: Locator;
   readonly iras_id_search_text: Locator;
+  readonly study_wide_reviewer_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.modificationsReadyToAssignPageTestData = modificationsReadyToAssignPageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
-    this._modification_record = [];
+    this._modification_record = '';
+    this._modification_id_title = [];
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
@@ -93,8 +96,8 @@ export default class ModificationsReadyToAssignPage {
     this.year_to_text = this.date_to_filter_input.getByLabel(
       this.modificationsReadyToAssignPageTestData.Filter_Labels.year_to_label
     );
-    this.days_since_submission_from_text = this.page.getByTestId('Search_FromDaysSinceSubmission');
-    this.days_since_submission_to_text = this.page.getByTestId('Search_ToDaysSinceSubmission');
+    this.days_since_submission_from_text = this.page.getByTestId('Search.FromDaysSinceSubmission');
+    this.days_since_submission_to_text = this.page.getByTestId('Search.ToDaysSinceSubmission');
     // this.short_project_title_text = this.page.getByLabel(
     //   this.modificationsReadyToAssignPageTestData.Filter_Labels.short_project_title_label
     // );
@@ -106,16 +109,25 @@ export default class ModificationsReadyToAssignPage {
       this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.iras_id_search_box_label,
       { exact: true }
     );
+    this.study_wide_reviewer_text = this.page.locator('input[name="Search.ReviewerName"]');
   }
 
   //Getters & Setters for Private Variables
 
-  async getSelectedModifications(): Promise<string[]> {
+  async getSelectedModifications(): Promise<string> {
     return this._modification_record;
   }
 
-  async setSelectedModifications(value: string[]): Promise<void> {
+  async setSelectedModifications(value: string): Promise<void> {
     this._modification_record = value;
+  }
+
+  async getSelectedModificationsIdTitle(): Promise<string[]> {
+    return this._modification_id_title;
+  }
+
+  async setSelectedModificationsIdTitle(value: string[]): Promise<void> {
+    this._modification_id_title = value;
   }
 
   //Page Methods

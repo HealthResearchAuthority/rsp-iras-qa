@@ -14,7 +14,14 @@ Feature: My Account Home page
     Then I can see the my account home page
     When I click the 'Approvals' link on the 'Home_Page'
     Then I can see the approvals home page
-    And I click the 'Search' link on the 'Approvals_Page'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I capture the page screenshot
+    And I can see the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I capture the page screenshot
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
     Then I can see the 'Search_Modifications_Page'
     Then I capture the page screenshot
     When I click the 'Back' link on the 'Search_Modifications_Page'
@@ -42,7 +49,14 @@ Feature: My Account Home page
     Then I capture the page screenshot
     When I click the 'Approvals' link on the 'Home_Page'
     Then I can see the approvals home page
-    And I click the 'Search' link on the 'Approvals_Page'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I capture the page screenshot
+    And I can see the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I capture the page screenshot
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
     Then I can see the 'Search_Modifications_Page'
     Then I capture the page screenshot
     When I click the 'Back' link on the 'Search_Modifications_Page'
@@ -65,7 +79,14 @@ Feature: My Account Home page
     Then I capture the page screenshot
     When I click the 'Approvals' link on the 'Home_Page'
     Then I can see the approvals home page
-    And I click the 'Search' link on the 'Approvals_Page'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I capture the page screenshot
+    And I can see the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I capture the page screenshot
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
     Then I can see the 'Search_Modifications_Page'
     Then I capture the page screenshot
     When I click the 'Back' link on the 'Search_Modifications_Page'
@@ -89,7 +110,14 @@ Feature: My Account Home page
     Then I capture the page screenshot
     When I click the 'Approvals' link on the 'Home_Page'
     Then I can see the approvals home page
-    And I click the 'Search' link on the 'Approvals_Page'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I capture the page screenshot
+    And I can see the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I capture the page screenshot
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I capture the page screenshot
     Then I can see the 'Search_Modifications_Page'
     Then I capture the page screenshot
     When I click the 'Back' link on the 'Search_Modifications_Page'

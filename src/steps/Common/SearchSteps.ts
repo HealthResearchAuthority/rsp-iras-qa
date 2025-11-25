@@ -19,6 +19,8 @@ When(
       userListSponsorOrganisationPage,
       myResearchProjectsPage,
       projectOverviewPage,
+      searchProjectsPage,
+      teamManagerDashboardPage,
     },
     searchType: string,
     searchQueryName: string
@@ -36,6 +38,8 @@ When(
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
       searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'project records') {
+      searchQueryDataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'tasklist') {
       searchQueryDataset =
         modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
@@ -58,16 +62,20 @@ When(
     } else if (searchType.toLowerCase() == 'modifications in post approval') {
       searchQueryDataset =
         projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'team manager dashboard') {
+      searchQueryDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
     let searchKey: string;
     if (searchQueryName.toLowerCase().startsWith('same') || searchQueryName.toLowerCase().includes('newly added')) {
       searchKey = await searchAddUserReviewBodyPage.getUserEmail();
+    } else if (searchQueryName === 'Valid_Full_Iras_Id of recently added project') {
+      searchKey = await searchProjectsPage.getIrasId();
     } else {
       searchKey = searchQueryDataset['search_input_text'];
     }
-    expect(searchKey).toBeTruthy();
+    expect.soft(searchKey).toBeTruthy();
     await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
