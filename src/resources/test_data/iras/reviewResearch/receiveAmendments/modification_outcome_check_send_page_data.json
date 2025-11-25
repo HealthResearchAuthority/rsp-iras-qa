@@ -1,0 +1,14 @@
+{
+  "Modification_Outcome_Check_Send_Page": {
+    "title": "Confirm review outcome - Plan and manage health and care research",
+    "page_heading": "Check and send review outcome to applicant",
+    "page_guidance_text": "Check the information here is correct before sending the review outcome",
+    "summary_list_heading": "Modification decision"
+  },
+  "Summary_List_Labels": {
+    "short_project_title_label": "Short project title",
+    "modification_id_label": "Modification ID",
+    "decision_label": "Decision",
+    "reason_label": "Reason"
+  }
+}

@@ -47,7 +47,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | page number             | page number            |
             | next link               | previous link          |
 
-    @RegressionSortMyTasklistByColumn @rsp-4842
+    @RegressionSortMyTasklistByColumn @rsp-4842 @rsp-4822
     Scenario Outline: Verify the user is able to sort the my modifications tasklist by ascending and descending order for each table column
         When I click the '<Sort_Button>' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -69,6 +69,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Short_Project_Title   | short project title   | ascending    | descending     |
             | Date_Submitted        | date submitted        | descending   | ascending      |
             | Days_Since_Submission | days since submission | ascending    | descending     |
+            | Status                | status                | ascending    | descending     |
 
     @RegressionSearchFilterComboMyTasklist @rsp-4821
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on my tasklist

@@ -145,7 +145,8 @@
     "Short_Project_Title": "Short project title",
     "Modification_Type": "Modification type",
     "Chief_Investigator": "Chief Investigator",
-    "Lead_Nation": "Lead Nation"
+    "Lead_Nation": "Lead Nation",
+    "Status": "Status"
   },
   "Search_Projects_Page": {
     "Advanced_Filters": "Advanced filters",
@@ -164,6 +165,20 @@
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
+    "Status": "Status",
+    "Continue_to_assign_modifications": "Continue to assign modifications"
+  },
+  "Team_Manager_Dashboard_Page": {
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Modification_Type": "Modification type",
+    "Date_Submitted": "Date submitted",
+    "Days_Since_Submission": "Days since submission",
+    "Studywide_Reveiwer": "Study-wide reviewer",
+    "Status": "Status",
     "Continue_to_assign_modifications": "Continue to assign modifications"
   },
   "My_Modifications_Tasklist_Page": {
@@ -266,7 +281,11 @@
     "Add_Another_Change": "Add another change to this modification",
     "Save_Continue_Review": "Save and continue to review",
     "Save_For_Later": "Save for later",
-    "Add_Documents": "Add documents"
+    "Add_Documents": "Add documents",
+    "Save_And_Continue": "Save and continue"
+  },
+  "Modification_Outcome_Check_Send_Page": {
+    "Send_Review_Outcome": "Send review outcome to applicant"
   },
   "Sponsor_Reference_Page": {
     "Save_Continue_Review": "Save and continue to review",

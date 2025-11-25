@@ -100,6 +100,7 @@ import SponsorModificationPage from '../pages/IRAS/makeChanges/SponsorModificati
 import ChooseARecordTypeToSearchPage from '../pages/IRAS/reviewResearch/approvals/ChooseARecordTypeToSearchPage';
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
 import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchProjectsPage';
+import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -200,6 +201,8 @@ type CustomFixtures = {
   chooseARecordTypeToSearchPage: ChooseARecordTypeToSearchPage;
   teamManagerDashboardPage: TeamManagerDashboardPage;
   searchProjectsPage: SearchProjectsPage;
+  modificationOutcomeCheckSendPage: ModificationOutcomeCheckSendPage;
+
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -590,6 +593,10 @@ export const test = base.extend<CustomFixtures>({
 
   searchProjectsPage: async ({ page }, use) => {
     await use(new SearchProjectsPage(page));
+  },
+
+  modificationOutcomeCheckSendPage: async ({ page }, use) => {
+    await use(new ModificationOutcomeCheckSendPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

@@ -238,7 +238,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Invalid_Date_From                 | Invalid_Date_From_Error                 |
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-    @SortTasklistByColumn @rsp-4091
+    @SortTasklistByColumn @rsp-4091 @rsp-4822 @KNOWN-DEFECT-RSP-6281
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -262,6 +262,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Short_Project_Title   | short project title   | ascending    | descending     |
             | Date_Submitted        | date submitted        | descending   | ascending      |
             | Days_Since_Submission | days since submission | ascending    | descending     |
+            | Status                | status                | ascending    | descending     |
 
     @tasklistErrorStateValidation @rsp-4111
     Scenario: Verify that the user must select a modifiation before continuing
@@ -402,6 +403,40 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Short_Project_Title   |
             | Date_Submitted        |
             | Days_Since_Submission |
+
+    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+    Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page
+        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see the advanced filters panel
+        And I open each of the modification tasklist filters
+        And I capture the page screenshot
+        When I fill the 'my' modifications tasklist search and filter options with 'Date_From_Multi'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see active filters displayed
+        And I capture the page screenshot
+        Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
+        When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Modifications_Tasklist_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        And I 'can' see active filters displayed
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Modifications_Tasklist_Page'
+        Then I can see the approvals home page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the 'Modifications_Tasklist_Page'
+        And I 'cannot' see the advanced filters panel
+        And I capture the page screenshot
+
+        Examples:
+            | Validation_Text | Navigation_Method |
+            | Label_Texts     | page number       |
+            | Label_Texts     | next link         |
 
     # Need to integrate with modification creation process to have a fresh dataset for assignment
     # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
@@ -596,3 +631,17 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Examples:
             | Valid_Iras_Id                       | Modification_Id                                |
             | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six |
+
+    @searchTasklistModificationStatus @rsp-4822
+    Scenario Outline: Verify that modifications status' display as expected on the modifications tasklist page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
+        And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        Then I '<Visibility>' see the modification displayed in the 'Modifications_Tasklist_Page' list with '<Status>' status
+
+        Examples:
+            | Status                                 | User               | Visibility |
+            | Modification_Status_Approved           | nobody             | cannot     |
+            | Modification_Status_Not_Approved       | nobody             | cannot     |
+            | Modification_Status_Received           | nobody             | can        |
+            | Modification_Status_Review_In_Progress | Studywide_Reviewer | cannot     |

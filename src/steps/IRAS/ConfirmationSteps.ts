@@ -458,3 +458,12 @@ Then(
       .toBe(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.confirmation_body);
   }
 );
+
+Then('I validate confirmation screen for modification review outcome sent', async ({ confirmationPage }) => {
+  expect
+    .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_header_common_label.textContent()))
+    .toBe(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.page_heading);
+  expect
+    .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_body_label.textContent()))
+    .toBe(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.confirmation_body);
+});

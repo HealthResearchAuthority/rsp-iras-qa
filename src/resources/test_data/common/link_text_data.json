@@ -200,7 +200,6 @@
   },
   "Approvals_Page": {
     "My_Account": "My account",
-    "Search": "Search",
     "Back": "Back",
     "Modifications_Tasklist": "Modifications tasklist",
     "My_Tasklist": "My tasklist",
@@ -242,7 +241,15 @@
     "Back": "Back",
     "Change": "Change",
     "Remove": "Remove",
-    "Delete_Modification": "Delete modification"
+    "Delete_Modification": "Delete modification",
+    "Continue": "Continue",
+    "Sponsor_Details": "Sponsor details",
+    "Modification_Details": "Modification details",
+    "Documents": "Documents",
+    "History": "History"
+  },
+  "Modification_Review_Outcome_Sent_Page": {
+    "Back_To_Tasklist": "Back to Task list"
   },
   "Modification_Unfinished_Error_Page": {
     "Back": "Back"
@@ -319,7 +326,8 @@
   "Sponsor_Check_And_Authorise_Page": {
     "Sponsor_Details": "Sponsor details",
     "Modification_Details": "Modification details",
-    "Documents": "Documents"
+    "Documents": "Documents",
+    "History": "History"
   },
   "Choose_A_Record_Type_To_Search_Page": {
     "Approvals": "Approvals"
@@ -337,4 +345,3 @@
     "Back_To_Dashboard": "Back to Dashboard"
   }
 }
-

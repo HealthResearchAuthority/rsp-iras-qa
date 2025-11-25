@@ -319,3 +319,95 @@ Given(
     await expect.soft(modificationsReceivedCommonPage.days_since_submission_suffix_label).toBeVisible();
   }
 );
+
+When(
+  'I enter an iras id for a modification with status {string} into the search field',
+  async ({ commonItemsPage, modificationsReceivedCommonPage, modificationsCommonPage }, statusType: string) => {
+    const [status, optionalReviewNullQueryInput] = await modificationsReceivedCommonPage.getModificationStatusSqlInput(
+      statusType,
+      modificationsCommonPage.modificationsCommonPageTestData
+    );
+    await modificationsReceivedCommonPage.sqlGetSpecificModificationByStatus(status, optionalReviewNullQueryInput);
+    await commonItemsPage.search_text.fill(`${await modificationsReceivedCommonPage.getIrasId()}`);
+  }
+);
+
+When(
+  'I enter an iras id for {string} lead nation modification assigned to {string} with status {string} into the search field',
+  async (
+    { commonItemsPage, modificationsReceivedCommonPage, modificationsCommonPage, loginPage },
+    leadNation: string,
+    assignedUser: string,
+    statusType: string
+  ) => {
+    const [status, optionalReviewNullQueryInput] = await modificationsReceivedCommonPage.getModificationStatusSqlInput(
+      statusType,
+      modificationsCommonPage.modificationsCommonPageTestData
+    );
+    const optionalReviewerIdQueryInput =
+      await modificationsReceivedCommonPage.getModificationNationReviewerEmailSqlInput(
+        assignedUser,
+        loginPage.loginPageTestData
+      );
+    await modificationsReceivedCommonPage.sqlGetSpecificModificationByNationStatus(
+      leadNation,
+      status,
+      optionalReviewNullQueryInput,
+      optionalReviewerIdQueryInput
+    );
+    await commonItemsPage.search_text.fill(`${await modificationsReceivedCommonPage.getIrasId()}`);
+  }
+);
+
+Then(
+  'I {string} see the modification displayed in the {string} list with {string} status',
+  async (
+    { commonItemsPage, modificationsReceivedCommonPage, modificationsCommonPage },
+    visibility: string,
+    pageType: string,
+    statusInput: string
+  ) => {
+    const statusExpected = modificationsCommonPage.modificationsCommonPageTestData[statusInput].status;
+    const modIdColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(
+      pageType,
+      'modification id'
+    );
+    const rowLocator = commonItemsPage.tableBodyRows.filter({
+      has: commonItemsPage.page
+        .getByRole('cell')
+        .nth(modIdColumnIndex)
+        .getByText(`${await modificationsReceivedCommonPage.getModificationId()}`, { exact: true }),
+    });
+    await modificationsReceivedCommonPage.setRowLocator(rowLocator);
+
+    if (visibility.toLowerCase() == 'cannot') {
+      expect.soft(rowLocator).toBeHidden();
+    } else {
+      const statusColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, 'status');
+      const actualStatus = await rowLocator.getByRole('cell').nth(statusColumnIndex).textContent();
+      expect.soft(rowLocator).toBeVisible();
+      expect.soft(actualStatus).toEqual(statusExpected);
+    }
+  }
+);
+
+Then(
+  'I click the modification id displayed on the {string}',
+  async ({ modificationsReceivedCommonPage }, pageType: string) => {
+    const modIdColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(
+      pageType,
+      'modification id'
+    );
+    const rowLocator = await modificationsReceivedCommonPage.getRowLocator();
+    await rowLocator
+      .getByRole('cell')
+      .nth(modIdColumnIndex)
+      .getByText(`${await modificationsReceivedCommonPage.getModificationId()}`, { exact: true })
+      .click();
+  }
+);
+
+When('I select the modification in order to assign it', async ({ modificationsReceivedCommonPage }) => {
+  const rowLocator = await modificationsReceivedCommonPage.getRowLocator();
+  await rowLocator.getByTestId(await modificationsReceivedCommonPage.getModificationId()).click();
+});

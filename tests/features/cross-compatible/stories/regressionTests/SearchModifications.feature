@@ -17,7 +17,7 @@ Feature: Receive Amendments: Search Modifications
                 Then I can see the 'Search_Modifications_Page'
                 And I capture the page screenshot
 
-        @RegressionSearchModificationsSortByColumn @rsp-4090
+        @RegressionSearchModificationsSortByColumn @rsp-4090 @rsp-4822
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -44,6 +44,7 @@ Feature: Receive Amendments: Search Modifications
                         | Modification_Type   | modification type   |
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
+                        | Status              | status              |
 
         @RegressionSearchModificationsAdvancedFilters @rsp-4011
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button

@@ -15,8 +15,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-
-        @SortModificationsByColumn @rsp-4090
+        @SortModificationsByColumn @rsp-4090 @rsp-4822
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -44,6 +43,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Modification_Type   | modification type   |
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
+                        | Status              | status              |
 
         @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
@@ -112,7 +112,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -755,3 +755,44 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
+
+        @searchModificationStatus @rsp-4822
+        Scenario Outline: Verify that modifications status' display as expected on the search modifictions page
+                When I enter an iras id for a modification with status '<Status>' into the search field
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I can now see a table of search results for modifications received for approval
+                Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with '<Status>' status
+
+                Examples:
+                        | Status                                 |
+                        | Modification_Status_Approved           |
+                        | Modification_Status_Not_Approved       |
+                        | Modification_Status_Received           |
+                        | Modification_Status_Review_In_Progress |
+
+        @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+        Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from the Search Modifications page
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                And I capture the page screenshot
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                When I click the 'Back' link on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the approvals home page
+                And I click the 'Search' link on the 'Approvals_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+                And I 'cannot' see active filters displayed
+                And I capture the page screenshot
+
+                Examples:
+                        | Navigation_Method | Advanced_Filters             |
+                        | page number       | Advanced_Filters_Lead_Nation |
+                        | previous link     | Advanced_Filters_Lead_Nation |
+
