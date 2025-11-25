@@ -75,7 +75,6 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
             | Sponsor_Organisation_ImperialCollegeLondon                          | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_ImperialNHSTrust                               | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_CambridgeUniversityHospitalsNHSFoundationTrust | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_GuysAndThomasNHSFoundationTrust                | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_UniversityOfManchester                         | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_UniversityOfLeeds                              | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_UniversityOfBirmingham                         | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |

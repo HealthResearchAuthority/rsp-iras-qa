@@ -8,6 +8,15 @@
   "Study_Wide_Reviewer": {
     "Study_Wide_Reviewer_HRA_England": {
       "study_wide_reviewer_dropdown": "Study-wide reviewer HRA England"
+    },
+    "Studywide_Reviewer_NI": {
+      "study_wide_reviewer_dropdown": "Study-wide reviewer Northern Ireland"
+    },
+    "Studywide_Reviewer_S": {
+      "study_wide_reviewer_dropdown": "Study-wide reviewer Scotland"
+    },
+    "Studywide_Reviewer_W": {
+      "study_wide_reviewer_dropdown": "Study-wide reviewer Wales"
     }
   }
 }
