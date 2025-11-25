@@ -73,6 +73,28 @@ AfterScenario(
   }
 );
 
+BeforeScenario(
+  {
+    name: 'Remove known reusable sponsor organisation from the system',
+    tags: '@SetupNewSponsorOrgGoLive',
+  },
+  async function ({ manageSponsorOrganisationPage, setupNewSponsorOrganisationPage }) {
+    const reusableOrgsDataset =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation;
+    for (const org in reusableOrgsDataset) {
+      if (Object.hasOwn(reusableOrgsDataset, org)) {
+        const sponsorOrgName = reusableOrgsDataset[org].sponsor_organisation_text;
+        const sponsorId = (
+          await manageSponsorOrganisationPage.sqlGetOrganisationIdFromRTSByName(sponsorOrgName)
+        ).toString();
+        if (sponsorId) {
+          await manageSponsorOrganisationPage.sqlDeleteSponsorOrgById(sponsorId);
+        }
+      }
+    }
+  }
+);
+
 AfterScenario(
   {
     name: 'Remove sponsor organisation from the system',

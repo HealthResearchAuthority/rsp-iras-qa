@@ -11,24 +11,24 @@ Given(
     reason: string
   ) => {
     await modificationOutcomeCheckSendPage.assertOnModificationOutcomeCheckSendPage();
-    await expect(modificationOutcomeCheckSendPage.short_project_title_value).toHaveText(
-      await modificationsReceivedCommonPage.getShortProjectTitle()
-    );
-    await expect(modificationOutcomeCheckSendPage.modification_id_value).toHaveText(
-      await modificationsReceivedCommonPage.getModificationId()
-    );
-    await expect(modificationOutcomeCheckSendPage.decision_value).toHaveText(
-      await modificationsReceivedCommonPage.getDecisionOutcome()
-    );
-    await expect(modificationOutcomeCheckSendPage.decision_change_link).toBeVisible();
+    await expect
+      .soft(modificationOutcomeCheckSendPage.short_project_title_value)
+      .toHaveText(await modificationsReceivedCommonPage.getShortProjectTitle());
+    await expect
+      .soft(modificationOutcomeCheckSendPage.modification_id_value)
+      .toHaveText(await modificationsReceivedCommonPage.getModificationId());
+    await expect
+      .soft(modificationOutcomeCheckSendPage.decision_value)
+      .toHaveText(await modificationsReceivedCommonPage.getDecisionOutcome());
+    await expect.soft(modificationOutcomeCheckSendPage.decision_change_link).toBeVisible();
 
     if (outcome.toLowerCase() == 'not_approved') {
       const expectedReason =
         modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons[reason];
-      await expect(modificationOutcomeCheckSendPage.reason_value).toHaveText(expectedReason);
-      await expect(modificationOutcomeCheckSendPage.reason_change_link).toBeVisible();
+      await expect.soft(modificationOutcomeCheckSendPage.reason_value).toHaveText(expectedReason);
+      await expect.soft(modificationOutcomeCheckSendPage.reason_change_link).toBeVisible();
     } else {
-      await expect(modificationOutcomeCheckSendPage.reason_row).toBeHidden();
+      await expect.soft(modificationOutcomeCheckSendPage.reason_row).toBeHidden();
     }
   }
 );

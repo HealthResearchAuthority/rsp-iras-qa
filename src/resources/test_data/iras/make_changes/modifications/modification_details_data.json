@@ -5,7 +5,9 @@
     "change_ready_for_submission_status_label": "Change ready for submission",
     "change_Unfinished_status_label": "Unfinished",
     "next_steps": "Next steps",
-    "next_steps_guidance": "When you've completed your review of all the information on this page, continue to the next step where you'll enter the review outcome"
+    "next_steps_guidance": "When you've completed your review of all the information on this page, continue to the next step where you'll enter the review outcome",
+    "review_comment_show": "Show",
+    "review_comment_hide": "Hide"
   },
   "Modification_Review_Outcome_Section": {
     "review_comment_heading": "Leave a comment",

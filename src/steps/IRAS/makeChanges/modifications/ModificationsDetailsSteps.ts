@@ -7,24 +7,15 @@ Then('I can see the modifications details page', async ({ modificationsDetailsPa
   await modificationsDetailsPage.assertOnModificationsDetailsPage();
 });
 
-Then(
-  'I can see the modifications details page in the readonly view for {string}',
-  async ({ modificationsDetailsPage }, user: string) => {
-    await modificationsDetailsPage.assertOnModificationsDetailsPage();
-    await expect.soft(modificationsDetailsPage.deleteModificationLink).toBeHidden();
-    await expect.soft(modificationsDetailsPage.remove_link).toBeHidden();
-    await expect.soft(modificationsDetailsPage.change_link).toBeHidden();
-    if (user.toLowerCase().startsWith('study')) {
-      await expect.soft(modificationsDetailsPage.next_steps_heading).toBeVisible();
-      await expect.soft(modificationsDetailsPage.next_steps_guidance).toBeVisible();
-      await expect.soft(modificationsDetailsPage.next_steps_button).toBeVisible();
-    } else {
-      await expect.soft(modificationsDetailsPage.next_steps_heading).toBeHidden();
-      await expect.soft(modificationsDetailsPage.next_steps_guidance).toBeHidden();
-      await expect.soft(modificationsDetailsPage.next_steps_button).toBeHidden();
-    }
-  }
-);
+Then('I can see the modifications details page in the readonly view', async ({ modificationsDetailsPage }) => {
+  await modificationsDetailsPage.assertOnModificationsDetailsPage();
+  await expect.soft(modificationsDetailsPage.deleteModificationLink).toBeHidden();
+  await expect.soft(modificationsDetailsPage.remove_link).toBeHidden();
+  await expect.soft(modificationsDetailsPage.change_link).toBeHidden();
+  await expect.soft(modificationsDetailsPage.next_steps_heading).toBeVisible();
+  await expect.soft(modificationsDetailsPage.next_steps_guidance).toBeVisible();
+  await expect.soft(modificationsDetailsPage.next_steps_button).toBeVisible();
+});
 
 Then('I can see the confirm remove modifications page', async ({ modificationsDetailsPage }) => {
   await modificationsDetailsPage.assertOnRemoveModificationsPage();
@@ -87,11 +78,13 @@ Then('I click the {string} tab on the modification details page', async ({ modif
 
 Given('I can see the review outcome section', async ({ modificationsDetailsPage }) => {
   await expect(modificationsDetailsPage.review_comment_heading).toBeVisible();
-  await expect(modificationsDetailsPage.review_comment_guidance).toBeVisible();
-  await expect(modificationsDetailsPage.review_comment_box).toBeVisible();
+  await expect(modificationsDetailsPage.review_comment_show).toBeVisible();
+  await expect(modificationsDetailsPage.review_comment_guidance).toBeHidden();
+  await expect(modificationsDetailsPage.review_comment_box).toBeHidden();
   await expect(modificationsDetailsPage.review_outcome_heading).toBeVisible();
   await expect(modificationsDetailsPage.approved_outcome_option).toBeVisible();
   await expect(modificationsDetailsPage.not_approved_outcome_option).toBeVisible();
+  await expect(modificationsDetailsPage.review_outcome_guidance).toBeVisible();
 });
 
 When(
@@ -109,6 +102,9 @@ When(
           .not_approved_outcome_option
       );
     } else {
+      await modificationsDetailsPage.review_comment_show.click();
+      await expect(modificationsDetailsPage.review_comment_hide).toBeVisible();
+      await expect(modificationsDetailsPage.review_comment_guidance).toBeVisible();
       await modificationsDetailsPage.approved_outcome_option.check();
       await modificationsDetailsPage.review_comment_box.fill(reasonGiven);
       await modificationsReceivedCommonPage.setDecisionOutcome(
