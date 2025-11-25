@@ -198,10 +198,11 @@
     "Remove_This_Change": "Remove this change"
   },
   "Approvals_Page": {
-    "Search": "Search",
+    "Search": "Search records",
     "Back": "Back",
     "Modifications_Tasklist": "Modifications tasklist",
-    "My_Tasklist": "My tasklist"
+    "My_Tasklist": "My tasklist",
+    "Team_Manager_Dashboard": "Team manager dashboard"
   },
   "Affected_Organisation_Selection_Page": {
     "Back": "Back",
@@ -238,7 +239,15 @@
     "Back": "Back",
     "Change": "Change",
     "Remove": "Remove",
-    "Delete_Modification": "Delete modification"
+    "Delete_Modification": "Delete modification",
+    "Continue": "Continue",
+    "Sponsor_Details": "Sponsor details",
+    "Modification_Details": "Modification details",
+    "Documents": "Documents",
+    "History": "History"
+  },
+  "Modification_Review_Outcome_Sent_Page": {
+    "Back_To_Tasklist": "Back to Task list"
   },
   "Modification_Unfinished_Error_Page": {
     "Back": "Back"

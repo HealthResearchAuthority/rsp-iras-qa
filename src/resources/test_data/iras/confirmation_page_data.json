@@ -92,6 +92,10 @@
     "what_happens_next_label": "What happens next",
     "confirmation_body": "The modification has been recorded as not authorised. If the modification is still required the researcher will need to create a new modification."
   },
+  "Modification_Outcome_Sent": {
+    "page_heading": "Review outcome successfully sent to applicant",
+    "confirmation_body": "The applicant will receive a status update. Any next steps has been sent to the applicant."
+  },
   "add_remove_user_review_Body_confirmation_success_header_label": "User has been successfully",
   "enable_disable_confirmation_header_label": "Confirm that you want to",
   "disable_success_confirmation_header_label": "successfully disabled",

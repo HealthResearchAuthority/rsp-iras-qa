@@ -1157,6 +1157,18 @@
   "Document_Status_Complete": {
     "status": "Complete"
   },
+  "Modification_Status_Received": {
+    "status": "Received"
+  },
+  "Modification_Status_Review_In_Progress": {
+    "status": "Review in progress"
+  },
+  "Modification_Status_Authorised": {
+    "status": "Authorised"
+  },
+  "Modification_Status_Not_Authorised": {
+    "status": "Not authorised"
+  },
   "Modification_Status_Authorised": {
     "status": "Authorised"
   },

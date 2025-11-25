@@ -74,7 +74,7 @@ export default class SearchModificationsPage {
     //Locators
     this.page_heading = this.page
       .getByRole('heading')
-      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_heading);
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_heading, { exact: true });
     this.page_guidance_text = this.page
       .getByRole('paragraph')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_guidance_text);
@@ -324,7 +324,7 @@ export default class SearchModificationsPage {
   async assertOnSearchModificationsPage() {
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.page_guidance_text).toBeVisible();
-    // expect.soft(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);// Temporarily commented out due to title mismatch
+    expect.soft(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
   }
 
   async goto() {

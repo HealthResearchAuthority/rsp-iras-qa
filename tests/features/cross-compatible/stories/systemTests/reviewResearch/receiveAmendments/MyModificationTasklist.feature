@@ -59,7 +59,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
         And I capture the page screenshot
         Then I can see the approvals home page
 
-    @SortMyTasklistByColumn @rsp-4842
+    @SortMyTasklistByColumn @rsp-4842 @rsp-4822
     Scenario Outline: Verify the user is able to sort the my modifications tasklist by ascending and descending order for each table column
         When I click the '<Sort_Button>' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -81,6 +81,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Short_Project_Title   | short project title   | ascending    | descending     |
             | Date_Submitted        | date submitted        | descending   | ascending      |
             | Days_Since_Submission | days since submission | ascending    | descending     |
+            | Status                | status                | ascending    | descending     |
 
     @searchMyTasklistByIrasIdWithResults @rsp-4821
     Scenario Outline: Verify the user is able to search the my modifications tasklist by the iras ID
@@ -285,3 +286,16 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Invalid_Date_From                 | Invalid_Date_From_Error                   |
             | Invalid_Date_To                   | Invalid_Date_To_Error                     |
             | Invalid_Date_From_Days_From       | Date_Days_Simultaneous_Summary_Only_Error |
+
+    @searchMyModificationsTasklistStatus @rsp-4822
+    Scenario Outline: Verify that modifications status' display as expected on the my modifications tasklist page
+        When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
+        And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+        Then I '<Visibility>' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with '<Status>' status
+
+        Examples:
+            | Status                                 | User               | Visibility |
+            | Modification_Status_Approved           | nobody             | cannot     |
+            | Modification_Status_Not_Approved       | nobody             | cannot     |
+            | Modification_Status_Received           | nobody             | cannot     |
+            | Modification_Status_Review_In_Progress | Studywide_Reviewer | can        |
