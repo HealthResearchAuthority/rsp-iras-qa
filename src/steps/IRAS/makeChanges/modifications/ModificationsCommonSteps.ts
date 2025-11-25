@@ -268,25 +268,6 @@ Then(
 );
 
 Then(
-  'I validate the change details are displayed as per the {string} dataset under the tabs sections',
-  async ({ modificationsCommonPage }, datasetName) => {
-    const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    const changeNames = Object.keys(changesDataset).reverse();
-    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
-      const changeName = changeNames[changeIndex];
-      const expectedData = changesDataset[changeName];
-      const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
-      const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
-        cardTitle,
-        cardTitle,
-        expectedData
-      );
-      validateCardData(expectedData, actualData.cardData);
-    }
-  }
-);
-
-Then(
   'I validate sponsor details are displayed with {string}',
   async ({ modificationsCommonPage, sponsorReferencePage, reviewAllChangesPage }, datasetName) => {
     const expectedData = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
@@ -313,24 +294,6 @@ Then(
     expect.soft(submittedDateActual[0]).toBe(submittedDateExpected);
   }
 );
-
-Then('I validate overall modification ranking on post approval tab', async ({ modificationsCommonPage }) => {
-  const modificationTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).modificationType;
-  const categoryExpected = (await modificationsCommonPage.getOverallRankingForChanges()).category;
-  const reviewTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).reviewType;
-  const modificationRankingDetails = await modificationsCommonPage.getModificationRankingPostApprovalPage();
-  const modificationTypeValue = modificationRankingDetails.get('modificationType');
-  const modificationTypeActual = Array.isArray(modificationTypeValue)
-    ? modificationTypeValue.join(', ')
-    : modificationTypeValue;
-  const categoryValue = modificationRankingDetails.get('rankingCategory');
-  const categoryActual = Array.isArray(categoryValue) ? categoryValue.join(', ') : categoryValue;
-  const reviewTypeValue = modificationRankingDetails.get('reviewType');
-  const reviewTypeActual = Array.isArray(reviewTypeValue) ? reviewTypeValue.join(', ') : reviewTypeValue;
-  expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
-  expect.soft(categoryActual).toBe(categoryExpected);
-  expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
-});
 
 Then(
   'I click on the modification id hyperlink in the post approval tab',
@@ -583,6 +546,24 @@ Then('I click on the searched modification id', async ({ modificationsCommonPage
   await modificationsCommonPage.page.getByText(modificationID, { exact: true }).click();
 });
 
+Then('I validate overall modification ranking on post approval tab', async ({ modificationsCommonPage }) => {
+  const modificationTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).modificationType;
+  const categoryExpected = (await modificationsCommonPage.getOverallRankingForChanges()).category;
+  const reviewTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).reviewType;
+  const modificationRankingDetails = await modificationsCommonPage.getModificationRankingPostApprovalPage();
+  const modificationTypeValue = modificationRankingDetails.get('modificationType');
+  const modificationTypeActual = Array.isArray(modificationTypeValue)
+    ? modificationTypeValue.join(', ')
+    : modificationTypeValue;
+  const categoryValue = modificationRankingDetails.get('rankingCategory');
+  const categoryActual = Array.isArray(categoryValue) ? categoryValue.join(', ') : categoryValue;
+  const reviewTypeValue = modificationRankingDetails.get('reviewType');
+  const reviewTypeActual = Array.isArray(reviewTypeValue) ? reviewTypeValue.join(', ') : reviewTypeValue;
+  expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
+  expect.soft(categoryActual).toBe(categoryExpected);
+  expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
+});
+
 Then(
   'I create multiple modifications using {string} dataset',
   async (
@@ -612,8 +593,6 @@ Then(
         changeName,
         changeDataset
       );
-      // await commonItemsPage.clickButton('Modification_Details_Page', 'Save_Continue');
-
       await commonItemsPage.clickButton('Modification_Details_Page', 'Save_Continue_Review');
       const sponsorReferenceDataset = sponsorReferencePage.sponsorReferencePageTestData['Valid_Data_All_Fields'];
       for (const key in sponsorReferenceDataset) {
@@ -624,8 +603,6 @@ Then(
       await commonItemsPage.clickButton('Sponsor_Reference_Page', 'Save_Continue_Review');
       await commonItemsPage.clickButton('Review_All_Changes_Page', 'Send_Modification_To_Sponsor');
       await commonItemsPage.clickButton('Confirmation_Page', 'Return_To_Project_Overview');
-
-      // Only click "Add Another Change" if it's not the last iteration
       if (changeIndex < changeNames.length - 1) {
         await commonItemsPage.clickButton('Project_Overview_Page', 'Create_New_Modification');
       }
