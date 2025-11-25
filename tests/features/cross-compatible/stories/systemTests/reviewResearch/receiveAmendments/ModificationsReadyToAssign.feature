@@ -402,6 +402,40 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
+    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+    Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page
+        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see the advanced filters panel
+        And I open each of the modification tasklist filters
+        And I capture the page screenshot
+        When I fill the 'my' modifications tasklist search and filter options with 'Date_From_Multi'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see active filters displayed
+        And I capture the page screenshot
+        Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
+        When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Modifications_Tasklist_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        And I 'can' see active filters displayed
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Modifications_Tasklist_Page'
+        Then I can see the approvals home page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the 'Modifications_Tasklist_Page'
+        And I 'cannot' see the advanced filters panel
+        And I capture the page screenshot
+
+        Examples:
+            | Validation_Text | Navigation_Method |
+            | Label_Texts     | page number       |
+            | Label_Texts     | next link         |
+
     # Need to integrate with modification creation process to have a fresh dataset for assignment
     # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
     @WFCAssignModificationSWR @rsp-4076 @rsp-4849 @skip
