@@ -520,6 +520,7 @@ Then(
       projectPersonnelChangeChiefInvestigatorPage,
       sponsorCheckAndAuthorisePage,
       chooseARecordTypeToSearchPage,
+      teamManagerDashboardPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -645,10 +646,8 @@ Then(
       page = chooseARecordTypeToSearchPage;
     } else if (pageKey == 'Team_Manager_Dashboard_Page') {
       errorMessageFieldDataset =
-        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Validation[
-          errorMessageFieldAndSummaryDatasetName
-        ];
-      page = modificationsReadyToAssignPage;
+        teamManagerDashboardPage.teamManagerDashboardPageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = teamManagerDashboardPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

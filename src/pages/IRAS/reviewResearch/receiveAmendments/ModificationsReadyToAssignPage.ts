@@ -109,7 +109,7 @@ export default class ModificationsReadyToAssignPage {
       this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.iras_id_search_box_label,
       { exact: true }
     );
-    this.study_wide_reviewer_text = this.page.locator('input[name="Search.ReviewerName"]'); //workaround use above after fix
+    this.study_wide_reviewer_text = this.page.locator('input[name="Search.ReviewerName"]');
   }
 
   //Getters & Setters for Private Variables

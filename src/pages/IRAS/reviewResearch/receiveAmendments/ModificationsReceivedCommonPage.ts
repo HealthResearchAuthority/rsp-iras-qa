@@ -2,6 +2,8 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReceivedCommonPagePageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_received_common_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
 import * as commonTestData from '../../../../resources/test_data/common/common_data.json';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
+import { confirmArrayNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ModificationsReceivedCommonPage {
@@ -371,4 +373,54 @@ export default class ModificationsReceivedCommonPage {
   async assertOnModificationDetailsPage() {
     await expect.soft(this.pageHeading).toBeVisible();
   }
+
+  validateCombinedSearchTerms = async (
+    searchResults: string[],
+    searchTerms: string[],
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
+    expect.soft(filteredResults).toEqual(searchResults);
+    const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+      searchResults,
+      searchTerms
+    );
+    expect.soft(validatedResults).toBeTruthy();
+    expect.soft(searchResults).toHaveLength(validatedResults.length);
+  };
+
+  validateSingleFieldMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    searchTerm: string,
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const match = await commonItemsPage.validateSearchResults(values, searchTerm);
+    expect.soft(match).toBeTruthy();
+  };
+
+  validateMultiWordFieldMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    searchTerm: string,
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const terms = await commonItemsPage.splitSearchTerm(searchTerm);
+    const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(values, terms);
+    expect.soft(match).toBeTruthy();
+    expect.soft(values).toHaveLength(match.length);
+  };
+
+  validateFilterMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    allowedValues: string[],
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
+    expect.soft(isValid).toBeTruthy();
+  };
 }

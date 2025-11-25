@@ -122,9 +122,10 @@ export default class MyModificationsTasklistPage {
     await expect(this.page_heading).toBeVisible();
     await expect.soft(this.page_description).toBeVisible(); //Not visible due to CMS issue
     await expect(this.results_table).toBeVisible();
+    // Temporarily commented out due to title mismatch
     // expect
     //   .soft(await this.page.title())
-    //   .toBe(this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.title);// Temporarily commented out due to title mismatch
+    //   .toBe(this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.title);
   }
 
   async saveModificationId(modificationId: string) {

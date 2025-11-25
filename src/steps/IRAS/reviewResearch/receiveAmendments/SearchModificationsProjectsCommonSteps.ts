@@ -3,7 +3,6 @@ import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull, confirmStringNotNull } from '../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 import config from '../../../../../playwright.config';
-import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
 Then(
   'I can now see a table of search results for {string}',
   async ({ searchModificationsPage, commonItemsPage }, resultType: string) => {
@@ -124,7 +123,11 @@ When(
 // Chief investigator name, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays project records based on the search {string} and filter criteria {string}',
-  async ({ commonItemsPage, searchProjectsPage }, irasIdDatasetName, filterDatasetName) => {
+  async (
+    { commonItemsPage, searchProjectsPage, modificationsReceivedCommonPage },
+    irasIdDatasetName,
+    filterDatasetName
+  ) => {
     const testData = searchProjectsPage.searchProjectsPageTestData;
     const irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
@@ -135,74 +138,41 @@ Then(
     const irasIds = confirmArrayNotNull(projectsList.get('irasIdValues'));
     await searchProjectsPage.setIrasIdListAfterSearch(irasIds);
 
-    const validateCombinedSearchTerms = async (
-      searchResults: string[],
-      searchTerms: string[],
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
-      expect.soft(filteredResults).toEqual(searchResults);
-      const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-        searchResults,
-        searchTerms
-      );
-      expect.soft(validatedResults).toBeTruthy();
-      expect.soft(searchResults).toHaveLength(validatedResults.length);
-    };
-
-    const validateSingleFieldMatch = async (
-      modificationsList: Map<string, string[]>,
-      fieldKey: string,
-      searchTerm: string,
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
-      const match = await commonItemsPage.validateSearchResults(values, searchTerm);
-      expect.soft(match).toBeTruthy();
-    };
-
-    const validateFilterMatch = async (
-      modificationsList: Map<string, string[]>,
-      fieldKey: string,
-      allowedValues: string[],
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
-      const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
-      expect.soft(isValid).toBeTruthy();
-    };
-
     if (searchResults.length > 0) {
       // Combined search validation
       const searchTerms = [irasId, projectTitle].filter(Boolean);
       if (searchTerms.length > 1) {
-        await validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
+        await modificationsReceivedCommonPage.validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
       }
       // Individual search field validations
       if (irasId) {
-        await validateSingleFieldMatch(projectsList, 'irasIdValues', irasId, commonItemsPage);
+        await modificationsReceivedCommonPage.validateSingleFieldMatch(
+          projectsList,
+          'irasIdValues',
+          irasId,
+          commonItemsPage
+        );
       }
       if (projectTitle) {
-        await validateSingleFieldMatch(projectsList, 'shortProjectTitleValues', projectTitle, commonItemsPage);
+        await modificationsReceivedCommonPage.validateSingleFieldMatch(
+          projectsList,
+          'shortProjectTitleValues',
+          projectTitle,
+          commonItemsPage
+        );
       }
       // Filter validations
       const allowedLeadNations = filterDataset['lead_nation_checkbox'];
       if (allowedLeadNations) {
-        await validateFilterMatch(projectsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
+        await modificationsReceivedCommonPage.validateFilterMatch(
+          projectsList,
+          'leadNationValues',
+          allowedLeadNations,
+          commonItemsPage
+        );
       }
     } else {
-      await expect.soft(commonItemsPage.tableRows).not.toBeVisible();
-      await expect
-        .soft(commonItemsPage.search_results_count)
-        .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
-      await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
-      await expect.soft(commonItemsPage.search_no_results_header).toBeVisible();
-      await expect.soft(commonItemsPage.search_no_results_guidance_text).toBeVisible();
-      await expect.soft(commonItemsPage.search_no_results_guidance_points).toBeVisible();
-      const actualBulletPoints = commonItemsPage.search_no_results_guidance_points.getByRole('listitem');
-      await expect
-        .soft(actualBulletPoints)
-        .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_guidance_points);
+      throw new Error(`Expected Search Results but No Search Results are Displayed`);
     }
   }
 );

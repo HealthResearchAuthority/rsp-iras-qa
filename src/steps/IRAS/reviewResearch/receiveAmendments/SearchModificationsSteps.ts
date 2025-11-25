@@ -1,8 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull, confirmStringNotNull, sortArray } from '../../../../utils/UtilFunctions';
-
-import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
 const { Then } = createBdd(test);
 
 Then(
@@ -45,7 +43,11 @@ Then(
 // date_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records based on the search {string} and filter criteria {string}',
-  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName, filterDatasetName) => {
+  async (
+    { commonItemsPage, searchModificationsPage, modificationsReceivedCommonPage },
+    irasIdDatasetName,
+    filterDatasetName
+  ) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
@@ -55,80 +57,55 @@ Then(
     const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
     await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
 
-    const validateCombinedSearchTerms = async (
-      searchResults: string[],
-      searchTerms: string[],
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
-      expect.soft(filteredResults).toEqual(searchResults);
-      const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-        searchResults,
-        searchTerms
-      );
-      expect.soft(validatedResults).toBeTruthy();
-      expect.soft(searchResults).toHaveLength(validatedResults.length);
-    };
-
-    const validateSingleFieldMatch = async (
-      modificationsList: Map<string, string[]>,
-      fieldKey: string,
-      searchTerm: string,
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
-      const match = await commonItemsPage.validateSearchResults(values, searchTerm);
-      expect.soft(match).toBeTruthy();
-    };
-
-    const validateMultiWordFieldMatch = async (
-      modificationsList: Map<string, string[]>,
-      fieldKey: string,
-      searchTerm: string,
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
-      const terms = await commonItemsPage.splitSearchTerm(searchTerm);
-      const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(values, terms);
-      expect.soft(match).toBeTruthy();
-      expect.soft(values).toHaveLength(match.length);
-    };
-
-    const validateFilterMatch = async (
-      modificationsList: Map<string, string[]>,
-      fieldKey: string,
-      allowedValues: string[],
-      commonItemsPage: CommonItemsPage
-    ) => {
-      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
-      const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
-      expect.soft(isValid).toBeTruthy();
-    };
-
     if (searchResults.length > 0) {
       // Combined search validation
       const searchTerms = [irasId, ciName, projectTitle].filter(Boolean);
       if (searchTerms.length > 1) {
-        await validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
+        await modificationsReceivedCommonPage.validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
       }
       // Individual search field validations
       if (irasId) {
-        await validateSingleFieldMatch(modificationsList, 'modificationIdValues', irasId, commonItemsPage);
+        await modificationsReceivedCommonPage.validateSingleFieldMatch(
+          modificationsList,
+          'modificationIdValues',
+          irasId,
+          commonItemsPage
+        );
       }
       if (projectTitle) {
-        await validateSingleFieldMatch(modificationsList, 'shortProjectTitleValues', projectTitle, commonItemsPage);
+        await modificationsReceivedCommonPage.validateSingleFieldMatch(
+          modificationsList,
+          'shortProjectTitleValues',
+          projectTitle,
+          commonItemsPage
+        );
       }
       if (ciName) {
-        await validateMultiWordFieldMatch(modificationsList, 'chiefInvestigatorNameValues', ciName, commonItemsPage);
+        await modificationsReceivedCommonPage.validateMultiWordFieldMatch(
+          modificationsList,
+          'chiefInvestigatorNameValues',
+          ciName,
+          commonItemsPage
+        );
       }
       // Filter validations
       const allowedModifications = filterDataset['modification_type_checkbox'];
       if (allowedModifications) {
-        await validateFilterMatch(modificationsList, 'modificationTypeValues', allowedModifications, commonItemsPage);
+        await modificationsReceivedCommonPage.validateFilterMatch(
+          modificationsList,
+          'modificationTypeValues',
+          allowedModifications,
+          commonItemsPage
+        );
       }
       const allowedLeadNations = filterDataset['lead_nation_checkbox'];
       if (allowedLeadNations) {
-        await validateFilterMatch(modificationsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
+        await modificationsReceivedCommonPage.validateFilterMatch(
+          modificationsList,
+          'leadNationValues',
+          allowedLeadNations,
+          commonItemsPage
+        );
       }
     } else {
       throw new Error(`Expected Search Results but No Search Results are Displayed`);
