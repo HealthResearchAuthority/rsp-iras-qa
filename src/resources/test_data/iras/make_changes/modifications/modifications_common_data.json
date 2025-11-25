@@ -37,7 +37,11 @@
       "Insurance renewal - no change to the level or breadth of cover",
       "Translated versions of participant-facing documents"
     ],
-    "nhs_always_c": ["GDPR wording - Unaccepted alternative wording used", "Other minor change to project management"]
+    "nhs_always_c": ["GDPR wording - Unaccepted alternative wording used", "Other minor change to project management"],
+    "new_site": [
+      "Addition of sites undertaking the same activities as existing sites",
+      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
+    ]
   },
   "Modification_Change_Question_Label_Texts": {
     "planned_project_end_date_label": "Change to planned end date",
@@ -104,7 +108,11 @@
     "Contract/agreement arrangements",
     "Equipment arrangements",
     "Funding arrangements - Changes to the payments, benefits or incentives to be received by researchers/sites",
-    "Insurance - Changes to insurance or indemnity arrangements"
+    "Insurance - Changes to insurance or indemnity arrangements",
+    "Early closure or withdrawal of research sites",
+    "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+    "PICs - Early closure or withdrawal of Participant Identification Centres",
+    "Addition of sites undertaking the same activities as existing sites"
   ],
   "Modifications_To_Add_Administrative_Details": ["Project identification"],
   "Applicability_Changes": [
@@ -146,7 +154,11 @@
     "Contract/agreement arrangements",
     "Equipment arrangements",
     "Funding arrangements - Changes to the payments, benefits or incentives to be received by researchers/sites",
-    "Insurance - Changes to insurance or indemnity arrangements"
+    "Insurance - Changes to insurance or indemnity arrangements",
+    "Early closure or withdrawal of research sites",
+    "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+    "PICs - Early closure or withdrawal of Participant Identification Centres",
+    "Addition of sites undertaking the same activities as existing sites"
   ],
   "Non_Applicability_Changes": [
     "Chief investigator: conflict of interest",
@@ -278,7 +290,11 @@
       "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
       "Other non-significant change to project documents",
       "Post trial information for participants (which does not contradict the protocol)",
-      "Change to protocol: non-significant not affecting safety or the scientific value of the project"
+      "Change to protocol: non-significant not affecting safety or the scientific value of the project",
+      "Early closure or withdrawal of research sites",
+      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+      "PICs - Early closure or withdrawal of Participant Identification Centres",
+      "Addition of sites undertaking the same activities as existing sites"
     ]
   },
   "Ranking_Modification_Type": {
@@ -288,7 +304,8 @@
       "Change of sponsor’s legal representative",
       "Project identification",
       "Contact details",
-      "Change of principal investigator"
+      "Change of principal investigator",
+      "Addition of sites undertaking the same activities as existing sites"
     ],
     "Minor_Modifications": [
       "Other significant change to participant procedures",
@@ -330,7 +347,10 @@
       "Contract/agreement arrangements",
       "Equipment arrangements",
       "Funding arrangements - Changes to the payments, benefits or incentives to be received by researchers/sites",
-      "Insurance - Changes to insurance or indemnity arrangements"
+      "Insurance - Changes to insurance or indemnity arrangements",
+      "Early closure or withdrawal of research sites",
+      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+      "PICs - Early closure or withdrawal of Participant Identification Centres"
     ],
     "Non_Notifiable_Modifications": [
       "Changes to the research team",
@@ -1113,6 +1133,12 @@
   "Modification_Status_With_Review_Body": {
     "status": "With review body"
   },
+  "Modification_Status_Authorised": {
+    "status": "Authorised"
+  },
+  "Modification_Status_Not_Authorised": {
+    "status": "Not authorised"
+  },
   "Document_Status_Complete": {
     "status": "Complete"
   },
@@ -1379,6 +1405,223 @@
       "changes_free_text": "This is a free text change for Change to protocol: non-significant not affecting safety or the scientific value of the project",
       "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Multiple_Changes_Participating_Organisations_Non_Reviewable_Three": {
+    "Early_Closure_Or_Withdrawal_Of_Research_Sites_One": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Early closure or withdrawal of research sites",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "Early_Closure_Or_Withdrawal_Of_Research_Sites_Two": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Early closure or withdrawal of research sites",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "Early_Closure_Or_Withdrawal_Of_Research_Sites_Three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Early closure or withdrawal of research sites",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    },
+    "PICs_Early_Closure_Or_Withdrawal_Of_Participant_Identification_Centres_One": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Early closure or withdrawal of Participant Identification Centres",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "PICs_Early_Closure_Or_Withdrawal_Of_Participant_Identification_Centre_Two": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Early closure or withdrawal of Participant Identification Centres",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "PICs_Early_Closure_Or_Withdrawal_Of_Participant_Identification_Centre_Three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Early closure or withdrawal of Participant Identification Centres",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["Wales"],
+      "change_status": "Change ready for submission"
+    },
+    "Addition_Of_Sites_Undertaking_The_Same_Activities_As_Existing_Sites_One": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "Addition_Of_Sites_Undertaking_The_Same_Activities_As_Existing_Sites_Two": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "Addition_Of_Sites_Undertaking_The_Same_Activities_As_Existing_Sites_Three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["Wales"],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Multiple_Changes_Participating_Organisations_Non_Reviewable_Four": {
+    "PICs_Addition_Of_Participant_Identification_Centres_Undertaking_The_Same_Activities_As_Existing_PICs_One": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "PICs_Addition_Of_Participant_Identification_Centres_Undertaking_The_Same_Activities_As_Existing_PICs_Two": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "PICs_Addition_Of_Participant_Identification_Centres_Undertaking_The_Same_Activities_As_Existing_PICs_Three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+      "changes_free_text": "This is a free text change for Other significant change to participant organisation.",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["Wales"],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Multiple_Changes_Participating_Organisations_Reviewable_Set_Four": {
+    "Addition_Of_New_Participating_Organisation_Type_one": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of new participating organisation type",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    },
+    "Addition_Of_New_Participating_Organisation_Type_two": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of new participating organisation type",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    },
+    "Addition_Of_New_Participating_Organisation_Type_three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of new participating organisation type",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    },
+    "Change_To_Activities_Undertaken_By_An_Existing_Participating_Organisation_Type_One": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Change to activities undertaken by an existing participating organisation type",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    },
+    "Change_To_Activities_Undertaken_By_An_Existing_Participating_Organisation_Type_Two": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Change to activities undertaken by an existing participating organisation type",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    },
+    "Change_To_Activities_Undertaken_By_An_Existing_Participating_Organisation_Type_Three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Change to activities undertaken by an existing participating organisation type",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    },
+    "Other_Change_To_Participating_Organisations_One": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Other change to participating organisations",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    },
+    "Other_Change_To_Participating_Organisations_Two": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Other change to participating organisations",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    },
+    "Other_Change_To_Participating_Organisations_Three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Other change to participating organisations",
+      "changes_free_text": "This is a free text change for Addition of new participating organisation type",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
       "change_status": "Change ready for submission"
     }
   }

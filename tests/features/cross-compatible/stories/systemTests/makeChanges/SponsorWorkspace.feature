@@ -244,7 +244,7 @@ Feature: Sponsor Workspace
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I capture the page screenshot
-    Then I click on the searched modification id from sponsor authorisations page
+    Then I click on the searched modification id
     And I can see the sponsor check and authorise page
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'

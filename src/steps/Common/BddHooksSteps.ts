@@ -1,8 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../hooks/CustomFixtures';
-import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
+import { getAuthState, getTicketReferenceTags } from '../../utils/UtilFunctions';
 import * as fs from 'node:fs';
-import path from 'node:path';
 
 const { AfterScenario, AfterStep, BeforeScenario } = createBdd(test);
 
@@ -11,25 +10,7 @@ AfterStep(async ({ page, $step, $testInfo, commonItemsPage }) => {
     `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' ||
     `${$step.title}` === 'I capture the page screenshot'
   ) {
-    const fileName = new Date().toISOString().replaceAll(/[-:.TZ]/g, '') + '.png';
-    const screenshotDir = './test-reports/' + getReportFolderName() + '/cucumber/html/screenshots';
-    const screenshotPath = path.join(screenshotDir, fileName);
-    try {
-      await page.screenshot({ path: screenshotPath, fullPage: true });
-    } catch (error) {
-      if (error.message.includes('Cannot take screenshot larger')) {
-        await commonItemsPage.captureLargeSizeScreenshot(page, screenshotPath);
-      } else {
-        console.error(error);
-      }
-    }
-    const relativePath = path.join('../screenshots/', fileName).replaceAll(/\\/g, '/');
-    const htmlPreview = `
-      <a href="${relativePath}" target="_blank">
-        <img src="${relativePath}" alt="screenshot" style="max-height:1000px;border:1px solid #ccc;" />
-      </a>
-    `;
-    await $testInfo.attach(`[step] ${$step.title}`, { body: htmlPreview, contentType: 'text/html' });
+    await commonItemsPage.captureScreenshot(page, $testInfo, $step);
   }
 });
 
@@ -248,3 +229,21 @@ BeforeScenario(
     }
   }
 );
+
+AfterScenario(
+  { name: 'Attach screenshot for failed scenarios' },
+  async function ({ page, $testInfo, commonItemsPage }) {
+    if ($testInfo.status === 'failed') {
+      await commonItemsPage.captureScreenshot(page, $testInfo);
+    }
+  }
+);
+
+AfterScenario({ name: 'Cleanup cucumber report to remove large items' }, async function ({ $testInfo }) {
+  if ($testInfo.attachments?.length) {
+    $testInfo.attachments = $testInfo.attachments.filter((att) => !(att.body && att.body.length > 200_000));
+  }
+  if ($testInfo.error?.message && $testInfo.error.message.length > 50_000) {
+    $testInfo.error.message = '[removed large error message]';
+  }
+});

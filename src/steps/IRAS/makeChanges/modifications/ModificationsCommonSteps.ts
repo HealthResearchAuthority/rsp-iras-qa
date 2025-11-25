@@ -543,3 +543,8 @@ Then(
     }
   }
 );
+
+Then('I click on the searched modification id', async ({ modificationsCommonPage }) => {
+  const modificationID = await modificationsCommonPage.getModificationID();
+  await modificationsCommonPage.page.getByText(modificationID, { exact: true }).click();
+});
