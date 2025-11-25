@@ -771,7 +771,11 @@ When(
         searchValue = await modificationsCommonPage.getModificationID();
         break;
       case 'new iras id':
+      case 'iras id':
         searchValue = await projectDetailsIRASPage.getUniqueIrasId();
+        break;
+      case 'short project title':
+        searchValue = await projectDetailsIRASPage.getShortProjectTitle();
         break;
       default:
         searchValue = inputType;

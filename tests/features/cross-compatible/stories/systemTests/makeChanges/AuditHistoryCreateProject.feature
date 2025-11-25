@@ -139,7 +139,7 @@ Feature: Audit history - Create project
         And I have navigated to the 'Home_Page' as '<User>'
         And I have navigated to the 'Search_Modifications_Page'
         And I capture the page screenshot
-        When I fill the search input with the search key 'project id'
+        When I enter 'iras id' into the search field
         And I click the 'Search' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         When I click a 'short project title' on the 'Search_Modifications_Page'
