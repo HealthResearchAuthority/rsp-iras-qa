@@ -403,7 +403,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Days_Since_Submission |
 
     @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
-    Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page 
+    Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -430,7 +430,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then I can see the 'Modifications_Tasklist_Page'
         And I 'cannot' see the advanced filters panel
         And I capture the page screenshot
-      
+
         Examples:
             | Validation_Text | Navigation_Method |
             | Label_Texts     | page number       |

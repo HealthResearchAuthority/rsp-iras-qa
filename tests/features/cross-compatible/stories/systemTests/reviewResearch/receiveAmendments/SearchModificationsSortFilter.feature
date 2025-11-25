@@ -702,13 +702,14 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 When I click the 'Back' link on the 'Search_Modifications_Page'
+                And I capture the page screenshot
                 Then I can see the approvals home page
                 And I click the 'Search' link on the 'Approvals_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
                 And I 'cannot' see active filters displayed
                 And I capture the page screenshot
-              
+
                 Examples:
                         | Navigation_Method | Advanced_Filters             |
                         | page number       | Advanced_Filters_Lead_Nation |
