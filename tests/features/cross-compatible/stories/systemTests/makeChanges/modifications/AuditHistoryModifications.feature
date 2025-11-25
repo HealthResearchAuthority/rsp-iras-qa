@@ -18,7 +18,7 @@ Feature: Audit history - This feature file contains scenarios to validate audit 
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
   Scenario: Validate the audit history for reviewable modifications when sponsor authorised
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -101,7 +101,7 @@ Feature: Audit history - This feature file contains scenarios to validate audit 
     And I validate the audit history table for modifications
     And I capture the page screenshot
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableAuthorised
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
   Scenario: Validate the audit history for non reviewable modifications when sponsor authorised
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -184,7 +184,7 @@ Feature: Audit history - This feature file contains scenarios to validate audit 
     And I validate the audit history table for modifications
     And I capture the page screenshot
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableNotAuthorised
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableNotAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
   Scenario: Validate the audit history for reviewable modifications when sponsor not authorised
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -266,7 +266,7 @@ Feature: Audit history - This feature file contains scenarios to validate audit 
     And I validate the audit history table for modifications
     And I capture the page screenshot
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableNotAuthorised @run
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableNotAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
   Scenario: Validate the audit history for non reviewable modifications when sponsor not authorised
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
