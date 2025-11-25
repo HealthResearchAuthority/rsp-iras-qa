@@ -6,15 +6,19 @@ import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../util
 const { Then } = createBdd(test);
 
 Then(
-  'I can see the modifications assignment confirmation page for {string}',
-  async ({ modificationsAssignmentConfirmationPage, selectStudyWideReviewerPage }, datasetName: string) => {
+  'I can see the modifications assignment confirmation page for {string} with reviewer {string}',
+  async (
+    { modificationsAssignmentConfirmationPage, selectStudyWideReviewerPage },
+    roleName: string,
+    datasetName: string
+  ) => {
     const dataset = selectStudyWideReviewerPage.selectStudywideReviewerPageData.Study_Wide_Reviewer[datasetName];
-    await modificationsAssignmentConfirmationPage.assertOnModificationsAssignmentConfirmationPage();
+    await modificationsAssignmentConfirmationPage.assertOnModificationsAssignmentConfirmationPage(roleName);
     const expectedConsent =
       dataset.study_wide_reviewer_dropdown +
       modificationsAssignmentConfirmationPageTestData.Modifications_Assignment_Confirmation_Page.consent;
     const valConsentUI: string | null = await modificationsAssignmentConfirmationPage.consentVal.textContent();
     const actualConsent = await removeUnwantedWhitespace(confirmStringNotNull(valConsentUI));
-    expect(actualConsent).toBe(expectedConsent);
+    expect.soft(actualConsent).toBe(expectedConsent);
   }
 );

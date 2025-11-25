@@ -8,6 +8,7 @@ export default class ModificationsAssignmentConfirmationPage {
   readonly confirmation_message: Locator;
   readonly consentVal: Locator;
   readonly back_to_task_list_link: Locator;
+  readonly back_to_dashboard_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -29,10 +30,20 @@ export default class ModificationsAssignmentConfirmationPage {
         this.modificationsAssignmentConfirmationPageTestData.Modifications_Assignment_Confirmation_Page
           .back_to_task_list_link
       );
+    this.back_to_dashboard_link = this.page
+      .getByRole('link')
+      .getByText(
+        this.modificationsAssignmentConfirmationPageTestData.Modifications_Assignment_Confirmation_Page
+          .back_to_dashboard_link
+      );
   }
 
-  async assertOnModificationsAssignmentConfirmationPage() {
+  async assertOnModificationsAssignmentConfirmationPage(roleValue: string) {
     await expect(this.confirmation_message).toBeVisible();
-    await expect(this.back_to_task_list_link).toBeVisible();
+    if (roleValue === 'Team_Manager') {
+      await expect.soft(this.back_to_dashboard_link).toBeVisible();
+    } else {
+      await expect.soft(this.back_to_task_list_link).toBeVisible();
+    }
   }
 }

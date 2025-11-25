@@ -16,17 +16,14 @@ Then(
 );
 
 Then(
-  'I can see the modifications assigned from WFC to SWR are now visible in my task list for {string}',
-  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
-    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        for (const modificationId of dataset[key]) {
-          await expect(
-            modificationsReadyToAssignPage.page.getByRole('cell').getByText(`${modificationId}`, { exact: true })
-          ).toBeVisible();
-        }
-      }
-    }
+  'I can see the modifications assigned from WFC or TM to SWR are now visible in my task list with status {string}',
+  async ({ modificationsReadyToAssignPage }, statusValue: string) => {
+    const modificationId = await modificationsReadyToAssignPage.getSelectedModifications();
+    const modificationRow = modificationsReadyToAssignPage.page.locator('tbody tr', {
+      has: modificationsReadyToAssignPage.page.locator('a.govuk-link', { hasText: `${modificationId}` }),
+    });
+    await expect.soft(modificationRow).toBeVisible();
+    const modificationStatus = modificationRow.locator('td', { hasText: `${statusValue}` });
+    await expect.soft(modificationStatus).toBeVisible();
   }
 );

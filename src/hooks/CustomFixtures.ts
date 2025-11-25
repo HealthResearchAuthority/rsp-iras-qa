@@ -97,7 +97,9 @@ import ModificationPostSubmissionPage from '../pages/IRAS/makeChanges/modificati
 import SponsorAuthorisationsPage from '../pages/IRAS/makeChanges/SponsorAuthorisationsPage';
 import SponsorCheckAndAuthorisePage from '../pages/IRAS/makeChanges/SponsorCheckAndAuthorisePage';
 import SponsorModificationPage from '../pages/IRAS/makeChanges/SponsorModificationPage';
+import ChooseARecordTypeToSearchPage from '../pages/IRAS/reviewResearch/approvals/ChooseARecordTypeToSearchPage';
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
+import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchProjectsPage';
 import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
 
 type CustomFixtures = {
@@ -196,7 +198,9 @@ type CustomFixtures = {
   sponsorAuthorisationsPage: SponsorAuthorisationsPage;
   sponsorCheckAndAuthorisePage: SponsorCheckAndAuthorisePage;
   sponsorModificationPage: SponsorModificationPage;
+  chooseARecordTypeToSearchPage: ChooseARecordTypeToSearchPage;
   teamManagerDashboardPage: TeamManagerDashboardPage;
+  searchProjectsPage: SearchProjectsPage;
   modificationOutcomeCheckSendPage: ModificationOutcomeCheckSendPage;
 
   makeAxeBuilder: () => AxeBuilder;
@@ -579,8 +583,16 @@ export const test = base.extend<CustomFixtures>({
     await use(new SponsorModificationPage(page));
   },
 
+  chooseARecordTypeToSearchPage: async ({ page }, use) => {
+    await use(new ChooseARecordTypeToSearchPage(page));
+  },
+
   teamManagerDashboardPage: async ({ page }, use) => {
     await use(new TeamManagerDashboardPage(page));
+  },
+
+  searchProjectsPage: async ({ page }, use) => {
+    await use(new SearchProjectsPage(page));
   },
 
   modificationOutcomeCheckSendPage: async ({ page }, use) => {

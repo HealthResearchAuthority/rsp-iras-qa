@@ -1,9 +1,12 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReceivedCommonPagePageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_received_common_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
 import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
 import { connect } from '../../../../utils/DbConfig';
 import { IResult } from 'mssql';
+import * as commonTestData from '../../../../resources/test_data/common/common_data.json';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
+import { confirmArrayNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ModificationsReceivedCommonPage {
@@ -11,6 +14,7 @@ export default class ModificationsReceivedCommonPage {
   readonly modificationsReceivedCommonPagePageTestData: typeof modificationsReceivedCommonPagePageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
   readonly dbConfigData: typeof dbConfigData;
+  readonly commonTestData: typeof commonTestData;
   private _days_since_submission_from_filter: number;
   private _days_since_submission_to_filter: number;
   private _iras_id: string;
@@ -25,6 +29,7 @@ export default class ModificationsReceivedCommonPage {
   readonly days_since_submission_hint_label: Locator;
   readonly days_since_submission_to_separator: Locator;
   readonly days_since_submission_suffix_label: Locator;
+  readonly pageHeading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -32,6 +37,7 @@ export default class ModificationsReceivedCommonPage {
     this.modificationsReceivedCommonPagePageTestData = modificationsReceivedCommonPagePageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
     this.dbConfigData = dbConfigData;
+    this.commonTestData = commonTestData;
     this._days_since_submission_from_filter = 0;
     this._days_since_submission_to_filter = 0;
     this._iras_id = '';
@@ -42,7 +48,10 @@ export default class ModificationsReceivedCommonPage {
 
     //Locators
     this._rowWithModification = this.page.getByText('');
-    this.days_since_submission_from_text = this.page.getByTestId('Search_FromDaysSinceSubmission');
+    this.pageHeading = this.page
+      .getByRole('heading', { level: 1 })
+      .getByText(this.commonTestData.modification_details_page_heading);
+    this.days_since_submission_from_text = this.page.getByTestId('Search.FromDaysSinceSubmission');
     this.days_since_submission_filter_input = this.page
       .locator('.search-filter-section__content')
       .filter({ has: this.days_since_submission_from_text });
@@ -200,6 +209,7 @@ export default class ModificationsReceivedCommonPage {
     shortTitles: string[],
     daysSinceSubmission: string[],
     datesSubmitted: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -210,6 +220,11 @@ export default class ModificationsReceivedCommonPage {
     if (searchInput.toLowerCase().includes('title')) {
       valuesMatch =
         shortTitles.toString().toLowerCase() == searchInputDataset[searchInput].short_project_title_text.toLowerCase();
+    }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      valuesMatch =
+        studyWideReviewers.toString().toLowerCase() ==
+        searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase();
     }
     if (searchInput.toLowerCase().includes('days')) {
       const actualDay = daysSinceSubmission.toString();
@@ -228,6 +243,7 @@ export default class ModificationsReceivedCommonPage {
   async checkMultiValuesStartsWith(
     irasIds: string[],
     shortTitles: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -250,12 +266,23 @@ export default class ModificationsReceivedCommonPage {
         }
       }
     }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      for (const swr of studyWideReviewers) {
+        valuesStartWith = swr
+          .toLowerCase()
+          .startsWith(searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase());
+        if (!valuesStartWith) {
+          return valuesStartWith;
+        }
+      }
+    }
     return valuesStartWith;
   }
 
   async checkPartialValuesContain(
     irasIds: string[],
     shortTitles: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -273,6 +300,16 @@ export default class ModificationsReceivedCommonPage {
         valuesContain = title
           .toLowerCase()
           .includes(searchInputDataset[searchInput].short_project_title_text.toLowerCase());
+        if (!valuesContain) {
+          return valuesContain;
+        }
+      }
+    }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      for (const swr of studyWideReviewers) {
+        valuesContain = swr
+          .toLowerCase()
+          .includes(searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase());
         if (!valuesContain) {
           return valuesContain;
         }
@@ -356,6 +393,16 @@ export default class ModificationsReceivedCommonPage {
           columnIndex = 5;
         } else if (pageType.toLowerCase() == 'team_manager_dashboard_page') {
           columnIndex = 6;
+        } else {
+          columnIndex = 4;
+        }
+        break;
+      case 'study-wide reviewer':
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
+          columnIndex = 5;
         } else {
           columnIndex = 4;
         }
@@ -462,4 +509,80 @@ AND ProjectModifications.[Status] = '${status}'${optionalReviewNullQueryInput}${
     console.dir(projectQueryResult);
     return projectQueryResult;
   }
+
+  async getProjectRecordColumnIndex(pageType: string, columnName: string): Promise<number> {
+    let columnIndex: number;
+    switch (columnName.toLowerCase()) {
+      case 'iras id':
+        if (pageType.toLowerCase() == 'search_projects_page') {
+          columnIndex = 0;
+        }
+        break;
+      case 'short project title':
+        if (pageType.toLowerCase() == 'search_projects_page') {
+          columnIndex = 1;
+        }
+        break;
+      case 'lead nation':
+        columnIndex = 2;
+        break;
+      default:
+        throw new Error(`${columnName} is not a valid option`);
+    }
+    return columnIndex;
+  }
+
+  async assertOnModificationDetailsPage() {
+    await expect.soft(this.pageHeading).toBeVisible();
+  }
+
+  validateCombinedSearchTerms = async (
+    searchResults: string[],
+    searchTerms: string[],
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
+    expect.soft(filteredResults).toEqual(searchResults);
+    const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+      searchResults,
+      searchTerms
+    );
+    expect.soft(validatedResults).toBeTruthy();
+    expect.soft(searchResults).toHaveLength(validatedResults.length);
+  };
+
+  validateSingleFieldMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    searchTerm: string,
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const match = await commonItemsPage.validateSearchResults(values, searchTerm);
+    expect.soft(match).toBeTruthy();
+  };
+
+  validateMultiWordFieldMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    searchTerm: string,
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const terms = await commonItemsPage.splitSearchTerm(searchTerm);
+    const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(values, terms);
+    expect.soft(match).toBeTruthy();
+    expect.soft(values).toHaveLength(match.length);
+  };
+
+  validateFilterMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    allowedValues: string[],
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
+    expect.soft(isValid).toBeTruthy();
+  };
 }
