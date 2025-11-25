@@ -51,7 +51,7 @@ export default class ModificationsCommonPage {
   readonly auditHistoryTableHeader: Locator;
   readonly auditHistoryTableBodyRows: Locator;
   readonly tableCell: Locator;
-  private auditHistoryRecord: {
+  readonly auditHistoryRecord: {
     modificationEventExpected: string;
     userEmailExpected: string;
     dateTimeOfEventExpected: string;
