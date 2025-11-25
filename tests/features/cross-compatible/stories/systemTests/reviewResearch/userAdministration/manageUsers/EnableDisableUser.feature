@@ -10,7 +10,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         Then I can see the add a new user profile page
 
-    @rsp-2829 @DisableUserProfile
+    @rsp-2829 @DisableUserProfile @rsp-4381 @ActiveFilterRemainAppliedAfterDisableUserProfile
     Scenario Outline: Verify the user is able to disable a user profile
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -33,6 +33,8 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_Users_Active>' in the 'Manage_Users_Page'
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters_Users_Disabled>'
@@ -70,7 +72,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
             | Add_User_Profile                           | Navigation_Link | Status_Enabled | Advanced_Filters_Users                          |
             | Valid_Data_In_All_Fields_Role_Team_Manager | Back            | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active |
 
-    @rsp-2930 @EnableUserProfile
+    @rsp-2930 @EnableUserProfile @rsp-4381 @ActiveFilterRemainAppliedAfterEnableUserProfile 
     Scenario Outline: Verify the user is able to enable a disabled a user profile
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -88,6 +90,8 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_Users_Active>' in the 'Manage_Users_Page'
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters_Users_Disabled>'

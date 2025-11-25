@@ -30,6 +30,8 @@ export default class ModificationsDetailsPage {
   readonly next_steps_guidance: Locator;
   readonly next_steps_button: Locator;
   readonly review_comment_heading: Locator;
+  readonly review_comment_show: Locator;
+  readonly review_comment_hide: Locator;
   readonly review_comment_guidance: Locator;
   readonly review_comment_box: Locator;
   readonly review_outcome_heading: Locator;
@@ -106,6 +108,12 @@ export default class ModificationsDetailsPage {
     this.review_comment_heading = this.page
       .getByRole('heading')
       .getByText(this.modificationsDetailsPageTestData.Modification_Review_Outcome_Section.review_comment_heading);
+    this.review_comment_show = this.page
+      .locator('span[class="govuk-accordion__section-toggle-text"]')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Details_Page.review_comment_show);
+    this.review_comment_hide = this.page
+      .locator('span[class="govuk-accordion__section-toggle-text"]')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Details_Page.review_comment_hide);
     this.review_comment_guidance = this.page
       .getByRole('paragraph')
       .getByText(this.modificationsDetailsPageTestData.Modification_Review_Outcome_Section.review_comment_guidance);

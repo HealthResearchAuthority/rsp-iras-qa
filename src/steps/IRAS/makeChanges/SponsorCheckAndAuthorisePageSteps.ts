@@ -69,16 +69,13 @@ Then(
   async ({ modificationsCommonPage, commonItemsPage, projectDetailsIRASPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset).reverse();
-    // Headings assertions
     expect.soft(modificationsCommonPage.overall_modification_ranking_sub_heading).toBeVisible();
     expect.soft(modificationsCommonPage.ranking_sub_heading).toBeVisible();
-    // Get actual values
     const actualValuesArray = await modificationsCommonPage.getActualFieldValuesOnModificationPage(
       modificationsCommonPage.allChangeCards,
       changesDataset,
       changeNames
     );
-    // Loop through each change and assert
     for (let index = 0; index < actualValuesArray.length; index++) {
       const changeName = changeNames[index];
       const expectedData = changesDataset[changeName];
@@ -93,8 +90,7 @@ Then(
         }
       }
     }
-    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
-      const changeName = changeNames[changeIndex];
+    for (const changeName of changeNames) {
       const expectedData = changesDataset[changeName];
       const cardTitle = `${expectedData.area_of_change_dropdown}`;
       await modificationsCommonPage.page
@@ -137,6 +133,7 @@ Then(
       );
       modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
       await commonItemsPage.clickButton('Modifications_Page', 'Return_To_Modification');
+      await commonItemsPage.clickLink('Sponsor_Check_And_Authorise_Page', 'Modification_Details');
     }
   }
 );

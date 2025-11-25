@@ -85,7 +85,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and review
         And I click the 'Search' button on the '<Backstage_Page>'
         Then I 'can' see the modification displayed in the '<Backstage_Page>' list with 'Modification_Status_Received' status
         When I click the modification id displayed on the '<Backstage_Page>'
-        Then I can see the modifications details page in the readonly view for '<Backstage_User>'
+        Then I can see the modifications details page in the readonly view
         And I validate the project information labels using dataset displayed on modifications page
         And I validate the date created for modification in sponsor check and authorise page
         And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
@@ -104,7 +104,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and review
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Northern_Ireland | Team_Manager_Dashboard_Page | Team_Manager_NI      |
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Scotland         | Search_Modifications_Page   | Studywide_Reviewer_S |
 
-    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @KNOWN_DEFECT_RSP-6266 @KNOWN_DEFECT_RSP-6314 @KNOWN_DEFECT_RSP-6315
+    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @KNOWN_DEFECT_RSP-6343
     Scenario Outline: Verify the modification approvals workflow
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -173,7 +173,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and review
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
         When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
-        Then I can see the modifications details page in the readonly view for '<Reviewer_User>'
+        Then I can see the modifications details page in the readonly view
         When I click the 'Continue' link on the 'Modification_Details_Page'
         Then I can see the review outcome section
         When I provide the '<Outcome>' outcome for the modification with '<Outcome_Reason>' reason
@@ -185,7 +185,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and review
         Then I can see the 'My_Modifications_Tasklist_Page'
         When I enter 'new iras id' into the search field
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
-        And I 'cannot' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
+        Then I 'cannot' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
         When I have navigated to the 'Search_Modifications_Page'
         When I enter 'new iras id' into the search field
         And I click the 'Search' button on the 'Search_Modifications_Page'

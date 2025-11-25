@@ -481,6 +481,11 @@ export default class ModificationsCommonPage {
       modificationsCommonPageTestData.Nhs_Resource_Implications.includes(dataset.specific_change_dropdown)
     ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+    } else if (
+      affectsNhs &&
+      modificationsCommonPageTestData.Ranking_Category.new_site.includes(dataset.specific_change_dropdown)
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_new_site;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {
@@ -937,8 +942,6 @@ export default class ModificationsCommonPage {
   async getModificationStatus(status: string) {
     if (status.toLowerCase() == 'with sponsor') {
       return this.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
-    } else if (status.toLowerCase() == 'complete') {
-      return this.modificationsCommonPageTestData.Document_Status_Complete.status;
     } else if (status.toLowerCase() == 'authorised') {
       return this.modificationsCommonPageTestData.Modification_Status_Authorised.status;
     } else if (status.toLowerCase() == 'not authorised') {
@@ -949,6 +952,8 @@ export default class ModificationsCommonPage {
       return this.modificationsCommonPageTestData.Modification_Status_Approved.status;
     } else if (status.toLowerCase() == 'not approved') {
       return this.modificationsCommonPageTestData.Modification_Status_Not_Approved.status;
+    } else if (status.toLowerCase() == 'complete') {
+      return this.modificationsCommonPageTestData.Document_Status_Complete.status;
     }
   }
 }

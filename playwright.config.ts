@@ -24,12 +24,8 @@ const config: PlaywrightTestConfig = {
   // retries: 2,
   use: {
     ...browser,
-    trace: 'on',
+    trace: 'retain-on-failure',
     baseURL: `${process.env.BASE_URL}`,
-    screenshot: {
-      mode: 'only-on-failure',
-      fullPage: true,
-    },
     actionTimeout: 30000,
     navigationTimeout: 30000,
     testIdAttribute: 'id',

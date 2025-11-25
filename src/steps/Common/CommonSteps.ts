@@ -278,7 +278,10 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).click();
   } else if (noOfLinksFound > 1 && linkKey != 'Back') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
-  } else if (pageKey === 'Modification_Post_Submission_Page' && linkKey === 'Documents') {
+  } else if (
+    (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
+    (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details' || linkKey === 'Documents')
+  ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
   } else if (pageKey === 'Modification_Post_Submission_Page' && linkKey === 'History') {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
@@ -2032,6 +2035,34 @@ Then(
     }
     for (const value of statusValues) {
       expect.soft(value).toBe(documentStatus);
+    }
+  }
+);
+
+Then(
+  'I can see {string} button {string} on the {string}',
+  async ({ commonItemsPage }, buttonKey: string, availability: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    if (availability.toLowerCase() === 'enabled') {
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeVisible();
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeEnabled();
+    } else if (availability.toLowerCase() === 'disabled') {
+      await expect(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      ).toBeDisabled();
     }
   }
 );
