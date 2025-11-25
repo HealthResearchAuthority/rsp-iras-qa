@@ -48,14 +48,14 @@
     "Back": "Back",
     "View_Edit": "View/Edit",
     "Advanced_Filters": "Advanced filters",
-    "Clear_All_Filters": "Clear all filters"
+    "Clear_All_Filters": "Clear all filters",
+    "System_Admin_Breadcrumb": "System administration"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
   },
   "Check_Create_User_Profile_Page": {
-    "Change": "Change",
-    "Back": "Back"
+    "Change": "Change"
   },
   "Create_User_Profile_Confirmation_Page": {
     "Back_To_Manage_Users": "Back to Manage users",
@@ -64,7 +64,8 @@
   "User_Profile_Page": {
     "Change": "Change",
     "Back": "Back",
-    "View_Users_Audit_History": "View this user's audit history"
+    "View_Users_Audit_History": "View this user's audit history",
+    "Manage_Users_Breadcrumb": "Manage users"
   },
   "Edit_User_Profile_Page": {
     "Back": "Back"
@@ -81,7 +82,8 @@
     "Back": "Back",
     "Add_New_Review_Body_Record": "Add a new review body record",
     "View_Edit": "View/Edit",
-    "Clear_All_Filters": "Clear all filters"
+    "Clear_All_Filters": "Clear all filters",
+    "System_Admin_Breadcrumb": "System administration"
   },
   "System_Administration_Page": {
     "Back": "Back",
@@ -93,8 +95,7 @@
     "Back": "Back"
   },
   "Check_Create_Review_Body_Page": {
-    "Change": "Change",
-    "Back": "Back"
+    "Change": "Change"
   },
   "Create_Review_Body_Confirmation_Page": {
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
@@ -104,7 +105,8 @@
     "Change": "Change",
     "View_This_Review_Body_List_Of_Users": "View this review body's list of users",
     "View_This_Review_Body_Audit_History": "View this review body's audit history",
-    "Back": "Back"
+    "Back": "Back",
+    "Manage_Review_Bodies_Breadcrumb": "Manage review bodies"
   },
   "Edit_Review_Body_Page": {
     "Back": "Back"
@@ -124,6 +126,9 @@
     "View_Project_Overview": "View project overview",
     "Back": "Back",
     "Project_Documents": "Project documents"
+  },
+  "Post_Approval_Page": {
+    "Clear_All_Filters": "Clear all filters"
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
@@ -222,6 +227,9 @@
     "Delete_Modification": "Delete modification",
     "Change": "Change"
   },
+  "Confirm_Project_Details_Page": {
+    "Back": "Back"
+  },
   "Project_Created_Confirmation_Page": {
     "View_Project_Overview": "View project overview"
   },
@@ -266,7 +274,9 @@
     "Back": "Back",
     "Add_User": "Add user"
   },
-  "Check_Add_User_Sponsor_Org_Page": { "Back": "Back" },
+  "Check_Add_User_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
   "Profile_Settings_Page": {
     "One_Login_Account": "One Login account",
     "Change": "Change"
@@ -289,5 +299,21 @@
   },
   "Add_Documents_Details_Page": {
     "Delete": "Delete"
+  },
+  "IRAS_ID_Error_Page": {
+    "Follow_Existing_Processes": "follow existing processes",
+    "HRA_Support_Site": "HRA support site"
+  },
+  "Sponsor_Workspace_Page": {
+    "My_Account": "My account",
+    "Authorisations": "Authorisations"
+  },
+  "Modification_Post_Submission_Page": {
+    "Documents": "Documents"
+  },
+  "Sponsor_Check_And_Authorise_Page": {
+    "Sponsor_Details": "Sponsor details",
+    "Modification_Details": "Modification details",
+    "Documents": "Documents"
   }
 }

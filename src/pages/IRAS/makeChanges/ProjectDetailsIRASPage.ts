@@ -16,7 +16,10 @@ export default class ProjectDetailsIRASPage {
   readonly iras_id_text: Locator;
   readonly iras_id_text_summary_error_label: Locator;
   readonly iras_textbox_hint: Locator;
+  readonly page_body: Locator;
   private _unique_iras_id: string;
+  private _short_project_title: string;
+  private _full_project_title: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -35,6 +38,7 @@ export default class ProjectDetailsIRASPage {
     });
     this.iras_id_text = this.page.getByTestId('IrasId');
     this.iras_id_text_summary_error_label = this.page.locator('.govuk-error-summary__list [href^="#IrasId"]');
+    this.page_body = this.page.locator('[class="govuk-grid-column-two-thirds"]');
   }
 
   //Page Methods
@@ -49,16 +53,34 @@ export default class ProjectDetailsIRASPage {
   async getUniqueIrasId(): Promise<string> {
     return this._unique_iras_id;
   }
+  async setShortProjectTitle(value: string): Promise<void> {
+    this._short_project_title = value;
+  }
 
-  async getValidIRASFromLegacySharepoint(): Promise<string> {
+  async getShortProjectTitle(): Promise<string> {
+    return this._short_project_title;
+  }
+  async setFullProjectTitle(value: string): Promise<void> {
+    this._full_project_title = value;
+  }
+
+  async getFullProjectTitle(): Promise<string> {
+    return this._full_project_title;
+  }
+
+  async getValidIRASAndProjectTitlesFromLegacySharepoint() {
     const sharePointDriveId = `${process.env.sharepoint_drive_id}`;
     const csvFilePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_file_path;
     const maxRetries = new CommonItemsPage(this.page).commonTestData.sharepoint_max_retries;
     const client = await getSharpointGraphClient();
     let attempt = 0;
     let foundIRASID: string | null = null;
+    let foundShortProjectTitle: string | null = null;
+    let foundFullProjectTitle: string | null = null;
     while (attempt <= maxRetries) {
       let currentIRASID: string | null = null;
+      let currentShortProjectTitle: string | null = null;
+      let currentFullProjectTitle: string | null = null;
       try {
         const fileMeta: any = await client.api(`/drives/${sharePointDriveId}/root:/${csvFilePath}:/`).get();
         const etag = fileMeta['@odata.etag'] || fileMeta.eTag;
@@ -91,6 +113,8 @@ export default class ProjectDetailsIRASPage {
               if (!currentIRASID && row.Status?.trim().toLowerCase() !== 'used') {
                 currentIRASID = row.IRAS_ID;
                 row.Status = 'Used';
+                currentShortProjectTitle = row.Short_Project_Title;
+                currentFullProjectTitle = row.Full_Project_Title;
               }
               yield row;
             }
@@ -104,6 +128,8 @@ export default class ProjectDetailsIRASPage {
           .put(uploadBuffer);
         if (currentIRASID) {
           foundIRASID = currentIRASID;
+          foundShortProjectTitle = currentShortProjectTitle;
+          foundFullProjectTitle = currentFullProjectTitle;
         } else {
           throw new Error('No IRAS ID found');
         }
@@ -123,6 +149,6 @@ export default class ProjectDetailsIRASPage {
         }
       }
     }
-    return foundIRASID;
+    return { foundIRASID, foundShortProjectTitle, foundFullProjectTitle };
   }
 }

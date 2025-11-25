@@ -9,6 +9,7 @@ Feature: Create Amendment - Create Modifications for administrative details for 
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -44,19 +45,19 @@ Feature: Create Amendment - Create Modifications for administrative details for 
     And I capture the page screenshot
     Then I can see the project identification select change modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I fill the project identification select change modification page using '<Valid_Data_Change>' dataset
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Project_Identification_Select_Change_Page'
     Then I can see the project identification select reference modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I fill the project identification select reference modification page using '<Valid_Data_Change>' dataset
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Project_Identification_SelectReference_To_Change_Page'
     Then I can see the project identification enter reference modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And  I fill the project identification enter reference modification page using '<Valid_Data_Change>' dataset
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
@@ -65,7 +66,7 @@ Feature: Create Amendment - Create Modifications for administrative details for 
     When I click the 'Save_Continue' button on the 'Review_Changes_Planned_End_Date_Page'
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
@@ -113,7 +114,7 @@ Feature: Create Amendment - Create Modifications for administrative details for 
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the project identification select change modification page
     And I capture the page screenshot
-    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate the project information labels using dataset displayed on modifications page
     And I click the 'Save_For_Later' button on the 'Project_Identification_Select_Change_Page'
     Then I can see the project overview page
     And I capture the page screenshot
@@ -147,7 +148,7 @@ Feature: Create Amendment - Create Modifications for administrative details for 
     When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
     Then I can see the project identification enter reference modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     When I click the 'Save_For_Later' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     Then I can see the project overview page
     And I capture the page screenshot
@@ -182,11 +183,11 @@ Feature: Create Amendment - Create Modifications for administrative details for 
     When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
     Then I can see the project identification select reference modification page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I fill the project identification select reference modification page using '<Changes>' dataset
     When I click the 'Save_Continue' button on the 'Project_Identification_SelectReference_To_Change_Page'
     Then I can see the project identification enter reference modification page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I can validate the ui labels on project identification enter reference numbers page using '<Label_Text_Data>' dataset
     When I click the 'Save_For_Later' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     Then I can see the project overview page

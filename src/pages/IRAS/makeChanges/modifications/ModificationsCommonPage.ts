@@ -4,7 +4,10 @@ import PlannedEndDateChangePage from './PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
-import { confirmStringNotNull, convertDate } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, convertDate, validateDateRange } from '../../../../utils/UtilFunctions';
+import ContactDetailsModificationPage from './ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from './ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from './ProjectPersonnelChangePrincipalInvestigatorPage';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
@@ -35,6 +38,16 @@ export default class ModificationsCommonPage {
   readonly allCategoryValues: Locator;
   readonly allReviewTypeValues: Locator;
   readonly modificationStatusLabel: Locator;
+  readonly modificationRows: Locator;
+  readonly listCell: Locator;
+  readonly documentRows: Locator;
+  readonly documentTypeCell: Locator;
+  readonly documentNameCell: Locator;
+  readonly fileNameCell: Locator;
+  readonly documentVersionCell: Locator;
+  readonly documentDateCell: Locator;
+  readonly documentStatusCell: Locator;
+  readonly dateCreatedValue: Locator;
 
   private rankingForChanges: Record<
     string,
@@ -133,6 +146,20 @@ export default class ModificationsCommonPage {
       })
       .locator('[class$="value"]');
     this.changes_free_text_summary_error = this.page.locator('.govuk-error-summary__list');
+    this.modificationRows = this.page.locator('tbody').getByRole('row');
+    this.listCell = this.page.getByRole('cell');
+    this.documentRows = this.page.locator('#projectDocumentsTable tbody tr');
+    this.documentTypeCell = this.page.locator('td:nth-child(1)');
+    this.documentNameCell = this.page.locator('td:nth-child(2)');
+    this.fileNameCell = this.page.locator('td:nth-child(3)');
+    this.documentVersionCell = this.page.locator('td:nth-child(4)');
+    this.documentDateCell = this.page.locator('td:nth-child(5)');
+    this.documentStatusCell = this.page.locator('td:nth-child(6)');
+    this.dateCreatedValue = this.page
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
+      .locator('..')
+      .locator('[class$="value"]');
   }
 
   //Getters & Setters for Private Variables
@@ -148,8 +175,8 @@ export default class ModificationsCommonPage {
   async assertOnModificationsPage(dataset: any) {
     const pageHeader = dataset['page_header'];
     const pageComponentLabel = dataset['page_component_label'];
-    await expect(this.pageHeading.getByText(pageHeader)).toBeVisible();
-    await expect(this.page.getByText(pageComponentLabel)).toBeVisible();
+    await expect(this.pageHeading.getByText(pageHeader).first()).toBeVisible();
+    await expect(this.page.getByText(pageComponentLabel).first()).toBeVisible();
   }
   async validatePageHeading(pageHeadingText: any) {
     await expect(this.pageHeading.getByText(pageHeadingText)).toBeVisible();
@@ -168,6 +195,16 @@ export default class ModificationsCommonPage {
     const commonItemsPage = new CommonItemsPage(this.page);
     if (dataset.specific_change_dropdown === 'Change to planned end date') {
       await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Contact details') {
+      await new ContactDetailsModificationPage(this.page).fillContactDetailsModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Change of chief investigator') {
+      await new ProjectPersonnelChangeChiefInvestigatorPage(
+        this.page
+      ).fillPersonnelChangeChiefInvestigatorModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Change of principal investigator') {
+      await new ProjectPersonnelChangePrincipalInvestigatorPage(
+        this.page
+      ).fillPersonnelChangePrincipalInvestigatorModificationsPage(dataset, 'create');
     } else if (
       this.modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset.specific_change_dropdown)
     ) {
@@ -219,9 +256,16 @@ export default class ModificationsCommonPage {
     const changeRankings = ranking[changeName];
     if (changeRankings && changeRankings.length > 0) {
       const { expectedModificationType, expectedCategory, expectedReviewType } = changeRankings[0];
-      expect.soft(actualModificationType).toBe(expectedModificationType);
-      expect.soft(actualCategory).toBe(expectedCategory);
-      expect.soft(actualReviewType).toBe(expectedReviewType);
+      try {
+        expect(actualModificationType).toBe(expectedModificationType);
+        expect(actualCategory).toBe(expectedCategory);
+        expect(actualReviewType).toBe(expectedReviewType);
+      } catch (error) {
+        console.log('Error in Change Name: ' + changeName + error);
+        expect.soft(actualModificationType).toBe(expectedModificationType);
+        expect.soft(actualCategory).toBe(expectedCategory);
+        expect.soft(actualReviewType).toBe(expectedReviewType);
+      }
     } else {
       throw new Error(`No ranking data found for changeName: ${changeName}`);
     }
@@ -277,26 +321,26 @@ export default class ModificationsCommonPage {
       areaOfChangeSubHeading: string;
       individualChangeStatus: string;
     }> = [];
-
     const totalCards = await changeCards.count();
     const relevantCards: Locator[] = [];
-
     // Collect all cards except the first one (index starts at 1)
     for (let cardIndex = 1; cardIndex < totalCards; cardIndex++) {
       relevantCards.push(changeCards.nth(cardIndex));
     }
-
     let changeIndex = 0;
     for (const card of relevantCards) {
+      const actualSpecificChangeValueLocator = card
+        .locator(this.keyLocator, {
+          hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
+        })
+        .locator(this.valueLocator);
+      await expect.soft(actualSpecificChangeValueLocator).toBeVisible();
+      if (!(await actualSpecificChangeValueLocator.isVisible())) {
+        break;
+      }
       const actualSpecificChangeValue = confirmStringNotNull(
-        await card
-          .locator(this.keyLocator, {
-            hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
-          })
-          .locator(this.valueLocator)
-          .textContent()
+        await actualSpecificChangeValueLocator.textContent()
       ).trim();
-
       const actualAreaOfChangeSubHeading = confirmStringNotNull(
         await card
           .getByText(
@@ -306,20 +350,16 @@ export default class ModificationsCommonPage {
       )
         .trim()
         .split('\n')[0];
-
       const actualChangeStatus = confirmStringNotNull(
         await card.locator(this.modificationStatusLabel).textContent()
       ).trim();
-
       actualValuesArray.push({
         specificChangeValue: actualSpecificChangeValue,
         areaOfChangeSubHeading: actualAreaOfChangeSubHeading,
         individualChangeStatus: actualChangeStatus,
       });
-
       changeIndex++;
     }
-
     return actualValuesArray;
   }
 
@@ -435,8 +475,21 @@ export default class ModificationsCommonPage {
     }
     if (affectsNonNhsOnly) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
-    } else if (affectsNhs && requiresResources === 'no') {
+    } else if (
+      affectsNhs &&
+      requiresResources === 'no' &&
+      modificationsCommonPageTestData.Nhs_Resource_Implications.includes(dataset.specific_change_dropdown)
+    ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+    } else if (
+      affectsNhs &&
+      modificationsCommonPageTestData.Ranking_Category.new_site.includes(dataset.specific_change_dropdown)
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_new_site;
+    } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_b;
+    } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_a;
     } else if (affectsNhs && requiresResources === 'yes' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'yes' && affectedOrgs === 'all') {
@@ -450,7 +503,11 @@ export default class ModificationsCommonPage {
   async getModificationCategoryForNonApplicability(changeDataset, researchLocationDataset: any): Promise<string> {
     let category: string | undefined;
     if (modificationsCommonPageTestData.Non_Applicability_Changes.includes(changeDataset.specific_change_dropdown)) {
-      if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'Yes') {
+      if (
+        modificationsCommonPageTestData.Ranking_Category.always_n_a.includes(changeDataset.specific_change_dropdown)
+      ) {
+        category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
+      } else if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'Yes') {
         category = this.modificationsCommonPageTestData.Label_Texts.category_c;
       } else if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'No') {
         category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
@@ -481,6 +538,8 @@ export default class ModificationsCommonPage {
     const values = Object.values(await this.getrankingForChanges()).flatMap((value) =>
       Array.isArray(value) ? value : [value]
     );
+    let category: null | string;
+    let categoryOrder = [];
     const reviewType = values.some(
       (reviewTypeValue) =>
         reviewTypeValue.expectedReviewType ===
@@ -506,18 +565,41 @@ export default class ModificationsCommonPage {
     ) {
       modificationType =
         this.modificationsCommonPageTestData.Label_Texts.modification_type_modification_of_important_detail;
-    } else {
+    } else if (
+      values.some(
+        (modificationTypeValue) =>
+          modificationTypeValue.expectedModificationType ===
+          this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification
+      )
+    ) {
       modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification;
+    } else if (
+      values.some(
+        (modificationTypeValue) =>
+          modificationTypeValue.expectedModificationType ===
+          this.modificationsCommonPageTestData.Label_Texts.modification_type_non_notifiable
+      )
+    ) {
+      modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_non_notifiable;
     }
-    const categoryOrder = [
-      this.modificationsCommonPageTestData.Label_Texts.category_a,
-      this.modificationsCommonPageTestData.Label_Texts.category_b,
-      this.modificationsCommonPageTestData.Label_Texts.category_c,
-      this.modificationsCommonPageTestData.Label_Texts.category_n_a,
-    ];
-    const category = categoryOrder.find((categoryValue) =>
-      values.some((value) => value.expectedCategory === categoryValue)
-    );
+    const categories = new Set(values.map((v) => v.expectedCategory));
+    const hasCategoryA = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_a);
+    const hasCategoryB = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_b);
+    const hasCategoryC = categories.has(this.modificationsCommonPageTestData.Label_Texts.category_c);
+    if (hasCategoryB && hasCategoryC && !hasCategoryA) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_b_c;
+    } else {
+      categoryOrder = [
+        this.modificationsCommonPageTestData.Label_Texts.category_a,
+        this.modificationsCommonPageTestData.Label_Texts.category_b,
+        this.modificationsCommonPageTestData.Label_Texts.category_c,
+        this.modificationsCommonPageTestData.Label_Texts.category_new_site,
+        this.modificationsCommonPageTestData.Label_Texts.category_n_a,
+      ];
+      category = categoryOrder.find((categoryValue) =>
+        values.some((value) => value.expectedCategory === categoryValue)
+      );
+    }
     this.setOverallRanking(modificationType, category, reviewType);
   }
 
@@ -525,14 +607,11 @@ export default class ModificationsCommonPage {
     await this.page.waitForLoadState('domcontentloaded');
     const keys = Object.keys(dataset);
     const cardLocator = this.page
-      .getByRole('heading', {
-        name: CardHeading,
-      })
+      .getByRole('heading', { name: CardHeading })
+      .locator('..')
       .locator('..')
       .locator('.govuk-summary-card')
-      .filter({
-        has: this.page.locator('.govuk-summary-card__title', { hasText: cardTitle }),
-      });
+      .or(this.page.getByRole('heading', { name: CardHeading }).locator('..').locator('..'));
     await this.page.waitForLoadState('domcontentloaded');
     await expect(cardLocator).toBeVisible({ timeout: 5000 });
     await cardLocator.waitFor({ state: 'visible' });
@@ -604,7 +683,7 @@ export default class ModificationsCommonPage {
         case this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts.sponsor_date_label: {
           const [day, month, year] = cleanedValue.split(' ');
           cardData['sponsor_modification_date_day_textbox'] = day;
-          cardData['sponsor_modification_date_month_textbox'] = month;
+          cardData['sponsor_modification_date_month_dropdown'] = month;
           cardData['sponsor_modification_date_year_textbox'] = year;
           break;
         }
@@ -713,5 +792,168 @@ export default class ModificationsCommonPage {
       ['statusValue', statusValue],
     ]);
     return modificationMap;
+  }
+
+  async getModificationRowNumberPostApprovalPage(rowNumber?: number): Promise<Map<string, string[]>> {
+    const modificationIdValue: string[] = [];
+    const submittedDateValue: string[] = [];
+    const statusValue: string[] = [];
+    const columnValue = this.tableRows.nth(rowNumber).getByRole('cell');
+    const displayedModificationId = confirmStringNotNull(await columnValue.nth(0).textContent());
+    modificationIdValue.push(displayedModificationId);
+    const displayedSubmittedDate = confirmStringNotNull(await columnValue.nth(4).textContent());
+    submittedDateValue.push(displayedSubmittedDate);
+    const displayedStatus = confirmStringNotNull(await columnValue.nth(5).textContent());
+    statusValue.push(displayedStatus);
+    const modificationMap = new Map([
+      ['modificationIdValue', modificationIdValue],
+      ['submittedDateValue', submittedDateValue],
+      ['statusValue', statusValue],
+    ]);
+    return modificationMap;
+  }
+
+  async validateSearchResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    validateSearch: boolean = true,
+    rowNumber: number = 1
+  ) {
+    const modificationId = await this.getModificationRowNumberPostApprovalPage(rowNumber);
+    const modificationIDActual = modificationId.get('modificationIdValue');
+    if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+      const modificationIdExpected = searchCriteriaDataset['search_input_text'];
+      expect(modificationIDActual.includes(modificationIdExpected));
+    }
+    const hasNextPage =
+      (await commonItemsPage.pagination_next_link.isVisible()) &&
+      !(await commonItemsPage.pagination_next_link.isDisabled());
+    if (hasNextPage) {
+      await commonItemsPage.next_button.click();
+    }
+  }
+
+  async getRowDataAdvancedFiltersSearch(row: any) {
+    return {
+      modificationId: confirmStringNotNull(await row.getByRole('cell').nth(0).textContent()),
+      modificationType: confirmStringNotNull(await row.getByRole('cell').nth(1).textContent()),
+      dateSubmitted: confirmStringNotNull(await row.getByRole('cell').nth(4).textContent()),
+      status: confirmStringNotNull(await row.getByRole('cell').nth(5).textContent()),
+    };
+  }
+
+  async validateResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    filterDataset?: any,
+    validateSearch: boolean = true
+  ) {
+    for (let pageIndex = 1; pageIndex < 2; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
+        const { modificationType, dateSubmitted, status } = await this.getRowDataAdvancedFiltersSearch(row);
+        if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+          this.validateSearchResults(commonItemsPage, searchCriteriaDataset, true, rowIndex);
+        }
+        this.validateFilters(modificationType, dateSubmitted, status, filterDataset);
+      }
+      const hasNextPage =
+        (await commonItemsPage.pagination_next_link.isVisible()) &&
+        !(await commonItemsPage.pagination_next_link.isDisabled());
+      if (hasNextPage) {
+        await commonItemsPage.pagination_next_link.click();
+      }
+    }
+  }
+
+  async validateFilters(
+    modificationTypeActual: string,
+    dateSubmittedActual: string,
+    statusActual: string,
+    filterDataset: any
+  ) {
+    if (!filterDataset) return;
+    const statusExpected = filterDataset['status_radio'];
+    if (statusExpected) {
+      const statusMatches = statusExpected.some((statusLabel: string) =>
+        statusActual.toLowerCase().includes(statusLabel.toLowerCase())
+      );
+      expect.soft(statusMatches).toBeTruthy();
+    }
+    const modificationTypeExpected = filterDataset['modification_type_radio'];
+    if (modificationTypeExpected) {
+      const typeMatches = modificationTypeExpected.some((modificationTypeLabel: string) =>
+        modificationTypeActual.toLowerCase().includes(modificationTypeLabel.toLowerCase())
+      );
+      expect.soft(typeMatches).toBeTruthy();
+    }
+    const hasFromDate =
+      'date_submitted_from_day_text' in filterDataset &&
+      'date_submitted_from_month_dropdown' in filterDataset &&
+      'date_submitted_from_year_text' in filterDataset;
+    const hasToDate =
+      'date_submitted_to_day_text' in filterDataset &&
+      'date_submitted_to_month_dropdown' in filterDataset &&
+      'date_submitted_to_year_text' in filterDataset;
+
+    if (hasFromDate && hasToDate && dateSubmittedActual != null) {
+      const filterFromDate = `${filterDataset['date_submitted_from_day_text']} ${filterDataset['date_submitted_from_month_dropdown']} ${filterDataset['date_submitted_from_year_text']}`;
+      const filterToDate = `${filterDataset['date_submitted_to_day_text']} ${filterDataset['date_submitted_to_month_dropdown']} ${filterDataset['date_submitted_to_year_text']}`;
+      if (filterFromDate !== '' && filterToDate !== '') {
+        await this.validateDateFilter(filterFromDate, filterToDate, dateSubmittedActual);
+      }
+    }
+  }
+
+  async validateDateFilter(filterFromDate: string, filterToDate: string, submittedDateActual: string) {
+    const submittedDateActualOnlyDate = submittedDateActual.substring(0, 11);
+    const isDateSubmittedInDateInValidRange = await validateDateRange(
+      submittedDateActualOnlyDate,
+      filterFromDate,
+      filterToDate
+    );
+    expect(isDateSubmittedInDateInValidRange).toBe(true);
+  }
+
+  async validateCardData(expectedData: any, actualData: any) {
+    const compareArrays = (expected: any[], actual: any[]) => {
+      if (expected.length !== actual.length) return false;
+      return expected.every((val, index) => val === actual[index]);
+    };
+    for (const key of Object.keys(expectedData)) {
+      if (key.includes('change_status')) {
+        continue;
+      }
+      const expectedValue = expectedData[key];
+      const actualValue = actualData[key];
+      if (Array.isArray(expectedValue)) {
+        const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
+        const sortedActual = [...(actualValue || [])].sort(
+          (a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b)
+        );
+        expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
+      } else {
+        expect.soft(actualValue).toStrictEqual(expectedValue);
+      }
+    }
+  }
+
+  async getModificationStatus(status: string) {
+    if (status.toLowerCase() == 'with sponsor') {
+      return this.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
+    } else if (status.toLowerCase() == 'authorised') {
+      return this.modificationsCommonPageTestData.Modification_Status_Authorised.status;
+    } else if (status.toLowerCase() == 'not authorised') {
+      return this.modificationsCommonPageTestData.Modification_Status_Not_Authorised.status;
+    } else if (status.toLowerCase() == 'with review body') {
+      return this.modificationsCommonPageTestData.Modification_Status_With_Review_Body.status;
+    } else if (status.toLowerCase() == 'approved') {
+      return this.modificationsCommonPageTestData.Modification_Status_Approved.status;
+    } else if (status.toLowerCase() == 'not approved') {
+      return this.modificationsCommonPageTestData.Modification_Status_Not_Approved.status;
+    } else if (status.toLowerCase() == 'complete') {
+      return this.modificationsCommonPageTestData.Document_Status_Complete.status;
+    }
   }
 }

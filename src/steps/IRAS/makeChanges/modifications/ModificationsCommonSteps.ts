@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { confirmStringNotNull, getFormattedDate } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, getFormattedDate, removeUnwantedWhitespace } from '../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -24,14 +24,10 @@ Then(
 );
 
 Then(
-  'I validate the project information labels using {string} dataset displayed on modifications page',
-  async (
-    { modificationsCommonPage, projectDetailsIRASPage, projectDetailsTitlePage },
-    projectTitleDatasetName: string
-  ) => {
+  'I validate the project information labels using dataset displayed on modifications page',
+  async ({ modificationsCommonPage, projectDetailsIRASPage }) => {
     const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
-    const shortProjectTitleExpected =
-      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
+    const shortProjectTitleExpected = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const modificationIDExpected = irasIDExpected + '/' + 1;
     const irasIDActual = await modificationsCommonPage.iras_id_value.textContent();
     const shortProjectTitleActual = confirmStringNotNull(
@@ -40,12 +36,6 @@ Then(
     const modificationIDActual = confirmStringNotNull(
       await modificationsCommonPage.modification_id_value.textContent()
     );
-    if (await modificationsCommonPage.status_value.isVisible()) {
-      const statusActual = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
-      expect
-        .soft(statusActual)
-        .toBe(modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.draft_status_value);
-    }
     expect.soft(irasIDActual).toBe(irasIDExpected);
     expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
@@ -234,27 +224,6 @@ Then(
   }
 );
 
-const validateCardData = (expectedData: any, actualData: any) => {
-  const compareArrays = (expected: any[], actual: any[]) => {
-    if (expected.length !== actual.length) return false;
-    return expected.every((val, index) => val === actual[index]);
-  };
-  for (const key of Object.keys(expectedData)) {
-    if (key.includes('change_status')) {
-      continue;
-    }
-    const expectedValue = expectedData[key];
-    const actualValue = actualData[key];
-    if (Array.isArray(expectedValue)) {
-      const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
-      const sortedActual = [...(actualValue || [])].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
-      expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
-    } else {
-      expect.soft(actualValue).toStrictEqual(expectedValue);
-    }
-  }
-};
-
 Then(
   'I validate the change details are displayed as per the {string} dataset',
   async ({ modificationsCommonPage, reviewAllChangesPage }, datasetName) => {
@@ -269,7 +238,31 @@ Then(
         reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading,
         expectedData
       );
-      validateCardData(expectedData, actualData.cardData);
+      modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
+    }
+  }
+);
+
+Then(
+  'I validate the change details are displayed as per the {string} dataset under the tabs sections',
+  async ({ modificationsCommonPage }, datasetName) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeNames = Object.keys(changesDataset).reverse();
+    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
+      const changeName = changeNames[changeIndex];
+      const expectedData = changesDataset[changeName];
+      const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
+      const headingLocator = modificationsCommonPage.page.getByRole('heading', { name: cardTitle });
+      if (await headingLocator.isVisible()) {
+        const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
+          cardTitle,
+          cardTitle,
+          expectedData
+        );
+        modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
+      } else {
+        await expect.soft(headingLocator, `Heading "${cardTitle}" should be visible`).toBeVisible();
+      }
     }
   }
 );
@@ -283,7 +276,7 @@ Then(
       reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
       expectedData
     );
-    validateCardData(Object.keys(expectedData), actualData.cardData);
+    modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
   }
 );
 
@@ -405,3 +398,150 @@ Then(
     expect.soft(actualFreeText).toBe(expectedFreeText);
   }
 );
+
+Then('I validate overall modification ranking', async ({ modificationsCommonPage }) => {
+  const modificationTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).modificationType;
+  const categoryExpected = (await modificationsCommonPage.getOverallRankingForChanges()).category;
+  const reviewTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).reviewType;
+  const modificationTypeActual = await removeUnwantedWhitespace(
+    await modificationsCommonPage.modification_type.first().textContent()
+  );
+  const categoryActual = await removeUnwantedWhitespace(await modificationsCommonPage.category.first().textContent());
+  const reviewTypeActual = await removeUnwantedWhitespace(
+    await modificationsCommonPage.review_type.first().textContent()
+  );
+  expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
+  expect.soft(categoryActual).toBe(categoryExpected);
+  expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
+});
+
+Then(
+  'I validate individual ranking for single card displayed in modifications page',
+  async ({ modificationsCommonPage }) => {
+    const individualRanking = await modificationsCommonPage.getrankingForChanges();
+    const firstCardKey = Object.keys(individualRanking)[0];
+    const modificationTypeExpected = individualRanking[firstCardKey][0].expectedModificationType;
+    const categoryExpected = individualRanking[firstCardKey][0].expectedCategory;
+    const reviewTypeExpected = individualRanking[firstCardKey][0].expectedReviewType;
+    const modificationTypeActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards
+        .locator(modificationsCommonPage.modification_type)
+        .first()
+        .textContent()
+    );
+    const categoryActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards.locator(modificationsCommonPage.category).first().textContent()
+    );
+    const reviewTypeActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards.locator(modificationsCommonPage.review_type).first().textContent()
+    );
+    expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
+    expect.soft(categoryActual).toBe(categoryExpected);
+    expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
+  }
+);
+
+Then(
+  'I can see the current chief investigator email details displayed on modifications page using {string} dataset',
+  async ({ modificationsCommonPage, chiefInvestigatorPage }, datasetNameChiefInvestigator) => {
+    const currentChiefInvestigatorNameExpected =
+      chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator].chief_investigator_email_text;
+    await expect
+      .soft(
+        modificationsCommonPage.page.getByText(
+          modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.current_chief_investigator_email_label
+        )
+      )
+      .toBeVisible();
+    await expect.soft(modificationsCommonPage.page.getByText(currentChiefInvestigatorNameExpected)).toBeVisible();
+  }
+);
+
+Then(
+  'I can see the modification status as {string} on the post approval page',
+  async ({ modificationsCommonPage }, statusDataset: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const expectedStatus = dataset.status;
+    let expectedSubmittedDate = dataset.submited_date;
+    const expectedModificationID = await modificationsCommonPage.getModificationID();
+    const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+    const modificationIDActual = modificationRecord.get('modificationIdValue');
+    expect.soft(modificationIDActual[0]).toBe(expectedModificationID);
+    const statusActual = modificationRecord.get('statusValue');
+    expect.soft(statusActual[0]).toBe(expectedStatus);
+    const actualDateSubmitted = modificationRecord.get('submittedDateValue');
+    if (expectedSubmittedDate !== '') {
+      expectedSubmittedDate = await getFormattedDate();
+    }
+    expect.soft(actualDateSubmitted[0]).toBe(expectedSubmittedDate);
+  }
+);
+
+Then(
+  'I validate submitted date field value for {string} modifications and confirm {string} status',
+  async ({ modificationsCommonPage }, statusDataset: string, statusToCheck: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const expectedStatus = dataset.status;
+    let expectedSubmittedDate: string;
+    if (statusDataset == 'Modification_Status_Indraft') {
+      expectedSubmittedDate = dataset.submited_date;
+    } else {
+      expectedSubmittedDate = await getFormattedDate();
+    }
+    let modificationMap: any;
+    const displayedModificationIdValue: string[] = [];
+    const displayedSubmittedDateValue: string[] = [];
+    const displayedStatusValue: string[] = [];
+    const rows = await modificationsCommonPage.modificationRows.all();
+    for (const row of rows) {
+      const columns = await row.locator(modificationsCommonPage.listCell).allInnerTexts();
+      const status = confirmStringNotNull(columns[5] ?? '');
+      if (status == statusToCheck) {
+        displayedStatusValue.push(status);
+        const modificationId = confirmStringNotNull(columns[0]);
+        displayedModificationIdValue.push(modificationId);
+        const submittedDate = confirmStringNotNull(columns[4] ?? '');
+        displayedSubmittedDateValue.push(submittedDate);
+        modificationMap = new Map([
+          ['displayedStatusValue', displayedStatusValue],
+          ['displayedSubmittedDateValue', displayedSubmittedDateValue],
+          ['displayedModificationIdValue', displayedModificationIdValue],
+        ]);
+        const actualStatus = modificationMap.get('displayedStatusValue');
+        const actualDateSubmitted = modificationMap.get('displayedSubmittedDateValue');
+        expect.soft(actualStatus[0]).toBe(expectedStatus);
+        expect.soft(actualDateSubmitted[0]).toBe(expectedSubmittedDate);
+      }
+    }
+  }
+);
+
+Then(
+  'I validate the status {string} is displayed on the page',
+  async ({ modificationsCommonPage }, statusDataset: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const expectedStatus = dataset.status;
+    const actualStatus = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
+    expect.soft(actualStatus).toBe(expectedStatus);
+  }
+);
+
+Then(
+  'I create {string} and click on save for later on the select area of change page',
+  async ({ selectAreaOfChangePage, modificationsCommonPage, commonItemsPage }, dataset: string) => {
+    const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[dataset];
+    const modificationDataValues = Object.keys(modificationsDataset);
+    for (const index of modificationDataValues) {
+      const modificationName = modificationDataValues[index];
+      const modificationDataset = modificationsDataset[modificationName];
+      const buttonValue = commonItemsPage.buttonTextData.Project_Overview_Page.Create_New_Modification;
+      await commonItemsPage.govUkButton.getByText(confirmStringNotNull(buttonValue)).click();
+      await selectAreaOfChangePage.selectAreaOfChangeAndSaveLater(modificationDataset);
+    }
+  }
+);
+
+Then('I click on the searched modification id', async ({ modificationsCommonPage }) => {
+  const modificationID = await modificationsCommonPage.getModificationID();
+  await modificationsCommonPage.page.getByText(modificationID, { exact: true }).click();
+});

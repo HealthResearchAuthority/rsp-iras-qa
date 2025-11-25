@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @VerifyAuditHistoryCreateReviewBody @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryCreateReviewBody @CreatedRevBodyCleanup @KNOWN-ISSUE-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after creating a review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
@@ -35,7 +35,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Valid_Data_In_All_Fields           | Create_Review_Body |
             | Valid_Data_In_All_Mandatory_Fields | Create_Review_Body |
 
-    @VerifyAuditHistoryDisableReviewBody @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryDisableReviewBody @KNOWN-ISSUE-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after disabling a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
@@ -63,7 +63,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
             | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
 
-    @VerifyAuditHistoryEnableReviewBody @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryEnableReviewBody @KNOWN-ISSUE-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after enabling a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Disabled>'
         And I can see the review body profile page
@@ -94,7 +94,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Audit_History      | Status_Enabled | Status_Disabled |
             | Enable_Review_Body | Enabled        | Disabled        |
 
-    @VerifyAuditHistoryEditReviewBodyOrgName @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryEditReviewBodyOrgName @KNOWN-ISSUE-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after editing organization name of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
@@ -117,7 +117,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Field_Name        | Edit_Review_Body                     | Audit_History                      | Status_Enabled |
             | Organisation_Name | Valid_Data_Organisation_Name_Another | Edit_Review_Body_Organisation_Name | Enabled        |
 
-    @VerifyAuditHistoryEditReviewBodyCountry @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryEditReviewBodyCountry @KNOWN-ISSUE-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after editing country of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
@@ -142,7 +142,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Field_Name | Edit_Review_Body           | Audit_History            | Status_Enabled |
             | Country    | Valid_Data_Country_Another | Edit_Review_Body_Country | Enabled        |
 
-    @VerifyAuditHistoryEditReviewBodyEmail @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryEditReviewBodyEmail @KNOWN-ISSUE-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after editing email address of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
@@ -167,7 +167,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Field_Name    | Edit_Review_Body         | Audit_History                  | Status_Enabled |
             | Email_Address | Valid_Data_Email_Another | Edit_Review_Body_Email_Address | Enabled        |
 
-    @VerifyAuditHistoryEditReviewBodyDescription @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryEditReviewBodyDescription @KNOWN-ISSUE-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after editing description of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
@@ -192,7 +192,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Field_Name  | Edit_Review_Body               | Audit_History                | Status_Enabled |
             | Description | Valid_Data_Description_Another | Edit_Review_Body_Description | Enabled        |
 
-    @VerifyAuditHistoryEditReviewBodyAllFields @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryEditReviewBodyAllFields @KNOWN-ISSUE-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after editing all the fields of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page

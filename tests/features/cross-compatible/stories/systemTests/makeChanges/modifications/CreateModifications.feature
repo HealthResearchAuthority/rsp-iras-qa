@@ -1,5 +1,5 @@
 @ApplicantUser @createModifications @SystemTest @jsEnabled
-Feature: Create Modification- This feature file help an applicant user complete the modification journey from start of create project record to the point that the modification can be sent to sponsor
+Feature: Create Modification- This feature file help an applicant to complete the modification journey and can sent to sponsor
 
   Background:
     Given I have navigated to the my research projects page
@@ -9,6 +9,7 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
     And I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -35,12 +36,12 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
@@ -48,7 +49,7 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And the 'Change' link should be 'available' on the 'Review_All_Changes_Page'
     And the 'Delete_Modification' link should be 'available' on the 'Review_All_Changes_Page'
     And the now sent to sponsor heading and hint text should be 'available' on the review all changes page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -92,17 +93,17 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -136,17 +137,17 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -154,14 +155,14 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I modify the current changes with '<New_Changes>' for the created modification
     And I capture the page screenshot
     Then I can see the review all changes modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the change details are displayed as per the '<New_Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I modify the current sponsor details with 'Valid_Data_All_Fields_Changes' for the created modification
     And I capture the page screenshot
     Then I can see the review all changes modifications page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields_Changes'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
@@ -186,8 +187,8 @@ Feature: Create Modification- This feature file help an applicant user complete 
       | Changes                           | New_Changes                              | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496
-  Scenario Outline: Validate that user can create modifications to add free text for reviewable modifications
+  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @rsp-5342 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408_5408_5285 @fail
+  Scenario Outline: Validate that user can create and submit reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -204,10 +205,37 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate all fields on modification page '<Changes>'
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I validate the ui labels on modification details page using 'Modification_Details_Label_Texts'
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files_Three' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
@@ -215,9 +243,14 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I capture the page screenshot
     Then I can see the review all changes page
     And I validate the change details are displayed as per the '<Changes>' dataset
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I can see the 'supporting_documents_table' ui labels on the review all changes page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'Complete' status displayed for all documents in the table
+    And I capture the page screenshot
+    And the 'Add_Documents' button should be 'available' on the 'Review_All_Changes_Page'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
     Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
@@ -228,20 +261,27 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I capture the page screenshot
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I click on the modification id hyperlink in the post approval tab
-    Then I can see the review all changes page
+    Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
-
+    And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
+    And I can see the 'documents_table' ui labels on the modification post submission page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'With sponsor' status displayed for all documents in the table
     Examples:
-      | Changes                                            | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_Yes |
-      | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
+      | Changes                                                          | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One               | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One               | Nhs_Involvement_No  |
+      | Other_Minor_Change_To_Project_Management                         | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two               | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two               | Nhs_Involvement_No  |
+      | Multiple_Changes_Reviewable_Set_Three                            | Nhs_Involvement_Yes |
+      | Multiple_Changes_Reviewable_Set_Three                            | Nhs_Involvement_No  |
+      | Multiple_Changes_Participating_Organisations_Reviewable_Set_Four | Nhs_Involvement_Yes |
+      | Multiple_Changes_Participating_Organisations_Reviewable_Set_Four | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
+  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @rsp-5342 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496_5285 @fail
   Scenario Outline: Validate that user can create and submit non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -260,9 +300,36 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I can see the modifications details page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     Then I validate all fields on modification page '<Changes>'
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I validate the ui labels on modification details page using 'Modification_Details_Label_Texts'
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files_Three' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
@@ -271,6 +338,11 @@ Feature: Create Modification- This feature file help an applicant user complete 
     Then I can see the review all changes page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
+    And I can see the 'supporting_documents_table' ui labels on the review all changes page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'Complete' status displayed for all documents in the table
+    And I capture the page screenshot
+    And the 'Add_Documents' button should be 'available' on the 'Review_All_Changes_Page'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
     Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
@@ -281,25 +353,37 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
     And I click on the modification id hyperlink in the post approval tab
-    Then I can see the review all changes page
+    Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
+    And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
+    And I can see the 'documents_table' ui labels on the modification post submission page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'With sponsor' status displayed for all documents in the table
 
     Examples:
-      | Changes                                                          | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
-      | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
+      | Changes                                                           | Research_Locations  |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One            | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One            | Nhs_Involvement_No  |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two            | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two            | Nhs_Involvement_No  |
+      | Multiple_Changes_Non_Reviewable_Set_One                           | Nhs_Involvement_Yes |
+      | Multiple_Changes_Non_Reviewable_Set_One                           | Nhs_Involvement_No  |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability  | Nhs_Involvement_Yes |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability  | Nhs_Involvement_No  |
+      | Change_Of_Sponsor_legal_Representative                            | Nhs_Involvement_Yes |
+      | Modification_To_Add_Administrative_Details                        | Nhs_Involvement_Yes |
+      | Modification_To_Add_Administrative_Details                        | Nhs_Involvement_No  |
+      | Multiple_Changes_Non_Reviewable_Set_Two                           | Nhs_Involvement_Yes |
+      | Multiple_Changes_Non_Reviewable_Set_Two                           | Nhs_Involvement_No  |
+      | Multiple_Changes_Participating_Organisations_Non_Reviewable_Three | Nhs_Involvement_Yes |
+      | Multiple_Changes_Participating_Organisations_Non_Reviewable_Three | Nhs_Involvement_No  |
+      | Multiple_Changes_Participating_Organisations_Non_Reviewable_Four  | Nhs_Involvement_Yes |
+      | Multiple_Changes_Participating_Organisations_Non_Reviewable_Four  | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496
-  Scenario Outline: Validate that user can create modifications to add free text for reviewable and non reviewable modifications
+  @rsp-5478 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5342 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496_5285 @fail
+  Scenario Outline: Validate that user can create modifications for reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -316,19 +400,51 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate all fields on modification page '<Changes>'
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I validate the ui labels on modification details page using 'Modification_Details_Label_Texts'
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files_Three' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
+    And I can see the 'supporting_documents_table' ui labels on the review all changes page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'Complete' status displayed for all documents in the table
+    And I capture the page screenshot
+    And the 'Add_Documents' button should be 'available' on the 'Review_All_Changes_Page'
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
@@ -340,10 +456,16 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I capture the page screenshot
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I click on the modification id hyperlink in the post approval tab
-    Then I can see the review all changes page
+    Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the change details are displayed as per the '<Changes>' dataset
+    And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
+    And I can see the 'documents_table' ui labels on the modification post submission page
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'With sponsor' status displayed for all documents in the table
+    And I capture the page screenshot
+    And I can see a 'Download_All' button on the 'Modification_Post_Submission_Page'
 
     Examples:
       | Changes                                                            | Research_Locations  |
@@ -360,7 +482,7 @@ Feature: Create Modification- This feature file help an applicant user complete 
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
     And I click the 'Delete_Modification' link on the 'Modification_Details_Page'
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the project information labels using dataset displayed on modifications page
     And I validate all field values on delete modification confirmation screen
     And I capture the page screenshot
     And I click the 'Delete_Modification' button on the 'Confirmation_Page'

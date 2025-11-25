@@ -88,6 +88,15 @@ import CheckYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement
 import ProjectIdentificationSelectChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectChangePage';
 import ProjectIdentificationSelectReferenceToChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectReferenceToChangePage';
 import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationEnterReferenceNumbersPage';
+import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/ProjectPersonnelChangePrincipalInvestigatorPage';
+import SponsorWorkspacePage from '../pages/IRAS/makeChanges/SponsorWorkspacePage';
+import ConfirmProjectDetailsPage from '../pages/IRAS/makeChanges/ConfirmProjectDetailsPage';
+import ModificationPostSubmissionPage from '../pages/IRAS/makeChanges/modifications/ModificationPostSubmissionPage';
+import SponsorAuthorisationsPage from '../pages/IRAS/makeChanges/SponsorAuthorisationsPage';
+import SponsorCheckAndAuthorisePage from '../pages/IRAS/makeChanges/SponsorCheckAndAuthorisePage';
+import SponsorModificationPage from '../pages/IRAS/makeChanges/SponsorModificationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -173,10 +182,18 @@ type CustomFixtures = {
   editYourProfilePage: EditYourProfilePage;
   completeYourProfilePage: CompleteYourProfilePage;
   checkYourProfilePage: CheckYourProfilePage;
-
   projectIdentificationSelectChangePage: ProjectIdentificationSelectChangePage;
   projectIdentificationSelectReferenceToChangePage: ProjectIdentificationSelectReferenceToChangePage;
   projectIdentificationEnterReferenceNumbersPage: ProjectIdentificationEnterReferenceNumbersPage;
+  contactDetailsModificationPage: ContactDetailsModificationPage;
+  projectPersonnelChangeChiefInvestigatorPage: ProjectPersonnelChangeChiefInvestigatorPage;
+  projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
+  sponsorWorkspacePage: SponsorWorkspacePage;
+  confirmProjectDetailsPage: ConfirmProjectDetailsPage;
+  modificationPostSubmissionPage: ModificationPostSubmissionPage;
+  sponsorAuthorisationsPage: SponsorAuthorisationsPage;
+  sponsorCheckAndAuthorisePage: SponsorCheckAndAuthorisePage;
+  sponsorModificationPage: SponsorModificationPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -455,6 +472,9 @@ export const test = base.extend<CustomFixtures>({
   reviewAllChangesPage: async ({ page }, use) => {
     await use(new ReviewAllChangesPage(page));
   },
+  modificationPostSubmissionPage: async ({ page }, use) => {
+    await use(new ModificationPostSubmissionPage(page));
+  },
 
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
@@ -523,10 +543,43 @@ export const test = base.extend<CustomFixtures>({
     await use(new ProjectIdentificationEnterReferenceNumbersPage(page));
   },
 
+  contactDetailsModificationPage: async ({ page }, use) => {
+    await use(new ContactDetailsModificationPage(page));
+  },
+
+  projectPersonnelChangeChiefInvestigatorPage: async ({ page }, use) => {
+    await use(new ProjectPersonnelChangeChiefInvestigatorPage(page));
+  },
+
+  projectPersonnelChangePrincipalInvestigatorPage: async ({ page }, use) => {
+    await use(new ProjectPersonnelChangePrincipalInvestigatorPage(page));
+  },
+
+  sponsorWorkspacePage: async ({ page }, use) => {
+    await use(new SponsorWorkspacePage(page));
+  },
+
+  confirmProjectDetailsPage: async ({ page }, use) => {
+    await use(new ConfirmProjectDetailsPage(page));
+  },
+
+  sponsorAuthorisationsPage: async ({ page }, use) => {
+    await use(new SponsorAuthorisationsPage(page));
+  },
+
+  sponsorCheckAndAuthorisePage: async ({ page }, use) => {
+    await use(new SponsorCheckAndAuthorisePage(page));
+  },
+
+  sponsorModificationPage: async ({ page }, use) => {
+    await use(new SponsorModificationPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
   },
+
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {

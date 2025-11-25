@@ -1,6 +1,7 @@
 {
   "Project_Overview_Page": {
     "heading": "Project overview",
+    "project_iras_id_label": "IRAS ID:",
     "short_project_title_label": "Short project title:",
     "project_details_heading": "Project details",
     "project_details_hint_label": "View and edit key information about this project.",
@@ -31,7 +32,6 @@
     "status": "Draft"
   },
   "Valid_Data_All_Fields": {
-    "short_project_title_text": "QA_Automation - This is a short project title",
     "planned_project_end_day_text": "1",
     "planned_project_end_month_dropdown": "January",
     "planned_project_end_year_text": "2030"
@@ -86,7 +86,10 @@
   },
   "Project_Details_Tab": {
     "iras_id_label": "IRAS ID",
-    "short_project_title_label": "Short project title"
+    "primary_sponsor_org_label": "Primary sponsor organisation",
+    "short_project_title_label": "Short project title",
+    "full_project_title_label": "Full project title",
+    "planned_project_end_date_label": "Project end date"
   },
   "Project_Team_Tab": {
     "chief_investigator_label": "Chief Investigator",
@@ -103,12 +106,12 @@
     "post_approvals_tab_modification_type": "Modification type",
     "post_approvals_tab_review_type": "Review type",
     "post_approvals_tab_category": "Category",
-    "post_approvals_tab_date_submitted": "Date submitted",
-    "post_approvals_tab_status": "Status"
+    "post_approvals_tab_date_submitted": "Date submitted"
   },
   "Project_Documents_Tab": {
     "document_type_project_documents": "Document type",
     "document_name_project_documents": "Document name",
+    "file_name_project_documents": "File name",
     "version_project_documents": "Version",
     "document_date_project_documents": "Document date",
     "status_project_documents": "Status",
@@ -116,5 +119,98 @@
     "action_project_documents": "Action",
     "search_project_documents": "Search",
     "advanced_filters_project_documents": "Advanced filters"
+  },
+  "Post_Approval_Search_Queries": {
+    "Partial_Modification_ID": { "search_input_text": "123" },
+    "Partial_Modification_ID_With_Slash": { "search_input_text": "/10" },
+    "Empty_Search_Data": { "search_input_text": "" },
+    "Non_Existant_Modification_ID": { "search_input_text": "000000" },
+    "Leading_White_Space_Modification_ID": { "search_input_text": " 123" },
+    "Trailing_White_Space_Modification_ID": { "search_input_text": "561 " }
+  },
+
+  "Max_Pages_To_Validate": 2,
+
+  "Post_Approval_Page": {
+    "filter_headings": ["Modification type", "Review type", "Category", "Date submitted", "Status"]
+  },
+  "Post_Approval_Page_Label_Texts": {
+    "status_label": "Status",
+    "modification_type_label": "Modification type",
+    "date_submitted_label": "Date submitted",
+    "review_type": "Review type",
+    "category": "Category",
+    "radio_hint_label": "Select one option",
+    "date_submitted_from_date_hint_text": "Enter the date you want to search from",
+    "date_submitted_from_date_help_text": "For example, 28 February 2023",
+    "date_submitted_to_date_hint_text": "Enter the date you want to search to",
+    "date_submitted_to_date_help_text": "For example, 12 October 2024",
+    "date_submitted_day_label": "Day",
+    "date_submitted_month_label": "Month",
+    "date_submitted_year_label": "Year"
+  },
+  "Advanced_Filters": {
+    "Advanced_Filter_All_Fields": {
+      "status_radio": ["In draft"],
+      "date_submitted_from_day_text": "11",
+      "date_submitted_from_month_dropdown": "September",
+      "date_submitted_from_year_text": "2025",
+      "date_submitted_to_day_text": "03",
+      "date_submitted_to_month_dropdown": "November",
+      "date_submitted_to_year_text": "2025",
+      "modification_type_radio": ["Modification of an important detail"]
+    },
+    "Advanced_Filter_Status_Only": {
+      "status_radio": ["In draft"]
+    },
+    "Advanced_Filter_Submitted_Date_Field_Only": {
+      "date_submitted_from_day_text": "11",
+      "date_submitted_from_month_dropdown": "September",
+      "date_submitted_from_year_text": "2025",
+      "date_submitted_to_day_text": "03",
+      "date_submitted_to_month_dropdown": "November",
+      "date_submitted_to_year_text": "2025"
+    },
+    "Advanced_Filter_Modification_Type_Only": {
+      "modification_type_radio": ["Minor modification"]
+    },
+    "Invalid_Date_Range_To_Before_From": {
+      "date_submitted_from_day_text": "3",
+      "date_submitted_from_month_dropdown": "July",
+      "date_submitted_from_year_text": "2025",
+      "date_submitted_to_day_text": "3",
+      "date_submitted_to_month_dropdown": "January",
+      "date_submitted_to_year_text": "2000"
+    },
+    "Invalid_Date_From": {
+      "date_submitted_from_day_text": "",
+      "date_submitted_from_month_dropdown": "July",
+      "date_submitted_from_year_text": "2025"
+    },
+    "Invalid_Date_To": {
+      "date_submitted_to_day_text": "3",
+      "date_submitted_to_month_dropdown": "January",
+      "date_submitted_to_year_text": "9"
+    }
+  },
+  "Error_Validation": {
+    "Post_Approval_Invalid_Date_Range_To_Before_From_Error": {
+      "date_submitted_to_day_text": "The date you’ve selected is before the search above"
+    },
+    "Post_Approval_Invalid_Date_From_Error": {
+      "date_submitted_from_day_text": "'Search from' date must be in the correct format"
+    },
+    "Post_Approval_Invalid_Date_To_Error": {
+      "date_submitted_to_day_text": "'Search to' date must be in the correct format"
+    }
+  },
+  "Document_Status_Incomplete": {
+    "status": "Incomplete"
+  },
+  "Document_Status_Complete": {
+    "status": "Complete"
+  },
+  "Document_Status_With_Sponsor": {
+    "status": "With sponsor"
   }
 }

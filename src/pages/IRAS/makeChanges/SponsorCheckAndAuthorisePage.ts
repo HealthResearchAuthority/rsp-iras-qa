@@ -1,0 +1,36 @@
+import { expect, Locator, Page } from '@playwright/test';
+import * as sponsorCheckAndAuthorisePageTestData from '../../../resources/test_data/iras/make_changes/sponsor_check_and_authorise_page_data.json';
+
+//Declare Page Objects
+export default class SponsorCheckAndAuthorisePage {
+  readonly page: Page;
+  readonly sponsorCheckAndAuthorisePageTestData: typeof sponsorCheckAndAuthorisePageTestData;
+  readonly mainPageContent: Locator;
+  readonly pageHeading: Locator;
+  readonly outcomeBodyLabel: Locator;
+  readonly outcome_selection_radio: Locator;
+
+  //Initialize Page Objects
+  constructor(page: Page) {
+    this.page = page;
+    this.sponsorCheckAndAuthorisePageTestData = sponsorCheckAndAuthorisePageTestData;
+
+    //Locators
+    this.mainPageContent = this.page.getByTestId('main-content');
+    this.pageHeading = this.page
+      .getByRole('heading')
+      .getByText(this.sponsorCheckAndAuthorisePageTestData.Sponsor_Check_And_Authorise_Page.pageHeading);
+    this.outcomeBodyLabel = this.page
+      .getByText(this.sponsorCheckAndAuthorisePageTestData.Sponsor_Check_And_Authorise_Page.outcomeHeading, {
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('paragraph');
+    this.outcome_selection_radio = this.page.getByRole('radio');
+  }
+
+  //Page Methods
+  async assertOnSponsorCheckAndAuthorisePage() {
+    await expect.soft(this.pageHeading).toBeVisible();
+  }
+}

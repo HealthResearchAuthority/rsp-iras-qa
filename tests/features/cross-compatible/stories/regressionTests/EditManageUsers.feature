@@ -104,10 +104,10 @@ Feature: User Administration: Edit Manage Users
         When I click the 'Back' link on the 'Edit_User_Profile_Page'
         Then I can see the user profile page
         And I capture the page screenshot
-        When I click the 'Back' link on the 'User_Profile_Page'
+        When I click the 'Manage_Users_Breadcrumb' link on the 'User_Profile_Page'
         Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Manage_Users_Page'
+        When I click the 'System_Admin_Breadcrumb' link on the 'Manage_Users_Page'
         Then I can see the 'System_Administration_Page'
         And I capture the page screenshot
 
