@@ -47,6 +47,8 @@ export default class ModificationsCommonPage {
   readonly documentVersionCell: Locator;
   readonly documentDateCell: Locator;
   readonly documentStatusCell: Locator;
+  readonly notification_heading_text: Locator;
+  readonly notification_text: Locator;
 
   private rankingForChanges: Record<
     string,
@@ -154,6 +156,8 @@ export default class ModificationsCommonPage {
     this.documentVersionCell = this.page.locator('td:nth-child(4)');
     this.documentDateCell = this.page.locator('td:nth-child(5)');
     this.documentStatusCell = this.page.locator('td:nth-child(6)');
+    this.notification_heading_text = this.page.locator('.govuk-heading-l');
+    this.notification_text = this.page.locator('p.govuk-body').nth(1);
   }
 
   //Getters & Setters for Private Variables

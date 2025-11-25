@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull, getFormattedDate, removeUnwantedWhitespace } from '../../../../utils/UtilFunctions';
+//import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
 
 const { Then } = createBdd(test);
 
@@ -59,6 +60,7 @@ Then(
       projectIdentificationSelectChangePage,
       projectIdentificationSelectReferenceToChangePage,
       projectIdentificationEnterReferenceNumbersPage,
+      $tags,
     },
     datasetName
   ) => {
@@ -67,7 +69,7 @@ Then(
     for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
       const changeName = changeNames[changeIndex];
       const changeDataset = changesDataset[changeName];
-      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset, $tags);
       await modificationsCommonPage.createChangeModification(
         {
           projectIdentificationSelectChangePage,
@@ -543,3 +545,19 @@ Then(
     }
   }
 );
+
+Then('I valide the missing document notification details', async ({ modificationsCommonPage }) => {
+  const actualNotificationHeading = (await modificationsCommonPage.notification_heading_text.innerText()).trim();
+  const actualNotificationText = (await modificationsCommonPage.notification_text.innerText()).trim();
+  expect
+    .soft(actualNotificationHeading)
+    .toBe(
+      modificationsCommonPage.modificationsCommonPageTestData.Missing_Document_Details_Notification
+        .notification_heading_text
+    );
+  expect
+    .soft(actualNotificationText)
+    .toBe(
+      modificationsCommonPage.modificationsCommonPageTestData.Missing_Document_Details_Notification.notification_text
+    );
+});

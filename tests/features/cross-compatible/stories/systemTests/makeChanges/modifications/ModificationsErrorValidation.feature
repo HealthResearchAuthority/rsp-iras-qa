@@ -1,4 +1,4 @@
-@ApplicantUser @ModificationsErrorValidation @SystemTest @jsEnabled
+@ApplicantUser @ModificationsErrorValidation @SystemTest
 Feature: ModificationsErrorValidation: This feature file helps check the error handling that is in place during modification journey
 
   Background:
@@ -18,7 +18,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-4038 @SelectAreaOfChangeErrorValidation
+  @rsp-4038 @rsp-4062 @SelectAreaOfChangeErrorValidation
   Scenario Outline: Validate the mandatory field error message on select area of change page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

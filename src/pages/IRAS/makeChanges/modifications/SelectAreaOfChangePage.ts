@@ -3,6 +3,7 @@ import * as selectAreaOfChangePageTestData from '../../../../resources/test_data
 import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
+import config from '../../../../../playwright.config';
 
 //Declare Page Objects
 export default class ModificationsSelectAreaOfChangePage {
@@ -24,6 +25,7 @@ export default class ModificationsSelectAreaOfChangePage {
   private _modification_id: string;
   readonly area_of_change_dropdown_all_options: Locator;
   readonly specific_change_dropdown_all_options: Locator;
+  readonly apply_selection_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -60,6 +62,7 @@ export default class ModificationsSelectAreaOfChangePage {
       name: this.linkTextData.Participating_Organisations_Page.Remove_This_Change,
       exact: true,
     });
+    this.apply_selection_button = this.page.locator('button', { hasText: 'Apply selection' });
   }
 
   //Page Methods
@@ -75,12 +78,17 @@ export default class ModificationsSelectAreaOfChangePage {
     return this._modification_id;
   }
 
-  async selectAreaOfChangeInModificationsPage(dataset: any) {
+  async selectAreaOfChangeInModificationsPage(dataset: any, $tags: any) {
     const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         if (key === 'area_of_change_dropdown' || key === 'specific_change_dropdown') {
-          await commonItemsPage.fillUIComponent(dataset, key, this);
+          if ($tags.includes('@jsDisabled') || !config.projects?.[1].use?.javaScriptEnabled) {
+            await this.apply_selection_button.click();
+            await commonItemsPage.fillUIComponent(dataset, key, this);
+          } else {
+            await commonItemsPage.fillUIComponent(dataset, key, this);
+          }
         }
       }
     }
