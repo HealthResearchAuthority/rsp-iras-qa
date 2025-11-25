@@ -2957,22 +2957,22 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One | Nhs_Involvement_Yes |
 
   @rsp-5573 @ValidateModificationRankingsPostApproval @KNOWN_DEFECT_RSP_6277
-  Scenario Outline: Verify that an applicant user can access the post approval tab to view all modification records, apply sorting on the list
-    Then I fill the research locations page with '<Research_Locations>'
+  Scenario: Verify that an applicant user can access the post approval tab to view all modification records, apply sorting on the list
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Modifications_All_Category' and '<Research_Locations>' dataset
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I create multiple modifications using '<Changes>' dataset
+    And I create multiple modifications using 'Multiple_Modifications_All_Category' dataset
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I create '<Changes_Ranking_B_C>' for the created modification
+    And I create 'Multiple_Modifications_Ranking_B_C' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
@@ -2997,6 +2997,3 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     And I can see the list of modifications submitted for sponsor approval is sorted by 'ascending' order of the 'category'
 
-    Examples:
-      | Changes                | Research_Locations  | Changes_Ranking_B_C                |
-      | Multiple_Modifications | Nhs_Involvement_Yes | Multiple_Modifications_Ranking_B_C |

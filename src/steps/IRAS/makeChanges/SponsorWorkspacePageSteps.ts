@@ -22,16 +22,22 @@ Then(
 Then(
   'I can see the list of modifications received for sponsor approval is sorted by {string} order of the {string}',
   async ({ commonItemsPage, sponsorWorkspacePage }, sortDirection: string, sortField: string) => {
-    let sortedModsList: string[];
     const searchColumnIndex = await sponsorWorkspacePage.getColumnIndex(sortField);
     const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
-    if (sortField.toLowerCase() == 'modification id') {
+    let sortedModsList: string[];
+    const direction = sortDirection.toLowerCase();
+    const field = sortField.toLowerCase();
+    if (field === 'modification id') {
       sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
-    } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedModsList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
-      sortedModsList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      const compareFn = (a: string, b: string) =>
+        direction === 'ascending'
+          ? a.localeCompare(b, 'en', { sensitivity: 'base' })
+          : b.localeCompare(a, 'en', { sensitivity: 'base' });
+
+      sortedModsList = [...actualList].toSorted(compareFn);
     }
+
     expect.soft(actualList).toEqual(sortedModsList);
   }
 );

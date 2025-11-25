@@ -29,8 +29,7 @@
     "current_chief_investigator_email_label": "Current chief investigator email:",
     "dateCreated": "Date created",
     "ViewDetailsLink": "View details",
-    "Audit_History_Headers": ["Date", "Event description", "User email"],
-    "dateCreated": "Date created"
+    "Audit_History_Headers": ["Date", "Event description", "User email"]
   },
   "Ranking_Category": {
     "always_n_a": [
@@ -676,21 +675,6 @@
     }
   },
   "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One": {
-    "Other_Change_To_Project_Personnel": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Other change to project personnel",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
-      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
-      "where_organisation_change_affect_non_nhs_question_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "change_status": "Change ready for submission"
-    }
-  },
-  "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One_backUp": {
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Chief investigator: conflict of interest",
@@ -1689,7 +1673,7 @@
       "change_status": "Change ready for submission"
     }
   },
-  "Multiple_Modifications": {
+  "Multiple_Modifications_All_Category": {
     "Planned_End_Date_NHS_All_Yes_All_Countries": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Change to planned end date",

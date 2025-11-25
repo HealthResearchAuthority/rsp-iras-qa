@@ -572,40 +572,28 @@ Then(
 );
 
 When(
-  'I can see the audit history for draft project on project overview history tab',
-  async ({ projectOverviewPage, projectIdentifiersPage, loginPage }) => {
+  'I can see the audit history for {string} on project overview history tab',
+  async ({ projectOverviewPage, projectIdentifiersPage, reviewYourAnswersPage, loginPage }, actionType: string) => {
     const actualProjectAuditLog = await projectOverviewPage.getProjectAuditLog();
-    const dateTimeExpected = await projectIdentifiersPage.getUpdatedTime();
-    const eventDescriptionExpected =
-      projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.event_description_project_draft;
     const modificationIdExpected =
       projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.audit_modification_id;
     const userEmailExpected = loginPage.loginPageTestData.Applicant_User.username;
+    let dateTimeExpected: string;
+    let eventDescriptionExpected: string;
+    let searchText: string;
+    if (actionType === 'draft project') {
+      dateTimeExpected = await projectIdentifiersPage.getCurrentDate();
+      eventDescriptionExpected =
+        projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.event_description_project_draft;
+      searchText = 'Project record draft started';
+    } else {
+      dateTimeExpected = await reviewYourAnswersPage.getCurrentDate();
+      eventDescriptionExpected =
+        projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.event_description_project_created;
+      searchText = 'Project record created';
+    }
     const eventDescriptions = actualProjectAuditLog.get('eventDescriptionValue');
-    const index = eventDescriptions.indexOf('Project record draft started');
-    expect.soft(confirmArrayNotNull(actualProjectAuditLog.get('dateTimeValue'))[index]).toBe(dateTimeExpected);
-    expect
-      .soft(confirmArrayNotNull(actualProjectAuditLog.get('eventDescriptionValue'))[index])
-      .toBe(eventDescriptionExpected);
-    expect
-      .soft(confirmArrayNotNull(actualProjectAuditLog.get('modificationIdValue'))[index])
-      .toBe(modificationIdExpected);
-    expect.soft(confirmArrayNotNull(actualProjectAuditLog.get('userEmailValue'))[index]).toBe(userEmailExpected);
-  }
-);
-
-When(
-  'I can see the audit history for project creation on project overview history tab',
-  async ({ projectOverviewPage, reviewYourAnswersPage, loginPage }) => {
-    const actualProjectAuditLog = await projectOverviewPage.getProjectAuditLog();
-    const dateTimeExpected = await reviewYourAnswersPage.getUpdatedTime();
-    const eventDescriptionExpected =
-      projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.event_description_project_created;
-    const modificationIdExpected =
-      projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.audit_modification_id;
-    const userEmailExpected = loginPage.loginPageTestData.Applicant_User.username;
-    const eventDescriptions = actualProjectAuditLog.get('eventDescriptionValue');
-    const index = eventDescriptions.indexOf('Project record created');
+    const index = eventDescriptions.indexOf(searchText);
     expect.soft(confirmArrayNotNull(actualProjectAuditLog.get('dateTimeValue'))[index]).toBe(dateTimeExpected);
     expect
       .soft(confirmArrayNotNull(actualProjectAuditLog.get('eventDescriptionValue'))[index])

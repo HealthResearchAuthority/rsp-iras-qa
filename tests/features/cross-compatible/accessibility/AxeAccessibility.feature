@@ -2305,8 +2305,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
     Examples:
-      | Changes                | Research_Locations  | Changes_Ranking_B_C                |
-      | Multiple_Modifications | Nhs_Involvement_Yes | Multiple_Modifications_Ranking_B_C |
+      | Changes                             | Research_Locations  | Changes_Ranking_B_C                |
+      | Multiple_Modifications_All_Category | Nhs_Involvement_Yes | Multiple_Modifications_Ranking_B_C |
 
   @axeAccessibilityProjectOverviewHistoryPage @ApplicantUser
   Scenario: Project overview history page

@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as reviewYourAnswersPageTestData from '../../../resources/test_data/iras/make_changes/review_your_answers_data.json';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace, getCurrentDate } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ReviewYourAnswersPage {
@@ -50,14 +50,14 @@ export default class ReviewYourAnswersPage {
   readonly primary_sponsor_organisation_text: Locator;
   readonly primary_sponsor_organisation_change_link: Locator;
   readonly primary_sponsor_orgainisation_enter_link: Locator;
-  private _updated_time: string;
+  private _CurrentDate: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.reviewYourAnswersPageTestData = reviewYourAnswersPageTestData;
     this.linkTextData = linkTextData;
-    this._updated_time = '';
+    this._CurrentDate = '';
 
     //Locators
     this.pageHeading = this.page
@@ -258,11 +258,11 @@ export default class ReviewYourAnswersPage {
     );
   }
 
-  async getUpdatedTime(): Promise<string> {
-    return this._updated_time;
+  async getCurrentDate(): Promise<string> {
+    return this._CurrentDate;
   }
 
-  async setUpdatedTime(value: string): Promise<void> {
-    this._updated_time = value;
+  async setCurrentDate(): Promise<void> {
+    this._CurrentDate = await getCurrentDate();
   }
 }

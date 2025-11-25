@@ -29,7 +29,7 @@ Feature: Audit history - Create project
         Then I can see the project overview page
         When I click the 'Project_History' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        Then I can see the audit history for draft project on project overview history tab
+        Then I can see the audit history for 'draft project' on project overview history tab
 
     @rsp-5259 @AuditHistoryCreateProject @ApplicantUser
     Scenario: Verify that user can see the audit history for the project creation successful on project overview history tab
@@ -59,7 +59,7 @@ Feature: Audit history - Create project
         Then I can see the project overview page
         When I click the 'Project_History' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        Then I can see the audit history for project creation on project overview history tab
+        Then I can see the audit history for 'project creation' on project overview history tab
 
     @rsp-5259 @ViewProjectHistoryBackStageUsers @SponsorUser @WorkFlowCoordinator @StudyWideReviewer @SysAdminUser @TeamManager @ApplicantUser
     Scenario Outline: Verify that backstage users can see the audit history on project overview history tab
@@ -145,8 +145,8 @@ Feature: Audit history - Create project
         When I click a 'short project title' on the 'Search_Modifications_Page'
         When I click the 'Project_History' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        Then I can see the audit history for draft project on project overview history tab
-        Then I can see the audit history for project creation on project overview history tab
+        Then I can see the audit history for 'draft project' on project overview history tab
+        Then I can see the audit history for 'project creation' on project overview history tab
 
         Examples:
             | User                 | Changes                                | Research_Locations            |

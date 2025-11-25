@@ -644,3 +644,17 @@ export async function getSharpointGraphClient(): Promise<Client> {
   });
   return client;
 }
+
+export async function getCurrentDate(format: string = 'YYYY-MM-DD'): Promise<string> {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  if (format === 'YYYY-MM-DD') {
+    return `${year}-${month}-${day}`;
+  } else if (format === 'DD/MM/YYYY') {
+    return `${day}/${month}/${year}`;
+  } else {
+    return now.toISOString();
+  }
+}

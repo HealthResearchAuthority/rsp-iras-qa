@@ -251,8 +251,8 @@ Feature: Sponsor Workspace
     And I validate 'Summary_Only_Error_Select_Outcome' displayed on 'Sponsor_Check_And_Authorise_Page'
     And I capture the page screenshot
 
-  @ReviewableModificationSponsorAuthorised
-  Scenario Outline: Validate that sponsor can authorise the reviewable modifications
+  @CreateDataApprovedModificationAuthorizationListPage
+  Scenario Outline: Create approved modifications for modification authorization list page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -341,8 +341,8 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @ReviewableModificationSponsorNotAuthorised
-  Scenario Outline: Validate that sponsor can authorise the reviewable modifications
+  @CreateDataNotApprovedModificationAuthorizationListPage
+  Scenario Outline: Create not approved modifications for modification authorization list page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'

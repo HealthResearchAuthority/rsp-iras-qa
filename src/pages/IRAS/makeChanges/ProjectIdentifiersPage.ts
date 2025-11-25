@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectIdentifiersPageTestData from '../../../resources/test_data/iras/make_changes/project_identifiers_page_data.json';
 import * as buttonTextData from '../../../resources/test_data/common/button_text_data.json';
+import { getCurrentDate } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ProjectIdentifiersPage {
@@ -21,13 +22,13 @@ export default class ProjectIdentifiersPage {
   readonly primary_sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_min_error_message: Locator;
   readonly primary_sponsor_organisation_filled_text: Locator;
-  private _updated_time: string;
+  private _CurrentDate: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.projectIdentifiersPageTestData = projectIdentifiersPageTestData;
-    this._updated_time = '';
+    this._CurrentDate = '';
 
     //Locators
     this.pageHeading = this.page.getByTestId('title');
@@ -64,11 +65,11 @@ export default class ProjectIdentifiersPage {
     await expect(this.pageHeading).toHaveText(this.projectIdentifiersPageTestData.Project_Identifiers_Page.heading);
   }
 
-  async getUpdatedTime(): Promise<string> {
-    return this._updated_time;
+  async getCurrentDate(): Promise<string> {
+    return this._CurrentDate;
   }
 
-  async setUpdatedTime(value: string): Promise<void> {
-    this._updated_time = value;
+  async setCurrentDate(): Promise<void> {
+    this._CurrentDate = await getCurrentDate();
   }
 }

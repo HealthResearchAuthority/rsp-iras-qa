@@ -286,11 +286,6 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
       linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
-  } else if (
-    pageKey === 'Sponsor_Check_And_Authorise_Page' &&
-    (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details')
-  ) {
-    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
   } else {
     await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
@@ -490,10 +485,10 @@ Then(
         await sponsorOrganisationProfilePage.setUpdatedTime(currentTime);
         break;
       case 'Project_Identifier_Page':
-        await projectIdentifiersPage.setUpdatedTime(currentTime);
+        await projectIdentifiersPage.setCurrentDate();
         break;
       case 'Review_Answers_Page':
-        await reviewYourAnswersPage.setUpdatedTime(currentTime);
+        await reviewYourAnswersPage.setCurrentDate();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
