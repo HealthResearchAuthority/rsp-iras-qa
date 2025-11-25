@@ -219,11 +219,9 @@ export default class ManageSponsorOrganisationsPage {
     const sqlConnection = await connect(dbConfigData.Application_Service);
     const queryResult = await sqlConnection.query(`SELECT Id FROM SponsorOrganisations WHERE RTSId = '${rts_id}'`);
     if (queryResult.recordset.length > 0) {
-      await sqlConnection.query(`DELETE FROM SponsorOrganisations WHERE Id = '${queryResult.recordset[0].Id}'`);
-      await sqlConnection.query(
-        `DELETE FROM SponsorOrganisationsAuditTrail WHERE Id = '${queryResult.recordset[0].Id}'`
-      );
-      await sqlConnection.query(`DELETE FROM SponsorOrganisationsUsers WHERE Id = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM SponsorOrganisations WHERE RtsId = '${rts_id}'`);
+      await sqlConnection.query(`DELETE FROM SponsorOrganisationsAuditTrail WHERE RtsId = '${rts_id}'`);
+      await sqlConnection.query(`DELETE FROM SponsorOrganisationsUsers WHERE RtsId = '${rts_id}'`);
     }
     await sqlConnection.close();
   }

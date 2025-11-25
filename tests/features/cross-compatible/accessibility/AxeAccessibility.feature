@@ -939,6 +939,13 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityTeamManagerDashboardPage @TeamManager
+  Scenario: Team manager dashboard page
+    Given I have navigated to the 'Team_Manager_Dashboard_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityModificationsTasklistPage @WorkFlowCoordinator
   Scenario: Select Studywide Reviewer Page
     Given I have navigated to the 'Modifications_Tasklist_Page'
@@ -1382,7 +1389,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
- 
+
   @axeAccessibilityProjectConfirmationPage @ApplicantUser
   Scenario: Create Project confirmation page
     Given I have navigated to the my research projects page

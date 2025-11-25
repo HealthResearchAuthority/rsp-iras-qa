@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as sponsorWorkspacePageTestData from '../../../../resources/test_data/iras/reviewResearch/userAdministration/sponsor_workspace_page_data.json';
+import * as sponsorWorkspacePageTestData from '../../../resources/test_data/iras/make_changes/sponsor_workspace_page_data.json';
 
 //Declare Page Objects
 export default class SponsorWorkspacePage {

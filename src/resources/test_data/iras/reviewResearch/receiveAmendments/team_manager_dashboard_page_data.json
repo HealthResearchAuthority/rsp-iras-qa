@@ -1,0 +1,39 @@
+{
+  "Team_Manager_Dashboard_Page": {
+    "title": "Team manager dashboard - Modifications - Approvals - System Administration - Plan and manage health and care research",
+    "team_manager_dashboard_link": "Team manager dashboard",
+    "page_heading": "Team manager dashboard",
+    "page_description": "This page shows all the modifications that need to be actioned in",
+    "modification_button_label": "Continue to assign modifications",
+    "advanced_filter_label": "Advanced filters",
+    "maxPagesToVisit": 2,
+    "days_since_suffix": "days",
+    "iras_id_search_box_label": "IRAS ID"
+  },
+
+  "Column_Label_Texts": {
+    "short_project_title_column_label": "Short project title",
+    "modification_id_column_label": "Modification ID",
+    "date_submitted_column_label": "Date submitted",
+    "days_since_submission_column_label": "Days since submission",
+    "studywide_reveiwer_column_label": "Study-wide reviewer",
+    "status_column_label": "status"
+  },
+
+  "Filter_Labels": {
+    "day_from_label": "Day",
+    "month_from_label": "Month",
+    "year_from_label": "Year",
+    "day_to_label": "Day",
+    "month_to_label": "Month",
+    "year_to_label": "Year",
+    "studywide_reveiwer_label": "Enter the name of the study wide reviewer"
+  },
+
+  "Team_Manager_Nations": {
+    "Team_Manager": "England",
+    "Team_Manager_NI": "Northern Ireland",
+    "Team_Manager_S": "Scotland",
+    "Team_Manager_W": "Wales"
+  }
+}

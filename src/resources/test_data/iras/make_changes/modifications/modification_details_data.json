@@ -3,7 +3,21 @@
     "heading": "Modification details",
     "status_label": "Status",
     "change_ready_for_submission_status_label": "Change ready for submission",
-    "change_Unfinished_status_label": "Unfinished"
+    "change_Unfinished_status_label": "Unfinished",
+    "next_steps": "Next steps",
+    "next_steps_guidance": "When you've completed your review of all the information on this page, continue to the next step where you'll enter the review outcome"
+  },
+  "Modification_Review_Outcome_Section": {
+    "review_comment_heading": "Leave a comment",
+    "review_comment_guidance": "If you have any comments on this document add them to the box below. Comments are only visible to other reviewers and are not shared with the applicant.",
+    "review_outcome_heading": "Review outcome",
+    "review_outcome_guidance": "You'll be able to check the outcome again before sending to the applicant in the next steps",
+    "approved_outcome_option": "Approved",
+    "not_approved_outcome_option": "Not approved"
+  },
+  "Modification_Not_Approved_Section": {
+    "not_approved_comment_heading": "Reason modification not approved",
+    "not_approved_comment_guidance": "Enter the reason this modification was not approved"
   },
   "Modification_Unfinished_Error_Page": {
     "heading": "You cannot proceed with ‘Unfinished’ changes",
@@ -18,5 +32,9 @@
     "supporting_documents_sub_label": "If any of the changes you're making involve an update to any project documents, make sure you add a copy of the original and updated documents.",
     "add_summary_heading_label": "Add summary and review modification before sending to sponsor",
     "add_summary_sub_label": "You'll have the option to add a brief summary and edit your modification before sending it to the sponsor on the next page."
+  },
+  "Modification_Outcome_Reasons": {
+    "Blank": "",
+    "Lack_Of_Evidence": "There is a lack of evidence provided"
   }
 }

@@ -7,7 +7,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        @SortModificationsByColumn @rsp-4090
+        @SortModificationsByColumn @rsp-4090 @rsp-4822
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -35,8 +35,9 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Modification_Type   | modification type   |
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
+                        | Status              | status              |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -688,3 +689,17 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
+
+        @searchModificationStatus @rsp-4822
+        Scenario Outline: Verify that modifications status' display as expected on the search modifictions page
+                When I enter an iras id for a modification with status '<Status>' into the search field
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I can now see a table of search results for modifications received for approval
+                Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with '<Status>' status
+
+                Examples:
+                        | Status                                 |
+                        | Modification_Status_Approved           |
+                        | Modification_Status_Not_Approved       |
+                        | Modification_Status_Received           |
+                        | Modification_Status_Review_In_Progress |
