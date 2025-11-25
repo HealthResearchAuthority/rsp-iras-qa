@@ -48,6 +48,14 @@ export default class ModificationsCommonPage {
   readonly documentDateCell: Locator;
   readonly documentStatusCell: Locator;
   readonly dateCreatedValue: Locator;
+  readonly auditHistoryTableHeader: Locator;
+  readonly auditHistoryTableBodyRows: Locator;
+  readonly tableCell: Locator;
+  readonly auditHistoryRecord: {
+    modificationEventExpected: string;
+    userEmailExpected: string;
+    dateTimeOfEventExpected: string;
+  }[] = [];
 
   private rankingForChanges: Record<
     string,
@@ -160,6 +168,9 @@ export default class ModificationsCommonPage {
       .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
       .locator('..')
       .locator('[class$="value"]');
+    this.auditHistoryTableHeader = this.page.locator('#history table thead tr th');
+    this.auditHistoryTableBodyRows = this.page.locator('#history tbody').getByRole('row');
+    this.tableCell = this.page.locator('td');
   }
 
   //Getters & Setters for Private Variables
@@ -955,6 +966,18 @@ export default class ModificationsCommonPage {
     } else if (status.toLowerCase() == 'complete') {
       return this.modificationsCommonPageTestData.Document_Status_Complete.status;
     }
+  }
+
+  set addAuditHistoryRecord(record: {
+    modificationEventExpected: string;
+    userEmailExpected: string;
+    dateTimeOfEventExpected: string;
+  }) {
+    this.auditHistoryRecord.push(record);
+  }
+
+  get getAuditHistoryRecord() {
+    return this.auditHistoryRecord;
   }
 
   async getModificationRankingPostApprovalPage(): Promise<Map<string, string[]>> {
