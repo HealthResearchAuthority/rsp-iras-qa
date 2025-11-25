@@ -1153,6 +1153,18 @@
   "Document_Status_Complete": {
     "status": "Complete"
   },
+  "Modification_Status_Received": {
+    "status": "Received"
+  },
+  "Modification_Status_Review_In_Progress": {
+    "status": "Review in progress"
+  },
+  "Modification_Status_Authorised": {
+    "status": "Authorised"
+  },
+  "Modification_Status_Not_Authorised": {
+    "status": "Not authorised"
+  },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
     "Other_Minor_Change_To_Participant_Procedures": {
       "area_of_change_dropdown": "Participant procedures",

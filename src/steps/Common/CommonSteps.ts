@@ -44,6 +44,7 @@ When(
       searchModificationsPage,
       modificationsReadyToAssignPage,
       myModificationsTasklistPage,
+      teamManagerDashboardPage,
       manageSponsorOrganisationPage,
       setupNewSponsorOrganisationPage,
       checkAddUserSponsorOrganisationPage,
@@ -100,6 +101,14 @@ When(
         break;
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
+        break;
+      case 'Team_Manager_Dashboard_Page':
+        await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
         await commonItemsPage.setNoOfResultsBeforeSearch(
           await commonItemsPage.extractNumFromSearchResultCount(
             await commonItemsPage.search_results_count.textContent()
@@ -746,7 +755,7 @@ When(
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
         break;
-      case 'iras id':
+      case 'new iras id':
         searchValue = await projectDetailsIRASPage.getUniqueIrasId();
         break;
       default:
@@ -859,6 +868,7 @@ Given(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      teamManagerDashboardPage,
       approvalsPage,
       myModificationsTasklistPage,
       manageSponsorOrganisationPage,
@@ -923,6 +933,15 @@ Given(
           )
         );
         break;
+      case 'Team_Manager_Dashboard_Page':
+        await teamManagerDashboardPage.goto();
+        await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
+        break;
       case 'Approvals_Page':
         await approvalsPage.goto();
         await approvalsPage.assertOnApprovalsPage();
@@ -963,6 +982,8 @@ Given(
       approvalsPage,
       myModificationsTasklistPage,
       modificationsReadyToAssignPage,
+      searchModificationsPage,
+      teamManagerDashboardPage,
     },
     page: string,
     user: string
@@ -1007,6 +1028,7 @@ Given(
           await accessDeniedPage.assertOnAccessDeniedPage();
           break;
         case 'My_Modifications_Tasklist_Page':
+          await myModificationsTasklistPage.page.context().addCookies(authState.cookies);
           await myModificationsTasklistPage.goto();
           await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
           break;
@@ -1015,6 +1037,17 @@ Given(
           await modificationsReadyToAssignPage.goto();
           await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
           break;
+        case 'Search_Modifications_Page':
+          await searchModificationsPage.page.context().addCookies(authState.cookies);
+          await searchModificationsPage.goto();
+          await searchModificationsPage.assertOnSearchModificationsPage();
+          break;
+        case 'Team_Manager_Dashboard_Page':
+          await teamManagerDashboardPage.page.context().addCookies(authState.cookies);
+          await teamManagerDashboardPage.goto();
+          await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
+          break;
+
         default:
           throw new Error(`${page} is not a valid option`);
       }
