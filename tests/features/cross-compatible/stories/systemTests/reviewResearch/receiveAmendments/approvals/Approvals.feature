@@ -11,7 +11,7 @@ Feature: My Account Home page - Approvals
         Then I can see the approvals home page
         Then I capture the page screenshot
 
-    @ApprovalsPage @SysAdminUser
+    @ApprovalsPageSysAdmin  @SysAdminUser
     Scenario: Validate the approvals page when logged in as a system administrator and make sure the system administrator has access to the pages under approvals workspace
         And I can see a '<Sub_Heading>' link on the 'Approvals_Page'
         And I click the '<Sub_Heading>' link on the 'Approvals_Page'
@@ -26,7 +26,7 @@ Feature: My Account Home page - Approvals
             | Search_Records         | Choose_A_Record_Type_To_Search_Page |
             | Modifications_Tasklist | Modifications_Tasklist_Page         |
 
-    @ApprovalsPage @StudyWideReviewer
+    @ApprovalsPageSWR  @StudyWideReviewer
     Scenario: Validate the approvals page when logged in as a study-wide reviewer and make sure the study-wide reviewer has access to the pages under approvals workspace
         And I cannot see a 'Modifications_Tasklist' link on the 'Approvals_Page'
         And I cannot see a 'Team_Manager_Dashboard' link on the 'Approvals_Page'
@@ -43,7 +43,7 @@ Feature: My Account Home page - Approvals
             | Search_Records | Choose_A_Record_Type_To_Search_Page |
             | My_Tasklist    | My_Modifications_Tasklist_Page      |
 
-    @ApprovalsPage @WorkFlowCoordinator
+    @ApprovalsPageWFC @WorkFlowCoordinator
     Scenario: Validate the approvals page when logged in as a workflow coordinator and make sure the workflow coordinator has access to the pages under approvals workspace
         And I cannot see a 'My_Tasklist' link on the 'Approvals_Page'
         And I cannot see a 'Team_Manager_Dashboard' link on the 'Approvals_Page'
@@ -60,7 +60,7 @@ Feature: My Account Home page - Approvals
             | Search_Records         | Choose_A_Record_Type_To_Search_Page |
             | Modifications_Tasklist | Modifications_Tasklist_Page         |
 
-    @ApprovalsPage @TeamManager
+    @ApprovalsPageTM @TeamManager
     Scenario: Validate the approvals page when logged in as a team manager and make sure the team manager has access to the pages under approvals workspace
         And I cannot see a 'My_Tasklist' link on the 'Approvals_Page'
         And I cannot see a 'Modifications_Tasklist' link on the 'Approvals_Page'

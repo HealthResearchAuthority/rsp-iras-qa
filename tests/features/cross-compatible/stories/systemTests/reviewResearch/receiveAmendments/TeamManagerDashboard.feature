@@ -1,4 +1,4 @@
-@ReceiveAmendments @TeamManagerDashboardSortFilter @TeamManager @SystemTest @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132 @TestOnlyTiji
+@ReceiveAmendments @TeamManagerDashboardSortFilter @TeamManager @SystemTest @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132
 Feature: Receive Amendments: Team Manager's dashboard page that displays modifications ready to be assigned
 
         # Known Issues :-
@@ -17,7 +17,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Team_Manager_S  |
                         | Team_Manager_W  |
 
-        @searchTasklistByIrasIdWithResults @rsp-5125 @DBDataUsed
+        @searchTMDashboardByIrasIdWithResults @rsp-5125 @DBDataUsed
         Scenario Outline: Verify the user is able to search the team manager dashboard by the iras ID
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
@@ -34,7 +34,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Existing_Partial_IRAS_ID | Team_Manager | With review body | Partial            |
 
 
-        @filterTasklistBySWR @rsp-5125
+        @filterTMDashboardBySWR @rsp-5125
         Scenario Outline: Verify the user is able to filter the team manager dashboard by the study-wide reviewer
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -56,7 +56,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
 
         # status-out of scope
 
-        @filterTasklistByDateSubmitted @rsp-5125 @DBSetupReqd
+        @filterTMDashboardByDateSubmitted @rsp-5125 @DBSetupReqd
         Scenario Outline: Verify the user is able to filter the team manager dashboard by the date submitted
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -79,7 +79,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Date_To_Multi     | With review body |
         #  date submitted need to capture from db to avoid any failures
 
-        @filterTasklistByDaysSinceSubmission @rsp-5125 @UPDATE-AFTER-RSP-4808 @DBSetupReqd
+        @filterTMDashboardByDaysSinceSubmission @rsp-5125 @UPDATE-AFTER-RSP-4808 @DBSetupReqd
         Scenario Outline: Verify the user is able to filter the team manager dashboard by the days since submission
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -104,7 +104,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Days_From_Multi   | With review body |
                         | Days_To_Multi     | With review body |
 
-        @searchFilterComboTasklist @rsp-5122 @rsp-5125
+        @searchFilterComboTMDashboard @rsp-5122 @rsp-5125
         Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the team manager dashboard
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -125,7 +125,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | IRAS_ID_Study_Wide_Reviewer_Date_Range_Multi   | Apply_Filters | With review body | Team_Manager | Multi              | Study_Wide_Reviewer_HRA_England |
                         | IRAS_ID_Study_Wide_Reviewer_Date_Range_Partial | Apply_Filters | With review body | Team_Manager | Single             | Study_Wide_Reviewer_HRA_England |
 
-        @searchTasklistWithNoResults @rsp-5122 @rsp-5125
+        @searchTMDashboardWithNoResults @rsp-5122 @rsp-5125
         Scenario Outline: Verify the team manager dashboard page displays the no results found message, when no records on the system match the search criteria
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -144,7 +144,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Non_Existant_Date_Range       |
                         | Non_Existant_Days_Since_Range |
 
-        @activeFilterPanelTasklist @rsp-5122 @rsp-5125
+        @activeFilterPanelTMDashboard @rsp-5122 @rsp-5125
         Scenario Outline: Verify the active filters display as expected
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -167,7 +167,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Days_From_Multi                      | Apply_Filters |
                         | Days_To_Multi                        | Search        |
 
-        @addRemoveFiltersTasklist @rsp-5125
+        @addRemoveFiltersTMDashboard @rsp-5125
         Scenario: Verify that adding and removing filters narrows and widens the search results appropriately
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -195,7 +195,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                 Then the number of search results has returned to the original number
                 And I 'cannot' see active filters displayed
 
-        @clearAllFiltersTasklist  @rsp-5125
+        @clearAllFiltersTMDashboard  @rsp-5125
         Scenario: Verify that the clear all filters option returns the team manager dashboard to its original state
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -213,7 +213,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                 Then the number of search results has returned to the original number
                 And I 'cannot' see active filters displayed
 
-        @filterTasklistDateSubmittedValidation @rsp-5125
+        @filterTMDashboardDateSubmittedValidation @rsp-5125
         Scenario Outline: Verify that correct validation is in place for the date submitted filter
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -235,7 +235,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Invalid_Date_To                   | Invalid_Date_To_Error                     |
                         | Invalid_Date_From_Days_From       | Date_Days_Simultaneous_Summary_Only_Error |
 
-        @SortTasklistByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909
+        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909
         Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -264,14 +264,14 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Status                | status                | ascending    | descending     |
 
 
-        @tasklistErrorStateValidation @rsp-5122
+        @TMDashboardErrorStateValidation @rsp-5122
         Scenario: Verify that the user must select a modifiation before continuing
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Team_Manager_Dashboard_Page'
 
-        @ModificationsTasklistPaginationFirst @rsp-5122
+        @ModificationsTMDashboardPaginationFirst @rsp-5122
         Scenario Outline: Verify pagination in team manager dashboard page when user is on the first page and navigate through each page by clicking page number or by clicking next link
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -290,7 +290,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Label_Texts     | page number       |
                         | Label_Texts     | next link         |
 
-        @ModificationsTasklistPaginationLast @rsp-5122
+        @ModificationsTMDashboardPaginationLast @rsp-5122
         Scenario Outline: Verify pagination in team manager dashboard page page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -366,7 +366,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Link_Text       | Navigation_Page           |
                         | modification id | Modification_Details_Page |
 
-        @ModificationsTasklistRandomSelection
+        @TMDashboardRandomSelection
         Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -375,7 +375,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                 And I check random row and validate if the row is checked even after navigation
                 And I capture the page screenshot
 
-        @ModificationsTasklistSelectAllWithJs  @jsEnabled
+        @TMDashboardSelectAllWithJs  @jsEnabled
         Scenario: With JavaScript enabled, Verify if user selects the check all checkbox on the first page and confirm checkboxes are checked and status retained even after navigation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -387,7 +387,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                 And I capture the page screenshot
                 Then I can see a 'Continue' button on the 'Team_Manager_Dashboard_Page'
 
-        @ModificationsTasklistSelectAllWithoutJs  @jsDisabled
+        @TMDashboardSelectAllWithoutJs  @jsDisabled
         Scenario: With JavaScript disabled, Verify user selects the check all checkbox on the first page and confirm checkboxes are unchecked and status retained even after navigation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -399,7 +399,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                 And I capture the page screenshot
                 Then I can see a 'Continue' button on the 'Team_Manager_Dashboard_Page'
 
-        @ModificationsRandomSelectionAndSort
+        @TMDashboardModificationsRandomSelectionAndSort
         Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -415,7 +415,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Date_Submitted        |
                         | Days_Since_Submission |
 
-        @ModificationsSelectAllAndSort @jsEnabled
+        @TMDashboardModificationsSelectAllAndSort @jsEnabled
         Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -430,7 +430,6 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Short_Project_Title   |
                         | Date_Submitted        |
                         | Days_Since_Submission |
-
 
         @TMAssignModificationSWR
         Scenario Outline: Validate the team manager can assign a study-wide reviewer to a modification from the team manger dashboard page
@@ -471,7 +470,7 @@ Feature: Receive Amendments: Team Manager's dashboard page that displays modific
                         | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
 
-        @ModificationsList @DBDataUsed
+        @TMDashboardModificationsList @DBDataUsed
         Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
