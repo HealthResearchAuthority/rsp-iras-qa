@@ -28,7 +28,8 @@
     "change_ready_for_submission_status_label": "Change ready for submission",
     "current_chief_investigator_email_label": "Current chief investigator email:",
     "dateCreated": "Date created",
-    "ViewDetailsLink": "View details"
+    "ViewDetailsLink": "View details",
+    "Audit_History_Headers": ["Date", "Event description", "User email"]
   },
   "Ranking_Category": {
     "always_n_a": [
@@ -42,6 +43,14 @@
       "Addition of sites undertaking the same activities as existing sites",
       "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
     ]
+  },
+  "Audit_History_Events": {
+    "Modification_Created": "Modification created",
+    "Modification_Sent_To_Sponsor": "Modification sent to sponsor",
+    "Modification_Authorised_By_Sponsor": "Modification authorised by sponsor",
+    "Modification_Submitted_To_Review_Body": "Modification submitted to review body",
+    "Modification_Approved": "Modification approved",
+    "Modification_Not_Authorised_By_Sponsor": "Modification not authorised by sponsor"
   },
   "Modification_Change_Question_Label_Texts": {
     "planned_project_end_date_label": "Change to planned end date",
