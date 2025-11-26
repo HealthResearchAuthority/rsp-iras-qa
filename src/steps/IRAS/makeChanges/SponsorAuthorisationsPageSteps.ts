@@ -44,3 +44,25 @@ Then(
     await sponsorAuthorisationsPage.page.getByText(modificationID, { exact: true }).click();
   }
 );
+
+Then(
+  'I can see the list of modifications received for sponsor approval is sorted by {string} order of the {string}',
+  async ({ commonItemsPage, sponsorAuthorisationsPage }, sortDirection: string, sortField: string) => {
+    const searchColumnIndex = await sponsorAuthorisationsPage.getColumnIndex(sortField);
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
+    let sortedModsList: string[];
+    const direction = sortDirection.toLowerCase();
+    const field = sortField.toLowerCase();
+    if (field === 'modification id') {
+      sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
+    } else {
+      const compareFn = (a: string, b: string) =>
+        direction === 'ascending'
+          ? a.localeCompare(b, 'en', { sensitivity: 'base' })
+          : b.localeCompare(a, 'en', { sensitivity: 'base' });
+
+      sortedModsList = [...actualList].toSorted(compareFn);
+    }
+    expect.soft(actualList).toEqual(sortedModsList);
+  }
+);

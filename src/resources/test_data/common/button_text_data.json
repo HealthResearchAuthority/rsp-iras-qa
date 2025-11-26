@@ -400,20 +400,18 @@
     "Return_To_IRAS_ID": "Return to IRAS ID"
   },
   "Sponsor_Authorisations_Page": {
-    "Search": "Search"
-  },
-  "Sponsor_Check_And_Authorise_Page": {
-    "Confirm_Selection": "Confirm selection"
-  },
-  "Choose_A_Record_Type_To_Search_Page": {
-    "Next": "Next"
-  },
-  "Sponsor_Workspace_Page": {
+    "Search": "Search",
     "Modification_Id": "Modification ID",
     "Short_Project_Title": "Short project title",
     "Date_Received": "Date received",
     "Date_Actioned": "Date actioned",
     "Chief_Investigator": "Chief investigator",
     "Status": "Status"
+  },
+  "Sponsor_Check_And_Authorise_Page": {
+    "Confirm_Selection": "Confirm selection"
+  },
+  "Choose_A_Record_Type_To_Search_Page": {
+    "Next": "Next"
   }
 }

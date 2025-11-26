@@ -440,13 +440,13 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
     And I can see the list of modifications received for sponsor approval is sorted by 'descending' order of the 'date received'
-    When I click the '<Sort_Button>' button on the 'Sponsor_Workspace_Page'
+    When I click the '<Sort_Button>' button on the 'Sponsor_Authorisations_Page'
     And I capture the page screenshot
     Then I can see the list of modifications received for sponsor approval is sorted by 'ascending' order of the '<Sort_Field>'
     When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
     Then I can see the list of modifications received for sponsor approval is sorted by 'ascending' order of the '<Sort_Field>'
-    When I click the '<Sort_Button>' button on the 'Sponsor_Workspace_Page'
+    When I click the '<Sort_Button>' button on the 'Sponsor_Authorisations_Page'
     And I capture the page screenshot
     Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     Then I can see the list of modifications received for sponsor approval is sorted by 'descending' order of the '<Sort_Field>'
