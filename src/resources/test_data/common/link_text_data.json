@@ -265,7 +265,8 @@
     "Setup_New_Sponsor_Organisation": "Set up a new sponsor organisation",
     "View_Edit": "View/Edit",
     "Advanced_Filters": "Advanced filters",
-    "Clear_All_Filters": "Clear all filters"
+    "Clear_All_Filters": "Clear all filters",
+    "System_Admin_Breadcrumb": "System administration"
   },
   "Setup_New_Sponsor_Organisation_Page": {
     "Back": "Back"
@@ -275,7 +276,8 @@
   },
   "Sponsor_Organisation_Profile_Page": {
     "Back": "Back",
-    "View_This_Sponsor_Org_List_Of_Users": "View this sponsor organisation's list of users"
+    "View_This_Sponsor_Org_List_Of_Users": "View this sponsor organisation's list of users",
+    "Manage_Sponsor_Organisations_Breadcrumb": "Manage sponsor organisations"
   },
   "Sponsor_Org_User_List_Page": {
     "Add_A_New_User_Profile_Record": "Add a new user profile record",
