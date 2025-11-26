@@ -1022,3 +1022,28 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
       | Invalid_Email_CI_Temorary_Arrangement_Data_One_Reserved_Domain | Principal_Investigator_Invalid_Email_Error_Message |
       | Invalid_Email_CI_Temorary_Arrangement_Data_One_Punycode        | Principal_Investigator_Invalid_Email_Error_Message |
       | Invalid_Email_CI_Temorary_Arrangement_Data_One_Max_Char        | Principal_Investigator_Invalid_Email_Error_Message |
+
+  @rsp-4392 @VerifyUserAbleToDeleteTheModificationDetails
+  Scenario Outline: Verify user is able to delete the modification details
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    And I capture the page screenshot
+    And I click the 'Delete_Modification' link on the 'Modification_Details_Page'
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate all field values on delete modification confirmation screen
+    And I capture the page screenshot
+    And I click the 'Delete_Modification' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I validate the delete modification success message
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I validate the deleted modification does not appear in the modification in the post approval tab
+
+    Examples:
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |
