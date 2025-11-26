@@ -1,4 +1,4 @@
-@ApplicantUser @createModifications @SystemTest @jsEnabled
+@Regression @ApplicantUser @createModifications @SystemTest @jsEnabled
 Feature: Create Modification- This feature file help an applicant to complete the modification journey and can sent to sponsor
 
   Background:
