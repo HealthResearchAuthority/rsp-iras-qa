@@ -75,9 +75,9 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with '<Search_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -100,8 +100,8 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario Outline: Verify the my tasklist page displays the no results found message, when no records on the system match the search criteria
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
-        When I fill the 'my' modifications tasklist search and filter options with '<Search_Filter_Input>'
+        And I open each of the 'modification tasklist' filters
+        When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -118,9 +118,9 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with 'Date_From_Multi'
+        When I fill the 'assign modifications tasklist' search and filter options with 'Date_From_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -128,8 +128,8 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
         Then the number of search results has 'decreased' from the 'original' number
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
-        When I fill the 'my' modifications tasklist search and filter options with 'Existing_Title_Partial'
+        And I open each of the 'modification tasklist' filters
+        When I fill the 'assign modifications tasklist' search and filter options with 'Existing_Title_Partial'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -146,9 +146,9 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario: Verify that the clear all filters option returns my tasklist to its original state
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with 'Title_Date_Range_Multi'
+        When I fill the 'assign modifications tasklist' search and filter options with 'Title_Date_Range_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -163,9 +163,9 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario Outline: Verify that correct validation is in place for the date submitted filter on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
-        When I fill the 'my' modifications tasklist search and filter options with '<Date_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot

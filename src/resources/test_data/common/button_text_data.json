@@ -148,6 +148,14 @@
     "Lead_Nation": "Lead Nation",
     "Status": "Status"
   },
+  "Search_Projects_Page": {
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Iras_Id": "IRAS ID",
+    "Short_Project_Title": "Short project title",
+    "Lead_Nation": "Lead Nation"
+  },
   "Modifications_Tasklist_Page": {
     "Apply_Filters": "Apply filters",
     "Search": "Search",
@@ -171,7 +179,8 @@
     "Days_Since_Submission": "Days since submission",
     "Studywide_Reveiwer": "Study-wide reviewer",
     "Status": "Status",
-    "Continue_to_assign_modifications": "Continue to assign modifications"
+    "Continue_to_assign_modifications": "Continue to assign modifications",
+    "Continue": "Continue to assign modifications"
   },
   "My_Modifications_Tasklist_Page": {
     "Apply_Filters": "Apply filters",
@@ -381,5 +390,8 @@
   },
   "Sponsor_Check_And_Authorise_Page": {
     "Confirm_Selection": "Confirm selection"
+  },
+  "Choose_A_Record_Type_To_Search_Page": {
+    "Next": "Next"
   }
 }
