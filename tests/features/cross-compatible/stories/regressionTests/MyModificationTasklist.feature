@@ -81,20 +81,20 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
         And I capture the page screenshot
         And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Search_Filter_Input>'
+        Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
         And I 'cannot' see the advanced filters panel
         And I 'can' see active filters displayed
         And I can see active filters displayed for '<Search_Filter_Input>'
 
         Examples:
-            | Search_Filter_Input             | Button        |
-            | IRAS_ID_Title_Single            | Apply_Filters |
-            | Title_Date_Range_Single         | Search        |
-            | IRAS_ID_Title_Date_Range_Single | Apply_Filters |
-            | IRAS_ID_Title_Multi             | Search        |
-            | Title_Date_Range_Multi          | Apply_Filters |
-            | IRAS_ID_Title_Date_Range_Multi  | Search        |
-            | Title_Days_Range_Multi          | Apply_Filters |
+            | Search_Filter_Input             | Button        | Status           |
+            | IRAS_ID_Title_Single            | Apply_Filters | With review body |
+            | Title_Date_Range_Single         | Search        | With review body |
+            | IRAS_ID_Title_Date_Range_Single | Apply_Filters | With review body |
+            | IRAS_ID_Title_Multi             | Search        | With review body |
+            | Title_Date_Range_Multi          | Apply_Filters | With review body |
+            | IRAS_ID_Title_Date_Range_Multi  | Search        | With review body |
+            | Title_Days_Range_Multi          | Apply_Filters | With review body |
 
     @RegressionSearchMyTasklistWithNoResults @rsp-4821
     Scenario Outline: Verify the my tasklist page displays the no results found message, when no records on the system match the search criteria
