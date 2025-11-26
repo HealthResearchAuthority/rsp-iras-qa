@@ -25,7 +25,7 @@ Then(
 
 Then(
   'I validate the project information labels using dataset displayed on modifications page',
-  async ({ modificationsCommonPage, projectDetailsIRASPage }) => {
+  async ({ modificationsCommonPage, projectDetailsIRASPage, modificationsReceivedCommonPage }) => {
     const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
     const shortProjectTitleExpected = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const modificationIDExpected = irasIDExpected + '/' + 1;
@@ -40,6 +40,9 @@ Then(
     expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
+    await modificationsReceivedCommonPage.setIrasId(shortProjectTitleExpected);
+    await modificationsReceivedCommonPage.setModificationId(modificationIDExpected);
+    await modificationsReceivedCommonPage.setShortProjectTitle(shortProjectTitleExpected);
   }
 );
 
@@ -544,4 +547,45 @@ Then(
 Then('I click on the searched modification id', async ({ modificationsCommonPage }) => {
   const modificationID = await modificationsCommonPage.getModificationID();
   await modificationsCommonPage.page.getByText(modificationID, { exact: true }).click();
+});
+
+Then(
+  'I keep note of the {string} event and {string} user for modification audit history',
+  async ({ modificationsCommonPage, loginPage }, modificationEventDatasetName: string, userDatasetName: string) => {
+    const modificationEvent =
+      modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName];
+    let userEmail = '';
+    if (userDatasetName.toLowerCase() !== 'blank_user_details') {
+      userEmail = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
+    }
+    const dateTimeOfEvent = new Date().toLocaleString('en-GB', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    });
+    modificationsCommonPage.addAuditHistoryRecord = {
+      dateTimeOfEventExpected: dateTimeOfEvent,
+      modificationEventExpected: modificationEvent,
+      userEmailExpected: userEmail,
+    };
+  }
+);
+
+Then('I validate the audit history table for modifications', async ({ modificationsCommonPage }) => {
+  const auditHistoryTableHeadersActual = await modificationsCommonPage.auditHistoryTableHeader.allTextContents();
+  const auditHistoryTableHeadersExpected =
+    modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.Audit_History_Headers;
+  expect.soft(auditHistoryTableHeadersActual).toEqual(auditHistoryTableHeadersExpected);
+  const rowCount = await modificationsCommonPage.auditHistoryTableBodyRows.count();
+  const actualAuditHistoryRows: string[][] = [];
+  for (let auditRowIndex = 0; auditRowIndex < rowCount; auditRowIndex++) {
+    const row = modificationsCommonPage.auditHistoryTableBodyRows.nth(auditRowIndex);
+    const cellTexts = await row.locator(modificationsCommonPage.tableCell).allTextContents();
+    actualAuditHistoryRows.push(cellTexts.map((text) => text.trim()));
+  }
+  const expectedAuditHistoryRows = modificationsCommonPage.getAuditHistoryRecord
+    .slice()
+    .reverse()
+    .map((record) => [record.dateTimeOfEventExpected, record.modificationEventExpected, record.userEmailExpected]);
+  expect.soft(actualAuditHistoryRows).toEqual(expectedAuditHistoryRows);
 });

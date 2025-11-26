@@ -2,31 +2,39 @@
 Feature: Receive Amendments: Filter, Search and Sort the Search modifications page
 
         Background:
-                Given I have navigated to the 'Search_Modifications_Page'
+                Given I have navigated to the 'Approvals_Page'
+                And I click the 'Search_Records' link on the 'Approvals_Page'
                 And I capture the page screenshot
+                And I can see the 'Choose_A_Record_Type_To_Search_Page'
+                And I capture the page screenshot
+                And I select the radio button for 'Modification_Record' in the choose a record type to search page
+                And I capture the page screenshot
+                And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        @SortModificationsByColumn @rsp-4090
+        @SortModificationsByColumn @rsp-4090 @rsp-4822
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And I can now see a table of search results for modifications received for approval
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I can now see a table of search results for 'modifications received for approval'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
 
                 Examples:
                         | Sort_Button         | Sort_Field          |
@@ -35,14 +43,82 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Modification_Type   | modification type   |
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
+                        | Status              | status              |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
+        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016
+        Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                And the default page size should be 'twenty'
+                And the 'Next' button will be 'available' to the user
+                And the 'Previous' button will be 'not available' to the user
+                And the current page number should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                And I capture the page screenshot
+                Examples:
+                        | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
+                        | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+                        | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
+        @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @rsp-4016
+        Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                And the 'Previous' button will be 'available' to the user
+                And the 'Next' button will be 'not available' to the user
+                And I capture the page screenshot
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                And I capture the page screenshot
+                Examples:
+                        | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
+                        | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+                        | previous link     | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
+        @SearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031
+        Scenario: Verify back and short project title link navigation for search modifications tasklist
+                And I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for 'modifications received for approval'
+                And Each 'short project title' displayed on the 'Search_Modifications_Page' is a link
+                When I click a 'short project title' on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the project overview page
+                When I click the 'Back' link on the 'Project_Overview_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+                When I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for 'modifications received for approval'
+                Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
+                When I click a 'modification id' on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the review all changes modifications page
+                When I click the 'Back' link on the 'Review_All_Changes_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -50,7 +126,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id        | Advanced_Filters                                 |
@@ -64,18 +140,18 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor organisation), and clicking the 'Apply filters' button-when JSvavascript is enabled
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters     |
@@ -83,23 +159,23 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters     |
@@ -112,21 +188,21 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters     |
@@ -138,13 +214,13 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id     |
@@ -158,14 +234,14 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                When I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Advanced_Filters     |
@@ -192,7 +268,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation
         Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -200,7 +276,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Advanced_Filters          |
@@ -223,7 +299,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters
         Scenario Outline: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking search button after entering invalid iras id
-                When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Invalid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 Then The search modifications page returns to its original empty state with no results displayed
@@ -236,7 +312,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters @rsp-4293
         # Add no results check to regression
         Scenario Outline: Verify the user can see no matching results found message on clicking search button after entering invalid iras id
-                When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Invalid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 Then the no search results found message is displayed
@@ -254,11 +330,11 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         @NoResultsFound @InvalidIrasIdAndAdvancedFilters
         Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
-                When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Invalid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -280,11 +356,11 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         @NoResultsFound @ValidIrasIdAndAdvancedFilters @rsp-4293 @jsDisabled
         Scenario Outline: Verify the user can see no matching results found message by entering valid iras id, then selected advanced filters and click on apply filters button
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters_No_Results>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters_No_Results>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -299,7 +375,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify the user can see no matching results found message by selecting advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters_No_Results>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters_No_Results>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -314,7 +390,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify the user can see clear validation error message This date you have selected is before the search above when an end date is earlier than the start date
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Date_Submitted_Invalid_Data>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Date_Submitted_Invalid_Data>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -340,21 +416,21 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                When I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters_Remove>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_After_Remove>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters_After_Remove>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
 
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Remove                             | Advanced_Filters_After_Remove                                    |
@@ -367,14 +443,14 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                When I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -391,14 +467,14 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify the user can remove all the selected filters(with sponsor org) one by one and the search results update accordingly-JS disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                When I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -411,25 +487,25 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I 'cannot' see active filters displayed
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters     |
@@ -439,14 +515,14 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                When I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -459,18 +535,18 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         @RemoveActiveFiltersAlTogether @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -483,7 +559,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And I capture the page screenshot
                 When I authorise the rts api using '<RTS_API_Data>'
                 Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -504,19 +580,19 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118 @KNOWN-DEFECT-RSP-5483 @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118 @RTS
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And I capture the page screenshot
                 When I authorise the rts api using '<RTS_API_Data>'
                 Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
-                And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+                And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+                And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box
-                And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+                And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box in the 'Search_Modifications_Page'
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
                 And I capture the page screenshot
                 Examples:
@@ -534,29 +610,21 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         @SponsorOrganisationValidation  @jsDisabled @rsp-4167
         Scenario Outline: Verify that the search button appears with a green background in the 'Sponsor Organisation' filter section of the advanced filters when JavaScript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And the search button appears with a green background in the sponsor Organisation filter
                 And I capture the page screenshot
                 Examples:
                         | Advanced_Filters                      |
                         | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
-                        | Advanced_Filters_Sponsor_Organisation |
 
         @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID
         Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
-                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id     |
@@ -571,7 +639,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -593,7 +661,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -620,7 +688,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
                 Examples:
@@ -638,17 +706,16 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Advanced_Filter_Two_Participating_Nation_Selected   |
                         | Advanced_Filter_Three_Participating_Nation_Selected |
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
-        # | Advanced_Filters_Nth                                |
-
+                        | Advanced_Filters_Nth                                |
 
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
                 Examples:
@@ -663,13 +730,13 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Advanced_Filter_Two_Participating_Nation_Selected   |
                         | Advanced_Filter_Three_Participating_Nation_Selected |
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
-        # | Advanced_Filters_Nth                                |
+                        | Advanced_Filters_Nth                                |
 
         # Can't close advanced filters panel- for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript disabled verify the hint text for advanced filters when user does n't select any checkboxes
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
                 Examples:
@@ -681,13 +748,27 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         @VerifyHintTextForAdvanceFilters @rsp-4167
         Scenario Outline: Validate hint labels for advanced filters in search modifications page
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
 
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
+
+        @searchModificationStatus @rsp-4822
+        Scenario Outline: Verify that modifications status' display as expected on the search modifictions page
+                When I enter an iras id for a modification with status '<Status>' into the search field
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I can now see a table of search results for modifications received for approval
+                Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with '<Status>' status
+
+                Examples:
+                        | Status                                 |
+                        | Modification_Status_Approved           |
+                        | Modification_Status_Not_Approved       |
+                        | Modification_Status_Received           |
+                        | Modification_Status_Review_In_Progress |
 
         @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
         Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from the Search Modifications page

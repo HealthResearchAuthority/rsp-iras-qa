@@ -131,6 +131,7 @@ export default class CommonItemsPage {
   readonly sponsor_organisation_suggestion_list_labels: Locator;
   readonly sponsor_organisation_suggestion_listbox: Locator;
   readonly sponsor_organisation_text: Locator;
+  readonly search_projects_modifications_sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
@@ -292,9 +293,7 @@ export default class CommonItemsPage {
       });
     this.upload_files_input = this.page.locator('input[type="file"]');
     this.search_results_count = this.page.locator('.search-filter-panel__count');
-    this.advanced_filter_panel = this.page
-      .getByTestId('filter-panel')
-      .or(this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label, exact: true }));
+    this.advanced_filter_panel = this.page.locator('.search-filter-panel__content');
     this.advanced_filter_headings = this.advanced_filter_panel.getByRole('heading');
     this.date_from_filter_group = this.page.getByTestId('FromDate');
     this.date_from_label = this.date_from_filter_group.getByText(this.searchFilterResultsData.date_from_label);
@@ -354,6 +353,10 @@ export default class CommonItemsPage {
           .select_a_sponsor_organisation_hint_text,
       })
     );
+    this.search_projects_modifications_sponsor_organisation_jsdisabled_search_button =
+      this.sponsor_organisation_fieldset.getByRole('button', {
+        name: 'Search',
+      });
     this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset
       .getByRole('button', {
         name: 'Search',
@@ -1745,5 +1748,47 @@ export default class CommonItemsPage {
     const columns = await row.locator(this.listCell).allTextContents();
     const selected = status === undefined ? [columns[0]] : [columns[0], columns[2]];
     return selected.map((col) => col.trim()).join('|');
+  }
+
+  async sortIrasIds(irasIds: string[], sortDirection: string): Promise<string[]> {
+    // Convert all IRAS IDs to numbers for accurate sorting
+    const irasIdsAsNumbers = irasIds.map((id) => Number.parseInt(id));
+    let sortedNumbers: number[];
+    if (sortDirection.toLowerCase() === 'ascending') {
+      sortedNumbers = irasIdsAsNumbers.toSorted((a, b) => a - b);
+    } else {
+      sortedNumbers = irasIdsAsNumbers.toSorted((a, b) => b - a);
+    }
+    // Convert back to strings
+    return sortedNumbers.map((num) => num.toString());
+  }
+  async getActualModificationListValues(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      for (const row of await tableBodyRows.all()) {
+        const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent())
+          .replaceAll(/\s+/g, ' ')
+          .trim();
+        actualListValues.push(actualListValue);
+      }
+      const hasNext = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNext) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    return actualListValues;
+  }
+
+  async getActualListValuesShortProjectTitle(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = (await row.getByRole('cell').nth(columnIndex).textContent()).replaceAll(/[\n\t]/g, '');
+      actualListValues.push(actualListValue);
+    }
+    return actualListValues;
   }
 }

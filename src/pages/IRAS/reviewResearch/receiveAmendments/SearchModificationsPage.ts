@@ -64,6 +64,7 @@ export default class SearchModificationsPage {
   readonly participating_nation_checkbox_chevron: Locator;
   readonly participating_nation_checkbox_hint_label: Locator;
   readonly participating_nation_checkbox_selected_hint_label: Locator;
+  readonly mainPageContent: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -72,13 +73,14 @@ export default class SearchModificationsPage {
     this._modifications_list_after_search = [];
 
     //Locators
-    this.page_heading = this.page
+    this.mainPageContent = this.page.getByTestId('main-content');
+    this.page_heading = this.mainPageContent
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_heading);
-    this.page_guidance_text = this.page
+    this.page_guidance_text = this.mainPageContent
       .getByRole('paragraph')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_guidance_text);
-    this.iras_id_search_text = this.page.getByLabel(
+    this.iras_id_search_text = this.mainPageContent.getByLabel(
       this.searchModificationsPageTestData.Search_Modifications_Page.iras_id_search_box_label,
       { exact: true }
     );
@@ -324,7 +326,7 @@ export default class SearchModificationsPage {
   async assertOnSearchModificationsPage() {
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.page_guidance_text).toBeVisible();
-    // expect.soft(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);// Temporarily commented out due to title mismatch
+    expect.soft(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
   }
 
   async goto() {
@@ -401,7 +403,7 @@ export default class SearchModificationsPage {
     page: PageObject
   ) {
     await commonItemsPage.fillUIComponent(dataset, key, page);
-    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
+    await commonItemsPage.search_projects_modifications_sponsor_organisation_jsdisabled_search_button.click();
     await this.page.waitForTimeout(2000);
     if (dataset[key] !== '') {
       await commonItemsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();

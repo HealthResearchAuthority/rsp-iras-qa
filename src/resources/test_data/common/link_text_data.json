@@ -173,12 +173,14 @@
     "Back": "Back"
   },
   "Modifications_Tasklist_Page": {
+    "Approvals": "Approvals",
     "Back": "Back",
     "Date_Submitted_Filter_Panel": "Date submitted",
     "Short_Project_Title_Filter_Panel": "Short project title",
     "Clear_All_Filters": "Clear all filters"
   },
   "My_Modifications_Tasklist_Page": {
+    "Approvals": "Approvals",
     "Back": "Back",
     "Date_Submitted_Filter_Panel": "Date submitted",
     "Short_Project_Title_Filter_Panel": "Short project title",
@@ -197,10 +199,12 @@
     "Remove_This_Change": "Remove this change"
   },
   "Approvals_Page": {
-    "Search": "Search",
+    "My_Account": "My account",
     "Back": "Back",
     "Modifications_Tasklist": "Modifications tasklist",
-    "My_Tasklist": "My tasklist"
+    "My_Tasklist": "My tasklist",
+    "Search_Records": "Search records",
+    "Team_Manager_Dashboard": "Team manager dashboard"
   },
   "Affected_Organisation_Selection_Page": {
     "Back": "Back",
@@ -237,7 +241,15 @@
     "Back": "Back",
     "Change": "Change",
     "Remove": "Remove",
-    "Delete_Modification": "Delete modification"
+    "Delete_Modification": "Delete modification",
+    "Continue": "Continue",
+    "Sponsor_Details": "Sponsor details",
+    "Modification_Details": "Modification details",
+    "Documents": "Documents",
+    "History": "History"
+  },
+  "Modification_Review_Outcome_Sent_Page": {
+    "Back_To_Tasklist": "Back to Task list"
   },
   "Modification_Unfinished_Error_Page": {
     "Back": "Back"
@@ -314,6 +326,22 @@
   "Sponsor_Check_And_Authorise_Page": {
     "Sponsor_Details": "Sponsor details",
     "Modification_Details": "Modification details",
-    "Documents": "Documents"
+    "Documents": "Documents",
+    "History": "History"
+  },
+  "Choose_A_Record_Type_To_Search_Page": {
+    "Approvals": "Approvals"
+  },
+  "Team_Manager_Dashboard_Page": {
+    "Approvals": "Approvals",
+    "Study_Wide_Reviewer_Filter_Panel": "Study-wide reviewer",
+    "Date_Submitted_Filter_Panel": "Date submitted",
+    "Clear_All_Filters": "Clear all filters"
+  },
+  "Search_Projects_Page": {
+    "Clear_All_Filters": "Clear all filters"
+  },
+  "Modifications_Assignment_Confirmation_Page_Team_Manager": {
+    "Back_To_Dashboard": "Back to Dashboard"
   }
 }

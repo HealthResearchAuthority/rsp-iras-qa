@@ -44,6 +44,7 @@ When(
       searchModificationsPage,
       modificationsReadyToAssignPage,
       myModificationsTasklistPage,
+      teamManagerDashboardPage,
       manageSponsorOrganisationPage,
       setupNewSponsorOrganisationPage,
       checkAddUserSponsorOrganisationPage,
@@ -58,6 +59,10 @@ When(
       editYourProfilePage,
       completeYourProfilePage,
       checkYourProfilePage,
+      chooseARecordTypeToSearchPage,
+      searchProjectsPage,
+      projectOverviewPage,
+      modificationsReceivedCommonPage,
     },
     page: string
   ) => {
@@ -100,6 +105,14 @@ When(
         break;
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
+        break;
+      case 'Team_Manager_Dashboard_Page':
+        await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
         await commonItemsPage.setNoOfResultsBeforeSearch(
           await commonItemsPage.extractNumFromSearchResultCount(
             await commonItemsPage.search_results_count.textContent()
@@ -157,6 +170,19 @@ When(
         await checkYourProfilePage.assertOnCheckProfilePage();
         await profileCommonPage.assertCommonProfilePageItems();
         break;
+      case 'Choose_A_Record_Type_To_Search_Page':
+        await chooseARecordTypeToSearchPage.assertOnChooseARecordTypeToSearchPage();
+        break;
+      case 'Search_Projects_Page':
+        await searchProjectsPage.assertOnSearchProjectsPage();
+        break;
+      case 'Project_Overview_Page':
+        await projectOverviewPage.assertOnProjectOverviewPage();
+        break;
+      case 'Modification_Details_Page':
+        await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
+        break;
+
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -271,7 +297,10 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
   } else if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
-    (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details' || linkKey === 'Documents')
+    (linkKey === 'Sponsor_Details' ||
+      linkKey === 'Modification_Details' ||
+      linkKey === 'Documents' ||
+      linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
   } else {
@@ -498,6 +527,8 @@ Then(
       contactDetailsModificationPage,
       projectPersonnelChangeChiefInvestigatorPage,
       sponsorCheckAndAuthorisePage,
+      chooseARecordTypeToSearchPage,
+      teamManagerDashboardPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -615,6 +646,16 @@ Then(
       errorMessageFieldDataset =
         sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = sponsorCheckAndAuthorisePage;
+    } else if (pageKey == 'Choose_A_Record_Type_To_Search_Page') {
+      errorMessageFieldDataset =
+        chooseARecordTypeToSearchPage.chooseARecordTypeToSearchPageTestData.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = chooseARecordTypeToSearchPage;
+    } else if (pageKey == 'Team_Manager_Dashboard_Page') {
+      errorMessageFieldDataset =
+        teamManagerDashboardPage.teamManagerDashboardPageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = teamManagerDashboardPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -744,7 +785,7 @@ When(
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
         break;
-      case 'iras id':
+      case 'new iras id':
         searchValue = await projectDetailsIRASPage.getUniqueIrasId();
         break;
       default:
@@ -863,6 +904,8 @@ Given(
       profileCommonPage,
       profileSettingsPage,
       editYourProfilePage,
+      teamManagerDashboardPage,
+      searchProjectsPage,
     },
     page: string
   ) => {
@@ -921,6 +964,15 @@ Given(
           )
         );
         break;
+      case 'Team_Manager_Dashboard_Page':
+        await teamManagerDashboardPage.goto();
+        await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
+        break;
       case 'Approvals_Page':
         await approvalsPage.goto();
         await approvalsPage.assertOnApprovalsPage();
@@ -929,6 +981,11 @@ Given(
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
         break;
+      case 'Search_Projects_Page':
+        await searchProjectsPage.goto();
+        await searchProjectsPage.assertOnSearchProjectsPage();
+        break;
+
       case 'Manage_Sponsor_Organisations_Page':
         await manageSponsorOrganisationPage.goto();
         await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
@@ -961,6 +1018,9 @@ Given(
       approvalsPage,
       myModificationsTasklistPage,
       modificationsReadyToAssignPage,
+      searchModificationsPage,
+      teamManagerDashboardPage,
+      manageUsersPage,
     },
     page: string,
     user: string
@@ -1005,6 +1065,7 @@ Given(
           await accessDeniedPage.assertOnAccessDeniedPage();
           break;
         case 'My_Modifications_Tasklist_Page':
+          await myModificationsTasklistPage.page.context().addCookies(authState.cookies);
           await myModificationsTasklistPage.goto();
           await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
           break;
@@ -1012,6 +1073,26 @@ Given(
           await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
           await modificationsReadyToAssignPage.goto();
           await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+          break;
+        case 'Search_Modifications_Page':
+          await searchModificationsPage.page.context().addCookies(authState.cookies);
+          await searchModificationsPage.goto();
+          await searchModificationsPage.assertOnSearchModificationsPage();
+          break;
+        case 'Approvals_Page':
+          await approvalsPage.page.context().addCookies(authState.cookies);
+          await approvalsPage.goto();
+          await approvalsPage.assertOnApprovalsPage();
+          break;
+        case 'Team_Manager_Dashboard_Page':
+          await teamManagerDashboardPage.page.context().addCookies(authState.cookies);
+          await teamManagerDashboardPage.goto();
+          await teamManagerDashboardPage.assertOnTeamManagerDashboardPage();
+          break;
+        case 'Manage_Users_Page':
+          await manageUsersPage.page.context().addCookies(authState.cookies);
+          await manageUsersPage.goto();
+          await manageUsersPage.assertOnManageUsersPage();
           break;
         default:
           throw new Error(`${page} is not a valid option`);
@@ -1113,6 +1194,7 @@ Then(
       commonItemsPage,
       myResearchProjectsPage,
       projectOverviewPage,
+      searchProjectsPage,
     },
     actionToPerform: string,
     filterDatasetName: string,
@@ -1125,6 +1207,10 @@ Then(
       Search_Modifications_Page: {
         dataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
         labels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
+      },
+      Search_Projects_Page: {
+        dataset: searchProjectsPage.searchProjectsPageTestData.Advanced_Filters,
+        labels: searchProjectsPage.searchProjectsPageTestData.Search_Projects_Page,
       },
       Manage_Review_Bodies_Page: {
         dataset: manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters,
@@ -1189,7 +1275,7 @@ Then(
 Then(
   'I validate {string} displayed on {string} in advanced filters',
   async (
-    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage },
+    { commonItemsPage, searchModificationsPage, myResearchProjectsPage, projectOverviewPage, searchProjectsPage },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
@@ -1198,6 +1284,12 @@ Then(
     if (pageKey === 'Search_Modifications_Page') {
       errorMessageFieldDataset =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = searchModificationsPage;
+    } else if (pageKey === 'Search_Projects_Page') {
+      errorMessageFieldDataset =
+        searchProjectsPage.searchProjectsPageTestData.Search_Projects_Page.Error_Validation[
           errorMessageFieldAndSummaryDatasetName
         ];
       page = searchModificationsPage;
@@ -1415,9 +1507,14 @@ Then(
 When(
   'I click a {string} on the {string}',
   async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
+    let testNum: number;
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
     const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
-    const testNum = await getRandomNumber(0, rowCount - 1);
+    if (rowCount > 1) {
+      testNum = await getRandomNumber(0, rowCount - 1);
+    } else if (rowCount == 1) {
+      testNum = 0;
+    }
     const fieldLocator = commonItemsPage.tableBodyRows
       .nth(testNum)
       .getByRole('cell')

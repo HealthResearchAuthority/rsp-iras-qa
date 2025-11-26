@@ -2,7 +2,7 @@
   "Search_Modifications_Page": {
     "page_heading": "Search",
     "page_guidance_text": "Enter the IRAS ID to search for all modifications received, including those submitted for notification only",
-    "title": "Search - Approvals - Health research UK",
+    "title": "Search - Approvals - Plan and manage health and care research",
     "iras_id_search_box_label": "IRAS ID",
     "search_button_label": "Search",
     "chief_investigator_name_label": "Chief Investigator name",
@@ -47,7 +47,7 @@
     "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
       "search_hint_header_prefix": "Results for",
       "search_hint_footer_prefix": "sponsor organisations match your search for",
-      "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed.",
+      "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
       "no_suggestion_found": "No suggestions found for"
     },
     "Error_Validation": {
