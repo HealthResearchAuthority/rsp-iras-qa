@@ -1,4 +1,4 @@
-@ApplicantUser @CreateModificationProjectDocumentsRegression @Regression @jsEnabled
+@ApplicantUser @CreateModificationProjectDocumentsRegression @jsEnabled
 Feature: Create Modifications - Project Documents Modifications Regression
 
   Background:
