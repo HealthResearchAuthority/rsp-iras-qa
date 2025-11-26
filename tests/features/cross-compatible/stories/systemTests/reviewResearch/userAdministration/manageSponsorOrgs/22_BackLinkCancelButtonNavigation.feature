@@ -10,8 +10,8 @@ Feature: User Administration: Manage Sponsor Organisations- Back Link and Cancel
         And I capture the page screenshot
 
     @verifyManageSponsorOrgsPageBackButtonFlow @rsp-5229
-    Scenario: Verify the user can navigate from 'Manage sponsor organisations' page by clicking 'Back' button
-        And I click the 'Back' link on the 'Manage_Sponsor_Organisations_Page'
+    Scenario: Verify the user can navigate from 'Manage sponsor organisations' page by clicking 'System Administration' breadcrumb
+        When I click the 'System_Admin_Breadcrumb' link on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then I can see the 'System_Administration_Page'
 
@@ -75,7 +75,7 @@ Feature: User Administration: Manage Sponsor Organisations- Back Link and Cancel
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
         And I capture the page screenshot
-        And I click the 'Back' link on the 'Sponsor_Organisation_Profile_Page'
+        And I click the 'Manage_Sponsor_Organisations_Breadcrumb' link on the 'Sponsor_Organisation_Profile_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 

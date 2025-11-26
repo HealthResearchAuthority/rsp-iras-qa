@@ -292,16 +292,6 @@ Then('I can see the {string} ui labels in manage users page', async ({ manageUse
 });
 
 Then(
-  'I validate {string} displayed on advanced filters in manage users page',
-  async ({ manageUsersPage }, errorMessageFieldDatasetName: string) => {
-    const fieldErrorMessagesExpected =
-      manageUsersPage.manageUsersPageTestData.Error_Message_Field_Dataset[errorMessageFieldDatasetName];
-    const fieldErrorMessagesActualValues = await manageUsersPage.date_last_logged_in_error_message.textContent();
-    expect(fieldErrorMessagesActualValues).toEqual(fieldErrorMessagesExpected);
-  }
-);
-
-Then(
   'I retrieve the list of review bodies displayed in the review body checkbox in the advanced filters of manage users page',
   async ({ manageUsersPage, commonItemsPage }) => {
     const actualList = await commonItemsPage.getLabelsFromCheckboxes(manageUsersPage.review_body_checkbox);

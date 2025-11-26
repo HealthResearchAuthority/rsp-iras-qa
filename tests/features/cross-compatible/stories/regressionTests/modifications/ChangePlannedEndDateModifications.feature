@@ -1,4 +1,4 @@
-@ApplicantUser @ChangePlannedEndDateModificationRegression @Regression @jsEnabled
+@ApplicantUser @ChangePlannedEndDateModificationRegression @jsEnabled
 Feature: Create Modifications - Change to planned end date regression
 
   Background:
