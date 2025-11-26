@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as reviewYourAnswersPageTestData from '../../../resources/test_data/iras/make_changes/review_your_answers_data.json';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace, getCurrentDate } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ReviewYourAnswersPage {
@@ -50,12 +50,14 @@ export default class ReviewYourAnswersPage {
   readonly primary_sponsor_organisation_text: Locator;
   readonly primary_sponsor_organisation_change_link: Locator;
   readonly primary_sponsor_orgainisation_enter_link: Locator;
+  private _currentDate: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.reviewYourAnswersPageTestData = reviewYourAnswersPageTestData;
     this.linkTextData = linkTextData;
+    this._currentDate = '';
 
     //Locators
     this.pageHeading = this.page
@@ -254,5 +256,13 @@ export default class ReviewYourAnswersPage {
     return await removeUnwantedWhitespace(
       await page[key].getByRole('link').evaluate((el) => el.firstChild.textContent)
     );
+  }
+
+  async getCurrentDate(): Promise<string> {
+    return this._currentDate;
+  }
+
+  async setCurrentDate(): Promise<void> {
+    this._currentDate = await getCurrentDate();
   }
 }
