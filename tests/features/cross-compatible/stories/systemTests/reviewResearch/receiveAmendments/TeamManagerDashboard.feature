@@ -244,7 +244,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                 And I 'cannot' see active filters displayed
 
         @filterTMDashboardDateSubmittedValidation @rsp-5125
-        Scenario Outline: Verify that correct validation is in place for the date submitted filter
+        Scenario Outline: Verify that correct validation is in place for the date submitted filter in team manager dashboard
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'

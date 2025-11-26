@@ -217,27 +217,6 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then the number of search results has returned to the original number
         And I 'cannot' see active filters displayed
 
-    @filterTasklistDateSubmittedValidation @rsp-4104
-    Scenario Outline: Verify that correct validation is in place for the date submitted filter
-        Given I have navigated to the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
-        And I 'can' see the advanced filters panel
-        And I open each of the 'modification tasklist' filters
-        And I capture the page screenshot
-        When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
-        And I capture the page screenshot
-        And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        Then I 'can' see the advanced filters panel
-        And I validate '<Field_And_Summary_Error_Message>' displayed on 'Modifications_Tasklist_Page'
-
-        Examples:
-            | Date_Filter_Input                 | Field_And_Summary_Error_Message         |
-            | Invalid_Date_Range_To_Before_From | Invalid_Date_Range_To_Before_From_Error |
-            | Invalid_Date_From                 | Invalid_Date_From_Error                 |
-            | Invalid_Date_To                   | Invalid_Date_To_Error                   |
-
     @SortTasklistByColumn @rsp-4091 @rsp-4822 @KNOWN-DEFECT-RSP-6281
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         Given I have navigated to the 'Modifications_Tasklist_Page'
@@ -408,7 +387,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
     Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
         When I fill the 'assign modifications tasklist' search and filter options with 'Date_From_Multi'
         And I capture the page screenshot
@@ -647,14 +626,15 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Modification_Status_Review_In_Progress | Studywide_Reviewer | cannot     |
 
     @filterTasklistDateSubmittedValidation @rsp-4819
-    Scenario Outline: Verify that correct validation is in place for the date submitted filter
+    Scenario Outline: Verify that correct validation is in place for the date submitted filter in mofication tasklist when the Date submitted filters and Days since submission filter simultaneously
+        Given I have navigated to the 'Modifications_Tasklist_Page'
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
+        And I open each of the 'modification tasklist' filters
         And I capture the page screenshot
         When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
         And I capture the page screenshot
-        When I fill the 'assign modifications tasklist' search and filter options with '<Date_Submission_Filter_Input>'
+        When I fill the 'assign modifications tasklist' search and filter options with '<Days_Since_Submission_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -662,5 +642,26 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I validate '<Field_And_Summary_Error_Message>' displayed on 'Modifications_Tasklist_Page'
 
         Examples:
-            | Date_Filter_Input | Date_Submission_Filter_Input | Field_And_Summary_Error_Message           |
-            | Date_Range_Multi  | Days_Range_Multi             | Date_Days_Simultaneous_Summary_Only_Error |
+            | Date_Filter_Input | Days_Since_Submission_Filter_Input | Field_And_Summary_Error_Message           |
+            | Date_Range_Multi  | Days_Range_Multi                   | Date_Days_Simultaneous_Summary_Only_Error |
+
+    @filterTasklistDateSubmittedValidation @rsp-4104
+    Scenario Outline: Verify that correct validation is in place for the date submitted filter in mofication tasklist when invalid date is entered
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see the advanced filters panel
+        And I open each of the 'modification tasklist' filters
+        And I capture the page screenshot
+        When I fill the 'assign modifications tasklist' search and filter options with '<Date_Filter_Input>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I 'can' see the advanced filters panel
+        And I validate '<Field_And_Summary_Error_Message>' displayed on 'Modifications_Tasklist_Page'
+
+        Examples:
+            | Date_Filter_Input                 | Field_And_Summary_Error_Message         |
+            | Invalid_Date_Range_To_Before_From | Invalid_Date_Range_To_Before_From_Error |
+            | Invalid_Date_From                 | Invalid_Date_From_Error                 |
+            | Invalid_Date_To                   | Invalid_Date_To_Error                   |

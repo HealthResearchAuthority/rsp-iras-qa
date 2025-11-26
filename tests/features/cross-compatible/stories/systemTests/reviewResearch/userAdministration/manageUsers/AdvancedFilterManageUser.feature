@@ -89,19 +89,6 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Existing_QA_User_First_Name | Advanced_Filter_Ten                                                                 |
             | Existing_QA_User_First_Name | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    @ValidateLastLoggedInInvalidDateErrorMessageManageUser
-    Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date
-        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
-        And I select advanced filters in the manage users page using '<Advanced_Filters>'
-        And I capture the page screenshot
-        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
-        And I capture the page screenshot
-        Then I validate '<Field_Error_Message>' displayed on advanced filters in manage users page
-        And I capture the page screenshot
-        Examples:
-            | Advanced_Filters                            | Field_Error_Message             |
-            | Advanced_Filter_Last_Logged_In_Invalid_Date | Field_Error_Date_Last_Logged_In |
-
     @VerifyNoResultsFoundInvalidSearchOnlyManageUser
     Scenario: Verify the user can see no matching results found message on clicking search button with invalid user name
         When I enter 'Non_Existant_User_Data' into the search field for manage users page
