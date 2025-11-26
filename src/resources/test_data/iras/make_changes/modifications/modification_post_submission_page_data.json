@@ -16,23 +16,6 @@
       "date_label": "Date",
       "event_description_label": "Event description",
       "user_label": "User"
-    },
-    "history_user_email": {
-      "applicant_user_email_text": "futureiras.automation@hra.nhs.uk",
-      "first_row_index": "0",
-      "second_row_index": "1"
-    },
-    "Create_Modification": {
-      "event_description_text": "Modification created"
-    },
-    "Modification_Send_To_sponsor": {
-      "event_description_text": "Modification sent to sponsor"
-    },
-    "Modification_Approved_By_Review_Body": {
-      "event_description_text": "Modification approved by review body"
-    },
-    "Modification_Not_Approved_By_Review_Body": {
-      "event_description_text": "Modification not approved by review body"
     }
   }
 }

@@ -280,7 +280,10 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
   } else if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
-    (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details' || linkKey === 'Documents')
+    (linkKey === 'Sponsor_Details' ||
+      linkKey === 'Modification_Details' ||
+      linkKey === 'Documents' ||
+      linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
   } else if (pageKey === 'Modification_Post_Submission_Page' && linkKey === 'History') {
@@ -462,15 +465,7 @@ Then(
 
 Then(
   'I capture the current time for {string}',
-  async (
-    {
-      auditHistoryReviewBodyPage,
-      auditHistoryUserPage,
-      sponsorOrganisationProfilePage,
-      modificationPostSubmissionPage,
-    },
-    page: string
-  ) => {
+  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage, sponsorOrganisationProfilePage }, page: string) => {
     const currentTime = await getTimeFormatted();
     switch (page) {
       case 'Audit_History_Review_Body_Page':
@@ -481,9 +476,6 @@ Then(
         break;
       case 'Sponsor_Organisation_Profile_Page':
         await sponsorOrganisationProfilePage.setUpdatedTime(currentTime);
-        break;
-      case 'Modification_Audit_History__Page':
-        await modificationPostSubmissionPage.setUpdatedTime(currentTime);
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -766,6 +758,7 @@ When(
         searchValue = await modificationsCommonPage.getModificationID();
         break;
       case 'new iras id':
+      case 'iras id':
         searchValue = await projectDetailsIRASPage.getUniqueIrasId();
         break;
       default:
