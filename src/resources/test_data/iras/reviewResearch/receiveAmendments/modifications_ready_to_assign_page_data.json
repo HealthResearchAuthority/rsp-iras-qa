@@ -198,7 +198,7 @@
       "error_message": "'Date submitted' and 'Days since submission' filters can't be applied at the same time - remove one to continue."
     },
     "No_Modifications_Selected_Summary_Only_Error": {
-      "error_message": "You have not selected a modification to assign. Select at least one modification before you can continue."
+       "error_message": "Select at least one modification"
     }
   }
 }
