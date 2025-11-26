@@ -179,7 +179,8 @@
     "Days_Since_Submission": "Days since submission",
     "Studywide_Reveiwer": "Study-wide reviewer",
     "Status": "Status",
-    "Continue_to_assign_modifications": "Continue to assign modifications"
+    "Continue_to_assign_modifications": "Continue to assign modifications",
+    "Continue": "Continue to assign modifications"
   },
   "My_Modifications_Tasklist_Page": {
     "Apply_Filters": "Apply filters",
@@ -191,18 +192,6 @@
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
     "Status": "Status"
-  },
-  "Team_Manager_Dashboard_Page": {
-    "Apply_Filters": "Apply filters",
-    "Search": "Search",
-    "Advanced_Filters": "Advanced filters",
-    "Modification_Id": "Modification ID",
-    "Short_Project_Title": "Short project title",
-    "Date_Submitted": "Date submitted",
-    "Days_Since_Submission": "Days since submission",
-    "Study_Wide_Reviewer": "Study-wide reviewer",
-    "Status": "Status",
-    "Continue": "Continue to assign modifications"
   },
   "Post_Approval_Page": {
     "Modification_Id": "Modification ID",
