@@ -15,7 +15,7 @@
     "project_record_answer_option_lead_nation_wales": "OPT0021",
     "filter_headings": ["Date submitted", "Days since submission", "Study-wide reviewer"]
   },
-  "Column_Label_Texts": {
+  "Column": {
     "short_project_title_column_label": "Short project title",
     "modification_id_column_label": "Modification ID",
     "date_submitted_column_label": "Date submitted",
