@@ -1,6 +1,11 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { confirmStringNotNull, removeUnwantedWhitespace, getRandomNumber } from '../../../utils/UtilFunctions';
+import {
+  confirmStringNotNull,
+  removeUnwantedWhitespace,
+  getRandomNumber,
+  confirmArrayNotNull,
+} from '../../../utils/UtilFunctions';
 import { Locator } from '@playwright/test';
 import path from 'node:path';
 const { When, Then } = createBdd(test);
@@ -513,5 +518,89 @@ Then(
     });
     expect.soft(foundRecords).toBeDefined();
     expect.soft(foundRecords).toHaveCount(1);
+  }
+);
+
+Then(
+  'I can see the list of modifications submitted for sponsor approval is sorted by {string} order of the {string}',
+  async function ({ commonItemsPage, projectOverviewPage }, sortDirection: string, sortField: string) {
+    const searchColumnIndex = await projectOverviewPage.getColumnIndexProjectApproval(sortField);
+    const actualList: string[] = await commonItemsPage.getActualListValues(
+      commonItemsPage.tableBodyRows,
+      searchColumnIndex
+    );
+    const modificationTypePriority: Record<string, number> = {
+      Substantial: 1,
+      'Modification of an important detail': 2,
+      'Minor modification': 3,
+      'Non-notifiable': 4,
+    };
+    const categoryPriority: Record<string, number> = {
+      A: 1,
+      'B/C': 2,
+      B: 3,
+      C: 4,
+      'New Site': 5,
+      'N/A': 6,
+    };
+    const reviewTypePriority: Record<string, number> = {
+      'Review required': 1,
+      'No review required': 2,
+    };
+    const directionMultiplier = sortDirection.toLowerCase() === 'ascending' ? 1 : -1;
+    let expectedSortedList: string[];
+
+    if (sortField.toLowerCase() === 'modification type') {
+      expectedSortedList = [...actualList].sort((a, b) => {
+        return (modificationTypePriority[a] - modificationTypePriority[b]) * directionMultiplier;
+      });
+    } else if (sortField.toLowerCase() === 'category') {
+      expectedSortedList = [...actualList].sort((a, b) => {
+        return (categoryPriority[a] - categoryPriority[b]) * directionMultiplier;
+      });
+    } else if (sortField.toLowerCase() === 'review type') {
+      expectedSortedList = [...actualList].sort((a, b) => {
+        return (reviewTypePriority[a] - reviewTypePriority[b]) * directionMultiplier;
+      });
+    } else if (sortDirection.toLowerCase() == 'ascending') {
+      expectedSortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    } else {
+      expectedSortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+    }
+    expect.soft(actualList).toEqual(expectedSortedList);
+  }
+);
+
+When(
+  'I can see the audit history for {string} on project overview history tab',
+  async ({ projectOverviewPage, projectIdentifiersPage, reviewYourAnswersPage, loginPage }, actionType: string) => {
+    const actualProjectAuditLog = await projectOverviewPage.getProjectAuditLog();
+    const modificationIdExpected =
+      projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.audit_modification_id;
+    const userEmailExpected = loginPage.loginPageTestData.Applicant_User.username;
+    let dateTimeExpected: string;
+    let eventDescriptionExpected: string;
+    let searchText: string;
+    if (actionType === 'draft project') {
+      dateTimeExpected = await projectIdentifiersPage.getCurrentDate();
+      eventDescriptionExpected =
+        projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.event_description_project_draft;
+      searchText = 'Project record draft started';
+    } else {
+      dateTimeExpected = await reviewYourAnswersPage.getCurrentDate();
+      eventDescriptionExpected =
+        projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.event_description_project_created;
+      searchText = 'Project record created';
+    }
+    const eventDescriptions = actualProjectAuditLog.get('eventDescriptionValue');
+    const index = eventDescriptions.indexOf(searchText);
+    expect.soft(confirmArrayNotNull(actualProjectAuditLog.get('dateTimeValue'))[index]).toBe(dateTimeExpected);
+    expect
+      .soft(confirmArrayNotNull(actualProjectAuditLog.get('eventDescriptionValue'))[index])
+      .toBe(eventDescriptionExpected);
+    expect
+      .soft(confirmArrayNotNull(actualProjectAuditLog.get('modificationIdValue'))[index])
+      .toBe(modificationIdExpected);
+    expect.soft(confirmArrayNotNull(actualProjectAuditLog.get('userEmailValue'))[index]).toBe(userEmailExpected);
   }
 );

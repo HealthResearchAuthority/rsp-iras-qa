@@ -21,7 +21,10 @@
     "participating_nations": "Participating nations",
     "nhs_hsc_organisations": "NHS / HSC organisations",
     "lead_nation": "Lead nation",
-    "maxPagesToVisit": 2
+    "maxPagesToVisit": 2,
+    "event_description_project_draft": "Project record draft started",
+    "event_description_project_created": "Project record created",
+    "audit_modification_id": "Not applicable"
   },
   "Project_URL": {
     "Test_Project": "projectoverview/projectdetails?projectRecordId=20250905085329",

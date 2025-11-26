@@ -644,3 +644,11 @@ export async function getSharpointGraphClient(): Promise<Client> {
   });
   return client;
 }
+
+export async function getCurrentDate(): Promise<string> {
+  return new Date().toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
+}

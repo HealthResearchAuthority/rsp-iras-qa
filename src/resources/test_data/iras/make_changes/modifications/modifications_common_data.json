@@ -137,7 +137,6 @@
     "Other minor change to project management",
     "Other significant change to project management",
     "Principal investigator: conflict of interest",
-    "Changes to the research team",
     "Change to background information that affects scientific value of the project",
     "Change to the endpoint or the main objective",
     "Change to the inclusion or exclusion criteria: non-significant",
@@ -1147,9 +1146,6 @@
   "Modification_Status_Authorised": {
     "status": "Authorised"
   },
-  "Modification_Status_Not_Authorised": {
-    "status": "Not authorised"
-  },
   "Document_Status_Complete": {
     "status": "Complete"
   },
@@ -1158,9 +1154,6 @@
   },
   "Modification_Status_Review_In_Progress": {
     "status": "Review in progress"
-  },
-  "Modification_Status_Authorised": {
-    "status": "Authorised"
   },
   "Modification_Status_Not_Authorised": {
     "status": "Not authorised"
@@ -1627,6 +1620,122 @@
       "specific_change_dropdown": "Other change to participating organisations",
       "changes_free_text": "This is a free text change for Addition of new participating organisation type",
       "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Multiple_Modifications_Ranking_B_C": {
+    "Other_Non_Significant_Change_To_Project_Documents": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Other non-significant change to project documents",
+      "changes_free_text": "This is a free text change for Other non-significant change to project documents",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    },
+    "Other_Significant_Change_To_Project_Design": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Other significant change to project design",
+      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Multiple_Modifications_All_Category": {
+    "Planned_End_Date_NHS_All_Yes_All_Countries": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "01",
+      "planned_project_end_month_dropdown": "January",
+      "planned_project_end_year_text": "2030",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    },
+    "Insurance_Renewal_No_Change_To_The_Level_Or_Breadth_Of_Cover": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Insurance renewal - no change to the level or breadth of cover",
+      "changes_free_text": "This is a free text for Insurance renewal - no change to the level or breadth of cover",
+      "change_status": "Change ready for submission"
+    },
+    "Other_Non_Significant_Change_To_The_Project_Design": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Other non-significant change to the project design",
+      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    },
+    "Other_Non_Significant_Change_To_Project_Documents": {
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Other non-significant change to project documents",
+      "changes_free_text": "This is a free text change for Other non-significant change to project documents",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"],
+      "change_status": "Change ready for submission"
+    },
+    "Other_Significant_Change_To_Project_Design": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Other significant change to project design",
+      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Modification_Reviewable_Single_Dataset": {
+    "Change_To_The_Participant_Sample_Size_Significant": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to the participant sample size: significant",
+      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
       "where_organisation_change_affect_non_nhs_question_checkbox": [
         "England",
         "Northern Ireland",
