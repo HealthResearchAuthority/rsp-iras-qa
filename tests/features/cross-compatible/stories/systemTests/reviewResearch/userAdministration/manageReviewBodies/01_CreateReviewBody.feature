@@ -211,9 +211,9 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Valid_Email_Data_Special_Characters   |
             | Valid_Email_Data_Multiple_Sub_Domains |
             | Valid_Email_Data_Domain               |
-    
-    @VerifyTheUserActionInReviewBodyAuditHistory @rsp-4819 
-    Scenario Outline: Verify the user can view the audit history after disabling a newly created review body 
+
+    @VerifyTheUserActionInReviewBodyAuditHistory @rsp-4819
+    Scenario Outline: Verify the user can view the audit history after disabling a newly created review body
         And I capture the page screenshot
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -260,7 +260,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I capture the page screenshot
         And I can see the review body profile page
         And I capture the page screenshot
-             
+
         Examples:
-        | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
-        | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
+            | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
+            | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |

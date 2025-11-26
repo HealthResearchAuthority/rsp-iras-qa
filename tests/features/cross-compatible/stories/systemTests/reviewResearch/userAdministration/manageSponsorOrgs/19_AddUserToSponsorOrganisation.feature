@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin @KNOWN_DEFECT-RSP-5531
+@UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin @KNOWN_DEFECT-RSP-5531 @TestOnly
 Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor organisation
 
     Background:

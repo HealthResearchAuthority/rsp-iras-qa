@@ -15,20 +15,20 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Filter_Input>'
+        Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
         And I 'cannot' see the advanced filters panel
         And I 'can' see active filters displayed
         And I can see active filters displayed for '<Search_Filter_Input>'
 
         Examples:
-            | Search_Filter_Input             | Button        |
-            | IRAS_ID_Title_Single            | Apply_Filters |
-            | Title_Date_Range_Single         | Search        |
-            | IRAS_ID_Title_Date_Range_Single | Apply_Filters |
-            | IRAS_ID_Title_Multi             | Search        |
-            | Title_Date_Range_Multi          | Apply_Filters |
-            | IRAS_ID_Title_Date_Range_Multi  | Search        |
-            | Title_Days_Range_Multi          | Apply_Filters |
+            | Search_Filter_Input             | Button        | Status           |
+            | IRAS_ID_Title_Single            | Apply_Filters | With review body |
+            | Title_Date_Range_Single         | Search        | With review body |
+            | IRAS_ID_Title_Date_Range_Single | Apply_Filters | With review body |
+            | IRAS_ID_Title_Multi             | Search        | With review body |
+            | Title_Date_Range_Multi          | Apply_Filters | With review body |
+            | IRAS_ID_Title_Date_Range_Multi  | Search        | With review body |
+            | Title_Days_Range_Multi          | Apply_Filters | With review body |
 
     @RegressionAddRemoveFiltersTasklist @rsp-4104
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately
