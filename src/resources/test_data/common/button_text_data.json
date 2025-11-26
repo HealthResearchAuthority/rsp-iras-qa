@@ -238,7 +238,10 @@
     "Save_Changes": "Save changes"
   },
   "Project_Overview_Page": {
-    "Create_New_Modification": "Create new modification"
+    "Create_New_Modification": "Create new modification",
+    "Modification_Type": "Modification type",
+    "Review_Type": "Review type",
+    "Category": "Category"
   },
   "Add_Document_Modifications_Page": {
     "Save_Continue": "Save and continue",
@@ -386,7 +389,13 @@
     "Return_To_IRAS_ID": "Return to IRAS ID"
   },
   "Sponsor_Authorisations_Page": {
-    "Search": "Search"
+    "Search": "Search",
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Date_Received": "Date received",
+    "Date_Actioned": "Date actioned",
+    "Chief_Investigator": "Chief investigator",
+    "Status": "Status"
   },
   "Sponsor_Check_And_Authorise_Page": {
     "Confirm_Selection": "Confirm selection"

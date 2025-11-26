@@ -892,8 +892,8 @@ export default class CommonItemsPage {
     let dataFound = false;
     while (!dataFound) {
       const rowCount = await this.tableRows.count();
-      for (let i = 1; i < rowCount; i++) {
-        const columns = this.tableRows.nth(i).getByRole('cell');
+      for (let index = 1; index < rowCount; index++) {
+        const columns = this.tableRows.nth(index).getByRole('cell');
         const timeValue = confirmStringNotNull(await columns.nth(0).textContent());
         timeValues.push(timeValue);
         const eventValue = confirmStringNotNull(await columns.nth(1).textContent());

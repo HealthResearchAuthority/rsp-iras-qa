@@ -2955,3 +2955,45 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Examples:
       | Changes                                                | Research_Locations  |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One | Nhs_Involvement_Yes |
+
+  @rsp-5573 @ValidateModificationRankingsPostApproval @KNOWN_DEFECT_RSP_6277
+  Scenario: Verify that an applicant user can access the post approval tab to view all modification records, apply sorting on the list
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Modifications_All_Category' and '<Research_Locations>' dataset
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I create multiple modifications using 'Multiple_Modifications_All_Category' dataset
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I create 'Multiple_Modifications_Ranking_B_C' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
+    And I can see the list of modifications submitted for sponsor approval is sorted by 'descending' order of the 'date submitted'
+    When I click the 'Modification_Type' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see the list of modifications submitted for sponsor approval is sorted by 'ascending' order of the 'modification type'
+    When I click the 'Review_Type' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see the list of modifications submitted for sponsor approval is sorted by 'ascending' order of the 'review type'
+    When I click the 'Category' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see the list of modifications submitted for sponsor approval is sorted by 'ascending' order of the 'category'
+
