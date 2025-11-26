@@ -1158,9 +1158,6 @@
   "Modification_Status_Not_Authorised": {
     "status": "Not authorised"
   },
-  "Modification_Status_With_Regulator": {
-    "status": "With review body"
-  },
   "Multiple_Changes_Reviewable_Non_Reviewable": {
     "Other_Minor_Change_To_Participant_Procedures": {
       "area_of_change_dropdown": "Participant procedures",

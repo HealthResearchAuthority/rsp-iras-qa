@@ -50,14 +50,14 @@ export default class ReviewYourAnswersPage {
   readonly primary_sponsor_organisation_text: Locator;
   readonly primary_sponsor_organisation_change_link: Locator;
   readonly primary_sponsor_orgainisation_enter_link: Locator;
-  private _CurrentDate: string;
+  private _currentDate: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.reviewYourAnswersPageTestData = reviewYourAnswersPageTestData;
     this.linkTextData = linkTextData;
-    this._CurrentDate = '';
+    this._currentDate = '';
 
     //Locators
     this.pageHeading = this.page
@@ -259,10 +259,10 @@ export default class ReviewYourAnswersPage {
   }
 
   async getCurrentDate(): Promise<string> {
-    return this._CurrentDate;
+    return this._currentDate;
   }
 
   async setCurrentDate(): Promise<void> {
-    this._CurrentDate = await getCurrentDate();
+    this._currentDate = await getCurrentDate();
   }
 }
