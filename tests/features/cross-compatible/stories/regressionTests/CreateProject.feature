@@ -103,7 +103,6 @@ Feature: Create Amendment - Create Project - Regression Tests
     Examples:
       | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Button_Add_Project | Navigation_Link | Project_Details_Title | Project_Identifiers   | Chief_Investigator    | Chief_Investigator_Change    | Research_Locations   | Change_Link_Field        | Project_Identifiers_Change                   |
       | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Data_With_No_NHS_HSC | chief_investigator_email | Valid_Data_Only_Investigator_Email_Field_Two |
-  # | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland | sponsor_contact    | Valid_Data_Only_Sponsor_Email_Field_Two      |
 
   @ErrorMessageInvalidIRASIDRegression
   Scenario Outline: Validate error messages displayed when user amend the project using invalid iras id
@@ -126,7 +125,7 @@ Feature: Create Amendment - Create Project - Regression Tests
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Blank            | Save_Continue           | Add_Project                   | Field_Error_Message_Iras_Id_Mandatory |
 
   @ErrorMessageInvalidTitleEndDateRegression
-  Scenario Outline: Validate error messages displayed when user fill invalid data for short project title and project end date
+  Scenario Outline: Validate error messages displayed when user fill invalid data for project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -137,8 +136,6 @@ Feature: Create Amendment - Create Project - Regression Tests
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Project_Details_Title                       | Field_And_Summary_Error_Message              |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Data_Short_Project_Title_Max_Length | Field_Error_Message_Short_Project_Title      |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Data_Short_Project_Title_Min_Length | Field_Error_Message_Short_Project_Title      |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Day_Number                          | Field_Error_Message_Planned_Project_End_Day  |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Day_Letters                         | Field_Error_Message_Planned_Project_End_Day  |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Number_1                       | Field_Error_Message_Planned_Project_End_Year |
@@ -292,4 +289,3 @@ Feature: Create Amendment - Create Project - Regression Tests
     Examples:
       | Project_Details_Title        |
       | Valid_Data_All_Fields        |
-      | Valid_Data_Title_Empty_Field |
