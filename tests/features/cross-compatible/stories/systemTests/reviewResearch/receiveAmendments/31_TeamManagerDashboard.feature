@@ -4,7 +4,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
 
-        @sortTeamManagerDashboardByColumn @rsp-4822 @KNOWN-DEFECT-RSP-6281 @fail
+        @sortTeamManagerDashboardByColumn @rsp-4822 @KNOWN-DEFECT-RSP-6281
         Scenario Outline: Verify the user is able to sort the team manager dashboards by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
