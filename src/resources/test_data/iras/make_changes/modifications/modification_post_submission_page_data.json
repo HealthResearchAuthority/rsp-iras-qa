@@ -11,11 +11,6 @@
       "document_version_label": "Document version",
       "document_date_label": "Document date",
       "status_label": "Status"
-    },
-    "history_tab": {
-      "date_label": "Date",
-      "event_description_label": "Event description",
-      "user_label": "User"
     }
   }
 }

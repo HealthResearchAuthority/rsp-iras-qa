@@ -22,18 +22,3 @@ Then(
     }
   }
 );
-
-Then(
-  'I can validate the {string} ui labels on the modification history page',
-  async ({ modificationPostSubmissionPage }, datasetName: string) => {
-    const dataset =
-      modificationPostSubmissionPage.modificationPostSubmissionPageTestData.Modification_Post_Submission_Page
-        .history_tab[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        const locator: Locator = modificationPostSubmissionPage[key];
-        await expect(locator).toBeVisible();
-      }
-    }
-  }
-);

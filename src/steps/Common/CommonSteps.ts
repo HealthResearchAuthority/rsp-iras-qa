@@ -303,8 +303,6 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
       linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
-  } else if (pageKey === 'Modification_Post_Submission_Page' && linkKey === 'History') {
-    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
   } else {
     await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
