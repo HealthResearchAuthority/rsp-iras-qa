@@ -119,7 +119,7 @@ export default class MyModificationsTasklistPage {
   }
 
   async assertOnMyModificationsTasklistPage() {
-    await expect(this.page_heading).toBeVisible();
+    await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.page_description).toBeVisible(); //Not visible due to CMS issue
     await expect(this.results_table).toBeVisible();
     // Temporarily commented out due to title mismatch
