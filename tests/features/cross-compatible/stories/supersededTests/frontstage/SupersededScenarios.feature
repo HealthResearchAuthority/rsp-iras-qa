@@ -1,8 +1,9 @@
-@ApplicantUser @ParticipatingOrganisationViewAndSearch @SystemTest @jsEnabled
-Feature: Organisation Search and View
+@Superseded
+Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
 
-  Background:
-    Given I have navigated to the my research projects page
+  @rsp-4063
+  Scenario Outline: Verify that user can view the participating organisation screen
+  Given I have navigated to the my research projects page
     And I can see the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -13,9 +14,6 @@ Feature: Organisation Search and View
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     Then I can see the project overview page
     And I capture the page screenshot
-
-  @rsp-4063 @OrganisationView
-  Scenario Outline: Verify that user can view the participating organisation screen
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
@@ -39,8 +37,19 @@ Feature: Organisation Search and View
       | Addition_Of_Participant_Identification_Centres_Option      |
       | Early_Closure_Of_Participant_Identification_Centres_Option |
 
-  @rsp-4063 @OrganisationSearch
+  @rsp-4063
   Scenario Outline: Verify that user can search on the participating organisation screen
+  Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
@@ -61,8 +70,19 @@ Feature: Organisation Search and View
       | Addition_Of_Participant_Identification_Centres_Option      | Valid_Search_Text_VACC_CENTRE |
       | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Search_Text_VACC_CENTRE |
 
-  @rsp-4063 @ParticipatingOrganisationsSummaryErrorValidation
+  @rsp-4063
   Scenario Outline: Validate the summary error message on participating organisation page
+  Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
@@ -82,8 +102,19 @@ Feature: Organisation Search and View
       | Addition_Of_Participant_Identification_Centres_Option      | Invalid_Search_Text_Two_Letters |
       | Early_Closure_Of_Participant_Identification_Centres_Option | Invalid_Search_Text_Two_Letters |
 
-  @rsp-4063 @ParticipatingOrganisationsPaginationFirst
+  @rsp-4063
   Scenario Outline: Validate pagination for first few pages in participating organisation page
+  Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
@@ -106,8 +137,19 @@ Feature: Organisation Search and View
       | page number       | Addition_Of_Participant_Identification_Centres_Option      |
       | next link         | Early_Closure_Of_Participant_Identification_Centres_Option |
 
-  @rsp-4063 @ParticipatingOrganisationsPaginationLast
+  @rsp-4063
   Scenario Outline: Validate pagination for last few pages in participating organisation page
+  Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
