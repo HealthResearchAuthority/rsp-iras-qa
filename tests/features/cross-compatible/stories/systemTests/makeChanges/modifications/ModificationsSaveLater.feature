@@ -1355,7 +1355,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I can see the review all changes page
     And I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I valide the missing document notification details
+    And I validate the missing document notification details
     And I validate the project information labels using dataset displayed on modifications page
     When I click the 'Return_To_Review_Modification' button on the 'Modification_Unfinished_Error_Page'
     Then I can see the modifications details page
