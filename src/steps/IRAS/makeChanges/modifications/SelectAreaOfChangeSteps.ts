@@ -3,6 +3,7 @@ import { test, expect } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
+import config from '../../../../../playwright.config';
 
 const { Then } = createBdd(test);
 
@@ -13,7 +14,7 @@ Then('I can see the select area of change page', async ({ selectAreaOfChangePage
 Then(
   'I select {string} from area of change dropdown and {string} from specific change dropdown',
   async (
-    { commonItemsPage, selectAreaOfChangePage },
+    { commonItemsPage, selectAreaOfChangePage, $tags },
     areaOfChangeDatasetName: string,
     specificChangeDatasetName: string
   ) => {
@@ -26,9 +27,18 @@ Then(
         await commonItemsPage.fillUIComponent(areaOfChangeDataset, key, selectAreaOfChangePage);
       }
     }
-    for (const key in specificChangeDataset) {
-      if (Object.hasOwn(specificChangeDataset, key)) {
-        await commonItemsPage.fillUIComponent(specificChangeDataset, key, selectAreaOfChangePage);
+    if ($tags.includes('@jsDisabled') || !config.projects?.[1].use?.javaScriptEnabled) {
+      await commonItemsPage.clickButton('Select_Area_Of_Change_Page', 'Apply_Selection');
+      for (const key in specificChangeDataset) {
+        if (Object.hasOwn(specificChangeDataset, key)) {
+          await commonItemsPage.fillUIComponent(specificChangeDataset, key, selectAreaOfChangePage);
+        }
+      }
+    } else {
+      for (const key in specificChangeDataset) {
+        if (Object.hasOwn(specificChangeDataset, key)) {
+          await commonItemsPage.fillUIComponent(specificChangeDataset, key, selectAreaOfChangePage);
+        }
       }
     }
   }
