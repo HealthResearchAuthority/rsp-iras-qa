@@ -1,4 +1,4 @@
-@RegressionCreateManageUsers @RegressionManageUsers @Regression @BackStage
+@RegressionCreateManageUsers @RegressionManageUsers @Regression @SysAdminUser @BackStage
 Feature: User Administration: Create and edit manage users
 
 
