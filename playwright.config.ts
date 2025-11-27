@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig = {
   globalTimeout: 5 * 60 * 60 * 1000,
   timeout: 8 * 60 * 1000,
   workers: 1, // to enforce serial execution
-  retries: 2,
+  retries: 0,
   use: {
     ...browser,
     trace: 'retain-on-failure',
