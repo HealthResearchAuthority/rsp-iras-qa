@@ -1,4 +1,4 @@
-@RegressionProfileSettings @Regression @ApplicantUser @OneLoginUser @SystemTest
+@RegressionProfileSettings @ApplicantUser @OneLoginUser @SystemTest
 Feature: Profile Management: Provide users with the ability to create and update their profile on the system
     As a user
     I want to be able to complete and update my profile details

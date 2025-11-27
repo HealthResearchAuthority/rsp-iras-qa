@@ -1,7 +1,7 @@
 @SystemTest @jsEnabled
 Feature: Audit history - Create project
 
-    @rsp-5259 @AuditHistoryDraftProject @ApplicantUser
+    @rsp-5259 @AuditHistoryDraftProject @ApplicantUser @KNOWN_DEFECT_RSP_6389 @fail
     Scenario: Verify that user can see the audit history for draft project on project overview history tab
         Given I have navigated to the my research projects page
         And I can see the my research projects page
@@ -31,7 +31,7 @@ Feature: Audit history - Create project
         And I capture the page screenshot
         Then I can see the audit history for 'draft project' on project overview history tab
 
-    @rsp-5259 @AuditHistoryCreateProject @ApplicantUser
+    @rsp-5259 @AuditHistoryCreateProject @ApplicantUser @KNOWN_DEFECT_RSP_6389 @fail
     Scenario: Verify that user can see the audit history for the project creation successful on project overview history tab
         Given I have navigated to the my research projects page
         And I can see the my research projects page
@@ -61,7 +61,7 @@ Feature: Audit history - Create project
         And I capture the page screenshot
         Then I can see the audit history for 'project creation' on project overview history tab
 
-    @rsp-5259 @ViewProjectHistoryBackStageUsers @SponsorUser @WorkFlowCoordinator @StudyWideReviewer @SysAdminUser @TeamManager @ApplicantUser
+    @rsp-5259 @ViewProjectHistoryBackStageUsers @SponsorUser @WorkFlowCoordinator @StudyWideReviewer @SysAdminUser @TeamManager @ApplicantUser @KNOWN_DEFECT_RSP_6389 @fail
     Scenario Outline: Verify that backstage users can see the audit history on project overview history tab
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'

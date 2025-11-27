@@ -1,4 +1,4 @@
-@RegressionManageUsersSortSearchFilter @RegressionManageUsers @SysAdminUser @Regression @BackStage
+@RegressionManageUsersSortSearchFilter @RegressionManageUsers @SysAdminUser @BackStage @SystemTest
 Feature: User Administration: Manage Users- Sort, search and filter the manage users list
 
   Background:
