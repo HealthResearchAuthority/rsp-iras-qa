@@ -3,6 +3,7 @@ import * as selectAreaOfChangePageTestData from '../../../../resources/test_data
 import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
+import config from '../../../../../playwright.config';
 
 //Declare Page Objects
 export default class ModificationsSelectAreaOfChangePage {
@@ -75,12 +76,17 @@ export default class ModificationsSelectAreaOfChangePage {
     return this._modification_id;
   }
 
-  async selectAreaOfChangeInModificationsPage(dataset: any) {
+  async selectAreaOfChangeInModificationsPage(dataset: any, $tags: any) {
     const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         if (key === 'area_of_change_dropdown' || key === 'specific_change_dropdown') {
-          await commonItemsPage.fillUIComponent(dataset, key, this);
+          if ($tags.includes('@jsDisabled') || !config.projects?.[1].use?.javaScriptEnabled) {
+            await commonItemsPage.clickButton('Select_Area_Of_Change_Page', 'Apply_Selection');
+            await commonItemsPage.fillUIComponent(dataset, key, this);
+          } else {
+            await commonItemsPage.fillUIComponent(dataset, key, this);
+          }
         }
       }
     }
