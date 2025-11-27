@@ -55,22 +55,22 @@ export default class TeamManagerDashboardPage {
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
     this.short_project_title_column_label = this.page
       .getByRole('button')
-      .getByText(this.teamManagerDashboardPageTestData.Column_Label_Texts.short_project_title_column_label, {
+      .getByText(this.teamManagerDashboardPageTestData.Column.short_project_title_column_label, {
         exact: true,
       });
     this.modification_id_column_label = this.page
       .getByRole('button')
-      .getByText(this.teamManagerDashboardPageTestData.Column_Label_Texts.modification_id_column_label, {
+      .getByText(this.teamManagerDashboardPageTestData.Column.modification_id_column_label, {
         exact: true,
       });
     this.date_submitted_column_label = this.page
       .getByRole('button')
-      .getByText(this.teamManagerDashboardPageTestData.Column_Label_Texts.date_submitted_column_label, {
+      .getByText(this.teamManagerDashboardPageTestData.Column.date_submitted_column_label, {
         exact: true,
       });
     this.days_since_submission_column_label = this.page
       .getByRole('button')
-      .getByText(this.teamManagerDashboardPageTestData.Column_Label_Texts.days_since_submission_column_label, {
+      .getByText(this.teamManagerDashboardPageTestData.Column.days_since_submission_column_label, {
         exact: true,
       });
     this.search_input_text = this.page.getByTestId('Search_IrasId');

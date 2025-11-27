@@ -591,12 +591,13 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011
     Scenario Outline: Validate the workflow co-ordinator navigates to the modifications task list page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
-        Given I have navigated to the 'Modifications_Tasklist_Page'
+        Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
-        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -604,12 +605,12 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I click the 'Back' link on the 'Select_Study_Wide_Reviewer_Page'
         And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
-        And I can see previously selected modifications checkboxes are retained for '<Modification_Id>'
+        And I can see previously selected modifications checkboxes are retained
         And I capture the page screenshot
 
         Examples:
-            | Valid_Iras_Id                       | Modification_Id                                |
-            | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six |
+            | Valid_Iras_Id           | User                 | Status           | Modification_Count |
+            | Existing_IRAS_ID_Single | Workflow_Coordinator | With review body | Single             |
 
     @searchTasklistModificationStatus @rsp-4822
     Scenario Outline: Verify that modifications status' display as expected on the modifications tasklist page
