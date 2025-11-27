@@ -1,4 +1,4 @@
-@Regression @ApplicantUser @createModifications @jsEnabled
+@Regression @ApplicantUser @createModifications
 
 Feature: Create Modification- This feature file help an applicant to complete the modification journey and can sent to sponsor
 
