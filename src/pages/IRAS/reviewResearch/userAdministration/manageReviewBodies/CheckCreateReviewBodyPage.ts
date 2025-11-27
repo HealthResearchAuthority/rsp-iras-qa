@@ -48,7 +48,7 @@ export default class CheckCreateReviewBodyPage {
     this.row_value_locator = this.page.locator('input');
     this.row_change_link_locator = this.page
       .getByRole('button')
-      .getByText(this.linkTextData.Check_Create_Review_Body_Page.Change, { exact: true });
+      .getByText(this.linkTextData.Check_Create_Review_Body_Page.Change);
     this.organisation_name_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')

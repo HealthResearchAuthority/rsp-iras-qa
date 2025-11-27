@@ -8,7 +8,8 @@
     "upload_document_header": "Upload document",
     "choose_files_button_label": "Choose files",
     "upload_document_component_hint_label": "or drop files",
-    "no_files_chosen_label": "No files chosen"
+    "no_files_chosen_label": "No files chosen",
+    "delete_label": "Delete"
   },
   "Field_Error_Upload_Documents_Mandatory": {
     "upload_files_input": "Please upload at least one document"
@@ -18,5 +19,8 @@
   },
   "Duplicate_File_Upload_Error": {
     "upload_files_input": " has already been uploaded"
+  },
+  "Document_Status_Uploaded": {
+    "status": "Uploaded"
   }
 }

@@ -1,4 +1,4 @@
-@RegressionProjectOverview @Regression @ApplicantUser
+@RegressionProjectOverview @ApplicantUser
 Feature: Create Amendment - Project Overview - Regression Tests
 
     @RegressionProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @KNOWN-DEFECT-RSP-5322

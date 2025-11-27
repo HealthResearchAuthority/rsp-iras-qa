@@ -1,31 +1,57 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReceivedCommonPagePageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_received_common_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
+import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../../utils/DbConfig';
+import { IResult } from 'mssql';
+import * as commonTestData from '../../../../resources/test_data/common/common_data.json';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
+import { confirmArrayNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ModificationsReceivedCommonPage {
   readonly page: Page;
   readonly modificationsReceivedCommonPagePageTestData: typeof modificationsReceivedCommonPagePageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
+  readonly dbConfigData: typeof dbConfigData;
+  readonly commonTestData: typeof commonTestData;
   private _days_since_submission_from_filter: number;
   private _days_since_submission_to_filter: number;
+  private _iras_id: string;
+  private _modification_id: string;
+  private _short_project_title: string;
+  private _status: string;
+  private _decision_outcome: string;
+  private _rowWithModification: Locator;
   readonly days_since_submission_from_text: Locator;
   readonly days_since_submission_filter_input: Locator;
   readonly days_since_submission_label: Locator;
   readonly days_since_submission_hint_label: Locator;
   readonly days_since_submission_to_separator: Locator;
   readonly days_since_submission_suffix_label: Locator;
+  readonly pageHeading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.modificationsReceivedCommonPagePageTestData = modificationsReceivedCommonPagePageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
+    this.dbConfigData = dbConfigData;
+    this.commonTestData = commonTestData;
     this._days_since_submission_from_filter = 0;
     this._days_since_submission_to_filter = 0;
+    this._iras_id = '';
+    this._modification_id = '';
+    this._short_project_title = '';
+    this._status = '';
+    this._decision_outcome = '';
 
     //Locators
-    this.days_since_submission_from_text = this.page.getByTestId('Search_FromDaysSinceSubmission');
+    this._rowWithModification = this.page.getByText('');
+    this.pageHeading = this.page
+      .getByRole('heading', { level: 1 })
+      .getByText(this.commonTestData.modification_details_page_heading);
+    this.days_since_submission_from_text = this.page.getByTestId('Search.FromDaysSinceSubmission');
     this.days_since_submission_filter_input = this.page
       .locator('.search-filter-section__content')
       .filter({ has: this.days_since_submission_from_text });
@@ -63,6 +89,55 @@ export default class ModificationsReceivedCommonPage {
     this._days_since_submission_to_filter = value;
   }
 
+  async getIrasId(): Promise<string> {
+    return this._iras_id;
+  }
+
+  async setIrasId(value: string): Promise<void> {
+    this._iras_id = value;
+  }
+
+  async getModificationId(): Promise<string> {
+    return this._modification_id;
+  }
+
+  async setModificationId(value: string): Promise<void> {
+    this._modification_id = value;
+  }
+
+  async getShortProjectTitle(): Promise<string> {
+    return this._short_project_title;
+  }
+
+  async setShortProjectTitle(value: string): Promise<void> {
+    this._short_project_title = value;
+  }
+
+  async getStatus(): Promise<string> {
+    return this._status;
+  }
+
+  async setStatus(value: string): Promise<void> {
+    this._status = value;
+  }
+
+  async getDecisionOutcome(): Promise<string> {
+    return this._decision_outcome;
+  }
+
+  async setDecisionOutcome(value: string): Promise<void> {
+    this._decision_outcome = value;
+  }
+
+  async getRowLocator(): Promise<Locator> {
+    return this._rowWithModification;
+  }
+
+  async setRowLocator(element: Locator): Promise<void> {
+    this._rowWithModification = element;
+  }
+
+  // Page Methods
   async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
     const listAsDates: Date[] = [];
     const sortedListAsStrings: string[] = [];
@@ -109,7 +184,13 @@ export default class ModificationsReceivedCommonPage {
     }
 
     for (const nums of listAsNums) {
-      const days = `${nums} ${this.modificationsReceivedCommonPagePageTestData.Tasklist_Page.days_since_suffix}`;
+      let suffix: string;
+      if (nums == 1) {
+        suffix = this.modificationsReceivedCommonPagePageTestData.Tasklist_Page.day_since_suffix;
+      } else {
+        suffix = this.modificationsReceivedCommonPagePageTestData.Tasklist_Page.days_since_suffix;
+      }
+      const days = `${nums} ${suffix}`;
       sortedListAsStrings.push(days);
     }
     return sortedListAsStrings;
@@ -128,6 +209,7 @@ export default class ModificationsReceivedCommonPage {
     shortTitles: string[],
     daysSinceSubmission: string[],
     datesSubmitted: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -138,6 +220,11 @@ export default class ModificationsReceivedCommonPage {
     if (searchInput.toLowerCase().includes('title')) {
       valuesMatch =
         shortTitles.toString().toLowerCase() == searchInputDataset[searchInput].short_project_title_text.toLowerCase();
+    }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      valuesMatch =
+        studyWideReviewers.toString().toLowerCase() ==
+        searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase();
     }
     if (searchInput.toLowerCase().includes('days')) {
       const actualDay = daysSinceSubmission.toString();
@@ -156,6 +243,7 @@ export default class ModificationsReceivedCommonPage {
   async checkMultiValuesStartsWith(
     irasIds: string[],
     shortTitles: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -178,12 +266,23 @@ export default class ModificationsReceivedCommonPage {
         }
       }
     }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      for (const swr of studyWideReviewers) {
+        valuesStartWith = swr
+          .toLowerCase()
+          .startsWith(searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase());
+        if (!valuesStartWith) {
+          return valuesStartWith;
+        }
+      }
+    }
     return valuesStartWith;
   }
 
   async checkPartialValuesContain(
     irasIds: string[],
     shortTitles: string[],
+    studyWideReviewers: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -201,6 +300,16 @@ export default class ModificationsReceivedCommonPage {
         valuesContain = title
           .toLowerCase()
           .includes(searchInputDataset[searchInput].short_project_title_text.toLowerCase());
+        if (!valuesContain) {
+          return valuesContain;
+        }
+      }
+    }
+    if (searchInput.toLowerCase().includes('reviewer')) {
+      for (const swr of studyWideReviewers) {
+        valuesContain = swr
+          .toLowerCase()
+          .includes(searchInputDataset[searchInput].study_wide_reviewer_text.toLowerCase());
         if (!valuesContain) {
           return valuesContain;
         }
@@ -237,31 +346,65 @@ export default class ModificationsReceivedCommonPage {
     let columnIndex: number;
     switch (columnName.toLowerCase()) {
       case 'modification id':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 1;
         } else {
           columnIndex = 0;
         }
         break;
       case 'short project title':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 2;
         } else {
           columnIndex = 1;
         }
         break;
       case 'date submitted':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 3;
         } else {
           columnIndex = 2;
         }
         break;
       case 'days since submission':
-        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
           columnIndex = 4;
         } else {
           columnIndex = 3;
+        }
+        break;
+      case 'status':
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'search_modifications_page'
+        ) {
+          columnIndex = 5;
+        } else if (pageType.toLowerCase() == 'team_manager_dashboard_page') {
+          columnIndex = 6;
+        } else {
+          columnIndex = 4;
+        }
+        break;
+      case 'study-wide reviewer':
+        if (
+          pageType.toLowerCase() == 'modifications_tasklist_page' ||
+          pageType.toLowerCase() == 'team_manager_dashboard_page'
+        ) {
+          columnIndex = 5;
+        } else {
+          columnIndex = 4;
         }
         break;
       case 'modification type':
@@ -273,9 +416,173 @@ export default class ModificationsReceivedCommonPage {
       case 'lead nation':
         columnIndex = 4;
         break;
+      case 'studywide reviewer':
+        columnIndex = 5;
+        break;
       default:
         throw new Error(`${columnName} is not a valid option`);
     }
     return columnIndex;
   }
+
+  async getModificationStatusSqlInput(statusType: string, dataset: any): Promise<[string, string]> {
+    let status: string;
+    let optionalReviewNullQueryInput: string = '';
+    if (statusType == 'Modification_Status_Received') {
+      status = dataset.Modification_Status_With_Review_Body.status;
+      optionalReviewNullQueryInput = ' AND ReviewerId IS NULL';
+    } else if (statusType == 'Modification_Status_Review_In_Progress') {
+      status = dataset.Modification_Status_With_Review_Body.status;
+      optionalReviewNullQueryInput = ' AND ReviewerId IS NOT NULL';
+    } else {
+      status = dataset[statusType].status;
+    }
+    return [status, optionalReviewNullQueryInput];
+  }
+
+  async getModificationNationReviewerEmailSqlInput(assignedUser: string, dataset: any): Promise<string> {
+    let optionalReviewerIdQueryInput: string = '';
+    if (assignedUser.toLowerCase() != 'nobody') {
+      const email = dataset[assignedUser].username;
+      optionalReviewerIdQueryInput = ` AND ReviewerEmail = '${email}'`;
+    }
+    return optionalReviewerIdQueryInput;
+  }
+
+  async setModificationValues(modificationQueryResult: IResult<any>, projectQueryResult: IResult<any>): Promise<void> {
+    await this.setIrasId(projectQueryResult.recordset[0].IrasId.toString());
+    await this.setModificationId(modificationQueryResult.recordset[0].ModificationIdentifier);
+    await this.setShortProjectTitle(projectQueryResult.recordset[0].ShortProjectTitle);
+    await this.setStatus(modificationQueryResult.recordset[0].Status);
+  }
+
+  // SQL STATEMENTS //
+  async sqlGetSpecificModificationByStatus(status: string, optionalReviewNullQueryInput: string): Promise<void> {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const modificationStatusQueryResult = await sqlConnection.query(
+      `SELECT TOP (1) * FROM ProjectModifications WHERE [Status] = '${status}'${optionalReviewNullQueryInput} ORDER BY NEWID()`
+    );
+    await sqlConnection.close();
+    if (modificationStatusQueryResult.recordset.length == 0) {
+      throw new Error(`No modification found in the system with ${status} status`);
+    } else {
+      const projectRecordId = modificationStatusQueryResult.recordset[0].ProjectRecordId;
+      const projectQueryResult = await this.sqlGetSpecificProjectById(projectRecordId);
+      console.dir(modificationStatusQueryResult);
+      await this.setModificationValues(modificationStatusQueryResult, projectQueryResult);
+    }
+  }
+
+  async sqlGetSpecificModificationByNationStatus(
+    leadNationKey: string,
+    status: string,
+    optionalReviewNullQueryInput: string,
+    optionalReviewerIdQueryInput: string
+  ): Promise<void> {
+    const leadNation = dbConfigData.Lead_Nations[leadNationKey];
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const modificationNationStatusQueryResult = await sqlConnection.query(
+      `SELECT TOP (1) ProjectModifications.* FROM ProjectModifications
+INNER JOIN ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = ProjectModifications.ProjectRecordId
+WHERE ProjectRecordAnswers.QuestionId = 'IQA0005' AND ProjectRecordAnswers.SelectedOptions = '${leadNation}' 
+AND ProjectModifications.[Status] = '${status}'${optionalReviewNullQueryInput}${optionalReviewerIdQueryInput} ORDER BY NEWID()`
+    );
+    await sqlConnection.close();
+    if (modificationNationStatusQueryResult.recordset.length == 0) {
+      throw new Error(
+        `No suitable modification found in the system with ${leadNation} lead nation and ${status} status`
+      );
+    } else {
+      const projectRecordId = modificationNationStatusQueryResult.recordset[0].ProjectRecordId;
+      const projectQueryResult = await this.sqlGetSpecificProjectById(projectRecordId);
+      console.dir(modificationNationStatusQueryResult);
+      await this.setModificationValues(modificationNationStatusQueryResult, projectQueryResult);
+    }
+  }
+
+  async sqlGetSpecificProjectById(projectRecordId: string): Promise<IResult<any>> {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const projectQueryResult = await sqlConnection.query(
+      `SELECT ShortProjectTitle, IrasId FROM ProjectRecords WHERE Id ='${projectRecordId}'`
+    );
+    await sqlConnection.close();
+    console.dir(projectQueryResult);
+    return projectQueryResult;
+  }
+
+  async getProjectRecordColumnIndex(pageType: string, columnName: string): Promise<number> {
+    let columnIndex: number;
+    switch (columnName.toLowerCase()) {
+      case 'iras id':
+        if (pageType.toLowerCase() == 'search_projects_page') {
+          columnIndex = 0;
+        }
+        break;
+      case 'short project title':
+        if (pageType.toLowerCase() == 'search_projects_page') {
+          columnIndex = 1;
+        }
+        break;
+      case 'lead nation':
+        columnIndex = 2;
+        break;
+      default:
+        throw new Error(`${columnName} is not a valid option`);
+    }
+    return columnIndex;
+  }
+
+  async assertOnModificationDetailsPage() {
+    await expect.soft(this.pageHeading).toBeVisible();
+  }
+
+  validateCombinedSearchTerms = async (
+    searchResults: string[],
+    searchTerms: string[],
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
+    expect.soft(filteredResults).toEqual(searchResults);
+    const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+      searchResults,
+      searchTerms
+    );
+    expect.soft(validatedResults).toBeTruthy();
+    expect.soft(searchResults).toHaveLength(validatedResults.length);
+  };
+
+  validateSingleFieldMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    searchTerm: string,
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const match = await commonItemsPage.validateSearchResults(values, searchTerm);
+    expect.soft(match).toBeTruthy();
+  };
+
+  validateMultiWordFieldMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    searchTerm: string,
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const terms = await commonItemsPage.splitSearchTerm(searchTerm);
+    const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(values, terms);
+    expect.soft(match).toBeTruthy();
+    expect.soft(values).toHaveLength(match.length);
+  };
+
+  validateFilterMatch = async (
+    modificationsList: Map<string, string[]>,
+    fieldKey: string,
+    allowedValues: string[],
+    commonItemsPage: CommonItemsPage
+  ) => {
+    const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+    const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
+    expect.soft(isValid).toBeTruthy();
+  };
 }

@@ -18,7 +18,12 @@ import AdultsLackingCapacityPage from '../IRAS/questionSet/AdultsLackingCapacity
 import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
-import { confirmArrayNotNull, confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import {
+  confirmArrayNotNull,
+  confirmStringNotNull,
+  removeUnwantedWhitespace,
+  getReportFolderName,
+} from '../../utils/UtilFunctions';
 import sharp from 'sharp';
 
 //Declare Page Objects
@@ -126,6 +131,7 @@ export default class CommonItemsPage {
   readonly sponsor_organisation_suggestion_list_labels: Locator;
   readonly sponsor_organisation_suggestion_listbox: Locator;
   readonly sponsor_organisation_text: Locator;
+  readonly search_projects_modifications_sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
@@ -287,9 +293,7 @@ export default class CommonItemsPage {
       });
     this.upload_files_input = this.page.locator('input[type="file"]');
     this.search_results_count = this.page.locator('.search-filter-panel__count');
-    this.advanced_filter_panel = this.page
-      .getByTestId('filter-panel')
-      .or(this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label, exact: true }));
+    this.advanced_filter_panel = this.page.locator('.search-filter-panel__content');
     this.advanced_filter_headings = this.advanced_filter_panel.getByRole('heading');
     this.date_from_filter_group = this.page.getByTestId('FromDate');
     this.date_from_label = this.date_from_filter_group.getByText(this.searchFilterResultsData.date_from_label);
@@ -349,6 +353,10 @@ export default class CommonItemsPage {
           .select_a_sponsor_organisation_hint_text,
       })
     );
+    this.search_projects_modifications_sponsor_organisation_jsdisabled_search_button =
+      this.sponsor_organisation_fieldset.getByRole('button', {
+        name: 'Search',
+      });
     this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset
       .getByRole('button', {
         name: 'Search',
@@ -766,9 +774,36 @@ export default class CommonItemsPage {
     return selfHealedLocator;
   }
 
-  async captureScreenshot(page: Page, $step: any, $testInfo: any) {
-    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
-    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
+  async captureScreenshot(page: Page, $testInfo: any, $step?: any) {
+    const fileName = new Date().toISOString().replaceAll(/[-:.TZ]/g, '') + '.png';
+    const screenshotDir = './test-reports/' + getReportFolderName() + '/cucumber/html/screenshots';
+    const screenshotPath = path.join(screenshotDir, fileName);
+    try {
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+    } catch (error) {
+      if (error.message.includes('Cannot take screenshot larger')) {
+        await this.captureLargeSizeScreenshot(page, screenshotPath);
+      } else {
+        console.error(error);
+      }
+    }
+    const relativePath = path.join('../screenshots/', fileName).replaceAll('\\', '/');
+    const htmlPreview = `<a href="${relativePath}" target="_blank">View screenshot</a>`;
+    if ($step) {
+      await $testInfo.attach(`[step] ${$step.title}`, {
+        body: htmlPreview,
+        contentType: 'text/html',
+      });
+    } else {
+      try {
+        await $testInfo.attach('Screenshot', {
+          body: htmlPreview,
+          contentType: 'text/html',
+        });
+      } catch {
+        /* intentionally ignored */
+      }
+    }
   }
 
   async captureComponentScreenshot(locator: Locator, $step: any, $testInfo: any) {
@@ -857,8 +892,8 @@ export default class CommonItemsPage {
     let dataFound = false;
     while (!dataFound) {
       const rowCount = await this.tableRows.count();
-      for (let i = 1; i < rowCount; i++) {
-        const columns = this.tableRows.nth(i).getByRole('cell');
+      for (let index = 1; index < rowCount; index++) {
+        const columns = this.tableRows.nth(index).getByRole('cell');
         const timeValue = confirmStringNotNull(await columns.nth(0).textContent());
         timeValues.push(timeValue);
         const eventValue = confirmStringNotNull(await columns.nth(1).textContent());
@@ -1636,11 +1671,18 @@ export default class CommonItemsPage {
 
   async clickLink(page: string, linkName: string) {
     const linkLabel = this.linkTextData[page][linkName];
-    await this.govUkLink
-      .getByText(linkLabel, { exact: true })
-      .or(this.genericButton.getByText(linkLabel, { exact: true }))
-      .first()
-      .click();
+    if (
+      page === 'Sponsor_Check_And_Authorise_Page' &&
+      (linkName === 'Sponsor_Details' || linkName === 'Modification_Details')
+    ) {
+      await this.page.locator('label', { hasText: linkLabel }).click();
+    } else {
+      await this.govUkLink
+        .getByText(linkLabel, { exact: true })
+        .or(this.genericButton.getByText(linkLabel, { exact: true }))
+        .first()
+        .click();
+    }
   }
 
   async clickErrorSummaryLinkSpecific<PageObject>(key: string, page: PageObject, errorMsg: string) {
@@ -1706,5 +1748,47 @@ export default class CommonItemsPage {
     const columns = await row.locator(this.listCell).allTextContents();
     const selected = status === undefined ? [columns[0]] : [columns[0], columns[2]];
     return selected.map((col) => col.trim()).join('|');
+  }
+
+  async sortIrasIds(irasIds: string[], sortDirection: string): Promise<string[]> {
+    // Convert all IRAS IDs to numbers for accurate sorting
+    const irasIdsAsNumbers = irasIds.map((id) => Number.parseInt(id));
+    let sortedNumbers: number[];
+    if (sortDirection.toLowerCase() === 'ascending') {
+      sortedNumbers = irasIdsAsNumbers.toSorted((a, b) => a - b);
+    } else {
+      sortedNumbers = irasIdsAsNumbers.toSorted((a, b) => b - a);
+    }
+    // Convert back to strings
+    return sortedNumbers.map((num) => num.toString());
+  }
+  async getActualModificationListValues(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      for (const row of await tableBodyRows.all()) {
+        const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent())
+          .replaceAll(/\s+/g, ' ')
+          .trim();
+        actualListValues.push(actualListValue);
+      }
+      const hasNext = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNext) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    return actualListValues;
+  }
+
+  async getActualListValuesShortProjectTitle(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = (await row.getByRole('cell').nth(columnIndex).textContent()).replaceAll(/[\n\t]/g, '');
+      actualListValues.push(actualListValue);
+    }
+    return actualListValues;
   }
 }

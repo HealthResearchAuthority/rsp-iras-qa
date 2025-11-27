@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as projectOverviewPageTestData from '../../../resources/test_data/iras/make_changes/project_overview_page_data.json';
 import { confirmStringNotNull } from '../../../utils/UtilFunctions';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
+import CommonItemsPage from '../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ProjectOverviewPage {
@@ -117,6 +118,8 @@ export default class ProjectOverviewPage {
   readonly project_details_tab_full_project_title: Locator;
   readonly project_details_tab_planned_project_end_date_label: Locator;
   readonly project_details_tab_planned_project_end_date: Locator;
+  readonly tableCell: Locator;
+  readonly tableRows: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -517,6 +520,8 @@ export default class ProjectOverviewPage {
         hasText: this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_from_date_hint_text,
       })
       .locator('.govuk-error-message');
+    this.tableCell = this.page.locator('td');
+    this.tableRows = this.page.getByRole('table').getByRole('row');
   }
 
   //Page Methods
@@ -542,5 +547,91 @@ export default class ProjectOverviewPage {
       columnIndex = 1;
     }
     return columnIndex;
+  }
+
+  async findModification(
+    commonItemsPage: CommonItemsPage,
+    modificationID: string,
+    options?: {
+      status?: string;
+    }
+  ) {
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const rows = await commonItemsPage.tableBodyRows.all();
+      for (const row of rows) {
+        const match =
+          options?.status && (await this.isMatchingRowForStatus(commonItemsPage, row, modificationID, options.status));
+        if (match) return row;
+      }
+      hasNextPage = await commonItemsPage.shouldGoToNextPage();
+      if (hasNextPage) await commonItemsPage.goToNextPage();
+    }
+    expect.soft(false, `No matching record found for modificationID: ${modificationID}`).toBe(true);
+  }
+
+  async isMatchingRowForStatus(
+    commonItemsPage: CommonItemsPage,
+    row: any,
+    modificationID: string,
+    status?: string
+  ): Promise<boolean> {
+    const columns = row.locator(this.tableCell);
+    const idText = (await columns.nth(0).innerText()).trim();
+    const statusText = (await columns.nth(5).innerText()).trim();
+    return idText === modificationID && (status ? statusText === status : true);
+  }
+
+  async getColumnIndexProjectApproval(columnName: string): Promise<number> {
+    let columnIndex: number;
+    switch (columnName.toLowerCase()) {
+      case 'modification id':
+        columnIndex = 0;
+        break;
+      case 'modification type':
+        columnIndex = 1;
+        break;
+      case 'review type':
+        columnIndex = 2;
+        break;
+      case 'category':
+        columnIndex = 3;
+        break;
+      case 'date submitted':
+        columnIndex = 4;
+        break;
+      case 'status':
+        columnIndex = 5;
+        break;
+      default:
+        throw new Error(`${columnName} is not a valid option`);
+    }
+    return columnIndex;
+  }
+
+  async getProjectAuditLog(): Promise<Map<string, string[]>> {
+    const dateTimeValues: string[] = [];
+    const eventDescriptionValues: string[] = [];
+    const modificationIdValues: string[] = [];
+    const userEmailValues: string[] = [];
+    const rowCount = await this.tableRows.count();
+    for (let index = 1; index < rowCount; index++) {
+      const columns = this.tableRows.nth(index).getByRole('cell');
+      const dateTimeValue = confirmStringNotNull(await columns.nth(0).textContent());
+      dateTimeValues.push(dateTimeValue);
+      const eventDescriptionValue = confirmStringNotNull(await columns.nth(1).textContent());
+      eventDescriptionValues.push(eventDescriptionValue);
+      const modificationIdValue = confirmStringNotNull(await columns.nth(2).textContent());
+      modificationIdValues.push(modificationIdValue);
+      const userEmailValue = confirmStringNotNull(await columns.nth(3).textContent());
+      userEmailValues.push(userEmailValue);
+    }
+    const auditProjectMap = new Map([
+      ['dateTimeValue', dateTimeValues],
+      ['eventDescriptionValue', eventDescriptionValues],
+      ['modificationIdValue', modificationIdValues],
+      ['userEmailValue', userEmailValues],
+    ]);
+    return auditProjectMap;
   }
 }

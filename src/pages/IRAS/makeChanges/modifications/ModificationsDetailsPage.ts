@@ -1,10 +1,14 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsDetailsPageTestData from '../../../../resources/test_data/iras/make_changes/modifications/modification_details_data.json';
+import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
+import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class ModificationsDetailsPage {
   readonly page: Page;
   readonly modificationsDetailsPageTestData: typeof modificationsDetailsPageTestData;
+  readonly linkTextData: typeof linkTextData;
+  readonly buttonTextData: typeof buttonTextData;
   readonly pageHeading: Locator;
   readonly removeModificationPageHeading: Locator;
   readonly removeModificationSuccessMessageText: Locator;
@@ -14,11 +18,37 @@ export default class ModificationsDetailsPage {
   readonly supporting_documents_sub_label: Locator;
   readonly add_summary_heading_label: Locator;
   readonly add_summary_sub_label: Locator;
+  readonly deleteModificationLink: Locator;
+  readonly remove_link: Locator;
+  readonly change_link: Locator;
+  readonly tab_links_container: Locator;
+  readonly sponsor_details_link: Locator;
+  readonly modification_details_link: Locator;
+  readonly documents_link: Locator;
+  readonly history_link: Locator;
+  readonly next_steps_heading: Locator;
+  readonly next_steps_guidance: Locator;
+  readonly next_steps_button: Locator;
+  readonly review_comment_heading: Locator;
+  readonly review_comment_show: Locator;
+  readonly review_comment_hide: Locator;
+  readonly review_comment_guidance: Locator;
+  readonly review_comment_box: Locator;
+  readonly review_outcome_heading: Locator;
+  readonly review_outcome_guidance: Locator;
+  readonly approved_outcome_option: Locator;
+  readonly not_approved_outcome_option: Locator;
+  readonly not_approved_comment_heading: Locator;
+  readonly not_approved_comment_guidance: Locator;
+  readonly not_approved_comment_box: Locator;
+  readonly save_continue_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.modificationsDetailsPageTestData = modificationsDetailsPageTestData;
+    this.linkTextData = linkTextData;
+    this.buttonTextData = buttonTextData;
 
     //Locators
     this.pageHeading = this.page.getByRole('heading', {
@@ -48,6 +78,68 @@ export default class ModificationsDetailsPage {
     this.add_summary_sub_label = this.page.getByText(
       modificationsDetailsPageTestData.Modification_Details_Label_Texts.add_summary_sub_label
     );
+    this.deleteModificationLink = this.page
+      .getByRole('link')
+      .getByText(this.linkTextData.Modification_Details_Page.Delete_Modification);
+    this.remove_link = this.page.getByRole('link').getByText(this.linkTextData.Modification_Details_Page.Remove);
+    this.change_link = this.page.getByRole('link').getByText(this.linkTextData.Modification_Details_Page.Change);
+    this.tab_links_container = this.page.getByTestId('main-content').locator('.govuk-service-navigation__list');
+    this.sponsor_details_link = this.tab_links_container
+      .getByRole('listitem')
+      .getByText(this.linkTextData.Modification_Details_Page.Sponsor_Details);
+    this.modification_details_link = this.tab_links_container
+      .getByRole('listitem')
+      .getByText(this.linkTextData.Modification_Details_Page.Modification_Details);
+    this.documents_link = this.tab_links_container
+      .getByRole('listitem')
+      .getByText(this.linkTextData.Modification_Details_Page.Documents);
+    this.history_link = this.tab_links_container
+      .getByRole('listitem')
+      .getByText(this.linkTextData.Modification_Details_Page.History);
+    this.next_steps_heading = this.page
+      .locator('.govuk-heading-m')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Details_Page.next_steps);
+    this.next_steps_guidance = this.page.getByText(
+      this.modificationsDetailsPageTestData.Modification_Details_Page.next_steps_guidance
+    );
+    this.next_steps_button = this.page
+      .getByRole('link')
+      .getByText(this.linkTextData.Modification_Details_Page.Continue);
+    this.review_comment_heading = this.page
+      .getByRole('heading')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Review_Outcome_Section.review_comment_heading);
+    this.review_comment_show = this.page
+      .locator('span[class="govuk-accordion__section-toggle-text"]')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Details_Page.review_comment_show);
+    this.review_comment_hide = this.page
+      .locator('span[class="govuk-accordion__section-toggle-text"]')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Details_Page.review_comment_hide);
+    this.review_comment_guidance = this.page
+      .getByRole('paragraph')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Review_Outcome_Section.review_comment_guidance);
+    this.review_comment_box = this.page.getByTestId('Comment');
+    this.review_outcome_heading = this.page
+      .getByRole('heading')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Review_Outcome_Section.review_outcome_heading);
+    this.review_outcome_guidance = this.page.getByText(
+      this.modificationsDetailsPageTestData.Modification_Review_Outcome_Section.review_outcome_guidance
+    );
+    this.approved_outcome_option = this.page.locator(
+      `input[value='${this.modificationsDetailsPageTestData.Modification_Review_Outcome_Section.approved_outcome_option}']`
+    );
+    this.not_approved_outcome_option = this.page.locator(
+      `input[value='${this.modificationsDetailsPageTestData.Modification_Review_Outcome_Section.not_approved_outcome_option}']`
+    );
+    this.not_approved_comment_heading = this.page
+      .getByRole('heading')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Not_Approved_Section.not_approved_comment_heading);
+    this.not_approved_comment_guidance = this.page
+      .getByRole('paragraph')
+      .getByText(this.modificationsDetailsPageTestData.Modification_Not_Approved_Section.not_approved_comment_guidance);
+    this.not_approved_comment_box = this.page.getByTestId('ReasonNotApproved');
+    this.save_continue_button = this.page
+      .getByRole('button')
+      .getByText(this.buttonTextData.Modification_Details_Page.Save_And_Continue);
   }
 
   //Page Methods
