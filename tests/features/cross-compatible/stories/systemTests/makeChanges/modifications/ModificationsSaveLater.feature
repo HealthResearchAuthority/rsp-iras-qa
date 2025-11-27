@@ -3194,3 +3194,73 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Examples:
       | Changes                           | New_Changes                              | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
+
+  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP_5495_5496_5285_6288_6324 @fail
+  Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modifiction post submission page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I fill the modification enter free text page using 'Valid_Data_All_Fields' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modification_Enter_Free_Text_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I capture the page screenshot
+    And I upload 'Multiple_Files' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files' in the add document details for specific document page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And I can see the 'supporting_documents_table' ui labels on the review all changes page
+    And I capture the page screenshot
+    And I download the document from supporting documents table
+    And I can see the list is sorted by default in the alphabetical order of the 'document type'
+    And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    And the 'Next' button will be 'available' to the user
+    And the 'Previous' button will be 'not available' to the user
+    And I capture the page screenshot
+    Then I sequentially navigate through each 'Review_All_Changes_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+    And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    And the 'Previous' button will be 'available' to the user
+    And the 'Next' button will be 'not available' to the user
+    And I capture the page screenshot
+    Then I sequentially navigate through each 'Review_All_Changes_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+
+    Examples:
+      | Navigation_Method |
+      | page number       |
+      | next link         |
