@@ -7,15 +7,24 @@ Then('I can see the modifications details page', async ({ modificationsDetailsPa
   await modificationsDetailsPage.assertOnModificationsDetailsPage();
 });
 
-Then('I can see the modifications details page in the readonly view', async ({ modificationsDetailsPage }) => {
-  await modificationsDetailsPage.assertOnModificationsDetailsPage();
-  await expect.soft(modificationsDetailsPage.deleteModificationLink).toBeHidden();
-  await expect.soft(modificationsDetailsPage.remove_link).toBeHidden();
-  await expect.soft(modificationsDetailsPage.change_link).toBeHidden();
-  await expect.soft(modificationsDetailsPage.next_steps_heading).toBeVisible();
-  await expect.soft(modificationsDetailsPage.next_steps_guidance).toBeVisible();
-  await expect.soft(modificationsDetailsPage.next_steps_button).toBeVisible();
-});
+Then(
+  'I can see the {string} modifications details page in the readonly view',
+  async ({ modificationsDetailsPage }, modType: string) => {
+    await modificationsDetailsPage.assertOnModificationsDetailsPage();
+    await expect.soft(modificationsDetailsPage.deleteModificationLink).toBeHidden();
+    await expect.soft(modificationsDetailsPage.remove_link).toBeHidden();
+    await expect.soft(modificationsDetailsPage.change_link).toBeHidden();
+    if (modType.toLowerCase() == 'reviewable') {
+      await expect.soft(modificationsDetailsPage.next_steps_heading).toBeVisible();
+      await expect.soft(modificationsDetailsPage.next_steps_guidance).toBeVisible();
+      await expect.soft(modificationsDetailsPage.next_steps_button).toBeVisible();
+    } else {
+      await expect.soft(modificationsDetailsPage.next_steps_heading).toBeHidden();
+      await expect.soft(modificationsDetailsPage.next_steps_guidance).toBeHidden();
+      await expect.soft(modificationsDetailsPage.next_steps_button).toBeHidden();
+    }
+  }
+);
 
 Then('I can see the confirm remove modifications page', async ({ modificationsDetailsPage }) => {
   await modificationsDetailsPage.assertOnRemoveModificationsPage();

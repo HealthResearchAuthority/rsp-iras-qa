@@ -20,7 +20,9 @@ export default class ConfirmationPage {
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
-    this.confirmation_header_common_label = this.page.getByRole('heading', { level: 2 });
+    this.confirmation_header_common_label = this.mainPageContent
+      .locator('.govuk-panel--confirmation')
+      .getByRole('heading');
     this.confirmation_header_label = this.mainPageContent
       .getByRole('heading', {
         name: confirmationPageTestData.add_remove_user_review_Body_confirmation_success_header_label,
