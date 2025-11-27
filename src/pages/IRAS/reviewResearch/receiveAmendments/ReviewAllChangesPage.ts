@@ -282,7 +282,7 @@ export default class ReviewAllChangesPage {
   }
 
   async assertOnReviewAllChangesPage() {
-    await expect(this.pageHeading).toBeVisible();
-    expect(await this.page.title()).toBe(this.reviewAllChangesPageTestData.Review_All_Changes_Page.title);
+    await expect.soft(this.pageHeading).toBeVisible();
+    expect.soft(await this.page.title()).toBe(this.reviewAllChangesPageTestData.Review_All_Changes_Page.title);
   }
 }
