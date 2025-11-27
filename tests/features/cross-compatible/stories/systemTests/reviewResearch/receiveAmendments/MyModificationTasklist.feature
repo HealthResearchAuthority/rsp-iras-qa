@@ -1,4 +1,4 @@
-@RegressionMyModificationsTasklist @Regression @RegressionReceiveAmendments @StudyWideReviewer @BackStage
+@RegressionMyModificationsTasklist @SystemTest @RegressionReceiveAmendments @StudyWideReviewer @BackStage
 Feature: Receive Amendments: My Modifications Tasklist page that displays modifications that have been assigned to me
 
     Background:

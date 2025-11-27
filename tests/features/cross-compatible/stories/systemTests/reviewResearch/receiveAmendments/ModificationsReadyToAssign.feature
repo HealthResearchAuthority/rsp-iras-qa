@@ -1,4 +1,4 @@
-@RegressionModificationsReadyToAssign @WorkFlowCoordinator @Regression @RegressionReceiveAmendments @BackStage
+@RegressionModificationsReadyToAssign @SystemTest @WorkFlowCoordinator @RegressionReceiveAmendments @BackStage
 Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
 
     @RegressionSearchFilterComboTasklist @rsp-4104 @rsp-4296
