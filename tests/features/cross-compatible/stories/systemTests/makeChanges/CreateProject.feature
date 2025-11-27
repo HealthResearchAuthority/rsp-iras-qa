@@ -127,6 +127,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -153,6 +156,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill todays date for planned project end date in project details title page
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -174,7 +180,7 @@ Feature: Create Amendment - Create Project
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I can see the project details title page
-    And I cannot see a 'Back' link on the 'Project_Details_Title_Page'
+    And I can see a 'Back' link on the 'Project_Details_Title_Page'
     And I capture the page screenshot
     Then I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -182,9 +188,6 @@ Feature: Create Amendment - Create Project
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I click the change link '<Change_Link_Field>' on review your answers page
     And I capture the page screenshot
@@ -196,7 +199,7 @@ Feature: Create Amendment - Create Project
 
     Examples:
       | Navigation_Button_Fourth | Project_Details_Title | Chief_Investigator    | Research_Locations    | Change_Link_Field |
-      | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     |
+      | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  |
 
   @rsp-1897 @rsp-4209
   Scenario Outline: Validate user is able to fill chief investigator page with valid data
@@ -205,6 +208,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -256,6 +262,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I can see the chief investigator page
@@ -266,14 +275,14 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Project_Details_Title | Chief_Investigator                     | Field_Error_Message                        | Summary_Error_Message                                |
-      | Valid_Data_All_Fields | Invalid_Data_Max_Character_Limit       | Field_Error_Max_Character_Limit_All_Fields | Summary_Error_Message_Max_Character_Limit_All_Fields |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot  | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Project_Details_Title | Chief_Investigator                     | Field_Error_Message     | Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot  | Field_Error_Chief_Email | Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email | Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email | Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email | Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email | Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Valid_Data_All_Fields | Invalid_Data_Max_Character_Limit                       | Field_Error_Max_Character_Limit_All_Fields | Summary_Error_Message_Max_Character_Limit_All_Fields |
       # | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
       # | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
       # | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email                    | Summary_Error_Message                                |
@@ -355,6 +364,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -375,6 +387,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -394,6 +409,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with '<Chief_Investigator>'
@@ -425,7 +443,6 @@ Feature: Create Amendment - Create Project
     Then I can see the project details iras page
     And I fill the existing iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
 
     Examples:
@@ -450,7 +467,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I validate the ui fields on project overview unfinished projects page
     And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -470,6 +487,9 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -478,7 +498,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_For_Later' button on the 'Chief_Investigator_Page'
     Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I validate the ui fields on project overview unfinished projects page
     And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -498,6 +518,9 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -509,7 +532,7 @@ Feature: Create Amendment - Create Project
     And I click the 'Save_For_Later' button on the 'Research_Locations_Page'
     Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I validate the ui fields on project overview unfinished projects page
     And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -519,7 +542,7 @@ Feature: Create Amendment - Create Project
     And I click the 'My_Research_Breadcrumb' link on the 'Project_Overview_Unfinished_Projects_Page'
     Then I can see the my research projects page
     And I capture the page screenshot
-    And I click the '<Project_Details>' link on the my research page
+    And I click on the short project title for the searched iras id from my research projects page
     Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
 
@@ -538,6 +561,9 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     And I capture the page screenshot
@@ -564,6 +590,9 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -609,6 +638,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -625,9 +657,6 @@ Feature: Create Amendment - Create Project
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with '<Project_Identifiers>'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers>' page
@@ -672,6 +701,9 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I can see the chief investigator page
@@ -954,7 +986,7 @@ Feature: Create Amendment - Create Project
     Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
     And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
-    And I can see the delete project confirmation page based on '<Project_Details_Title>' entered for short project title
+    And I can see the delete project confirmation page based on the short project title
     And I capture the page screenshot
     When I click the 'Keep_Project' button on the 'Confirmation_Page'
     Then I can see the project overview for unfinished projects page

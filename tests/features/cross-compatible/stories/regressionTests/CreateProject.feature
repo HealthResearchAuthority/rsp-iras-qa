@@ -260,7 +260,7 @@ Feature: Create Amendment - Create Project - Regression Tests
     Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
     And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
-    And I can see the delete project confirmation page based on '<Project_Details_Title>' entered for short project title
+    And I can see the delete project confirmation page based on the short project title
     And I capture the page screenshot
     When I click the 'Keep_Project' button on the 'Confirmation_Page'
     Then I can see the project overview for unfinished projects page

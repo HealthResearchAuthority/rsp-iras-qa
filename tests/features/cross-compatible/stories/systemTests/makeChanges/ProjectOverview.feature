@@ -37,7 +37,7 @@ Feature: Create Amendment - Project Overview
     And I can see the 'My_Research_Page'
     And I can see the '<Validation_Text_Research>' ui labels on the my research project page
     And I capture the page screenshot
-    And I click the '<Project_Details>' link on the my research page
+    And I click on the short project title for the searched iras id from my research projects page
     And I can see the project overview page
     And I capture the page screenshot
     And I can see the 'created' project details on project overview page for '<Project_Details>'

@@ -33,7 +33,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I click the 'Save_For_Later' button on the 'Review_Your_Answers_Page'
     Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I validate the ui fields on project overview unfinished projects page
     And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -77,7 +77,6 @@ Feature: Create Amendment - Create Project - Review your answers
 
     Examples:
       | Project_Details_Title       | Chief_Investigator    | Research_Locations    | Project_Identifiers   | Change_Link_Field | Project_Details_Title_Change    |
-      | Valid_Data_All_Fields       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Valid_Data_All_Fields_Two       |
       | Valid_Data_Only_Date_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Valid_Data_Only_Date_Fields_Two |
 
   @rsp-2837 @rsp-4209 @rsp-4868 @reviewAnswersChangeProjKeyRoles
@@ -198,8 +197,7 @@ Feature: Create Amendment - Create Project - Review your answers
 
     Examples:
       | Project_Details_Title       | Chief_Investigator          | Research_Locations          | Enter_Link_Field | Review_Answers             | Project_Details_Title_Enter | Project_Identifiers             |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Valid_Data_All_Fields       | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Valid_Data_Only_Date_Fields | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Valid_Data_Only_Date_Fields | Sponsor_Organisation_Text_Blank |
 
   @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersEnterKeyRoles
   Scenario Outline: Verify that user has not completed all questions and can enter project key roles details from review your answers page
@@ -320,7 +318,7 @@ Feature: Create Amendment - Create Project - Review your answers
 
     Examples:
       | Project_Details_Title | Chief_Investigator    | Research_Locations    | Change_Link_Field | Project_Identifiers   |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Valid_Data_All_Fields |
 
   @rsp-2837 @rsp-4868 @reviewAnswersNavigationKeyRoles
   Scenario Outline: Verify back navigation on chief investigator page from review your answers page
@@ -392,16 +390,16 @@ Feature: Create Amendment - Create Project - Review your answers
 
     Examples:
       | Project_Details_Title       | Chief_Investigator          | Research_Locations          | Enter_Link_Field | Review_Answers             | Project_Details_Title_Enter                 | Field_And_Summary_Error_Message | Project_Identifiers             |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_All_Fields                          | All_Field_Error_Message         | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Day_Number                          | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Date_Past                           | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Date_No_Day                         | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_All_Fields                          | All_Field_Error_Message         | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Day_Number                          | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Date_Past                           | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Date_No_Day                         | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date    | Enter_Links_Missing_Fields | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
 
   @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidations @KNOWN_DEFECT_RSP-5319
   Scenario Outline: Validate chief investigator email error messages when user redirected from review your answers page
@@ -499,16 +497,16 @@ Feature: Create Amendment - Create Project - Review your answers
 
     Examples:
       | Project_Details_Title | Chief_Investigator    | Research_Locations    | Change_Link_Field | Project_Details_Title_Enter                 | Field_And_Summary_Error_Message | Project_Identifiers   |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_All_Fields                          | All_Field_Error_Message         | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Day_Number                          | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Date_Past                           | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Date_No_Day                         | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_All_Fields                          | All_Field_Error_Message         | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Day_Number                          | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Date_Past                           | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Date_No_Day                         | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date     | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
 
   @rsp-2837 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidation_ChangeFlow @KNOWN_DEFECT_RSP-5319
   Scenario Outline: Validate error message for chief investigator email when user redirected from review your answers page - change flow
@@ -666,7 +664,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I capture the page screenshot
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
     And I capture the page screenshot
-    Then I validate 'Project_Record_Created_Labels' labels displayed in confirmation page for project created using the '<Project_Details_Title>' details
+    Then I validate 'Project_Record_Created_Labels' labels displayed in confirmation page for project created
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     And I capture the page screenshot

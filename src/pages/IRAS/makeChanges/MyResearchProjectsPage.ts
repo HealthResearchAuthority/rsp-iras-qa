@@ -19,7 +19,6 @@ export default class MyResearchProjectsPage {
   readonly status_title: Locator;
   readonly projectListRows: Locator;
   readonly listCell: Locator;
-  readonly titlelink: Locator;
   readonly next_button: Locator;
   readonly search: Locator;
   readonly short_project_title: Locator;
@@ -79,10 +78,6 @@ export default class MyResearchProjectsPage {
     });
     this.projectListRows = this.page.locator('tbody').getByRole('row');
     this.listCell = this.page.getByRole('cell');
-    this.titlelink = this.page.getByRole('link', {
-      name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.short_project_title_text,
-      exact: true,
-    });
     this.next_button = this.page.getByRole('button', {
       name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.next_button,
       exact: true,

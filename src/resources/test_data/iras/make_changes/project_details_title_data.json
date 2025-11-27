@@ -4,7 +4,7 @@
   },
   "Label_Texts": {
     "planned_end_date_textbox_label": "Planned project end date",
-    "planned_end_date_hint_label": "For example, 19 06 2025",
+    "planned_end_date_hint_label": "For example, 19 06 2030",
     "day_textbox_label": "Day",
     "month_dropdown_label": "Month",
     "year_textbox_label": "Year"

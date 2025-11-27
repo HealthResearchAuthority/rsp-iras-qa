@@ -71,19 +71,6 @@ Then(
 );
 
 Then(
-  'I click the {string} link on the my research page',
-  async ({ myResearchProjectsPage, projectDetailsTitlePage, projectDetailsIRASPage }, datasetName: string) => {
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    const shortProjectTitleData = dataset.short_project_title_text;
-    const irasidData = await projectDetailsIRASPage.getUniqueIrasId();
-    const foundRecords = await myResearchProjectsPage.findProjectLink(shortProjectTitleData, irasidData);
-    expect(foundRecords).toBeDefined();
-    expect(foundRecords).toHaveCount(1);
-    await foundRecords.locator(myResearchProjectsPage.titlelink).click();
-  }
-);
-
-Then(
   'I can see the project status as {string} on the my research page',
   async ({ myResearchProjectsPage, projectDetailsIRASPage }, statusValue: string) => {
     const dataset = myResearchProjectsPage.myResearchProjectsPageTestData[statusValue];

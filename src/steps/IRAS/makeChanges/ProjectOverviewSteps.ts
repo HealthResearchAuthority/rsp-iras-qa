@@ -38,7 +38,7 @@ Then(
       dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     }
-    const expectedProjectTitle = dataset.short_project_title_text;
+    const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     const projectTitle = confirmStringNotNull(await projectOverviewPage.project_overview_heading.textContent());
     const projectDetails = projectTitle.split('\n');
     const irasId = projectDetails[0].split(' ');
@@ -47,19 +47,6 @@ Then(
     const actualshortProjectTitle = shortProjectTitle.replace('Short project title: ', '');
     expect.soft(actualshortProjectTitle).toBe(expectedProjectTitle);
     expect.soft(actualIrasId).toBe(expectedIrasId);
-  }
-);
-
-Then(
-  'I can see the short project title on project overview page for {string}',
-  async ({ projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    const expectedProjectTitle = dataset.short_project_title_text;
-    const actualProjectTitle = confirmStringNotNull(await projectOverviewPage.project_short_title_label.textContent());
-    const actualProjectTitleUpdated = actualProjectTitle
-      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label, '')
-      .trim();
-    expect.soft(actualProjectTitleUpdated).toBe(expectedProjectTitle);
   }
 );
 
@@ -138,7 +125,7 @@ Then(
       dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     }
-    const expectedProjectTitle = dataset.short_project_title_text;
+    const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     const actualProjectTitle = confirmStringNotNull(
       await projectOverviewPage.project_details_tab_short_project_title.textContent()
     );
