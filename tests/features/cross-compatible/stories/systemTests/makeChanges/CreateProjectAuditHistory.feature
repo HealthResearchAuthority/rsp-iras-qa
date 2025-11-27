@@ -1,5 +1,5 @@
 @SystemTest @jsEnabled
-Feature: Audit history - Create project
+Feature: Create project - Audit history
 
     @rsp-5259 @AuditHistoryDraftProject @ApplicantUser
     Scenario: Verify that user can see the audit history for draft project on project overview history tab
