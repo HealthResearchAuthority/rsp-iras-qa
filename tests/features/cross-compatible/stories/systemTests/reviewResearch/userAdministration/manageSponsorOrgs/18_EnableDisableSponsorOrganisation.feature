@@ -57,7 +57,7 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
     Then I can see the sponsor organisation enabled successful message on manage sponsor organisation page
     And I capture the page screenshot
     Then I can see the 'Manage_Sponsor_Organisations_Page'
-    When I enter 'name of the previously added sponsor organisationT' into the search field
+    When I enter 'name of the previously added sponsor organisation' into the search field
     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     And I capture the page screenshot
     Then the system displays 'sponsor organisations' matching the search criteria

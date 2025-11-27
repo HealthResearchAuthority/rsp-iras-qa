@@ -160,7 +160,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and review
         And I capture the page screenshot
         And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
         And I capture the page screenshot
-        Then I can see the modifications assignment confirmation page for '<Study_Wide_Reviewer>'
+        Then I can see the modifications assignment confirmation page for '<Workflow_User>' with reviewer '<Study_Wide_Reviewer>'
         And I capture the page screenshot
         And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
         And I capture the page screenshot

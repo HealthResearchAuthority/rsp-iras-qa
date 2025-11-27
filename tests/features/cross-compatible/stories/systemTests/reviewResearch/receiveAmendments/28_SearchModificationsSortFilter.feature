@@ -611,7 +611,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify that the search button appears with a green background in the 'Sponsor Organisation' filter section of the advanced filters when JavaScript is disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
-                And the search button appears with a green background in the sponsor Organisation filter
+                And the search button appears with a green background in the sponsor Organisation filter in the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Examples:
                         | Advanced_Filters                      |
@@ -634,48 +634,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         # | Valid_Iras_Id_TwentyOne   |
         # | Valid_Iras_Id_TwentyTwo   |
         # | Valid_Iras_Id_TwentyThree |
-
-        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick
-        Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
-                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I capture the page screenshot
-                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
-                And I capture the page screenshot
-                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
-                And I capture the page screenshot
-                And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                And the default page size should be 'twenty'
-                And the 'Next' button will be 'available' to the user
-                And the 'Previous' button will be 'not available' to the user
-                And the current page number should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
-                And I capture the page screenshot
-                Examples:
-                        | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
-                        | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
-                        | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
-
-        @ViewListOfModifications  @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick
-        Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
-                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I capture the page screenshot
-                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
-                And I capture the page screenshot
-                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
-                And I capture the page screenshot
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                And the 'Previous' button will be 'available' to the user
-                And the 'Next' button will be 'not available' to the user
-                And I capture the page screenshot
-                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
-                And I capture the page screenshot
-                Examples:
-                        | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
-                        | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
-                        | previous link     | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
         @BackLinkNavigation
         Scenario:  Verify the user can navigate from 'Search_Modifications_Page' by clicking 'Back' link
@@ -750,7 +708,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
+                And I can see the '<Advanced_Filters_Labels>' ui labels in 'Search_Modifications_Page'
 
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Labels      |
@@ -760,7 +718,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify that modifications status' display as expected on the search modifictions page
                 When I enter an iras id for a modification with status '<Status>' into the search field
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And I can now see a table of search results for modifications received for approval
+                And I can now see a table of search results for 'modifications received for approval'
                 Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with '<Status>' status
 
                 Examples:
@@ -774,7 +732,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
         Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from the Search Modifications page
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot

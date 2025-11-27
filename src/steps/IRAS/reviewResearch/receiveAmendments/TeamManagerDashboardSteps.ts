@@ -97,3 +97,16 @@ Then(
     await teamManagerDashboardPage.saveIrasId(irasId.toString(), modificationCount);
   }
 );
+
+Then(
+  'I can see the {string} ui labels on the team manager dashboard page',
+  async ({ commonItemsPage, teamManagerDashboardPage }, datasetName: string) => {
+    const dataset = teamManagerDashboardPage.teamManagerDashboardPageTestData[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        const labelVal = await commonItemsPage.getUiLabel(key, teamManagerDashboardPage);
+        expect.soft(labelVal).toBe(dataset[key]);
+      }
+    }
+  }
+);
