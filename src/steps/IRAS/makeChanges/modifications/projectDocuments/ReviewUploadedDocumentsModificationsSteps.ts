@@ -104,12 +104,10 @@ Then(
       fileCount = fileCount + 1;
       if (fileCount < fileArray.length) {
         const fileName = path.basename(filePath);
-        const fieldLocator = reviewUploadedDocumentsModificationsPage.table.locator(
-          reviewUploadedDocumentsModificationsPage.rows.getByText(fileName)
-        );
+        const fieldLocator = reviewUploadedDocumentsModificationsPage.documentlink.getByText(fileName);
         const downloadPath = path.resolve(process.env.HOME || process.env.USERPROFILE || '', 'Downloads');
-        const actualFileNameArray = await fieldLocator.allTextContents();
-        const actualFileName = actualFileNameArray[0].trim();
+        const actualFileNameArray = await fieldLocator.innerText();
+        const actualFileName = actualFileNameArray.trim();
         const [download] = await Promise.all([page.waitForEvent('download'), fieldLocator.click()]);
         const suggestedFileName = download.suggestedFilename();
         const savedFilePath = path.join(downloadPath, suggestedFileName);

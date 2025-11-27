@@ -20,6 +20,7 @@ import {
 import { Locator } from 'playwright/test';
 import * as fs from 'node:fs';
 import path from 'node:path';
+import config from '../../../playwright.config';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -1162,7 +1163,8 @@ Then(
     if (
       pagename === 'My_Research_Projects_Page' ||
       pagename === 'Post_Approval_Page' ||
-      pagename === 'Sponsor_Org_User_List_Page'
+      pagename === 'Sponsor_Org_User_List_Page' ||
+      pagename === 'Review_All_Changes_Page'
     ) {
       totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
     } else {
@@ -1190,7 +1192,8 @@ Then(
     if (
       pagename == 'My_Research_Projects_Page' ||
       pagename === 'Post_Approval_Page' ||
-      pagename === 'Sponsor_Org_User_List_Page'
+      pagename === 'Sponsor_Org_User_List_Page' ||
+      pagename === 'Review_All_Changes_Page'
     ) {
       totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
     } else {
@@ -1376,18 +1379,20 @@ Then(
 
 Then(
   'I upload {string} documents',
-  async ({ commonItemsPage, reviewUploadedDocumentsModificationsPage }, uploadDocumentsDatasetName) => {
+  async ({ commonItemsPage, reviewUploadedDocumentsModificationsPage, $tags }, uploadDocumentsDatasetName) => {
     const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
     await commonItemsPage.upload_files_input.setInputFiles(documentPath);
-    if (typeof documentPath === 'string') {
-      const fileName = path.basename(documentPath);
-      await expect(commonItemsPage.page.getByText(fileName).first()).toBeVisible();
-    } else {
-      await expect(
-        commonItemsPage.page.getByText(
-          `${documentPath.length}` + commonItemsPage.commonTestData.uploaded_documents_counter_label
-        )
-      ).toBeVisible();
+    if ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) {
+      if (typeof documentPath === 'string') {
+        const fileName = path.basename(documentPath);
+        await expect(commonItemsPage.page.getByText(fileName).first()).toBeVisible();
+      } else {
+        await expect(
+          commonItemsPage.page.getByText(
+            `${documentPath.length}` + commonItemsPage.commonTestData.uploaded_documents_counter_label
+          )
+        ).toBeVisible();
+      }
     }
     const filePaths = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
     if (filePaths.length == 0) {
@@ -2137,3 +2142,26 @@ Then(
     }
   }
 );
+
+Then('I download the document from supporting documents table', async ({ modificationsCommonPage, page }) => {
+  const documentRows = modificationsCommonPage.documentRows;
+  const rowCount = 1;
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+    const actualFileName = (
+      await documentRows.nth(rowIndex).locator(modificationsCommonPage.fileNameCell).innerText()
+    ).trim();
+    const fileLocatorToDownload = modificationsCommonPage.documentRows
+      .nth(rowIndex)
+      .locator(modificationsCommonPage.fileNameCell)
+      .getByText(actualFileName);
+
+    const downloadPath = path.resolve(process.env.HOME || process.env.USERPROFILE || '', 'Downloads');
+    const [download] = await Promise.all([page.waitForEvent('download'), fileLocatorToDownload.click()]);
+
+    const suggestedFileName = download.suggestedFilename();
+    const savedFilePath = path.join(downloadPath, suggestedFileName);
+    await download.saveAs(savedFilePath);
+    const expectedFileName = path.basename(savedFilePath);
+    expect.soft(actualFileName).toBe(expectedFileName);
+  }
+});

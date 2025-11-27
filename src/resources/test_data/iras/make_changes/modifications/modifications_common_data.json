@@ -1744,5 +1744,9 @@
       ],
       "change_status": "Change ready for submission"
     }
+  },
+  "Missing_Document_Details_Notification": {
+    "notification_heading_text": "You cannot proceed whilst document details are incomplete",
+    "notification_text": "All documents must have the status 'Complete' before you can continue. For any documents with the status 'Incomplete', either select 'Change details' to add missing document details, or remove that document if it is no longer needed."
   }
 }
