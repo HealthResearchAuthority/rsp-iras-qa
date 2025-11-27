@@ -173,8 +173,8 @@ export default class ModificationsCommonPage {
     this.auditHistoryTableHeader = this.page.locator('#history table thead tr th');
     this.auditHistoryTableBodyRows = this.page.locator('#history tbody').getByRole('row');
     this.tableCell = this.page.locator('td');
-    this.notification_heading_text = this.page.locator('.govuk-heading-l');
-    this.notification_text = this.page.locator('p.govuk-body').nth(1);
+    this.notification_heading_text = this.page.getByRole('heading', { level: 1 });
+    this.notification_text = this.page.locator('p.govuk-body');
   }
 
   //Getters & Setters for Private Variables

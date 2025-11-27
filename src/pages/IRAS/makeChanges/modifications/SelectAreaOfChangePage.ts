@@ -25,7 +25,6 @@ export default class ModificationsSelectAreaOfChangePage {
   private _modification_id: string;
   readonly area_of_change_dropdown_all_options: Locator;
   readonly specific_change_dropdown_all_options: Locator;
-  readonly apply_selection_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -62,7 +61,6 @@ export default class ModificationsSelectAreaOfChangePage {
       name: this.linkTextData.Participating_Organisations_Page.Remove_This_Change,
       exact: true,
     });
-    this.apply_selection_button = this.page.locator('button', { hasText: 'Apply selection' });
   }
 
   //Page Methods
@@ -84,7 +82,7 @@ export default class ModificationsSelectAreaOfChangePage {
       if (Object.hasOwn(dataset, key)) {
         if (key === 'area_of_change_dropdown' || key === 'specific_change_dropdown') {
           if ($tags.includes('@jsDisabled') || !config.projects?.[1].use?.javaScriptEnabled) {
-            await this.apply_selection_button.click();
+            await commonItemsPage.clickButton('Select_Area_Of_Change_Page', 'Apply_Selection');
             await commonItemsPage.fillUIComponent(dataset, key, this);
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, this);
