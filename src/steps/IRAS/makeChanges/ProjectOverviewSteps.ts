@@ -24,18 +24,11 @@ Then(
 
 Then(
   'I can see the {string} project details on project overview page for {string}',
-  async (
-    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage },
-    projectType: string,
-    datasetName: string
-  ) => {
-    let dataset: any;
+  async ({ projectDetailsIRASPage, projectOverviewPage }, projectType: string, datasetName: string) => {
     let expectedIrasId: string;
     if (projectType.toLowerCase() == 'existing') {
-      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details;
-      expectedIrasId = dataset.iras_id;
+      expectedIrasId = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.iras_id;
     } else {
-      dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     }
     const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
@@ -110,19 +103,12 @@ Then(
 
 Then(
   'I validate the {string} data for {string} is displayed in the project details tab of project overview page',
-  async (
-    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage },
-    projectType: string,
-    datasetName: string
-  ) => {
-    let dataset: any;
+  async ({ projectDetailsIRASPage, projectOverviewPage }, projectType: string, datasetName: string) => {
     let expectedIrasId: string;
     await expect(projectOverviewPage.project_details_heading).toBeVisible();
     if (projectType.toLowerCase() == 'existing') {
-      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details;
-      expectedIrasId = dataset.iras_id;
+      expectedIrasId = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.iras_id;
     } else {
-      dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     }
     const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
