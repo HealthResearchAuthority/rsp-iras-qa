@@ -24,20 +24,18 @@
     "Project_Documents": "Project documents"
   },
   "Specific_Change_Options": {
-    "Default_Value": [
-      "Select specific change"
-    ],
+    "Default_Value": ["Select specific change"],
     "Participating_Organisation": [
       "Select specific change",
       "Early closure or withdrawal of research sites",
       "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
       "PICs - Early closure or withdrawal of Participant Identification Centres",
-      "Addition of sites undertaking the same activities as existing sites"
+      "Addition of sites undertaking the same activities as existing sites",
+      "Other change to participating organisations",
+      "Addition of new participating organisation type",
+      "Change to activities undertaken by an existing participating organisation type"
     ],
-    "Project_Design": [
-      "Select specific change",
-      "Change to planned end date"
-    ],
+    "Project_Design": ["Select specific change", "Change to planned end date"],
     "Project_Documents": [
       "Select specific change",
       "Correction of typographical errors",

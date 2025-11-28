@@ -78,7 +78,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Project_Design             | Default_Value   | Project_Design               | Modifications_Tile      |
       | Project_Documents          | Default_Value   | Project_Documents            | Modifications_Tile      |
 
-  @rsp-4038 @SelectAreaOfChangeModificationIdValidation @KNOWN_DEFECT-RSP-4997
+  @rsp-4038 @SelectAreaOfChangeModificationIdValidation
   Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -97,7 +97,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | New_Modification_Count | Modifications_Tile_Link |
       | Modification_Count     | Modifications_Tile      |
 
-  @rsp-4038 @SelectAreaOfChangeSaveLater @KNOWN_DEFECT-RSP-4997
+  @rsp-4038 @SelectAreaOfChangeSaveLater
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -155,40 +155,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @rsp-4039 @rsp-4065 @ParticipatingOrganisationSaveLater
-  Scenario Outline: Verify that user can save the modifications progress on search participating organisations page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the participating organisation page
-    And I capture the page screenshot
-    And I validate the guidance content displayed on modifications participating organisations page
-    And I capture the page screenshot
-    And I click the 'Save_For_Later' button on the 'Participating_Organisations_Page'
-    Then I can see the project overview page
-    And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
-
-    Examples:
-      | Area_Of_Change             | Specific_Change                                            |
-      | Participating_Organisation | Addition_Of_Sites_Option                                   |
-      | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   |
-      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |
-      | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option |
-
-  @rsp-4364 @ValidateSponsorReferenceModifications
+  @rsp-4364 @ValidateSponsorReferenceModifications @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Verify user is able to fill sponsor reference details for the modification
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -213,10 +180,10 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     # Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
 
     Examples:
-      | Changes              | Sponsor_Reference_Page |
-      | Multiple_Changes_One | Valid_Data_All_Fields  |
+      | Changes                                            | Sponsor_Reference_Page |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Valid_Data_All_Fields  |
 
-  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications
+  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Verify the save for later functionality for sponsor reference modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -311,7 +278,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Bulk_Free_Text_Single_Change_Other_Minor_Change_To_Participant_Procedures   | Participant_Procedures | Other_Minor_Change_To_Participant_Procedures | Valid_Data_All_Fields |
       | Bulk_Free_Text_Single_Chief_Investigator_Conflict_Of_Interest_Change_Edited | Project_Personnel      | Chief_Investigator_Conflict_Of_Interest      | Valid_Data_All_Fields |
 
-  @rsp-4094 @rsp-4095 @ModificationsJourneyEntireJourney @ModificationsToAddAdministrativeDetailsAndModifyDetails
+  @rsp-4094 @rsp-4095 @ModificationsJourneyEntireJourney @ModificationsToAddAdministrativeDetailsAndModifyDetails @KNOW_DEFECT_RSP_5669 @fail
   Scenario Outline: Validate that user can create modifications to add administrative details and modify the details from modification details page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -677,7 +644,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | NHS_HSC_Only               |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           |
 
-  @rsp-4108 @ValidateUiLabelsAffectedOrganisationQuestionsPage @KNOWN-DEFECT-RSP-4790
+  @rsp-4108 @ValidateUiLabelsAffectedOrganisationQuestionsPage @KNOWN_DEFECT_RSP_5747
   Scenario Outline: Validate ui labels on modifications affected organisation questions page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -715,7 +682,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Label_Texts_Nhs_Hsc               |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Label_Texts_Non_Nhs_Hsc           |
 
-  @rsp-4108 @SaveLaterAffectedOrganisationQuestionsPage @KNOWN-DEFECT-RSP-4786
+  @rsp-4108 @SaveLaterAffectedOrganisationQuestionsPage
   Scenario Outline: Verify that modifications progress successfully saved when user saves the record from affected organisation questions page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -757,7 +724,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Empty_Data_Non_Nhs             |
 
-  @rsp-4171 @rsp-4611 @CreateModificationsToChangePlannedEndDateAndReviewChanges @KNOWN-DEFECT-RSP-4795
+  @rsp-4171 @rsp-4611 @CreateModificationsToChangePlannedEndDateAndReviewChanges
   Scenario Outline: Create modifications for change planned end date and review the modifications details on review changes page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -802,7 +769,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Empty_Data_Non_Nhs             |
 
-  @rsp-4171 @rsp-4611 @SaveLaterReviewChangesPage @KNOWN-DEFECT-RSP-4795
+  @rsp-4171 @rsp-4611 @SaveLaterReviewChangesPage
   Scenario Outline: Verify that modifications progress successfully saved when user saves the record from review changes page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -845,7 +812,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields          |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country |
 
-  @rsp-4171 @ChangePlannedEndDateDataPersistenceValidations @KNOWN-DEFECT-RSP-4795
+  @rsp-4171 @ChangePlannedEndDateDataPersistenceValidations @KNOWN-DEFECT-RSP-5747 @fail
   Scenario Outline: Verify that system retains the data on all modifications pages when user navigates back from review changes page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -902,7 +869,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
 
-  @rsp-4171 @ModifyPlannedEndDateFromReviewChangesPage @KNOWN-DEFECT-RSP-4795
+  @rsp-4171 @ModifyPlannedEndDateFromReviewChangesPage @KNOWN-DEFECT-RSP-5747 @fail
   Scenario Outline: Verify that user can change the planned end date from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -956,7 +923,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Change_Field         | Planned_End_Date      | Planned_End_Date_Change      | Organisation_Change_Affect | Affected_Org_Questions |
       | New_Planned_End_Date | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
-  @rsp-4171 @ModifyAffectedOrganisationTypesFromReviewChangesPage @KNOWN-DEFECT-RSP-4795
+  @rsp-4171 @ModifyAffectedOrganisationTypesFromReviewChangesPage @KNOWN-DEFECT-RSP-4795 @looklater
   Scenario Outline: Verify that user can change the affected organisation types from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1008,7 +975,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Affected_Organisation_Types | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | NHS_HSC_Only                      | Valid_Data_All_Fields          | Valid_Data_All_Fields         |
       | Affected_Organisation_Types | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Non_NHS_HSC_Only           | NHS_HSC_Only                      | Valid_Data_Non_Nhs_All_Country | Valid_Data_All_Fields         |
 
-  @rsp-4171 @ModifyAffectedOrgQuestionsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795
+  @rsp-4171 @ModifyAffectedOrgQuestionsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795 @looklater
   Scenario Outline: Verify that user can change all affected organisation questions from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1061,7 +1028,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
-  @rsp-4271 @ModificationsDetailsSaveAndContinue
+  @rsp-4271 @ModificationsDetailsSaveAndContinue @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Validate that user can create modifications and navigate to add sponsor reference page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1090,7 +1057,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-  @rsp-4271 @ModificationsDetailsUnfinishedModification
+  @rsp-4271 @ModificationsDetailsUnfinishedModification @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Verify that system prevents the user to proceed further when modification details are unfinished
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1117,10 +1084,10 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
 
     Examples:
-      | Changes                                           |
-      | Changes_Planned_End_Date_Unfinished_Modifications |
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |
 
-  @rsp-4271 @rsp-5188 @ModificationsDetailsRemoveAllChanges
+  @rsp-4271 @rsp-5188 @ModificationsDetailsRemoveAllChanges @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Validate that user can remove all changes from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1149,10 +1116,10 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
 
     Examples:
-      | Changes                                           |
-      | Changes_Planned_End_Date_Unfinished_Modifications |
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |
 
-  @rsp-4271 @UpdateDetailsFromModificationsDetailsPage @KNOWN_DEFECT_RSP-5275
+  @rsp-4271 @UpdateDetailsFromModificationsDetailsPage @KNOWN_DEFECT_RSP-5275 @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Verify that user can update the details from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1188,7 +1155,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           | Change_Field         | Planned_End_Date_Change      |
       | Multiple_Changes_Planned_End_Date | New_Planned_End_Date | Valid_Data_All_Fields_Change |
 
-  @rsp-4271 @ModificationsDetailsSaveForLater
+  @rsp-4271 @ModificationsDetailsSaveForLater @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Verify that user can save the modification progress from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1214,97 +1181,6 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Examples:
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
-
-  @rsp-3876 @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
-  Scenario Outline: Validate the user is able to upload and review documents for modifications
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
-    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files_New>' documents
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    And I validate the uploaded '<Document_Upload_Files_New>' documents are listed along with size and delete option in the review uploaded documents page
-    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
-    And I click the 'Back' link on the 'Review_Uploaded_Document_Modifications_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    When I click the 'Save_For_Later' button on the 'Add_Document_Modifications_Page'
-    Then I can see the modification progress saved successful message on project overview page
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files | Document_Upload_Files_New  |
-      | Correction_Of_Typographical_Errors           | PNG_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | GIF_File              | PNG_File                   |
-      | Correction_Of_Typographical_Errors           | BMP_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | SVG_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | JPG_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | JPEG_File             | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | DOC_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | DOCX_File             | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | DOT_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | DOTX_File             | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | XLS_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | XLSX_File             | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | PDF_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | TXT_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | CSV_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | PPT_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | PPTX_File             | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | RTF_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | ODT_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | OFD_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | XPS_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | XML_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | HTML_File             | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | HTM_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | VCF_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | EML_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | MSG_File              | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | Multiple_Files        | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | Multiple_Files        | Multiple_Files             |
-      | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files             |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files        | GIF_File                   |
-      | GDPR_Wording                                 | Multiple_Files        | GIF_File                   |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files        | GIF_File                   |
-      | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                   |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                   |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                   |
-      | Correction_Of_Typographical_Errors           | MP4_File              | AVI_File                   |
-      | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files_Video_Valid |
-      | Correction_Of_Typographical_Errors           | AVI_File              | MP4_File                   |
-      | Correction_Of_Typographical_Errors           | MOV_File              | MKV_File                   |
-      | Correction_Of_Typographical_Errors           | MKV_File              | MOV_File                   |
-      | Correction_Of_Typographical_Errors           | MPG_File              | MPEG_File                  |
-      | Correction_Of_Typographical_Errors           | MPEG_File             | MPG_File                   |
-      | Correction_Of_Typographical_Errors           | WMV_File              | WEBM_File                  |
-      | Correction_Of_Typographical_Errors           | WEBM_File             | WMV_File                   |
 
   @rsp-5675 @rsp-4539 @SaveForLaterWithoutSelectingDocumentType @KNOWN-DEFECT-RSP-5091-6299 @fail
   Scenario Outline: Verify the user is able to save for later without selecting document type in the review your information page
@@ -1362,8 +1238,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
 
   @rsp-4539 @SaveForLaterSelectingOnlyDocumentType @KNOWN-DEFECT-RSP-5091
-  Scenario Outline: Verify the user is able to save for later after selecting only document type in the review your information page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
+  Scenario: Verify the user is able to save for later after selecting only document type in the review your information page
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -1375,16 +1251,14 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I upload '<Document_Upload_Files>' documents
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' for the created modification
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'PNG_File' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
     When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
-    And I can see the review your document information page
     And I can see document type guidance text next to each document type
     And I capture the page screenshot
     And I select a document type 'New_Valid_Document_Type' and validate the changes in review your information page
@@ -1395,19 +1269,9 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the project overview page
     And I capture the page screenshot
 
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
   @SaveForLaterWithoutSelectingDocumentDate @rsp-5261
   Scenario Outline: Verify the user is able to save for later without selecting document date in add document detail page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -1419,16 +1283,15 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I upload '<Document_Upload_Files>' documents
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' for the created modification
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'PNG_File' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
     And I capture the page screenshot
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     And I capture the page screenshot
@@ -1440,588 +1303,16 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                              | Document_Upload_Files | Document_Types_Mandatory                         |
-      | Correction_Of_Typographical_Errors           | PNG_File              | Protocol_Clinical_Investigation_Plan             |
-      | CRF_Other_Study_Data_Records                 | PNG_File              | Participant_Information_Sheet_PIS                |
-      | GDPR_Wording                                 | PNG_File              | Consent_form                                     |
-      | Other_Minor_Change_To_Study_Documents        | PNG_File              | Recruitment_Invitation_To_Potential_Participants |
-      | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      |
-      | Protocol_Non_Substantial_Changes             | PNG_File              | Interviews_Or_Focus_Group_Topic_Guides           |
-      | Translations_Addition_Of_Translated_Versions | PNG_File              | Questionnaire_Non_Validated                      |
+      | Document_Types_Mandatory                         | Version_Date |
+      | Protocol_Clinical_Investigation_Plan             | mandatory    |
+      | Participant_Information_Sheet_PIS                | mandatory    |
+      | Consent_form                                     | mandatory    |
+      | Recruitment_Invitation_To_Potential_Participants | mandatory    |
+      | Recruitment_Materials_Other                      | mandatory    |
+      | Interviews_Or_Focus_Group_Topic_Guides           | mandatory    |
+      | Questionnaire_Non_Validated                      | mandatory    |
 
-  @rsp-3889 @AddDetailsToUploadedDocumentsIncompleteStatus @KNOWN-DEFECT-RSP-5091
-  Scenario Outline: Verify the user is able to enter details for uploaded documents with incomplete status and review your information page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
-    And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
-    And I capture the page screenshot
-    And I validate the status of each document is 'Document_Status_Complete' in add document details page
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
-    And I capture the page screenshot
-    And I can see the review your document information page
-    And I capture the page screenshot
-    Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Review_Document_Infomation_Page'
-    And I can see the modification progress saved successful message on project overview page
-    And I can see the project overview page
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
-  @rsp-3889 @rsp-5280 @AddDetailsToUploadedDocumentsCompletedStatus @KNOWN-DEFECT-RSP-5091_5747 @fail
-  Scenario Outline: Verify the user is able to enter details for uploaded documents with completed status and review your information page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
-    And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
-    And I capture the page screenshot
-    And I validate the status of each document is 'Document_Status_Complete' in add document details page
-    And I click on the document link with status 'Document_Status_Complete' and enter 'New_Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
-    And I capture the page screenshot
-    And I can see the review your document information page
-    And I capture the page screenshot
-    Then I validate the field values 'New_Valid_Data_Fields' displayed in the review your document information page
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Review_Document_Infomation_Page'
-    And I can see the modification progress saved successful message on project overview page
-    And I can see the project overview page
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
-  @rsp-3889 @SaveAndContinueAfterMakingChanges @KNOWN-DEFECT-RSP-5091
-  Scenario Outline: Verify the user is able to change and save the updated document details after reaching the review your information page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
-    And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
-    And I capture the page screenshot
-    And I validate the status of each document is 'Document_Status_Complete' in add document details page
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
-    And I capture the page screenshot
-    And I can see the review your document information page
-    And I capture the page screenshot
-    Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
-    And I click on the document type change link next to each document and enter new 'New_Valid_Document_Type' in the add document details for the uploaded documents page
-    And I capture the page screenshot
-    And I click on the document version change link next to each document and enter new 'New_Valid_Document_Version' in the add document details for the uploaded documents page
-    And I capture the page screenshot
-    And I click on the document date change link next to each document and enter new 'New_Valid_Document_Date' and validate if 'New_Full_Valid_Document_Date' is displayed in the add document details for the uploaded documents page
-    And I capture the page screenshot
-    And I click on the document previously approved option change link next to each document and enter new 'New_Valid_Document_Previously_Approved_Value' in the add document details for the uploaded documents page
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Review_Document_Infomation_Page'
-    And I can see the modification progress saved successful message on project overview page
-    And I can see the project overview page
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
-  @rsp-3889 @SaveAndContinueWithoutMakingChanges @KNOWN-DEFECT-RSP-5091
-  Scenario Outline: Verify the user is able to save without changing and document details are retained after reaching the review your information page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
-    And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
-    And I capture the page screenshot
-    And I validate the status of each document is 'Document_Status_Complete' in add document details page
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
-    And I capture the page screenshot
-    And I can see the review your document information page
-    And I capture the page screenshot
-    Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
-    And I capture the page screenshot
-    And I click on the 'document_type' change link next to each document and click on save changes without making any change in the add document details for the uploaded documents page
-    And I capture the page screenshot
-    And I click on the 'document_version' change link next to each document and click on save changes without making any change in the add document details for the uploaded documents page
-    And I capture the page screenshot
-    And I click on the 'document_date' change link next to each document and click on save changes without making any change in the add document details for the uploaded documents page
-    And I capture the page screenshot
-    And I click on the 'previously_approved' change link next to each document and click on save changes without making any change in the add document details for the uploaded documents page
-    And I capture the page screenshot
-    Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
-    When I click the 'Save_Continue' button on the 'Review_Document_Infomation_Page'
-    And I can see the modification progress saved successful message on project overview page
-    And I can see the project overview page
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
-  @rsp-4314 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeOptionalDocumentVersionDate
-  Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are optional, for documents uploaded with an Incomplete status, and review the entered information
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
-    And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
-    And I capture the page screenshot
-    And I select document type '<Document_Types_Optional>' for which document version and date are '<Version_Date>' and I can see mandatory fields are displayed based on the selected document type
-    And I capture the page screenshot
-    And I enter document details for the uploaded documents using '<Document_Details_Info_Optional>' in the add document details for specific document page
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
-    And I capture the page screenshot
-    And I validate the status of each document is 'Document_Status_Complete' in add document details page
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
-    And I capture the page screenshot
-    And I can see the review your document information page
-    Then I validate the field values 'Valid_Data_All_Fields' displayed in the review your document information page
-    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
-    And I capture the page screenshot
-    And I can see the modification progress saved successful message on project overview page
-    And I can see the project overview page
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                                                                                       | Version_Date | Document_Details_Info_Optional          |
-      | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Evidence_Of_Insurance_Or_Indemnity                                                                            | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant_Facing_Material_Other                                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Questionnaire_Validated                                                                                       | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher                                                                 | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Student_Research_Criteria_Eligibility_Declaration                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Dear_Investigator_Letter                                                                                      | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Funder_Letters_Outcome_Of_Funding_Panel                                                                       | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Statisticians_Letter                                                                                          | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referees_Or_Other_Scientific_Critique_Report                                                                  | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Sponsor_Site_Agreement                                                                                        | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Schedule_Of_Events_Or_Schedule_Of_Events_Cost_Attribution_Template_SoECAT                                     | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Data_Flow_Diagram_Or_Documents_Demonstrating_Conformity_With_Data_Protection_And_Confidentiality_Requirements | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Miscellaneous                                                                                                 | optional     | Valid_Data_Fields_Optional_Version_Date |
-
-  @rsp-4314 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeMandatoryDocumentVersionDate
-  Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are mandatory, for documents uploaded with an Incomplete status, and review the entered information
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
-    And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
-    And I capture the page screenshot
-    And I select document type '<Document_Types_Mandatory>' for which document version and date are '<Version_Date>' and I can see mandatory fields are displayed based on the selected document type
-    And I capture the page screenshot
-    And I enter document details for the uploaded documents using 'Valid_Data_Fields_Mandatory_Version_Date' in the add document details for specific document page
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
-    And I capture the page screenshot
-    And I validate the status of each document is 'Document_Status_Complete' in add document details page
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
-    And I capture the page screenshot
-    And I can see the review your document information page
-    Then I validate the field values 'Valid_Data_All_Fields' displayed in the review your document information page
-    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
-    And I capture the page screenshot
-    And I can see the modification progress saved successful message on project overview page
-    And I can see the project overview page
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Mandatory                         | Version_Date |
-      | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Protocol_Clinical_Investigation_Plan             | mandatory    |
-      | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant_Information_Sheet_PIS                | mandatory    |
-      | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Consent_form                                     | mandatory    |
-      | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Recruitment_Invitation_To_Potential_Participants | mandatory    |
-      | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Recruitment_Materials_Other                      | mandatory    |
-      | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Interviews_Or_Focus_Group_Topic_Guides           | mandatory    |
-      | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Questionnaire_Non_Validated                      | mandatory    |
-      | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Participant_Diary_Sample                         | mandatory    |
-
-  @rsp-3876 @ValidateUploadDocumentsModificationsPageLabels @KNOWN_DEFECT_RSP-4801
-  Scenario Outline: Validate the ui labels displayed for upload documents pages in modifications
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the ui labels for add documents modifications page
-    Then I upload 'PNG_File' documents
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-
-    Examples:
-      | Specific_Change                              |
-      | Correction_Of_Typographical_Errors           |
-      | CRF_Other_Study_Data_Records                 |
-      | GDPR_Wording                                 |
-      | Other_Minor_Change_To_Study_Documents        |
-      | Post_Trial_Information_For_Participants      |
-      | Protocol_Non_Substantial_Changes             |
-      | Translations_Addition_Of_Translated_Versions |
-
-  @rsp-3876 @ValidateBackLinkRetainDocumentsInReviewUploadedDocumentPage @KNOWN_DEFECT_RSP-4801
-  Scenario Outline: Validate the user is able to see the previously uploaded documents in eview uploaded documents page after navigating away using back link
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    Then I upload 'PNG_File' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded 'PNG_File' documents are listed along with size and delete option in the review uploaded documents page
-    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
-    And I click the 'Back' link on the 'Review_Uploaded_Document_Modifications_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload 'GIF_File' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded 'PNG_File' documents are listed along with size and delete option in the review uploaded documents page
-    And I validate the uploaded 'GIF_File' documents are listed along with size and delete option in the review uploaded documents page
-    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
-
-    Examples:
-      | Specific_Change                              |
-      | Correction_Of_Typographical_Errors           |
-      | CRF_Other_Study_Data_Records                 |
-      | GDPR_Wording                                 |
-      | Other_Minor_Change_To_Study_Documents        |
-      | Post_Trial_Information_For_Participants      |
-      | Protocol_Non_Substantial_Changes             |
-      | Translations_Addition_Of_Translated_Versions |
-
-  @rsp-3888 @DeleteAllDocumentsModification
-  Scenario Outline: Validate the user is able to delete all documents after uploading
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    And I capture the page screenshot
-    And I click the 'Delete_All' link on the 'Documents_Added_For_Change_Page'
-    Then I can see the delete multiple documents confirmation page
-    And I capture the page screenshot
-    And I click the 'Delete_Documents' button on the 'Confirmation_Page'
-    And I capture the page screenshot
-    Then I can see the add documents for '<Specific_Change>' page
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
-  @rsp-3888 @DeleteDocumentsOneByOneInModification
-  Scenario Outline: Validate the user is able to delete documents one by one from documents added for page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    And I delete the documents one by one from the documents added page of '<Specific_Change>' modifications in reference to the uploaded '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    Then I can see the add documents for '<Specific_Change>' page
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    And I capture the page screenshot
-    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
-  @rsp-3888 @DeleteDocumentsOneByOneFromAddDocumentDetailsModification
-  Scenario Outline: Validate the user is able to delete documents from add document details page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and delete the uploaded document in the add document details for specific document page
-    Then I can see the add documents for '<Specific_Change>' page
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
-  @rsp-4980 @ContactDetailsModificationChangeLinks
+  @rsp-4980 @ContactDetailsModificationChangeLinks @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario Outline: Validate that user can update the saved contact details modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2080,7 +1371,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Name_Text                | Contact_Name_Change                               | Contact_Details_Other_Page              |
       | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Email_Text               | Contact_Email_Change                              | Contact_Details_Other_Page              |
 
-  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
+  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario: Verify that save for later functionalities and page labels for contact details modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -2152,7 +1443,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
-  @rsp-4980 @ValidateEnterLinksOnReviewAnswersPageContactDetails
+  @rsp-4980 @ValidateEnterLinksOnReviewAnswersPageContactDetails @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario Outline: Validate the enter links on review your answers page for contact details modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2185,7 +1476,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Empty_Data_Other_Contact_All_Fields   | Other_Contact_Name       | Contact_Details_Other_Page              |
       | Empty_Data_Other_Contact_All_Fields   | Other_Contact_Email      | Contact_Details_Other_Page              |
 
-  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationChangeLinks
+  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationChangeLinks @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario Outline: Validate that user can update the saved chief investigator modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2243,7 +1534,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | Chief_Investigator_Email | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
       | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | Name_Text                | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationsLabelsAndSaveForLater
+  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario: Verify that save for later functionalities and page labels for project personnel change chief investigator modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -2304,7 +1595,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
-  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangeChiefInvestigator
+  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangeChiefInvestigator @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario Outline: Validate the enter links on review your answers page for project personnel new chief investigator modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2337,7 +1628,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Empty_Data_Temporary_Arrangement_All_Fields    | Chief_Investigator       | Project_Personnel_Temporary_Arrangement_Page |
       | Empty_Data_Temporary_Arrangement_All_Fields    | Name_Text                | Project_Personnel_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationChangeLinks
+  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationChangeLinks @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario Outline: Validate that user can update the saved principal investigator modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2395,7 +1686,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data | Principal_Investigator_Email | Principal_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data | Name_Text                    | Principal_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationsLabelsAndSaveForLater
+  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario: Verify that save for later functionalities and page labels for project personnel change principal investigator modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -2455,7 +1746,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
-  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangePrincipalInvestigator
+  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangePrincipalInvestigator @KNOWN_DEFECT_RSP_6409_5645 @fail
   Scenario Outline: Validate the enter links on review your answers page for project personnel new principal investigator modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2559,7 +1850,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click on the document link with status 'Document_Status_Incomplete' and download the uploaded document in the add document details for specific document page
     And I capture the page screenshot
 
-  @rsp-5341 @ValidateChangesAndModificationAdditionAndDeletionInStatusIndraft
+  @rsp-5341 @ValidateChangesAndModificationAdditionAndDeletionInStatusIndraft @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Validate changes can be added or removed and modification can be deleted when the modification is in draft status
     Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2623,158 +1914,6 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Primary_Change                           | Secondary_Change                                       |
       | Change_To_Planned_End_Date               | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
       | Other_Minor_Change_To_Project_Management | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One     |
-
-  @rsp-5341 @ValidateDocumentsAdditionAndDeletionInStatusIndraft
-  Scenario Outline: Validate the user is able to add and delete documents when the modification is in draft status
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the modification progress saved successful message on project overview page
-    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
-    And I click on the modification id hyperlink in the post approval tab
-    And I can see the modifications details page
-    When I click the 'Add_Another_Change' button on the 'Modification_Details_Page'
-    And I can see the select area of change page
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    And I delete the documents one by one from the documents added page of '<Specific_Change>' modifications in reference to the uploaded '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    And I capture the page screenshot
-    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                              | Document_Upload_Files |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-      | GDPR_Wording                                 | Multiple_Files_Three  |
-      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-      | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
-  @rsp-5341 @ValidateModificationStatusesInDraftAndWithSponsor
-  Scenario Outline: Validate modification status transition from in draft to with sponsor for reviewable and non reviewable modifications
-    Then I fill the research locations page with 'Nhs_Involvement_Yes'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I create '<Changes>' for the created modification
-    When I click the 'Save_For_Later' button on the 'Modification_Details_Page'
-    Then I can see the project overview page
-    And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
-    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
-    Then I validate submitted date field value for 'Modification_Status_Indraft' modifications and confirm 'In draft' status
-    And I capture the page screenshot
-    And I click on the modification id hyperlink in the post approval tab
-    And I can see the modifications details page
-    And I validate the project information labels using dataset displayed on modifications page
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    Then I can see the add sponsor reference page
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    Then I can see the review all changes modifications page
-    And I validate the project information labels using dataset displayed on modifications page
-    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I click the 'Return_To_Project_Overview' button on the 'Modification_Sent_To_Sponsor_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    Then I can see the modification status as 'Modification_Status_With_Sponsor' on the post approval page
-    And I capture the page screenshot
-    And I click on the modification id hyperlink in the post approval tab
-    Then I can see the review all changes modifications page
-    And the 'Delete_Modification' link should be 'not available' on the 'Review_All_Changes_Page'
-    And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-    And I capture the page screenshot
-
-    Examples:
-      | Changes                                                            |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One             |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two                 |
-      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable |
-
-  @rsp-5341 @ValidateModificationStatusesInDraftAndWithRegulator
-  Scenario Outline: Validate modification status transition from in draft to with regulator for reviewable modification and combination of reviewable non reviewable modifications
-    Then I fill the research locations page with 'Nhs_Involvement_Yes'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I create '<Changes>' for the created modification
-    When I click the 'Save_For_Later' button on the 'Modification_Details_Page'
-    Then I can see the project overview page
-    And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
-    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
-    Then I validate submitted date field value for 'Modification_Status_Indraft' modifications and confirm 'In draft' status
-    And I capture the page screenshot
-    And I click on the modification id hyperlink in the post approval tab
-    And I can see the modifications details page
-    And I validate the project information labels using dataset displayed on modifications page
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    Then I can see the add sponsor reference page
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    Then I can see the review all changes modifications page
-    And I validate the project information labels using dataset displayed on modifications page
-    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I click the 'Submit_To_Regulator' button on the 'Modification_Sent_To_Sponsor_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    Then I can see the modification status as 'Modification_Status_With_Review_Body' on the post approval page
-    And I capture the page screenshot
-    And I click on the modification id hyperlink in the post approval tab
-    Then I can see the review all changes modifications page
-    And the 'Delete_Modification' link should be 'not available' on the 'Review_All_Changes_Page'
-    And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
-    And I capture the page screenshot
-
-    Examples:
-      | Changes                                                            |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two                 |
-      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable |
 
   @rsp-5342 @ProjectDocumentsTabStatusReviewable
   Scenario Outline: Validate that user can create and submit reviewable modifications with documents and validate the status of the documents in Project documents tab
@@ -2985,7 +2124,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                                                | Research_Locations  |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One | Nhs_Involvement_Yes |
 
-  @rsp-5573 @ValidateModificationRankingsPostApproval @KNOWN_DEFECT_RSP_6277
+  @rsp-5573 @ValidateModificationRankingsPostApproval @KNOWN_DEFECT_RSP_6277 @fail
   Scenario: Verify that an applicant user can access the post approval tab to view all modification records, apply sorting on the list
     Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -3026,7 +2165,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     And I can see the list of modifications submitted for sponsor approval is sorted by 'ascending' order of the 'category'
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation @KNOWN_DEFECT_RSP-5184
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation @KNOWN_DEFECT_RSP_5495_5408_5285_5184 @fail
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till send modification to sponsor confirmation page and return to project overview page from there
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -3083,7 +2222,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @SaveForLaterFromReviewAllChangesPage @KNOWN_DEFECT_RSP-5324 @KNOWN_DEFECT_RSP-5184 @KNOWN_DEFECT_RSP-5317
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @SaveForLaterFromReviewAllChangesPage @KNOWN_DEFECT_RSP-5324 @KNOWN_DEFECT_RSP-5184 @fail
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till review all changes page and save for later from there
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -3127,7 +2266,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ModifyCurrentChangesInReviewAllChangesPage @KNOWN_DEFECT_RSP-5184 @KNOWN_DEFECT_RSP-5317
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ModifyCurrentChangesInReviewAllChangesPage @KNOWN_DEFECT_RSP-5184 @fail
   Scenario Outline: Validate that user can create modification with multiple changes and modify current changes in review all changes page by clicking change link link from there
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
