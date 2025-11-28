@@ -604,3 +604,12 @@ When(
     expect.soft(confirmArrayNotNull(actualProjectAuditLog.get('userEmailValue'))[index]).toBe(userEmailExpected);
   }
 );
+
+Then(
+  'I click on the modification id hyperlink in the project documents tab',
+  async ({ modificationsCommonPage, commonItemsPage }) => {
+    const modificationIDExpected = await modificationsCommonPage.getModificationID();
+    await commonItemsPage.govUkLink.getByText(modificationIDExpected).click();
+    await modificationsCommonPage.page.waitForLoadState('domcontentloaded');
+  }
+);

@@ -494,9 +494,6 @@ export default class ProjectOverviewPage {
       exact: true,
     });
     this.action_header = this.page.locator('th');
-    this.action_project_documents = this.action_header.getByText(
-      this.projectOverviewPageTestData.Project_Documents_Tab.action_project_documents
-    );
     this.search_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.search_project_documents.trim(),
       exact: true,
