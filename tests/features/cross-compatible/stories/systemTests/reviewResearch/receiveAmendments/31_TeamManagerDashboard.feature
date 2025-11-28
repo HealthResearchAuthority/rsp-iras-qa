@@ -1,5 +1,5 @@
 @ReceiveAmendments @TeamManagerDashboard @TeamManagerDashboardSortFilter @SystemTest @TeamManager @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132
-Feature: Receive Amendments: Team Manager Dashboard page that displays modifications that are in the process of being reviewed
+Feature: Team Manager Dashboard page
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)

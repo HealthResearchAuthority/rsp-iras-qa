@@ -1,5 +1,5 @@
 @ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest
-Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
+Feature: WFC - Modifications Tasklist page
 
     @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed
     Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation

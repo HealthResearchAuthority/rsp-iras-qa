@@ -1,6 +1,5 @@
 @ReceiveAmendments @MyModificationsTasklist @SystemTest @StudyWideReviewer
-Feature: Receive Amendments: My Modifications Tasklist page that displays modifications that have been assigned to me
-
+Feature: SWR - My Modifications Tasklist page
     Background:
         Given I have navigated to the 'Approvals_Page'
         And I click the 'My_Tasklist' link on the 'Approvals_Page'
