@@ -47,7 +47,7 @@ Feature: Team Manager Dashboard page
                         | Status                           | User   | Visibility |
                         | Modification_Status_Not_Approved | nobody | cannot     |
 
-        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @skip
+        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @Test
         Scenario Outline: Verify the team manger is able to view existing list of modifications for a specific lead nation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
@@ -147,7 +147,7 @@ Feature: Team Manager Dashboard page
                         | Days_From_Multi   | With review body |
                         | Days_To_Multi     | With review body |
 
-        @searchFilterComboTMDashboard @rsp-5122 @rsp-5125 @skip
+        @searchFilterComboTMDashboard @rsp-5122 @rsp-5125 @Test
         Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the team manager dashboard
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -278,7 +278,7 @@ Feature: Team Manager Dashboard page
                         | Invalid_Date_To                   | Invalid_Date_To_Error                     |
                         | Invalid_Date_From_Days_From       | Date_Days_Simultaneous_Summary_Only_Error |
 
-        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909 @Test
+        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909
         Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -533,7 +533,7 @@ Feature: Team Manager Dashboard page
                         | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
                         | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @skip
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @Test
         Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
                 Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
                 And I capture the page screenshot
@@ -579,7 +579,7 @@ Feature: Team Manager Dashboard page
                         | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
                         | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland @fail @skip
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland @fail @Test
         Scenario Outline: Validate whether disabled study-wide reviewer is not displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
                 Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
                 And I capture the page screenshot

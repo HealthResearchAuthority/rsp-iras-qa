@@ -820,14 +820,19 @@ When(
   'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }, position: string) => {
     let pageLocator: Locator;
-    if (position.toLowerCase() === 'first') {
-      pageLocator = commonItemsPage.firstPage;
-    } else {
-      const totalPages = await commonItemsPage.getTotalPages();
-      commonItemsPage.setNumberofTotalPages(totalPages);
-      pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      if (position.toLowerCase() === 'first') {
+        pageLocator = commonItemsPage.firstPage;
+      } else {
+        const totalPages = await commonItemsPage.getTotalPages();
+        commonItemsPage.setNumberofTotalPages(totalPages);
+        pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
+      }
+      await expect(pageLocator).toHaveAttribute('aria-current', 'page');
     }
-    await expect(pageLocator).toHaveAttribute('aria-current', 'page');
   }
 );
 

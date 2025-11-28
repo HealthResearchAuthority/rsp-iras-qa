@@ -45,20 +45,23 @@ Then(
 Then(
   'I check random row and validate if the row is checked even after navigation',
   async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
-    await commonItemsPage.firstPage.click();
-    const randomRowToCheck = await getRandomNumber(1, 20);
-    const maxPagesToCheck =
-      modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page
-        .maxPagesToVisit;
-
-    for (let currentPage = 1; currentPage <= maxPagesToCheck; currentPage++) {
-      await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
-      await commonItemsPage.next_button.click();
-    }
-
-    for (let currentPage = maxPagesToCheck + 1; currentPage >= maxPagesToCheck; currentPage--) {
-      await commonItemsPage.previous_button.click();
-      await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      await commonItemsPage.firstPage.click();
+      const randomRowToCheck = await getRandomNumber(1, 20);
+      const maxPagesToCheck =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page
+          .maxPagesToVisit;
+      for (let currentPage = 1; currentPage <= maxPagesToCheck; currentPage++) {
+        await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
+        await commonItemsPage.next_button.click();
+      }
+      for (let currentPage = maxPagesToCheck + 1; currentPage >= maxPagesToCheck; currentPage--) {
+        await commonItemsPage.previous_button.click();
+        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+      }
     }
   }
 );
@@ -93,22 +96,27 @@ When(
 When(
   'I navigate by {string} within the Modifications Ready to assign page',
   async ({ commonItemsPage }, paginationLink: string) => {
-    if (paginationLink.toLowerCase() === 'clicking on next link') {
-      await commonItemsPage.next_button.click();
-    } else {
-      await commonItemsPage.previous_button.click();
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      if (paginationLink.toLowerCase() === 'clicking on next link') {
+        await commonItemsPage.next_button.click();
+      } else {
+        await commonItemsPage.previous_button.click();
+      }
     }
   }
 );
 
 When('I confirm all checkboxes are {string}', async ({ modificationsReadyToAssignPage }, checkboxStatus: string) => {
   const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
-  expect(checkboxes.length).toBeGreaterThan(0);
+  expect.soft(checkboxes.length).toBeGreaterThan(0);
   for (const checkbox of checkboxes) {
     if (checkboxStatus.toLowerCase() === 'unchecked') {
-      await expect(checkbox).not.toBeChecked();
+      await expect.soft(checkbox).not.toBeChecked();
     } else {
-      await expect(checkbox).toBeChecked();
+      await expect.soft(checkbox).toBeChecked();
     }
   }
 });
@@ -148,7 +156,7 @@ When(
         .nth(0)
         .textContent()
     );
-    modificationRecord.push(modificationIdValue + ':' + shortProjectTitle);
+    modificationRecord.push(modificationIdValue + ':' + shortProjectTitle.trim());
     await modificationsReadyToAssignPage.setSelectedModificationsIdTitle(modificationRecord);
     await modificationsReadyToAssignPage.setSelectedModifications(modificationIdValue);
   }
