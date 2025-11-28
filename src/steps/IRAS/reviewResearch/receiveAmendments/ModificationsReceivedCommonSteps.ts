@@ -379,13 +379,16 @@ Then(
         .getByText(`${await modificationsReceivedCommonPage.getModificationId()}`, { exact: true }),
     });
     await modificationsReceivedCommonPage.setRowLocator(rowLocator);
-
     if (visibility.toLowerCase() == 'cannot') {
-      expect.soft(rowLocator).toBeHidden();
+      if (await commonItemsPage.tableRows.isVisible()) {
+        await expect.soft(rowLocator).toBeHidden();
+      } else {
+        await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
+      }
     } else {
+      await expect.soft(rowLocator).toBeVisible();
       const statusColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, 'status');
       const actualStatus = await rowLocator.getByRole('cell').nth(statusColumnIndex).textContent();
-      expect.soft(rowLocator).toBeVisible();
       expect.soft(actualStatus).toEqual(statusExpected);
     }
   }

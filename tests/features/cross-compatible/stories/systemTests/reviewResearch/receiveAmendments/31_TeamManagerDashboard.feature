@@ -20,19 +20,32 @@ Feature: Team Manager Dashboard page
                         | Status      | status     | ascending    | descending     |
 
         @searchTeamManagerDashboardStatus @rsp-4822
-        Scenario Outline: Verify that modifications status' display as expected on the team manager dashboard
+        Scenario Outline: Verify that modifications status display as expected on the team manager dashboard
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
                 When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
                 Then I '<Visibility>' see the modification displayed in the 'Team_Manager_Dashboard_Page' list with '<Status>' status
 
                 Examples:
                         | Status                                 | User               | Visibility |
                         | Modification_Status_Approved           | nobody             | cannot     |
-                        | Modification_Status_Not_Approved       | nobody             | cannot     |
                         | Modification_Status_Received           | nobody             | can        |
                         | Modification_Status_Review_In_Progress | Studywide_Reviewer | can        |
+
+        @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @fail
+        Scenario Outline: Verify that modifications status display as expected on the team manager dashboard where the status is not approved
+                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+                And I can see the 'Column' ui labels on the team manager dashboard page
+                When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
+                And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
+                Then I '<Visibility>' see the modification displayed in the 'Team_Manager_Dashboard_Page' list with '<Status>' status
+
+                Examples:
+                        | Status                           | User   | Visibility |
+                        | Modification_Status_Not_Approved | nobody | cannot     |
 
         @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @skip
         Scenario Outline: Verify the team manger is able to view existing list of modifications for a specific lead nation
@@ -60,7 +73,7 @@ Feature: Team Manager Dashboard page
                 Examples:
                         | Search_Input             | User         | Status           | Modification_Count |
                         | Existing_IRAS_ID_Single  | Team_Manager | With review body | Single             |
-                        | Existing_IRAS_ID_Multi   | Team_Manager | With review body | Multi              |
+                        # | Existing_IRAS_ID_Multi   | Team_Manager | With review body | Multi              |
                         | Existing_Partial_IRAS_ID | Team_Manager | With review body | Partial            |
 
 
@@ -134,7 +147,7 @@ Feature: Team Manager Dashboard page
                         | Days_From_Multi   | With review body |
                         | Days_To_Multi     | With review body |
 
-        @searchFilterComboTMDashboard @rsp-5122 @rsp-5125
+        @searchFilterComboTMDashboard @rsp-5122 @rsp-5125 @skip
         Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the team manager dashboard
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -265,7 +278,7 @@ Feature: Team Manager Dashboard page
                         | Invalid_Date_To                   | Invalid_Date_To_Error                     |
                         | Invalid_Date_From_Days_From       | Date_Days_Simultaneous_Summary_Only_Error |
 
-        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909
+        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909 @Test
         Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot

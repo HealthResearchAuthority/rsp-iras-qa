@@ -206,8 +206,12 @@ WHERE
     AND NationQuery.IrasIdCount ${countValue} 1
 ORDER BY NationQuery.CreatedDate DESC;
 `);
-
     await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(
+        `No suitable modification found in the system with ${leadNationOption} lead nation and ${status} status and ${countValue}`
+      );
+    }
     return queryResult.recordset.map((row) => row.IrasId);
   }
 
