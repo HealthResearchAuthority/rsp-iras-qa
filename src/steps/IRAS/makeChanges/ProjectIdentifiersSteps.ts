@@ -74,7 +74,7 @@ Then(
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         if (key === 'primary_sponsor_organisation_text') {
-          expect(await projectIdentifiersPage.primary_sponsor_organisation_filled_text.getAttribute('value')).toBe(
+          expect(await projectIdentifiersPage.primary_sponsor_organisation_filled_text.textContent()).toBe(
             dataset[key]
           );
         } else {

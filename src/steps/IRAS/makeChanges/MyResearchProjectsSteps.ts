@@ -71,19 +71,6 @@ Then(
 );
 
 Then(
-  'I click the {string} link on the my research page',
-  async ({ myResearchProjectsPage, projectDetailsTitlePage, projectDetailsIRASPage }, datasetName: string) => {
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    const shortProjectTitleData = dataset.short_project_title_text;
-    const irasidData = await projectDetailsIRASPage.getUniqueIrasId();
-    const foundRecords = await myResearchProjectsPage.findProjectLink(shortProjectTitleData, irasidData);
-    expect(foundRecords).toBeDefined();
-    expect(foundRecords).toHaveCount(1);
-    await foundRecords.locator(myResearchProjectsPage.titlelink).click();
-  }
-);
-
-Then(
   'I can see the project status as {string} on the my research page',
   async ({ myResearchProjectsPage, projectDetailsIRASPage }, statusValue: string) => {
     const dataset = myResearchProjectsPage.myResearchProjectsPageTestData[statusValue];
@@ -91,22 +78,9 @@ Then(
     const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     const projectRecord = await myResearchProjectsPage.getProjectDetails(expectedIrasId);
     const actualIrasId = projectRecord.get('displayedIrasId');
-    expect.soft(actualIrasId[0]).toBe(expectedIrasId);
+    expect.soft(actualIrasId).toBe(expectedIrasId);
     const actualStatus = projectRecord.get('displayedStatusValue');
-    expect.soft(actualStatus[0]).toBe(expectedStatus);
-  }
-);
-
-Then(
-  'I click on the respective {string} on the my research page',
-  async ({ myResearchProjectsPage, projectDetailsIRASPage }, datasetName: string) => {
-    const projectTitle = myResearchProjectsPage.myResearchProjectsPageTestData[datasetName];
-    const shortProjectTitle = projectTitle.short_project_title;
-    const irasId = await projectDetailsIRASPage.getUniqueIrasId();
-    const foundRecords = await myResearchProjectsPage.findProjectLink(shortProjectTitle, irasId);
-    expect(foundRecords).toBeDefined();
-    expect(foundRecords).toHaveCount(1);
-    await foundRecords.locator(myResearchProjectsPage.short_project_title).click();
+    expect.soft(actualStatus).toBe(expectedStatus);
   }
 );
 

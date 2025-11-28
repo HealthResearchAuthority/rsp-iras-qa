@@ -32,7 +32,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I validate the field values with '<Project_Details_Title>' on select area of change page
+    And I validate the field values on select area of change page
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -146,7 +146,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I can see the participating organisation page
     And I can see the page heading is changed for '<Specific_Change>' on participating organisation page
     And I capture the page screenshot
-    And I validate the ui lables and field values with '<Project_Details_Title>' on participating organisation page
+    And I validate the ui lables and field values on the participating organisation page
 
     Examples:
       | Area_Of_Change             | Specific_Change                                            | Project_Details_Title | Modifications_Tile_Link |
