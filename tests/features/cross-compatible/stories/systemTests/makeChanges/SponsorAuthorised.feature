@@ -1,4 +1,4 @@
-@SponsorAuthorised @SystemTest @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
 Feature: This feature covers scenarios related to sponsor authorisation - sponsor authorises research projects and modifications
 
   Background:

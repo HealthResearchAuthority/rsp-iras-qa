@@ -620,6 +620,7 @@ Then(
       projectIdentificationSelectReferenceToChangePage,
       projectIdentificationEnterReferenceNumbersPage,
       sponsorReferencePage,
+      $tags,
     },
     datasetName
   ) => {
@@ -628,7 +629,7 @@ Then(
     for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
       const changeName = changeNames[changeIndex];
       const changeDataset = changesDataset[changeName];
-      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset, $tags);
       await modificationsCommonPage.createChangeModification(
         {
           projectIdentificationSelectChangePage,

@@ -25,15 +25,13 @@ export default class ResearchLocationsPage {
     this.nations_participating_checkbox = this.page.locator('input[id^="Questions[0]"]:not([type="hidden"])');
     this.is_nhs_hsc_organisation_radio = this.page.getByTestId(/^IQA0004/);
     this.lead_nation_radio = this.page.getByTestId(/^IQA0005/);
-    this.nations_participating_label = this.page.getByTestId('Questions[0]_Answers').locator('govuk-fieldset-legend');
+    this.nations_participating_label = this.page.getByTestId('Questions[0]_Answers').locator('legend');
     this.nations_participating_hint_label = this.nations_participating_label
       .locator('..')
       .locator('..')
       .getByTestId('Questions[0]_Answers-hint');
-    this.is_nhs_hsc_organisation_label = this.page.locator(
-      'div[id="Questions[1].SelectedOption"] govuk-fieldset-legend'
-    );
-    this.lead_nation_label = this.page.locator('div[id="Questions[2].SelectedOption"] govuk-fieldset-legend');
+    this.is_nhs_hsc_organisation_label = this.page.getByTestId('Questions[1].SelectedOption').locator('legend');
+    this.lead_nation_label = this.page.getByTestId('Questions[2].SelectedOption').locator('legend');
     this.details_component = this.page.locator('.govuk-details');
   }
 

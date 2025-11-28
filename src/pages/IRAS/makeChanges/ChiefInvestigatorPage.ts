@@ -33,6 +33,7 @@ export default class ChiefInvestigatorPage {
     this.chief_investigator_first_name_text = this.page.getByTestId('IQA0309_Text');
     this.chief_investigator_last_name_text = this.page.getByTestId('IQA0310_Text');
     this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
+    this.chief_investigator_email_text_summary_error_label = this.page.locator('a[href="#Questions[2].AnswerText"]');
   }
 
   //Page Methods

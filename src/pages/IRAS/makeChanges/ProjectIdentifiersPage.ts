@@ -35,7 +35,9 @@ export default class ProjectIdentifiersPage {
     this.primary_sponsor_organisation_text = this.page.getByRole('textbox', {
       name: projectIdentifiersPageTestData.Project_Identifiers_Page.primary_sponsor_organisation_header_label,
     });
-    this.primary_sponsor_organisation_filled_text = this.page.getByTestId('IQA0312_Text');
+    this.primary_sponsor_organisation_filled_text = this.page
+      .getByTestId('sponsor_org_search')
+      .or(this.page.getByTestId('IQA0312_Text_autocomplete'));
     this.primary_sponsor_organisation_jsenabled_text = this.page.locator('#IQA0312_Text_autocomplete');
     this.primary_sponsor_organisation_jsdisabled_search_button = this.page.getByRole('button', {
       name: buttonTextData.Project_Identifiers_Page.Search,
