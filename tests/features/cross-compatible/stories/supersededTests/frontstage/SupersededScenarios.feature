@@ -3,7 +3,7 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
 
   @rsp-4063
   Scenario Outline: Verify that user can view the participating organisation screen
-  Given I have navigated to the my research projects page
+    Given I have navigated to the my research projects page
     And I can see the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -39,7 +39,7 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
 
   @rsp-4063
   Scenario Outline: Verify that user can search on the participating organisation screen
-  Given I have navigated to the my research projects page
+    Given I have navigated to the my research projects page
     And I can see the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -72,7 +72,7 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
 
   @rsp-4063
   Scenario Outline: Validate the summary error message on participating organisation page
-  Given I have navigated to the my research projects page
+    Given I have navigated to the my research projects page
     And I can see the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -104,7 +104,7 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
 
   @rsp-4063
   Scenario Outline: Validate pagination for first few pages in participating organisation page
-  Given I have navigated to the my research projects page
+    Given I have navigated to the my research projects page
     And I can see the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -139,7 +139,7 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
 
   @rsp-4063
   Scenario Outline: Validate pagination for last few pages in participating organisation page
-  Given I have navigated to the my research projects page
+    Given I have navigated to the my research projects page
     And I can see the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
