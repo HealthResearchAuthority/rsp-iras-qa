@@ -19,7 +19,7 @@ Then(
 );
 
 Then(
-  'I validate the ui lables and field values with {string} on participating organisation page',
+  'I validate the ui lables and field values on the participating organisation page',
   async ({ participatingOrganisationsPage, projectDetailsIRASPage }) => {
     const actualIrasIdValue = confirmStringNotNull(await participatingOrganisationsPage.iras_id_text.textContent());
     const expectedIrasIdValue = await projectDetailsIRASPage.getUniqueIrasId();

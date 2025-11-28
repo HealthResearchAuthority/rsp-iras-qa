@@ -45,7 +45,7 @@ Then(
 );
 
 Then(
-  'I validate the field values with {string} on select area of change page',
+  'I validate the field values on select area of change page',
   async ({ selectAreaOfChangePage, projectDetailsIRASPage }) => {
     const actualIrasIdValue = confirmStringNotNull(await selectAreaOfChangePage.iras_id_text.textContent());
     const expectedIrasIdValue = await projectDetailsIRASPage.getUniqueIrasId();
