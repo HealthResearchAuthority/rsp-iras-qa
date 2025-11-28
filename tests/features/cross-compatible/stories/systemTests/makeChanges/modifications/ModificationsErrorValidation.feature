@@ -1,4 +1,4 @@
-@ApplicantUser @ModificationsErrorValidation @SystemTest @jsEnabled
+@ApplicantUser @ModificationsErrorValidation @SystemTest
 Feature: ModificationsErrorValidation: This feature file helps check the error handling that is in place during modification journey
 
   Background:
@@ -18,7 +18,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-4038 @SelectAreaOfChangeErrorValidation
+  @rsp-4038 @rsp-4062 @SelectAreaOfChangeErrorValidation
   Scenario Outline: Validate the mandatory field error message on select area of change page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1047,3 +1047,70 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     Examples:
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
+
+  @rsp-4094 @rsp-4095 @ModificationsErrorValidationForInvalidReferenceNumbers
+  Scenario Outline: Validate error message for invalid reference numbers on project identification page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the project identification select change modification page
+    And I capture the page screenshot
+    And I fill the project identification select change modification page using '<Changes>' dataset
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
+    Then I can see the project identification select reference modification page
+    And I capture the page screenshot
+    And I fill the project identification select reference modification page using '<Changes>' dataset
+    When I click the 'Save_Continue' button on the 'Project_Identification_SelectReference_To_Change_Page'
+    Then I can see the project identification enter reference modification page
+    And I fill the project identification enter reference modification page using '<Changes>' dataset
+    When I click the 'Save_Continue' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
+    And I capture the page screenshot
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Identification_Enter_Reference_Numbers_Page'
+    Examples:
+      | Changes                                                                   | Field_And_Summary_Error_Message                       | Area_Of_Change                         | Specific_Change        |
+      | Modification_To_Add_Administrative_Details_Invalid_Data_Reference_Numbers | Field_Summary_Error_Message_Invalid_Project_Reference | Administrative_Details_For_The_Project | Project_Identification |
+
+  @rsp-4094 @ModificationsErrorValidationInvalidProjectTitles
+  Scenario Outline: Validate error message for invalid project titles on project identification page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the project identification select change modification page
+    And I capture the page screenshot
+    And I fill the project identification select change modification page using '<Changes>' dataset
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
+    Then I can see the project identification enter reference modification page
+    And I fill the project identification enter reference modification page using '<Changes>' dataset
+    When I click the 'Save_Continue' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
+    And I capture the page screenshot
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Identification_Enter_Reference_Numbers_Page'
+
+    Examples:
+      | Changes                                                        | Field_And_Summary_Error_Message                    | Area_Of_Change                         | Specific_Change        |
+      | Modification_To_Add_Administrative_Details_Invalid_Data_Titles | Field_Summary_Error_Message_Invalid_Project_Titles | Administrative_Details_For_The_Project | Project_Identification |

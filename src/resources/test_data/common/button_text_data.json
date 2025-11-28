@@ -214,7 +214,8 @@
   },
   "Select_Area_Of_Change_Page": {
     "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Apply_Selection": "Apply selection"
   },
   "Modifications_Page": {
     "Save_Continue": "Save and continue",
@@ -301,7 +302,8 @@
     "Change_Details": "Change"
   },
   "Modification_Unfinished_Error_Page": {
-    "Return_To_Modification_Details": "Return to modification details"
+    "Return_To_Modification_Details": "Return to modification details",
+    "Return_To_Review_Modification": "Return to review modification"
   },
   "Confirm_Remove_Modification_Page": {
     "Remove_Change": "Remove change"

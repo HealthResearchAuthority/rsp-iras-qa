@@ -35,10 +35,12 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
     this.pageLabels = this.page.getByRole('paragraph');
     this.table = this.page.getByRole('table');
     this.rows = this.page.locator('tr');
-    this.document_type_dropdown = this.page.getByRole('combobox', {
-      name: this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
-        .Add_Document_Details_For_Specific_Document_Modifications_Page.document_type_dropdown_label,
-    });
+    this.document_type_dropdown = this.page
+      .getByRole('combobox', {
+        name: this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+          .Add_Document_Details_For_Specific_Document_Modifications_Page.document_type_dropdown_label,
+      })
+      .first();
     this.document_name_text = this.page
       .locator('.govuk-form-group', {
         has: this.page.getByText(
@@ -61,7 +63,7 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
           .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_label
       ),
     });
-    this.sponsor_document_day_text = this.page.getByTestId('Questions[4].Day');
+    this.sponsor_document_day_text = this.page.getByTestId('Questions[3].Day');
     this.sponsor_document_month_dropdown = this.sponsor_document_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(

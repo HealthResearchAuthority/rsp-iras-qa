@@ -1,4 +1,4 @@
-@RegressionSearchModifications @StudyWideReviewer @Regression @RegressionReceiveAmendments @BackStage
+@RegressionSearchModifications @SystemTest @StudyWideReviewer @RegressionReceiveAmendments @BackStage
 
 Feature: Receive Amendments: Search Modifications
 

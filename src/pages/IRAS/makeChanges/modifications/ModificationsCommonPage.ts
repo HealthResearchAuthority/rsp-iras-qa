@@ -56,6 +56,8 @@ export default class ModificationsCommonPage {
     userEmailExpected: string;
     dateTimeOfEventExpected: string;
   }[] = [];
+  readonly notification_heading_text: Locator;
+  readonly notification_text: Locator;
 
   private rankingForChanges: Record<
     string,
@@ -171,6 +173,8 @@ export default class ModificationsCommonPage {
     this.auditHistoryTableHeader = this.page.locator('#history table thead tr th');
     this.auditHistoryTableBodyRows = this.page.locator('#history tbody').getByRole('row');
     this.tableCell = this.page.locator('td');
+    this.notification_heading_text = this.page.getByRole('heading', { level: 1 });
+    this.notification_text = this.page.locator('p.govuk-body');
   }
 
   //Getters & Setters for Private Variables
