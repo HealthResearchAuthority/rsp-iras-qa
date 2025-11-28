@@ -1270,15 +1270,14 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
@@ -1287,7 +1286,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for 'Correction_Of_Typographical_Errors' page
+    And I fill the modification enter free text page using 'Valid_Data_All_Fields' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modification_Enter_Free_Text_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I capture the page screenshot
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -1300,15 +1307,14 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
@@ -1317,14 +1323,32 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I fill the modification enter free text page using 'Valid_Data_All_Fields' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modification_Enter_Free_Text_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I capture the page screenshot
     Then I upload 'PNG_File' documents
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for 'Correction_Of_Typographical_Errors' page
+    And I validate the uploaded 'PNG_File' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for 'Correction_Of_Typographical_Errors' page
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'PNG_File' in the add document details for specific document page
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
     And I can see the review your document information page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -1337,7 +1361,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    Then I can see the project identifiers page
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -1346,6 +1370,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
@@ -1353,10 +1378,27 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I upload 'PNG_File' documents
+    And I fill the modification enter free text page using 'Valid_Data_All_Fields' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modification_Enter_Free_Text_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I capture the page screenshot
+    Then I upload 'PNG_File' documents
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for 'Correction_Of_Typographical_Errors' page
+    And I validate the uploaded 'PNG_File' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -1369,6 +1411,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -1380,11 +1423,23 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I fill the modification enter free text page using 'Valid_Data_All_Fields' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modification_Enter_Free_Text_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I capture the page screenshot
     Then I upload 'PNG_File' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -1542,7 +1597,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
-    And I can see the delete project confirmation page based on 'Valid_Data_All_Fields' entered for short project title
+    And I can see the delete project confirmation page based on the short project title
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -1787,26 +1842,38 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    And I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I fill the modification enter free text page using 'Valid_Data_All_Fields' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modification_Enter_Free_Text_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I capture the page screenshot
     Then I upload 'PNG_File' documents
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
     Then I upload 'GIF_File' documents
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for 'Correction_Of_Typographical_Errors' page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     And I click the 'Delete' link on the 'Add_Documents_Details_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -1820,24 +1887,37 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the unique iras id in project details iras page
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    And I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I fill the modification enter free text page using 'Valid_Data_All_Fields' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modification_Enter_Free_Text_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I capture the page screenshot
     Then I upload 'PNG_File' documents
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
     Then I upload 'GIF_File' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     And I click the 'Delete_All' link on the 'Documents_Added_For_Change_Page'
     Then I can see the delete multiple documents confirmation page

@@ -56,6 +56,7 @@ Then(
       projectIdentificationSelectChangePage,
       projectIdentificationSelectReferenceToChangePage,
       projectIdentificationEnterReferenceNumbersPage,
+      $tags,
     },
     datasetName
   ) => {
@@ -64,7 +65,7 @@ Then(
     for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
       const changeName = changeNames[changeIndex];
       const changeDataset = changesDataset[changeName];
-      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset, $tags);
       await modificationsCommonPage.createChangeModification(
         {
           projectIdentificationSelectChangePage,
@@ -619,6 +620,7 @@ Then(
       projectIdentificationSelectReferenceToChangePage,
       projectIdentificationEnterReferenceNumbersPage,
       sponsorReferencePage,
+      $tags,
     },
     datasetName
   ) => {
@@ -627,7 +629,7 @@ Then(
     for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
       const changeName = changeNames[changeIndex];
       const changeDataset = changesDataset[changeName];
-      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset, $tags);
       await modificationsCommonPage.createChangeModification(
         {
           projectIdentificationSelectChangePage,
@@ -653,3 +655,21 @@ Then(
     }
   }
 );
+
+Then('I validate the missing document notification details', async ({ modificationsCommonPage }) => {
+  await expect
+    .soft(
+      modificationsCommonPage.notification_heading_text.getByText(
+        modificationsCommonPage.modificationsCommonPageTestData.Missing_Document_Details_Notification
+          .notification_heading_text
+      )
+    )
+    .toBeVisible();
+  await expect
+    .soft(
+      modificationsCommonPage.notification_text.getByText(
+        modificationsCommonPage.modificationsCommonPageTestData.Missing_Document_Details_Notification.notification_text
+      )
+    )
+    .toBeVisible();
+});
