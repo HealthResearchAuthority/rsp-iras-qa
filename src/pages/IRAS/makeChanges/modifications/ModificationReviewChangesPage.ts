@@ -253,6 +253,7 @@ export default class ModificationReviewChangesPage {
       .locator('..')
       .locator('.govuk-summary-list__value');
     this.new_full_project_title_text_change_link = this.new_full_project_title_text_row.locator('..').getByRole('link');
+    this.select_details_to_change_row = this.page.locator('.govuk-summary-list__row');
     this.select_details_to_change_value = this.select_details_to_change_row
       .locator('..')
       .locator('.govuk-summary-list__value');
