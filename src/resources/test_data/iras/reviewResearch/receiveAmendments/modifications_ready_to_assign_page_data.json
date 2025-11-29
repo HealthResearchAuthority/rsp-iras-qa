@@ -8,7 +8,11 @@
     "advanced_filter_label": "Advanced filters",
     "maxPagesToVisit": 2,
     "days_since_suffix": "days",
-    "iras_id_search_box_label": "IRAS ID"
+    "iras_id_search_box_label": "IRAS ID",
+    "project_record_answer_option_lead_nation_england": "OPT0018",
+    "project_record_answer_option_lead_nation_northern_ireland": "OPT0019",
+    "project_record_answer_option_lead_nation_scotland": "OPT0020",
+    "project_record_answer_option_lead_nation_wales": "OPT0021"
   },
 
   "Column_Label_Texts": {
@@ -198,7 +202,7 @@
       "error_message": "'Date submitted' and 'Days since submission' filters can't be applied at the same time - remove one to continue."
     },
     "No_Modifications_Selected_Summary_Only_Error": {
-       "error_message": "Select at least one modification"
+      "error_message": "Select at least one modification"
     }
   }
 }

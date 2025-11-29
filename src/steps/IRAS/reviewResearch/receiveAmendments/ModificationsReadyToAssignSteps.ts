@@ -191,12 +191,32 @@ Then(
 );
 
 Then(
-  'I see only modifications where the lead nation is the country linked to the review body of the {string}',
-  async ({ modificationsReadyToAssignPage }, user: string) => {
-    // PLACEHOLDER FOR FUTURE UPDATE AFTER DB ENABLER
-    const expectedLeadNation =
+  'I see only modifications where the lead nation is the country linked to the review body of the {string} and with status {string}',
+  async ({ modificationsReadyToAssignPage, commonItemsPage }, user: string, status: string) => {
+    let leadNation =
       modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
-    console.log(expectedLeadNation);
+    if (leadNation === 'Northern Ireland') {
+      leadNation = 'Northern_Ireland';
+    }
+    const modificationsByLeadNation = await modificationsReadyToAssignPage.sqlGetModificationByLeadNationAndStatusWFC(
+      leadNation,
+      status
+    );
+    const actualList = await commonItemsPage.getActualModificationListValues(commonItemsPage.tableBodyRows, 1);
+
+    const normalize = (arr: any[]) =>
+      arr
+        .map((item) => item.toString().trim())
+        .sort((a, b) => {
+          const numA = Number.parseFloat(a);
+          const numB = Number.parseFloat(b);
+          if (!Number.isNaN(numA) && !Number.isNaN(numB)) {
+            return numA - numB; // Numeric comparison
+          }
+
+          return 0; // Keeps original order for non-numeric values
+        });
+    expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
   }
 );
 
@@ -223,5 +243,33 @@ When(
     }
     const irasId = modificationId.toString().split('/')[0];
     await myModificationsTasklistPage.saveModificationId(irasId);
+  }
+);
+
+Then(
+  'I capture the modification id of {string} where the lead nation is the country linked to the WFC {string} and with status {string}',
+  async (
+    { modificationsReadyToAssignPage, teamManagerDashboardPage },
+    modificationCount: string,
+    user: string,
+    status: string
+  ) => {
+    let countValue: string;
+    let leadNation =
+      modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
+    if (leadNation === 'Northern Ireland') {
+      leadNation = 'Northern_Ireland';
+    }
+    if (modificationCount === 'Single' || modificationCount === 'Partial') {
+      countValue = '=';
+    } else {
+      countValue = '>';
+    }
+    const modificationId = await modificationsReadyToAssignPage.sqlGetModificationByLeadNationAndStatusCountWFC(
+      leadNation,
+      status,
+      countValue
+    );
+    await teamManagerDashboardPage.saveModificationId(modificationId.toString(), modificationCount);
   }
 );

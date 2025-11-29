@@ -1,24 +1,24 @@
 @ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest
 Feature: WFC - Modifications Tasklist page
-
-    @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed
+    # pagination is missing
+    @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed  @fail @defect
     Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
         Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
-        And I see only modifications where the lead nation is the country linked to the review body of the '<User>'
+        And I see only modifications where the lead nation is the country linked to the review body of the '<User>' and with status '<Status>'
         Examples:
-            | User                    |
-            | Workflow_Coordinator    |
-            | Workflow_Coordinator_NI |
-            | Workflow_Coordinator_S  |
-            | Workflow_Coordinator_W  |
+            | User                    | Status           |
+            | Workflow_Coordinator    | With review body |
+            | Workflow_Coordinator_NI | With review body |
+            | Workflow_Coordinator_S  | With review body |
+            | Workflow_Coordinator_W  | With review body |
 
-    @searchTasklistByIrasIdWithResults @rsp-4104
+    @searchTasklistByIrasIdWithResults @rsp-4104 @Test
     Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
-        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<User>' and with status '<Status>'
         When I fill the search input for searching 'tasklist' with '<Search_Input>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
