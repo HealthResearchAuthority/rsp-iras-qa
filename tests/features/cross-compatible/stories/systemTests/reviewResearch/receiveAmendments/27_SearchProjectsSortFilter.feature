@@ -1,5 +1,5 @@
 @ReceiveAmendments @SearchProjectRecordsSortFilter @TeamManager  @SystemTest @rsp-5455 @rsp-5456 @KNOWN-DEFECT-RSP-5909
-Feature: Receive Amendments: Filter, Search and Sort the Search project records page
+Feature: Filter, Search and Sort the Search project records page
 
         Background:
                 Given I have navigated to the 'Search_Projects_Page'

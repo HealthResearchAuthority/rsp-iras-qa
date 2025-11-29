@@ -1,5 +1,5 @@
-@RegressionModificationsReadyToAssign @SystemTest @WorkFlowCoordinator @RegressionReceiveAmendments @BackStage
-Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
+@WFCModificationsReadyToAssign @WorkFlowCoordinator
+Feature: Receive Amendments: WFC -Modifications Tasklist page
 
     @RegressionSearchFilterComboTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist

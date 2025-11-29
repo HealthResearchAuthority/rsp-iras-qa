@@ -12,7 +12,7 @@ When(
     for (const row of await commonItemsPage.tableBodyRows.all()) {
       const modification_id = confirmStringNotNull(await row.getByRole('cell').nth(0).textContent());
       const shortProjectTitle = confirmStringNotNull(await row.getByRole('link').nth(1).textContent());
-      modificationRecordActual.push(modification_id + ':' + shortProjectTitle);
+      modificationRecordActual.push(modification_id + ':' + shortProjectTitle.trim());
     }
     expect.soft(modificationRecordExpected).toEqual(modificationRecordActual);
   }

@@ -90,7 +90,10 @@
     "email_address_text": "Enter an email address in the correct format"
   },
   "Incorrect_Format_Invalid_Character_Limit_Telephone_Error": {
-    "telephone_text": ["Telephone must be 13 digits or less", "Telephone must only contain numbers"]
+    "telephone_text": [
+      "Telephone must be 13 digits or less",
+      "Telephone must only contain numbers"
+    ]
   },
   "Incorrect_Format_Invalid_Character_Limit_Email_Address_Error": {
     "email_address_text": [
@@ -103,7 +106,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20251124163551026hscrd@health.org",
+    "email_address_unique": "QAAutomation20251128165607813hscrd@health.org",
     "Role_TM_SWR_WFC": {
       "role_checkbox": [
         "Study-wide reviewer",

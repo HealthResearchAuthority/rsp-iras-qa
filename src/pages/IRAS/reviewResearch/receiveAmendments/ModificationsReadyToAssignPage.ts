@@ -1,6 +1,13 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReadyToAssignPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
+import { connect } from '../../../../utils/DbConfig';
+import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
+import path from 'node:path';
+import * as fse from 'fs-extra';
+import { returnDataFromJSON } from '../../../../utils/UtilFunctions';
+const pathToTestDataJson =
+  './src/resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
 
 //Declare Page Objects
 export default class ModificationsReadyToAssignPage {
@@ -9,6 +16,7 @@ export default class ModificationsReadyToAssignPage {
   readonly searchFilterResultsData: typeof searchFilterResultsData;
   private _modification_record: string;
   private _modification_id_title: string[];
+  private _modification_id: string;
   readonly modifications_tasklist_link: Locator;
   readonly short_project_title_column_label: Locator;
   readonly modification_id_column_label: Locator;
@@ -44,6 +52,7 @@ export default class ModificationsReadyToAssignPage {
     this.searchFilterResultsData = searchFilterResultsData;
     this._modification_record = '';
     this._modification_id_title = [];
+    this._modification_id = '';
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
@@ -130,6 +139,14 @@ export default class ModificationsReadyToAssignPage {
     this._modification_id_title = value;
   }
 
+  async getModificationId(): Promise<string> {
+    return this._modification_id;
+  }
+
+  async setModificationId(value: string): Promise<void> {
+    this._modification_id = value;
+  }
+
   //Page Methods
   async goto() {
     await this.page.goto('modificationstasklist/index');
@@ -140,5 +157,129 @@ export default class ModificationsReadyToAssignPage {
     expect
       .soft(await this.page.title())
       .toBe(this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.title);
+  }
+
+  async sqlGetModificationByLeadNationAndStatusWFC(lead_nation: string, status: string) {
+    const option = 'project_record_answer_option_lead_nation_' + lead_nation.toLowerCase();
+    const leadNationOption = modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page[option];
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(`
+  SELECT 
+    NationQuery.ModificationIdentifier,
+    NationQuery.IrasId,
+    ProjectRecordAnswers.Response,
+    NationQuery.CreatedDate,
+    NationQuery.[Status]
+FROM (
+    SELECT
+        ProjectModifications.ModificationIdentifier,
+        ProjectModifications.CreatedDate,
+        ProjectModifications.[Status],
+        ProjectRecords.Id,
+        ProjectRecords.IrasId,
+        ProjectRecordAnswers.ProjectRecordId,
+        ProjectRecordAnswers.QuestionId,
+        ProjectRecordAnswers.SelectedOptions,
+        ProjectRecordAnswers.Response,
+        ProjectRecords.[Status] AS ProjectRecordStatus,
+        COUNT(*) OVER (PARTITION BY ProjectRecords.IrasId) AS IrasIdCount
+    FROM ProjectModifications
+    INNER JOIN ProjectRecords
+        ON ProjectRecords.Id = ProjectModifications.ProjectRecordId
+    INNER JOIN ProjectRecordAnswers
+        ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+    WHERE
+        ProjectRecordAnswers.QuestionId = 'IQA0005' AND
+        ProjectRecordAnswers.SelectedOptions ='${leadNationOption}' AND
+        ProjectRecords.[Status] = 'Active' AND
+        ProjectModifications.[Status] = '${status}'   AND ProjectModifications.ReviewerName is NULL
+) AS NationQuery
+INNER JOIN ProjectRecordAnswers
+    ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
+WHERE
+    ProjectRecordAnswers.QuestionId = 'IQA0002'   
+ORDER BY NationQuery.CreatedDate DESC;
+`);
+
+    await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(`No suitable modification found in the system with ${leadNationOption} lead nation`);
+    }
+    return queryResult.recordset.map((row) => row.ModificationIdentifier);
+  }
+
+  async sqlGetModificationByLeadNationAndStatusCountWFC(lead_nation: string, status: string, countValue: string) {
+    const option = 'project_record_answer_option_lead_nation_' + lead_nation.toLowerCase();
+    const leadNationOption = modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page[option];
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(`
+      SELECT TOP 1
+    NationQuery.ModificationIdentifier,
+    NationQuery.IrasId,
+    ProjectRecordAnswers.Response,
+    NationQuery.CreatedDate,
+    NationQuery.[Status]
+FROM (
+    SELECT
+        ProjectModifications.ModificationIdentifier,
+        ProjectModifications.CreatedDate,
+        ProjectModifications.[Status],
+        ProjectRecords.Id,
+        ProjectRecords.IrasId,
+        ProjectRecordAnswers.ProjectRecordId,
+        ProjectRecordAnswers.QuestionId,
+        ProjectRecordAnswers.SelectedOptions,
+        ProjectRecordAnswers.Response,
+        ProjectRecords.[Status] AS ProjectRecordStatus,
+        COUNT(*) OVER (PARTITION BY ProjectRecords.IrasId) AS IrasIdCount
+    FROM ProjectModifications
+    INNER JOIN ProjectRecords
+        ON ProjectRecords.Id = ProjectModifications.ProjectRecordId
+    INNER JOIN ProjectRecordAnswers
+        ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+    WHERE
+        ProjectRecordAnswers.QuestionId = 'IQA0005' AND
+        ProjectRecordAnswers.SelectedOptions ='${leadNationOption}' AND
+        ProjectRecords.[Status] = 'Active' AND
+        ProjectModifications.[Status] = '${status}' AND ProjectModifications.ReviewerName is NULL
+) AS NationQuery
+INNER JOIN ProjectRecordAnswers
+    ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
+WHERE
+    ProjectRecordAnswers.QuestionId = 'IQA0002'
+    AND NationQuery.IrasIdCount ${countValue} 1
+ORDER BY NationQuery.CreatedDate DESC;
+`);
+    await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(
+        `No suitable modification found in the system with ${leadNationOption} lead nation and ${status} status and ${countValue}`
+      );
+    }
+    return queryResult.recordset.map((row) => row.IrasId);
+  }
+
+  async saveModificationId(modificationId: string, countval: string) {
+    await this.setModificationId(modificationId);
+    const filePath = path.resolve(pathToTestDataJson);
+    await this.updateModificationIdTestDataJson(filePath, modificationId, countval);
+  }
+
+  async updateModificationIdTestDataJson(filePath: string, updateVal: string, countval: string) {
+    (async () => {
+      try {
+        const data = await returnDataFromJSON(filePath);
+        if (countval === 'Single') {
+          data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
+        } else if (countval === 'Partial') {
+          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 3);
+        } else if (countval === 'Multi') {
+          data.Search_Queries.Existing_IRAS_ID_Multi.search_input_text = updateVal;
+        }
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating modification id to testdata json file:`);
+      }
+    })();
   }
 }

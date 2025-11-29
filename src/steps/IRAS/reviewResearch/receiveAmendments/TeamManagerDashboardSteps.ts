@@ -19,13 +19,16 @@ Then(
 );
 
 Then(
-  'I see only modifications where the lead nation is the country linked to the {string}',
-  async ({ teamManagerDashboardPage, commonItemsPage }, user: string) => {
+  'I see only modifications where the lead nation is the country linked to the {string} and with status {string}',
+  async ({ teamManagerDashboardPage, commonItemsPage }, user: string, status: string) => {
     let leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
     if (leadNation === 'Northern Ireland') {
       leadNation = 'Northern_Ireland';
     }
-    const modificationsByLeadNation = await teamManagerDashboardPage.sqlGetModificationByLeadNation(leadNation);
+    const modificationsByLeadNation = await teamManagerDashboardPage.sqlGetModificationByLeadNationAndStatus(
+      leadNation,
+      status
+    );
     const actualList = await commonItemsPage.getActualModificationListValues(commonItemsPage.tableBodyRows, 1);
 
     const normalize = (arr: any[]) =>
