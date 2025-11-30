@@ -2,7 +2,7 @@
   "Label_Texts": {
     "current_planned_end_date_label": "Current planned project end date",
     "new_planned_project_end_date_label": "New planned project end date",
-    "planned_project_end_date_hint_label": "For example, 27 March 2029",
+    "planned_project_end_date_hint_label": "For example, 19 June 2030",
     "planned_project_end_date_day_label": "Day",
     "planned_project_end_date_month_label": "Month",
     "planned_project_end_date_year_label": "Year"
@@ -19,7 +19,7 @@
     "planned_project_end_year_text": "The date should be a valid date and in future"
   },
   "Valid_Data_All_Fields": {
-    "planned_project_end_day_text": "1",
+    "planned_project_end_day_text": "01",
     "planned_project_end_month_dropdown": "January",
     "planned_project_end_year_text": "2030"
   },
