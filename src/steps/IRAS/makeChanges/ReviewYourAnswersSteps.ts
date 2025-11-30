@@ -35,7 +35,9 @@ Then(
     expect(confirmStringNotNull(await reviewYourAnswersPage.iras_id_text.textContent())).toBe(irasIdRunTime);
     const expectedShortProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const actualShortProjectTitle = confirmStringNotNull(
-      await confirmProjectDetailsPage.short_project_title_row.textContent()
+      (await confirmProjectDetailsPage.short_project_title_row.textContent())
+        ?.replace(/[’‘]/g, "'")
+        .replace(/[“”]/g, '"')
     );
     const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
       actualShortProjectTitle

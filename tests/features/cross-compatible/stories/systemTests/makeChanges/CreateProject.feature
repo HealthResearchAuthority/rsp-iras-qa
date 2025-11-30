@@ -1426,7 +1426,7 @@ Feature: Create Project - This feature file helps check all the create project j
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
-    Then I fill the project identifiers page with '<Project_Identifiers>'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'

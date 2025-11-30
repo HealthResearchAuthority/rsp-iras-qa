@@ -297,6 +297,13 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-4887 @DateSubmittedErrorValidationPostApproval
   Scenario Outline: Verify that correct validation is in place for the date submitted filter
+  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -326,6 +333,13 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-2837 @rsp-1867 @rsp-3819 @rsp-4868 @reviewAnswersProjTitleErrorValidations
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page
+  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -364,6 +378,13 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidations @KNOWN_DEFECT_RSP-5319
   Scenario Outline: Validate chief investigator email error messages when user redirected from review your answers page
+  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -417,6 +438,13 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-2837 @rsp-3819 @rsp-4868 @reviewAnswersProjTitleErrorValidationsChangeFlow
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page - change flow
+  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -454,6 +482,13 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-2837 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidation_ChangeFlow @KNOWN_DEFECT_RSP-5319
   Scenario Outline: Validate error message for chief investigator email when user redirected from review your answers page - change flow
+  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -506,6 +541,13 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-1867 @rsp-3819 @rsp-4868 @ValidateErrorMessagesOnConfirmProjectPage @KNOWN_DEFECT_RSP-5418
   Scenario Outline: Validate user is able to see the error messages when user submit the review answer page when all mandatory fields are not entered correctly
+  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     And I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
