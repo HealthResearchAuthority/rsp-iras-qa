@@ -162,31 +162,6 @@ Feature: Create project error validations - This feature file helps check all th
       # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
       # | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email                    | Summary_Error_Message                                |
 
-  @rsp-1860 @duplicateIrasIdValidation
-  Scenario Outline: Verify the duplicate IRAS ID error message when user enters the existing IRAS ID
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    And I click the 'Start' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
-    And I fill the unique iras id in project details iras page
-    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    Then I can see the project details title page
-    And I have navigated to the my research projects page
-    And I can see the my research projects page
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    And I click the 'Start' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
-    And I fill the existing iras id in project details iras page
-    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
-
-    Examples:
-      | Field_And_Summary_Error_Message       |
-      | Field_Error_Message_Iras_Id_Duplicate |
-
   @rsp-1863 @rsp-3819 @saveLaterProjTitleValidations
   Scenario Outline: Validate error messages when user saves the project with invalid data on project details page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
