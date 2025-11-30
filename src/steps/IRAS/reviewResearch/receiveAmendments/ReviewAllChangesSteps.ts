@@ -36,7 +36,9 @@ Then(
     const expectedIrasId = dataset.iras_id;
     const actualIrasId = confirmStringNotNull(await reviewAllChangesPage.iras_id.textContent());
     const expectedShortProjectTitle = dataset.short_project_title;
-    const actualShortProjectTitle = confirmStringNotNull(await reviewAllChangesPage.short_project_title.textContent());
+    const actualShortProjectTitle = confirmStringNotNull(
+      (await reviewAllChangesPage.short_project_title.textContent())?.replace(/[’‘]/g, "'").replace(/[“”]/g, '"')
+    );
     const expectedModificationId = dataset.modification_id;
     const actualModificationId = confirmStringNotNull(await reviewAllChangesPage.modification_id.textContent());
     const expectedStatus = dataset.status;
