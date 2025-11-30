@@ -1081,3 +1081,28 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
       | Changes                                                |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
+
+  @rsp-1860
+  Scenario Outline: Verify the duplicate IRAS ID error message when user enters the existing IRAS ID
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the project details title page
+    And I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the existing iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
+
+    Examples:
+      | Field_And_Summary_Error_Message       |
+      | Field_Error_Message_Iras_Id_Duplicate |
