@@ -1,5 +1,5 @@
 @ApplicantUser @createProject @createAmendment @SystemTest
-Feature: Create Amendment - Create Project
+Feature: Create Project - This feature file helps check all the create project journeys
 
   Background:
     Given I have navigated to the my research projects page
@@ -451,7 +451,7 @@ Feature: Create Amendment - Create Project
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
+    Then I can see the review your answers page
     And I capture the page screenshot
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
