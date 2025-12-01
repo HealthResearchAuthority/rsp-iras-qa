@@ -21,6 +21,7 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
   readonly save_and_continue: Locator;
   readonly save_changes: Locator;
   readonly back_link: Locator;
+  readonly sub_document_type_dropdown: Locator;
   readonly document_previously_approved_hint_text: Locator;
 
   //Initialize Page Objects
@@ -114,6 +115,10 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
         this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
           .Add_Document_Details_For_Specific_Document_Modifications_Page.back_link
       );
+    this.sub_document_type_dropdown = this.page.getByRole('combobox', {
+      name: this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+        .Add_Document_Details_For_Specific_Document_Modifications_Page.sub_document_type_label,
+    });
   }
 
   //Page Methods
@@ -135,12 +140,5 @@ export default class AddDocumentDetailsForSpecificDocumentModificationsPage {
       this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
         .Add_Document_Details_For_Specific_Document_Modifications_Page.page_title_second_part;
     expect.soft(await this.page.title()).toBe(expectedPageTitle);
-    const isSubDocumentDropdownDisplayed = await this.page
-      .getByText(
-        addDocumentDetailsForSpecificDocumentModificationsPageTestData
-          .Add_Document_Details_For_Specific_Document_Modifications_Page.sub_document_type_label
-      )
-      .isVisible();
-    expect.soft(isSubDocumentDropdownDisplayed).toBeFalsy();
   }
 }
