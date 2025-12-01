@@ -136,7 +136,7 @@ When(
     if (pageValue === 'team manager dashboard') {
       dataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[datasetName];
     } else {
-      dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
+      dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[datasetName];
     }
     const modificationId = dataset['search_input_text'];
     const modificationRecord: string[] = [];
@@ -248,10 +248,15 @@ When(
 
 Then(
   'I capture the modification id of {string} where the lead nation is the country linked to the WFC {string} and with status {string}',
-  async ({ modificationsReadyToAssignPage }, modificationCount: string, user: string, status: string) => {
+  async (
+    { modificationsReadyToAssignPage, myModificationsTasklistPage },
+    modificationCount: string,
+    user: string,
+    status: string
+  ) => {
     let countValue: string;
     let leadNation =
-      modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
+      await modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
     if (leadNation === 'Northern Ireland') {
       leadNation = 'Northern_Ireland';
     }
@@ -265,7 +270,7 @@ Then(
       status,
       countValue
     );
-    console.log(modificationId);
     await modificationsReadyToAssignPage.saveModificationId(modificationId.toString(), modificationCount);
+    await myModificationsTasklistPage.saveModificationId(modificationId.toString());
   }
 );

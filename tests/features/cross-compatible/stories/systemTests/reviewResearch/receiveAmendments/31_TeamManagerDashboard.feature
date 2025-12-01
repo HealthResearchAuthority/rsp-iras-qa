@@ -1,10 +1,10 @@
-@ReceiveAmendments @TeamManagerDashboard @TeamManagerDashboardSortFilter @SystemTest @TeamManager @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132
+@ReceiveAmendments @TeamManagerDashboard @TeamManagerDashboardSortFilter @SystemTest @TeamManager @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132 @TestTMWFC
 Feature: Team Manager Dashboard page
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
         # pagination is missing in team mananger dashboard, swr sorting is not correct
-        @sortTeamManagerDashboardByColumn @rsp-4822 @KNOWN-DEFECT-RSP-6281
+        @sortTeamManagerDashboardByColumn @rsp-4822
         Scenario Outline: Verify the user is able to sort the team manager dashboards by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
@@ -48,7 +48,7 @@ Feature: Team Manager Dashboard page
                         | Status                           | User   | Visibility |
                         | Modification_Status_Not_Approved | nobody | cannot     |
 
-        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @fail @defectPaginationMissing
+        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @fail @KNOWN_DEFECT-RSP-6411
         Scenario Outline: Verify the team manger is able to view existing list of modifications for a specific lead nation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
@@ -279,7 +279,7 @@ Feature: Team Manager Dashboard page
                         | Invalid_Date_To                   | Invalid_Date_To_Error                     |
                         | Invalid_Date_From_Days_From       | Date_Days_Simultaneous_Summary_Only_Error |
 
-        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909
+        @SortTMDashboardByColumn @rsp-5122
         Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -306,7 +306,7 @@ Feature: Team Manager Dashboard page
                         | Days_Since_Submission | days since submission | ascending    | descending     |
                         | Status                | status                | ascending    | descending     |
 
-        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909 @fail @defectSWRSorting
+        @SortTMDashboardByColumn @rsp-5122 @KNOWN_DEFECT-RSP-6411 @fail @defectSWRSortingDuetoSPace
         Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for study-wide reviewer
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -337,7 +337,7 @@ Feature: Team Manager Dashboard page
                 When I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Team_Manager_Dashboard_Page'
 
-        @ModificationsTMDashboardPaginationFirst @rsp-5122
+        @ModificationsTMDashboardPaginationFirst @rsp-5122 @fail @KNOWN_DEFECT-RSP-6411
         Scenario Outline: Verify pagination in team manager dashboard page when user is on the first page and navigate through each page by clicking page number or by clicking next link
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -356,7 +356,7 @@ Feature: Team Manager Dashboard page
                         | Label_Texts     | page number       |
                         | Label_Texts     | next link         |
 
-        @ModificationsTMDashboardPaginationLast @rsp-5122
+        @ModificationsTMDashboardPaginationLast @rsp-5122 @fail @KNOWN_DEFECT-RSP-6411
         Scenario Outline: Verify pagination in team manager dashboard page page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -602,7 +602,7 @@ Feature: Team Manager Dashboard page
                         | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
                         | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland @fail
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland
         Scenario Outline: Validate whether disabled study-wide reviewer is not displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
                 Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
                 And I capture the page screenshot

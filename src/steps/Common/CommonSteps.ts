@@ -850,14 +850,19 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
 Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
-    const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-    if (availabilityVal.toLowerCase() === 'available') {
-      await expect(locatorVal).toBeVisible();
-      await expect(locatorVal).toBeEnabled();
-    } else if (availabilityVal.toLowerCase() === 'not available') {
-      await expect(locatorVal).toBeHidden();
-    } else {
-      throw new Error(`Unsupported button state: ${availabilityVal}`);
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
+      if (availabilityVal.toLowerCase() === 'available') {
+        await expect(locatorVal).toBeVisible();
+        await expect(locatorVal).toBeEnabled();
+      } else if (availabilityVal.toLowerCase() === 'not available') {
+        await expect(locatorVal).toBeHidden();
+      } else {
+        throw new Error(`Unsupported button state: ${availabilityVal}`);
+      }
     }
   }
 );

@@ -82,7 +82,6 @@ When(
     }
     expect.soft(searchKey).toBeTruthy();
     await commonItemsPage.setSearchKey(searchKey);
-    console.log(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );
