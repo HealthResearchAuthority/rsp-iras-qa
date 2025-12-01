@@ -655,31 +655,33 @@ export async function getCurrentDate(): Promise<string> {
 
 export async function processKnownDefectsAsync(jsonDir: string): Promise<number> {
   let knownDefectFailCount = 0;
+  const isKnownDefect = (scenario: any) =>
+    scenario.tags?.some((t: any) =>
+      (t.name ?? '')
+        .toLowerCase()
+        .replaceAll(/[^a-z0-9]/g, '')
+        .includes('knowndefect')
+    ) ?? false;
+  const hasFailedSteps = (scenario: any) => scenario.steps?.some((s: any) => s.result?.status === 'failed') ?? false;
+  const markFailedStepsAsPending = (scenario: any) =>
+    scenario.steps?.forEach((s: any) => {
+      if (s.result?.status === 'failed') {
+        s.result.status = 'pending';
+      }
+    });
   const files = (await readdir(jsonDir)).filter((f) => f.endsWith('.json'));
   for (const file of files) {
     const fullPath = path.join(jsonDir, file);
     const content = await readFile(fullPath, 'utf8');
     const json = JSON.parse(content);
-    for (const feature of json) {
-      for (const scenario of feature.elements || []) {
-        const isKnownDefect = scenario.tags?.some(
-          (t: any) =>
-            t.name
-              ?.toLowerCase()
-              .replace(/[^a-z0-9]/g, '') // remove _, -, @, etc.
-              .includes('knowndefect') ?? false
-        );
-        const hasFailed = scenario.steps?.some((s: any) => s.result?.status === 'failed');
-        if (isKnownDefect && hasFailed) {
+    json.forEach((feature: any) =>
+      (feature.elements ?? []).forEach((scenario: any) => {
+        if (isKnownDefect(scenario) && hasFailedSteps(scenario)) {
           knownDefectFailCount++;
-          for (const step of scenario.steps) {
-            if (step.result.status === 'failed') {
-              step.result.status = 'pending';
-            }
-          }
+          markFailedStepsAsPending(scenario);
         }
-      }
-    }
+      })
+    );
     await writeFile(fullPath, JSON.stringify(json, null, 2));
   }
   return knownDefectFailCount;
