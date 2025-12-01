@@ -27,43 +27,48 @@ When(
   ) => {
     let searchQueryDataset: any;
     if (searchType.toLowerCase() == 'users') {
-      searchQueryDataset = manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
+      searchQueryDataset =
+        await manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'review bodies') {
       searchQueryDataset =
-        manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[searchQueryName];
+        await manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[
+          searchQueryName
+        ];
     } else if (searchType.toLowerCase() == 'adding users') {
       searchQueryDataset =
-        searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
+        await searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
           searchQueryName
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
-      searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset =
+        await searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'project records') {
-      searchQueryDataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset = await searchProjectsPage.searchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'tasklist') {
       searchQueryDataset =
-        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
+        await modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'my tasklist') {
       searchQueryDataset =
-        myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries[searchQueryName];
+        await myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'organisations') {
       searchQueryDataset =
-        participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
+        await participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'sponsor organisations') {
       searchQueryDataset =
-        manageSponsorOrganisationPage.manageSponsorOrganisationsPageTestData.Search_For_Sponsor_Organisations
+        await manageSponsorOrganisationPage.manageSponsorOrganisationsPageTestData.Search_For_Sponsor_Organisations
           .Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'users in sponsor organisations') {
       searchQueryDataset =
-        userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Search_For_Users_In_Sponsor_Organisations
+        await userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Search_For_Users_In_Sponsor_Organisations
           .Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'my research') {
-      searchQueryDataset = myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset = await myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'modifications in post approval') {
       searchQueryDataset =
-        projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchQueryName];
+        await projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'team manager dashboard') {
-      searchQueryDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset =
+        await teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
@@ -73,10 +78,11 @@ When(
     } else if (searchQueryName === 'Valid_Full_Iras_Id of recently added project') {
       searchKey = await searchProjectsPage.getIrasId();
     } else {
-      searchKey = searchQueryDataset['search_input_text'];
+      searchKey = await searchQueryDataset['search_input_text'];
     }
     expect.soft(searchKey).toBeTruthy();
     await commonItemsPage.setSearchKey(searchKey);
+    console.log(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );

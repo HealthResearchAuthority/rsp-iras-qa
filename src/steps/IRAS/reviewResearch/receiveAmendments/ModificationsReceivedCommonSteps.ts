@@ -69,13 +69,14 @@ Given(
     let daysSinceSubmissionIndex: number;
     let studyWideReviewerIndex: number;
     let statusIndex: number;
+    let studyWideReviewers: string[];
     if (pageType.toLowerCase() == 'ready to assign') {
       searchInputDataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries;
       modificationIdIndex = 1;
       shortProjectTitleIndex = 2;
       dateSubmittedIndex = 3;
       daysSinceSubmissionIndex = 4;
-      statusIndex = 6;
+      statusIndex = 5;
       await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
     } else if (pageType.toLowerCase() == 'ready to assign and reassign in team manager dashboard') {
       searchInputDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries;
@@ -137,10 +138,12 @@ Given(
       });
       expect.soft(allValidStatuses).toBe(true);
     }
-    const studyWideReviewers = await commonItemsPage.getActualListValues(
-      commonItemsPage.tableBodyRows,
-      studyWideReviewerIndex
-    );
+    if (studyWideReviewerIndex != undefined) {
+      studyWideReviewers = await commonItemsPage.getActualListValues(
+        commonItemsPage.tableBodyRows,
+        studyWideReviewerIndex
+      );
+    }
     if (searchInput.toLowerCase().includes('single')) {
       await expect
         .soft(commonItemsPage.search_results_count)
@@ -153,9 +156,9 @@ Given(
             shortTitles,
             daysSinceSubmission,
             datesSubmitted,
-            studyWideReviewers,
             searchInputDataset,
-            searchInput
+            searchInput,
+            studyWideReviewers
           )
         )
         .toBeTruthy();

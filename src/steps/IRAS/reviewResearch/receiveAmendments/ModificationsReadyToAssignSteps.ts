@@ -248,12 +248,7 @@ When(
 
 Then(
   'I capture the modification id of {string} where the lead nation is the country linked to the WFC {string} and with status {string}',
-  async (
-    { modificationsReadyToAssignPage, teamManagerDashboardPage },
-    modificationCount: string,
-    user: string,
-    status: string
-  ) => {
+  async ({ modificationsReadyToAssignPage }, modificationCount: string, user: string, status: string) => {
     let countValue: string;
     let leadNation =
       modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
@@ -270,6 +265,7 @@ Then(
       status,
       countValue
     );
-    await teamManagerDashboardPage.saveModificationId(modificationId.toString(), modificationCount);
+    console.log(modificationId);
+    await modificationsReadyToAssignPage.saveModificationId(modificationId.toString(), modificationCount);
   }
 );

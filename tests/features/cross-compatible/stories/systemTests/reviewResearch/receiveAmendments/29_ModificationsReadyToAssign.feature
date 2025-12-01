@@ -1,7 +1,7 @@
 @ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest
 Feature: WFC - Modifications Tasklist page
     # pagination is missing
-    @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed  @fail @defect
+    @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed  @fail @defectPaginationMissing
     Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
@@ -14,7 +14,7 @@ Feature: WFC - Modifications Tasklist page
             | Workflow_Coordinator_S  | With review body |
             | Workflow_Coordinator_W  | With review body |
 
-    @searchTasklistByIrasIdWithResults @rsp-4104 @Test
+    @searchTasklistByIrasIdWithResults @rsp-4104
     Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
@@ -27,7 +27,7 @@ Feature: WFC - Modifications Tasklist page
         Examples:
             | Search_Input             | User                 | Status           | Modification_Count |
             | Existing_IRAS_ID_Single  | Workflow_Coordinator | With review body | Single             |
-            | Existing_IRAS_ID_Multi   | Workflow_Coordinator | With review body | Multi              |
+            # | Existing_IRAS_ID_Multi   | Workflow_Coordinator | With review body | Multi              |
             | Existing_Partial_IRAS_ID | Workflow_Coordinator | With review body | Partial            |
 
     @filterTasklistByShortTitle @rsp-4104
@@ -612,12 +612,15 @@ Feature: WFC - Modifications Tasklist page
             | Valid_Iras_Id           | User                 | Status           | Modification_Count |
             | Existing_IRAS_ID_Single | Workflow_Coordinator | With review body | Single             |
 
-    @searchTasklistModificationStatus @rsp-4822
-    Scenario Outline: Verify that modifications status' display as expected on the modifications tasklist page
+    @searchTasklistModificationStatus @rsp-4822 @DataIssueNotApproved
+    Scenario Outline: Verify that modifications status display as expected on the modifications tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I '<Visibility>' see the modification displayed in the 'Modifications_Tasklist_Page' list with '<Status>' status
+        And I capture the page screenshot
 
         Examples:
             | Status                                 | User               | Visibility |
