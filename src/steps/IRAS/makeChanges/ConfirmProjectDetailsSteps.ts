@@ -29,7 +29,9 @@ Then(
     );
     const expectedFullProjectTitle = (await projectDetailsIRASPage.getFullProjectTitle()).trimEnd();
     const actualFullProjectTitle = confirmStringNotNull(
-      await confirmProjectDetailsPage.full_project_title_row.textContent()
+      (await confirmProjectDetailsPage.full_project_title_row.textContent())
+        ?.replace(/[’‘]/g, "'")
+        .replace(/[“”]/g, '"')
     );
     const actualFullProjectTitleUpdated = await removeUnwantedWhitespace(
       actualFullProjectTitle
