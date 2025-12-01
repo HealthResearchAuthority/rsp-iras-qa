@@ -34,7 +34,8 @@ Feature: Team Manager Dashboard page
                         | Modification_Status_Received           | nobody             | can        |
                         | Modification_Status_Review_In_Progress | Studywide_Reviewer | can        |
 
-        @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @fail
+        # there is no data in db with not approved status
+        @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @fail @noDBDataNotApproved
         Scenario Outline: Verify that modifications status display as expected on the team manager dashboard where the status is not approved
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
@@ -47,7 +48,7 @@ Feature: Team Manager Dashboard page
                         | Status                           | User   | Visibility |
                         | Modification_Status_Not_Approved | nobody | cannot     |
 
-        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @fail @defect
+        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @fail @defectPaginationMissing
         Scenario Outline: Verify the team manger is able to view existing list of modifications for a specific lead nation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
@@ -305,7 +306,7 @@ Feature: Team Manager Dashboard page
                         | Days_Since_Submission | days since submission | ascending    | descending     |
                         | Status                | status                | ascending    | descending     |
 
-        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909 @fail @defect
+        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909 @fail @defectSWRSorting
         Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for study-wide reviewer
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
