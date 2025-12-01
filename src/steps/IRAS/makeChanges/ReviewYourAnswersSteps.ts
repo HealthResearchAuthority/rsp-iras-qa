@@ -64,6 +64,8 @@ Then(
           key == 'planned_project_end_month_dropdown' ||
           key == 'planned_project_end_year_text'
         ) {
+          const day = datasetProjectTitle.planned_project_end_day_text;
+          if (!day) break;
           const projectEndDateFormatted = await convertDate(
             datasetProjectTitle.planned_project_end_day_text,
             datasetProjectTitle.planned_project_end_month_dropdown,

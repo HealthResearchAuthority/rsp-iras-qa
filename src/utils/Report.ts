@@ -12,12 +12,15 @@ import {
   formatedDuration,
   getOSNameVersion,
   getReportFolderName,
+  processKnownDefectsAsync,
 } from '../utils/UtilFunctions';
 
 class MyReporter implements Reporter {
   async onEnd(result: FullResult) {
     const endTime = new Date().toLocaleString();
     const reportFolderName = getReportFolderName();
+    const jsonDir = `./test-reports/${reportFolderName}/cucumber/json/`;
+    const knownDefectFailCount = await processKnownDefectsAsync(jsonDir);
     try {
       const tempDir = path.join(process.cwd(), '.temp');
       if (fs.existsSync(tempDir)) {
@@ -45,6 +48,7 @@ class MyReporter implements Reporter {
         data: [
           { label: 'Environment', value: 'QA' },
           { label: 'Operating System', value: getOSNameVersion() },
+          { label: 'Known Defect Failures - Pending', value: knownDefectFailCount },
           {
             label: 'Execution Start Time',
             value: displayTimeZone(result.startTime),

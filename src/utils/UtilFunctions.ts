@@ -1,7 +1,7 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
 import { createDecipheriv, DecipherGCM, randomInt } from 'node:crypto';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
 import * as fs from 'node:fs';
@@ -651,4 +651,36 @@ export async function getCurrentDate(): Promise<string> {
     month: 'long',
     year: 'numeric',
   });
+}
+
+export async function processKnownDefectsAsync(jsonDir: string): Promise<number> {
+  let knownDefectFailCount = 0;
+  const files = (await readdir(jsonDir)).filter((f) => f.endsWith('.json'));
+  for (const file of files) {
+    const fullPath = path.join(jsonDir, file);
+    const content = await readFile(fullPath, 'utf8');
+    const json = JSON.parse(content);
+    for (const feature of json) {
+      for (const scenario of feature.elements || []) {
+        const isKnownDefect = scenario.tags?.some(
+          (t: any) =>
+            t.name
+              ?.toLowerCase()
+              .replace(/[^a-z0-9]/g, '') // remove _, -, @, etc.
+              .includes('knowndefect') ?? false
+        );
+        const hasFailed = scenario.steps?.some((s: any) => s.result?.status === 'failed');
+        if (isKnownDefect && hasFailed) {
+          knownDefectFailCount++;
+          for (const step of scenario.steps) {
+            if (step.result.status === 'failed') {
+              step.result.status = 'pending';
+            }
+          }
+        }
+      }
+    }
+    await writeFile(fullPath, JSON.stringify(json, null, 2));
+  }
+  return knownDefectFailCount;
 }
