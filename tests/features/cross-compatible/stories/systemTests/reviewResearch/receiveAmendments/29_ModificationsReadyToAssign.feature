@@ -360,7 +360,7 @@ Feature: WFC - Modifications Tasklist page
         And I capture the page screenshot
         Then I can see a 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
 
-    @ModificationsRandomSelectionAndSort @rsp-4105 @TestTiji
+    @ModificationsRandomSelectionAndSort @rsp-4105
     Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
