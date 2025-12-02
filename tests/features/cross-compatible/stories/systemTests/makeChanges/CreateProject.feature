@@ -1493,7 +1493,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Swansea_ACL_Trials         |
     #The project 5789415 and modifications were created manually and validations are for the specific project
 
-  @rsp-4876 @PostApprovalPageSort @KNOW-DEFECT-RSP-TBD-MOD-ID-SORT
+  @rsp-4876 @PostApprovalPageSort @KNOW-DEFECT-RSP-6411 @fail
   Scenario Outline: Validate the user is able to sort the post approval fields
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1513,7 +1513,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Modification_Type | modification type |
     #The project 5789415 and modifications were created manually and validations are for the specific project
 
-  @rsp-4876 @PostApprovalPaginationFirstPage
+  @rsp-4876 @PostApprovalPaginationFirstPage @KNOW-DEFECT-RSP-6411 @fail
   Scenario Outline: Verify pagination in post approval page when user is on the first page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1533,7 +1533,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | next link         |
     #The project 5789415 and modifications were created manually and validations are for the specific project
 
-  @rsp-4876 @PostApprovalPaginationLastPage
+  @rsp-4876 @PostApprovalPaginationLastPage @KNOW-DEFECT-RSP-6411 @fail
   Scenario Outline: Verify pagination in post approval page when user is on the last page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1553,7 +1553,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | previous link     |
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
-  @rsp-4545 @rsp-5280 @ProjectDocumentsTab
+  @rsp-4545 @rsp-5280 @ProjectDocumentsTab @KNOW-DEFECT-RSP-6411 @fail
   Scenario: Validate the user is able to access and view the project documents details from the project overview page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1564,7 +1564,7 @@ Feature: Create Project - This feature file helps check all the create project j
     And I can see the list is sorted by default in the alphabetical order of the 'document type'
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
-  @rsp-4545 @ProjectDocumentsPaginationFirstPage
+  @rsp-4545 @ProjectDocumentsPaginationFirstPage @KNOW-DEFECT-RSP-6411 @fail
   Scenario Outline: Verify pagination in project documents page when user is on the first page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1585,7 +1585,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | next link         |
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
-  @rsp-4545 @ProjectDocumentsPaginationLastPage
+  @rsp-4545 @ProjectDocumentsPaginationLastPage @KNOW-DEFECT-RSP-6411 @fail
   Scenario Outline: Verify pagination in project documents page when user is on the last page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1741,7 +1741,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Advanced_Filter_One_All | Advanced_Filter_One_All |
       | Advanced_Filter_Two     | Advanced_Filter_Two     |
 
-  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650
+  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650 @KNOW-DEFECT-RSP-6411 @fail
   Scenario: Verify that active filters remain visible during pagination, and that they are cleared when navigating to a different page
     And I have navigated to the 'My_Research_Page'
     And I can see the 'My_Research_Page'

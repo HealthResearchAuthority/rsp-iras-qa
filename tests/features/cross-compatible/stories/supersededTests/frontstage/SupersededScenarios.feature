@@ -1106,3 +1106,27 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
     Examples:
       | Field_And_Summary_Error_Message       |
       | Field_Error_Message_Iras_Id_Duplicate |
+
+  @rsp-4039
+  Scenario Outline: Validate the mandatory field error message on participating organisation page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Participating_Organisations_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
+
+    Examples:
+      | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
+      | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |

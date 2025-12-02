@@ -42,32 +42,6 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
       | Missing_All_Mandatory_Fields           | Default_Value              | Default_Value   | Modifications_Tile      |
       | Missing_Mandatory_Only_Specific_Change | Participating_Organisation | Default_Value   | Modifications_Tile      |
 
-  # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
-  @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
-  Scenario Outline: Validate the mandatory field error message on participating organisation page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Participating_Organisations_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
-
-    Examples:
-      | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
-      | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
-
-
   @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
   Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
@@ -82,6 +56,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
@@ -90,18 +65,18 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Sponsor_Reference_Page'
 
     Examples:
-      | Changes                 | Sponsor_Reference_Page               | Field_And_Summary_Error_Message |
-      | Change_Planned_End_Date | Missing_Mandatory_Field              | Missing_Mandatory_Fields_Error  |
-      | Change_Planned_End_Date | Max_Character_Sponsor_Summary_Fields | Max_Character_Field_Error       |
-      | Change_Planned_End_Date | Invalid_Day_Number                   | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Number_1                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Number_2                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Letters                 | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_Past                    | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
+      | Changes                                | Sponsor_Reference_Page               | Field_And_Summary_Error_Message |
+      | Change_Of_Sponsor_legal_Representative | Missing_Mandatory_Field              | Missing_Mandatory_Fields_Error  |
+      | Change_Of_Sponsor_legal_Representative | Max_Character_Sponsor_Summary_Fields | Max_Character_Field_Error       |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Day_Number                   | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Year_Number_1                | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Year_Number_2                | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Year_Letters                 | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Date_Past                    | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
 
   @rsp-5200 @rsp-4818 @ModificationsEnterFreeTextErrorValidation
   Scenario Outline: Validate the maximum field length error message on enter free text modification page
@@ -430,7 +405,6 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     Then I validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     And I capture the page screenshot
 
-
     Examples:
       | Changes                           | Document_Upload_Files      | Document_Upload_Files_New  | Upload_Type      | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | PNG_File                   | PNG_File                   | single invalid   | Nhs_Involvement_Yes |
@@ -478,7 +452,6 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Multiple_Invalid_Files_Non_Video | multiple invalid | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | JSON_File                        | single invalid   | Nhs_Involvement_Yes |
 
-
   @rsp-5478 @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
     Then I fill the research locations page with '<Research_Locations>'
@@ -515,7 +488,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
 
   @rsp-4314 @ValidateErrorNonRECStudyTypeOptionalDocumentVersionDate
   Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing, using document types applicable to Non-REC study types where document version and date are optional, for documents uploaded with an Incomplete status
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -527,9 +500,12 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
     And I upload '<Document_Upload_Files>' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
@@ -1030,6 +1006,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
     And I click the 'Delete_Modification' link on the 'Modification_Details_Page'
@@ -1079,6 +1056,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     When I click the 'Save_Continue' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     And I capture the page screenshot
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Identification_Enter_Reference_Numbers_Page'
+
     Examples:
       | Changes                                                                   | Field_And_Summary_Error_Message                       | Area_Of_Change                         | Specific_Change        |
       | Modification_To_Add_Administrative_Details_Invalid_Data_Reference_Numbers | Field_Summary_Error_Message_Invalid_Project_Reference | Administrative_Details_For_The_Project | Project_Identification |

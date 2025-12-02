@@ -169,6 +169,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
@@ -176,8 +177,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    # Then I can see the review all changes modifications page
-    # Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
+    Then I can see the review all changes modifications page
+    Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
 
     Examples:
       | Changes                                            | Sponsor_Reference_Page |
@@ -197,6 +198,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
@@ -206,8 +208,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
 
     Examples:
-      | Changes                 |
-      | Change_Planned_End_Date |
+      | Changes                                |
+      | Change_Of_Sponsor_legal_Representative |
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-4818 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextUpdateFreeText
   Scenario Outline: Validate that user can create modifications to add free text and modify free text from modification details page
@@ -1042,6 +1044,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
@@ -1071,8 +1074,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I create '<Changes>' for the created modification
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
@@ -1101,8 +1104,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I create '<Changes>' for the created modification
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Remove' link on the 'Modification_Details_Page'
@@ -1133,8 +1136,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I create '<Changes>' for the created modification
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Change' link on the 'Modification_Details_Page'
@@ -1169,6 +1172,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
     And I can see the modifications details page
@@ -2443,7 +2447,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I can see the project identification enter reference modification page
     And I capture the page screenshot
     And I validate the project information labels using dataset displayed on modifications page
-    And  I fill the project identification enter reference modification page using '<Valid_Data_Change>' dataset
+    And I fill the project identification enter reference modification page using '<Valid_Data_Change>' dataset
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     Then I can see the modification review changes page

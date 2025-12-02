@@ -35,16 +35,35 @@
       "Addition of new participating organisation type",
       "Change to activities undertaken by an existing participating organisation type"
     ],
-    "Project_Design": ["Select specific change", "Change to planned end date"],
+    "Project_Design": [
+      "Select specific change", 
+      "Change to planned end date",
+      "Other significant change to project design",
+      "Change to background information that affects scientific value of the project",
+      "Change to the endpoint or the main objective",
+      "Change to the inclusion or exclusion criteria: non-significant",
+      "Additional or new control group (placebo) or arm to the project",
+      "Other non-significant change to the project design",
+      "Change to the participant sample size: non-significant change",
+      "Change to the participant sample size: significant",
+      "Change to the use of human biological samples in the project: non-significant (for example, change to the logistical, transporting or storing arrangements)",
+      "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
+      "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
+      "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)"
+    ],
     "Project_Documents": [
       "Select specific change",
       "Correction of typographical errors",
-      "CRF/other study data records - Changes in the documentation used by the research team for recording study data",
-      "GDPR wording - Accepted wording used verbatim",
-      "Other minor change to study documents (e.g. information sheets, consent forms, questionnaires, letters) that will have additional resource implications for participating organisations",
+      "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
+      "GDPR: accepted wording used verbatim",
+      "Other non-significant change to project documents",
       "Post trial information for participants (which does not contradict the protocol)",
-      "Protocol - Non-substantial changes (e.g. not affecting safety or the scientific value of the trial)",
-      "Translations - Addition of translated versions of participant-facing documentation"
+      "Change to protocol: non-significant not affecting safety or the scientific value of the project",
+      "Translated versions of participant-facing documents",
+      "Insurance renewal - no change to the level or breadth of cover",
+      "GDPR wording - Unaccepted alternative wording used",
+      "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below",
+      "Protocol - Significant changes (e.g. affecting safety or the scientific value of the trial)"
     ]
   },
   "Select_Area_Of_Change": {

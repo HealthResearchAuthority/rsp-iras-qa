@@ -58,10 +58,8 @@ export default class SponsorReferencePage {
       })
       .getByRole('textbox');
     this.sponsor_summary_textbox = this.page
-      .locator('.govuk-form-group')
-      .locator('.govuk-form-group', {
-        has: this.page.getByText(this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_summary_label),
-      })
+      .getByText(this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_summary_label)
+      .locator('..')
       .getByRole('textbox');
     this.sponsor_modification_date_hint_label = this.page.getByTestId('Questions[1]_AnswerText-hint').locator('p');
   }
