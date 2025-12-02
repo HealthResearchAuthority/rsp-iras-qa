@@ -105,8 +105,8 @@ Feature: Display project records on the Search Projects page status and roles
                         | Workflow_Coordinator |
 
 
-        @DraftStatusProjectSWRWFCTeamManager @fail @KNOWN_DEFECT
-        Scenario Outline: Verify that project records are not displayed on the Search Projects page for Team Managers, Workflow Coordinators, and Study-wide Reviewers, when the status 'In draft'
+        @DraftStatusProjectSWRWFCTeamManager @fail @KNOWN_DEFECT-RSP-6416
+        Scenario Outline: Verify that In draft project records are not displayed on the Search Projects page for TM, WFC, and SWR
                 Given I have navigated to the 'My_Research_Page' as 'Applicant_User'
                 And I can see the my research projects page
                 And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
