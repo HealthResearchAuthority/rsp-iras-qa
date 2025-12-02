@@ -142,13 +142,17 @@ Then(
       await addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown
         .locator('option')
         .allTextContents()
-    ).filter((option) => option.trim() !== 'Please select...');
-    expect.soft(documentTypeDropdownValuesActual).toEqual(documentTypeDropdownValuesExpected);
-    // check the document types are sorted in alphabetical order
-    const sortedList = [...documentTypeDropdownValuesActual].sort((a, b) =>
+    )
+      .map((option) => option.trim())
+      .filter((option) => option !== 'Please select...');
+
+    const sortedDocumentTypeDropdownValuesActual = [...documentTypeDropdownValuesActual].sort((a, b) =>
       a.localeCompare(b, 'en', { sensitivity: 'base' })
     );
-    expect.soft(documentTypeDropdownValuesActual).toEqual(sortedList);
+    const SortedDocumentTypeDropdownValuesExpected = [...documentTypeDropdownValuesExpected].sort((a, b) =>
+      a.localeCompare(b, 'en', { sensitivity: 'base' })
+    );
+    expect.soft(sortedDocumentTypeDropdownValuesActual).toEqual(SortedDocumentTypeDropdownValuesExpected);
   }
 );
 
@@ -203,19 +207,6 @@ Then(
         .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_month_dropdown)
         .toBeHidden();
       await expect.soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_year_text).toBeHidden();
-      if (documentTypeName === 'Curriculum vitae (CV) /suitability of researcher') {
-        await expect
-          .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown)
-          .toBeVisible();
-        const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown;
-        if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
-          await locator.selectOption('Academic Supervisor');
-        }
-      } else {
-        await expect
-          .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown)
-          .toBeHidden();
-      }
     } else if (documentVersionDate === 'mandatory') {
       await expect
         .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_version_text)

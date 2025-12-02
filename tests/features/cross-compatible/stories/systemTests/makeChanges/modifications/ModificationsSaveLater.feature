@@ -1678,7 +1678,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
       | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
-  @rsp-4314 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeOptionalDocumentVersionDate
+  @rsp-4314 @rsp-6167 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeOptionalDocumentVersionDate
   Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are optional, for documents uploaded with an Incomplete status, and review the entered information
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1692,17 +1692,19 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
     And I upload '<Document_Upload_Files>' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     And I capture the page screenshot
     And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
     And I validate the project information labels using dataset displayed on modifications page
     And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
@@ -1720,26 +1722,31 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the review your document information page
     Then I validate the field values 'Valid_Data_All_Fields' displayed in the review your document information page
     When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
-    And I can see the modification progress saved successful message on project overview page
-    And I can see the project overview page
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
+    Then I can see the review all changes page
 
     Examples:
-      | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                                                                                       | Version_Date | Document_Details_Info_Optional          |
-      | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Evidence_Of_Insurance_Or_Indemnity                                                                            | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant_Facing_Material_Other                                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Questionnaire_Validated                                                                                       | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher                                                                 | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Student_Research_Criteria_Eligibility_Declaration                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Dear_Investigator_Letter                                                                                      | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Funder_Letters_Outcome_Of_Funding_Panel                                                                       | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Statisticians_Letter                                                                                          | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referees_Or_Other_Scientific_Critique_Report                                                                  | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Sponsor_Site_Agreement                                                                                        | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Schedule_Of_Events_Or_Schedule_Of_Events_Cost_Attribution_Template_SoECAT                                     | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Data_Flow_Diagram_Or_Documents_Demonstrating_Conformity_With_Data_Protection_And_Confidentiality_Requirements | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Miscellaneous                                                                                                 | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Changes                                | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                                                                                       | Version_Date | Document_Details_Info_Optional          |
+      | Change_Of_Sponsor_legal_Representative | Change_Of_Sponsor_legal_Representative       | PNG_File              | Non_REC_Study_Types                         | Evidence_Of_Insurance_Or_Indemnity                                                                            | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant_Facing_Material_Other                                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Questionnaire_Validated                                                                                       | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Student_Research_Criteria_Eligibility_Declaration                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Dear_Investigator_Letter                                                                                      | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Funder_Letters_Outcome_Of_Funding_Panel                                                                       | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Statisticians_Letter                                                                                          | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referees_Or_Other_Scientific_Critique_Report                                                                  | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Sponsor_Site_Agreement                                                                                        | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Schedule_Of_Events_Or_Schedule_Of_Events_Cost_Attribution_Template_SoECAT                                     | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Data_Flow_Diagram_Or_Documents_Demonstrating_Conformity_With_Data_Protection_And_Confidentiality_Requirements | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Miscellaneous                                                                                                 | optional     | Valid_Data_Fields_Optional_Version_Date |
+      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher_Principal_Investigator                                          | optional     | Valid_Data_Mandatory_Fields             |
+      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher_Chief_Investigator                                              | optional     | Valid_Data_Mandatory_Fields             |
+      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher_Academic_Supervisor                                             | optional     | Valid_Data_Mandatory_Fields             |
+      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher_Student                                                         | optional     | Valid_Data_Mandatory_Fields             |
 
   @rsp-4314 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeMandatoryDocumentVersionDate
   Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are mandatory, for documents uploaded with an Incomplete status, and review the entered information
