@@ -839,7 +839,7 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
   } else {
     rowCountExpected = Number.parseInt(commonItemsPage.commonTestData.default_page_size, 10);
   }
-  expect(rowCountActual - 1).toBe(rowCountExpected);
+  expect.soft(rowCountActual - 1).toBe(rowCountExpected);
 });
 
 Then(

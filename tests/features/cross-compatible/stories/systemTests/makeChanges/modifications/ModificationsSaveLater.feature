@@ -2334,7 +2334,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           | New_Changes                              | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
 
-  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP_5495_5496_5285_6288_6324 @fail
+  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP_5495_5496_5285_6288_6324_6411 @fail
   Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modifiction post submission page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

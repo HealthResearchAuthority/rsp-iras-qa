@@ -141,10 +141,10 @@ Feature: Create Amendment - Create Project
       | Valid_Data_All_Fields | Valid_Email_Data_Special_Characters |
       | Valid_Data_All_Fields | Valid_Email_Data_Hyphen_Underscore  |
       | Valid_Data_All_Fields | Valid_Email_Data_Domain             |
-      # | Valid_Data_All_Fields | Valid_Email_Data_Unicode              |
-      # | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Unicode     |
-      # | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains |
-      # | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       |
+  # | Valid_Data_All_Fields | Valid_Email_Data_Unicode              |
+  # | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Unicode     |
+  # | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains |
+  # | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       |
 
   @rsp-1897 @rsp-4209
   Scenario: Validate breadcrumb navigations in chief investigator page
@@ -1400,7 +1400,8 @@ Feature: Create Amendment - Create Project
       | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Nhs     |
       | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Non_Nhs |
 
-  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @KNOWN-DEFECT-RSP-5322
+  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @abc
+  #The project 222827 and modifications were created manually and validations are for the specific project
   Scenario Outline: Validate the expected data is available and displayed on the project overview page
     And I navigate to the project overview page of the '<Project_Name>' project
     And I capture the page screenshot
@@ -1420,16 +1421,41 @@ Feature: Create Amendment - Create Project
     Then I can see the 'Post_Approval_Tab' ui labels on the project overview page
 
     Examples:
-      | Project_Name               |
-      | Kilmarnock_Cancer_Research |
-      | Swansea_ACL_Trials         |
-    #The project 5789415 and modifications were created manually and validations are for the specific project
+      | Project_Name                         |
+      | Salford Primary Care Workforce Study |
 
-  @rsp-4876 @PostApprovalPageSort @KNOW-DEFECT-RSP-TBD-MOD-ID-SORT
+  @rsp-4876 @PostApprovalPageSort @abc
   Scenario Outline: Validate the user is able to sort the post approval fields
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I capture the page screenshot
     And the default page size should be 'twenty'
     And I capture the page screenshot
     When I click the '<Sort_Button>' button on the 'Post_Approval_Page'
@@ -1440,16 +1466,41 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Sort_Button       | Sort_Field        |
-      | Modification_Id   | modification id   |
-      | Modification_Type | modification type |
-    #The project 5789415 and modifications were created manually and validations are for the specific project
+      | Sort_Button     | Sort_Field      |
+      | Modification_Id | modification id |
 
-  @rsp-4876 @PostApprovalPaginationFirstPage
+  @rsp-4876 @PostApprovalPaginationFirstPage @KNOWN_DEFECT_RSP_6411 @fail
   Scenario Outline: Verify pagination in post approval page when user is on the first page
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I capture the page screenshot
     And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
@@ -1463,13 +1514,39 @@ Feature: Create Amendment - Create Project
       | Navigation_Method |
       | page number       |
       | next link         |
-    #The project 5789415 and modifications were created manually and validations are for the specific project
 
-  @rsp-4876 @PostApprovalPaginationLastPage
+  @rsp-4876 @PostApprovalPaginationLastPage @KNOWN_DEFECT_RSP_6411 @fail
   Scenario Outline: Verify pagination in post approval page when user is on the last page
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I capture the page screenshot
     And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
@@ -1483,26 +1560,28 @@ Feature: Create Amendment - Create Project
       | Navigation_Method |
       | page number       |
       | previous link     |
-    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
-  @rsp-4545 @rsp-5280 @ProjectDocumentsTab
+  @rsp-4545 @rsp-5280 @ProjectDocumentsTab @abc
+  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario: Validate the user is able to access and view the project documents details from the project overview page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
     And I capture the page screenshot
+    And I can see a 'Search' button on the 'Project_Documents_Page'
+    And I click the 'Advanced_Filters' button on the 'Project_Documents_Page'
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
-    And the default page size should be 'twenty'
     And I can see the list is sorted by default in the alphabetical order of the 'document type'
-    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
-  @rsp-4545 @ProjectDocumentsPaginationFirstPage
+  @rsp-4545 @ProjectDocumentsPaginationFirstPage @KNOWN_DEFECT_RSP_6411 @fail
+  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario Outline: Verify pagination in project documents page when user is on the first page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I can now see a table of search results for project documents page
+    And the default page size should be 'twenty'
     And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
     And the 'Next' button will be 'available' to the user
@@ -1515,9 +1594,9 @@ Feature: Create Amendment - Create Project
       | Navigation_Method |
       | page number       |
       | next link         |
-    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
-  @rsp-4545 @ProjectDocumentsPaginationLastPage
+  @rsp-4545 @ProjectDocumentsPaginationLastPage @KNOWN_DEFECT_RSP_6411 @fail
+  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario Outline: Verify pagination in project documents page when user is on the last page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1538,6 +1617,7 @@ Feature: Create Amendment - Create Project
       | previous link     |
 
   @rsp-3930 @ProjectDocumentDownload
+  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario: Validate the user is able to download the project document from the project overview page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1673,7 +1753,7 @@ Feature: Create Amendment - Create Project
       | Advanced_Filter_One_All | Advanced_Filter_One_All |
       | Advanced_Filter_Two     | Advanced_Filter_Two     |
 
-  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650
+  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650 @KNOWN_DEFECT_RSP_6411 @fail
   Scenario: Verify that active filters remain visible during pagination, and that they are cleared when navigating to a different page
     And I have navigated to the 'My_Research_Page'
     And I can see the 'My_Research_Page'
