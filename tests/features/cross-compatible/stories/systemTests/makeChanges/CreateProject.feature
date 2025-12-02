@@ -1537,7 +1537,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Sort_Button     | Sort_Field      |
       | Modification_Id | modification id |
 
-  @rsp-4876 @PostApprovalPaginationFirstPage @KNOWN_DEFECT_RSP_6411 @fail
+  @rsp-4876 @PostApprovalPaginationFirstPage
   Scenario Outline: Verify pagination in post approval page when user is on the first page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1583,7 +1583,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | page number       |
       | next link         |
 
-  @rsp-4876 @PostApprovalPaginationLastPage @KNOWN_DEFECT_RSP_6411 @fail
+  @rsp-4876 @PostApprovalPaginationLastPage
   Scenario Outline: Verify pagination in post approval page when user is on the last page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
