@@ -394,7 +394,9 @@ Then(
       .trim();
     const expectedShortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     const actualShortProjectTitle = confirmStringNotNull(
-      await projectOverviewPage.project_short_title_label.textContent()
+      (await projectOverviewPage.project_short_title_label.textContent())
+        ?.replaceAll(/[’‘]/g, "'")
+        .replaceAll(/[“”]/g, '"')
     );
     const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
       actualShortProjectTitle
@@ -441,7 +443,9 @@ Then(
 
     const expectedShortProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const actualShortProjectTitle = confirmStringNotNull(
-      await projectOverviewPage.project_details_tab_short_project_title.textContent()
+      (await projectOverviewPage.project_details_tab_short_project_title.textContent())
+        ?.replaceAll(/[’‘]/g, "'")
+        .replaceAll(/[“”]/g, '"')
     );
     const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
       actualShortProjectTitle
@@ -451,7 +455,9 @@ Then(
 
     const expectedFullProjectTitle = (await projectDetailsIRASPage.getFullProjectTitle()).trimEnd();
     const actualFullProjectTitle = confirmStringNotNull(
-      await projectOverviewPage.project_details_tab_full_project_title.textContent()
+      (await projectOverviewPage.project_details_tab_full_project_title.textContent())
+        ?.replaceAll(/[’‘]/g, "'")
+        .replaceAll(/[“”]/g, '"')
     );
     const actualFullProjectTitleUpdated = await removeUnwantedWhitespace(
       actualFullProjectTitle

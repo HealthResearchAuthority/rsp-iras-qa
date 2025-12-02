@@ -1,5 +1,5 @@
 @ApplicantUser @ModificationsSaveLater @SystemTest
-Feature: Create Modifications - ModificationsSaveLater: This feature file helps check all the partial journey that a user can leave at any time and come back again to
+Feature: Create Modifications - ModificationsSaveLater: This feature file helps check all the partial journey
 
   Background:
     Given I have navigated to the my research projects page

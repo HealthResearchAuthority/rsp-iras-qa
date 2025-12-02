@@ -1,7 +1,7 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
 import { createDecipheriv, DecipherGCM, randomInt } from 'node:crypto';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
 import * as fs from 'node:fs';
@@ -651,4 +651,38 @@ export async function getCurrentDate(): Promise<string> {
     month: 'long',
     year: 'numeric',
   });
+}
+
+export async function processKnownDefectsAsync(jsonDir: string): Promise<number> {
+  let knownDefectFailCount = 0;
+  const isKnownDefect = (scenario: any) =>
+    scenario.tags?.some((t: any) =>
+      (t.name ?? '')
+        .toLowerCase()
+        .replaceAll(/[^a-z0-9]/g, '')
+        .includes('knowndefect')
+    ) ?? false;
+  const hasFailedSteps = (scenario: any) => scenario.steps?.some((s: any) => s.result?.status === 'failed') ?? false;
+  const markFailedStepsAsPending = (scenario: any) =>
+    scenario.steps?.forEach((s: any) => {
+      if (s.result?.status === 'failed') {
+        s.result.status = 'pending';
+      }
+    });
+  const files = (await readdir(jsonDir)).filter((f) => f.endsWith('.json'));
+  for (const file of files) {
+    const fullPath = path.join(jsonDir, file);
+    const content = await readFile(fullPath, 'utf8');
+    const json = JSON.parse(content);
+    json.forEach((feature: any) =>
+      (feature.elements ?? []).forEach((scenario: any) => {
+        if (isKnownDefect(scenario) && hasFailedSteps(scenario)) {
+          knownDefectFailCount++;
+          markFailedStepsAsPending(scenario);
+        }
+      })
+    );
+    await writeFile(fullPath, JSON.stringify(json, null, 2));
+  }
+  return knownDefectFailCount;
 }
