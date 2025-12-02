@@ -1400,7 +1400,7 @@ Feature: Create Amendment - Create Project
       | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Nhs     |
       | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Non_Nhs |
 
-  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @abc
+  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050
   #The project 222827 and modifications were created manually and validations are for the specific project
   Scenario Outline: Validate the expected data is available and displayed on the project overview page
     And I navigate to the project overview page of the '<Project_Name>' project
@@ -1424,7 +1424,7 @@ Feature: Create Amendment - Create Project
       | Project_Name                         |
       | Salford Primary Care Workforce Study |
 
-  @rsp-4876 @PostApprovalPageSort @abc
+  @rsp-4876 @PostApprovalPageSort
   Scenario Outline: Validate the user is able to sort the post approval fields
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1561,7 +1561,7 @@ Feature: Create Amendment - Create Project
       | page number       |
       | previous link     |
 
-  @rsp-4545 @rsp-5280 @ProjectDocumentsTab @abc
+  @rsp-4545 @rsp-5280 @ProjectDocumentsTab
   #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario: Validate the user is able to access and view the project documents details from the project overview page
     When I navigate to the project overview page of the 'Test_Project' project
