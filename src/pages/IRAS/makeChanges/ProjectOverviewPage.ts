@@ -540,8 +540,8 @@ export default class ProjectOverviewPage {
 
   async getProjectColumnIndex(columnName: string): Promise<number> {
     let columnIndex: number;
-    if (columnName.toLowerCase() == 'document name') {
-      columnIndex = 1;
+    if (columnName.toLowerCase() == 'file name') {
+      columnIndex = 2;
     }
     return columnIndex;
   }

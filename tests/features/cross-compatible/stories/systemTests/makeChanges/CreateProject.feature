@@ -1625,7 +1625,7 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I capture the page screenshot
-    When I click a 'document name' on the project overview page and validate the downlaoded file in the download folder
+    When I click a 'file name' on the project overview page and validate the downlaoded file in the download folder
     And I capture the page screenshot
 
   @VerifyValidSearchAndAdvancedFilterMyResearch @rsp-4650
