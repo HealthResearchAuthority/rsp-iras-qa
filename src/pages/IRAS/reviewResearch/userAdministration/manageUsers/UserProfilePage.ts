@@ -110,9 +110,7 @@ export default class UserProfilePage {
       .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading_prefix, { exact: false });
 
     this.row_value_locator = this.page.locator('input');
-    this.row_change_link_locator = this.page
-      .getByRole('cell')
-      .getByText(this.linkTextData.User_Profile_Page.Change, { exact: true });
+    this.row_change_link_locator = this.page.getByRole('cell').getByText(this.linkTextData.User_Profile_Page.Change);
     this.title_row = this.page.locator('tr', {
       has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.title_label, {
         exact: true,

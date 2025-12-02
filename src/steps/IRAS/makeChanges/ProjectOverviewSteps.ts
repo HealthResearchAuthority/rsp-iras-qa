@@ -6,7 +6,6 @@ import {
   getRandomNumber,
   confirmArrayNotNull,
 } from '../../../utils/UtilFunctions';
-import { Locator } from '@playwright/test';
 import path from 'node:path';
 const { When, Then } = createBdd(test);
 
@@ -26,12 +25,15 @@ Then(
   'I can see the {string} project details on project overview page for {string}',
   async ({ projectDetailsIRASPage, projectOverviewPage }, projectType: string, datasetName: string) => {
     let expectedIrasId: string;
+    let expectedProjectTitle: string;
     if (projectType.toLowerCase() == 'existing') {
       expectedIrasId = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.iras_id;
+      expectedProjectTitle =
+        projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.short_project_title_text;
     } else {
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+      expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     }
-    const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     const projectTitle = confirmStringNotNull(await projectOverviewPage.project_overview_heading.textContent());
     const projectDetails = projectTitle.split('\n');
     const irasId = projectDetails[0].split(' ');
@@ -67,12 +69,12 @@ Then(
 
 Then(
   'I can see the {string} ui labels on the project overview page',
-  async ({ projectOverviewPage }, datasetName: string) => {
+  async ({ projectOverviewPage, commonItemsPage }, datasetName: string) => {
     const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        const locator: Locator = projectOverviewPage[key];
-        await expect(locator).toBeVisible();
+        const labelValue = await commonItemsPage.getInnerLabel(key, projectOverviewPage);
+        expect.soft(labelValue).toBe(dataset[key]);
       }
     }
   }
@@ -105,13 +107,16 @@ Then(
   'I validate the {string} data for {string} is displayed in the project details tab of project overview page',
   async ({ projectDetailsIRASPage, projectOverviewPage }, projectType: string, datasetName: string) => {
     let expectedIrasId: string;
+    let expectedProjectTitle: string;
     await expect(projectOverviewPage.project_details_heading).toBeVisible();
     if (projectType.toLowerCase() == 'existing') {
       expectedIrasId = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.iras_id;
+      expectedProjectTitle =
+        projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.short_project_title_text;
     } else {
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+      expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     }
-    const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     const actualProjectTitle = confirmStringNotNull(
       await projectOverviewPage.project_details_tab_short_project_title.textContent()
     );
@@ -131,21 +136,21 @@ Then(
     } else {
       dataset = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetName];
     }
-    const expectedChiefInvestigator = dataset.chief_investigator_email_text;
-    const expectedPrimarySponsorOrganisation = dataset.primary_sponsor_organisation_text;
-    const expectedSponsorContact = dataset.sponsor_contact_email_text;
-    const actualChiefInvestigator = confirmStringNotNull(
-      await projectOverviewPage.project_team_tab_chief_investigator.textContent()
+    const expectedChiefInvestigatorFirstName = dataset.chief_investigator_first_name;
+    const expectedChiefInvestigatorLastName = dataset.chief_investigator_last_name;
+    const expectedChiefInvestigatorEmail = dataset.chief_investigator_email_text;
+    const actualChiefInvestigatorFirstName = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_chief_investigator_first_name.textContent()
     );
-    const actualPrimarySponsorOrganisation = confirmStringNotNull(
-      await projectOverviewPage.project_team_tab_primary_sponsor_org.textContent()
+    const actualChiefInvestigatorLastName = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_chief_investigator_last_name.textContent()
     );
-    const actualSponsorContact = confirmStringNotNull(
-      await projectOverviewPage.project_team_tab_sponsor_contact.textContent()
+    const actualChiefInvestigatorEmail = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_chief_investigator_email.textContent()
     );
-    expect.soft(actualChiefInvestigator).toBe(expectedChiefInvestigator);
-    expect.soft(actualPrimarySponsorOrganisation).toBe(expectedPrimarySponsorOrganisation);
-    expect.soft(actualSponsorContact).toBe(expectedSponsorContact);
+    expect.soft(actualChiefInvestigatorFirstName).toBe(expectedChiefInvestigatorFirstName);
+    expect.soft(actualChiefInvestigatorLastName).toBe(expectedChiefInvestigatorLastName);
+    expect.soft(actualChiefInvestigatorEmail).toBe(expectedChiefInvestigatorEmail);
   }
 );
 
@@ -160,16 +165,13 @@ Then(
     const actualParticipatingNations = confirmStringNotNull(
       await projectOverviewPage.research_locations_tab_participating_nations.textContent()
     );
-    const actualTrimmedParticipatingNations = await removeUnwantedWhitespace(
-      confirmStringNotNull(actualParticipatingNations)
-    );
     const actualNhsHscOrganisations = confirmStringNotNull(
       await projectOverviewPage.research_locations_tab_nhs_hsc_organisations.textContent()
     );
     const actualLeadNation = confirmStringNotNull(
       await projectOverviewPage.research_locations_tab_lead_nation.textContent()
     );
-    expect.soft(actualTrimmedParticipatingNations).toContain(expectedParticipatingNations);
+    expect.soft(actualParticipatingNations).toContain(expectedParticipatingNations);
     expect.soft(actualNhsHscOrganisations).toBe(expectedNhsHscOrganisations);
     expect.soft(actualLeadNation).toBe(expectedLeadNation);
   }
@@ -508,45 +510,13 @@ Then(
       commonItemsPage.tableBodyRows,
       searchColumnIndex
     );
-    const modificationTypePriority: Record<string, number> = {
-      Substantial: 1,
-      'Modification of an important detail': 2,
-      'Minor modification': 3,
-      'Non-notifiable': 4,
-    };
-    const categoryPriority: Record<string, number> = {
-      A: 1,
-      'B/C': 2,
-      B: 3,
-      C: 4,
-      'New Site': 5,
-      'N/A': 6,
-    };
-    const reviewTypePriority: Record<string, number> = {
-      'Review required': 1,
-      'No review required': 2,
-    };
-    const directionMultiplier = sortDirection.toLowerCase() === 'ascending' ? 1 : -1;
     let expectedSortedList: string[];
-
-    if (sortField.toLowerCase() === 'modification type') {
-      expectedSortedList = [...actualList].sort((a, b) => {
-        return (modificationTypePriority[a] - modificationTypePriority[b]) * directionMultiplier;
-      });
-    } else if (sortField.toLowerCase() === 'category') {
-      expectedSortedList = [...actualList].sort((a, b) => {
-        return (categoryPriority[a] - categoryPriority[b]) * directionMultiplier;
-      });
-    } else if (sortField.toLowerCase() === 'review type') {
-      expectedSortedList = [...actualList].sort((a, b) => {
-        return (reviewTypePriority[a] - reviewTypePriority[b]) * directionMultiplier;
-      });
-    } else if (sortDirection.toLowerCase() == 'ascending') {
-      expectedSortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    if (sortDirection.toLowerCase() == 'ascending') {
+      expectedSortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
-      expectedSortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      expectedSortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect.soft(actualList).toEqual(expectedSortedList);
+    expect(actualList).toEqual(expectedSortedList);
   }
 );
 
