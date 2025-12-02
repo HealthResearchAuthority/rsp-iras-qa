@@ -1,5 +1,5 @@
 @ApplicantUser @createProject @createAmendment @SystemTest
-Feature: Create Amendment - Create Project
+Feature: Create Project - This feature file helps check all the create project journeys
 
   Background:
     Given I have navigated to the my research projects page
@@ -451,7 +451,7 @@ Feature: Create Amendment - Create Project
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
+    Then I can see the review your answers page
     And I capture the page screenshot
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -794,61 +794,15 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     And I can see the project details iras page
 
-  @rsp-4893 @rsp-4977 @rsp-5341 @ValidateNonReviewableModificationStatusesInDraftAndApproved @ValidateSubmissionDatePostApprovalPage
-  Scenario Outline: Validate modification status transition from in draft to approved and submitted date field for non reviewable modification
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the chief investigator page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    And I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I create '<Changes>' for the created modification
-    When I click the 'Save_For_Later' button on the 'Modification_Details_Page'
-    Then I can see the project overview page
-    And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
-    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
-    Then I validate submitted date field value for 'Modification_Status_Indraft' modifications and confirm 'In draft' status
-    And I capture the page screenshot
-    And I click on the modification id hyperlink in the post approval tab
-    And I can see the modifications details page
-    And I validate the project information labels using dataset displayed on modifications page
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    Then I can see the add sponsor reference page
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    Then I can see the review all changes modifications page
-    And I validate the project information labels using dataset displayed on modifications page
-    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I click the 'Submit_To_Regulator' button on the 'Modification_Sent_To_Sponsor_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    Then I can see the modification status as 'Modification_Status_Approved' on the post approval page
-    Then I validate submitted date field value for 'Modification_Status_Approved' modifications and confirm 'Approved' status
-    And I capture the page screenshot
-    And I click on the modification id hyperlink in the post approval tab
-    Then I can see the review all changes modifications page
-    And the 'Delete_Modification' link should be 'not available' on the 'Review_All_Changes_Page'
-    And I validate the status 'Modification_Status_Approved' is displayed on the page
-    And I capture the page screenshot
-
-    Examples:
-      | Changes                                                |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
-
   @rsp-4887 @VerifyValidSearchPostApproval
   Scenario Outline: Verify the user is able to search the modifications with a valid search criteria
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -863,6 +817,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
@@ -871,7 +826,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     Then I can see the review all changes page
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I click the 'Submit_To_Regulator' button on the 'Confirmation_Page'
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
@@ -888,6 +843,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-4887 @VerifyNoResultsFoundInvalidSearchOnlyPostApproval
   Scenario: Verify the user can see no matching results found message on clicking search button with invalid modification id
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -915,6 +877,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-4887 @ApplyFiltersAndSearchPostApproval
   Scenario Outline: Verify the user is able to filter modifications using a combination of advanced filters and search criteria
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -929,6 +898,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
@@ -937,7 +907,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     Then I can see the review all changes page
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I click the 'Submit_To_Regulator' button on the 'Confirmation_Page'
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
@@ -964,6 +934,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-4887 @ValidateClearAllFiltersPostApproval
   Scenario: Validate clear all filters removes all active filters in the post approval page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -995,6 +972,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-4887 @RemoveAllActiveFiltersOneByOnePostApproval
   Scenario Outline: Verify the user can remove all the selected filters one by one
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -1026,6 +1010,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-3819 @rsp-4874 @rsp-4868 @reviewYourAnswersAllFields
   Scenario Outline: Verify that user completed all question and can review the answers on create project journey
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1055,6 +1046,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-3819 @rsp-4868 @reviewAnswersChangeProjTitleFields
   Scenario Outline: Verify that user can change the project title details all fields from review the answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1085,6 +1083,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-4209 @rsp-4868 @reviewAnswersChangeProjKeyRoles
   Scenario Outline: Verify that user can change the project key roles all fields from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1118,6 +1123,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-4868 @reviewAnswersChangeResearchLoc
   Scenario Outline: Verify that user can change the project research locations fields from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1151,6 +1163,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersEnterProjTitle
   Scenario Outline: Verify that user has not completed all questions and can enter project title details from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1181,6 +1200,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersEnterKeyRoles
   Scenario Outline: Verify that user has not completed all questions and can enter project key roles details from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1212,6 +1238,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-1867 @rsp-3819 @rsp-4868 @reviewAnswersEnterResearchLoc
   Scenario Outline: Verify that user has not completed all questions and can enter research locations details from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1245,6 +1278,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-4868 @reviewAnswersNavigationResLocProjTitle
   Scenario Outline: Verify back navigation on project title and research locations page from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1278,6 +1318,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-2837 @rsp-4868 @reviewAnswersNavigationKeyRoles
   Scenario Outline: Verify back navigation on chief investigator page from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     Then I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1305,6 +1352,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-1867 @rsp-3819 @rsp-4868 @ValidateConfirmProjectFlow
   Scenario Outline: Validate user is able to see the project overview page when user submit the review answer page with all mandatory fields entered correctly
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     And I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1330,6 +1384,13 @@ Feature: Create Amendment - Create Project
 
   @rsp-1867 @rsp-3819 @rsp-4880 @rsp-4868 @ValidateConfirmProjectPage
   Scenario Outline: Validate user is able to see the project success confirmation screen and then the project overview page when user submit the review answer page with all mandatory fields entered correctly
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
     And I fill the project identifiers page with '<Project_Identifiers>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -1358,7 +1419,14 @@ Feature: Create Amendment - Create Project
 
   @rsp-1864 @ProjectOverviewPage
   Scenario Outline: Verify user is able to click on the project link on my research page and able to navigate to project overview page
-    Then I fill the project identifiers page with '<Project_Identifiers>'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'

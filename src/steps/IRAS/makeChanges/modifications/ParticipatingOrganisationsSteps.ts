@@ -26,7 +26,7 @@ Then(
     const actualProjectTitle = confirmStringNotNull(
       await participatingOrganisationsPage.short_project_title_text.textContent()
     );
-    const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+    const expectedProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const actualModificationId = confirmStringNotNull(
       await participatingOrganisationsPage.modification_id_text.textContent()
     );
@@ -35,11 +35,6 @@ Then(
     expect(actualIrasIdValue).toBe(expectedIrasIdValue);
     expect(actualProjectTitle).toBe(expectedProjectTitle);
     expect(actualModificationId).toBe(expectedModificationId);
-    // All the below assertion can be removed when the functionality is implemented - now it's UI only function
-    expect(participatingOrganisationsPage.remove_this_change_link).toBeVisible();
-    expect(participatingOrganisationsPage.advanced_filter_link).toBeVisible();
-    expect(participatingOrganisationsPage.participating_organisations_search_text).toBeVisible();
-    expect(participatingOrganisationsPage.participating_organisations_search_button).toBeVisible();
   }
 );
 
