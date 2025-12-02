@@ -504,45 +504,13 @@ Then(
       commonItemsPage.tableBodyRows,
       searchColumnIndex
     );
-    const modificationTypePriority: Record<string, number> = {
-      Substantial: 1,
-      'Modification of an important detail': 2,
-      'Minor modification': 3,
-      'Non-notifiable': 4,
-    };
-    const categoryPriority: Record<string, number> = {
-      A: 1,
-      'B/C': 2,
-      B: 3,
-      C: 4,
-      'New Site': 5,
-      'N/A': 6,
-    };
-    const reviewTypePriority: Record<string, number> = {
-      'Review required': 1,
-      'No review required': 2,
-    };
-    const directionMultiplier = sortDirection.toLowerCase() === 'ascending' ? 1 : -1;
     let expectedSortedList: string[];
-
-    if (sortField.toLowerCase() === 'modification type') {
-      expectedSortedList = [...actualList].sort((a, b) => {
-        return (modificationTypePriority[a] - modificationTypePriority[b]) * directionMultiplier;
-      });
-    } else if (sortField.toLowerCase() === 'category') {
-      expectedSortedList = [...actualList].sort((a, b) => {
-        return (categoryPriority[a] - categoryPriority[b]) * directionMultiplier;
-      });
-    } else if (sortField.toLowerCase() === 'review type') {
-      expectedSortedList = [...actualList].sort((a, b) => {
-        return (reviewTypePriority[a] - reviewTypePriority[b]) * directionMultiplier;
-      });
-    } else if (sortDirection.toLowerCase() == 'ascending') {
-      expectedSortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    if (sortDirection.toLowerCase() == 'ascending') {
+      expectedSortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
-      expectedSortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      expectedSortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect.soft(actualList).toEqual(expectedSortedList);
+    expect(actualList).toEqual(expectedSortedList);
   }
 );
 
