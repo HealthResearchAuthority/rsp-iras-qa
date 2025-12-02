@@ -79,12 +79,12 @@ When(
   'I can see the {string} user has the correct roles assigned on their profile page',
   async ({ userProfilePage, createUserProfilePage }, datasetName: string) => {
     if (datasetName.endsWith('_No_Roles')) {
-      await expect(userProfilePage.role_value).not.toBeVisible();
+      await expect.soft(userProfilePage.role_value).not.toBeVisible();
     } else {
       const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
       const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
       const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-      expect(actualValues).toBe(expectedValues);
+      expect.soft(actualValues).toBe(expectedValues);
     }
   }
 );

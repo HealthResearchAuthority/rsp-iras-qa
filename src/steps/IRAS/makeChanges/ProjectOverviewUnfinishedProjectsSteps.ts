@@ -14,7 +14,7 @@ Then(
 Then(
   'I validate the ui fields on project overview unfinished projects page',
   async ({ projectDetailsIRASPage, projectOverviewUnfinishedProjectsPage }) => {
-    const expectedProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
+    const expectedProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trim();
     const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     if (await projectDetailsIRASPage.getShortProjectTitle()) {
       const projectTitle = confirmStringNotNull(

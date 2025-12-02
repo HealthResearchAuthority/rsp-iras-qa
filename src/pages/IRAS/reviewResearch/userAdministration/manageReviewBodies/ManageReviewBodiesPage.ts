@@ -65,7 +65,7 @@ export default class ManageReviewBodiesPage {
     this.status_from_list = this.page.locator('td:nth-child(3)');
     this.actionsLink = this.page
       .getByRole('link')
-      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link);
     this.statusCell = this.page.getByRole('cell').nth(2);
     this.orgListRows = this.page.getByRole('table').getByRole('row');
     this.no_results_heading = this.page
