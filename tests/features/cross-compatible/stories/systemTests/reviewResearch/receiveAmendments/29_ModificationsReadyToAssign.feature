@@ -1,4 +1,4 @@
-@ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest @TestTMWFC
+@ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest @TestApprovals
 Feature: WFC - Modifications Tasklist page
     # pagination is missing
     @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed  @fail @KNOWN_DEFECT-RSP-6411

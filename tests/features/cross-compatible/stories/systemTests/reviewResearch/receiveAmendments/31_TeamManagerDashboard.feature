@@ -1,4 +1,4 @@
-@ReceiveAmendments @TeamManagerDashboard @TeamManagerDashboardSortFilter @SystemTest @TeamManager @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132 @TestTMWFC
+@ReceiveAmendments @TeamManagerDashboard @TeamManagerDashboardSortFilter @SystemTest @TeamManager @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132 @TestApprovals
 Feature: Team Manager Dashboard page
 
         # Known Issues :-

@@ -1,4 +1,4 @@
-@ReceiveAmendments @SearchProjectRecordsSortFilter @TeamManager  @SystemTest @rsp-5455 @rsp-5456 @KNOWN-DEFECT-RSP-5909 @TestSearchProjectRecords
+@ReceiveAmendments @SearchProjectRecordsSortFilter @TeamManager  @SystemTest @rsp-5455 @rsp-5456 @KNOWN-DEFECT-RSP-5909 @TestApprovals
 Feature: Filter, Search and Sort the Search project records page
 
         Background:
