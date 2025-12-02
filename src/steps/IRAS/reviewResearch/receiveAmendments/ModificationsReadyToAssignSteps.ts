@@ -242,18 +242,13 @@ When(
       await expect.soft(modificationStatus).toBeVisible();
     }
     const irasId = modificationId.toString().split('/')[0];
-    await myModificationsTasklistPage.saveModificationId(irasId);
+    await myModificationsTasklistPage.saveModificationId(irasId, 'Single');
   }
 );
 
 Then(
   'I capture the modification id of {string} where the lead nation is the country linked to the WFC {string} and with status {string}',
-  async (
-    { modificationsReadyToAssignPage, myModificationsTasklistPage },
-    modificationCount: string,
-    user: string,
-    status: string
-  ) => {
+  async ({ modificationsReadyToAssignPage }, modificationCount: string, user: string, status: string) => {
     let countValue: string;
     let leadNation =
       await modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
@@ -271,6 +266,5 @@ Then(
       countValue
     );
     await modificationsReadyToAssignPage.saveModificationId(modificationId.toString(), modificationCount);
-    await myModificationsTasklistPage.saveModificationId(modificationId.toString());
   }
 );
