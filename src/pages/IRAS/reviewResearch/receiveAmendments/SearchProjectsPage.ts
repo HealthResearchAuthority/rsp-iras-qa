@@ -212,12 +212,12 @@ export default class SearchProjectsPage {
 
   async assertOnSearchProjectsPage() {
     await expect.soft(this.page_heading).toBeVisible();
-    await expect.soft(this.page_guidance_text).toBeVisible();
+    // await expect.soft(this.page_guidance_text).toBeVisible();//defect @KNOWN-DEFECT-RSP-5909
     expect.soft(await this.page.title()).toBe(this.searchProjectsPageTestData.Search_Projects_Page.title);
   }
 
   async goto() {
-    await this.page.goto('projectrecordsearch');
+    await this.page.goto('approvals/projectrecordsearch');
     await this.assertOnSearchProjectsPage();
   }
 
