@@ -35,7 +35,7 @@ export default class AffectedOrganisationQuestionsPage {
       .getByText(affectedOrganisationQuestionsPageTestData.Affected_Organisation_Question_Page.page_heading_label);
 
     this.where_organisation_change_affect_nhs_question_label = this.page
-      .locator('.govuk-label')
+      .locator('.govuk-fieldset__legend--s')
       .getByText(
         this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
           .where_organisation_change_affect_nhs_question_label

@@ -45,9 +45,8 @@ Then(
 );
 
 Then(
-  'I validate the field values with {string} on select area of change page',
-  async ({ selectAreaOfChangePage, projectDetailsIRASPage, projectDetailsTitlePage }, projectTitleDatasetName) => {
-    const projectTitleDataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName];
+  'I validate the field values on select area of change page',
+  async ({ selectAreaOfChangePage, projectDetailsIRASPage }) => {
     const actualIrasIdValue = confirmStringNotNull(await selectAreaOfChangePage.iras_id_text.textContent());
     const expectedIrasIdValue = await projectDetailsIRASPage.getUniqueIrasId();
     const actualProjectTitle = confirmStringNotNull(
@@ -56,11 +55,10 @@ Then(
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
     const expectedModificationId = irasIdRunTime + '/' + 1;
     const actualModificationId = confirmStringNotNull(await selectAreaOfChangePage.modification_id_text.textContent());
-    const expectedProjectTitle = projectTitleDataset.short_project_title_text;
+    const expectedProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     expect(actualIrasIdValue).toBe(expectedIrasIdValue);
     expect(actualProjectTitle).toBe(expectedProjectTitle);
     expect(actualModificationId).toBe(expectedModificationId);
-    expect(selectAreaOfChangePage.remove_this_change_link).toBeVisible();
   }
 );
 

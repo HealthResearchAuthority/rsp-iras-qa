@@ -84,7 +84,7 @@ Then(
         })
         .click();
       await expect(
-        confirmationPage.confirmation_header_common_label.getByText(
+        addDocumentsModificationsPage.deletion_label.getByText(
           confirmationPage.confirmationPageTestData.Delete_Document_Confirmation_Labels
             .delete_single_document_page_heading
         )

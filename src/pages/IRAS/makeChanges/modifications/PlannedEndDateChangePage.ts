@@ -40,7 +40,7 @@ export default class PlannedEndDateChangePage {
     this.current_planned_end_date_label = this.page
       .getByText(this.plannedEndDateChangePageTestData.Label_Texts.current_planned_end_date_label)
       .locator('..');
-    this.planned_end_date_hint_label = this.page.getByTestId('NewPlannedEndDate_Date-hint');
+    this.planned_end_date_hint_label = this.page.getByTestId('Questions[0]_AnswerText-hint');
   }
 
   //Page Methods

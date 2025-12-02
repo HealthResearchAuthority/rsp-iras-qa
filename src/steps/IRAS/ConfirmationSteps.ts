@@ -238,20 +238,14 @@ Given(
 );
 
 Then(
-  'I validate {string} labels displayed in confirmation page for project created using the {string} details',
-  async (
-    { confirmationPage, projectDetailsTitlePage, projectDetailsIRASPage },
-    validationLabelsDatasetName,
-    projectDetailsTitlePageDatasetName: string
-  ) => {
-    const projectDetailsTitlePageDataset =
-      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectDetailsTitlePageDatasetName];
+  'I validate {string} labels displayed in confirmation page for project created',
+  async ({ confirmationPage, projectDetailsIRASPage }, validationLabelsDatasetName) => {
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     await expect(confirmationPage.success_message_header_label).toBeVisible();
     const expectedSuccessMessage =
       validationLabelsDataset.page_heading_prefix +
       ' ' +
-      projectDetailsTitlePageDataset.short_project_title_text +
+      (await projectDetailsIRASPage.getShortProjectTitle()) +
       ', ' +
       validationLabelsDataset.page_heading_body_prefix +
       ' ' +
@@ -304,18 +298,13 @@ Then(
 );
 
 Then(
-  'I can see the delete project confirmation page based on {string} entered for short project title',
-  async (
-    { confirmationPage, projectDetailsTitlePage, projectDetailsIRASPage },
-    projectDetailsTitlePageDatasetName: string
-  ) => {
-    const projectDetailsTitlePageDataset =
-      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectDetailsTitlePageDatasetName];
+  'I can see the delete project confirmation page based on the short project title',
+  async ({ confirmationPage, projectDetailsIRASPage }) => {
     const validationLabelsDataset = confirmationPage.confirmationPageTestData['Project_Record_Delete_Labels'];
     const expectedConfirmationHeader =
       validationLabelsDataset.page_heading_prefix +
-      (projectDetailsTitlePageDataset.short_project_title_text?.trim()
-        ? ' ' + projectDetailsTitlePageDataset.short_project_title_text.trim()
+      ((await projectDetailsIRASPage.getShortProjectTitle())?.trim()
+        ? ' ' + (await projectDetailsIRASPage.getShortProjectTitle()).trim()
         : '') +
       validationLabelsDataset.page_heading_suffix;
     await expect
@@ -334,7 +323,7 @@ Then(
         confirmationPage.page
           .getByText(validationLabelsDataset.short_project_title_label, { exact: true })
           .locator('..')
-          .getByText(projectDetailsTitlePageDataset.short_project_title_text, { exact: true })
+          .getByText(await projectDetailsIRASPage.getShortProjectTitle(), { exact: true })
       )
       .toBeVisible();
     await expect

@@ -1597,7 +1597,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
-    And I can see the delete project confirmation page based on 'Valid_Data_All_Fields' entered for short project title
+    And I can see the delete project confirmation page based on the short project title
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

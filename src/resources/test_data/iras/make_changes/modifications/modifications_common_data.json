@@ -26,7 +26,7 @@
     "changes_label": "Changes",
     "change_label": "Change",
     "change_ready_for_submission_status_label": "Change ready for submission",
-    "current_chief_investigator_email_label": "Current chief investigator email:",
+    "current_chief_investigator_email_label": "Current chief investigator email",
     "dateCreated": "Date created",
     "ViewDetailsLink": "View details",
     "Audit_History_Headers": ["Date", "Event description", "User email"]
@@ -584,6 +584,20 @@
         "Scotland",
         "Wales"
       ],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Change_To_Planned_End_Date": {
+    "Change_To_Planned_End_Date": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "23",
+      "planned_project_end_month_dropdown": "April",
+      "planned_project_end_year_text": "2058",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["Northern Ireland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
       "change_status": "Change ready for submission"
     }
   },

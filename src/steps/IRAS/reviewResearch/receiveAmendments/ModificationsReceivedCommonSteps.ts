@@ -244,6 +244,7 @@ When(
       myModificationsTasklistPage,
       modificationsReceivedCommonPage,
       teamManagerDashboardPage,
+      projectDetailsIRASPage,
     },
     pageType: string,
     datasetName: string
@@ -274,7 +275,7 @@ When(
       }
     }
     if (datasetName.toLowerCase().includes('title')) {
-      await commonItemsPage.setShortProjectTitleFilter(dataset.short_project_title_text);
+      await commonItemsPage.setShortProjectTitleFilter(await projectDetailsIRASPage.getShortProjectTitle());
     }
     if (datasetName.toLowerCase().includes('days')) {
       if (datasetName.toLowerCase().includes('from') || datasetName.toLowerCase().includes('range')) {
