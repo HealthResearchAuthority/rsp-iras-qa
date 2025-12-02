@@ -35,7 +35,9 @@ Then(
     expect(confirmStringNotNull(await reviewYourAnswersPage.iras_id_text.textContent())).toBe(irasIdRunTime);
     const expectedShortProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const actualShortProjectTitle = confirmStringNotNull(
-      await confirmProjectDetailsPage.short_project_title_row.textContent()
+      (await confirmProjectDetailsPage.short_project_title_row.textContent())
+        ?.replaceAll(/[’‘]/g, "'")
+        .replaceAll(/[“”]/g, '"')
     );
     const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
       actualShortProjectTitle
@@ -44,7 +46,9 @@ Then(
     );
     const expectedFullProjectTitle = (await projectDetailsIRASPage.getFullProjectTitle()).trimEnd();
     const actualFullProjectTitle = confirmStringNotNull(
-      await confirmProjectDetailsPage.full_project_title_row.textContent()
+      (await confirmProjectDetailsPage.full_project_title_row.textContent())
+        ?.replaceAll(/[’‘]/g, "'")
+        .replaceAll(/[“”]/g, '"')
     );
     const actualFullProjectTitleUpdated = await removeUnwantedWhitespace(
       actualFullProjectTitle
@@ -60,6 +64,8 @@ Then(
           key == 'planned_project_end_month_dropdown' ||
           key == 'planned_project_end_year_text'
         ) {
+          const day = datasetProjectTitle.planned_project_end_day_text;
+          if (!day) break;
           const projectEndDateFormatted = await convertDate(
             datasetProjectTitle.planned_project_end_day_text,
             datasetProjectTitle.planned_project_end_month_dropdown,

@@ -62,12 +62,12 @@ Then(
       dataset.planned_project_end_year_text;
     const plannedEndDateHintLabelExpected =
       plannedEndDateChangePage.plannedEndDateChangePageTestData.Label_Texts.planned_project_end_date_hint_label;
-    await expect(
-      plannedEndDateChangePage.current_planned_end_date_label.getByText(currentPlannedEndDateExpected)
-    ).toBeVisible();
-    expect(await plannedEndDateChangePage.planned_end_date_hint_label.textContent()).toBe(
-      plannedEndDateHintLabelExpected
-    );
+    await expect
+      .soft(plannedEndDateChangePage.current_planned_end_date_label.getByText(currentPlannedEndDateExpected))
+      .toBeVisible();
+    expect
+      .soft(await plannedEndDateChangePage.planned_end_date_hint_label.textContent())
+      .toBe(plannedEndDateHintLabelExpected);
   }
 );
 

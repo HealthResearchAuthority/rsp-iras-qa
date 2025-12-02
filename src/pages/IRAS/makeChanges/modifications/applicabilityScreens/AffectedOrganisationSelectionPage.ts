@@ -17,7 +17,7 @@ export default class AffectedOrganisationSelectionPage {
     this.affectedOrganisationSelectionPageTestData = affectedOrganisationSelectionPageTestData;
     //SelectedOrganisationTypes_Non-NHS/HSC
     //Locators
-    this.which_organisation_affect_hint_label = this.page.locator('.govuk-hint');
+    this.which_organisation_affect_hint_label = this.page.getByTestId('Questions[0]_Answers-hint');
     this.which_organisation_change_affect_checkbox = this.page.locator('.govuk-checkboxes__input');
     this.which_organisation_change_affect_nhs_hsc_checkbox = this.page.getByTestId('SelectedOrganisationTypes_NHS/HSC');
     this.which_organisation_change_affect_non_nhs_hsc_checkbox = this.page.getByTestId(

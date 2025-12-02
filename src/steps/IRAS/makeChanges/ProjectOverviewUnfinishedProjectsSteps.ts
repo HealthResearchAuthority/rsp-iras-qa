@@ -12,15 +12,11 @@ Then(
 );
 
 Then(
-  'I can validate the ui fields on project overview unfinished projects page with {string}',
-  async (
-    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewUnfinishedProjectsPage },
-    datasetName: string
-  ) => {
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    const expectedProjectTitle = dataset.short_project_title_text;
+  'I validate the ui fields on project overview unfinished projects page',
+  async ({ projectDetailsIRASPage, projectOverviewUnfinishedProjectsPage }) => {
+    const expectedProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trim();
     const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
-    if (dataset.short_project_title_text) {
+    if (await projectDetailsIRASPage.getShortProjectTitle()) {
       const projectTitle = confirmStringNotNull(
         await projectOverviewUnfinishedProjectsPage.project_short_title_text.textContent()
       );

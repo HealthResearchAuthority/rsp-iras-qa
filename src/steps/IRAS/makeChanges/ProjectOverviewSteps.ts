@@ -24,21 +24,14 @@ Then(
 
 Then(
   'I can see the {string} project details on project overview page for {string}',
-  async (
-    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage },
-    projectType: string,
-    datasetName: string
-  ) => {
-    let dataset: any;
+  async ({ projectDetailsIRASPage, projectOverviewPage }, projectType: string, datasetName: string) => {
     let expectedIrasId: string;
     if (projectType.toLowerCase() == 'existing') {
-      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details;
-      expectedIrasId = dataset.iras_id;
+      expectedIrasId = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.iras_id;
     } else {
-      dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     }
-    const expectedProjectTitle = dataset.short_project_title_text;
+    const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     const projectTitle = confirmStringNotNull(await projectOverviewPage.project_overview_heading.textContent());
     const projectDetails = projectTitle.split('\n');
     const irasId = projectDetails[0].split(' ');
@@ -47,19 +40,6 @@ Then(
     const actualshortProjectTitle = shortProjectTitle.replace('Short project title: ', '');
     expect.soft(actualshortProjectTitle).toBe(expectedProjectTitle);
     expect.soft(actualIrasId).toBe(expectedIrasId);
-  }
-);
-
-Then(
-  'I can see the short project title on project overview page for {string}',
-  async ({ projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    const expectedProjectTitle = dataset.short_project_title_text;
-    const actualProjectTitle = confirmStringNotNull(await projectOverviewPage.project_short_title_label.textContent());
-    const actualProjectTitleUpdated = actualProjectTitle
-      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label, '')
-      .trim();
-    expect.soft(actualProjectTitleUpdated).toBe(expectedProjectTitle);
   }
 );
 
@@ -123,22 +103,15 @@ Then(
 
 Then(
   'I validate the {string} data for {string} is displayed in the project details tab of project overview page',
-  async (
-    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage },
-    projectType: string,
-    datasetName: string
-  ) => {
-    let dataset: any;
+  async ({ projectDetailsIRASPage, projectOverviewPage }, projectType: string, datasetName: string) => {
     let expectedIrasId: string;
     await expect(projectOverviewPage.project_details_heading).toBeVisible();
     if (projectType.toLowerCase() == 'existing') {
-      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details;
-      expectedIrasId = dataset.iras_id;
+      expectedIrasId = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.iras_id;
     } else {
-      dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     }
-    const expectedProjectTitle = dataset.short_project_title_text;
+    const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     const actualProjectTitle = confirmStringNotNull(
       await projectOverviewPage.project_details_tab_short_project_title.textContent()
     );
@@ -421,7 +394,9 @@ Then(
       .trim();
     const expectedShortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
     const actualShortProjectTitle = confirmStringNotNull(
-      await projectOverviewPage.project_short_title_label.textContent()
+      (await projectOverviewPage.project_short_title_label.textContent())
+        ?.replaceAll(/[’‘]/g, "'")
+        .replaceAll(/[“”]/g, '"')
     );
     const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
       actualShortProjectTitle
@@ -468,7 +443,9 @@ Then(
 
     const expectedShortProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const actualShortProjectTitle = confirmStringNotNull(
-      await projectOverviewPage.project_details_tab_short_project_title.textContent()
+      (await projectOverviewPage.project_details_tab_short_project_title.textContent())
+        ?.replaceAll(/[’‘]/g, "'")
+        .replaceAll(/[“”]/g, '"')
     );
     const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
       actualShortProjectTitle
@@ -478,7 +455,9 @@ Then(
 
     const expectedFullProjectTitle = (await projectDetailsIRASPage.getFullProjectTitle()).trimEnd();
     const actualFullProjectTitle = confirmStringNotNull(
-      await projectOverviewPage.project_details_tab_full_project_title.textContent()
+      (await projectOverviewPage.project_details_tab_full_project_title.textContent())
+        ?.replaceAll(/[’‘]/g, "'")
+        .replaceAll(/[“”]/g, '"')
     );
     const actualFullProjectTitleUpdated = await removeUnwantedWhitespace(
       actualFullProjectTitle

@@ -220,9 +220,6 @@ export default class ReviewYourAnswersPage {
 
   async clickEnterLinks(enterLink: string) {
     switch (enterLink.trim().toLowerCase()) {
-      case 'project_title':
-        await this.short_project_title_enter_link.click();
-        break;
       case 'project_end_date':
         await this.planned_project_end_date_enter_link.click();
         break;

@@ -74,9 +74,7 @@ Then(
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         if (key === 'primary_sponsor_organisation_text') {
-          expect(await projectIdentifiersPage.primary_sponsor_organisation_filled_text.getAttribute('value')).toBe(
-            dataset[key]
-          );
+          expect(await projectIdentifiersPage.primary_sponsor_organisation_filled_text.inputValue()).toBe(dataset[key]);
         } else {
           await commonItemsPage.validateUIComponentValues(dataset, key, projectIdentifiersPage);
         }

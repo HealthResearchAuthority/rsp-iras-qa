@@ -14,6 +14,7 @@ export default class AddDocumentsModificationsPage {
   readonly cells: Locator;
   readonly documentStatus: Locator;
   readonly documentDeleteLink: Locator;
+  readonly deletion_label: Locator;
   private displayedStatuses: string[];
 
   //Initialize Page Objects
@@ -33,6 +34,7 @@ export default class AddDocumentsModificationsPage {
     this.cells = this.page.locator('.govuk-table__cell');
     this.documentDeleteLink = this.rows.locator(this.cells).locator('.govuk-link');
     this.documentStatus = this.rows.locator(this.cells).locator('.govuk-tag');
+    this.deletion_label = this.page.getByRole('heading', { level: 1 });
   }
 
   //Page Methods
