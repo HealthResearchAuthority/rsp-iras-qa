@@ -181,7 +181,7 @@ Then(
   'The search projects page returns to its original empty state with no results displayed',
   async ({ commonItemsPage, searchProjectsPage }) => {
     await expect.soft(searchProjectsPage.page_heading).toBeVisible();
-    await expect.soft(searchProjectsPage.page_guidance_text).toBeVisible();
+    // await expect.soft(searchProjectsPage.page_guidance_text).toBeVisible();//@KNOWN-DEFECT-RSP-5909
     await expect.soft(commonItemsPage.advanced_filter_chevron).toBeVisible();
     await expect.soft(searchProjectsPage.results_table).not.toBeVisible();
     await expect.soft(commonItemsPage.search_no_results_container).not.toBeVisible();

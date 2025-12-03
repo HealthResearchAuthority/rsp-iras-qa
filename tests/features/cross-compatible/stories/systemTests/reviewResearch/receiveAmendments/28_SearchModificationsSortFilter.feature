@@ -1,4 +1,4 @@
-@ReceiveAmendments @SearchModificationsSortFilter @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @DataIssueNeedsFixing @TestApprovals
+@ReceiveAmendments @SearchModificationsSortFilter @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @DataIssueNeedsFixing @TestApprovals @TestApprovalsSearch
 Feature: Filter, Search and Sort the Search modifications page
 
         Background:

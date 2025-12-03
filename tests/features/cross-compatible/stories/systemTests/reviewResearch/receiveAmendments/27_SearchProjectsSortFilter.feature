@@ -1,4 +1,4 @@
-@ReceiveAmendments @SearchProjectRecordsSortFilter @TeamManager  @SystemTest @rsp-5455 @rsp-5456 @KNOWN-DEFECT-RSP-5909 @TestApprovals
+@ReceiveAmendments @SearchProjectRecordsSortFilter @TeamManager  @SystemTest @rsp-5455 @rsp-5456 @TestApprovals @TestApprovalsSearch
 Feature: Filter, Search and Sort the Search project records page
 
         Background:
@@ -7,46 +7,46 @@ Feature: Filter, Search and Sort the Search project records page
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
 
-        # rsp-6194 will be delivered in next sprint
-        @viewListOfProjects @ValidIrasIdAndNoFilters @PartialSearchIrasID @rsp-6194  @skip
-        Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
-                When I enter '<Partial_Iras_Id>' into the search field for 'Search_Projects_Page'
-                And I capture the page screenshot
-                And I click the 'Search' button on the 'Search_Projects_Page'
-                And the system displays project records based on the search '<Partial_Iras_Id>' and filter criteria ''
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
-                And I capture the page screenshot
-                Examples:
-                        | Partial_Iras_Id      |
-                        | Valid_Iras_Id_Prefix |
+        # # rsp-6194 will be delivered in next sprint
+        # @viewListOfProjects @ValidIrasIdAndNoFilters @PartialSearchIrasID @rsp-6194  @skip
+        # Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
+        #         When I enter '<Partial_Iras_Id>' into the search field for 'Search_Projects_Page'
+        #         And I capture the page screenshot
+        #         And I click the 'Search' button on the 'Search_Projects_Page'
+        #         And the system displays project records based on the search '<Partial_Iras_Id>' and filter criteria ''
+        #         And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
+        #         And I capture the page screenshot
+        #         Examples:
+        #                 | Partial_Iras_Id      |
+        #                 | Valid_Iras_Id_Prefix |
 
-        # rsp-6194 will be delivered in next sprint
-        @SortProjectsByColumn @PartialIrasIdSearch  @rsp-6194 @skip
-        Scenario Outline: Verify the user is able to sort the list of projects by ascending and descending order for each results table column after performing a search with iras id
-                And I fill the search input for searching 'project records' with '<Partial_Iras_Id>' as the search query
-                And I click the 'Search' button on the 'Search_Projects_Page'
-                And I can now see a table of search results for 'project records'
-                And I can see the list of 'project records' is sorted by 'ascending' order of the 'iras id'
-                And I capture the page screenshot
-                When I click the '<Sort_Button>' button on the 'Search_Projects_Page'
-                And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'descending' order of the '<Sort_Field>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'descending' order of the '<Sort_Field>'
-                When I click the '<Sort_Button>' button on the 'Search_Projects_Page'
-                And I capture the page screenshot
-                Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                Then I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
+        # # rsp-6194 will be delivered in next sprint
+        # @SortProjectsByColumn @PartialIrasIdSearch  @rsp-6194 @skip
+        # Scenario Outline: Verify the user is able to sort the list of projects by ascending and descending order for each results table column after performing a search with iras id
+        #         And I fill the search input for searching 'project records' with '<Partial_Iras_Id>' as the search query
+        #         And I click the 'Search' button on the 'Search_Projects_Page'
+        #         And I can now see a table of search results for 'project records'
+        #         And I can see the list of 'project records' is sorted by 'ascending' order of the 'iras id'
+        #         And I capture the page screenshot
+        #         When I click the '<Sort_Button>' button on the 'Search_Projects_Page'
+        #         And I capture the page screenshot
+        #         Then I can see the list of 'project records' is sorted by 'descending' order of the '<Sort_Field>'
+        #         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I capture the page screenshot
+        #         Then I can see the list of 'project records' is sorted by 'descending' order of the '<Sort_Field>'
+        #         When I click the '<Sort_Button>' button on the 'Search_Projects_Page'
+        #         And I capture the page screenshot
+        #         Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
+        #         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I capture the page screenshot
+        #         Then I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
 
-                Examples:
-                        | Partial_Iras_Id      | Sort_Button         | Sort_Field          |
-                        | Valid_Iras_Id_Prefix | Iras_Id             | IRAS ID             |
-                        | Valid_Iras_Id_Prefix | Short_Project_Title | Short project title |
-                        | Valid_Iras_Id_Prefix | Lead_Nation         | Lead nation         |
+        #         Examples:
+        #                 | Partial_Iras_Id      | Sort_Button         | Sort_Field          |
+        #                 | Valid_Iras_Id_Prefix | Iras_Id             | IRAS ID             |
+        #                 | Valid_Iras_Id_Prefix | Short_Project_Title | Short project title |
+        #                 | Valid_Iras_Id_Prefix | Lead_Nation         | Lead nation         |
 
         @SortProjectsByColumn @DefaultSorting
         Scenario Outline: Verify default sorting of projects by IRAS ID, Short Project Title and Lead Nation and check ascending and descending order for each column after applying filters
@@ -221,13 +221,13 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters                                |
                         | Advanced_Filters_All_Except_Short_Project_Title |
 
-        @NoResultsFound @NoIrasIdAndNoAdvancedFilters @fail @KNOWN-DEFECT-RSP-5909
+        @NoResultsFound @NoIrasIdAndNoAdvancedFilters
         Scenario: Verify the user can see an empty state that informs me no projects exist for the search criteria on clicking search button without entering/selecting iras id and filters
                 When I click the 'Search' button on the 'Search_Projects_Page'
                 Then The search projects page returns to its original empty state with no results displayed
                 And I capture the page screenshot
 
-        @NoResultsFound @NoIrasIdAndNoAdvancedFilters @fail @KNOWN-DEFECT-RSP-5909
+        @NoResultsFound @NoIrasIdAndNoAdvancedFilters
         Scenario: Verify the user can see an empty state that informs me no projects exist for the search criteria on clicking apply filters button without entering/selecting iras id and filters
                 When I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
@@ -339,7 +339,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters_All | Advanced_Filters_All_Sponsor_Organisation_Filter    | Advanced_Filters_All_After_Remove_Sponsor_Organisation_Filter    |
         #
 
-        @RemoveAllActiveFiltersOneByOne @fail @KNOWN-DEFECT-RSP-5909
+        @RemoveAllActiveFiltersOneByOne
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -498,7 +498,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters_All                             |
 
 
-        @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @fail @KNOWN-DEFECT-RSP-5909
+        @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters
         Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot

@@ -1,4 +1,4 @@
-@ReceiveAmendments @SearchProjectRecordsSortFilter @SysAdminUser @SystemTest @rsp-5456 @TestApprovals
+@ReceiveAmendments @SearchProjectRecordsSortFilter @SysAdminUser @SystemTest @rsp-5456 @TestApprovals @TestApprovalsSearch
 Feature: Display project records on the Search Projects page status and roles
 
         # There is no back link to navigate back from Project Record Overview page to Search project records page of Approvals workspace
