@@ -505,9 +505,6 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.modification_id_project_documents.trim(),
     });
     this.action_header = this.page.locator('th');
-    this.advanced_filters_project_documents = this.page
-      .locator('.search-filter-panel__button-inner')
-      .getByText(this.projectOverviewPageTestData.Project_Documents_Tab.advanced_filters_project_documents);
     this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
     this.modification_table_data = page.locator('.govuk-table.modifications-tasklist-table td');
     this.date_submitted_to_date_error_message = this.page
