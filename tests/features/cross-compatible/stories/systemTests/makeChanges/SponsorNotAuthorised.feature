@@ -1,5 +1,5 @@
 @SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
-Feature: This feature covers scenarios related to sponsor authorisation - sponsor authorises research projects and modifications
+Feature: This feature covers scenarios related to sponsor not authorised modifications
 
     Background:
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
