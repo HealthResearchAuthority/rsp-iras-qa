@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233 @KNOWN_DEFECT-RSP-5531
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233
 Feature: User Administration: Manage Sponsor Organisations - View user list page of the sponsor organisations, Search for the users and add user to the sponsor organisation
 
     Background:
@@ -117,8 +117,8 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
             | Full_Name     | First    |
             | Full_Name     | Last     |
 
-    # Then the no search results found message is displayed -- failing due to @KNOWN_DEFECT-RSP-5531
-    @rsp-5233 @UserListSponsorOrgSearchNoResultsFound @KNOWN_DEFECT-RSP-5531 @fail
+    # Then the no search results found message is displayed -- failing due to
+    @rsp-5233 @UserListSponsorOrgSearchNoResultsFound  @fail
     Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
         When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
