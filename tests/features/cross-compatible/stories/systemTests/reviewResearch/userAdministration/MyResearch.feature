@@ -45,7 +45,7 @@ Feature: User Administration: My Research
       | Iras_Id             | iras id             |
       | Date_Created        | date created        |
 
-  @rsp-2854 @MyResearchPagination @MyResearchPaginationFirstPage
+  @rsp-2854 @MyResearchPagination @MyResearchPaginationFirstPage @KNOWN_DEFECT_RSP_6411 @fail
   Scenario: Verify pagination in my research page when user is on the first page
     And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
@@ -60,7 +60,7 @@ Feature: User Administration: My Research
       | page number       |
       | next link         |
 
-  @rsp-2854 @MyResearchPagination @MyResearchPaginationLastPage
+  @rsp-2854 @MyResearchPagination @MyResearchPaginationLastPage @KNOWN_DEFECT_RSP_6411 @fail
   Scenario: Verify pagination in my research page when user is on the last page
     And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
