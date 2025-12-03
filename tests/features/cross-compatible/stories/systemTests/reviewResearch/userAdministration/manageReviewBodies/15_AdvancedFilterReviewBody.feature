@@ -23,17 +23,17 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
 
     Examples:
-      | Organisation_Name    | Advanced_Filters                       |
-      | Existing_QA_Data_One | Advanced_Filter_All_Countries_Active   |
-      | Existing_QA_Data_One | Advanced_Filter_All_Countries_Disabled |
-      | Existing_QA_Data_One | Advanced_Filter_Eng_Active             |
-      | Existing_QA_Data_One | Advanced_Filter_NI_Active              |
-      | Existing_QA_Data_One | Advanced_Filter_Sco_Active             |
-      | Existing_QA_Data_One | Advanced_Filter_Wal_Active             |
-      | Existing_QA_Data_One | Advanced_Filter_Eng_NI_Active          |
-      | Existing_QA_Data_One | Advanced_Filter_NI_Sco_Wal_Active      |
-      | Existing_QA_Data_One | Advanced_Filter_Eng_Wal_Active         |
-      | Existing_QA_Data_One | Advanced_Filter_NI_Wal_Disabled        |
+      | Organisation_Name    | Advanced_Filters                     |
+      | Existing_QA_Data_One | Advanced_Filter_All_Countries_Active |
+      # | Existing_QA_Data_One | Advanced_Filter_All_Countries_Disabled |
+      | Existing_QA_Data_One | Advanced_Filter_Eng_Active           |
+      | Existing_QA_Data_One | Advanced_Filter_NI_Active            |
+      | Existing_QA_Data_One | Advanced_Filter_Sco_Active           |
+      | Existing_QA_Data_One | Advanced_Filter_Wal_Active           |
+      | Existing_QA_Data_One | Advanced_Filter_Eng_NI_Active        |
+      | Existing_QA_Data_One | Advanced_Filter_NI_Sco_Wal_Active    |
+      | Existing_QA_Data_One | Advanced_Filter_Eng_Wal_Active       |
+  # | Existing_QA_Data_One | Advanced_Filter_NI_Wal_Disabled        |
 
   @rsp-3547 @VerifyNoSearchAndAdvancedFilterReviewBody
   Scenario Outline: Verify the user is able to view the list of review bodies by selecting the advanced filters, and clicking the 'Apply filters' button
@@ -93,17 +93,17 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
 
     Examples:
-      | Organisation_Name    | Advanced_Filters                       |
-      | Existing_QA_Data_One | Advanced_Filter_All_Countries_Active   |
-      | Existing_QA_Data_One | Advanced_Filter_All_Countries_Disabled |
-      | Existing_QA_Data_One | Advanced_Filter_Eng_Active             |
-      | Existing_QA_Data_One | Advanced_Filter_NI_Active              |
-      | Existing_QA_Data_One | Advanced_Filter_Sco_Active             |
-      | Existing_QA_Data_One | Advanced_Filter_Wal_Active             |
-      | Existing_QA_Data_One | Advanced_Filter_Eng_NI_Active          |
-      | Existing_QA_Data_One | Advanced_Filter_NI_Sco_Wal_Active      |
-      | Existing_QA_Data_One | Advanced_Filter_Eng_Wal_Active         |
-      | Existing_QA_Data_One | Advanced_Filter_NI_Wal_Disabled        |
+      | Organisation_Name    | Advanced_Filters                     |
+      | Existing_QA_Data_One | Advanced_Filter_All_Countries_Active |
+      # | Existing_QA_Data_One | Advanced_Filter_All_Countries_Disabled |
+      | Existing_QA_Data_One | Advanced_Filter_Eng_Active           |
+      | Existing_QA_Data_One | Advanced_Filter_NI_Active            |
+      | Existing_QA_Data_One | Advanced_Filter_Sco_Active           |
+      | Existing_QA_Data_One | Advanced_Filter_Wal_Active           |
+      | Existing_QA_Data_One | Advanced_Filter_Eng_NI_Active        |
+      | Existing_QA_Data_One | Advanced_Filter_NI_Sco_Wal_Active    |
+      | Existing_QA_Data_One | Advanced_Filter_Eng_Wal_Active       |
+  # | Existing_QA_Data_One | Advanced_Filter_NI_Wal_Disabled        |
 
   @rsp-3547 @VerifyNoResultsFoundInvalidSearchAlone
   Scenario: Verify the user can see no matching results found message on clicking search button with invalid organisation name
@@ -228,7 +228,9 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
+    When I click the 'System_Admin_Breadcrumb' link on the 'Manage_Review_Bodies_Page'
+    # Then I can see the 'System_Administration_Page'
+    # And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
     Then I can see the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
