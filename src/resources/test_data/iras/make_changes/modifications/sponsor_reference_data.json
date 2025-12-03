@@ -2,7 +2,7 @@
   "Sponsor_Reference_Page": {
     "heading": "Add sponsor reference, date and brief summary of changes",
     "sponsor_modification_reference_label": "Sponsor modification reference (optional)",
-    "sponsor_modification_reference_date_label": "Sponsor modification date",
+    "sponsor_modification_reference_date_label": "Sponsor modification date (optional)",
     "sponsor_modification_date_day_label": "Day",
     "sponsor_modification_date_month_label": "Month",
     "sponsor_modification_date_year_label": "Year",
@@ -11,7 +11,7 @@
   "Label_Texts": {
     "sponsor_modification_date_label": "Sponsor modification date (optional)",
     "sponsor_modification_date_hint_label": "For example, 19 June 2030",
-    "characters_remaining_label": "You have 3200 characters remaining"
+    "characters_remaining_label": "You have 3,200 characters remaining"
   },
   "Missing_Mandatory_Fields_Error": {
     "sponsor_summary_textbox": "Enter brief summary"

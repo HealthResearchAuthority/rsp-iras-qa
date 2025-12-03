@@ -136,8 +136,8 @@ Then(
     } else {
       dataset = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetName];
     }
-    const expectedChiefInvestigatorFirstName = dataset.chief_investigator_first_name;
-    const expectedChiefInvestigatorLastName = dataset.chief_investigator_last_name;
+    const expectedChiefInvestigatorFirstName = dataset.chief_investigator_first_name_text;
+    const expectedChiefInvestigatorLastName = dataset.chief_investigator_last_name_text;
     const expectedChiefInvestigatorEmail = dataset.chief_investigator_email_text;
     const actualChiefInvestigatorFirstName = confirmStringNotNull(
       await projectOverviewPage.project_team_tab_chief_investigator_first_name.textContent()

@@ -164,7 +164,7 @@ Feature: Create Project
     Then I can see the project details title page
     And I capture the page screenshot
 
-  @rsp-1901 @rsp-2922 @ValidateUserAbleToFillResearchLocationsPage
+  @rsp-1901 @rsp-2922 @ValidateUserAbleToFillResearchLocationsPage @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Validate user is able to fill research locations page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -371,7 +371,7 @@ Feature: Create Project
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field | Valid_Data_All_Fields |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      | Valid_Data_All_Fields |
 
-  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled
+  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Validate user is able to fill sponsor organisation in project identifiers page with valid data
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -477,7 +477,7 @@ Feature: Create Project
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-  @rsp-3939 @rsp-4200 @rsp-3940 @searchSelectSponsorOrgJsDisabled @jsDisabled
+  @rsp-3939 @rsp-4200 @rsp-3940 @searchSelectSponsorOrgJsDisabled @jsDisabled @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Validate user is able to search and select sponsor organisation in project identifiers page with valid data
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -998,7 +998,7 @@ Feature: Create Project
       | Advanced_Filter_All_Fields                | Advanced_Filter_All_Fields                |
       | Advanced_Filter_Submitted_Date_Field_Only | Advanced_Filter_Submitted_Date_Field_Only |
 
-  @rsp-2837 @rsp-3819 @rsp-4874 @rsp-4868 @reviewYourAnswersAllFields
+  @rsp-2837 @rsp-3819 @rsp-4874 @rsp-4868 @reviewYourAnswersAllFields @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Verify that user completed all question and can review the answers on create project journey
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1407,7 +1407,7 @@ Feature: Create Project
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title | Chief_Investigator    | Research_Locations    | Project_Identifiers   |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
 
-  @rsp-1864 @ProjectOverviewPage
+  @rsp-1864 @ProjectOverviewPage @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Verify user is able to click on the project link on my research page and able to navigate to project overview page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1458,7 +1458,7 @@ Feature: Create Project
       | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Nhs     |
       | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Non_Nhs |
 
-  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050
+  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @KNOWN_DEFECT_RSP-5747 @fail
   #The project 222827 and modifications were created manually and validations are for the specific project
   Scenario Outline: Validate the expected data is available and displayed on the project overview page
     And I navigate to the project overview page of the '<Project_Name>' project

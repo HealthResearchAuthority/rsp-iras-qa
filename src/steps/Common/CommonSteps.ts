@@ -545,6 +545,7 @@ Then(
       sponsorCheckAndAuthorisePage,
       chooseARecordTypeToSearchPage,
       teamManagerDashboardPage,
+      plannedEndDateChangePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -672,6 +673,10 @@ Then(
       errorMessageFieldDataset =
         teamManagerDashboardPage.teamManagerDashboardPageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
       page = teamManagerDashboardPage;
+    } else if (pageKey == 'Planned_End_Date_Change_Page') {
+      errorMessageFieldDataset =
+        plannedEndDateChangePage.plannedEndDateChangePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = plannedEndDateChangePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

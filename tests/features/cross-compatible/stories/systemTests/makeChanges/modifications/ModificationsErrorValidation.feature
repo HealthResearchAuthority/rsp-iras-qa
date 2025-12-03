@@ -198,28 +198,28 @@ Feature: Modifications - Error Validation
     And I capture the page screenshot
     When I click the '<Navigation_Button>' button on the 'Modifications_Page'
     And I capture the page screenshot
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on planned project end date modifications page for '<Planned_End_Date>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Planned_End_Date_Change_Page'
 
     Examples:
-      | Planned_End_Date      | Navigation_Button | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Day_Number    | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Day_Letters   | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Number_1 | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Number_2 | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Letters  | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_Past     | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Day   | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Month | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Year  | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Day_Number    | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Day_Letters   | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Number_1 | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Number_2 | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Letters  | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_Past     | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Day   | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Month | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Year  | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
+      | Planned_End_Date      | Navigation_Button | Field_And_Summary_Error_Message   |
+      | Invalid_Day_Number    | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Day_Letters   | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Number_1 | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Number_2 | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Letters  | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Date_Past     | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Date_No_Day   | Save_Continue     | Date_Day_Field_Error_Message      |
+      | Invalid_Date_No_Month | Save_Continue     | Date_Month_Field_Error_Message    |
+      | Invalid_Date_No_Year  | Save_Continue     | Date_Year_Field_Error_Message     |
+      | Invalid_Day_Number    | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Day_Letters   | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Number_1 | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Number_2 | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Letters  | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Date_Past     | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Date_No_Day   | Save_For_Later    | Date_Day_Field_Error_Message      |
+      | Invalid_Date_No_Month | Save_For_Later    | Date_Month_Field_Error_Message    |
+      | Invalid_Date_No_Year  | Save_For_Later    | Date_Year_Field_Error_Message     |
 
   @rsp-4097 @ValidateErrorMessageTodayDatePlannedEndDateModifications
   Scenario Outline: Validate error messages displayed when user fill todays date for planned end date in modifications (save and continue and save for later)
@@ -244,12 +244,12 @@ Feature: Modifications - Error Validation
     And I capture the page screenshot
     When I click the '<Navigation_Button>' button on the 'Modifications_Page'
     And I capture the page screenshot
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on planned project end date modifications page for '<Planned_End_Date>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Planned_End_Date_Change_Page'
 
     Examples:
-      | Planned_End_Date   | Navigation_Button | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_Today | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_Today | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
+      | Planned_End_Date   | Navigation_Button | Field_And_Summary_Error_Message   |
+      | Invalid_Date_Today | Save_Continue     | Date_Must_Be_Future_Error_Message |
+      | Invalid_Date_Today | Save_For_Later    | Date_Must_Be_Future_Error_Message |
 
   @rsp-4103 @ValidateErrorForEmptyOrganisationChangeAffectModifications
   Scenario Outline: Verify the user is able to see error messages when empty data for 'which organisation this change affect' page in modifications
@@ -284,7 +284,7 @@ Feature: Modifications - Error Validation
       | Planned_End_Date      | Organisation_Change_Affect | Field_And_Summary_Error_Message |
       | Valid_Data_All_Fields | Empty_Data_All_Fields      | Mandatory_Field_Error           |
 
-  @rsp-4171 @ChangePlannedEndDateValidationsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795
+  @rsp-4171 @ChangePlannedEndDateValidationsFromReviewChangesPage
   Scenario Outline: Verify that system prevents the user to enter invalid date when modifications details updated from review changes page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -324,14 +324,14 @@ Feature: Modifications - Error Validation
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
     When I click the 'Save_Changes' button on the 'Modifications_Page'
     And I capture the page screenshot
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on planned project end date modifications page for '<Planned_End_Date>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Planned_End_Date_Change_Page'
 
     Examples:
-      | Planned_End_Date_Change | Change_Field         | Field_Error_Message | Summary_Error_Message | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
-      | Invalid_Date_Past       | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
-      | Invalid_Day_Number      | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
-      | Invalid_Day_Letters     | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
-      | Invalid_Year_Letters    | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Planned_End_Date_Change | Change_Field         | Field_And_Summary_Error_Message   | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
+      | Invalid_Date_Past       | New_Planned_End_Date | Date_Correct_Format_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Invalid_Day_Number      | New_Planned_End_Date | Date_Correct_Format_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Invalid_Day_Letters     | New_Planned_End_Date | Date_Correct_Format_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Invalid_Year_Letters    | New_Planned_End_Date | Date_Correct_Format_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
   @rsp-4171 @TodayDateErrorValidationsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795
   Scenario Outline: Verify that system prevents the user to enter invalid today date when modifications details updated from review changes page
@@ -373,11 +373,11 @@ Feature: Modifications - Error Validation
     Then I fill todays date in planned project end date for modifications
     When I click the 'Save_Changes' button on the 'Modifications_Page'
     And I capture the page screenshot
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on planned project end date modifications page for '<Planned_End_Date>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Planned_End_Date_Change_Page'
 
     Examples:
-      | Planned_End_Date_Change | Change_Field         | Field_Error_Message | Summary_Error_Message | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
-      | Invalid_Date_Today      | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Planned_End_Date_Change | Change_Field         | Field_And_Summary_Error_Message   | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
+      | Invalid_Date_Today      | New_Planned_End_Date | Date_Must_Be_Future_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
   @rsp-5478 @4684 @3877 @ValidateDocumentUploadDuplicateFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video or non video file that has already been uploaded

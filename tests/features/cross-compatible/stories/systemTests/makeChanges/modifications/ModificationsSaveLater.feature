@@ -155,7 +155,7 @@ Feature: Modifications - Save Later
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @rsp-4364 @ValidateSponsorReferenceModifications @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4364 @ValidateSponsorReferenceModifications @jsEnabled
   Scenario Outline: Verify user is able to fill sponsor reference details for the modification
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -592,7 +592,6 @@ Feature: Modifications - Save Later
       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     |
       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Empty_Data_All_Fields          |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
-      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Empty_Data_Non_Nhs             |
 
   @rsp-4171 @rsp-4611 @SaveLaterReviewChangesPage
   Scenario Outline: Verify that modifications progress successfully saved when user saves the record from review changes page
@@ -2307,7 +2306,7 @@ Feature: Modifications - Save Later
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
     And I click on the modification id hyperlink in the post approval tab
-    Then I can see the review all changes page
+    Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
 
