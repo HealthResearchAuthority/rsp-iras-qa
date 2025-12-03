@@ -88,7 +88,7 @@ export default class ReviewBodyProfilePage {
     this.row_value_locator = this.page.locator('input');
     this.row_change_link_locator = this.page
       .getByRole('cell')
-      .getByText(this.linkTextData.Check_Create_Review_Body_Page.Change, { exact: true });
+      .getByText(this.linkTextData.Check_Create_Review_Body_Page.Change);
 
     this.row_view_this_review_body_list_of_users_link_locator = this.page
       .getByRole('cell')
