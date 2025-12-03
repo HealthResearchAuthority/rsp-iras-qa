@@ -1,5 +1,5 @@
 @ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive @jsEnabled
-Feature: Audit history - This feature file contains scenarios to validate audit history for modifications and related documents
+Feature: Modifications - Audit history
 
   @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
   Scenario: Validate the audit history for reviewable modifications when sponsor authorised

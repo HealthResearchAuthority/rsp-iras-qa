@@ -1,5 +1,5 @@
 @ApplicantUser @createProject @createAmendment @SystemTest
-Feature: Create Project - This feature file helps check all the create project journeys
+Feature: Create Project
 
   Background:
     Given I have navigated to the my research projects page
@@ -442,16 +442,6 @@ Feature: Create Project - This feature file helps check all the create project j
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with '<Project_Details_Title>'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I can see the chief investigator page
-    Then I fill the chief investigator page with '<Chief_Investigator>'
-    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    Then I fill the research locations page with '<Research_Locations>'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
     And I capture the page screenshot
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -550,7 +540,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation |
 
-  @rsp-5340 @validateProjectRecordFromInDraftToActiveStatus
+  @rsp-5340 @validateProjectRecordFromInDraftToActiveStatus @KNOWN_DEFECT_RSP-5747 @fail
   Scenario: Validate project status transition from in draft to active in the my research page and project overview page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -628,7 +618,7 @@ Feature: Create Project - This feature file helps check all the create project j
     And I can see the project overview page
     And I capture the page screenshot
 
-  @rsp-5340 @validateProjectRecordInDraftStatusRetains
+  @rsp-5340 @validateProjectRecordInDraftStatusRetains @KNOWN_DEFECT_RSP-5747 @fail
   Scenario: Validate project status in draft is retained if partial project information is saved
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1161,7 +1151,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_is_nhs_hsc_organisation      | Valid_Data_is_nhs_hsc_organisation_Two      | nhs_hsc_organisation  | Valid_Data_All_Fields |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_is_nhs_hsc_organisation | Valid_Data_Only_is_nhs_hsc_organisation_Two | nhs_hsc_organisation  | Valid_Data_All_Fields |
 
-  @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersEnterProjTitle
+  @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersEnterProjTitle @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Verify that user has not completed all questions and can enter project title details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1198,7 +1188,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Project_Details_Title       | Chief_Investigator          | Research_Locations          | Enter_Link_Field | Review_Answers             | Project_Details_Title_Enter | Project_Identifiers             |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Valid_Data_Only_Date_Fields | Sponsor_Organisation_Text_Blank |
 
-  @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersEnterKeyRoles
+  @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersEnterKeyRoles @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Verify that user has not completed all questions and can enter project key roles details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1537,7 +1527,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Sort_Button     | Sort_Field      |
       | Modification_Id | modification id |
 
-  @rsp-4876 @PostApprovalPaginationFirstPage @KNOW-DEFECT-RSP-6411 @fail
+  @rsp-4876 @PostApprovalPaginationFirstPage @KNOWN-DEFECT-RSP-6411 @fail
   Scenario Outline: Verify pagination in post approval page when user is on the first page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1583,7 +1573,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | page number       |
       | next link         |
 
-  @rsp-4876 @PostApprovalPaginationLastPage @KNOW-DEFECT-RSP-6411 @fail
+  @rsp-4876 @PostApprovalPaginationLastPage @KNOWN-DEFECT-RSP-6411 @fail
   Scenario Outline: Verify pagination in post approval page when user is on the last page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page

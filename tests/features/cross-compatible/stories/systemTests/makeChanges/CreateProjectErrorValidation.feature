@@ -1,5 +1,5 @@
 @ApplicantUser @createProject @createAmendment @SystemTest
-Feature: Create project error validations - This feature file helps check all the create project error validation journeys
+Feature: Create project - Error Validations
 
   Background:
     Given I have navigated to the my research projects page

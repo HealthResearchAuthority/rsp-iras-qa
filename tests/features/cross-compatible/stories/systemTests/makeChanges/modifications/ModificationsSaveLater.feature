@@ -1,5 +1,5 @@
 @ApplicantUser @ModificationsSaveLater @SystemTest
-Feature: Create Modifications - ModificationsSaveLater: This feature file helps check all the partial journey
+Feature: Modifications - Save Later
 
   Background:
     Given I have navigated to the my research projects page

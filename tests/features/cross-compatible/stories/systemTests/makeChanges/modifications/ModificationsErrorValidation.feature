@@ -1,5 +1,5 @@
 @ApplicantUser @ModificationsErrorValidation @SystemTest
-Feature: ModificationsErrorValidation: This feature file helps check the error handling that is in place during modification journey
+Feature: Modifications - Error Validation
 
   Background:
     Given I have navigated to the my research projects page
