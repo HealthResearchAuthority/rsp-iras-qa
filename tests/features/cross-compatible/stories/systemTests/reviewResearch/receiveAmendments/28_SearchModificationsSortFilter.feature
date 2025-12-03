@@ -87,7 +87,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
                         | previous link     | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
-        @SearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031
+        @SearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031 @DataIssue @NeedToFix @fail
         Scenario: Verify back and short project title link navigation for search modifications tasklist
                 And I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -97,7 +97,8 @@ Feature: Filter, Search and Sort the Search modifications page
                 When I click a 'short project title' on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the project overview page
-                When I click the 'Back' link on the 'Project_Overview_Page'
+                # When I click the 'Back' link on the 'Project_Overview_Page'
+                Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
                 When I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
@@ -112,7 +113,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -138,7 +139,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor organisation), and clicking the 'Apply filters' button-when JSvavascript is enabled
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -157,7 +158,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -185,7 +186,7 @@ Feature: Filter, Search and Sort the Search modifications page
         # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
         # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -212,7 +213,7 @@ Feature: Filter, Search and Sort the Search modifications page
         # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
         # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
+        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -231,7 +232,7 @@ Feature: Filter, Search and Sort the Search modifications page
         # | Valid_Iras_Id_TwentyTwo   |
         # | Valid_Iras_Id_TwentyThree |
 
-        @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled
+        @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -265,7 +266,7 @@ Feature: Filter, Search and Sort the Search modifications page
         # | Advanced_Filters_TwentyTwo   |
         # | Advanced_Filters_TwentyThree |
 
-        @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation
+        @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -371,7 +372,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Iras_Id     | Advanced_Filters_No_Results |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Fifteen    |
 
-        @NoResultsFound @InvalidAdvancedFilters
+        @NoResultsFound @InvalidAdvancedFilters @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can see no matching results found message by selecting advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -412,7 +413,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Date_Submitted_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                   |
 
 
-        @RemoveActiveFiltersOneByOne @jsDisabled
+        @RemoveActiveFiltersOneByOne @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -439,7 +440,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Date_Submitted_From_To_Filter  | Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter  |
 
-        @RemoveAllActiveFiltersOneByOne
+        @RemoveAllActiveFiltersOneByOne @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -463,7 +464,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
                         | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled
+        @RemoveAllActiveFiltersOneByOne @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can remove all the selected filters(with sponsor org) one by one and the search results update accordingly-JS disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -485,7 +486,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled
+        @RemoveAllActiveFiltersOneByOne @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -511,7 +512,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAltogether @rsp-4293
+        @RemoveActiveFiltersAltogether @rsp-4293 @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -533,7 +534,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAlTogether @jsDisabled
+        @RemoveActiveFiltersAlTogether @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -557,7 +558,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
         @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS
-        Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
+        Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled-Search Modifications Page
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -581,7 +582,28 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
         @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118 @RTS
-        Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
+        Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled-Search Modifications Page
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
+                And I capture the page screenshot
+                When I authorise the rts api using '<RTS_API_Data>'
+                Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
+                And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>' in the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>' in the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box in the 'Search_Modifications_Page'
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
+                Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
+                And I capture the page screenshot
+                Examples:
+                        | Advanced_Filters                      | Sponsor_Organisation                        | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min      | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_API_Data         | RTS_Request                               | Field_And_Summary_Error_Message     |
+                        | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets  | Sponsor_Organisation_Min_Char_Error |
+                        | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma | Sponsor_Organisation_Min_Char_Error |
+                        | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen    | Sponsor_Organisation_Min_Char_Error |
+
+        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118 @RTS @fail @KNOWN_DEFECT_RSP_RTS
+        Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled-Search Modifications Page-RTS issue
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -598,10 +620,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 Examples:
                         | Advanced_Filters                      | Sponsor_Organisation                           | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min             | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_API_Data         | RTS_Request                                    | Field_And_Summary_Error_Message     |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Partial_Text_NHS          | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS            | Sponsor_Organisation_Min_Char_Error |
-                        | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets     | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets       | Sponsor_Organisation_Min_Char_Error |
-                        | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma      | Sponsor_Organisation_Min_Char_Error |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Slash        | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash          | Sponsor_Organisation_Min_Char_Error |
-                        | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen         | Sponsor_Organisation_Min_Char_Error |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Sponsor_Organisation_Min_Char_Error |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Sponsor_Organisation_Min_Char_Error |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
@@ -617,7 +636,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters                      |
                         | Advanced_Filters_Sponsor_Organisation |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID
+        @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -635,12 +654,13 @@ Feature: Filter, Search and Sort the Search modifications page
         # | Valid_Iras_Id_TwentyTwo   |
         # | Valid_Iras_Id_TwentyThree |
 
-        @BackLinkNavigation
-        Scenario:  Verify the user can navigate from 'Search_Modifications_Page' by clicking 'Back' link
-                When I click the 'Back' link on the 'Search_Modifications_Page'
-                Then I can see the approvals home page
-                When I click the 'Back' link on the 'Approvals_Page'
-                Then I can see the 'Home_Page'
+        # covered in Approvals.feature
+        # @BackLinkNavigation @Duplicate
+        # Scenario:  Verify the user can navigate from 'Search_Modifications_Page' by clicking 'Back' link
+        #         When I click the 'Back' link on the 'Search_Modifications_Page'
+        #         Then I can see the approvals home page
+        #         When I click the 'Back' link on the 'Approvals_Page'
+        #         Then I can see the 'Home_Page'
 
         @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
@@ -667,7 +687,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters_Nth                                |
 
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
-        Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
+        Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes-without sponsor
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -688,7 +708,19 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filter_Two_Participating_Nation_Selected   |
                         | Advanced_Filter_Three_Participating_Nation_Selected |
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
-                        | Advanced_Filters_Nth                                |
+
+        @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
+        Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes-with sponsor
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
+                Examples:
+                        | Advanced_Filters     |
+                        | Advanced_Filters_Nth |
 
         # Can't close advanced filters panel- for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
@@ -714,8 +746,8 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
 
-        @searchModificationStatus @rsp-4822
-        Scenario Outline: Verify that modifications status' display as expected on the search modifictions page
+        @searchModificationStatus @rsp-4822 @noDBData @DataIssue
+        Scenario Outline: Verify that modifications status display as expected on the search modifications page
                 When I enter an iras id for a modification with status '<Status>' into the search field
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I can now see a table of search results for 'modifications received for approval'
@@ -740,10 +772,16 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                When I click the 'Back' link on the 'Search_Modifications_Page'
+                When I click the 'Approvals' link in the breadcrumbs on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the approvals home page
-                And I click the 'Search' link on the 'Approvals_Page'
+                And I click the 'Search_Records' link on the 'Approvals_Page'
+                And I capture the page screenshot
+                And I can see the 'Choose_A_Record_Type_To_Search_Page'
+                And I capture the page screenshot
+                And I select the radio button for 'Modification_Record' in the choose a record type to search page
+                And I capture the page screenshot
+                And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
                 And I 'cannot' see active filters displayed
