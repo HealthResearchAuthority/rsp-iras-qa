@@ -27,7 +27,10 @@ Then(
         await commonItemsPage.fillUIComponent(areaOfChangeDataset, key, selectAreaOfChangePage);
       }
     }
-    if ($tags.includes('@jsDisabled') || !config.projects?.[1].use?.javaScriptEnabled) {
+    if (
+      $tags.includes('@jsDisabled') ||
+      (!$tags.includes('@jsEnabled') && !config.projects?.[1].use?.javaScriptEnabled)
+    ) {
       await commonItemsPage.clickButton('Select_Area_Of_Change_Page', 'Apply_Selection');
       for (const key in specificChangeDataset) {
         if (Object.hasOwn(specificChangeDataset, key)) {

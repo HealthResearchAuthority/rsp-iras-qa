@@ -122,9 +122,16 @@ Then(
 
       if (changeRankings && changeRankings.length > 0) {
         const { expectedModificationType, expectedCategory, expectedReviewType } = changeRankings[0];
-        expect.soft(actualValuesArray[fieldIndex].modificationType).toBe(expectedModificationType);
-        expect.soft(actualValuesArray[fieldIndex].category).toBe(expectedCategory);
-        expect.soft(actualValuesArray[fieldIndex].reviewType).toBe(expectedReviewType);
+        try {
+          expect(actualValuesArray[fieldIndex].modificationType).toBe(expectedModificationType);
+          expect(actualValuesArray[fieldIndex].category).toBe(expectedCategory);
+          expect(actualValuesArray[fieldIndex].reviewType).toBe(expectedReviewType);
+        } catch (error) {
+          console.log('Error is ranking Change name: ' + changeName, error);
+          expect.soft(actualValuesArray[fieldIndex].modificationType).toBe(expectedModificationType);
+          expect.soft(actualValuesArray[fieldIndex].category).toBe(expectedCategory);
+          expect.soft(actualValuesArray[fieldIndex].reviewType).toBe(expectedReviewType);
+        }
       } else {
         throw new Error(`No ranking data found for changeName: ${changeName}`);
       }

@@ -62,7 +62,7 @@
     "additional_resource_implications_label": "Additional resource implications",
     "affected_non_nhs_hsc_locations_label": "Affected non-NHS/HSC locations",
     "project_reference_numbers_radio_label": "Which reference(s) do you need to change?",
-    "title_radio_label": "Which titles do you need to change?",
+    "title_radio_label": "Title",
     "isrctn_reference_number_label": "International standard randomised controlled trial number (ISRCTN)",
     "nct_reference_number_label": "ClinicalTrials.gov identifier (NCT number)",
     "funder_name_label": "Funder name",
@@ -70,7 +70,8 @@
     "other_reference_number_label": "Other reference number",
     "what_other_is_label": "What ‘other’ is",
     "new_short_project_title_label": "New short project title",
-    "new_full_project_title_label": "New full project title"
+    "new_full_project_title_label": "New full project title",
+    "which_titles_do_you_need_to_change_label": "Which titles do you need to change?"
   },
   "Modifications_To_Add_Free_Text": [
     "Other significant change to participant procedures",
@@ -114,7 +115,7 @@
     "Post trial information for participants (which does not contradict the protocol)",
     "Change to protocol: non-significant not affecting safety or the scientific value of the project",
     "GDPR wording - Unaccepted alternative wording used",
-    "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below",
+    "Other significant change to study documents, for example, information sheets, consent forms, questionnaires, letters",
     "Protocol - Significant changes (e.g. affecting safety or the scientific value of the trial)",
     "Contract/agreement arrangements",
     "Equipment arrangements",
@@ -153,13 +154,13 @@
     "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
     "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
     "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
-    "Change of principal investigator",
+    "Change of Principal Investigator",
     "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
     "Other non-significant change to project documents",
     "Post trial information for participants (which does not contradict the protocol)",
     "Change to protocol: non-significant not affecting safety or the scientific value of the project",
     "GDPR wording - Unaccepted alternative wording used",
-    "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below",
+    "Other significant change to study documents, for example, information sheets, consent forms, questionnaires, letters",
     "Protocol - Significant changes (e.g. affecting safety or the scientific value of the trial)",
     "Contract/agreement arrangements",
     "Equipment arrangements",
@@ -179,7 +180,7 @@
     "Insurance renewal - no change to the level or breadth of cover",
     "Project identification",
     "Contact details",
-    "Change of chief investigator",
+    "Change of Chief Investigator",
     "Correction of typographical errors",
     "GDPR: accepted wording used verbatim",
     "Insurance renewal - no change to the level or breadth of cover",
@@ -221,27 +222,27 @@
       "page_component_label": "Name"
     },
     "Project_Personnel_Select_Change_Page": {
-      "page_header": "Change of chief investigator",
+      "page_header": "Change of Chief Investigator",
       "page_component_label": "Select details to change"
     },
     "Project_Personnel_Chief_Investigator_Page": {
-      "page_header": "Change of chief investigator",
+      "page_header": "Change of Chief Investigator",
       "page_component_label": "New chief investigator email"
     },
     "Project_Personnel_Temporary_Arrangement_Page": {
-      "page_header": "Change of chief investigator",
+      "page_header": "Change of Chief Investigator",
       "page_component_label": "New chief investigator email"
     },
     "Project_Personnel_Principal_Investigator_Select_Change_Page": {
-      "page_header": "Change of principal investigator",
+      "page_header": "Change of Principal Investigator",
       "page_component_label": "Select details to change"
     },
     "Project_Personnel_Principal_Investigator_Page": {
-      "page_header": "Change of principal investigator",
+      "page_header": "Change of Principal Investigator",
       "page_component_label": "New principal investigator email"
     },
     "Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page": {
-      "page_header": "Change of principal investigator",
+      "page_header": "Change of Principal Investigator",
       "page_component_label": "New principal investigator email"
     }
   },
@@ -263,7 +264,7 @@
       "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
       "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
       "GDPR wording - Unaccepted alternative wording used",
-      "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below",
+      "Other significant change to study documents, for example, information sheets, consent forms, questionnaires, letters",
       "Protocol - Significant changes (e.g. affecting safety or the scientific value of the trial)",
       "Contract/agreement arrangements",
       "Equipment arrangements",
@@ -291,8 +292,8 @@
       "Participant procedures: non-significant change",
       "Project identification",
       "Contact details",
-      "Change of chief investigator",
-      "Change of principal investigator",
+      "Change of Chief Investigator",
+      "Change of Principal Investigator",
       "Correction of typographical errors",
       "GDPR: accepted wording used verbatim",
       "Insurance renewal - no change to the level or breadth of cover",
@@ -314,7 +315,7 @@
       "Change of sponsor’s legal representative",
       "Project identification",
       "Contact details",
-      "Change of principal investigator",
+      "Change of Principal Investigator",
       "Addition of sites undertaking the same activities as existing sites"
     ],
     "Minor_Modifications": [
@@ -346,13 +347,13 @@
       "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
       "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)",
       "Sponsor delegations - Changes to the internal organisation of the sponsor or persons to whom tasks have been delegated",
-      "Change of chief investigator",
+      "Change of Chief Investigator",
       "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
       "Other non-significant change to project documents",
       "Post trial information for participants (which does not contradict the protocol)",
       "Change to protocol: non-significant not affecting safety or the scientific value of the project",
       "GDPR wording - Unaccepted alternative wording used",
-      "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below",
+      "Other significant change to study documents, for example, information sheets, consent forms, questionnaires, letters",
       "Protocol - Significant changes (e.g. affecting safety or the scientific value of the trial)",
       "Contract/agreement arrangements",
       "Equipment arrangements",
@@ -379,7 +380,7 @@
     "Change to planned end date",
     "Other non-significant change to the project design",
     "Other non-significant change to project documents",
-    "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below"
+    "Other significant change to study documents, for example, information sheets, consent forms, questionnaires, letters"
   ],
   "Invalid_Data": {
     "Max_Length_Changes_Free_Text": {
@@ -876,21 +877,21 @@
   "Multiple_Changes_Non_Reviewable_Set_One": {
     "Project_Personnel_Chief_Investigator_New": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of chief investigator",
+      "specific_change_dropdown": "Change of Chief Investigator",
       "select_details_to_change_radio": "New chief investigator",
       "chief_investigator_email_text": "ci_test_modified@test.com",
       "name_text": "QA test name"
     },
     "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of chief investigator",
+      "specific_change_dropdown": "Change of Chief Investigator",
       "select_details_to_change_radio": "Temporary arrangement to cover absence",
       "chief_investigator_email_text": "ci_test_modified@test.com",
       "name_text": "QA test name"
     },
     "Project_Personnel_Principal_Investigator_New": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of principal investigator",
+      "specific_change_dropdown": "Change of Principal Investigator",
       "select_details_to_change_radio": "New principal investigator",
       "principal_investigator_email_text": "test_modified@test.com",
       "name_text": "QA test name",
@@ -902,7 +903,7 @@
     },
     "Project_Personnel_Temporary_Arrangement": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of principal investigator",
+      "specific_change_dropdown": "Change of Principal Investigator",
       "select_details_to_change_radio": "Temporary arrangement to cover absence",
       "principal_investigator_email_text": "test_modified@test.com",
       "name_text": "QA test name",
@@ -1078,7 +1079,7 @@
       "change_status": "Change ready for submission"
     }
   },
-  "Modification_To_Add_Administrative_Details": {
+  "Modification_To_Add_Administrative_Details_Set_One": {
     "Project_Identification_Project_Reference_Numbers": {
       "area_of_change_dropdown": "Administrative details for the project",
       "specific_change_dropdown": "Project identification",
@@ -1093,7 +1094,9 @@
         "other_reference_number_textbox": "46353222",
         "what_other_is_textbox": "fgdg52342"
       }
-    },
+    }
+  },
+  "Modification_To_Add_Administrative_Details_Set_Two": {
     "Project_Identification_Project_Titles": {
       "area_of_change_dropdown": "Administrative details for the project",
       "specific_change_dropdown": "Project identification",
@@ -1284,8 +1287,8 @@
     },
     "Other_Significant_Change_To_Study_Documents_Information_Sheets_Consent_Forms_Questionnaires_Letters": {
       "area_of_change_dropdown": "Project documents",
-      "specific_change_dropdown": "Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below",
-      "changes_free_text": "This is a free text change for Other significant change to study documents (e.g. information sheets, consent forms, questionnaires, letters) - Please specify in the free text below",
+      "specific_change_dropdown": "Other significant change to study documents, for example, information sheets, consent forms, questionnaires, letters",
+      "changes_free_text": "This is a free text change for Other significant change to study documents, for example, information sheets, consent forms, questionnaires, letters",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
