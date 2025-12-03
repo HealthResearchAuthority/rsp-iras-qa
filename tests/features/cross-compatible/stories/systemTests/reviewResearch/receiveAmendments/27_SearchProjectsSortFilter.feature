@@ -79,7 +79,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters_Lead_Nation | Short_Project_Title | short project title | ascending        | descending        |
                         | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         | ascending        | descending        |
 
-        @ViewListOfProjects @ViewListOfProjectsPaginationFirstPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationNextLinkClick
+        @ViewListOfProjects @ViewListOfProjectsPaginationFirstPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationNextLinkClick @fail @KNOWN_DEFECT-RSP-6411
         Scenario Outline: Verify pagination in the list of projects page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -101,7 +101,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | page number       | Advanced_Filters_Lead_Nation |
                         | next link         | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfProjects @ViewListOfProjectsPaginationLastPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationPreviousLinkClick
+        @ViewListOfProjects @ViewListOfProjectsPaginationLastPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationPreviousLinkClick @fail @KNOWN_DEFECT-RSP-6411
         Scenario Outline: Verify pagination in the list of projects page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -121,7 +121,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | page number       | Advanced_Filters_Lead_Nation |
                         | previous link     | Advanced_Filters_Lead_Nation |
 
-        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @ActiveFilters @DBDataUsed
+        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @ActiveFilters @DBDataUsed @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user is able to view the list of projects by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 And I capture the iras id and short project title of the recently added project with status as 'Active' from the database
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
@@ -314,7 +314,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters_All        |
 
 
-        @RemoveActiveFiltersOneByOne @jsDisabled
+        @RemoveActiveFiltersOneByOne @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -537,7 +537,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
 
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters
-        Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
+        Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes-without sponsor
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 And I select advanced filters in the 'Search_Projects_Page' using '<Advanced_Filters>'
@@ -556,7 +556,20 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filter_Two_Participating_Nation_Selected   |
                         | Advanced_Filter_Three_Participating_Nation_Selected |
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
-                        | Advanced_Filters_All                                |
+
+        # Can't close advanced filters panel- for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
+        @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters
+        Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes-with sponsor
+                And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Projects_Page' using '<Advanced_Filters>'
+                And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
+                And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'
+                And I capture the page screenshot
+                And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
+                Examples:
+                        | Advanced_Filters     |
+                        | Advanced_Filters_All |
 
         # Can't close advanced filters panel- for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters

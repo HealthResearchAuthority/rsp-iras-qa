@@ -1,4 +1,4 @@
-@ReceiveAmendments @SearchModificationsSortFilter @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @DataIssueNeedsFixing @TestApprovals @TestApprovalsSearch
+@ReceiveAmendments @SearchModificationsSortFilter @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @TestApprovals @TestApprovalsSearch
 Feature: Filter, Search and Sort the Search modifications page
 
         Background:
@@ -709,6 +709,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filter_Three_Participating_Nation_Selected |
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
 
+        # Can't close advanced filters panel- for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes-with sponsor
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
