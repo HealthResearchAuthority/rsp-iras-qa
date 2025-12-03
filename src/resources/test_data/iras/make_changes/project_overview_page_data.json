@@ -27,9 +27,8 @@
     "audit_modification_id": "Not applicable"
   },
   "Project_URL": {
-    "Test_Project": "projectoverview/projectdetails?projectRecordId=20250905085329",
-    "Kilmarnock_Cancer_Research": "projectoverview/projectdetails?projectRecordId=20250930093915",
-    "Swansea_ACL_Trials": "projectoverview/projectdetails?projectRecordId=20251003104402"
+    "Test_Project": "projectoverview/projectdetails?projectRecordId=20251202184313",
+    "Salford Primary Care Workforce Study": "projectoverview/projectdetails?projectRecordId=20251202184313"
   },
   "Modification_Status_Draft": {
     "status": "Draft"
@@ -53,38 +52,21 @@
       "lead_nation": ""
     }
   },
-  "Kilmarnock_Cancer_Research": {
-    "status": "Submitted",
+  "Salford Primary Care Workforce Study": {
+    "status": "Active",
     "Project_Details": {
-      "iras_id": "98931",
-      "short_project_title_text": "Kilmarnock Cancer Research"
+      "iras_id": "222827",
+      "short_project_title_text": "Salford Primary Care Workforce Study"
     },
     "Project_Team": {
-      "chief_investigator_email_text": "chris.test@bmail.com",
-      "primary_sponsor_organisation_text": "FIFE",
-      "sponsor_contact_email_text": "chris.sponsor@bmail.com"
+      "chief_investigator_first_name": "Chief Investigator First name",
+      "chief_investigator_last_name": "Chief Investigator Last name",
+      "chief_investigator_email_text": "ci_test@test.com"
     },
     "Research_Locations": {
-      "participating_nations": "Scotland",
+      "participating_nations": "EnglandScotlandNorthern IrelandWales",
       "nhs_hsc_organisations": "Yes",
-      "lead_nation": "Scotland"
-    }
-  },
-  "Swansea_ACL_Trials": {
-    "status": "Submitted",
-    "Project_Details": {
-      "iras_id": "46782",
-      "short_project_title_text": "Swansea ACL Trials"
-    },
-    "Project_Team": {
-      "chief_investigator_email_text": "david.bishop@bmail.com",
-      "primary_sponsor_organisation_text": "Swansea University",
-      "sponsor_contact_email_text": ""
-    },
-    "Research_Locations": {
-      "participating_nations": "Wales",
-      "nhs_hsc_organisations": "Yes",
-      "lead_nation": "Wales"
+      "lead_nation": "England"
     }
   },
   "Project_Details_Tab": {
@@ -96,12 +78,13 @@
   },
   "Project_Team_Tab": {
     "chief_investigator_label": "Chief Investigator",
-    "primary_sponsor_org_label": "Primary sponsor organisation",
-    "sponsor_contact_label": "Sponsor contact"
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "email_label": "Email"
   },
   "Research_Locations_Tab": {
     "participating_nations_label": "Participating nations",
-    "nhs_hsc_organisations_label": "NHS / HSC organisations",
+    "nhs_hsc_organisations_label": "NHS/HSC organisations",
     "lead_nation_label": "Lead nation"
   },
   "Post_Approval_Tab": {
@@ -112,16 +95,13 @@
     "post_approvals_tab_date_submitted": "Date submitted"
   },
   "Project_Documents_Tab": {
-    "document_type_project_documents": "Document type",
-    "document_name_project_documents": "Document name",
-    "file_name_project_documents": "File name",
+    "document_type_project_documents": "Document\ntype",
+    "document_name_project_documents": "Document\nname",
+    "file_name_project_documents": "File\nname",
     "version_project_documents": "Version",
-    "document_date_project_documents": "Document date",
+    "document_date_project_documents": "Document\ndate",
     "status_project_documents": "Status",
-    "modification_id_project_documents": "Modification ID",
-    "action_project_documents": "Action",
-    "search_project_documents": "Search",
-    "advanced_filters_project_documents": "Advanced filters"
+    "modification_id_project_documents": "Modification\nID"
   },
   "Post_Approval_Search_Queries": {
     "Partial_Modification_ID": { "search_input_text": "123" },

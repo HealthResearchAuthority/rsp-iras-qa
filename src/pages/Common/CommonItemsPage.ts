@@ -863,6 +863,11 @@ export default class CommonItemsPage {
     return confirmStringNotNull(await locator.textContent());
   }
 
+  async getInnerLabel<PageObject>(key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    return confirmStringNotNull(await locator.innerText());
+  }
+
   async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
