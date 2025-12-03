@@ -1,4 +1,4 @@
-@ReceiveAmendments @MyModificationsTasklist @SystemTest @StudyWideReviewer @TestApprovals
+@ReceiveAmendments @MyModificationsTasklist @SystemTest @StudyWideReviewer @TestApprovals @TestApprovalsTMWFCSWR
 Feature: SWR - My Modifications Tasklist page
     Background:
         Given I have navigated to the 'My_Modifications_Tasklist_Page'
