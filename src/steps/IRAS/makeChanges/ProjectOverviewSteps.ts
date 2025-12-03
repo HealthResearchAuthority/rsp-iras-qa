@@ -68,15 +68,21 @@ Then(
 Then(
   'I can see the {string} ui labels on the project overview page',
   async ({ projectOverviewPage }, datasetName: string) => {
-    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const dataset = projectOverviewPage.projectOverviewPageTestData.Project_Documents_Tab[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         const locator: Locator = projectOverviewPage[key];
-        await expect(locator).toBeVisible();
+        await expect.soft(locator).toBeVisible();
       }
     }
   }
 );
+
+Then('I navigate to a {string} project documents tab', async ({ projectOverviewPage }, status: string) => {
+  await projectOverviewPage.sqlGetProjectDocumentsRecordByStatus(status);
+  await projectOverviewPage.goto(projectOverviewPage.project_rec_id);
+  await projectOverviewPage.assertOnProjectOverviewPage();
+});
 
 Then(
   'I can see the status of modifications displayed is {string}',
@@ -579,10 +585,35 @@ When(
 );
 
 Then(
-  'I click on the modification id hyperlink in the project documents tab',
+  'I click on the modification id hyperlink in the project documents tab for complete and incomplete status',
   async ({ modificationsCommonPage, commonItemsPage }) => {
     const modificationIDExpected = await modificationsCommonPage.getModificationID();
     await commonItemsPage.govUkLink.getByText(modificationIDExpected).click();
     await modificationsCommonPage.page.waitForLoadState('domcontentloaded');
   }
 );
+
+Then(
+  'I click on the modification id hyperlink in the project documents tab',
+  async ({ projectOverviewPage, commonItemsPage }) => {
+    const modificationIDExpected = projectOverviewPage.doc_modification_id;
+    await commonItemsPage.govUkLink.getByText(modificationIDExpected).first().click();
+    await projectOverviewPage.page.waitForLoadState('domcontentloaded');
+  }
+);
+
+Then('I validate the fields are read only format', async ({ page }) => {
+  const rowDetails = page.locator('#modifications-changes dd');
+  const count = await rowDetails.count();
+  expect(count).toBeGreaterThan(0);
+  for (let i = 0; i < count; i++) {
+    const rowValue = rowDetails.nth(i);
+    await expect(rowValue).toBeVisible();
+    const text = (await rowValue.textContent())?.trim() ?? '';
+    expect(text.length).toBeGreaterThan(0);
+    const editableValue = rowValue.locator(
+      'input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [contenteditable="true"], [role="textbox"]'
+    );
+    await expect(editableValue).toHaveCount(0);
+  }
+});

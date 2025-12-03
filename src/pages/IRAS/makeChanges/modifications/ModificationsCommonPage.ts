@@ -809,6 +809,25 @@ export default class ModificationsCommonPage {
     return modificationMap;
   }
 
+  async getModificationProjectDocumentsPage(): Promise<Map<string, string[]>> {
+    const modificationIdValue: string[] = [];
+    const documentDateValue: string[] = [];
+    const statusValue: string[] = [];
+    const columns = this.tableRows.nth(1).getByRole('cell');
+    const modificationId = confirmStringNotNull(await columns.nth(6).textContent());
+    modificationIdValue.push(modificationId);
+    const documentDate = confirmStringNotNull(await columns.nth(4).textContent());
+    documentDateValue.push(documentDate);
+    const status = confirmStringNotNull(await columns.nth(5).textContent());
+    statusValue.push(status);
+    const modificationMap = new Map([
+      ['modificationIdValue', modificationIdValue],
+      ['documentDateValue', documentDateValue],
+      ['statusValue', statusValue],
+    ]);
+    return modificationMap;
+  }
+
   async getModificationRowNumberPostApprovalPage(rowNumber?: number): Promise<Map<string, string[]>> {
     const modificationIdValue: string[] = [];
     const submittedDateValue: string[] = [];

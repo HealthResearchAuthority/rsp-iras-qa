@@ -3,7 +3,9 @@ import * as projectOverviewPageTestData from '../../../resources/test_data/iras/
 import { confirmStringNotNull } from '../../../utils/UtilFunctions';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
 import CommonItemsPage from '../../Common/CommonItemsPage';
-
+import * as dbConfigData from '../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../utils/DbConfig';
+import { IResult } from 'mssql';
 //Declare Page Objects
 export default class ProjectOverviewPage {
   readonly page: Page;
@@ -65,7 +67,6 @@ export default class ProjectOverviewPage {
   readonly document_date_project_documents: Locator;
   readonly status_project_documents: Locator;
   readonly modification_id_project_documents: Locator;
-  readonly action_project_documents: Locator;
   readonly action_header: Locator;
   readonly advanced_filters_project_documents: Locator;
   readonly search_project_documents: Locator;
@@ -120,13 +121,16 @@ export default class ProjectOverviewPage {
   readonly project_details_tab_planned_project_end_date: Locator;
   readonly tableCell: Locator;
   readonly tableRows: Locator;
+  private _doc_name: string;
+  private _doc_modification_id: string;
+  private _doc_status: string;
+  private _project_rec_id: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.projectOverviewPageTestData = projectOverviewPageTestData;
     this.linkTextData = linkTextData;
-
     //Locators
 
     this.pageHeading = this.page
@@ -471,33 +475,23 @@ export default class ProjectOverviewPage {
     });
     this.document_name_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.document_name_project_documents.trim(),
-      exact: true,
     });
     this.file_name_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.file_name_project_documents.trim(),
-      exact: true,
     });
     this.version_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.version_project_documents,
-      exact: true,
     });
     this.document_date_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.document_date_project_documents.trim(),
-      exact: true,
     });
-    this.status_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Project_Documents_Tab.status_project_documents,
-      exact: true,
-    });
+    this.status_project_documents = this.page.getByText(
+      this.projectOverviewPageTestData.Project_Documents_Tab.status_project_documents
+    );
     this.modification_id_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.modification_id_project_documents.trim(),
-      exact: true,
     });
     this.action_header = this.page.locator('th');
-    this.search_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Project_Documents_Tab.search_project_documents.trim(),
-      exact: true,
-    });
     this.advanced_filters_project_documents = this.page
       .locator('.search-filter-panel__button-inner')
       .getByText(this.projectOverviewPageTestData.Project_Documents_Tab.advanced_filters_project_documents);
@@ -519,6 +513,32 @@ export default class ProjectOverviewPage {
       .locator('.govuk-error-message');
     this.tableCell = this.page.locator('td');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+  }
+
+  //Getters & Setters for Private Variables
+  public get doc_name(): string {
+    return this._doc_name;
+  }
+  public set doc_name(value: string) {
+    this._doc_name = value;
+  }
+  public get doc_status(): string {
+    return this._doc_status;
+  }
+  public set doc_status(value: string) {
+    this._doc_status = value;
+  }
+  public get doc_modification_id(): string {
+    return this._doc_modification_id;
+  }
+  public set doc_modification_id(value: string) {
+    this._doc_modification_id = value;
+  }
+  public get project_rec_id(): string {
+    return this._project_rec_id;
+  }
+  public set project_rec_id(value: string) {
+    this._project_rec_id = value;
   }
 
   //Page Methods
@@ -630,5 +650,29 @@ export default class ProjectOverviewPage {
       ['userEmailValue', userEmailValues],
     ]);
     return auditProjectMap;
+  }
+  async goto(projectRecordId: string) {
+    await this.page.goto(`projectoverview/projectdocuments?projectRecordId=${projectRecordId}&backRoute=app%3AWelcome`);
+  }
+  async setAllProjectDocumentsValues(sqlQueryResult: IResult<any>): Promise<void> {
+    console.dir(sqlQueryResult);
+    this.project_rec_id = sqlQueryResult.recordset[0].ProjectRecordId;
+    this._doc_status = sqlQueryResult.recordset[0].Status;
+    this._doc_name = sqlQueryResult.recordset[0].FileName;
+    this._doc_modification_id = sqlQueryResult.recordset[0].ModificationIdentifier;
+  }
+
+  // SQL STATEMENTS //
+  async sqlGetProjectDocumentsRecordByStatus(status: string): Promise<void> {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(
+      `select top 1 ModificationDocuments.[FileName], ModificationDocuments.Status, ProjectModifications.ProjectRecordId, ProjectModifications.ModificationIdentifier from ProjectModifications, ModificationDocuments where ProjectModifications.ProjectRecordId = ModificationDocuments.ProjectRecordId and ProjectModifications.[Status] = '${status}' ORDER BY NEWID()`
+    );
+    await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(`No suitable modification found in the system with ${status} status`);
+    } else {
+      await this.setAllProjectDocumentsValues(queryResult);
+    }
   }
 }

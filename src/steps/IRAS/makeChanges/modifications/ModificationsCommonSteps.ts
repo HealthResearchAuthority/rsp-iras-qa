@@ -675,16 +675,10 @@ Then('I validate the missing document notification details', async ({ modificati
 });
 
 Then(
-  'I can see the modification send to sponsor is displayed on Project documents of project overview page with status as {string}',
+  'I can see the documents status of project overview page with status as {string}',
   async ({ modificationsCommonPage }, statusValue: string) => {
-    const modificationIDExpected = await modificationsCommonPage.getModificationID();
-    const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
-    const modificationIDActual = modificationRecord.get('modificationIdValue');
-    expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
+    const modificationRecord = await modificationsCommonPage.getModificationProjectDocumentsPage();
     const statusActual = modificationRecord.get('statusValue');
     expect.soft(statusActual[0]).toBe(statusValue);
-    const submittedDateActual = modificationRecord.get('submittedDateValue');
-    const submittedDateExpected = await getFormattedDate();
-    expect.soft(submittedDateActual[0]).toBe(submittedDateExpected);
   }
 );
