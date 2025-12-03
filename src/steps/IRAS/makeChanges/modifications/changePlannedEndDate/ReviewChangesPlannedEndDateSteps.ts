@@ -75,24 +75,26 @@ Then(
         datasetAffectedOrgQuestions.where_organisation_change_affect_nhs_question_checkbox
           .toString()
           .replaceAll(',', '');
-      expect(actualNhsAffectedLocations).toBe(expectedNhsAffectedLocations);
-      expect(actualPortionOfAffected).toBe(
-        datasetAffectedOrgQuestions.will_some_or_all_organisations_be_affected_question_radio
-      );
-      expect(actualAdditionalResourcesImplications).toBe(
-        datasetAffectedOrgQuestions.will_nhs_hsc_organisations_require_additional_resources_question_radio
-      );
+      expect.soft(actualNhsAffectedLocations).toBe(expectedNhsAffectedLocations);
+      expect
+        .soft(actualPortionOfAffected)
+        .toBe(datasetAffectedOrgQuestions.will_some_or_all_organisations_be_affected_question_radio);
+      expect
+        .soft(actualAdditionalResourcesImplications)
+        .toBe(datasetAffectedOrgQuestions.will_nhs_hsc_organisations_require_additional_resources_question_radio);
     }
 
     async function validateNonNhsFields() {
       const actualNonNhsAffectedLocations = confirmStringNotNull(
         await modificationReviewChangesPage.affected_non_nhs_hsc_locations_text.textContent()
       );
-      expect(actualNonNhsAffectedLocations).toBe(
-        datasetAffectedOrgQuestions.where_organisation_change_affect_non_nhs_question_checkbox
-          .toString()
-          .replaceAll(',', '')
-      );
+      expect
+        .soft(actualNonNhsAffectedLocations)
+        .toBe(
+          datasetAffectedOrgQuestions.where_organisation_change_affect_non_nhs_question_checkbox
+            .toString()
+            .replaceAll(',', '')
+        );
     }
   }
 );

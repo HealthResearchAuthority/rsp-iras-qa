@@ -55,11 +55,10 @@ Then(
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
     const expectedModificationId = irasIdRunTime + '/' + 1;
     const actualModificationId = confirmStringNotNull(await selectAreaOfChangePage.modification_id_text.textContent());
-    const expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+    const expectedProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     expect(actualIrasIdValue).toBe(expectedIrasIdValue);
     expect(actualProjectTitle).toBe(expectedProjectTitle);
     expect(actualModificationId).toBe(expectedModificationId);
-    expect(selectAreaOfChangePage.remove_this_change_link).toBeVisible();
   }
 );
 

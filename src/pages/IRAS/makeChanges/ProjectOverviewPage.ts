@@ -45,10 +45,12 @@ export default class ProjectOverviewPage {
   readonly project_details_tab_short_project_title: Locator;
   readonly project_team_tab_chief_investigator_label: Locator;
   readonly project_team_tab_chief_investigator: Locator;
-  readonly project_team_tab_primary_sponsor_org_label: Locator;
-  readonly project_team_tab_primary_sponsor_org: Locator;
-  readonly project_team_tab_sponsor_contact_label: Locator;
-  readonly project_team_tab_sponsor_contact: Locator;
+  readonly project_team_tab_chief_investigator_first_name_label: Locator;
+  readonly project_team_tab_chief_investigator_first_name: Locator;
+  readonly project_team_tab_chief_investigator_last_name_label: Locator;
+  readonly project_team_tab_chief_investigator_last_name: Locator;
+  readonly project_team_tab_chief_investigator_email_label: Locator;
+  readonly project_team_tab_chief_investigator_email: Locator;
   readonly research_locations_tab_participating_nations_label: Locator;
   readonly research_locations_tab_participating_nations: Locator;
   readonly research_locations_tab_nhs_hsc_organisations_label: Locator;
@@ -154,11 +156,11 @@ export default class ProjectOverviewPage {
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
     this.delete_modification_success_message_text = this.page.locator('.govuk-notification-banner__heading');
     this.project_overview_heading = this.page.locator('.govuk-inset-text');
-    this.project_team_heading = this.page
-      .getByRole('heading')
-      .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_team_heading);
+    this.project_team_heading = this.page.getByText(
+      this.projectOverviewPageTestData.Project_Overview_Page.project_team_heading
+    );
     this.research_locations_heading = this.page
-      .getByRole('heading')
+      .locator('.govuk-service-navigation__link')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.research_locations_heading);
     this.post_approvals_heading = this.page
       .getByRole('heading')
@@ -210,18 +212,25 @@ export default class ProjectOverviewPage {
     this.project_team_tab_chief_investigator = this.project_team_tab_chief_investigator_label
       .locator('..')
       .locator(this.tab_row_value);
-    this.project_team_tab_primary_sponsor_org_label = this.tab_row_label.getByText(
-      this.projectOverviewPageTestData.Project_Team_Tab.primary_sponsor_org_label,
+    this.project_team_tab_chief_investigator_first_name_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Team_Tab.first_name_label,
       { exact: true }
     );
-    this.project_team_tab_primary_sponsor_org = this.project_team_tab_primary_sponsor_org_label
+    this.project_team_tab_chief_investigator_first_name = this.project_team_tab_chief_investigator_first_name_label
       .locator('..')
       .locator(this.tab_row_value);
-    this.project_team_tab_sponsor_contact_label = this.tab_row_label.getByText(
-      this.projectOverviewPageTestData.Project_Team_Tab.sponsor_contact_label,
+    this.project_team_tab_chief_investigator_last_name_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Team_Tab.last_name_label,
       { exact: true }
     );
-    this.project_team_tab_sponsor_contact = this.project_team_tab_sponsor_contact_label
+    this.project_team_tab_chief_investigator_last_name = this.project_team_tab_chief_investigator_last_name_label
+      .locator('..')
+      .locator(this.tab_row_value);
+    this.project_team_tab_chief_investigator_email_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Team_Tab.email_label,
+      { exact: true }
+    );
+    this.project_team_tab_chief_investigator_email = this.project_team_tab_chief_investigator_email_label
       .locator('..')
       .locator(this.tab_row_value);
     this.research_locations_tab_participating_nations_label = this.tab_row_label.getByText(
@@ -471,23 +480,27 @@ export default class ProjectOverviewPage {
       .locator('.govuk-body')
       .getByText(this.linkTextData.Project_Overview_Page.View_Project_Overview);
     this.document_type_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_type_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_type_project_documents,
     });
     this.document_name_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.document_name_project_documents.trim(),
+      exact: true,
     });
     this.file_name_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.file_name_project_documents.trim(),
+      exact: true,
     });
     this.version_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.version_project_documents,
     });
     this.document_date_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_date_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_date_project_documents,
+      exact: true,
     });
-    this.status_project_documents = this.page.getByText(
-      this.projectOverviewPageTestData.Project_Documents_Tab.status_project_documents
-    );
+    this.status_project_documents = this.page.getByRole('columnheader', {
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.status_project_documents,
+      exact: true,
+    });
     this.modification_id_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.modification_id_project_documents.trim(),
     });
@@ -560,8 +573,8 @@ export default class ProjectOverviewPage {
 
   async getProjectColumnIndex(columnName: string): Promise<number> {
     let columnIndex: number;
-    if (columnName.toLowerCase() == 'document name') {
-      columnIndex = 1;
+    if (columnName.toLowerCase() == 'file name') {
+      columnIndex = 2;
     }
     return columnIndex;
   }
