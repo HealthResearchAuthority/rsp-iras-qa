@@ -426,7 +426,7 @@ export default class CommonItemsPage {
       .getByTestId('govuk-notification-banner-title')
       .getByText(this.commonTestData.success_header_label);
     this.page_heading = this.page.getByRole('heading');
-    this.removeLink = this.page.locator('.govuk-link').getByText('Remove');
+    this.removeLink = this.page.locator('.govuk-link').getByText(linkTextData.Review_Body_User_List_Page.Remove);
   }
 
   //Getters & Setters for Private Variables
