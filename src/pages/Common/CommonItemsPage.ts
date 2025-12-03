@@ -1546,7 +1546,7 @@ export default class CommonItemsPage {
 
   async getChangeLink<PageObject>(fieldKey: string, page: PageObject): Promise<Locator> {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
-    return page[locatorName];
+    return await page[locatorName];
   }
 
   async selectCheckboxUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
