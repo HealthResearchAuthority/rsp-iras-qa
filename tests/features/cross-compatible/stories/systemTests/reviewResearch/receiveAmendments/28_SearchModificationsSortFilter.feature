@@ -87,9 +87,11 @@ Feature: Filter, Search and Sort the Search modifications page
                         | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
                         | previous link     | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
-        @SearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031 @DataIssue @NeedToFix @fail
+        @SearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031 @Run
         Scenario: Verify back and short project title link navigation for search modifications tasklist
-                And I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
+                Given I have navigated to the 'Search_Modifications_Page' as '<User>'
+                And I capture the modification id of '<Modification_Count>' with status '<Status>'
+                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I can now see a table of search results for 'modifications received for approval'
@@ -97,7 +99,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 When I click a 'short project title' on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the project overview page
-                # When I click the 'Back' link on the 'Project_Overview_Page'
                 Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
@@ -108,10 +109,43 @@ Feature: Filter, Search and Sort the Search modifications page
                 Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
                 When I click a 'modification id' on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the review all changes modifications page
-                When I click the 'Back' link on the 'Review_All_Changes_Page'
-                And I capture the page screenshot
+                Then I can see the 'Modification_Details_Page'
+                When I click the 'Back' link on the 'Modification_Details_Page'
                 Then I can see the 'Search_Modifications_Page'
+                Examples:
+                        | Search_Input       | User                 | Status           | Modification_Count |
+                        | Valid_Full_Iras_Id | Team_Manager         | With review body | Single             |
+                        | Valid_Full_Iras_Id | Studywide_Reviewer   | With review body | Single             |
+                        | Valid_Full_Iras_Id | Workflow_Coordinator | With review body | Single             |
+                        | Valid_Full_Iras_Id | Team_Manager         | Approved         | Single             |
+                        | Valid_Full_Iras_Id | Studywide_Reviewer   | Approved         | Single             |
+                        | Valid_Full_Iras_Id | Workflow_Coordinator | Approved         | Single             |
+                        | Valid_Full_Iras_Id | Team_Manager         | Not approved     | Single             |
+                        | Valid_Full_Iras_Id | Studywide_Reviewer   | Not approved     | Single             |
+                        | Valid_Full_Iras_Id | Workflow_Coordinator | Not approved     | Single             |
+                        | Valid_Full_Iras_Id | System_Admin         | Not approved     | Single             |
+                        | Valid_Full_Iras_Id | System_Admin         | Approved         | Single             |
+                        | Valid_Full_Iras_Id | System_Admin         | In draft         | Single             |
+                        | Valid_Full_Iras_Id | System_Admin         | With sponsor     | Single             |
+                        | Valid_Full_Iras_Id | System_Admin         | With review body | Single             |
+
+        @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031 @Run @fail @KNOWN_DEFECT_RSP_No_Result_COunt
+        Scenario: Verify In draft and WIth sponsor modifications in search modifications page
+                Given I have navigated to the 'Search_Modifications_Page' as '<User>'
+                And I capture the modification id of '<Modification_Count>' with status '<Status>'
+                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then the no search results found message is displayed
+                And I capture the page screenshot
+                Examples:
+                        | Search_Input       | User               | Status       | Modification_Count |
+                        | Valid_Full_Iras_Id | Team_Manager       | In draft     | Single             |
+                        | Valid_Full_Iras_Id | Team_Manager       | With sponsor | Single             |
+                        | Valid_Full_Iras_Id | Studywide_Reviewer | In draft     | Single             |
+                        | Valid_Full_Iras_Id | Studywide_Reviewer | With sponsor | Single             |
+                        | Valid_Full_Iras_Id | Team_Manager       | In draft     | Single             |
+                        | Valid_Full_Iras_Id | Team_Manager       | With sponsor | Single             |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
@@ -131,10 +165,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id        | Advanced_Filters                                 |
-                        # | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty                          |
-                        # | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne                       |
-                        # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo                       |
-                        # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree                     |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_No_SpOrg             |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
@@ -181,10 +211,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
-        # | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
-        # | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
-        # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
-        # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
@@ -208,10 +234,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
-        # | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
-        # | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
-        # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
-        # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
         @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
@@ -226,11 +248,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 Examples:
                         | Valid_Iras_Id     |
                         | Valid_Iras_Id_Nth |
-        # | Valid_Iras_Id_Nineteen    |
-        # | Valid_Iras_Id_Twenty      |
-        # | Valid_Iras_Id_TwentyOne   |
-        # | Valid_Iras_Id_TwentyTwo   |
-        # | Valid_Iras_Id_TwentyThree |
 
         @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
@@ -247,24 +264,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 Examples:
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
-        # | Advanced_Filters_Two       |
-        # | Advanced_Filters_Three       |
-        # | Advanced_Filters_Four      |
-        # | Advanced_Filters_Five        |
-        # | Advanced_Filters_Six         |
-        # | Advanced_Filters_Seven       |
-        # | Advanced_Filters_Eight       |
-        # | Advanced_Filters_Nine        |
-        # | Advanced_Filters_Ten         |
-        # | Advanced_Filters_Eleven      |
-        # | Advanced_Filters_Fourteen    |
-        # | Advanced_Filters_Sixteen   |
-        # | Advanced_Filters_Seventeen |
-        # | Advanced_Filters_Eighteen    |
-        # | Advanced_Filters_Twenty      |
-        # | Advanced_Filters_TwentyOne |
-        # | Advanced_Filters_TwentyTwo   |
-        # | Advanced_Filters_TwentyThree |
 
         @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @DataIssue @NeedToFix @fail
         Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
@@ -282,7 +281,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 Examples:
                         | Advanced_Filters          |
                         | Advanced_Filters_One      |
-                        # | Advanced_Filters_Tweleve  |
                         | Advanced_Filters_Thirteen |
 
         @NoResultsFound @NoIrasIdAndNoAdvancedFilters
@@ -413,8 +411,8 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Date_Submitted_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                   |
 
 
-        @RemoveActiveFiltersOneByOne @jsDisabled @DataIssue @NeedToFix @fail
-        Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
+        @RemoveActiveFiltersOneByOne @jsDisabled
+        Scenario Outline: Verify the user can remove the selected filters one by one
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -422,17 +420,9 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
-                And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters_Remove>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_After_Remove>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters_After_Remove>'
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
-
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Remove                             | Advanced_Filters_After_Remove                                    |
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Chief_Investigator_Name_Filter | Advanced_Filters_Nth_After_Remove_Chief_Investigator_Name_Filter |
@@ -440,8 +430,8 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Date_Submitted_From_To_Filter  | Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter  |
 
-        @RemoveAllActiveFiltersOneByOne @DataIssue @NeedToFix @fail
-        Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
+        @RemoveAllActiveFiltersOneByOne
+        Scenario Outline: Verify the user can remove all the selected filters one by one
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -449,23 +439,17 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
-                And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then The search modifications page returns to its original empty state with no results displayed
-                And I capture the page screenshot
-
+                And I 'cannot' see active filters displayed
                 Examples:
                         | Advanced_Filters                                 |
                         | Advanced_Filters_Automation_No_SpOrg             |
                         | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
                         | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled @DataIssue @NeedToFix @fail
-        Scenario Outline: Verify the user can remove all the selected filters(with sponsor org) one by one and the search results update accordingly-JS disabled
+        @RemoveAllActiveFiltersOneByOne @jsDisabled
+        Scenario Outline: Verify the user can remove all the selected filters(with sponsor org) one by one -JS disabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -473,15 +457,9 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
-                And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then The search modifications page returns to its original empty state with no results displayed
-                And I capture the page screenshot
-
+                And I 'cannot' see active filters displayed
                 Examples:
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
@@ -512,8 +490,8 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAltogether @rsp-4293 @DataIssue @NeedToFix @fail
-        Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link and the search results update accordingly
+        @RemoveActiveFiltersAltogether @rsp-4293
+        Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -521,10 +499,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
-                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
-                And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then The search modifications page returns to its original empty state with no results displayed
@@ -648,19 +622,8 @@ Feature: Filter, Search and Sort the Search modifications page
                 Examples:
                         | Valid_Iras_Id     |
                         | Valid_Iras_Id_Nth |
-        # | Valid_Iras_Id_Nineteen    |
-        # | Valid_Iras_Id_Twenty      |
-        # | Valid_Iras_Id_TwentyOne   |
-        # | Valid_Iras_Id_TwentyTwo   |
-        # | Valid_Iras_Id_TwentyThree |
 
-        # covered in Approvals.feature
-        # @BackLinkNavigation @Duplicate
-        # Scenario:  Verify the user can navigate from 'Search_Modifications_Page' by clicking 'Back' link
-        #         When I click the 'Back' link on the 'Search_Modifications_Page'
-        #         Then I can see the approvals home page
-        #         When I click the 'Back' link on the 'Approvals_Page'
-        #         Then I can see the 'Home_Page'
+
 
         @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes

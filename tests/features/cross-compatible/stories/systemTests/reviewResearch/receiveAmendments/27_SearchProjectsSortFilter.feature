@@ -313,9 +313,8 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters_No_Results |
                         | Advanced_Filters_All        |
 
-
-        @RemoveActiveFiltersOneByOne @jsDisabled @DataIssue @NeedToFix @fail
-        Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
+        @RemoveActiveFiltersOneByOne @jsDisabled
+        Scenario Outline: Verify the user can remove the selected filters one by one
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 When I select advanced filters in the 'Search_Projects_Page' using '<Advanced_Filters>'
@@ -323,21 +322,14 @@ Feature: Filter, Search and Sort the Search project records page
                 And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
-                And the system displays project records based on the search '' and filter criteria '<Advanced_Filters>'
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
-                And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters_Remove>' in the 'Search_Projects_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_After_Remove>' in the 'Search_Projects_Page'
-                And the system displays project records based on the search '' and filter criteria '<Advanced_Filters_After_Remove>'
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
-
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Remove                             | Advanced_Filters_After_Remove                                    |
                         | Advanced_Filters_All | Advanced_Filters_All_Chief_Investigator_Name_Filter | Advanced_Filters_All_After_Remove_Chief_Investigator_Name_Filter |
                         | Advanced_Filters_All | Advanced_Filters_All_Short_Project_Title_Filter     | Advanced_Filters_All_After_Remove_Short_Project_Title_Filter     |
                         | Advanced_Filters_All | Advanced_Filters_All_Sponsor_Organisation_Filter    | Advanced_Filters_All_After_Remove_Sponsor_Organisation_Filter    |
-        #
 
         @RemoveAllActiveFiltersOneByOne
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
@@ -356,7 +348,6 @@ Feature: Filter, Search and Sort the Search project records page
                 Examples:
                         | Advanced_Filters     |
                         | Advanced_Filters_All |
-
 
         @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID

@@ -312,3 +312,17 @@ Then(
     }
   }
 );
+
+Then(
+  'I capture the modification id of {string} with status {string}',
+  async ({ searchModificationsPage }, modificationCount: string, status: string) => {
+    let countValue: string;
+    if (modificationCount === 'Single' || modificationCount === 'Partial') {
+      countValue = '=';
+    } else {
+      countValue = '>';
+    }
+    const modificationId = await searchModificationsPage.sqlGetModificationByStatus(status, countValue);
+    await searchModificationsPage.saveModificationId(modificationId.toString(), modificationCount);
+  }
+);

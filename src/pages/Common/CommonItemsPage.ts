@@ -1788,10 +1788,10 @@ export default class CommonItemsPage {
     return actualListValues;
   }
 
-  async getActualListValuesShortProjectTitle(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+  async getActualListValuesShortProjectTitleSWRStatus(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
     const actualListValues: string[] = [];
     for (const row of await tableBodyRows.all()) {
-      const actualListValue = (await row.getByRole('cell').nth(columnIndex).textContent()).replaceAll(/[\n\t]/g, '');
+      const actualListValue = await row.getByRole('cell').nth(columnIndex).textContent();
       actualListValues.push(actualListValue);
     }
     return actualListValues;

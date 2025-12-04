@@ -14,8 +14,21 @@ Then(
     sortField: string
   ) => {
     let sortedList: string[];
+    let actualList: string[];
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, sortField);
-    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    if (
+      sortField.toLowerCase() === 'short project title' ||
+      sortField.toLowerCase() === 'study-wide reviewer' ||
+      sortField.toLowerCase() === 'status'
+    ) {
+      actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
+        commonItemsPage.tableBodyRows,
+        columnIndex
+      );
+    } else {
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    }
+    // const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortField.toLowerCase() == 'modification id') {
       sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date submitted') {

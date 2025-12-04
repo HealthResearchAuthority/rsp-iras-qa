@@ -34,8 +34,12 @@ Then(
         sortField
       );
     }
-    if (sortField.toLowerCase() === 'short project title') {
-      actualList = await commonItemsPage.getActualListValuesShortProjectTitle(
+    if (
+      sortField.toLowerCase() === 'short project title' ||
+      sortField.toLowerCase() === 'study-wide reviewer' ||
+      sortField.toLowerCase() === 'status'
+    ) {
+      actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
         commonItemsPage.tableBodyRows,
         searchColumnIndex
       );
