@@ -78,10 +78,10 @@ When(
   'I enter {string} into the search field for {string}',
   async ({ searchModificationsPage, searchProjectsPage }, datasetName: string, pageValue: string) => {
     if (pageValue === 'Search_Modifications_Page') {
-      const dataset = searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
+      const dataset = await searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
       await searchModificationsPage.iras_id_search_text.fill(dataset['iras_id_text']);
     } else if (pageValue === 'Search_Projects_Page') {
-      const dataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[datasetName];
+      const dataset = await searchProjectsPage.searchProjectsPageTestData.Search_Queries[datasetName];
       await searchModificationsPage.iras_id_search_text.fill(dataset['search_input_text']);
     }
   }

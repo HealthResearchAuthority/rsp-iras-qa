@@ -121,7 +121,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | page number       | Advanced_Filters_Lead_Nation |
                         | previous link     | Advanced_Filters_Lead_Nation |
 
-        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @ActiveFilters @DBDataUsed @DataIssue @NeedToFix @fail
+        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @ActiveFilters @DBDataUsed
         Scenario Outline: Verify the user is able to view the list of projects by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 And I capture the iras id and short project title of the recently added project with status as 'Active' from the database
                 When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
