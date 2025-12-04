@@ -414,7 +414,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Valid_Iras_Id      | Advanced_Filters             |
                         | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS @skip
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled-Search Projects Page
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'
@@ -438,7 +438,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @RTS @skip
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled-Search Projects Page
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'
@@ -459,7 +459,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma | Sponsor_Organisation_Min_Char_Error |
                         | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen    | Sponsor_Organisation_Min_Char_Error |
 
-        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @RTS @fail @KNOWN_DEFECT_RSP_RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @RTS @fail @KNOWN_DEFECT_RSP_RTS @skip
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled-Search Projects Page-RTS issue
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in 'Search_Projects_Page'

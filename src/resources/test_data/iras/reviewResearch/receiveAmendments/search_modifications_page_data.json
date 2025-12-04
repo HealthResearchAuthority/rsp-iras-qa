@@ -138,9 +138,8 @@
   },
   "Advanced_Filters": {
     "Advanced_Filters_Nth": {
-      "chief_investigator_name_text": "ci@hra.nhs.uk",
-      "short_project_title_text": "QA Automation",
-      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+      "chief_investigator_name_text": "ci",
+      "short_project_title_text": "e",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "1900",
@@ -158,14 +157,15 @@
       "modification_type_checkbox": [
         "Minor modification",
         "Modification of an important detail"
-      ]
+      ],
+      "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Nth_Chief_Investigator_Name_Filter": {
       "chief_investigator_name_text": "ci@hra.nhs.uk"
     },
     "Advanced_Filters_Nth_After_Remove_Chief_Investigator_Name_Filter": {
       "short_project_title_text": "QA Automation",
-      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+      "sponsor_organisation_text": "University of Southampton",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "1900",
@@ -186,11 +186,11 @@
       ]
     },
     "Advanced_Filters_Nth_Sponsor_Organisation_Filter": {
-      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST"
+      "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter": {
-      "chief_investigator_name_text": "ci@hra.nhs.uk",
-      "short_project_title_text": "QA Automation",
+      "chief_investigator_name_text": "ci",
+      "short_project_title_text": "a",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "1900",
@@ -219,9 +219,9 @@
       "date_submitted_to_year_text": "2050"
     },
     "Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter": {
-      "chief_investigator_name_text": "ci@hra.nhs.uk",
-      "short_project_title_text": "QA Automation",
-      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+      "chief_investigator_name_text": "ci",
+      "short_project_title_text": "a",
+      "sponsor_organisation_text": "University of Southampton",
       "lead_nation_checkbox": [
         "England",
         "Wales"
@@ -236,11 +236,11 @@
       ]
     },
     "Advanced_Filters_Nth_Short_Project_Title_Filter": {
-      "short_project_title_text": "QA Automation"
+      "short_project_title_text": "a"
     },
     "Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter": {
-      "chief_investigator_name_text": "ci@hra.nhs.uk",
-      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+      "chief_investigator_name_text": "ci",
+      "sponsor_organisation_text": "University of Southampton",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "1900",
@@ -261,13 +261,14 @@
       ]
     },
     "Advanced_Filters_No_Results_One": {
-      "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A.",
+      "sponsor_organisation_text": "University of Southampton",
+      "short_project_title_text": "qa automation",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "March",
       "date_submitted_from_year_text": "2025",
       "date_submitted_to_day_text": "01",
       "date_submitted_to_month_dropdown": "April",
-      "date_submitted_to_year_text": "2024",
+      "date_submitted_to_year_text": "2025",
       "lead_nation_checkbox": [
         "Scotland",
         "Wales"
@@ -278,7 +279,7 @@
       ]
     },
     "Advanced_Filters_One": {
-      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST"
+      "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Two": {
       "short_project_title_text": "Short study title 17"
@@ -297,7 +298,7 @@
       ]
     },
     "Advanced_Filters_Five": {
-      "sponsor_organisation_text": "Nottingham Trent University",
+      "sponsor_organisation_text": "University of Southampton",
       "lead_nation_checkbox": [
         "Northern Ireland"
       ],
@@ -316,7 +317,7 @@
     },
     "Advanced_Filters_Seven": {
       "short_project_title_text": "Study title 04",
-      "sponsor_organisation_text": "ASHFORD AND ST PETER'S HOSPITALS NHS FOUNDATION TRUST",
+      "sponsor_organisation_text": "University of Southampton",
       "lead_nation_checkbox": [
         "Wales"
       ],
@@ -338,7 +339,7 @@
       ]
     },
     "Advanced_Filters_Nine": {
-      "sponsor_organisation_text": "Academic Medical Center at the University of Amsterdam (Netherlands)",
+      "sponsor_organisation_text": "University of Southampton",
       "lead_nation_checkbox": [
         "England",
         "Scotland"
@@ -368,7 +369,7 @@
     },
     "Advanced_Filters_Eleven": {
       "short_project_title_text": "26 -Study",
-      "sponsor_organisation_text": "AKL RESEARCH & DEVELOPMENT LIMITED",
+      "sponsor_organisation_text": "University of Southampton",
       "lead_nation_checkbox": [
         "Northern Ireland",
         "Scotland"
@@ -387,7 +388,7 @@
       "date_submitted_to_year_text": "2000"
     },
     "Advanced_Filters_Thirteen": {
-      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+      "sponsor_organisation_text": "University of Southampton",
       "date_submitted_from_day_text": "03",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "2000"
@@ -409,7 +410,7 @@
       ]
     },
     "Advanced_Filters_Fifteen": {
-      "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A.",
+      "sponsor_organisation_text": "University of Southampton",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "March",
       "date_submitted_from_year_text": "2024",
@@ -429,7 +430,7 @@
       "chief_investigator_name_text": "Barry White"
     },
     "Advanced_Filters_Seventeen": {
-      "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
+      "chief_investigator_name_text": "ci",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -437,7 +438,7 @@
       ]
     },
     "Advanced_Filters_Eighteen": {
-      "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
+      "chief_investigator_name_text": "ci",
       "date_submitted_from_day_text": "10",
       "date_submitted_from_month_dropdown": "April",
       "date_submitted_from_year_text": "2025",
@@ -498,7 +499,7 @@
       ]
     },
     "Advanced_Filters_TwentyThree": {
-      "chief_investigator_name_text": "Commander Maximilian Thorne-Winchester III",
+      "chief_investigator_name_text": "ci",
       "short_project_title_text": "Study title 10",
       "sponsor_organisation_text": "AB SCIEX UK LIMITED",
       "date_submitted_from_day_text": "2",
@@ -537,7 +538,7 @@
       ]
     },
     "Advanced_Filters_Sponsor_Organisation": {
-      "sponsor_organisation_text": "COLD GENESYS INC"
+      "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Lead_Nation": {
       "lead_nation_checkbox": [
@@ -683,8 +684,7 @@
       "date_submitted_to_year_text": "'2ooo"
     },
     "Advanced_Filters_Automation_No_SpOrg": {
-      "chief_investigator_name_text": "ci_test",
-      "short_project_title_text": "QA_Automation",
+      "chief_investigator_name_text": "ci",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -709,8 +709,7 @@
       "date_submitted_to_year_text": "2030"
     },
     "Advanced_Filters_Automation_No_SpOrg_No_ToDate": {
-      "chief_investigator_name_text": "ci_test",
-      "short_project_title_text": "QA_Automation",
+      "chief_investigator_name_text": "ci",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -732,8 +731,7 @@
       "date_submitted_from_year_text": "1990"
     },
     "Advanced_Filters_Automation_No_SpOrg_No_FromDate": {
-      "chief_investigator_name_text": "ci_test",
-      "short_project_title_text": "QA_Automation",
+      "chief_investigator_name_text": "ci",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -752,7 +750,7 @@
       ],
       "date_submitted_to_day_text": "2",
       "date_submitted_to_month_dropdown": "December",
-      "date_submitted_to_year_text": "2030"
+      "date_submitted_to_year_text": "2040"
     }
   },
   "Sponsor_Organisation": {
@@ -816,7 +814,10 @@
       "search_input_text": "98"
     },
     "Valid_Full_Iras_Id": {
-      "search_input_text": "290101"
+      "search_input_text": "330183"
+    },
+    "Existing_Partial_IRAS_ID": {
+      "search_input_text": "330"
     }
   }
 }
