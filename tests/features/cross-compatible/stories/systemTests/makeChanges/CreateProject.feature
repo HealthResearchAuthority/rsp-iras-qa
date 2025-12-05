@@ -477,7 +477,7 @@ Feature: Create Project
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-  @rsp-3939 @rsp-4200 @rsp-3940 @searchSelectSponsorOrgJsDisabled
+  @rsp-3939 @rsp-4200 @rsp-3940 @searchSelectSponsorOrgJsDisabled @jsDisabled
   Scenario Outline: Validate user is able to search and select sponsor organisation in project identifiers page with valid data
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
