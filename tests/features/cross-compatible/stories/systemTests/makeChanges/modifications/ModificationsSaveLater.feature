@@ -842,7 +842,7 @@ Feature: Modifications - Save Later
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
-  @rsp-4271 @ModificationsDetailsUnfinishedModification @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4271 @ModificationsDetailsUnfinishedModification
   Scenario Outline: Verify that system prevents the user to proceed further when modification details are unfinished
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -869,8 +869,8 @@ Feature: Modifications - Save Later
     And I capture the page screenshot
 
     Examples:
-      | Changes                           |
-      | Multiple_Changes_Planned_End_Date |
+      | Changes                                      |
+      | Multiple_Changes_Planned_End_Date_Unfinished |
 
   @rsp-4271 @rsp-5188 @ModificationsDetailsRemoveAllChanges @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
   Scenario Outline: Validate that user can remove all changes from modification details page
