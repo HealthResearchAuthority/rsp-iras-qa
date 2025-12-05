@@ -140,9 +140,9 @@ Then(
         );
         delete expectedDataCustom['specific_change_dropdown'];
       }
-      const excludeKeys = ['area_of_change_dropdown', 'change_status'];
+      const excludeKeys = new Set(['area_of_change_dropdown', 'change_status']);
       const filteredExpectedData = Object.fromEntries(
-        Object.entries(expectedDataCustom).filter(([key]) => !excludeKeys.includes(key))
+        Object.entries(expectedDataCustom).filter(([key]) => !excludeKeys.has(key))
       );
       await modificationsCommonPage.validateCardData(filteredExpectedData, actualData);
       await commonItemsPage.clickButton('Modifications_Page', 'Return_To_Modification');
