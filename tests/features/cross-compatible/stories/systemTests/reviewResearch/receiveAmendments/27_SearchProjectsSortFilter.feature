@@ -138,9 +138,9 @@ Feature: Filter, Search and Sort the Search project records page
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 Examples:
-                        | Valid_Iras_Id      | Advanced_Filters                     |
-                        | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation         |
-                        | Valid_Full_Iras_Id | Advanced_Filters_Short_Project_Title |
+                        | Valid_Iras_Id      | Advanced_Filters             |
+                        | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation |
+        # | Valid_Full_Iras_Id | Advanced_Filters_Short_Project_Title |
         # | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title   |
         # | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title   |
         # | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title |

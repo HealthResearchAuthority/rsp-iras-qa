@@ -17,13 +17,26 @@
     "date_submitted_year_label": "Year",
     "lead_nation_label": "Lead nation",
     "lead_nation_hint_text": "selected",
-    "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "lead_nation_checkbox": [
+      "England",
+      "Northern Ireland",
+      "Scotland",
+      "Wales"
+    ],
     "modification_type_label": "Modification type",
     "modification_type_hint_text": "selected",
-    "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
+    "modification_type_checkbox": [
+      "Minor modification",
+      "Modification of an important detail"
+    ],
     "participating_nation_label": "Participating nation",
     "participating_nation_hint_text": "selected",
-    "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "participating_nation_checkbox": [
+      "England",
+      "Northern Ireland",
+      "Scotland",
+      "Wales"
+    ],
     "short_project_title_label": "Short project title",
     "short_project_title_hint_text": "Enter the name of the short project title",
     "sponsor_organisation_label": "Sponsor organisation",
@@ -133,9 +146,18 @@
       "date_submitted_to_day_text": "31",
       "date_submitted_to_month_dropdown": "December",
       "date_submitted_to_year_text": "2050",
-      "lead_nation_checkbox": ["England", "Wales"],
-      "participating_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
+      "lead_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ],
       "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Nth_Chief_Investigator_Name_Filter": {
@@ -150,9 +172,18 @@
       "date_submitted_to_day_text": "31",
       "date_submitted_to_month_dropdown": "December",
       "date_submitted_to_year_text": "2050",
-      "lead_nation_checkbox": ["England", "Wales"],
-      "participating_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_Nth_Sponsor_Organisation_Filter": {
       "sponsor_organisation_text": "University of Southampton"
@@ -166,9 +197,18 @@
       "date_submitted_to_day_text": "31",
       "date_submitted_to_month_dropdown": "December",
       "date_submitted_to_year_text": "2050",
-      "lead_nation_checkbox": ["England", "Wales"],
-      "participating_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_Nth_Date_Submitted_From_To_Filter": {
       "date_submitted_from_day_text": "01",
@@ -182,9 +222,18 @@
       "chief_investigator_name_text": "ci",
       "short_project_title_text": "a",
       "sponsor_organisation_text": "University of Southampton",
-      "lead_nation_checkbox": ["England", "Wales"],
-      "participating_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_Nth_Short_Project_Title_Filter": {
       "short_project_title_text": "a"
@@ -198,9 +247,18 @@
       "date_submitted_to_day_text": "31",
       "date_submitted_to_month_dropdown": "December",
       "date_submitted_to_year_text": "2050",
-      "lead_nation_checkbox": ["England", "Wales"],
-      "participating_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_No_Results_One": {
       "sponsor_organisation_text": "University of Southampton",
@@ -211,8 +269,14 @@
       "date_submitted_to_day_text": "01",
       "date_submitted_to_month_dropdown": "April",
       "date_submitted_to_year_text": "2025",
-      "lead_nation_checkbox": ["Scotland", "Wales"],
-      "participating_nation_checkbox": ["England", "Wales"]
+      "lead_nation_checkbox": [
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Wales"
+      ]
     },
     "Advanced_Filters_One": {
       "sponsor_organisation_text": "University of Southampton"
@@ -221,51 +285,102 @@
       "short_project_title_text": "Short study title 17"
     },
     "Advanced_Filters_Three": {
-      "modification_type_checkbox": ["Minor modification"]
+      "modification_type_checkbox": [
+        "Minor modification"
+      ]
     },
     "Advanced_Filters_Four": {
-      "lead_nation_checkbox": ["Scotland"],
-      "participating_nation_checkbox": ["Scotland"]
+      "lead_nation_checkbox": [
+        "Scotland"
+      ],
+      "participating_nation_checkbox": [
+        "Scotland"
+      ]
     },
     "Advanced_Filters_Five": {
       "sponsor_organisation_text": "University of Southampton",
-      "lead_nation_checkbox": ["Northern Ireland"],
-      "participating_nation_checkbox": ["Northern Ireland"]
+      "lead_nation_checkbox": [
+        "Northern Ireland"
+      ],
+      "participating_nation_checkbox": [
+        "Northern Ireland"
+      ]
     },
     "Advanced_Filters_Six": {
       "short_project_title_text": "Project 31",
-      "lead_nation_checkbox": ["England"],
-      "participating_nation_checkbox": ["England"]
+      "lead_nation_checkbox": [
+        "England"
+      ],
+      "participating_nation_checkbox": [
+        "England"
+      ]
     },
     "Advanced_Filters_Seven": {
       "short_project_title_text": "Study title 04",
       "sponsor_organisation_text": "University of Southampton",
-      "lead_nation_checkbox": ["Wales"],
-      "participating_nation_checkbox": ["Wales"]
+      "lead_nation_checkbox": [
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "Wales"
+      ]
     },
     "Advanced_Filters_Eight": {
-      "lead_nation_checkbox": ["England", "Northern Ireland"],
-      "participating_nation_checkbox": ["England", "Northern Ireland"],
-      "modification_type_checkbox": ["Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland"
+      ],
+      "modification_type_checkbox": [
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_Nine": {
       "sponsor_organisation_text": "University of Southampton",
-      "lead_nation_checkbox": ["England", "Scotland"],
-      "participating_nation_checkbox": ["England", "Scotland"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "England",
+        "Scotland"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Scotland"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_Ten": {
       "short_project_title_text": "Project 13",
-      "lead_nation_checkbox": ["England", "Wales"],
-      "participating_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_Eleven": {
       "short_project_title_text": "26 -Study",
       "sponsor_organisation_text": "University of Southampton",
-      "lead_nation_checkbox": ["Northern Ireland", "Scotland"],
-      "participating_nation_checkbox": ["Northern Ireland", "Scotland"],
-      "modification_type_checkbox": ["Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "Northern Ireland",
+        "Scotland"
+      ],
+      "participating_nation_checkbox": [
+        "Northern Ireland",
+        "Scotland"
+      ],
+      "modification_type_checkbox": [
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_Tweleve": {
       "date_submitted_to_day_text": "3",
@@ -285,8 +400,14 @@
       "date_submitted_to_day_text": "2",
       "date_submitted_to_month_dropdown": "January",
       "date_submitted_to_year_text": "2025",
-      "lead_nation_checkbox": ["Northern Ireland", "Wales"],
-      "participating_nation_checkbox": ["Northern Ireland", "Wales"]
+      "lead_nation_checkbox": [
+        "Northern Ireland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "Northern Ireland",
+        "Wales"
+      ]
     },
     "Advanced_Filters_Fifteen": {
       "sponsor_organisation_text": "University of Southampton",
@@ -296,15 +417,25 @@
       "date_submitted_to_day_text": "1",
       "date_submitted_to_month_dropdown": "April",
       "date_submitted_to_year_text": "2025",
-      "lead_nation_checkbox": ["Scotland", "Wales"],
-      "participating_nation_checkbox": ["Scotland", "Wales"]
+      "lead_nation_checkbox": [
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "Scotland",
+        "Wales"
+      ]
     },
     "Advanced_Filters_Sixteen": {
       "chief_investigator_name_text": "Barry White"
     },
     "Advanced_Filters_Seventeen": {
       "chief_investigator_name_text": "ci",
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland"
+      ]
     },
     "Advanced_Filters_Eighteen": {
       "chief_investigator_name_text": "ci",
@@ -314,24 +445,58 @@
       "date_submitted_to_day_text": "12",
       "date_submitted_to_month_dropdown": "April",
       "date_submitted_to_year_text": "2025",
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"],
-      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland"
+      ]
     },
     "Advanced_Filters_Twenty": {
-      "lead_nation_checkbox": ["England", "Scotland", "Wales"],
-      "participating_nation_checkbox": ["England", "Scotland", "Wales"]
+      "lead_nation_checkbox": [
+        "England",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Scotland",
+        "Wales"
+      ]
     },
     "Advanced_Filters_TwentyOne": {
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "2024",
-      "lead_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"],
-      "participating_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"]
+      "lead_nation_checkbox": [
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
     },
     "Advanced_Filters_TwentyTwo": {
       "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
     },
     "Advanced_Filters_TwentyThree": {
       "chief_investigator_name_text": "ci",
@@ -340,59 +505,120 @@
       "date_submitted_from_day_text": "2",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "2020",
-      "lead_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"],
-      "participating_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"],
-      "modification_type_checkbox": ["Minor modification"]
+      "lead_nation_checkbox": [
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification"
+      ]
     },
     "Advanced_Filters_Checkboxes": {
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filters_Sponsor_Organisation": {
       "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Lead_Nation": {
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
     },
     "Advanced_Filter_No_Lead_Nation_Selected": {
       "lead_nation_checkbox": []
     },
     "Advanced_Filter_One_Lead_Nation_Selected": {
-      "lead_nation_checkbox": ["England"]
+      "lead_nation_checkbox": [
+        "England"
+      ]
     },
     "Advanced_Filter_Two_Lead_Nation_Selected": {
-      "lead_nation_checkbox": ["England", "Northern Ireland"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland"
+      ]
     },
     "Advanced_Filter_Three_Lead_Nation_Selected": {
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland"
+      ]
     },
     "Advanced_Filter_Four_Lead_Nation_Selected": {
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
     },
     "Advanced_Filter_No_Modification_Type_Selected": {
       "modification_type_checkbox": []
     },
     "Advanced_Filter_One_Modification_Type_Selected": {
-      "modification_type_checkbox": ["Minor modification"]
+      "modification_type_checkbox": [
+        "Minor modification"
+      ]
     },
     "Advanced_Filter_Two_Modification_Type_Selected": {
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ]
     },
     "Advanced_Filter_No_Participating_Nation_Selected": {
       "participating_nation_checkbox": []
     },
     "Advanced_Filter_One_Participating_Nation_Selected": {
-      "participating_nation_checkbox": ["England"]
+      "participating_nation_checkbox": [
+        "England"
+      ]
     },
     "Advanced_Filter_Two_Participating_Nation_Selected": {
-      "participating_nation_checkbox": ["England", "Northern Ireland"]
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland"
+      ]
     },
     "Advanced_Filter_Three_Participating_Nation_Selected": {
-      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland"
+      ]
     },
     "Advanced_Filter_Four_Participating_Nation_Selected": {
-      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ]
     },
     "Date_Submitted_To_Date_Before_From_Date": {
       "date_submitted_from_day_text": "2",
@@ -459,9 +685,22 @@
     },
     "Advanced_Filters_Automation_No_SpOrg": {
       "chief_investigator_name_text": "ci",
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ],
       "date_submitted_from_day_text": "1",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "1990",
@@ -471,18 +710,44 @@
     },
     "Advanced_Filters_Automation_No_SpOrg_No_ToDate": {
       "chief_investigator_name_text": "ci",
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ],
       "date_submitted_from_day_text": "1",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "1990"
     },
     "Advanced_Filters_Automation_No_SpOrg_No_FromDate": {
       "chief_investigator_name_text": "ci",
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
+      "lead_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "participating_nation_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "modification_type_checkbox": [
+        "Minor modification",
+        "Modification of an important detail"
+      ],
       "date_submitted_to_day_text": "2",
       "date_submitted_to_month_dropdown": "December",
       "date_submitted_to_year_text": "2040"
@@ -549,10 +814,10 @@
       "search_input_text": "98"
     },
     "Valid_Full_Iras_Id": {
-      "search_input_text": "330183"
+      "search_input_text": "252672"
     },
     "Existing_Partial_IRAS_ID": {
-      "search_input_text": "252"
+      "search_input_text": "25"
     }
   }
 }

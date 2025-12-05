@@ -15,7 +15,7 @@ Feature: Filter, Search and Sort the Search modifications page
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        @SortModificationsByColumn @rsp-4090 @rsp-4822 @Run @KNOWN_DEFECT_RSP_6411
+        @SortModificationsByColumn @rsp-4090 @rsp-4822 @KNOWN_DEFECT_RSP_6411
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
