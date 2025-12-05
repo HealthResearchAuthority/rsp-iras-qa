@@ -1,7 +1,7 @@
 @ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest @TestApprovals @TestApprovalsTMWFCSWR
 Feature: WFC - Modifications Tasklist page
     # pagination is missing
-    @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed  @fail @KNOWN_DEFECT-RSP-6411
+    @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed
     Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation-England
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
