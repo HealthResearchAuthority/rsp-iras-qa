@@ -716,7 +716,7 @@ Feature: Create Project
       | Project_Details_Title |
       | Valid_Data_All_Fields |
 
-  @rsp-5302 @ValidateConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6183 @KNOWN_DEFECT_RSP-5747 @fail
+  @rsp-5302 @ValidateConfirmProjectDetailsPage
   Scenario: Validate confirm project details page and confirm the project journey displays the project titles
     And I capture the page screenshot
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -827,9 +827,9 @@ Feature: Create Project
 
     Examples:
       | Changes                                                | Search_Queries                     |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One | Full_Modification_ID               |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two | Full_Modification_ID               |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two | Partial_Modification_ID            |
-      | Multiple_Changes_Reviewable_Non_Reviewable             | Partial_Modification_ID_With_Slash |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two | Partial_Modification_ID_With_Slash |
 
   @rsp-4887 @VerifyNoResultsFoundInvalidSearchOnlyPostApproval
   Scenario: Verify the user can see no matching results found message on clicking search button with invalid modification id
@@ -915,12 +915,12 @@ Feature: Create Project
 
     Examples:
       | Search_Queries                     | Advanced_Filters                                    | Changes                                                |
-      | Partial_Modification_ID_With_Slash | Advanced_Filter_Status_Only                         | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
-      | Partial_Modification_ID            | Advanced_Filter_All_Fields                          | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
-      | Empty_Search_Data                  | Advanced_Filter_Submitted_Date_Field_Only           | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
+      | Partial_Modification_ID_With_Slash | Advanced_Filter_Status_Only                         | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
+      | Partial_Modification_ID            | Advanced_Filter_All_Fields                          | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
+      | Empty_Search_Data                  | Advanced_Filter_Submitted_Date_Field_Only           | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
       | Empty_Search_Data                  | Advanced_Filter_Modification_Type_Only              | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
-      | Empty_Search_Data                  | Advanced_Filter_Submitted_From_Date_Field_Only      | Multiple_Changes_Reviewable_Non_Reviewable             |
-      | Empty_Search_Data                  | Advanced_Filter_Submitted_To_Future_Date_Field_Only | Multiple_Changes_Reviewable_Non_Reviewable             |
+      | Empty_Search_Data                  | Advanced_Filter_Submitted_From_Date_Field_Only      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
+      | Empty_Search_Data                  | Advanced_Filter_Submitted_To_Future_Date_Field_Only | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
 
   @rsp-4887 @ValidateClearAllFiltersPostApproval
   Scenario: Validate clear all filters removes all active filters in the post approval page
@@ -1407,7 +1407,7 @@ Feature: Create Project
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title | Chief_Investigator    | Research_Locations    | Project_Identifiers   |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
 
-  @rsp-1864 @ProjectOverviewPage @KNOWN_DEFECT_RSP-5747 @fail
+  @rsp-1864 @ProjectOverviewPage
   Scenario Outline: Verify user is able to click on the project link on my research page and able to navigate to project overview page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1457,9 +1457,9 @@ Feature: Create Project
       | Validation_Text_Research | Project_Details       | Research_Project_Details | Validation_Text_Project | Project_Team_Details  | Research_Locations_Details               |
       | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Nhs     |
       | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Non_Nhs |
-
-  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @KNOWN_DEFECT_RSP-5747 @fail
   #The project 222827 and modifications were created manually and validations are for the specific project
+
+  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050
   Scenario Outline: Validate the expected data is available and displayed on the project overview page
     And I navigate to the project overview page of the '<Project_Name>' project
     And I capture the page screenshot
@@ -1480,7 +1480,7 @@ Feature: Create Project
 
     Examples:
       | Project_Name                         |
-      | Salford Primary Care Workforce Study |
+      | Salford_Primary_Care_Workforce_Study |
 
   @rsp-4876 @PostApprovalPageSort
   Scenario Outline: Validate the user is able to sort the post approval fields
@@ -1618,9 +1618,9 @@ Feature: Create Project
       | Navigation_Method |
       | page number       |
       | previous link     |
+  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
 
   @rsp-4545 @rsp-5280 @ProjectDocumentsTab
-  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario: Validate the user is able to access and view the project documents details from the project overview page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1630,9 +1630,9 @@ Feature: Create Project
     And I click the 'Advanced_Filters' button on the 'Project_Documents_Page'
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I can see the list is sorted by default in the alphabetical order of the 'document type'
+  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
 
   @rsp-4545 @ProjectDocumentsPaginationFirstPage @KNOWN_DEFECT_RSP_6411 @fail
-  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario Outline: Verify pagination in project documents page when user is on the first page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1652,9 +1652,9 @@ Feature: Create Project
       | Navigation_Method |
       | page number       |
       | next link         |
+  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
 
   @rsp-4545 @ProjectDocumentsPaginationLastPage @KNOWN_DEFECT_RSP_6411 @fail
-  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario Outline: Verify pagination in project documents page when user is on the last page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot
@@ -1673,9 +1673,9 @@ Feature: Create Project
       | Navigation_Method |
       | page number       |
       | previous link     |
+  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
 
   @rsp-3930 @ProjectDocumentDownload
-  #Documents were uploaded manually to the project id 222827 and validations are for the specific project
   Scenario: Validate the user is able to download the project document from the project overview page
     When I navigate to the project overview page of the 'Test_Project' project
     And I capture the page screenshot

@@ -1130,3 +1130,33 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
     Examples:
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
+
+  @rsp-4271
+  Scenario Outline: Validate that user can create modifications and navigate to add sponsor reference page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
+    And I create '<Changes>' for the created modification
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
+    And I can see the modifications details page
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the ui labels on modification details page using 'Modification_Details_Label_Texts'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    # Further steps will be covered in RSP-4364
+
+    Examples:
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |

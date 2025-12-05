@@ -37,7 +37,7 @@
     "planned_project_end_month_dropdown": "The date should be a valid date and in future",
     "planned_project_end_year_text": "The date should be a valid date and in future"
   },
-  "Field_Error_Message_Planned_Project_End_Day": {
+  "Date_Must_Be_Future_Field_Error_Message": {
     "planned_project_end_day_text": "The date should be a valid date and in future"
   },
   "Field_Error_Message_Planned_Project_End_Year": {

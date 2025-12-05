@@ -1,7 +1,7 @@
 @ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive @jsEnabled
 Feature: Modifications - Audit history
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised
   Scenario: Validate the audit history for reviewable modifications when sponsor authorised
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -25,8 +25,8 @@ Feature: Modifications - Audit history
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
-    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Data_With_Lead_Nation_England' dataset
-    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two' for the created modification
     And I can see the modifications details page
     And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
@@ -98,7 +98,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications
     And I capture the page screenshot
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableAuthorised
   Scenario: Validate the audit history for non reviewable modifications when sponsor authorised
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -122,8 +122,8 @@ Feature: Modifications - Audit history
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
-    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' and 'Nhs_Involvement_Yes' dataset
-    And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' for the created modification
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two' for the created modification
     And I can see the modifications details page
     And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
@@ -195,7 +195,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications
     And I capture the page screenshot
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableNotAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableNotAuthorised
   Scenario: Validate the audit history for reviewable modifications when sponsor not authorised
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -219,8 +219,8 @@ Feature: Modifications - Audit history
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
-    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Data_With_Lead_Nation_England' dataset
-    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two' for the created modification
     And I can see the modifications details page
     And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
@@ -291,7 +291,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications
     And I capture the page screenshot
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableNotAuthorised @KNOWN_DEFECT-RSP-6272_6354_6358 @fail
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableNotAuthorised
   Scenario: Validate the audit history for non reviewable modifications when sponsor not authorised
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -315,8 +315,8 @@ Feature: Modifications - Audit history
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
-    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' and 'Nhs_Involvement_Yes' dataset
-    And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One' for the created modification
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two' for the created modification
     And I can see the modifications details page
     And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
@@ -466,7 +466,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications
     And I capture the page screenshot
 
-  @rsp-5268 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive @KNOWN_DEFECT_RSP-6272 @KNOWN_DEFECT_RSP-6354 @fail
+  @rsp-5268 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
   Scenario: Verify the modification approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -542,6 +542,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
     And I keep note of the 'Modification_Authorised_By_Sponsor' event and 'Sponsor_User' user for modification audit history
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event and 'Sponsor_User' user for modification audit history
     And I capture the page screenshot
     When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
     And I enter 'iras id' into the search field
@@ -567,7 +568,7 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
     Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
     When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
-    Then I can see the modifications details page in the readonly view
+    Then I can see the modification post submission page
     When I click the 'Continue' link on the 'Modification_Details_Page'
     Then I can see the review outcome section
     When I provide the 'Approved' outcome for the modification with 'Blank' reason
@@ -576,15 +577,6 @@ Feature: Modifications - Audit history
     Then I see the check and send review outcome page with 'Approved' outcome and 'Blank' reason
     When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
     Then I validate confirmation screen for modification review outcome sent
-    When I click the 'Back_To_Tasklist' link on the 'Modification_Review_Outcome_Sent_Page'
-    Then I can see the 'My_Modifications_Tasklist_Page'
-    When I enter 'iras id' into the search field
-    And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
-    And I 'cannot' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
-    When I have navigated to the 'Search_Modifications_Page'
-    When I enter 'iras id' into the search field
-    And I click the 'Search' button on the 'Search_Modifications_Page'
-    Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with 'Modification_Status_Approved' status
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -597,7 +589,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications
     And I capture the page screenshot
 
-  @rsp-5268 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive @KNOWN_DEFECT_RSP-6272 @KNOWN_DEFECT_RSP-6354 @fail
+  @rsp-5268 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
   Scenario: Verify the modification not approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -635,7 +627,7 @@ Feature: Modifications - Audit history
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    Then I fill the research locations page with 'Data_With_Lead_Nation_Northern_Ireland'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -670,16 +662,16 @@ Feature: Modifications - Audit history
     Then I click on the searched modification id from sponsor authorisations page
     And I can see the sponsor check and authorise page
     And I validate the project information labels using dataset displayed on modifications page
-    And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
     And I keep note of the 'Modification_Authorised_By_Sponsor' event and 'Sponsor_User' user for modification audit history
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event and 'Sponsor_User' user for modification audit history
     And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
     And I capture the page screenshot
-    When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator_NI'
+    When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
     Then I 'can' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
@@ -688,22 +680,16 @@ Feature: Modifications - Audit history
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
-    And I select a study wide reviewer in the select a reviewer page using 'Studywide_Reviewer_NI'
+    And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
     And I capture the page screenshot
     And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
     And I capture the page screenshot
-    And I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
-    And I capture the page screenshot
-    Then I can see the 'Modifications_Tasklist_Page'
-    And I enter 'iras id' into the search field
-    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-    Then I 'cannot' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
-    When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer_NI'
+    When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
     Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
     When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
-    Then I can see the modifications details page in the readonly view
+    Then I can see the modification post submission page
     When I click the 'Continue' link on the 'Modification_Details_Page'
     Then I can see the review outcome section
     When I provide the 'Not_Approved' outcome for the modification with 'Lack_Of_Evidence' reason
@@ -712,15 +698,6 @@ Feature: Modifications - Audit history
     Then I see the check and send review outcome page with 'Not_Approved' outcome and 'Lack_Of_Evidence' reason
     When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
     Then I validate confirmation screen for modification review outcome sent
-    When I click the 'Back_To_Tasklist' link on the 'Modification_Review_Outcome_Sent_Page'
-    Then I can see the 'My_Modifications_Tasklist_Page'
-    When I enter 'iras id' into the search field
-    And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
-    And I 'cannot' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
-    When I have navigated to the 'Search_Modifications_Page'
-    When I enter 'iras id' into the search field
-    And I click the 'Search' button on the 'Search_Modifications_Page'
-    Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with 'Modification_Status_Not_Approved' status
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Research_Page'

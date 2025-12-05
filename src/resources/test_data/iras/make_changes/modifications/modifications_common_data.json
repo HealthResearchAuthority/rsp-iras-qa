@@ -82,8 +82,8 @@
     "Other stop or restart of the project",
     "Other minor change to project management",
     "Other significant change to project management",
-    "Chief investigator: conflict of interest",
-    "Principal investigator: conflict of interest",
+    "Chief Investigator: conflict of interest",
+    "Principal Investigator: conflict of interest",
     "Changes to the research team",
     "Change of sponsor’s legal representative",
     "Change to background information that affects scientific value of the project",
@@ -137,7 +137,7 @@
     "Other stop or restart of the project",
     "Other minor change to project management",
     "Other significant change to project management",
-    "Principal investigator: conflict of interest",
+    "Principal Investigator: conflict of interest",
     "Change to background information that affects scientific value of the project",
     "Change to the endpoint or the main objective",
     "Change to the inclusion or exclusion criteria: non-significant",
@@ -172,7 +172,7 @@
     "Addition of sites undertaking the same activities as existing sites"
   ],
   "Non_Applicability_Changes": [
-    "Chief investigator: conflict of interest",
+    "Chief Investigator: conflict of interest",
     "Change of sponsor’s legal representative",
     "Change to the use of human biological samples in the project: non-significant (for example, change to the logistical, transporting or storing arrangements)",
     "Changes to funding arrangements that do not affect payments to participants, researchers or participating organisations",
@@ -273,8 +273,8 @@
     ],
     "Non_Reviewable_Changes": [
       "Change to planned end date",
-      "Chief investigator: conflict of interest",
-      "Principal investigator: conflict of interest",
+      "Chief Investigator: conflict of interest",
+      "Principal Investigator: conflict of interest",
       "Changes to the research team",
       "Change of sponsor’s legal representative",
       "Change to background information that affects scientific value of the project",
@@ -311,7 +311,7 @@
   "Ranking_Modification_Type": {
     "Modification_Of_Important_Detail": [
       "Change to planned end date",
-      "Principal investigator: conflict of interest",
+      "Principal Investigator: conflict of interest",
       "Change of sponsor’s legal representative",
       "Project identification",
       "Contact details",
@@ -327,7 +327,7 @@
       "Other stop or restart of the project",
       "Other minor change to project management",
       "Other significant change to project management",
-      "Chief investigator: conflict of interest",
+      "Chief Investigator: conflict of interest",
       "Change to background information that affects scientific value of the project",
       "Change to the endpoint or the main objective",
       "Change to the inclusion or exclusion criteria: non-significant",
@@ -403,6 +403,12 @@
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
       "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
       "change_status": "Change ready for submission"
     },
@@ -692,13 +698,13 @@
   "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One": {
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Chief investigator: conflict of interest",
+      "specific_change_dropdown": "Chief Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
     "Principal_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Principal investigator: conflict of interest",
+      "specific_change_dropdown": "Principal Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
@@ -939,7 +945,7 @@
   "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability": {
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Chief investigator: conflict of interest",
+      "specific_change_dropdown": "Chief Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
@@ -1024,13 +1030,13 @@
     },
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Chief investigator: conflict of interest",
+      "specific_change_dropdown": "Chief Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
     "Principal_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Principal investigator: conflict of interest",
+      "specific_change_dropdown": "Principal Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
@@ -1048,7 +1054,7 @@
   "Bulk_Free_Text_Single_Change_Chief_Investigator_Conflict_Of_Interest": {
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Chief investigator: conflict of interest",
+      "specific_change_dropdown": "Chief Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
       "change_status": "Change ready for submission"
     }
@@ -1056,7 +1062,7 @@
   "Bulk_Free_Text_Single_Chief_Investigator_Conflict_Of_Interest_Change_Edited": {
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Chief investigator: conflict of interest",
+      "specific_change_dropdown": "Chief Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Other significant change to participant procedures. This text is specifically designed to Update the initial text.",
       "change_status": "Change ready for submission"
     }
@@ -1125,11 +1131,11 @@
   "Multiple_Modifications_In_Draft": {
     "Modification_One": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Chief investigator: conflict of interest"
+      "specific_change_dropdown": "Chief Investigator: conflict of interest"
     },
     "Modification_Two": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Principal investigator: conflict of interest"
+      "specific_change_dropdown": "Principal Investigator: conflict of interest"
     },
     "Modification_Three": {
       "area_of_change_dropdown": "Participant procedures",
@@ -1212,13 +1218,13 @@
     },
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Chief investigator: conflict of interest",
+      "specific_change_dropdown": "Chief Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
     "Principal_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Principal investigator: conflict of interest",
+      "specific_change_dropdown": "Principal Investigator: conflict of interest",
       "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],

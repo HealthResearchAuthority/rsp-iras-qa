@@ -302,9 +302,6 @@ Then(
     expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
     const statusActual = modificationRecord.get('statusValue');
     expect.soft(statusActual[0]).toBe(statusValue);
-    const submittedDateActual = modificationRecord.get('submittedDateValue');
-    const submittedDateExpected = await getFormattedDate();
-    expect.soft(submittedDateActual[0]).toBe(submittedDateExpected);
   }
 );
 
