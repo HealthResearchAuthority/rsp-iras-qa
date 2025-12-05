@@ -79,7 +79,7 @@
     ]
   },
   "Empty_Data_CI_Fields": {
-    "select_details_to_change_radio": "New principal investigator",
+    "select_details_to_change_radio": "New Principal Investigator",
     "principal_investigator_email_text": "",
     "name_text": "",
     "which_organisation_change_affect_checkbox": [

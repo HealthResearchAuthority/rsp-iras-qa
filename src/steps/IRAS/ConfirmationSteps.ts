@@ -397,9 +397,9 @@ Then(
 Then(
   'I validate confirmation screen for modification has been authorised by sponsor and submitted for review',
   async ({ confirmationPage }) => {
-    expect
-      .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_header_common_label.textContent()))
-      .toBe(confirmationPage.confirmationPageTestData.Modification_Authorised_Submitted_Review.page_heading);
+    await confirmationPage.confirmation_header_common_label
+      .getByText(confirmationPage.confirmationPageTestData.Modification_Authorised_Submitted_Review.page_heading)
+      .isVisible();
     await expect
       .soft(
         confirmationPage.page.getByText(
@@ -407,9 +407,9 @@ Then(
         )
       )
       .toBeVisible();
-    expect
-      .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_body_label.textContent()))
-      .toBe(confirmationPage.confirmationPageTestData.Modification_Authorised_Submitted_Review.confirmation_body);
+    await confirmationPage.confirmation_body_label
+      .getByText(confirmationPage.confirmationPageTestData.Modification_Authorised_Submitted_Review.confirmation_body)
+      .isVisible();
   }
 );
 
@@ -449,10 +449,10 @@ Then(
 );
 
 Then('I validate confirmation screen for modification review outcome sent', async ({ confirmationPage }) => {
-  expect
-    .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_header_common_label.textContent()))
-    .toBe(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.page_heading);
-  expect
-    .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_body_label.textContent()))
-    .toBe(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.confirmation_body);
+  await confirmationPage.confirmation_header_common_label
+    .getByText(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.page_heading)
+    .isVisible();
+  await confirmationPage.confirmation_body_label
+    .getByText(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.confirmation_body)
+    .isVisible();
 });

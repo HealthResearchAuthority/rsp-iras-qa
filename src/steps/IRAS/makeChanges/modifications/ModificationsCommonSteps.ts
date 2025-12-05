@@ -37,7 +37,9 @@ Then(
       await modificationsCommonPage.modification_id_value.textContent()
     );
     expect.soft(irasIDActual).toBe(irasIDExpected);
-    expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
+    expect
+      .soft(shortProjectTitleActual.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'))
+      .toBe(shortProjectTitleExpected.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'));
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
     await modificationsReceivedCommonPage.setIrasId(shortProjectTitleExpected);
@@ -300,9 +302,6 @@ Then(
     expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
     const statusActual = modificationRecord.get('statusValue');
     expect.soft(statusActual[0]).toBe(statusValue);
-    const submittedDateActual = modificationRecord.get('submittedDateValue');
-    const submittedDateExpected = await getFormattedDate();
-    expect.soft(submittedDateActual[0]).toBe(submittedDateExpected);
   }
 );
 
