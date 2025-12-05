@@ -209,9 +209,9 @@ export default class ModificationsReceivedCommonPage {
     shortTitles: string[],
     daysSinceSubmission: string[],
     datesSubmitted: string[],
-    studyWideReviewers: string[],
     searchInputDataset: any,
-    searchInput: string
+    searchInput: string,
+    studyWideReviewers?: string[]
   ): Promise<boolean> {
     let valuesMatch = false;
     if (searchInput.toLowerCase().includes('iras')) {

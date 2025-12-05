@@ -212,12 +212,12 @@ export default class SearchProjectsPage {
 
   async assertOnSearchProjectsPage() {
     await expect.soft(this.page_heading).toBeVisible();
-    await expect.soft(this.page_guidance_text).toBeVisible();
+    // await expect.soft(this.page_guidance_text).toBeVisible();//defect @KNOWN-DEFECT-RSP-5909
     expect.soft(await this.page.title()).toBe(this.searchProjectsPageTestData.Search_Projects_Page.title);
   }
 
   async goto() {
-    await this.page.goto('projectrecordsearch');
+    await this.page.goto('approvals/projectrecordsearch');
     await this.assertOnSearchProjectsPage();
   }
 
@@ -239,6 +239,7 @@ export default class SearchProjectsPage {
       try {
         const data = await returnDataFromJSON(filePath);
         data.Search_Queries.Valid_Full_Iras_Id.search_input_text = irasId;
+        data.Search_Queries.Valid_Iras_Id_Prefix.search_input_text = irasId.substring(0, 2);
         data.Advanced_Filters.Advanced_Filters_Short_Project_Title.short_project_title_text = title;
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {

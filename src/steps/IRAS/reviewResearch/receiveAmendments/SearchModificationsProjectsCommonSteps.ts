@@ -34,8 +34,12 @@ Then(
         sortField
       );
     }
-    if (sortField.toLowerCase() === 'short project title') {
-      actualList = await commonItemsPage.getActualListValuesShortProjectTitle(
+    if (
+      sortField.toLowerCase() === 'short project title' ||
+      sortField.toLowerCase() === 'study-wide reviewer' ||
+      sortField.toLowerCase() === 'status'
+    ) {
+      actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
         commonItemsPage.tableBodyRows,
         searchColumnIndex
       );
@@ -78,10 +82,10 @@ When(
   'I enter {string} into the search field for {string}',
   async ({ searchModificationsPage, searchProjectsPage }, datasetName: string, pageValue: string) => {
     if (pageValue === 'Search_Modifications_Page') {
-      const dataset = searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
+      const dataset = await searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
       await searchModificationsPage.iras_id_search_text.fill(dataset['iras_id_text']);
     } else if (pageValue === 'Search_Projects_Page') {
-      const dataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[datasetName];
+      const dataset = await searchProjectsPage.searchProjectsPageTestData.Search_Queries[datasetName];
       await searchModificationsPage.iras_id_search_text.fill(dataset['search_input_text']);
     }
   }
@@ -181,7 +185,7 @@ Then(
   'The search projects page returns to its original empty state with no results displayed',
   async ({ commonItemsPage, searchProjectsPage }) => {
     await expect.soft(searchProjectsPage.page_heading).toBeVisible();
-    await expect.soft(searchProjectsPage.page_guidance_text).toBeVisible();
+    // await expect.soft(searchProjectsPage.page_guidance_text).toBeVisible();//@KNOWN-DEFECT-RSP-5909
     await expect.soft(commonItemsPage.advanced_filter_chevron).toBeVisible();
     await expect.soft(searchProjectsPage.results_table).not.toBeVisible();
     await expect.soft(commonItemsPage.search_no_results_container).not.toBeVisible();

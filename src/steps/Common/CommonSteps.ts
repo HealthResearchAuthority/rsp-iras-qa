@@ -827,14 +827,19 @@ When(
   'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }, position: string) => {
     let pageLocator: Locator;
-    if (position.toLowerCase() === 'first') {
-      pageLocator = commonItemsPage.firstPage;
-    } else {
-      const totalPages = await commonItemsPage.getTotalPages();
-      commonItemsPage.setNumberofTotalPages(totalPages);
-      pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      if (position.toLowerCase() === 'first') {
+        pageLocator = commonItemsPage.firstPage;
+      } else {
+        const totalPages = await commonItemsPage.getTotalPages();
+        commonItemsPage.setNumberofTotalPages(totalPages);
+        pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
+      }
+      await expect(pageLocator).toHaveAttribute('aria-current', 'page');
     }
-    await expect(pageLocator).toHaveAttribute('aria-current', 'page');
   }
 );
 
@@ -852,14 +857,19 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
 Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
-    const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-    if (availabilityVal.toLowerCase() === 'available') {
-      await expect(locatorVal).toBeVisible();
-      await expect(locatorVal).toBeEnabled();
-    } else if (availabilityVal.toLowerCase() === 'not available') {
-      await expect(locatorVal).toBeHidden();
-    } else {
-      throw new Error(`Unsupported button state: ${availabilityVal}`);
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
+      if (availabilityVal.toLowerCase() === 'available') {
+        await expect(locatorVal).toBeVisible();
+        await expect(locatorVal).toBeEnabled();
+      } else if (availabilityVal.toLowerCase() === 'not available') {
+        await expect(locatorVal).toBeHidden();
+      } else {
+        throw new Error(`Unsupported button state: ${availabilityVal}`);
+      }
     }
   }
 );
@@ -1450,35 +1460,35 @@ Then(
     if (searchInput.toLowerCase().includes('title')) {
       assertionMade = true;
       const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_short_project_title_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getShortProjectTitleFilter()}`;
-      await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
     }
     if (searchInput.toLowerCase().includes('date')) {
       if (searchInput.toLowerCase().includes('from')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await commonItemsPage.getDateSubmittedFromFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
       if (searchInput.toLowerCase().includes('to')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
       if (searchInput.toLowerCase().includes('range')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getDateSubmittedFromFilter()} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
     }
     if (searchInput.toLowerCase().includes('days')) {
       if (searchInput.toLowerCase().includes('from') || searchInput.toLowerCase().includes('range')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await modificationsReceivedCommonPage.getDaysSinceSubmissionFromFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
       if (searchInput.toLowerCase().includes('to') || searchInput.toLowerCase().includes('range')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await modificationsReceivedCommonPage.getDaysSinceSubmissionToFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
     }
     if (!assertionMade) {

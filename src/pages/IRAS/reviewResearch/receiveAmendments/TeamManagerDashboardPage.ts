@@ -142,25 +142,52 @@ export default class TeamManagerDashboardPage {
     expect.soft(await this.page.title()).toBe(this.teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page.title);
   }
 
-  async sqlGetModificationByLeadNation(lead_nation: string) {
+  async sqlGetModificationByLeadNationAndStatus(lead_nation: string, status: string) {
     const option = 'project_record_answer_option_lead_nation_' + lead_nation.toLowerCase();
     const leadNationOption = teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page[option];
     const sqlConnection = await connect(dbConfigData.Application_Service);
     const queryResult = await sqlConnection.query(`
-SELECT NationQuery.ModificationIdentifier, ProjectRecordAnswers.Response, NationQuery.CreatedDate, NationQuery.[Status]
+  SELECT 
+    NationQuery.ModificationIdentifier,
+    NationQuery.IrasId,
+    ProjectRecordAnswers.Response,
+    NationQuery.CreatedDate,
+    NationQuery.[Status]
 FROM (
-    SELECT pm.ModificationIdentifier, pm.CreatedDate, pm.[Status], pr.Id
-    FROM dbo.ProjectModifications pm
-    INNER JOIN dbo.ProjectRecords pr ON pr.Id = pm.ProjectRecordId
-    INNER JOIN dbo.ProjectRecordAnswers pra ON pra.ProjectRecordId = pr.Id
-    WHERE pra.QuestionId = 'IQA0005' AND pra.SelectedOptions = '${leadNationOption}'
+    SELECT
+        ProjectModifications.ModificationIdentifier,
+        ProjectModifications.CreatedDate,
+        ProjectModifications.[Status],
+        ProjectRecords.Id,
+        ProjectRecords.IrasId,
+        ProjectRecordAnswers.ProjectRecordId,
+        ProjectRecordAnswers.QuestionId,
+        ProjectRecordAnswers.SelectedOptions,
+        ProjectRecordAnswers.Response,
+        ProjectRecords.[Status] AS ProjectRecordStatus,
+        COUNT(*) OVER (PARTITION BY ProjectRecords.IrasId) AS IrasIdCount
+    FROM ProjectModifications
+    INNER JOIN ProjectRecords
+        ON ProjectRecords.Id = ProjectModifications.ProjectRecordId
+    INNER JOIN ProjectRecordAnswers
+        ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+    WHERE
+        ProjectRecordAnswers.QuestionId = 'IQA0005' AND
+        ProjectRecordAnswers.SelectedOptions ='${leadNationOption}' AND
+        ProjectRecords.[Status] = 'Active' AND
+        ProjectModifications.[Status] = '${status}'  
 ) AS NationQuery
-INNER JOIN dbo.ProjectRecordAnswers ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
-WHERE ProjectRecordAnswers.QuestionId = 'IQA0002'
-ORDER BY NationQuery.CreatedDate ASC;
+INNER JOIN ProjectRecordAnswers
+    ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
+WHERE
+    ProjectRecordAnswers.QuestionId = 'IQA0002'   
+ORDER BY NationQuery.CreatedDate DESC;
 `);
 
     await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(`No suitable modification found in the system with ${leadNationOption} lead nation`);
+    }
     return queryResult.recordset.map((row) => row.ModificationIdentifier);
   }
 
@@ -206,8 +233,12 @@ WHERE
     AND NationQuery.IrasIdCount ${countValue} 1
 ORDER BY NationQuery.CreatedDate DESC;
 `);
-
     await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(
+        `No suitable modification found in the system with ${leadNationOption} lead nation and ${status} status and ${countValue}`
+      );
+    }
     return queryResult.recordset.map((row) => row.IrasId);
   }
 
@@ -277,7 +308,7 @@ ORDER BY NationQuery.CreatedDate DESC;
         if (countval === 'Single') {
           data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
         } else if (countval === 'Partial') {
-          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 3);
+          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 2);
         } else if (countval === 'Multi') {
           data.Search_Queries.Existing_IRAS_ID_Multi.search_input_text = updateVal;
         }
@@ -302,7 +333,7 @@ ORDER BY NationQuery.CreatedDate DESC;
         } else if (countval === 'Partial') {
           data.Search_Queries.IRAS_ID_Study_Wide_Reviewer_Date_Range_Partial.search_input_text = updateVal.substring(
             0,
-            3
+            2
           );
         } else if (countval === 'Multi') {
           data.Search_Queries.IRAS_ID_Study_Wide_Reviewer_Date_Range_Multi.search_input_text = updateVal;

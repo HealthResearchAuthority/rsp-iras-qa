@@ -1190,7 +1190,7 @@ export default class CommonItemsPage {
     const currentPageLink = this.pagination
       .getByRole('link', { name: `Page ${currentPageNumber}`, exact: true })
       .or(this.pagination.getByRole('button', { name: `Page ${currentPageNumber}`, exact: true }));
-    if (navigateMethod === 'page number') {
+    if (navigateMethod === 'page number' || navigateMethod === 'previous link') {
       if (await currentPageLink.isVisible()) {
         await currentPageLink.click();
         await this.page.waitForLoadState('domcontentloaded');
@@ -1447,10 +1447,10 @@ export default class CommonItemsPage {
       pageSize = Number.parseInt(this.commonTestData.default_page_size, 10);
     }
     const currentPageLocator = await this.clickOnPages(currentPage, navigateMethod);
-    await expect(currentPageLocator).toHaveAttribute('aria-current');
+    await expect.soft(currentPageLocator).toHaveAttribute('aria-current');
     const { start, end } = Object.fromEntries(await this.getStartEndPages(currentPage, pageSize, totalItems));
     const rowCount = await this.getItemsPerPage();
-    expect(rowCount - 1).toBe(end - start + 1);
+    expect.soft(rowCount - 1).toBe(end - start + 1);
     const itemsMap = await this.getPaginationValues();
     const ellipsisIndices = itemsMap.get('ellipsisIndices');
     const itemsValues = itemsMap.get('items');
@@ -1548,7 +1548,7 @@ export default class CommonItemsPage {
 
   async getChangeLink<PageObject>(fieldKey: string, page: PageObject): Promise<Locator> {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
-    return page[locatorName];
+    return await page[locatorName];
   }
 
   async selectCheckboxUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
@@ -1790,10 +1790,10 @@ export default class CommonItemsPage {
     return actualListValues;
   }
 
-  async getActualListValuesShortProjectTitle(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+  async getActualListValuesShortProjectTitleSWRStatus(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
     const actualListValues: string[] = [];
     for (const row of await tableBodyRows.all()) {
-      const actualListValue = (await row.getByRole('cell').nth(columnIndex).textContent()).replaceAll(/[\n\t]/g, '');
+      const actualListValue = await row.getByRole('cell').nth(columnIndex).textContent();
       actualListValues.push(actualListValue);
     }
     return actualListValues;

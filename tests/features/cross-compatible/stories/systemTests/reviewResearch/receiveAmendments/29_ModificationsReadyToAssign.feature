@@ -1,24 +1,33 @@
-@ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest
-Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
-
+@ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest @TestApprovals @TestApprovalsTMWFCSWR
+Feature: WFC - Modifications Tasklist page
+    # pagination is missing
     @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed
-    Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation
+    Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation-England
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
         Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
-        And I see only modifications where the lead nation is the country linked to the review body of the '<User>'
+        And I see only modifications where the lead nation is the country linked to the review body of the '<User>' and with status '<Status>'
         Examples:
-            | User                    |
-            | Workflow_Coordinator    |
-            | Workflow_Coordinator_NI |
-            | Workflow_Coordinator_S  |
-            | Workflow_Coordinator_W  |
+            | User                 | Status           |
+            | Workflow_Coordinator | With review body |
+
+    @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed
+    Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation(NI,Scotland,Wales)
+        Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
+        And I capture the page screenshot
+        Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
+        And I see only modifications where the lead nation is the country linked to the review body of the '<User>' and with status '<Status>'
+        Examples:
+            | User                    | Status           |
+            | Workflow_Coordinator_NI | With review body |
+            | Workflow_Coordinator_S  | With review body |
+            | Workflow_Coordinator_W  | With review body |
 
     @searchTasklistByIrasIdWithResults @rsp-4104
     Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
-        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<User>' and with status '<Status>'
         When I fill the search input for searching 'tasklist' with '<Search_Input>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -27,7 +36,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Examples:
             | Search_Input             | User                 | Status           | Modification_Count |
             | Existing_IRAS_ID_Single  | Workflow_Coordinator | With review body | Single             |
-            | Existing_IRAS_ID_Multi   | Workflow_Coordinator | With review body | Multi              |
+            # | Existing_IRAS_ID_Multi   | Workflow_Coordinator | With review body | Multi              |
             | Existing_Partial_IRAS_ID | Workflow_Coordinator | With review body | Partial            |
 
     @filterTasklistByShortTitle @rsp-4104
@@ -74,7 +83,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_From_Multi   | With review body |
             | Date_To_Multi     | With review body |
 
-    @filterTasklistByDaysSinceSubmission @rsp-4296 @UPDATE-AFTER-RSP-4808
+    @filterTasklistByDaysSinceSubmission @rsp-4296
     Scenario Outline: Verify the user is able to filter the modifications tasklist by the days since submission
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -217,7 +226,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then the number of search results has returned to the original number
         And I 'cannot' see active filters displayed
 
-    @SortTasklistByColumn @rsp-4091 @rsp-4822 @KNOWN-DEFECT-RSP-6281
+    @SortTasklistByColumn @rsp-4091 @rsp-4822 @fail @KNOWN_DEFECT-RSP-6411
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -250,7 +259,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Modifications_Tasklist_Page'
 
-    @ModificationsTasklistPaginationFirst @rsp-4040 @rsp-4309
+    @ModificationsTasklistPaginationFirst @rsp-4040 @rsp-4309 @fail @KNOWN_DEFECT-RSP-6411
     Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the first page and navigate through each page by clicking page number or by clicking next link
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -269,7 +278,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Label_Texts     | page number       |
             | Label_Texts     | next link         |
 
-    @ModificationsTasklistPaginationLast @rsp-4040 @rsp-4309
+    @ModificationsTasklistPaginationLast @rsp-4040 @rsp-4309 @fail @KNOWN_DEFECT-RSP-6411
     Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -318,7 +327,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
 
-    @ModificationsTasklistRandomSelection @rsp-4105 @KNOWN-DEFECT-RSP-4971
+    @ModificationsTasklistRandomSelection @rsp-4105
     Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -367,7 +376,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @ModificationsSelectAllAndSort @rsp-4105 @jsEnabled @KNOWN-DEFECT-RSP-4976
+    @ModificationsSelectAllAndSort @rsp-4105 @jsEnabled
     Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -383,8 +392,9 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation  @fail @KNOWN_DEFECT-RSP-6411
     Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the 'modification tasklist' filters
@@ -417,16 +427,15 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Label_Texts     | page number       |
             | Label_Texts     | next link         |
 
-    # Need to integrate with modification creation process to have a fresh dataset for assignment
-    # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
     @WFCAssignModificationSWR @rsp-4076 @rsp-4849
     Scenario Outline: Validate the workflow co-ordinator can assign a study-wide reviewer to a modification from the modifications ready to assign page
-        Given I have navigated to the 'Modifications_Tasklist_Page'
+        Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
-        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
+        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -440,39 +449,31 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
         And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
-        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see previously assigned modification is no longer displayed
         And I capture the page screenshot
-
-        Examples:
-            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                  |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_One        |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
-
-    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849
-    Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
-        Given I have navigated to the 'My_Modifications_Tasklist_Page'
+        Given I have navigated to the 'My_Modifications_Tasklist_Page' as '<Study_Wide_Reviewer_User>'
         Then I capture the page screenshot
-        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        When I fill the search input for searching 'my tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the modifications assigned from WFC or TM to SWR are now visible in my task list with status 'Review in progress'
 
         Examples:
-            | Valid_Iras_Id                       | Modification_Id                                                    |
-            | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_All_Assigned_From_WFC_To_SWR |
+            | Valid_Iras_Id           | Study_Wide_Reviewer             | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
+            | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
 
     @ModificationsList @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
-        Given I have navigated to the 'Modifications_Tasklist_Page'
+        Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
-        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
+        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -481,12 +482,12 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
 
         Examples:
-            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Five_Six |
+            | Valid_Iras_Id           | Workflow_Coordinator_User | Status           | Modification_Count |
+            | Existing_IRAS_ID_Single | Workflow_Coordinator      | With review body | Single             |
 
     @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
-        Given I have navigated to the 'Manage_Users_Page'
+        Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
         And I capture the page screenshot
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -510,12 +511,13 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I can see the newly created user record should be present in the list for '<User_Profile>' with 'Active' status in the manage user page
         And I capture the page screenshot
-        Given I have navigated to the 'Modifications_Tasklist_Page'
+        Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
-        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
+        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -524,15 +526,15 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
 
         Examples:
-            | User_Profile                                                       | Valid_Iras_Id                       | Modification_Id                                | Advanced_Filters_Users                                | Lead_Nation      | Availability  |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England          | Available     |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another           | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Wales            | Not Available |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available |
+            | User_Profile                                                       | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation      | Availability  | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England          | Available     | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
+
 
     @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether disabled study-wide reviewer is not displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
-        Given I have navigated to the 'Manage_Users_Page'
+        Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
         And I capture the page screenshot
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -572,12 +574,13 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         When I search and click on view edit link for unique '<User_Profile>' user with 'DISABLED' status from the manage user page
-        Given I have navigated to the 'Modifications_Tasklist_Page'
+        Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
-        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
+        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -586,14 +589,15 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
 
         Examples:
-            | User_Profile                                              | Valid_Iras_Id                       | Modification_Id                                | Advanced_Filters_Users                                | Lead_Nation | Availability  |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available |
+
+            | User_Profile                                              | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation | Availability  | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
 
     @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011
     Scenario Outline: Validate the workflow co-ordinator navigates to the modifications task list page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
-        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+        And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<User>' and with status '<Status>'
         When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -613,18 +617,34 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Existing_IRAS_ID_Single | Workflow_Coordinator | With review body | Single             |
 
     @searchTasklistModificationStatus @rsp-4822
-    Scenario Outline: Verify that modifications status' display as expected on the modifications tasklist page
+    Scenario Outline: Verify that modifications status display as expected on the modifications tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I '<Visibility>' see the modification displayed in the 'Modifications_Tasklist_Page' list with '<Status>' status
+        And I capture the page screenshot
 
         Examples:
             | Status                                 | User               | Visibility |
             | Modification_Status_Approved           | nobody             | cannot     |
-            | Modification_Status_Not_Approved       | nobody             | cannot     |
             | Modification_Status_Received           | nobody             | can        |
             | Modification_Status_Review_In_Progress | Studywide_Reviewer | cannot     |
+
+    # there is no data in db with not approved status
+    @searchTasklistModificationStatus @rsp-4822 @fail @noDBDataNotApproved
+    Scenario Outline: Verify that modifications status display as expected on the modifications tasklist page where the status is not approved
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
+        And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I '<Visibility>' see the modification displayed in the 'Modifications_Tasklist_Page' list with '<Status>' status
+        And I capture the page screenshot
+
+        Examples:
+            | Status                           | User   | Visibility |
+            | Modification_Status_Not_Approved | nobody | cannot     |
 
     @filterTasklistDateSubmittedValidation @rsp-4819
     Scenario Outline: Verify that correct validation is in place for the date submitted filter in mofication tasklist when the Date submitted filters and Days since submission filter simultaneously

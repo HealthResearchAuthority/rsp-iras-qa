@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../hooks/CustomFixtures';
-import { confirmStringNotNull, getAuthState } from '../../../../utils/UtilFunctions';
+import { getAuthState } from '../../../../utils/UtilFunctions';
 import { Locator } from '@playwright/test';
 import * as fs from 'node:fs';
 

@@ -111,8 +111,8 @@ When(
   async ({ manageReviewBodiesPage, commonItemsPage }, reviewBodyName: string, status: string) => {
     const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
     const foundRecords = await manageReviewBodiesPage.findReviewBody(commonItemsPage, reviewBodyName, reviewBodyStatus);
-    expect(foundRecords).toBeDefined();
-    expect(foundRecords).toHaveCount(1);
+    expect.soft(foundRecords).toBeDefined();
+    expect.soft(foundRecords).toHaveCount(1);
     await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );

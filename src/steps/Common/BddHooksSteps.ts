@@ -238,3 +238,12 @@ AfterScenario(
     }
   }
 );
+
+AfterScenario({ name: 'Cleanup cucumber report to remove large items' }, async function ({ $testInfo }) {
+  if ($testInfo.attachments?.length) {
+    $testInfo.attachments = $testInfo.attachments.filter((att) => !(att.body && att.body.length > 200_000));
+  }
+  if ($testInfo.error?.message && $testInfo.error.message.length > 50_000) {
+    $testInfo.error.message = '[removed large error message]';
+  }
+});

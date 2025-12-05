@@ -41,6 +41,10 @@ Feature: User Administration: Manage Review Bodies - Create review body
 
         Examples:
             | Add_Review_Body         |
+            | Review_Body_HCRW_Data   |
+            | Review_Body_HSCNI_Data  |
+            | Review_Body_HRA_Data    |
+            | Review_Body_NRSPCC_Data |
             | Review_Body_RandD_Data  |
             | Review_Body_NIPS_Data   |
             | Review_Body_HFEA_Data   |

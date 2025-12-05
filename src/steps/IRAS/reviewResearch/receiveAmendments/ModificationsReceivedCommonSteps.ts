@@ -14,8 +14,21 @@ Then(
     sortField: string
   ) => {
     let sortedList: string[];
+    let actualList: string[];
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, sortField);
-    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    if (
+      sortField.toLowerCase() === 'short project title' ||
+      sortField.toLowerCase() === 'study-wide reviewer' ||
+      sortField.toLowerCase() === 'status'
+    ) {
+      actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
+        commonItemsPage.tableBodyRows,
+        columnIndex
+      );
+    } else {
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    }
+    // const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortField.toLowerCase() == 'modification id') {
       sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date submitted') {
@@ -69,13 +82,14 @@ Given(
     let daysSinceSubmissionIndex: number;
     let studyWideReviewerIndex: number;
     let statusIndex: number;
+    let studyWideReviewers: string[];
     if (pageType.toLowerCase() == 'ready to assign') {
       searchInputDataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries;
       modificationIdIndex = 1;
       shortProjectTitleIndex = 2;
       dateSubmittedIndex = 3;
       daysSinceSubmissionIndex = 4;
-      statusIndex = 6;
+      statusIndex = 5;
       await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
     } else if (pageType.toLowerCase() == 'ready to assign and reassign in team manager dashboard') {
       searchInputDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries;
@@ -137,10 +151,12 @@ Given(
       });
       expect.soft(allValidStatuses).toBe(true);
     }
-    const studyWideReviewers = await commonItemsPage.getActualListValues(
-      commonItemsPage.tableBodyRows,
-      studyWideReviewerIndex
-    );
+    if (studyWideReviewerIndex != undefined) {
+      studyWideReviewers = await commonItemsPage.getActualListValues(
+        commonItemsPage.tableBodyRows,
+        studyWideReviewerIndex
+      );
+    }
     if (searchInput.toLowerCase().includes('single')) {
       await expect
         .soft(commonItemsPage.search_results_count)
@@ -153,9 +169,9 @@ Given(
             shortTitles,
             daysSinceSubmission,
             datesSubmitted,
-            studyWideReviewers,
             searchInputDataset,
-            searchInput
+            searchInput,
+            studyWideReviewers
           )
         )
         .toBeTruthy();
@@ -241,7 +257,6 @@ When(
       myModificationsTasklistPage,
       modificationsReceivedCommonPage,
       teamManagerDashboardPage,
-      projectDetailsIRASPage,
     },
     pageType: string,
     datasetName: string
@@ -272,7 +287,7 @@ When(
       }
     }
     if (datasetName.toLowerCase().includes('title')) {
-      await commonItemsPage.setShortProjectTitleFilter(await projectDetailsIRASPage.getShortProjectTitle());
+      await commonItemsPage.setShortProjectTitleFilter(dataset.short_project_title_text);
     }
     if (datasetName.toLowerCase().includes('days')) {
       if (datasetName.toLowerCase().includes('from') || datasetName.toLowerCase().includes('range')) {
@@ -380,13 +395,16 @@ Then(
         .getByText(`${await modificationsReceivedCommonPage.getModificationId()}`, { exact: true }),
     });
     await modificationsReceivedCommonPage.setRowLocator(rowLocator);
-
     if (visibility.toLowerCase() == 'cannot') {
-      expect.soft(rowLocator).toBeHidden();
+      if (await commonItemsPage.tableRows.isVisible()) {
+        await expect.soft(rowLocator).toBeHidden();
+      } else {
+        await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
+      }
     } else {
+      await expect.soft(rowLocator).toBeVisible();
       const statusColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, 'status');
       const actualStatus = await rowLocator.getByRole('cell').nth(statusColumnIndex).textContent();
-      expect.soft(rowLocator).toBeVisible();
       expect.soft(actualStatus).toEqual(statusExpected);
     }
   }

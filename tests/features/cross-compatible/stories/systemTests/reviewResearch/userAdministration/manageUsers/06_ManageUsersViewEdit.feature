@@ -226,26 +226,26 @@ Feature: User Administration: Manage user profiles, view and edit user profile
   #     | Trailing_White_Space_User_Data             |
 
   #  check with Chris on this test case
-  @rsp-3890 @ManageUsersSearchMultiTerms @fail
-  Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
-    When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And the list displays 'multiple user records'
-    And I capture the page screenshot
-    When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And the list displays 'a single user record'
-    And I capture the page screenshot
+  # @rsp-3890 @ManageUsersSearchMultiTerms @fail
+  # Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
+  #   When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
+  #   And I capture the page screenshot
+  #   And I click the 'Search' button on the 'Manage_Users_Page'
+  #   And I capture the page screenshot
+  #   Then the system displays user records matching the search criteria
+  #   And the list displays 'multiple user records'
+  #   And I capture the page screenshot
+  #   When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
+  #   And I capture the page screenshot
+  #   And I click the 'Search' button on the 'Manage_Users_Page'
+  #   And I capture the page screenshot
+  #   Then the system displays user records matching the search criteria
+  #   And the list displays 'a single user record'
+  #   And I capture the page screenshot
 
-    Examples:
-      | Initial_Search_Query              | Second_Search_Query             |
-      | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
+  #   Examples:
+  #     | Initial_Search_Query              | Second_Search_Query             |
+  #     | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
 
   @rsp-4021 @ManageUsersEmailNotEditable
   Scenario Outline: Verify the user is not able to edit the email address

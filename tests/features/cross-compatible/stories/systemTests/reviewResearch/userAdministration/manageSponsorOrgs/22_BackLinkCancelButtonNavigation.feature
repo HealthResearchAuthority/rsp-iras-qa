@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage @KNOWN_DEFECT-RSP-5531
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage
 Feature: User Administration: Manage Sponsor Organisations- Back Link and Cancel Button Navigation
 
     Background:

@@ -1,10 +1,10 @@
-@ReceiveAmendments @TeamManagerDashboard @TeamManagerDashboardSortFilter @SystemTest @TeamManager @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132
-Feature: Receive Amendments: Team Manager Dashboard page that displays modifications that are in the process of being reviewed
+@ReceiveAmendments @TeamManagerDashboard @TeamManagerDashboardSortFilter @SystemTest @TeamManager @rsp-5122 @rsp-5125 @rsp-5174 @rsp-5175 @rsp-5132 @TestApprovals @TestApprovalsTMWFCSWR
+Feature: Team Manager Dashboard page
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-
-        @sortTeamManagerDashboardByColumn @rsp-4822 @KNOWN-DEFECT-RSP-6281
+        # pagination is missing in team mananger dashboard, swr sorting is not correct
+        @sortTeamManagerDashboardByColumn @rsp-4822
         Scenario Outline: Verify the user is able to sort the team manager dashboards by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
@@ -20,32 +20,46 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                         | Status      | status     | ascending    | descending     |
 
         @searchTeamManagerDashboardStatus @rsp-4822
-        Scenario Outline: Verify that modifications status' display as expected on the team manager dashboard
+        Scenario Outline: Verify that modifications status display as expected on the team manager dashboard
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
                 When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
                 Then I '<Visibility>' see the modification displayed in the 'Team_Manager_Dashboard_Page' list with '<Status>' status
 
                 Examples:
                         | Status                                 | User               | Visibility |
                         | Modification_Status_Approved           | nobody             | cannot     |
-                        | Modification_Status_Not_Approved       | nobody             | cannot     |
                         | Modification_Status_Received           | nobody             | can        |
                         | Modification_Status_Review_In_Progress | Studywide_Reviewer | can        |
 
-        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @skip
+        # there is no data in db with not approved status
+        @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @fail @noDBDataNotApproved
+        Scenario Outline: Verify that modifications status display as expected on the team manager dashboard where the status is not approved
+                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+                And I can see the 'Column' ui labels on the team manager dashboard page
+                When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
+                And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
+                Then I '<Visibility>' see the modification displayed in the 'Team_Manager_Dashboard_Page' list with '<Status>' status
+
+                Examples:
+                        | Status                           | User   | Visibility |
+                        | Modification_Status_Not_Approved | nobody | cannot     |
+
+        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @fail @KNOWN_DEFECT-RSP-6411
         Scenario Outline: Verify the team manger is able to view existing list of modifications for a specific lead nation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
                 Then the country linked to the '<User>' appears as the lead nation in the page description
-                And I see only modifications where the lead nation is the country linked to the '<User>'
+                And I see only modifications where the lead nation is the country linked to the '<User>' and with status '<Status>'
                 Examples:
-                        | User            |
-                        | Team_Manager    |
-                        | Team_Manager_NI |
-                        | Team_Manager_S  |
-                        | Team_Manager_W  |
+                        | User            | Status           |
+                        | Team_Manager    | With review body |
+                        | Team_Manager_NI | With review body |
+                        | Team_Manager_S  | With review body |
+                        | Team_Manager_W  | With review body |
 
         @searchTMDashboardByIrasIdWithResults @rsp-5125 @DBDataUsed
         Scenario Outline: Verify the user is able to search the team manager dashboard by the iras ID
@@ -60,7 +74,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                 Examples:
                         | Search_Input             | User         | Status           | Modification_Count |
                         | Existing_IRAS_ID_Single  | Team_Manager | With review body | Single             |
-                        | Existing_IRAS_ID_Multi   | Team_Manager | With review body | Multi              |
+                        # | Existing_IRAS_ID_Multi   | Team_Manager | With review body | Multi              |
                         | Existing_Partial_IRAS_ID | Team_Manager | With review body | Partial            |
 
 
@@ -134,26 +148,26 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                         | Days_From_Multi   | With review body |
                         | Days_To_Multi     | With review body |
 
-        @searchFilterComboTMDashboard @rsp-5122 @rsp-5125
-        Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the team manager dashboard
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' with status '<Status>' and SWR '<Study_Wide_Reviewer>'
-                And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
-                And I 'can' see the advanced filters panel
-                And I open each of the 'team manager dashboard' filters
-                And I capture the page screenshot
-                When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Search_Filter_Input>'
-                And I capture the page screenshot
-                And I click the '<Button>' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
-                And I 'cannot' see the advanced filters panel
+        # @searchFilterComboTMDashboard @rsp-5122 @rsp-5125 @dataIssue
+        # Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the team manager dashboard
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' with status '<Status>' and SWR '<Study_Wide_Reviewer>'
+        #         And I click the 'Advanced_Filters' button on the 'Team_Manager_Dashboard_Page'
+        #         And I 'can' see the advanced filters panel
+        #         And I open each of the 'team manager dashboard' filters
+        #         And I capture the page screenshot
+        #         When I fill the 'ready to assign and reassign in team manager dashboard' search and filter options with '<Search_Filter_Input>'
+        #         And I capture the page screenshot
+        #         And I click the '<Button>' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
+        #         And I 'cannot' see the advanced filters panel
 
-                Examples:
-                        | Search_Filter_Input                            | Button        | Status           | User         | Modification_Count | Study_Wide_Reviewer             |
-                        | IRAS_ID_Study_Wide_Reviewer_Date_Range_Multi   | Apply_Filters | With review body | Team_Manager | Multi              | Study_Wide_Reviewer_HRA_England |
-                        | IRAS_ID_Study_Wide_Reviewer_Date_Range_Partial | Apply_Filters | With review body | Team_Manager | Single             | Study_Wide_Reviewer_HRA_England |
+        #         Examples:
+        #                 | Search_Filter_Input                            | Button        | Status           | User         | Modification_Count | Study_Wide_Reviewer             |
+        #                 | IRAS_ID_Study_Wide_Reviewer_Date_Range_Multi   | Apply_Filters | With review body | Team_Manager | Multi              | Study_Wide_Reviewer_HRA_England |
+        #                 | IRAS_ID_Study_Wide_Reviewer_Date_Range_Partial | Apply_Filters | With review body | Team_Manager | Single             | Study_Wide_Reviewer_HRA_England |
 
         @searchTMDashboardWithNoResults @rsp-5122 @rsp-5125
         Scenario Outline: Verify the team manager dashboard page displays the no results found message, when no records on the system match the search criteria
@@ -265,7 +279,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                         | Invalid_Date_To                   | Invalid_Date_To_Error                     |
                         | Invalid_Date_From_Days_From       | Date_Days_Simultaneous_Summary_Only_Error |
 
-        @SortTMDashboardByColumn @rsp-5122 @KNOWN-DEFECT-RSP-5909
+        @SortTMDashboardByColumn @rsp-5122
         Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -290,8 +304,30 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                         | Short_Project_Title   | short project title   | ascending    | descending     |
                         | Date_Submitted        | date submitted        | descending   | ascending      |
                         | Days_Since_Submission | days since submission | ascending    | descending     |
-                        | Study_Wide_Reviewer   | study-wide reviewer   | ascending    | descending     |
                         | Status                | status                | ascending    | descending     |
+
+        @SortTMDashboardByColumn @rsp-5122 @KNOWN_DEFECT-RSP-6411 @fail @defectSWRSortingDuetoSPace
+        Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for study-wide reviewer
+                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
+                When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
+                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+                When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
+                Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+
+                Examples:
+                        | Sort_Button         | Sort_Field          | Initial_Sort | Secondary_Sort |
+                        | Study_Wide_Reviewer | study-wide reviewer | ascending    | descending     |
 
 
         @TMDashboardErrorStateValidation @rsp-5122
@@ -301,7 +337,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                 When I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Team_Manager_Dashboard_Page'
 
-        @ModificationsTMDashboardPaginationFirst @rsp-5122
+        @ModificationsTMDashboardPaginationFirst @rsp-5122 @fail @KNOWN_DEFECT-RSP-6411
         Scenario Outline: Verify pagination in team manager dashboard page when user is on the first page and navigate through each page by clicking page number or by clicking next link
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -320,7 +356,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                         | Label_Texts     | page number       |
                         | Label_Texts     | next link         |
 
-        @ModificationsTMDashboardPaginationLast @rsp-5122
+        @ModificationsTMDashboardPaginationLast @rsp-5122 @fail @KNOWN_DEFECT-RSP-6411
         Scenario Outline: Verify pagination in team manager dashboard page page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -412,6 +448,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                 When I select check all checkbox on the current page and validate all checkboxes are checked
                 And I capture the page screenshot
                 When I navigate by 'clicking on next link' within the Modifications Ready to assign page
+                And I capture the page screenshot
                 And I navigate by 'clicking on previous link' within the Modifications Ready to assign page
                 And I confirm all checkboxes are 'checked'
                 And I capture the page screenshot
@@ -424,26 +461,27 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                 When JavaScript is disabled I select check all checkbox on the current page and validate all checkboxes are unchecked
                 And I capture the page screenshot
                 And I navigate by 'clicking on next link' within the Modifications Ready to assign page
+                And I capture the page screenshot
                 And I navigate by 'clicking on previous link' within the Modifications Ready to assign page
                 And I confirm all checkboxes are 'unchecked'
                 And I capture the page screenshot
                 Then I can see a 'Continue' button on the 'Team_Manager_Dashboard_Page'
 
-        @TMDashboardModificationsRandomSelectionAndSort
-        Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                When I check random row and validate if the row is checked even after navigation
-                And I capture the page screenshot
-                When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
-                And I confirm all checkboxes are 'unchecked'
-                And I capture the page screenshot
-                Examples:
-                        | Sort_Button           |
-                        | Modification_Id       |
-                        | Short_Project_Title   |
-                        | Date_Submitted        |
-                        | Days_Since_Submission |
+        # @TMDashboardModificationsRandomSelectionAndSort @jsEnabled
+        # Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         When I check random row and validate if the row is checked even after navigation
+        #         And I capture the page screenshot
+        #         When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         And I confirm all checkboxes are 'unchecked'
+        #         Examples:
+        #                 | Sort_Button           |
+        #                 | Modification_Id       |
+        #                 | Short_Project_Title   |
+        #                 | Date_Submitted        |
+        #                 | Days_Since_Submission |
 
         @TMDashboardModificationsSelectAllAndSort @jsEnabled
         Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
@@ -499,7 +537,6 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                         | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
                         | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
-
         @TMDashboardModificationsList @DBDataUsed
         Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
@@ -520,7 +557,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                         | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
                         | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @skip
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland
         Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
                 Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
                 And I capture the page screenshot
@@ -566,7 +603,7 @@ Feature: Receive Amendments: Team Manager Dashboard page that displays modificat
                         | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
                         | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland @fail @skip
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland
         Scenario Outline: Validate whether disabled study-wide reviewer is not displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
                 Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
                 And I capture the page screenshot

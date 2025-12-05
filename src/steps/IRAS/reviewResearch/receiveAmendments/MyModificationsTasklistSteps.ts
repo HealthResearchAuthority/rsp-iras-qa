@@ -27,3 +27,36 @@ Then(
     await expect.soft(modificationStatus).toBeVisible();
   }
 );
+
+Then(
+  'I capture the modification id of {string} where the lead nation is the country linked to the SWR {string} and with status {string} and with reviewer {string}',
+  async (
+    { myModificationsTasklistPage, selectStudyWideReviewerPage },
+    modificationCount: string,
+    user: string,
+    status: string,
+    reviewerDatasetName: string
+  ) => {
+    let countValue: string;
+    let leadNation =
+      await myModificationsTasklistPage.myModificationsTasklistPageTestData.Study_Wide_Reviewer_Nations[user];
+    if (leadNation === 'Northern Ireland') {
+      leadNation = 'Northern_Ireland';
+    }
+    if (modificationCount === 'Single' || modificationCount === 'Partial') {
+      countValue = '=';
+    } else {
+      countValue = '>';
+    }
+    const reviewerDataset =
+      selectStudyWideReviewerPage.selectStudywideReviewerPageData.Study_Wide_Reviewer[reviewerDatasetName];
+    const studyWideReviewer = reviewerDataset.study_wide_reviewer_dropdown;
+    const modificationId = await myModificationsTasklistPage.sqlGetModificationByLeadNationAndStatusCountSWR(
+      leadNation,
+      status,
+      countValue,
+      studyWideReviewer
+    );
+    await myModificationsTasklistPage.saveModificationId(modificationId.toString(), modificationCount);
+  }
+);

@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233 @KNOWN_DEFECT-RSP-5531
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233
 Feature: User Administration: Manage Sponsor Organisations- Sort, search and pagination of users list in the selected sponsor organisation
 
   Background:
