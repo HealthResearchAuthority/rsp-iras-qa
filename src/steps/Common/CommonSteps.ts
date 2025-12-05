@@ -1455,35 +1455,35 @@ Then(
     if (searchInput.toLowerCase().includes('title')) {
       assertionMade = true;
       const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_short_project_title_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getShortProjectTitleFilter()}`;
-      await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
     }
     if (searchInput.toLowerCase().includes('date')) {
       if (searchInput.toLowerCase().includes('from')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await commonItemsPage.getDateSubmittedFromFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
       if (searchInput.toLowerCase().includes('to')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
       if (searchInput.toLowerCase().includes('range')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getDateSubmittedFromFilter()} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
     }
     if (searchInput.toLowerCase().includes('days')) {
       if (searchInput.toLowerCase().includes('from') || searchInput.toLowerCase().includes('range')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await modificationsReceivedCommonPage.getDaysSinceSubmissionFromFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
       if (searchInput.toLowerCase().includes('to') || searchInput.toLowerCase().includes('range')) {
         assertionMade = true;
         const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await modificationsReceivedCommonPage.getDaysSinceSubmissionToFilter()}`;
-        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+        await expect.soft(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
     }
     if (!assertionMade) {
