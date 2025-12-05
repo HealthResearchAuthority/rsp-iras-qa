@@ -101,36 +101,26 @@ export default class ReviewBodyProfilePage {
     this.organisation_name_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
-        .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.organisation_name_label, {
-          exact: true,
-        }),
+        .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.organisation_name_label),
     });
     this.organisation_name_value = this.organisation_name_row.locator('td', { has: this.row_value_locator });
     this.organisation_name_change_link = this.organisation_name_row.locator(this.row_change_link_locator);
     this.country_row = this.page.locator('tr', {
-      has: this.page
-        .getByRole('cell')
-        .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.country_label, {
-          exact: true,
-        }),
+      has: this.page.getByRole('cell').getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.country_label),
     });
     this.country_value = this.country_row.locator('td', { has: this.row_value_locator });
     this.country_change_link = this.country_row.locator(this.row_change_link_locator);
     this.email_address_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
-        .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.email_address_label, {
-          exact: true,
-        }),
+        .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.email_address_label),
     });
     this.email_address_value = this.email_address_row.locator('td', { has: this.row_value_locator });
     this.email_address_change_link = this.email_address_row.locator(this.row_change_link_locator);
     this.description_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
-        .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.description_label, {
-          exact: true,
-        }),
+        .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.description_label),
     });
     this.description_value = this.description_row.locator('td', { has: this.row_value_locator });
     this.description_change_link = this.description_row.locator(this.row_change_link_locator);
@@ -143,9 +133,7 @@ export default class ReviewBodyProfilePage {
       this.row_view_this_review_body_list_of_users_link_locator
     );
     this.audit_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.audit_label, {
-        exact: true,
-      }),
+      has: this.page.getByRole('cell').getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.audit_label),
     });
     this.view_this_review_body_audit_history_link = this.audit_row.locator(
       this.row_view_this_review_body_audit_history_link

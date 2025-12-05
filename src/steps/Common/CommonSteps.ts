@@ -304,6 +304,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
       linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
+  } else if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
+    commonItemsPage.removeLink.click();
   } else {
     await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
