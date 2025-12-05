@@ -43,7 +43,7 @@ export default class ProjectDetailsIRASPage {
 
   //Page Methods
   async assertOnProjectDetailsIRASPage() {
-    await expect(this.pageHeading).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
   }
 
   async setUniqueIrasId(value: string): Promise<void> {
