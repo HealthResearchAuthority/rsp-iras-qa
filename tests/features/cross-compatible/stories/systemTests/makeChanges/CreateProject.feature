@@ -1691,7 +1691,7 @@ Feature: Create Project
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I can see the list is sorted by default in the alphabetical order of the 'document type'
 
-  @rsp-4545 @ProjectDocumentsPaginationFirstPage @KNOWN_DEFECT_RSP_6411 @fail
+  @rsp-4545 @ProjectDocumentsPaginationFirstPage
   Scenario Outline: Verify pagination in project documents page when user is on the first page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1746,7 +1746,6 @@ Feature: Create Project
     And I capture the page screenshot
     And I can see the review your document information page
     And I capture the page screenshot
-    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
@@ -1774,7 +1773,7 @@ Feature: Create Project
       | page number       |
       | next link         |
 
-  @rsp-4545 @ProjectDocumentsPaginationLastPage @KNOWN_DEFECT_RSP_6411 @fail
+  @rsp-4545 @ProjectDocumentsPaginationLastPage
   Scenario Outline: Verify pagination in project documents page when user is on the last page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1828,7 +1827,6 @@ Feature: Create Project
     When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
     And I capture the page screenshot
     And I can see the review your document information page
-    And I capture the page screenshot
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
     And I capture the page screenshot
