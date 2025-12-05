@@ -251,7 +251,7 @@ Feature: Sponsor Workspace
     And I validate 'Summary_Only_Error_Select_Outcome' displayed on 'Sponsor_Check_And_Authorise_Page'
     And I capture the page screenshot
 
-  @CreateDataApprovedModificationAuthorizationListPage
+  @CreateDataApprovedModificationAuthorizationListPage @SetupNewSponsorOrgGoLive
   Scenario Outline: Create approved modifications for modification authorization list page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -341,7 +341,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @CreateDataNotApprovedModificationAuthorizationListPage
+  @CreateDataNotApprovedModificationAuthorizationListPage @SetupNewSponsorOrgGoLive
   Scenario Outline: Create not approved modifications for modification authorization list page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -434,7 +434,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @rsp-5190 @ValidateModificationListPageSortingPagination
+  @rsp-5190 @ValidateModificationListPageSortingPagination @SetupNewSponsorOrgGoLive
   Scenario: Verify that a sponsor user can access the modification authorization list page, view all modification records, apply sorting on the list, and navigate through records using pagination.
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
