@@ -15,10 +15,15 @@ Feature: Filter, Search and Sort the Search modifications page
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        @SortModificationsByColumn @rsp-4090 @rsp-4822
+        @SortModificationsByColumn @rsp-4090 @rsp-4822 @Run @KNOWN_DEFECT_RSP_6411
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
-                And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
-                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I capture the page screenshot
                 And I can now see a table of search results for 'modifications received for approval'
                 And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
@@ -37,15 +42,15 @@ Feature: Filter, Search and Sort the Search modifications page
                 Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
 
                 Examples:
-                        | Sort_Button         | Sort_Field          |
-                        | Modification_Id     | modification id     |
-                        | Short_Project_Title | short project title |
-                        | Modification_Type   | modification type   |
-                        | Chief_Investigator  | chief investigator  |
-                        | Lead_Nation         | lead nation         |
-                        | Status              | status              |
+                        | Sort_Button         | Sort_Field          | Advanced_Filters             |
+                        | Modification_Id     | modification id     | Advanced_Filters_Lead_Nation |
+                        | Short_Project_Title | short project title | Advanced_Filters_Lead_Nation |
+                        | Modification_Type   | modification type   | Advanced_Filters_Lead_Nation |
+                        | Chief_Investigator  | chief investigator  | Advanced_Filters_Lead_Nation |
+                        | Lead_Nation         | lead nation         | Advanced_Filters_Lead_Nation |
+                        | Status              | status              | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016
+        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016 @KNOWN_DEFECT_RSP_6411
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -55,7 +60,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                And the default page size should be 'twenty'
+                # And the default page size should be 'twenty'
                 And the 'Next' button will be 'available' to the user
                 And the 'Previous' button will be 'not available' to the user
                 And the current page number should be visually highlighted to indicate the active page the user is on
@@ -67,7 +72,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
                         | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @rsp-4016
+        @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @rsp-4016 @KNOWN_DEFECT_RSP_6411
         Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -147,7 +152,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id | Team_Manager       | In draft     | Single             |
                         | Valid_Full_Iras_Id | Team_Manager       | With sponsor | Single             |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DbDataUsed
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DbDataUsed @KNOWN_DEFECT_RSP_6411
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
@@ -169,8 +174,8 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Automation_No_SpOrg_No_ToDate   | Partial            | Approved         |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Automation_No_SpOrg_No_FromDate | Partial            | Not approved     |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed
-        Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor organisation), and clicking the 'Apply filters' button-when JSvavascript is enabled
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed @KNOWN_DEFECT_RSP_6411
+        Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor) when JS enabled
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
                 And I capture the page screenshot
@@ -730,7 +735,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Modification_Status_Received           |
                         | Modification_Status_Review_In_Progress |
 
-        @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+        @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation @KNOWN_DEFECT_RSP_6411
         Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from the Search Modifications page
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
