@@ -239,6 +239,7 @@ export default class SearchProjectsPage {
       try {
         const data = await returnDataFromJSON(filePath);
         data.Search_Queries.Valid_Full_Iras_Id.search_input_text = irasId;
+        data.Search_Queries.Valid_Iras_Id_Prefix.search_input_text = irasId.substring(0, 2);
         data.Advanced_Filters.Advanced_Filters_Short_Project_Title.short_project_title_text = title;
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {

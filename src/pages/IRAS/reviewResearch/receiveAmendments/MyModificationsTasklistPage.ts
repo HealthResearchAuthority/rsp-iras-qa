@@ -198,7 +198,7 @@ ORDER BY NationQuery.CreatedDate DESC;
         if (countval === 'Single') {
           data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
         } else if (countval === 'Partial') {
-          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 3);
+          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 2);
         }
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {

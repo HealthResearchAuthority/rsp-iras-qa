@@ -110,6 +110,7 @@ When(
 );
 
 When('I confirm all checkboxes are {string}', async ({ modificationsReadyToAssignPage }, checkboxStatus: string) => {
+  await modificationsReadyToAssignPage.page.waitForLoadState('domcontentloaded');
   const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
   expect.soft(checkboxes.length).toBeGreaterThan(0);
   for (const checkbox of checkboxes) {

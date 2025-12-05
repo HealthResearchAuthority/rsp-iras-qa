@@ -308,7 +308,7 @@ ORDER BY NationQuery.CreatedDate DESC;
         if (countval === 'Single') {
           data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
         } else if (countval === 'Partial') {
-          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 3);
+          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 2);
         } else if (countval === 'Multi') {
           data.Search_Queries.Existing_IRAS_ID_Multi.search_input_text = updateVal;
         }
@@ -333,7 +333,7 @@ ORDER BY NationQuery.CreatedDate DESC;
         } else if (countval === 'Partial') {
           data.Search_Queries.IRAS_ID_Study_Wide_Reviewer_Date_Range_Partial.search_input_text = updateVal.substring(
             0,
-            3
+            2
           );
         } else if (countval === 'Multi') {
           data.Search_Queries.IRAS_ID_Study_Wide_Reviewer_Date_Range_Multi.search_input_text = updateVal;

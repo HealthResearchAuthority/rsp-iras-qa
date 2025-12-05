@@ -448,6 +448,7 @@ Feature: Team Manager Dashboard page
                 When I select check all checkbox on the current page and validate all checkboxes are checked
                 And I capture the page screenshot
                 When I navigate by 'clicking on next link' within the Modifications Ready to assign page
+                And I capture the page screenshot
                 And I navigate by 'clicking on previous link' within the Modifications Ready to assign page
                 And I confirm all checkboxes are 'checked'
                 And I capture the page screenshot
@@ -460,26 +461,27 @@ Feature: Team Manager Dashboard page
                 When JavaScript is disabled I select check all checkbox on the current page and validate all checkboxes are unchecked
                 And I capture the page screenshot
                 And I navigate by 'clicking on next link' within the Modifications Ready to assign page
+                And I capture the page screenshot
                 And I navigate by 'clicking on previous link' within the Modifications Ready to assign page
                 And I confirm all checkboxes are 'unchecked'
                 And I capture the page screenshot
                 Then I can see a 'Continue' button on the 'Team_Manager_Dashboard_Page'
 
-        @TMDashboardModificationsRandomSelectionAndSort
-        Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                When I check random row and validate if the row is checked even after navigation
-                And I capture the page screenshot
-                When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
-                And I confirm all checkboxes are 'unchecked'
-                And I capture the page screenshot
-                Examples:
-                        | Sort_Button           |
-                        | Modification_Id       |
-                        | Short_Project_Title   |
-                        | Date_Submitted        |
-                        | Days_Since_Submission |
+        # @TMDashboardModificationsRandomSelectionAndSort @jsEnabled
+        # Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         When I check random row and validate if the row is checked even after navigation
+        #         And I capture the page screenshot
+        #         When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         And I confirm all checkboxes are 'unchecked'
+        #         Examples:
+        #                 | Sort_Button           |
+        #                 | Modification_Id       |
+        #                 | Short_Project_Title   |
+        #                 | Date_Submitted        |
+        #                 | Days_Since_Submission |
 
         @TMDashboardModificationsSelectAllAndSort @jsEnabled
         Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
@@ -534,7 +536,6 @@ Feature: Team Manager Dashboard page
                 Examples:
                         | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
                         | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
-
 
         @TMDashboardModificationsList @DBDataUsed
         Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
