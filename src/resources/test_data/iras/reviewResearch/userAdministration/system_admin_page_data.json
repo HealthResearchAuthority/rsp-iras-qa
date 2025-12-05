@@ -5,7 +5,7 @@
   },
   "Label_Texts": {
     "manage_review_bodies_hint_label": "View, add, disable or edit review body records.",
-    "manage_users_hint_label": "View, add, disable or edit review individual user records.",
+    "manage_users_hint_label": "View, add, disable or edit individual user records.",
     "manage_sponsor_organisations_hint_label": "View, add, disable or edit sponsor organisations."
   }
 }
