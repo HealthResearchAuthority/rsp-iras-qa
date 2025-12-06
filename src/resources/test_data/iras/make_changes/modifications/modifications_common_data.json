@@ -962,7 +962,7 @@
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Principal Investigator",
       "select_details_to_change_radio": "Temporary arrangement to cover absence",
-      "principal_investigator_temporary_arrangement_email_text": "test_modified@test.com",
+      "principal_investigator_email_text": "test_modified@test.com",
       "name_text": "QA test",
       "change_status": "Change ready for submission",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
