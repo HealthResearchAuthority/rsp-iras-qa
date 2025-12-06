@@ -106,7 +106,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
-    And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with date actioned with 'with reviewbody' status in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
     And I can see the modification page for sponsor view
@@ -229,7 +229,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'Approved' status in the sponsor authorisations page
-    And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with date actioned with 'Approved' status in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
     And I can see the modification page for sponsor view
