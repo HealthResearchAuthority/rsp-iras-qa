@@ -211,11 +211,12 @@ export default class ModificationsReceivedCommonPage {
     datesSubmitted: string[],
     searchInputDataset: any,
     searchInput: string,
+    irasIdSearchKey: string,
     studyWideReviewers?: string[]
   ): Promise<boolean> {
     let valuesMatch = false;
     if (searchInput.toLowerCase().includes('iras')) {
-      valuesMatch = irasIds.toString() == searchInputDataset[searchInput].search_input_text;
+      valuesMatch = irasIds.toString() == irasIdSearchKey;
     }
     if (searchInput.toLowerCase().includes('title')) {
       valuesMatch =

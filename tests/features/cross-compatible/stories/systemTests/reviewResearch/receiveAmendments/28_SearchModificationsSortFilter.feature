@@ -15,7 +15,7 @@ Feature: Filter, Search and Sort the Search modifications page
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        @SortModificationsByColumn @rsp-4090 @rsp-4822 @KNOWN_DEFECT_RSP_6411
+        @SortModificationsByColumn @rsp-4090 @rsp-4822
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -50,7 +50,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Lead_Nation         | lead nation         | Advanced_Filters_Lead_Nation |
                         | Status              | status              | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016 @KNOWN_DEFECT_RSP_6411
+        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -72,7 +72,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
                         | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @rsp-4016 @KNOWN_DEFECT_RSP_6411
+        @ViewListOfModifications @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @rsp-4016
         Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -152,7 +152,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id | Team_Manager       | In draft     | Single             |
                         | Valid_Full_Iras_Id | Team_Manager       | With sponsor | Single             |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DbDataUsed @KNOWN_DEFECT_RSP_6411
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
@@ -174,7 +174,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Automation_No_SpOrg_No_ToDate   | Partial            | Approved         |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Automation_No_SpOrg_No_FromDate | Partial            | Not approved     |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed @KNOWN_DEFECT_RSP_6411
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor) when JS enabled
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
@@ -193,7 +193,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input             | Advanced_Filters     | Modification_Count | Status           |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed @fail @KNOWN_DEFECT_RSP_6411
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed @fail
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
@@ -217,7 +217,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body |
                         | Valid_Full_Iras_Id       | Advanced_Filters_Nth | Single             | With review body |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @fail @KNOWN_DEFECT_RSP_6411
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @fail
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -240,7 +240,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Lead_Nation | Partial            | With review body |
                         | Valid_Full_Iras_Id       | Advanced_Filters_Lead_Nation | Single             | With review body |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled @KNOWN_DEFECT_RSP_6411
+        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
@@ -263,7 +263,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id       | System_Admin         | Single             | With sponsor     |
                         | Valid_Full_Iras_Id       | System_Admin         | Single             | With review body |
 
-        @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled @KNOWN_DEFECT_RSP_6411
+        @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -278,7 +278,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @KNOWN_DEFECT_RSP_6411
+        @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation
         Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -476,7 +476,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled @KNOWN_DEFECT_RSP_6411
+        @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
@@ -520,7 +520,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAlTogether @jsDisabled @KNOWN_DEFECT_RSP_6411
+        @RemoveActiveFiltersAlTogether @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
@@ -623,7 +623,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters                      |
                         | Advanced_Filters_Sponsor_Organisation |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID @KNOWN_DEFECT_RSP_6411
+        @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID
         Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
@@ -735,7 +735,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Modification_Status_Received           |
                         | Modification_Status_Review_In_Progress |
 
-        @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation @KNOWN_DEFECT_RSP_6411
+        @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
         Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from the Search Modifications page
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot

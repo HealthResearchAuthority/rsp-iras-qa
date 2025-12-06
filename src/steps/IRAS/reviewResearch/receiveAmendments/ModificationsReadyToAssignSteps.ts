@@ -131,15 +131,14 @@ When(
 );
 
 When(
-  'I select modifications with ids as {string} by clicking the checkbox in the {string} page',
-  async ({ modificationsReadyToAssignPage, teamManagerDashboardPage }, datasetName: string, pageValue: string) => {
-    let dataset: any;
+  'I select modifications by clicking the checkbox in the {string} page',
+  async ({ modificationsReadyToAssignPage, teamManagerDashboardPage }, pageValue: string) => {
+    let modificationId: string;
     if (pageValue === 'team manager dashboard') {
-      dataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[datasetName];
+      modificationId = await teamManagerDashboardPage.getModificationId();
     } else {
-      dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[datasetName];
+      modificationId = await modificationsReadyToAssignPage.getModificationId();
     }
-    const modificationId = dataset['search_input_text'];
     const modificationRecord: string[] = [];
     await modificationsReadyToAssignPage.page.locator(`[id^="${modificationId}"]`).nth(0).check();
     const shortProjectTitle = await modificationsReadyToAssignPage.page

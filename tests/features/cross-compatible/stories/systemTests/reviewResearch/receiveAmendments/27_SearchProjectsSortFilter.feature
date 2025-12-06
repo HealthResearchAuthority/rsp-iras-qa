@@ -81,7 +81,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | Advanced_Filters_Lead_Nation | Short_Project_Title | short project title | ascending        | descending        |
                         | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         | ascending        | descending        |
 
-        @ViewListOfProjects @ViewListOfProjectsPaginationFirstPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationNextLinkClick @fail @KNOWN_DEFECT-RSP-6411
+        @ViewListOfProjects @ViewListOfProjectsPaginationFirstPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationNextLinkClick
         Scenario Outline: Verify pagination in the list of projects page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -103,7 +103,7 @@ Feature: Filter, Search and Sort the Search project records page
                         | page number       | Advanced_Filters_Lead_Nation |
                         | next link         | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfProjects @ViewListOfProjectsPaginationLastPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationPreviousLinkClick @fail @KNOWN_DEFECT-RSP-6411
+        @ViewListOfProjects @ViewListOfProjectsPaginationLastPage @ViewListOfProjectsPaginationPageNumber @ViewListOfProjectsPaginationPreviousLinkClick
         Scenario Outline: Verify pagination in the list of projects page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot

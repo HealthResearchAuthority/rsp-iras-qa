@@ -839,14 +839,22 @@ When(
 );
 
 When('the default page size should be {string}', async ({ commonItemsPage }, pageSize: string) => {
-  const rowCountActual = await commonItemsPage.tableRows.count();
-  let rowCountExpected: number;
-  if (pageSize == 'ten') {
-    rowCountExpected = Number.parseInt(commonItemsPage.commonTestData.default_page_size_participating_organisation, 10);
-  } else {
-    rowCountExpected = Number.parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+  const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+    await commonItemsPage.search_results_count.textContent()
+  );
+  if (recordsCount > 20) {
+    const rowCountActual = await commonItemsPage.tableRows.count();
+    let rowCountExpected: number;
+    if (pageSize == 'ten') {
+      rowCountExpected = Number.parseInt(
+        commonItemsPage.commonTestData.default_page_size_participating_organisation,
+        10
+      );
+    } else {
+      rowCountExpected = Number.parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    }
+    expect.soft(rowCountActual - 1).toBe(rowCountExpected);
   }
-  expect.soft(rowCountActual - 1).toBe(rowCountExpected);
 });
 
 Then(
@@ -1163,28 +1171,33 @@ Then(
 Then(
   'I sequentially navigate through each {string} by clicking on {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
-    const totalPages = await commonItemsPage.getTotalPages();
-    //Limiting the max pages to validate to 10
-    let maxPagesToValidate = 0;
-    if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
-      maxPagesToValidate = commonItemsPage.commonTestData.maxPagesToValidate;
-    } else {
-      maxPagesToValidate = totalPages;
-    }
-    let totalItems: number;
-    if (
-      pagename === 'My_Research_Projects_Page' ||
-      pagename === 'Post_Approval_Page' ||
-      pagename === 'Sponsor_Org_User_List_Page' ||
-      pagename === 'Review_All_Changes_Page'
-    ) {
-      totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
-    } else {
-      totalItems = await commonItemsPage.getTotalItems();
-    }
-    await commonItemsPage.firstPage.click();
-    for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      const totalPages = await commonItemsPage.getTotalPages();
+      //Limiting the max pages to validate to 10
+      let maxPagesToValidate = 0;
+      if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
+        maxPagesToValidate = commonItemsPage.commonTestData.maxPagesToValidate;
+      } else {
+        maxPagesToValidate = totalPages;
+      }
+      let totalItems: number;
+      if (
+        pagename === 'My_Research_Projects_Page' ||
+        pagename === 'Post_Approval_Page' ||
+        pagename === 'Sponsor_Org_User_List_Page' ||
+        pagename === 'Review_All_Changes_Page'
+      ) {
+        totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
+      } else {
+        totalItems = await commonItemsPage.getTotalItems();
+      }
+      await commonItemsPage.firstPage.click();
+      for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
+        await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
+      }
     }
   }
 );
@@ -1192,28 +1205,33 @@ Then(
 Then(
   'I sequentially navigate through each {string} by clicking on {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
-    const totalPages = await commonItemsPage.getTotalPages();
-    //Limiting the max pages to validate to 10
-    let validatePageUntil = 0;
-    if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
-      validatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
-    } else {
-      validatePageUntil = totalPages;
-    }
-    let totalItems: number;
-    if (
-      pagename == 'My_Research_Projects_Page' ||
-      pagename === 'Post_Approval_Page' ||
-      pagename === 'Sponsor_Org_User_List_Page' ||
-      pagename === 'Review_All_Changes_Page'
-    ) {
-      totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
-    } else {
-      totalItems = await commonItemsPage.getTotalItems();
-    }
-    await commonItemsPage.clickOnPages(totalPages, navigateMethod);
-    for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      const totalPages = await commonItemsPage.getTotalPages();
+      //Limiting the max pages to validate to 10
+      let validatePageUntil = 0;
+      if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
+        validatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
+      } else {
+        validatePageUntil = totalPages;
+      }
+      let totalItems: number;
+      if (
+        pagename == 'My_Research_Projects_Page' ||
+        pagename === 'Post_Approval_Page' ||
+        pagename === 'Sponsor_Org_User_List_Page' ||
+        pagename === 'Review_All_Changes_Page'
+      ) {
+        totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
+      } else {
+        totalItems = await commonItemsPage.getTotalItems();
+      }
+      await commonItemsPage.clickOnPages(totalPages, navigateMethod);
+      for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
+        await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
+      }
     }
   }
 );

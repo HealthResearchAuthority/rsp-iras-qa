@@ -20,19 +20,33 @@ Feature: Team Manager Dashboard page
                         | Status      | status     | ascending    | descending     |
 
         @searchTeamManagerDashboardStatus @rsp-4822
-        Scenario Outline: Verify that modifications status display as expected on the team manager dashboard
+        Scenario Outline: Verify that modifications status with review body display as expected on the team manager dashboard
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
-                When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
+                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then I '<Visibility>' see the modification displayed in the 'Team_Manager_Dashboard_Page' list with '<Status>' status
-
+                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Search_Input>' with '<Status>'
                 Examples:
-                        | Status                                 | User               | Visibility |
-                        | Modification_Status_Approved           | nobody             | cannot     |
-                        | Modification_Status_Received           | nobody             | can        |
-                        | Modification_Status_Review_In_Progress | Studywide_Reviewer | can        |
+                        | Search_Input            | User         | Status           | Modification_Count |
+                        | Existing_IRAS_ID_Single | Team_Manager | With review body | Single             |
+
+        @searchTeamManagerDashboardStatus @rsp-4822
+        Scenario Outline: Verify that modifications status with approved, not approved, in  draft, with sponsor will not display on the team manager dashboard
+                Given I have navigated to the 'Team_Manager_Dashboard_Page'
+                And I can see the 'Column' ui labels on the team manager dashboard page
+                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
+                And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+                And I capture the page screenshot
+                Then the no search results found message is displayed
+                Examples:
+                        | Search_Input            | User         | Status       | Modification_Count |
+                        | Existing_IRAS_ID_Single | Team_Manager | Approved     | Single             |
+                        | Existing_IRAS_ID_Single | Team_Manager | Not approved | Single             |
+                        | Existing_IRAS_ID_Single | Team_Manager | In draft     | Single             |
+                        | Existing_IRAS_ID_Single | Team_Manager | With sponsor | Single             |
 
         # there is no data in db with not approved status
         @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @fail @noDBDataNotApproved
@@ -48,7 +62,7 @@ Feature: Team Manager Dashboard page
                         | Status                           | User   | Visibility |
                         | Modification_Status_Not_Approved | nobody | cannot     |
 
-        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed @fail @KNOWN_DEFECT-RSP-6411
+        @viewTeamManagerDashboardByLeadNation  @rsp-5132 @DBDataUsed
         Scenario Outline: Verify the team manger is able to view existing list of modifications for a specific lead nation
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
@@ -306,7 +320,7 @@ Feature: Team Manager Dashboard page
                         | Days_Since_Submission | days since submission | ascending    | descending     |
                         | Status                | status                | ascending    | descending     |
 
-        @SortTMDashboardByColumn @rsp-5122 @KNOWN_DEFECT-RSP-6411 @fail @defectSWRSortingDuetoSPace
+        @SortTMDashboardByColumn @rsp-5122  @defectSWRSortingDuetoSPace
         Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for study-wide reviewer
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -337,7 +351,7 @@ Feature: Team Manager Dashboard page
                 When I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Team_Manager_Dashboard_Page'
 
-        @ModificationsTMDashboardPaginationFirst @rsp-5122 @fail @KNOWN_DEFECT-RSP-6411
+        @ModificationsTMDashboardPaginationFirst @rsp-5122
         Scenario Outline: Verify pagination in team manager dashboard page when user is on the first page and navigate through each page by clicking page number or by clicking next link
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -356,7 +370,7 @@ Feature: Team Manager Dashboard page
                         | Label_Texts     | page number       |
                         | Label_Texts     | next link         |
 
-        @ModificationsTMDashboardPaginationLast @rsp-5122 @fail @KNOWN_DEFECT-RSP-6411
+        @ModificationsTMDashboardPaginationLast @rsp-5122
         Scenario Outline: Verify pagination in team manager dashboard page page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -504,10 +518,10 @@ Feature: Team Manager Dashboard page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<Team_Manager_User>'
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'team manager dashboard' page
+                When I select modifications by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -521,14 +535,14 @@ Feature: Team Manager Dashboard page
                 And  I click the 'Back_To_Dashboard' link on the 'Modifications_Assignment_Confirmation_Page_Team_Manager'
                 And I capture the page screenshot
                 Then I can see the 'Team_Manager_Dashboard_Page'
-                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 Then I can see previously assigned modification is displayed in 'Team_Manager_Dashboard_Page' with status 'Review in progress' and reviewer '<Study_Wide_Reviewer>'
                 And I capture the page screenshot
                 Given I have navigated to the 'My_Modifications_Tasklist_Page' as '<Study_Wide_Reviewer_User>'
                 Then I capture the page screenshot
-                When I fill the search input for searching 'my tasklist' with '<Valid_Iras_Id>' as the search query
+                When I fill the search input for searching 'my tasklist' with 'modification assigned by team manager' as the search query
                 And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
                 And I capture the page screenshot
                 Then I can see the modifications assigned from WFC or TM to SWR are now visible in my task list with status 'Review in progress'
@@ -545,7 +559,7 @@ Feature: Team Manager Dashboard page
                 When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'team manager dashboard' page
+                When I select modifications by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -589,7 +603,7 @@ Feature: Team Manager Dashboard page
                 When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'team manager dashboard' page
+                When I select modifications by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -651,7 +665,7 @@ Feature: Team Manager Dashboard page
                 When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'team manager dashboard' page
+                When I select modifications by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
@@ -671,7 +685,7 @@ Feature: Team Manager Dashboard page
                 When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'team manager dashboard' page
+                When I select modifications by clicking the checkbox in the 'team manager dashboard' page
                 And I capture the page screenshot
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot

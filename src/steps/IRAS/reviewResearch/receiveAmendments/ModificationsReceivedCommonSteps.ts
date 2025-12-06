@@ -83,6 +83,7 @@ Given(
     let studyWideReviewerIndex: number;
     let statusIndex: number;
     let studyWideReviewers: string[];
+    let irasIdSearchKey: string;
     if (pageType.toLowerCase() == 'ready to assign') {
       searchInputDataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries;
       modificationIdIndex = 1;
@@ -162,6 +163,9 @@ Given(
         .soft(commonItemsPage.search_results_count)
         .toHaveText(commonItemsPage.searchFilterResultsData.search_single_result_count);
       expect.soft(await commonItemsPage.tableBodyRows.all()).toHaveLength(1);
+      if (pageType === 'ready to assign') {
+        irasIdSearchKey = await modificationsReadyToAssignPage.getModificationId();
+      }
       expect
         .soft(
           await modificationsReceivedCommonPage.checkSingleValueEquals(
@@ -171,6 +175,7 @@ Given(
             datesSubmitted,
             searchInputDataset,
             searchInput,
+            irasIdSearchKey,
             studyWideReviewers
           )
         )

@@ -6,7 +6,7 @@ Feature: SWR - My Modifications Tasklist page
         And I can see the 'My_Modifications_Tasklist_Page'
         And I can see the 'Column' ui labels on the my modifications tasklist page
 
-    @MyModificationsTasklistPaginationFirst @rsp-4820 @fail @KNOWN_DEFECT-RSP-6411
+    @MyModificationsTasklistPaginationFirst @rsp-4820
     Scenario Outline: Verify pagination in My Modifications tasklist when user is on the first page
         When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
@@ -22,7 +22,7 @@ Feature: SWR - My Modifications Tasklist page
             | page number       |
             | next link         |
 
-    @MyModificationsTasklistPaginationLast @rsp-4820 @fail @KNOWN_DEFECT-RSP-6411
+    @MyModificationsTasklistPaginationLast @rsp-4820
     Scenario Outline: Verify pagination in My Modifications tasklist when user is on the last page
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot

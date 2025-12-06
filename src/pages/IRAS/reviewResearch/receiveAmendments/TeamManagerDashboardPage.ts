@@ -181,7 +181,7 @@ INNER JOIN ProjectRecordAnswers
     ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
 WHERE
     ProjectRecordAnswers.QuestionId = 'IQA0002'   
-ORDER BY NationQuery.CreatedDate DESC;
+ORDER BY NationQuery.CreatedDate ASC;
 `);
 
     await sqlConnection.close();
@@ -302,21 +302,19 @@ ORDER BY NationQuery.CreatedDate DESC;
   }
 
   async updateModificationIdTestDataJson(filePath: string, updateVal: string, countval: string) {
-    (async () => {
-      try {
-        const data = await returnDataFromJSON(filePath);
-        if (countval === 'Single') {
-          data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
-        } else if (countval === 'Partial') {
-          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 2);
-        } else if (countval === 'Multi') {
-          data.Search_Queries.Existing_IRAS_ID_Multi.search_input_text = updateVal;
-        }
-        await fse.writeJson(filePath, data, { spaces: 2 });
-      } catch (error) {
-        throw new Error(`${error} Error updating modification id to testdata json file:`);
+    try {
+      const data = await returnDataFromJSON(filePath);
+      if (countval === 'Single') {
+        data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
+      } else if (countval === 'Partial') {
+        data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 2);
+      } else if (countval === 'Multi') {
+        data.Search_Queries.Existing_IRAS_ID_Multi.search_input_text = updateVal;
       }
-    })();
+      await fse.writeJson(filePath, data, { spaces: 2 });
+    } catch (error) {
+      throw new Error(`${error} Error updating modification id to testdata json file:`);
+    }
   }
 
   async saveIrasId(irasId: string, countval: string) {

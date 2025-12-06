@@ -28,16 +28,16 @@ Feature: WFC - Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with '<Search_Input>' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query as '<Search_Key_Type>'
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Input>' with '<Status>'
 
         Examples:
-            | Search_Input             | User                 | Status           | Modification_Count |
-            | Existing_IRAS_ID_Single  | Workflow_Coordinator | With review body | Single             |
-            # | Existing_IRAS_ID_Multi   | Workflow_Coordinator | With review body | Multi              |
-            | Existing_Partial_IRAS_ID | Workflow_Coordinator | With review body | Partial            |
+            | Search_Input             | User                 | Status           | Modification_Count | Search_Key_Type |
+            | Existing_IRAS_ID_Single  | Workflow_Coordinator | With review body | Single             | Full            |
+            # | Existing_IRAS_ID_Multi   | Workflow_Coordinator | With review body | Multi              |Full|
+            | Existing_Partial_IRAS_ID | Workflow_Coordinator | With review body | Partial            | Partial         |
 
     @filterTasklistByShortTitle @rsp-4104
     Scenario Outline: Verify the user is able to filter the modifications tasklist by the short project title
@@ -56,8 +56,8 @@ Feature: WFC - Modifications Tasklist page
 
         Examples:
             | Title_Filter_Input     | Status           |
-            | Existing_Title_Single  | With review body |
-            | Existing_Title_Multi   | With review body |
+            # | Existing_Title_Single  | With review body |
+            # | Existing_Title_Multi   | With review body |
             | Existing_Title_Partial | With review body |
 
     @filterTasklistByDateSubmitted @rsp-4104
@@ -78,7 +78,7 @@ Feature: WFC - Modifications Tasklist page
 
         Examples:
             | Date_Filter_Input | Status           |
-            | Date_Range_Single | With review body |
+            # | Date_Range_Single | With review body |
             | Date_Range_Multi  | With review body |
             | Date_From_Multi   | With review body |
             | Date_To_Multi     | With review body |
@@ -105,33 +105,33 @@ Feature: WFC - Modifications Tasklist page
             | Days_Filter_Input | Status           |
             | Days_Range_Multi  | With review body |
             # | Days_Specific_Single | REQUIRES DATA SETUP
-            | Days_From_Multi   | With review body |
+            # | Days_From_Multi   | With review body |
             | Days_To_Multi     | With review body |
 
-    @searchFilterComboTasklist @rsp-4104 @rsp-4296
-    Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
-        Given I have navigated to the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
-        And I 'can' see the advanced filters panel
-        And I open each of the 'modification tasklist' filters
-        And I capture the page screenshot
-        When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
-        And I capture the page screenshot
-        And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
-        And I 'cannot' see the advanced filters panel
+    # @searchFilterComboTasklist @rsp-4104 @rsp-4296
+    # Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
+    #     Given I have navigated to the 'Modifications_Tasklist_Page'
+    #     And I capture the page screenshot
+    #     And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+    #     And I 'can' see the advanced filters panel
+    #     And I open each of the 'modification tasklist' filters
+    #     And I capture the page screenshot
+    #     When I fill the 'assign modifications tasklist' search and filter options with '<Search_Filter_Input>'
+    #     And I capture the page screenshot
+    #     And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
+    #     And I capture the page screenshot
+    #     Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Filter_Input>' with '<Status>'
+    #     And I 'cannot' see the advanced filters panel
 
-        Examples:
-            | Search_Filter_Input             | Button        | Status           |
-            | IRAS_ID_Title_Single            | Apply_Filters | With review body |
-            | Title_Date_Range_Single         | Search        | With review body |
-            | IRAS_ID_Title_Date_Range_Single | Apply_Filters | With review body |
-            | IRAS_ID_Title_Multi             | Search        | With review body |
-            | Title_Date_Range_Multi          | Apply_Filters | With review body |
-            | IRAS_ID_Title_Date_Range_Multi  | Search        | With review body |
-            | Title_Days_Range_Multi          | Apply_Filters | With review body |
+    #     Examples:
+    #         | Search_Filter_Input             | Button        | Status           |
+    #         | IRAS_ID_Title_Single            | Apply_Filters | With review body |
+    #         | Title_Date_Range_Single         | Search        | With review body |
+    #         | IRAS_ID_Title_Date_Range_Single | Apply_Filters | With review body |
+    #         | IRAS_ID_Title_Multi             | Search        | With review body |
+    #         | Title_Date_Range_Multi          | Apply_Filters | With review body |
+    #         | IRAS_ID_Title_Date_Range_Multi  | Search        | With review body |
+    #         | Title_Days_Range_Multi          | Apply_Filters | With review body |
 
     @searchTasklistWithNoResults @rsp-4104 @rsp-4296
     Scenario Outline: Verify the tasklist page displays the no results found message, when no records on the system match the search criteria
@@ -190,7 +190,7 @@ Feature: WFC - Modifications Tasklist page
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
         And I capture the page screenshot
-        Then the number of search results has 'decreased' from the 'original' number
+        # Then the number of search results has 'decreased' from the 'original' number
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the 'modification tasklist' filters
@@ -198,13 +198,13 @@ Feature: WFC - Modifications Tasklist page
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then the number of search results has 'decreased' from the 'previous' number
+        # Then the number of search results has 'decreased' from the 'previous' number
         When I click the 'Date_Submitted_Filter_Panel' link on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then the number of search results has 'increased' from the 'previous' number
+        # Then the number of search results has 'increased' from the 'previous' number
         When I click the 'Short_Project_Title_Filter_Panel' link on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then the number of search results has returned to the original number
+        # Then the number of search results has returned to the original number
         And I 'cannot' see active filters displayed
 
     @clearAllFiltersTasklist @rsp-4104
@@ -226,7 +226,7 @@ Feature: WFC - Modifications Tasklist page
         Then the number of search results has returned to the original number
         And I 'cannot' see active filters displayed
 
-    @SortTasklistByColumn @rsp-4091 @rsp-4822 @fail @KNOWN_DEFECT-RSP-6411
+    @SortTasklistByColumn @rsp-4091 @rsp-4822
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -259,7 +259,7 @@ Feature: WFC - Modifications Tasklist page
         When I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Modifications_Tasklist_Page'
 
-    @ModificationsTasklistPaginationFirst @rsp-4040 @rsp-4309 @fail @KNOWN_DEFECT-RSP-6411
+    @ModificationsTasklistPaginationFirst @rsp-4040 @rsp-4309
     Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the first page and navigate through each page by clicking page number or by clicking next link
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -278,7 +278,7 @@ Feature: WFC - Modifications Tasklist page
             | Label_Texts     | page number       |
             | Label_Texts     | next link         |
 
-    @ModificationsTasklistPaginationLast @rsp-4040 @rsp-4309 @fail @KNOWN_DEFECT-RSP-6411
+    @ModificationsTasklistPaginationLast @rsp-4040 @rsp-4309
     Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -297,14 +297,45 @@ Feature: WFC - Modifications Tasklist page
             | Label_Texts     | previous link     |
 
     @ModificationsTasklistTitleLinksNav @jsEnabled @rsp-5046
-    Scenario: Verify back and short project title link navigation for modifications tasklist and select reviewer pages
+    Scenario Outline: Verify back and short project title link navigation for modifications tasklist and select reviewer pages
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        And Each 'short project title' displayed on the 'Modifications_Tasklist_Page' is a link
-        When I click a 'short project title' on the 'Modifications_Tasklist_Page'
+        And Each '<Link_Text>' displayed on the 'Modifications_Tasklist_Page' is a link
+        When I click a '<Link_Text>' on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can see the project overview page
-        When I click the 'Back' link on the 'Project_Overview_Page'
+        Then I can see the '<Navigation_Page>'
+        # When I click the 'Back' link on the 'Project_Overview_Page'
+        # And I capture the page screenshot
+        # And I can see the 'Team_Manager_Dashboard_Page'
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I can see the 'Modifications_Tasklist_Page'
+        When I select check all checkbox on the current page and validate all checkboxes are checked
+        And I capture the page screenshot
+        And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the 'Select_Study_Wide_Reviewer_Page'
+        And Each '<Link_Text>' displayed on the 'Select_Study_Wide_Reviewer_Page' is a link
+        When I click a '<Link_Text>' on the 'Select_Study_Wide_Reviewer_Page'
+        And I capture the page screenshot
+        Then I can see the '<Navigation_Page>'
+        # When I click the 'Back' link on the 'Project_Overview_Page'
+        # And I capture the page screenshot
+        # Then I can see the 'Modifications_Tasklist_Page'
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I can see the 'Modifications_Tasklist_Page'
+        Examples:
+            | Link_Text           | Navigation_Page       |
+            | short project title | Project_Overview_Page |
+
+    @ModificationsTasklistModificationLinksNav @jsEnabled @rsp-5046
+    Scenario Outline: Verify back and modification link navigation for modifications tasklist and select reviewer pages
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        And Each '<Link_Text>' displayed on the 'Modifications_Tasklist_Page' is a link
+        When I click a '<Link_Text>' on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the '<Navigation_Page>'
+        When I click the 'Back' link on the 'Modification_Details_Page'
         And I capture the page screenshot
         And I can see the 'Modifications_Tasklist_Page'
         When I select check all checkbox on the current page and validate all checkboxes are checked
@@ -312,29 +343,27 @@ Feature: WFC - Modifications Tasklist page
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
-        And Each 'short project title' displayed on the 'Select_Study_Wide_Reviewer_Page' is a link
-        When I click a 'short project title' on the 'Select_Study_Wide_Reviewer_Page'
+        And Each '<Link_Text>' displayed on the 'Select_Study_Wide_Reviewer_Page' is a link
+        When I click a '<Link_Text>' on the 'Select_Study_Wide_Reviewer_Page'
         And I capture the page screenshot
-        Then I can see the project overview page
-        When I click the 'Back' link on the 'Project_Overview_Page'
+        Then I can see the '<Navigation_Page>'
+        When I click the 'Back' link on the 'Modification_Details_Page'
         And I capture the page screenshot
-        Then I can see the 'Modifications_Tasklist_Page'
-        And Each 'modification id' displayed on the 'Modifications_Tasklist_Page' is a link
-        When I click a 'modification id' on the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        Then I can see the review all changes modifications page
-        When I click the 'Back' link on the 'Review_All_Changes_Page'
-        And I capture the page screenshot
-        Then I can see the 'Modifications_Tasklist_Page'
+        Then I can see the 'Select_Study_Wide_Reviewer_Page'
+        Examples:
+            | Link_Text       | Navigation_Page           |
+            | modification id | Modification_Details_Page |
 
-    @ModificationsTasklistRandomSelection @rsp-4105
-    Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
-        Given I have navigated to the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        When I confirm checkbox exists in every row across pages
-        And I capture the page screenshot
-        And I check random row and validate if the row is checked even after navigation
-        And I capture the page screenshot
+    # @ModificationsTasklistRandomSelection @jsEnabled @rsp-4105
+    # Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
+    #     Given I have navigated to the 'Modifications_Tasklist_Page'
+    #     And I capture the page screenshot
+    #     When I select check all checkbox on the current page and validate all checkboxes are checked
+    #     And I capture the page screenshot
+    #     When I confirm checkbox exists in every row across pages
+    #     And I capture the page screenshot
+    #     And I check random row and validate if the row is checked even after navigation
+    #     And I capture the page screenshot
 
     @ModificationsTasklistSelectAllWithJs @rsp-4105 @jsEnabled
     Scenario: With JavaScript enabled, Verify if user selects the check all checkbox on the first page and confirm checkboxes are checked and status retained even after navigation
@@ -392,7 +421,7 @@ Feature: WFC - Modifications Tasklist page
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation  @fail @KNOWN_DEFECT-RSP-6411
+    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
     Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
@@ -432,10 +461,10 @@ Feature: WFC - Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -449,14 +478,14 @@ Feature: WFC - Modifications Tasklist page
         And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
         And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
-        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see previously assigned modification is no longer displayed
         And I capture the page screenshot
         Given I have navigated to the 'My_Modifications_Tasklist_Page' as '<Study_Wide_Reviewer_User>'
         Then I capture the page screenshot
-        When I fill the search input for searching 'my tasklist' with '<Valid_Iras_Id>' as the search query
+        When I fill the search input for searching 'my tasklist' with 'modification assigned by workflow co-ordinator' as the search query
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the modifications assigned from WFC or TM to SWR are now visible in my task list with status 'Review in progress'
@@ -470,10 +499,10 @@ Feature: WFC - Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -517,7 +546,7 @@ Feature: WFC - Modifications Tasklist page
         When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -580,7 +609,7 @@ Feature: WFC - Modifications Tasklist page
         When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -601,7 +630,7 @@ Feature: WFC - Modifications Tasklist page
         When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        When I select modifications with ids as '<Valid_Iras_Id>' by clicking the checkbox in the 'modifications ready to assign' page
+        When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot

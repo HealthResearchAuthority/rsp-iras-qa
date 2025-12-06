@@ -77,6 +77,20 @@ When(
       searchKey = await searchAddUserReviewBodyPage.getUserEmail();
     } else if (searchQueryName === 'Valid_Full_Iras_Id of recently added project') {
       searchKey = await searchProjectsPage.getIrasId();
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'team manager dashboard') {
+      searchKey = await teamManagerDashboardPage.getModificationId();
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'tasklist') {
+      searchKey = await modificationsReadyToAssignPage.getModificationId();
+    } else if (
+      searchQueryName === 'modification assigned by team manager' &&
+      searchType.toLowerCase() == 'my tasklist'
+    ) {
+      searchKey = await teamManagerDashboardPage.getModificationId();
+    } else if (
+      searchQueryName === 'modification assigned by workflow co-ordinator' &&
+      searchType.toLowerCase() == 'my tasklist'
+    ) {
+      searchKey = await modificationsReadyToAssignPage.getModificationId();
     } else {
       searchKey = await searchQueryDataset['search_input_text'];
     }
@@ -110,3 +124,44 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
     expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThanOrEqual(1);
   }
 });
+
+When(
+  'I fill the search input for searching {string} with {string} as the search query as {string}',
+  async (
+    { modificationsReadyToAssignPage, commonItemsPage, teamManagerDashboardPage },
+    searchType: string,
+    searchQueryName: string,
+    searchKeyType: string
+  ) => {
+    let searchKey: string;
+    let searchQueryDataset: any;
+    if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'team manager dashboard') {
+      if (searchKeyType.toLowerCase() === 'full') {
+        searchKey = await teamManagerDashboardPage.getModificationId();
+      } else if (searchKeyType.toLowerCase() === 'partial') {
+        searchKey = (await teamManagerDashboardPage.getModificationId()).substring(0, 2);
+      }
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'tasklist') {
+      if (searchKeyType.toLowerCase() === 'full') {
+        searchKey = await modificationsReadyToAssignPage.getModificationId();
+      } else if (searchKeyType.toLowerCase() === 'partial') {
+        searchKey = (await modificationsReadyToAssignPage.getModificationId()).substring(0, 2);
+      }
+    } else if (
+      searchQueryName === 'modification assigned by team manager' &&
+      searchType.toLowerCase() == 'my tasklist'
+    ) {
+      searchKey = await teamManagerDashboardPage.getModificationId();
+    } else if (
+      searchQueryName === 'modification assigned by workflow co-ordinator' &&
+      searchType.toLowerCase() == 'my tasklist'
+    ) {
+      searchKey = await modificationsReadyToAssignPage.getModificationId();
+    } else {
+      searchKey = await searchQueryDataset['search_input_text'];
+    }
+    expect.soft(searchKey).toBeTruthy();
+    await commonItemsPage.setSearchKey(searchKey);
+    await commonItemsPage.search_text.fill(searchKey);
+  }
+);
