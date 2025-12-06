@@ -8,7 +8,6 @@ export default class ProjectPersonnelChangePrincipalInvestigatorPage {
   readonly projectPersonnelChangePrincipalInvestigatorModificationPageTestData: typeof projectPersonnelChangePrincipalInvestigatorModificationPageTestData;
   readonly select_details_to_change_radio: Locator;
   readonly principal_investigator_email_text: Locator;
-
   readonly name_text: Locator;
 
   //Initialize Page Objects
