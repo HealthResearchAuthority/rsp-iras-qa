@@ -633,7 +633,7 @@ export default class ModificationsCommonPage {
     const cardLocator = this.page.getByRole('heading', { name: cardTitle, exact: true }).locator('..').locator('..');
     await this.page.waitForLoadState('domcontentloaded');
     const rows = cardLocator.locator('.govuk-summary-list__row');
-    await expect.soft(rows.first()).toBeVisible({ timeout: 5000 });
+    await expect.soft(rows.first()).toBeVisible();
     const rowCount = await rows.count();
     const specificChangeValue = await rows.nth(0).locator('.govuk-summary-list__key').innerText();
     const cardData: Record<string, any> = {};
@@ -642,18 +642,8 @@ export default class ModificationsCommonPage {
     }
     const modificationInfo: Record<string, string> = {};
     if (cardTitle.includes('Change')) {
-      let cardTitleValue: string | null = null;
-      const govukTitle = cardLocator.locator('.govuk-summary-card__title').first();
-      if (await govukTitle.count()) {
-        cardTitleValue = await govukTitle.innerText();
-      } else {
-        const headingInside = cardLocator.locator('h2, h3').first();
-        if (await headingInside.count()) {
-          cardTitleValue = await headingInside.innerText();
-        }
-      }
-      cardTitleValue = cardTitleValue?.trim() ?? '';
-      const areaOfChangeValue = cardTitleValue.split('-')[1]?.trim() ?? '';
+      const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
+      const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
       cardData['area_of_change_dropdown'] = areaOfChangeValue;
       cardData['specific_change_dropdown'] = specificChangeValue;
     }
