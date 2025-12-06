@@ -940,7 +940,7 @@
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Chief Investigator",
       "select_details_to_change_radio": "Temporary arrangement to cover absence",
-      "chief_investigator_temporary_arrangement_email_text": "ci_test_modified@test.com",
+      "chief_investigator_email_text": "ci_test_modified@test.com",
       "first_name_text": "QA test First name",
       "last_name_text": "QA test Last name",
       "change_status": "Change ready for submission"
