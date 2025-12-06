@@ -9,6 +9,9 @@ export default class ProjectPersonnelChangeChiefInvestigatorPage {
   readonly select_details_to_change_radio: Locator;
   readonly chief_investigator_email_text: Locator;
   readonly name_text: Locator;
+  readonly first_name_text: Locator;
+  readonly last_name_text: Locator;
+  readonly chief_investigator_temporary_arrangement_email_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -18,15 +21,16 @@ export default class ProjectPersonnelChangeChiefInvestigatorPage {
 
     //Locators
     this.select_details_to_change_radio = this.page.getByTestId(/^IQA0889/);
-    this.chief_investigator_email_text = this.page
-      .getByText(
-        this.projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.chief_investigator_email_label,
-        { exact: true }
-      )
+    this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
+    this.first_name_text = this.page
+      .getByText(this.projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.first_name_label, {
+        exact: true,
+      })
       .locator('..')
       .locator('input');
-    this.name_text = this.page
-      .getByText(this.projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.name_label, {
+
+    this.last_name_text = this.page
+      .getByText(this.projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.last_name_label, {
         exact: true,
       })
       .locator('..')
@@ -41,7 +45,7 @@ export default class ProjectPersonnelChangeChiefInvestigatorPage {
       await commonItemsPage.fillUIComponent(dataset, 'select_details_to_change_radio', this);
     }
     await commonItemsPage.clickButton('Modifications_Page', clickAction);
-    const ExpectedKeys = ['chief_investigator_email_text', 'name_text'];
+    const ExpectedKeys = ['chief_investigator_email_text', 'first_name_text', 'last_name_text'];
     for (const key of ExpectedKeys) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, this);
