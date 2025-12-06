@@ -1,7 +1,10 @@
 {
   "Label_Texts": {
-    "chief_investigator_email_label": "New chief investigator email",
+    "chief_investigator_email_label": "New Chief Investigator email",
+    "chief_investigator_temporary_arrangement_email_label": "New chief investigator email",
     "name_label": "Name",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
     "select_detail_enter_link": "Select details to change",
     "chief_investigator_enter_link": "Enter new chief investigator email",
     "name_enter_link": "Enter name"
@@ -11,7 +14,7 @@
   },
   "Project_Personnel_Chief_Investigator_New_Valid_Data": {
     "specific_change_dropdown": "Change of chief investigator",
-    "select_details_to_change_radio": "New chief investigator",
+    "select_details_to_change_radio": "New Chief Investigator",
     "chief_investigator_email_text": "ci_test_modified@test.com",
     "name_text": "QA test name"
   },
@@ -25,7 +28,7 @@
     "select_details_to_change_radio": ""
   },
   "Empty_Data_CI_Fields": {
-    "select_details_to_change_radio": "New chief investigator",
+    "select_details_to_change_radio": "New Chief Investigator",
     "chief_investigator_email_text": "",
     "name_text": ""
   },
@@ -51,27 +54,27 @@
     "name_text": "Modified Name Change"
   },
   "Invalid_Email_CI_Data_One_Start_With_Dot": {
-    "select_details_to_change_radio": "New chief investigator",
+    "select_details_to_change_radio": "New Chief Investigator",
     "chief_investigator_email_text": ".john@example.com"
   },
   "Invalid_Email_CI_Data_One_Double_Dot": {
-    "select_details_to_change_radio": "New chief investigator",
+    "select_details_to_change_radio": "New Chief Investigator",
     "chief_investigator_email_text": "john..doe@example.com"
   },
   "Invalid_Email_CI_Data_One_TLD": {
-    "select_details_to_change_radio": "New chief investigator",
+    "select_details_to_change_radio": "New Chief Investigator",
     "chief_investigator_email_text": "john.doe@example.1234"
   },
   "Invalid_Email_CI_Data_One_Reserved_Domain": {
-    "select_details_to_change_radio": "New chief investigator",
+    "select_details_to_change_radio": "New Chief Investigator",
     "chief_investigator_email_text": "john.doe@localhost"
   },
   "Invalid_Email_CI_Data_One_Punycode": {
-    "select_details_to_change_radio": "New chief investigator",
+    "select_details_to_change_radio": "New Chief Investigator",
     "chief_investigator_email_text": "john@example.xn--mgbh0fb"
   },
   "Invalid_Email_CI_Data_One_Max_Char": {
-    "select_details_to_change_radio": "New chief investigator",
+    "select_details_to_change_radio": "New Chief Investigator",
     "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   },
   "Invalid_Email_CI_Temorary_Arrangement_Data_One_Start_With_Dot": {

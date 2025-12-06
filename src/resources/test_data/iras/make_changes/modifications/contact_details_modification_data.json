@@ -1,11 +1,11 @@
 {
   "Label_Texts": {
-    "chief_investigator_email_label": "Chief investigator contact email",
+    "chief_investigator_email_label": "New Chief Investigator email",
     "sponsor_contact_email_label": "Sponsor contact email",
     "contact_name_label": "Name",
     "contact_email_label": "Email",
     "select_contact_detail_enter_link": "Enter select details to change",
-    "chief_investigator_enter_link": "Enter chief investigator contact email",
+    "chief_investigator_enter_link": "Enter chief Investigator contact email",
     "sponsor_contact_enter_link": "Enter sponsor contact email",
     "other_contact_name_enter_link": "Enter name",
     "other_contact_email_enter_link": "Enter email"

@@ -39,7 +39,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285_6272 @fail
+    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747 @fail
     Scenario Outline: Validate that sponsor can action to not authorise the reviewable modifications
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -106,7 +106,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
-        And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
+        And I can see the searched modification to be present in the list with date actioned with 'Not authorised' status in the sponsor authorisations page
         And I capture the page screenshot
         Then I click on the searched modification id
         And I can see the modification page for sponsor view
@@ -162,7 +162,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
             | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
             | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
-    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285_6272 @fail
+    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747 @fail
     Scenario Outline: Validate that sponsor can action to not authorise the non reviewable modifications
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -229,7 +229,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
-        And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
+        And I can see the searched modification to be present in the list with date actioned with 'Not authorised' status in the sponsor authorisations page
         And I capture the page screenshot
         Then I click on the searched modification id
         And I can see the modification page for sponsor view
@@ -282,7 +282,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
             | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
             | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
-    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285_6272 @fail
+    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747 @fail
     Scenario Outline: Validate that sponsor can action to not authorise the combination of reviewable and non reviewable modifications
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -349,7 +349,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
-        And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
+        And I can see the searched modification to be present in the list with date actioned with 'Not authorised' status in the sponsor authorisations page
         And I capture the page screenshot
         Then I click on the searched modification id
         And I can see the modification page for sponsor view

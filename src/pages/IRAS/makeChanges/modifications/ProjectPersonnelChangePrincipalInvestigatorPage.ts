@@ -8,6 +8,8 @@ export default class ProjectPersonnelChangePrincipalInvestigatorPage {
   readonly projectPersonnelChangePrincipalInvestigatorModificationPageTestData: typeof projectPersonnelChangePrincipalInvestigatorModificationPageTestData;
   readonly select_details_to_change_radio: Locator;
   readonly principal_investigator_email_text: Locator;
+  readonly principal_investigator_temporary_arrangement_email_text: Locator;
+
   readonly name_text: Locator;
 
   //Initialize Page Objects
@@ -26,6 +28,15 @@ export default class ProjectPersonnelChangePrincipalInvestigatorPage {
       )
       .locator('..')
       .locator('input');
+    this.principal_investigator_temporary_arrangement_email_text = this.page
+      .getByText(
+        this.projectPersonnelChangePrincipalInvestigatorModificationPageTestData.Label_Texts
+          .principal_investigator_temporary_arrangement_email_label,
+        { exact: true }
+      )
+      .locator('..')
+      .locator('input');
+
     this.name_text = this.page
       .getByText(this.projectPersonnelChangePrincipalInvestigatorModificationPageTestData.Label_Texts.name_label, {
         exact: true,
@@ -42,7 +53,11 @@ export default class ProjectPersonnelChangePrincipalInvestigatorPage {
       await commonItemsPage.fillUIComponent(dataset, 'select_details_to_change_radio', this);
     }
     await commonItemsPage.clickButton('Modifications_Page', clickAction);
-    const ExpectedKeys = ['principal_investigator_email_text', 'name_text'];
+    const ExpectedKeys = [
+      'principal_investigator_email_text',
+      'principal_investigator_temporary_arrangement_email_text',
+      'name_text',
+    ];
     for (const key of ExpectedKeys) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, this);
