@@ -1667,6 +1667,18 @@ export default class CommonItemsPage {
     return actualListValues;
   }
 
+  async getActualListValuesWithoutTrim(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = await row
+        .getByRole('cell')
+        .nth(columnIndex)
+        .evaluate((node) => node.firstChild?.nodeValue ?? '');
+      actualListValues.push(actualListValue);
+    }
+    return actualListValues;
+  }
+
   async clickButton(page: string, buttonName: string) {
     const buttonLabel = this.buttonTextData[page][buttonName];
     await this.govUkButton
