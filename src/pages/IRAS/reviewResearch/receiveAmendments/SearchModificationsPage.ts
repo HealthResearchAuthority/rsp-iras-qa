@@ -17,6 +17,7 @@ export default class SearchModificationsPage {
   readonly searchModificationsPageTestData: typeof searchModificationsPageTestData;
   readonly linkTextData: typeof linkTextData;
   private _modifications_list_after_search: string[];
+  private _modification_id: string;
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
   readonly iras_id_search_text: Locator;
@@ -78,6 +79,7 @@ export default class SearchModificationsPage {
     this.page = page;
     this.searchModificationsPageTestData = searchModificationsPageTestData;
     this._modifications_list_after_search = [];
+    this._modification_id = '';
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
@@ -328,6 +330,14 @@ export default class SearchModificationsPage {
     this._modifications_list_after_search = value;
   }
 
+  async getModificationId(): Promise<string> {
+    return this._modification_id;
+  }
+
+  async setModificationId(value: string): Promise<void> {
+    this._modification_id = value;
+  }
+
   //Page Methods
 
   async assertOnSearchModificationsPage() {
@@ -487,6 +497,7 @@ ORDER BY NationQuery.CreatedDate DESC;
     return queryResult.recordset.map((row) => row.IrasId);
   }
   async saveModificationId(modificationId: string, countval: string) {
+    await this.setModificationId(modificationId);
     const filePath = path.resolve(pathToTestDataJson);
     await this.updateModificationIdTestDataJson(filePath, modificationId, countval);
   }

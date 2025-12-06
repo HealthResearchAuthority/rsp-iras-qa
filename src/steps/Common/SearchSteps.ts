@@ -91,6 +91,8 @@ When(
       searchType.toLowerCase() == 'my tasklist'
     ) {
       searchKey = await modificationsReadyToAssignPage.getModificationId();
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'modifications') {
+      searchKey = await searchModificationsPage.getModificationId();
     } else {
       searchKey = await searchQueryDataset['search_input_text'];
     }
@@ -128,7 +130,7 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
 When(
   'I fill the search input for searching {string} with {string} as the search query as {string}',
   async (
-    { modificationsReadyToAssignPage, commonItemsPage, teamManagerDashboardPage },
+    { modificationsReadyToAssignPage, commonItemsPage, teamManagerDashboardPage, searchModificationsPage },
     searchType: string,
     searchQueryName: string,
     searchKeyType: string
@@ -146,6 +148,12 @@ When(
         searchKey = await modificationsReadyToAssignPage.getModificationId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await modificationsReadyToAssignPage.getModificationId()).substring(0, 2);
+      }
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'modifications') {
+      if (searchKeyType.toLowerCase() === 'full') {
+        searchKey = await searchModificationsPage.getModificationId();
+      } else if (searchKeyType.toLowerCase() === 'partial') {
+        searchKey = (await searchModificationsPage.getModificationId()).substring(0, 2);
       }
     } else if (
       searchQueryName === 'modification assigned by team manager' &&

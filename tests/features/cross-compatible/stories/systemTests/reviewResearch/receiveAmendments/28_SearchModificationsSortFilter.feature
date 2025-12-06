@@ -134,11 +134,11 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id | System_Admin         | With sponsor     | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | With review body | Single             |
 
-        @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031  @fail @KNOWN_DEFECT_RSP_6453
+        @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031
         Scenario: Verify In draft and WIth sponsor modifications in search modifications page
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                And I fill the search input for searching 'modifications' with 'modification with status' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then the no search results found message is displayed
@@ -193,10 +193,11 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input             | Advanced_Filters     | Modification_Count | Status           |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed @fail
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                # And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I fill the search input for searching 'modifications' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
@@ -213,9 +214,9 @@ Feature: Filter, Search and Sort the Search modifications page
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
-                        | Search_Input             | Advanced_Filters     | Modification_Count | Status           |
-                        | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body |
-                        | Valid_Full_Iras_Id       | Advanced_Filters_Nth | Single             | With review body |
+                        | Search_Input             | Advanced_Filters     | Modification_Count | Status           | Search_Key_Type |
+                        | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body | Full            |
+                        | Valid_Full_Iras_Id       | Advanced_Filters_Nth | Single             | With review body | Partial         |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @fail
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
@@ -240,28 +241,28 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Lead_Nation | Partial            | With review body |
                         | Valid_Full_Iras_Id       | Advanced_Filters_Lead_Nation | Single             | With review body |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
+        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled @Run
         Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I fill the search input for searching 'modifications' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
+                And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
-                        | Search_Input             | User                 | Modification_Count | Status           |
-                        | Existing_Partial_IRAS_ID | Team_Manager         | Partial            | With review body |
-                        | Valid_Full_Iras_Id       | Studywide_Reviewer   | Single             | With review body |
-                        | Existing_Partial_IRAS_ID | Workflow_Coordinator | Partial            | Approved         |
-                        | Valid_Full_Iras_Id       | Workflow_Coordinator | Single             | Not approved     |
-                        | Existing_Partial_IRAS_ID | System_Admin         | Partial            | Approved         |
-                        | Valid_Full_Iras_Id       | System_Admin         | Single             | Not approved     |
-                        | Existing_Partial_IRAS_ID | System_Admin         | Partial            | In draft         |
-                        | Valid_Full_Iras_Id       | System_Admin         | Single             | With sponsor     |
-                        | Valid_Full_Iras_Id       | System_Admin         | Single             | With review body |
+                        | Search_Input             | User                 | Modification_Count | Status           | Search_Key_Type |
+                        | Existing_Partial_IRAS_ID | Team_Manager         | Partial            | With review body | Partial         |
+                        | Valid_Full_Iras_Id       | Studywide_Reviewer   | Single             | With review body | Full            |
+                        | Existing_Partial_IRAS_ID | Workflow_Coordinator | Partial            | Approved         | Partial         |
+                        | Valid_Full_Iras_Id       | Workflow_Coordinator | Single             | Not approved     | Full            |
+                        | Existing_Partial_IRAS_ID | System_Admin         | Partial            | Approved         | Partial         |
+                        | Valid_Full_Iras_Id       | System_Admin         | Single             | Not approved     | Full            |
+                        | Existing_Partial_IRAS_ID | System_Admin         | Partial            | In draft         | Partial         |
+                        | Valid_Full_Iras_Id       | System_Admin         | Single             | With sponsor     | Full            |
+                        | Valid_Full_Iras_Id       | System_Admin         | Single             | With review body | Full            |
 
         @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
