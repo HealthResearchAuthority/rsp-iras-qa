@@ -128,6 +128,9 @@ When(
           )
         );
         break;
+      case 'My_Modifications_Tasklist_No_Result_Page':
+        await myModificationsTasklistPage.assertOnMyModificationsTaskNoResultPage();
+        break;
       case 'Select_Study_Wide_Reviewer_Page':
         await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
         break;

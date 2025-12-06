@@ -61,7 +61,7 @@
     "portion_of_nhs_hsc_organisations_affected_label": "Portion of NHS/HSC organisations affected",
     "additional_resource_implications_label": "Additional resource implications",
     "affected_non_nhs_hsc_locations_label": "Affected non-NHS/HSC locations",
-    "project_reference_numbers_radio_label": "Which reference(s) do you need to change?",
+    "project_reference_numbers_radio_label": "Which references do you need to change?",
     "title_radio_label": "Title",
     "isrctn_reference_number_label": "International standard randomised controlled trial number (ISRCTN)",
     "nct_reference_number_label": "ClinicalTrials.gov identifier (NCT number)",
@@ -440,7 +440,7 @@
       "change_status": "Change ready for submission"
     }
   },
-    "Multiple_Changes_Planned_End_Date_Unfinished": {
+  "Multiple_Changes_Planned_End_Date_Unfinished": {
     "Planned_End_Date_NHS_All_Yes_All_Countries": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Change to planned end date",
@@ -930,23 +930,28 @@
     "Project_Personnel_Chief_Investigator_New": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Chief Investigator",
-      "select_details_to_change_radio": "New chief investigator",
+      "select_details_to_change_radio": "New Chief Investigator",
       "chief_investigator_email_text": "ci_test_modified@test.com",
-      "name_text": "QA test name"
+      "first_name_text": "QA test First name",
+      "last_name_text": "QA test Last name",
+      "change_status": "Change ready for submission"
     },
     "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Chief Investigator",
       "select_details_to_change_radio": "Temporary arrangement to cover absence",
       "chief_investigator_email_text": "ci_test_modified@test.com",
-      "name_text": "QA test name"
+      "first_name_text": "QA test First name",
+      "last_name_text": "QA test Last name",
+      "change_status": "Change ready for submission"
     },
     "Project_Personnel_Principal_Investigator_New": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Principal Investigator",
-      "select_details_to_change_radio": "New principal investigator",
+      "select_details_to_change_radio": "New Principal Investigator",
       "principal_investigator_email_text": "test_modified@test.com",
-      "name_text": "QA test name",
+      "name_text": "QA test",
+      "change_status": "Change ready for submission",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -958,7 +963,8 @@
       "specific_change_dropdown": "Change of Principal Investigator",
       "select_details_to_change_radio": "Temporary arrangement to cover absence",
       "principal_investigator_email_text": "test_modified@test.com",
-      "name_text": "QA test name",
+      "name_text": "QA test",
+      "change_status": "Change ready for submission",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -968,7 +974,7 @@
     "Contact_Details_Chief_Investigator": {
       "area_of_change_dropdown": "Administrative details for the project",
       "specific_change_dropdown": "Contact details",
-      "select_contact_details_to_change_radio": "Chief investigator",
+      "select_contact_details_to_change_radio": "Chief Investigator",
       "chief_investigator_email_text": "ci_test_modified@test.com",
       "change_status": "Change ready for submission"
     },
@@ -992,7 +998,7 @@
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Chief Investigator: conflict of interest",
-      "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
+      "changes_free_text": "This is a free text change for Chief Investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
     "Change_Of_Sponsor_legal_Representative": {
@@ -1077,7 +1083,7 @@
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Chief Investigator: conflict of interest",
-      "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
+      "changes_free_text": "This is a free text change for Chief Investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
     "Principal_Investigator_Conflict_Of_Interest": {
@@ -1101,7 +1107,7 @@
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Chief Investigator: conflict of interest",
-      "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
+      "changes_free_text": "This is a free text change for Chief Investigator: conflict of interest",
       "change_status": "Change ready for submission"
     }
   },
@@ -1265,7 +1271,7 @@
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Chief Investigator: conflict of interest",
-      "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
+      "changes_free_text": "This is a free text change for Chief Investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
     "Principal_Investigator_Conflict_Of_Interest": {

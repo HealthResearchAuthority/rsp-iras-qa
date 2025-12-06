@@ -21,8 +21,10 @@ Then(
 );
 
 Then(
-  'I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page',
-  async ({ sponsorAuthorisationsPage, modificationsCommonPage, commonItemsPage }) => {
+  'I can see the searched modification to be present in the list with date actioned with {string} status in the sponsor authorisations page',
+  async ({ sponsorAuthorisationsPage, modificationsCommonPage, commonItemsPage }, status: string) => {
+    const modificationStatusForSponsor = await modificationsCommonPage.getModificationStatus(status);
+
     const dateActionedBySponsor = new Date().toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
@@ -31,6 +33,7 @@ Then(
     const modificationID = await modificationsCommonPage.getModificationID();
     const foundRecords = await sponsorAuthorisationsPage.findModification(commonItemsPage, modificationID, {
       dateActionedSponsor: dateActionedBySponsor,
+      statusForSponsor: modificationStatusForSponsor,
     });
     expect.soft(foundRecords).toBeDefined();
     expect.soft(foundRecords).toHaveCount(1);
