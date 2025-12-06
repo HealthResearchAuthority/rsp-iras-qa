@@ -227,11 +227,11 @@
     },
     "Project_Personnel_Chief_Investigator_Page": {
       "page_header": "Change of Chief Investigator",
-      "page_component_label": "New Chief Investigator email"
+      "page_component_label": "New chief investigator email"
     },
     "Project_Personnel_Temporary_Arrangement_Page": {
       "page_header": "Change of Chief Investigator",
-      "page_component_label": "New Chief Investigator email"
+      "page_component_label": "New chief investigator email"
     },
     "Project_Personnel_Principal_Investigator_Select_Change_Page": {
       "page_header": "Change of Principal Investigator",
@@ -403,6 +403,58 @@
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "change_status": "Change ready for submission"
+    },
+    "Planned_End_Date_NHS_Some_No_Eng": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "21",
+      "planned_project_end_month_dropdown": "February",
+      "planned_project_end_year_text": "2054",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    },
+    "Planned_End_Date_Non_NHS_All_Countries": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "01",
+      "planned_project_end_month_dropdown": "February",
+      "planned_project_end_year_text": "2030",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Multiple_Changes_Planned_End_Date_Unfinished": {
+    "Planned_End_Date_NHS_All_Yes_All_Countries": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "01",
+      "planned_project_end_month_dropdown": "January",
+      "planned_project_end_year_text": "2030",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
       "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
       "change_status": "Change ready for submission"
     },
@@ -693,7 +745,7 @@
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Chief Investigator: conflict of interest",
-      "changes_free_text": "This is a free text change for Chief Investigator: conflict of interest",
+      "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
     "Principal_Investigator_Conflict_Of_Interest": {

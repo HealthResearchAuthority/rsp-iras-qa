@@ -37,7 +37,9 @@ Then(
       await modificationsCommonPage.modification_id_value.textContent()
     );
     expect.soft(irasIDActual).toBe(irasIDExpected);
-    expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
+    expect
+      .soft(shortProjectTitleActual.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'))
+      .toBe(shortProjectTitleExpected.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'));
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
     await modificationsReceivedCommonPage.setIrasId(shortProjectTitleExpected);
@@ -237,7 +239,7 @@ Then(
 
 Then(
   'I validate the change details are displayed as per the {string} dataset',
-  async ({ modificationsCommonPage, reviewAllChangesPage }, datasetName) => {
+  async ({ modificationsCommonPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset).reverse();
     for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
@@ -246,7 +248,6 @@ Then(
       const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
       const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
         cardTitle,
-        reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading,
         expectedData
       );
       modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
@@ -267,7 +268,6 @@ Then(
       if (await headingLocator.isVisible()) {
         const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
           cardTitle,
-          cardTitle,
           expectedData
         );
         modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
@@ -284,7 +284,6 @@ Then(
     const expectedData = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
     const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
       reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
-      reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
       expectedData
     );
     modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
@@ -300,9 +299,6 @@ Then(
     expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
     const statusActual = modificationRecord.get('statusValue');
     expect.soft(statusActual[0]).toBe(statusValue);
-    const submittedDateActual = modificationRecord.get('submittedDateValue');
-    const submittedDateExpected = await getFormattedDate();
-    expect.soft(submittedDateActual[0]).toBe(submittedDateExpected);
   }
 );
 

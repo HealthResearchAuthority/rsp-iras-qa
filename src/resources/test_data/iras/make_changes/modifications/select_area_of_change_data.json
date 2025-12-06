@@ -24,27 +24,48 @@
     "Project_Documents": "Project documents"
   },
   "Specific_Change_Options": {
-    "Default_Value": ["Select specific change"],
+    "Default_Value": [
+      "Select specific change"
+    ],
     "Participating_Organisation": [
       "Select specific change",
-      "Early closure or withdrawal of research sites",
-      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
-      "PICs - Early closure or withdrawal of Participant Identification Centres",
-      "Addition of sites undertaking the same activities as existing sites",
-      "Other change to participating organisations",
       "Addition of new participating organisation type",
-      "Change to activities undertaken by an existing participating organisation type"
+      "Addition of sites undertaking the same activities as existing sites",
+      "Change to activities undertaken by an existing participating organisation type",
+      "Early closure or withdrawal of research sites",
+      "Other change to participating organisations",
+      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+      "PICs - Early closure or withdrawal of Participant Identification Centres"
     ],
-    "Project_Design": ["Select specific change", "Change to planned end date"],
+    "Project_Design": [
+      "Select specific change",
+      "Additional or new control group (placebo) or arm to the project",
+      "Change to background information that affects scientific value of the project",
+      "Change to planned end date",
+      "Change to the endpoint or the main objective",
+      "Change to the inclusion or exclusion criteria: non-significant",
+      "Change to the participant sample size: non-significant change",
+      "Change to the participant sample size: significant",
+      "Change to the use of human biological samples in the project: non-significant (for example, change to the logistical, transporting or storing arrangements)",
+      "Data collection, transfer or processing of identifiable participant information - Changes in arrangements or organisations involved (other than the addition of new participating organisations)",
+      "Other non-significant change to the project design",
+      "Other significant change to project design",
+      "Samples - addition of the storage or use of human tissue samples under the relevant legislation on Human Tissue for the first time",
+      "Samples - significant changes (e.g. to the arrangements for removal, storage or use of samples under the relevant legislation on Human Tissue)"
+    ],
     "Project_Documents": [
       "Select specific change",
+      "Change to case report forms (CRFs) or other documents used by the research team for recording research data",
+      "Change to protocol: non-significant not affecting safety or the scientific value of the project",
       "Correction of typographical errors",
-      "CRF/other study data records - Changes in the documentation used by the research team for recording study data",
-      "GDPR wording - Accepted wording used verbatim",
-      "Other minor change to study documents (e.g. information sheets, consent forms, questionnaires, letters) that will have additional resource implications for participating organisations",
+      "GDPR wording - Unaccepted alternative wording used",
+      "GDPR: accepted wording used verbatim",
+      "Insurance renewal - no change to the level or breadth of cover",
+      "Other non-significant change to project documents",
+      "Other significant change to study documents, for example, information sheets, consent forms, questionnaires, letters",
       "Post trial information for participants (which does not contradict the protocol)",
-      "Protocol - Non-substantial changes (e.g. not affecting safety or the scientific value of the trial)",
-      "Translations - Addition of translated versions of participant-facing documentation"
+      "Protocol - Significant changes (e.g. affecting safety or the scientific value of the trial)",
+      "Translated versions of participant-facing documents"
     ]
   },
   "Select_Area_Of_Change": {
@@ -123,10 +144,10 @@
       "specific_change_dropdown": "Contact details"
     },
     "Change_Of_Chief_Investigator": {
-      "specific_change_dropdown": "Change of chief investigator"
+      "specific_change_dropdown": "Change of Chief Investigator"
     },
     "Change_Of_Principal_Investigator": {
-      "specific_change_dropdown": "Change of principal investigator"
+      "specific_change_dropdown": "Change of Principal Investigator"
     }
   }
 }

@@ -41,7 +41,7 @@
     "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
   },
   "Empty_Data_CI_Fields": {
-    "select_details_to_change_radio": "New principal investigator",
+    "select_details_to_change_radio": "New Principal Investigator",
     "principal_investigator_email_text": "",
     "name_text": "",
     "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],

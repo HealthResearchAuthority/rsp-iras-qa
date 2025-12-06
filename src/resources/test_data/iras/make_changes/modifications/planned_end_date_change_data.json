@@ -18,6 +18,21 @@
     "planned_project_end_month_dropdown": "The date should be a valid date and in future",
     "planned_project_end_year_text": "The date should be a valid date and in future"
   },
+  "Date_Correct_Format_Error_Message": {
+    "planned_project_end_day_text": "Planned project end date must be in the correct format"
+  },
+  "Date_Must_Be_Future_Error_Message": {
+    "planned_project_end_day_text": "Planned project end date must be in the future"
+  },
+  "Date_Day_Field_Error_Message": {
+    "planned_project_end_day_text": "Planned project end date must include a day"
+  },
+  "Date_Month_Field_Error_Message": {
+    "planned_project_end_month_dropdown": "Planned project end date must include a month"
+  },
+  "Date_Year_Field_Error_Message": {
+    "planned_project_end_year_text": "Planned project end date must include a year"
+  },
   "Valid_Data_All_Fields": {
     "planned_project_end_day_text": "01",
     "planned_project_end_month_dropdown": "January",
