@@ -155,6 +155,7 @@ export default class CommonItemsPage {
   readonly myAccountGovUkBreadCrumbsLink: Locator;
   readonly page_heading: Locator;
   readonly govUkBackLink: Locator;
+  readonly removeLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -425,6 +426,7 @@ export default class CommonItemsPage {
       .getByTestId('govuk-notification-banner-title')
       .getByText(this.commonTestData.success_header_label);
     this.page_heading = this.page.getByRole('heading');
+    this.removeLink = this.page.locator('.govuk-link').getByText(commonTestData.remove_label);
   }
 
   //Getters & Setters for Private Variables
@@ -859,6 +861,11 @@ export default class CommonItemsPage {
   async getUiLabel<PageObject>(key: string, page: PageObject) {
     const locator: Locator = page[key];
     return confirmStringNotNull(await locator.textContent());
+  }
+
+  async getInnerLabel<PageObject>(key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    return confirmStringNotNull(await locator.innerText());
   }
 
   async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {

@@ -1,5 +1,5 @@
 @ApplicantUser @ModificationsErrorValidation @SystemTest
-Feature: ModificationsErrorValidation: This feature file helps check the error handling that is in place during modification journey
+Feature: Modifications - Error Validation
 
   Background:
     Given I have navigated to the my research projects page
@@ -42,32 +42,6 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
       | Missing_All_Mandatory_Fields           | Default_Value              | Default_Value   | Modifications_Tile      |
       | Missing_Mandatory_Only_Specific_Change | Participating_Organisation | Default_Value   | Modifications_Tile      |
 
-  # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
-  @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
-  Scenario Outline: Validate the mandatory field error message on participating organisation page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Participating_Organisations_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
-
-    Examples:
-      | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
-      | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
-
-
   @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
   Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
@@ -82,6 +56,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
@@ -90,18 +65,18 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Sponsor_Reference_Page'
 
     Examples:
-      | Changes                 | Sponsor_Reference_Page               | Field_And_Summary_Error_Message |
-      | Change_Planned_End_Date | Missing_Mandatory_Field              | Missing_Mandatory_Fields_Error  |
-      | Change_Planned_End_Date | Max_Character_Sponsor_Summary_Fields | Max_Character_Field_Error       |
-      | Change_Planned_End_Date | Invalid_Day_Number                   | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Number_1                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Number_2                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Letters                 | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_Past                    | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
+      | Changes                                | Sponsor_Reference_Page               | Field_And_Summary_Error_Message |
+      | Change_Of_Sponsor_legal_Representative | Missing_Mandatory_Field              | Missing_Mandatory_Fields_Error  |
+      | Change_Of_Sponsor_legal_Representative | Max_Character_Sponsor_Summary_Fields | Max_Character_Field_Error       |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Day_Number                   | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Year_Number_1                | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Year_Number_2                | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Year_Letters                 | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Date_Past                    | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
+      | Change_Of_Sponsor_legal_Representative | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
 
   @rsp-5200 @rsp-4818 @ModificationsEnterFreeTextErrorValidation
   Scenario Outline: Validate the maximum field length error message on enter free text modification page
@@ -166,7 +141,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
       | Changes                                                                   | Field_And_Summary_Error_Message                       | Area_Of_Change                         | Specific_Change        |
       | Modification_To_Add_Administrative_Details_Invalid_Data_Reference_Numbers | Field_Summary_Error_Message_Invalid_Project_Reference | Administrative_Details_For_The_Project | Project_Identification |
 
-  @rsp-4094 @ModificationsErrorValidationInvalidProjectTitles
+  @rsp-4094 @ModificationsErrorValidationInvalidProjectTitles @KNOWN_DEFECT_RSP_5747 @fail
   Scenario Outline: Validate error message for invalid project titles on project identification page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -188,7 +163,9 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I fill the project identification select change modification page using '<Changes>' dataset
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
-    Then I can see the project identification enter reference modification page
+    And I fill the project identification titles page using '<Changes>' dataset
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identification_SelectReference_To_Change_Page'
     And I fill the project identification enter reference modification page using '<Changes>' dataset
     When I click the 'Save_Continue' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     And I capture the page screenshot
@@ -221,28 +198,28 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I capture the page screenshot
     When I click the '<Navigation_Button>' button on the 'Modifications_Page'
     And I capture the page screenshot
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on planned project end date modifications page for '<Planned_End_Date>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Planned_End_Date_Change_Page'
 
     Examples:
-      | Planned_End_Date      | Navigation_Button | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Day_Number    | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Day_Letters   | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Number_1 | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Number_2 | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Letters  | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_Past     | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Day   | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Month | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Year  | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Day_Number    | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Day_Letters   | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Number_1 | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Number_2 | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Year_Letters  | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_Past     | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Day   | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Month | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_No_Year  | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
+      | Planned_End_Date      | Navigation_Button | Field_And_Summary_Error_Message   |
+      | Invalid_Day_Number    | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Day_Letters   | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Number_1 | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Number_2 | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Letters  | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Date_Past     | Save_Continue     | Date_Correct_Format_Error_Message |
+      | Invalid_Date_No_Day   | Save_Continue     | Date_Day_Field_Error_Message      |
+      | Invalid_Date_No_Month | Save_Continue     | Date_Month_Field_Error_Message    |
+      | Invalid_Date_No_Year  | Save_Continue     | Date_Year_Field_Error_Message     |
+      | Invalid_Day_Number    | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Day_Letters   | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Number_1 | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Number_2 | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Year_Letters  | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Date_Past     | Save_For_Later    | Date_Correct_Format_Error_Message |
+      | Invalid_Date_No_Day   | Save_For_Later    | Date_Day_Field_Error_Message      |
+      | Invalid_Date_No_Month | Save_For_Later    | Date_Month_Field_Error_Message    |
+      | Invalid_Date_No_Year  | Save_For_Later    | Date_Year_Field_Error_Message     |
 
   @rsp-4097 @ValidateErrorMessageTodayDatePlannedEndDateModifications
   Scenario Outline: Validate error messages displayed when user fill todays date for planned end date in modifications (save and continue and save for later)
@@ -267,12 +244,12 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I capture the page screenshot
     When I click the '<Navigation_Button>' button on the 'Modifications_Page'
     And I capture the page screenshot
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on planned project end date modifications page for '<Planned_End_Date>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Planned_End_Date_Change_Page'
 
     Examples:
-      | Planned_End_Date   | Navigation_Button | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_Today | Save_Continue     | Field_Error_Message | Summary_Error_Message |
-      | Invalid_Date_Today | Save_For_Later    | Field_Error_Message | Summary_Error_Message |
+      | Planned_End_Date   | Navigation_Button | Field_And_Summary_Error_Message   |
+      | Invalid_Date_Today | Save_Continue     | Date_Must_Be_Future_Error_Message |
+      | Invalid_Date_Today | Save_For_Later    | Date_Must_Be_Future_Error_Message |
 
   @rsp-4103 @ValidateErrorForEmptyOrganisationChangeAffectModifications
   Scenario Outline: Verify the user is able to see error messages when empty data for 'which organisation this change affect' page in modifications
@@ -307,7 +284,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
       | Planned_End_Date      | Organisation_Change_Affect | Field_And_Summary_Error_Message |
       | Valid_Data_All_Fields | Empty_Data_All_Fields      | Mandatory_Field_Error           |
 
-  @rsp-4171 @ChangePlannedEndDateValidationsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795
+  @rsp-4171 @ChangePlannedEndDateValidationsFromReviewChangesPage
   Scenario Outline: Verify that system prevents the user to enter invalid date when modifications details updated from review changes page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -347,14 +324,14 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
     When I click the 'Save_Changes' button on the 'Modifications_Page'
     And I capture the page screenshot
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on planned project end date modifications page for '<Planned_End_Date>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Planned_End_Date_Change_Page'
 
     Examples:
-      | Planned_End_Date_Change | Change_Field         | Field_Error_Message | Summary_Error_Message | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
-      | Invalid_Date_Past       | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
-      | Invalid_Day_Number      | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
-      | Invalid_Day_Letters     | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
-      | Invalid_Year_Letters    | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Planned_End_Date_Change | Change_Field         | Field_And_Summary_Error_Message   | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
+      | Invalid_Date_Past       | New_Planned_End_Date | Date_Correct_Format_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Invalid_Day_Number      | New_Planned_End_Date | Date_Correct_Format_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Invalid_Day_Letters     | New_Planned_End_Date | Date_Correct_Format_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Invalid_Year_Letters    | New_Planned_End_Date | Date_Correct_Format_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
   @rsp-4171 @TodayDateErrorValidationsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795
   Scenario Outline: Verify that system prevents the user to enter invalid today date when modifications details updated from review changes page
@@ -396,11 +373,11 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     Then I fill todays date in planned project end date for modifications
     When I click the 'Save_Changes' button on the 'Modifications_Page'
     And I capture the page screenshot
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on planned project end date modifications page for '<Planned_End_Date>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Planned_End_Date_Change_Page'
 
     Examples:
-      | Planned_End_Date_Change | Change_Field         | Field_Error_Message | Summary_Error_Message | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
-      | Invalid_Date_Today      | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
+      | Planned_End_Date_Change | Change_Field         | Field_And_Summary_Error_Message   | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions |
+      | Invalid_Date_Today      | New_Planned_End_Date | Date_Must_Be_Future_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
   @rsp-5478 @4684 @3877 @ValidateDocumentUploadDuplicateFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video or non video file that has already been uploaded
@@ -429,7 +406,6 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     And I capture the page screenshot
-
 
     Examples:
       | Changes                           | Document_Upload_Files      | Document_Upload_Files_New  | Upload_Type      | Research_Locations  |
@@ -478,7 +454,6 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Multiple_Invalid_Files_Non_Video | multiple invalid | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | JSON_File                        | single invalid   | Nhs_Involvement_Yes |
 
-
   @rsp-5478 @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
     Then I fill the research locations page with '<Research_Locations>'
@@ -515,7 +490,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
 
   @rsp-4314 @ValidateErrorNonRECStudyTypeOptionalDocumentVersionDate
   Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing, using document types applicable to Non-REC study types where document version and date are optional, for documents uploaded with an Incomplete status
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -527,9 +502,12 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
     And I upload '<Document_Upload_Files>' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
@@ -1030,6 +1008,7 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
     And I click the 'Delete_Modification' link on the 'Modification_Details_Page'
@@ -1047,70 +1026,3 @@ Feature: ModificationsErrorValidation: This feature file helps check the error h
     Examples:
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
-
-  @rsp-4094 @rsp-4095 @ModificationsErrorValidationForInvalidReferenceNumbers
-  Scenario Outline: Validate error message for invalid reference numbers on project identification page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the project identification select change modification page
-    And I capture the page screenshot
-    And I fill the project identification select change modification page using '<Changes>' dataset
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
-    Then I can see the project identification select reference modification page
-    And I capture the page screenshot
-    And I fill the project identification select reference modification page using '<Changes>' dataset
-    When I click the 'Save_Continue' button on the 'Project_Identification_SelectReference_To_Change_Page'
-    Then I can see the project identification enter reference modification page
-    And I fill the project identification enter reference modification page using '<Changes>' dataset
-    When I click the 'Save_Continue' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
-    And I capture the page screenshot
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Identification_Enter_Reference_Numbers_Page'
-    Examples:
-      | Changes                                                                   | Field_And_Summary_Error_Message                       | Area_Of_Change                         | Specific_Change        |
-      | Modification_To_Add_Administrative_Details_Invalid_Data_Reference_Numbers | Field_Summary_Error_Message_Invalid_Project_Reference | Administrative_Details_For_The_Project | Project_Identification |
-
-  @rsp-4094 @ModificationsErrorValidationInvalidProjectTitles
-  Scenario Outline: Validate error message for invalid project titles on project identification page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the project identification select change modification page
-    And I capture the page screenshot
-    And I fill the project identification select change modification page using '<Changes>' dataset
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
-    Then I can see the project identification enter reference modification page
-    And I fill the project identification enter reference modification page using '<Changes>' dataset
-    When I click the 'Save_Continue' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
-    And I capture the page screenshot
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Identification_Enter_Reference_Numbers_Page'
-
-    Examples:
-      | Changes                                                        | Field_And_Summary_Error_Message                    | Area_Of_Change                         | Specific_Change        |
-      | Modification_To_Add_Administrative_Details_Invalid_Data_Titles | Field_Summary_Error_Message_Invalid_Project_Titles | Administrative_Details_For_The_Project | Project_Identification |

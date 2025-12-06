@@ -52,6 +52,10 @@ Then(
     for (let i = 0; i < displayedDocumentsList.length; i++) {
       if (displayedStatusesList[i] === status) {
         const documentName = displayedDocumentsList[i];
+        await addDocumentDetailsModificationsPage.documentlink
+          .getByText(documentName, { exact: true })
+          .first()
+          .waitFor({ state: 'visible', timeout: 5000 });
         await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
         //Assertion to verify Add document details for specific document page
         await addDocumentDetailsForSpecificDocumentModificationsPage.assertOnAddDocumentsDetailsForSpecificModificationsPage(

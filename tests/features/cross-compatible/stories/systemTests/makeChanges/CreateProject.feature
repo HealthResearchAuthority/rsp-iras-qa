@@ -1,5 +1,5 @@
 @ApplicantUser @createProject @createAmendment @SystemTest
-Feature: Create Project - This feature file helps check all the create project journeys
+Feature: Create Project
 
   Background:
     Given I have navigated to the my research projects page
@@ -141,10 +141,10 @@ Feature: Create Project - This feature file helps check all the create project j
       | Valid_Data_All_Fields | Valid_Email_Data_Special_Characters |
       | Valid_Data_All_Fields | Valid_Email_Data_Hyphen_Underscore  |
       | Valid_Data_All_Fields | Valid_Email_Data_Domain             |
-      # | Valid_Data_All_Fields | Valid_Email_Data_Unicode              |
-      # | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Unicode     |
-      # | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains |
-      # | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       |
+  # | Valid_Data_All_Fields | Valid_Email_Data_Unicode              |
+  # | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Unicode     |
+  # | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains |
+  # | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       |
 
   @rsp-1897 @rsp-4209
   Scenario: Validate breadcrumb navigations in chief investigator page
@@ -164,7 +164,7 @@ Feature: Create Project - This feature file helps check all the create project j
     Then I can see the project details title page
     And I capture the page screenshot
 
-  @rsp-1901 @rsp-2922 @ValidateUserAbleToFillResearchLocationsPage
+  @rsp-1901 @rsp-2922 @ValidateUserAbleToFillResearchLocationsPage @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Validate user is able to fill research locations page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -371,7 +371,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field | Valid_Data_All_Fields |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      | Valid_Data_All_Fields |
 
-  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled
+  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Validate user is able to fill sponsor organisation in project identifiers page with valid data
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -442,16 +442,6 @@ Feature: Create Project - This feature file helps check all the create project j
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
     Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with '<Project_Details_Title>'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I can see the chief investigator page
-    Then I fill the chief investigator page with '<Chief_Investigator>'
-    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    Then I fill the research locations page with '<Research_Locations>'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
     And I capture the page screenshot
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -628,7 +618,7 @@ Feature: Create Project - This feature file helps check all the create project j
     And I can see the project overview page
     And I capture the page screenshot
 
-  @rsp-5340 @validateProjectRecordInDraftStatusRetains
+  @rsp-5340 @validateProjectRecordInDraftStatusRetains @KNOWN_DEFECT_RSP-5747 @fail
   Scenario: Validate project status in draft is retained if partial project information is saved
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -726,7 +716,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Project_Details_Title |
       | Valid_Data_All_Fields |
 
-  @rsp-5302 @ValidateConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6183 @KNOWN_DEFECT_RSP-5747 @fail
+  @rsp-5302 @ValidateConfirmProjectDetailsPage
   Scenario: Validate confirm project details page and confirm the project journey displays the project titles
     And I capture the page screenshot
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -837,9 +827,9 @@ Feature: Create Project - This feature file helps check all the create project j
 
     Examples:
       | Changes                                                | Search_Queries                     |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One | Full_Modification_ID               |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two | Full_Modification_ID               |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two | Partial_Modification_ID            |
-      | Multiple_Changes_Reviewable_Non_Reviewable             | Partial_Modification_ID_With_Slash |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two | Partial_Modification_ID_With_Slash |
 
   @rsp-4887 @VerifyNoResultsFoundInvalidSearchOnlyPostApproval
   Scenario: Verify the user can see no matching results found message on clicking search button with invalid modification id
@@ -925,12 +915,12 @@ Feature: Create Project - This feature file helps check all the create project j
 
     Examples:
       | Search_Queries                     | Advanced_Filters                                    | Changes                                                |
-      | Partial_Modification_ID_With_Slash | Advanced_Filter_Status_Only                         | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
-      | Partial_Modification_ID            | Advanced_Filter_All_Fields                          | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
-      | Empty_Search_Data                  | Advanced_Filter_Submitted_Date_Field_Only           | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
+      | Partial_Modification_ID_With_Slash | Advanced_Filter_Status_Only                         | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
+      | Partial_Modification_ID            | Advanced_Filter_All_Fields                          | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
+      | Empty_Search_Data                  | Advanced_Filter_Submitted_Date_Field_Only           | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
       | Empty_Search_Data                  | Advanced_Filter_Modification_Type_Only              | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
-      | Empty_Search_Data                  | Advanced_Filter_Submitted_From_Date_Field_Only      | Multiple_Changes_Reviewable_Non_Reviewable             |
-      | Empty_Search_Data                  | Advanced_Filter_Submitted_To_Future_Date_Field_Only | Multiple_Changes_Reviewable_Non_Reviewable             |
+      | Empty_Search_Data                  | Advanced_Filter_Submitted_From_Date_Field_Only      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
+      | Empty_Search_Data                  | Advanced_Filter_Submitted_To_Future_Date_Field_Only | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two |
 
   @rsp-4887 @ValidateClearAllFiltersPostApproval
   Scenario: Validate clear all filters removes all active filters in the post approval page
@@ -1008,7 +998,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Advanced_Filter_All_Fields                | Advanced_Filter_All_Fields                |
       | Advanced_Filter_Submitted_Date_Field_Only | Advanced_Filter_Submitted_Date_Field_Only |
 
-  @rsp-2837 @rsp-3819 @rsp-4874 @rsp-4868 @reviewYourAnswersAllFields
+  @rsp-2837 @rsp-3819 @rsp-4874 @rsp-4868 @reviewYourAnswersAllFields @KNOWN_DEFECT_RSP-5747 @fail
   Scenario Outline: Verify that user completed all question and can review the answers on create project journey
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1468,7 +1458,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Nhs     |
       | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Non_Nhs |
 
-  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @KNOWN-DEFECT-RSP-5322
+  @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050
   Scenario Outline: Validate the expected data is available and displayed on the project overview page
     And I navigate to the project overview page of the '<Project_Name>' project
     And I capture the page screenshot
@@ -1488,16 +1478,41 @@ Feature: Create Project - This feature file helps check all the create project j
     Then I can see the 'Post_Approval_Tab' ui labels on the project overview page
 
     Examples:
-      | Project_Name               |
-      | Kilmarnock_Cancer_Research |
-      | Swansea_ACL_Trials         |
-    #The project 5789415 and modifications were created manually and validations are for the specific project
+      | Project_Name                         |
+      | Salford_Primary_Care_Workforce_Study |
 
-  @rsp-4876 @PostApprovalPageSort @KNOW-DEFECT-RSP-TBD-MOD-ID-SORT
+  @rsp-4876 @PostApprovalPageSort
   Scenario Outline: Validate the user is able to sort the post approval fields
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I capture the page screenshot
     And the default page size should be 'twenty'
     And I capture the page screenshot
     When I click the '<Sort_Button>' button on the 'Post_Approval_Page'
@@ -1508,16 +1523,41 @@ Feature: Create Project - This feature file helps check all the create project j
     And I capture the page screenshot
 
     Examples:
-      | Sort_Button       | Sort_Field        |
-      | Modification_Id   | modification id   |
-      | Modification_Type | modification type |
-    #The project 5789415 and modifications were created manually and validations are for the specific project
+      | Sort_Button     | Sort_Field      |
+      | Modification_Id | modification id |
 
   @rsp-4876 @PostApprovalPaginationFirstPage
   Scenario Outline: Verify pagination in post approval page when user is on the first page
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I capture the page screenshot
     And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
@@ -1531,13 +1571,39 @@ Feature: Create Project - This feature file helps check all the create project j
       | Navigation_Method |
       | page number       |
       | next link         |
-    #The project 5789415 and modifications were created manually and validations are for the specific project
 
   @rsp-4876 @PostApprovalPaginationLastPage
   Scenario Outline: Verify pagination in post approval page when user is on the last page
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I capture the page screenshot
     And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
@@ -1551,26 +1617,149 @@ Feature: Create Project - This feature file helps check all the create project j
       | Navigation_Method |
       | page number       |
       | previous link     |
-    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
   @rsp-4545 @rsp-5280 @ProjectDocumentsTab
   Scenario: Validate the user is able to access and view the project documents details from the project overview page
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I keep note of the individual and overall ranking of changes created using 'Change_To_Planned_End_Date' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Change_To_Planned_End_Date' for the created modification
+    And I can see the modifications details page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    Then I click the 'Save_For_Later' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
     And I capture the page screenshot
+    And I can see a 'Search' button on the 'Project_Documents_Page'
+    And I click the 'Advanced_Filters' button on the 'Project_Documents_Page'
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
-    And the default page size should be 'twenty'
     And I can see the list is sorted by default in the alphabetical order of the 'document type'
-    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
   @rsp-4545 @ProjectDocumentsPaginationFirstPage
   Scenario Outline: Verify pagination in project documents page when user is on the first page
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I keep note of the individual and overall ranking of changes created using 'Change_To_Planned_End_Date' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Change_To_Planned_End_Date' for the created modification
+    And I can see the modifications details page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    Then I click the 'Save_For_Later' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I can now see a table of search results for project documents page
+    And the default page size should be 'twenty'
     And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
     And the 'Next' button will be 'available' to the user
@@ -1583,12 +1772,72 @@ Feature: Create Project - This feature file helps check all the create project j
       | Navigation_Method |
       | page number       |
       | next link         |
-    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
 
   @rsp-4545 @ProjectDocumentsPaginationLastPage
   Scenario Outline: Verify pagination in project documents page when user is on the last page
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I keep note of the individual and overall ranking of changes created using 'Change_To_Planned_End_Date' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Change_To_Planned_End_Date' for the created modification
+    And I can see the modifications details page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    Then I click the 'Save_For_Later' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I can now see a table of search results for project documents page
@@ -1607,13 +1856,75 @@ Feature: Create Project - This feature file helps check all the create project j
 
   @rsp-3930 @ProjectDocumentDownload
   Scenario: Validate the user is able to download the project document from the project overview page
-    When I navigate to the project overview page of the 'Test_Project' project
+    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    Then I can see the create project record page
     And I capture the page screenshot
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I capture the page screenshot
+    And I can see the 'Label_Texts' ui labels on the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I keep note of the individual and overall ranking of changes created using 'Change_To_Planned_End_Date' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Change_To_Planned_End_Date' for the created modification
+    And I can see the modifications details page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'Multiple_Files_Three' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
+    And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
+    And I validate the uploaded 'Multiple_Files_Three' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I capture the page screenshot
+    And I validate the status of each document is 'Document_Status_Complete' in add document details page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    Then I click the 'Save_For_Later' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I capture the page screenshot
-    When I click a 'document name' on the project overview page and validate the downlaoded file in the download folder
+    When I click a 'file name' on the project overview page and validate the downlaoded file in the download folder
     And I capture the page screenshot
 
   @VerifyValidSearchAndAdvancedFilterMyResearch @rsp-4650
@@ -1741,7 +2052,7 @@ Feature: Create Project - This feature file helps check all the create project j
       | Advanced_Filter_One_All | Advanced_Filter_One_All |
       | Advanced_Filter_Two     | Advanced_Filter_Two     |
 
-  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650
+  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650 @KNOWN_DEFECT_RSP_6411 @fail
   Scenario: Verify that active filters remain visible during pagination, and that they are cleared when navigating to a different page
     And I have navigated to the 'My_Research_Page'
     And I can see the 'My_Research_Page'

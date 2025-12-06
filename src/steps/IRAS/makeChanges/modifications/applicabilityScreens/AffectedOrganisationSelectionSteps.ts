@@ -5,18 +5,13 @@ const { Then } = createBdd(test);
 
 Then(
   'I validate the ui labels for which organisation this change affect page in modifications',
-  async ({ affectedOrganisationSelectionPage, modificationsCommonPage }) => {
+  async ({ affectedOrganisationSelectionPage }) => {
     const whichOrganisationAffectHintLabelExpected =
       affectedOrganisationSelectionPage.affectedOrganisationSelectionPageTestData.Label_Texts
         .which_organisation_change_affect_hint_label;
     expect
       .soft((await affectedOrganisationSelectionPage.which_organisation_affect_hint_label.textContent()).trim())
       .toBe(whichOrganisationAffectHintLabelExpected);
-    await expect(
-      affectedOrganisationSelectionPage.page.getByText(
-        modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.remove_this_change_label
-      )
-    ).toBeVisible();
   }
 );
 

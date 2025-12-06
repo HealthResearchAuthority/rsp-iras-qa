@@ -134,7 +134,8 @@ export default class ProjectIdentificationEnterReferenceNumbersPage {
           .new_full_project_title_textbox_label
       )
       .locator('..')
-      .getByTestId('IQA0789_Text');
+      .getByTestId('IQA0789_Text')
+      .first();
   }
 
   //Page Methods
