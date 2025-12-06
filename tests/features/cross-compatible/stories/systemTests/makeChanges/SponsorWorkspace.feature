@@ -434,7 +434,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @rsp-5190 @ValidateModificationListPageSortingPagination @SetupNewSponsorOrgGoLive @run
+  @rsp-5190 @ValidateModificationListPageSortingPagination @SetupNewSponsorOrgGoLive
   Scenario: Verify that a sponsor user can access the modification authorization list page, view all modification records, apply sorting on the list, and navigate through records using pagination.
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
