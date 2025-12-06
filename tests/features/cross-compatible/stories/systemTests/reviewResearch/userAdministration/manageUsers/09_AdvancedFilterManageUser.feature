@@ -299,7 +299,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Manage_Users_Page'
+        When I click the 'System_Admin_Breadcrumb' link in the breadcrumbs on the 'Manage_Users_Page'
         Then I can see the 'System_Administration_Page'
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Users_Page'
@@ -358,7 +358,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         When I click the 'Back' link on the 'Edit_User_Profile_Page'
         Then I can see the user profile page
         And I capture the page screenshot
-        When I click the 'Back' link on the 'User_Profile_Page'
+        When I click the 'Manage_Users_Breadcrumb' link in the breadcrumbs on the 'User_Profile_Page'
         Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'

@@ -49,7 +49,8 @@
     "View_Edit": "View/Edit",
     "Advanced_Filters": "Advanced filters",
     "Clear_All_Filters": "Clear all filters",
-    "System_Admin_Breadcrumb": "System administration"
+    "System_Admin_Breadcrumb": "System administration",
+    "Manage_Users_Breadcrumb": "Manage users"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"

@@ -732,6 +732,7 @@ Then(
             }
             expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
             const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+            await element.scrollIntoViewIfNeeded();
             await expect.soft(element).toBeInViewport();
           }
         }

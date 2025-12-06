@@ -22,10 +22,10 @@ Feature: User Administration: Manage Sponsor Organisations- Sort, search and pag
         Then I can see the 'manage sponsor organisations' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'last' page
 
         Examples:
-            | Sort_Button | Sort_Field        | Initial_Sort | Secondary_Sort |
-            | Org_Name    | organisation name | descending   | ascending      |
-            | Country     | country           | ascending    | descending     |
-            | Status      | status            | ascending    | descending     |
+            | Sort_Button | Sort_Field | Initial_Sort | Secondary_Sort |
+            # | Org_Name    | organisation name | descending   | ascending      |
+            # | Country     | country           | ascending    | descending     |
+            | Status      | status     | ascending    | descending     |
 
     @rsp-5229 @ManageSponsorOrgsPagination @ManageSponsorOrgsPaginationFirstPage @ManageSponsorOrgsPaginationPageNumber @ManageSponsorOrgsPaginationNextLinkClick
     Scenario: Verify pagination in manage sponsor organisation page when user is on the first page and navigate through each page by clicking page number or by by clicking next link

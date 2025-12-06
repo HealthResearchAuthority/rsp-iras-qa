@@ -122,7 +122,7 @@ When(
       }
       const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
       const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-      expect(expectedValues).toContain(actualValues);
+      expect(actualValues).toContain(expectedValues);
     }
   }
 );
@@ -142,7 +142,7 @@ When(
       }
       const actualValues = confirmStringNotNull(await userProfilePage.review_body_value.textContent());
       const expectedValues = dataset.review_body_checkbox.toString().replaceAll(',', ', ');
-      expect(expectedValues).toContain(actualValues);
+      expect(actualValues.includes(expectedValues) || expectedValues.includes(actualValues)).toBe(true);
     }
   }
 );

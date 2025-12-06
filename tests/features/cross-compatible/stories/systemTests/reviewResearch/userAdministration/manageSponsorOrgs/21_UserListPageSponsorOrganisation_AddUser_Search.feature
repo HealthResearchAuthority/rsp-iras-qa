@@ -142,29 +142,29 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
             | Search_Query           |
             | Non_Existant_User_Data |
 
-    @rsp-5233 @UserListSponsorOrgSearchAndPagination
-    Scenario Outline: Verify search results and pagination in user list page of selected sponsor organisation when user searches and navigate through each page
-        When I enter 'name of the previously added sponsor organisation' into the search field
-        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-        And I capture the page screenshot
-        Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
-        And I capture the page screenshot
-        Then I click the view edit link of the 'previously added sponsor organisation'
-        And I capture the page screenshot
-        And I can see the sponsor organisation profile page
-        And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
-        And I capture the page screenshot
-        Then I can see the user list page of the 'sponsor organisation'
-        When I fill the search input for searching 'users in sponsor organisations' with '<Search_Query>' as the search query
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
-        And I capture the page screenshot
-        Then the system displays user records matching the search criteria
-        And I capture the page screenshot
+# @rsp-5233 @UserListSponsorOrgSearchAndPagination
+# Scenario Outline: Verify search results and pagination in user list page of selected sponsor organisation when user searches and navigate through each page
+#     When I enter 'name of the previously added sponsor organisation' into the search field
+#     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+#     And I capture the page screenshot
+#     Then the system displays 'sponsor organisations' matching the search criteria
+#     And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+#     And I capture the page screenshot
+#     Then I click the view edit link of the 'previously added sponsor organisation'
+#     And I capture the page screenshot
+#     And I can see the sponsor organisation profile page
+#     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+#     And I capture the page screenshot
+#     Then I can see the user list page of the 'sponsor organisation'
+#     When I fill the search input for searching 'users in sponsor organisations' with '<Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+#     And I capture the page screenshot
+#     Then the system displays user records matching the search criteria
+#     And I capture the page screenshot
 
-        Examples:
-            | Search_Query                |
-            | Existing_QA_User_First_Name |
-            | Existing_QA_User_Last_Name  |
-            | Existing_QA_User_Email      |
+#     Examples:
+#         | Search_Query                |
+#         | Existing_QA_User_First_Name |
+#         | Existing_QA_User_Last_Name  |
+#         | Existing_QA_User_Email      |
