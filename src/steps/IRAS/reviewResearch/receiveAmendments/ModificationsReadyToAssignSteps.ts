@@ -247,6 +247,7 @@ When(
     }
     const irasId = modificationId.toString().split('/')[0];
     await myModificationsTasklistPage.saveModificationId(irasId, 'Single');
+    await myModificationsTasklistPage.page.waitForTimeout(3000);
   }
 );
 

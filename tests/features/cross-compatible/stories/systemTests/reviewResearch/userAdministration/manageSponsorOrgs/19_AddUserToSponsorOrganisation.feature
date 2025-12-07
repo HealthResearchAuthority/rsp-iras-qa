@@ -38,7 +38,7 @@ Feature: Add user to sponsor organisation
             | Existing_QA_User_Email      |
             | Existing_QA_User_Full_Name  |
 
-    @addUserSponsorOrgSearchFunctionNoResults  @fail
+    @addUserSponsorOrgSearchFunctionNoResults
     Scenario: Verify that the add users to sponsor organisation search function returns a no results page, when no such user exists
         When I fill the search input for searching 'adding users' with 'Non_Existant_User_Data' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -116,7 +116,7 @@ Feature: Add user to sponsor organisation
         And I capture the page screenshot
         Then I see that the newly added user appears in the user list page for the 'sponsor organisation'
 
-    @verifySearchForAddedSponsorOrgUserNoResults  @fail
+    @verifySearchForAddedSponsorOrgUserNoResults
     Scenario: Verify that when a user is added to a sponsor organisation, that user no longer appears in the add user to sponsor organisation search
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'

@@ -185,7 +185,7 @@ Feature: Receive Amendments: WFC -Modifications Tasklist page
         When I click the 'Back' link on the 'Review_All_Changes_Page'
         And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
-        When I click the 'Back' link on the 'Modifications_Tasklist_Page'
+        When I click the 'Approvals' link in the breadcrumbs on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the approvals home page
 

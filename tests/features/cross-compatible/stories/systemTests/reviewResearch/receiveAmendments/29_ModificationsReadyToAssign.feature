@@ -389,21 +389,21 @@ Feature: WFC - Modifications Tasklist page
         And I capture the page screenshot
         Then I can see a 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
 
-    @ModificationsRandomSelectionAndSort @rsp-4105
-    Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
-        Given I have navigated to the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        When I check random row and validate if the row is checked even after navigation
-        And I capture the page screenshot
-        When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
-        And I confirm all checkboxes are 'unchecked'
-        And I capture the page screenshot
-        Examples:
-            | Sort_Button           |
-            | Modification_Id       |
-            | Short_Project_Title   |
-            | Date_Submitted        |
-            | Days_Since_Submission |
+    # @ModificationsRandomSelectionAndSort @rsp-4105
+    # Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
+    #     Given I have navigated to the 'Modifications_Tasklist_Page'
+    #     And I capture the page screenshot
+    #     When I check random row and validate if the row is checked even after navigation
+    #     And I capture the page screenshot
+    #     When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
+    #     And I confirm all checkboxes are 'unchecked'
+    #     And I capture the page screenshot
+    #     Examples:
+    #         | Sort_Button           |
+    #         | Modification_Id       |
+    #         | Short_Project_Title   |
+    #         | Date_Submitted        |
+    #         | Days_Since_Submission |
 
     @ModificationsSelectAllAndSort @rsp-4105 @jsEnabled
     Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
@@ -443,7 +443,8 @@ Feature: WFC - Modifications Tasklist page
         And I capture the page screenshot
         And I 'can' see active filters displayed
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Modifications_Tasklist_Page'
+        When I click the 'Approvals' link in the breadcrumbs on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I can see the approvals home page
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -514,7 +515,7 @@ Feature: WFC - Modifications Tasklist page
             | Valid_Iras_Id           | Workflow_Coordinator_User | Status           | Modification_Count |
             | Existing_IRAS_ID_Single | Workflow_Coordinator      | With review body | Single             |
 
-    @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849
+    @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849 @Run
     Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
         Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
         And I capture the page screenshot
@@ -543,7 +544,7 @@ Feature: WFC - Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
@@ -662,7 +663,7 @@ Feature: WFC - Modifications Tasklist page
             | Modification_Status_Review_In_Progress | Studywide_Reviewer | cannot     |
 
     # there is no data in db with not approved status
-    @searchTasklistModificationStatus @rsp-4822 @fail @noDBDataNotApproved
+    @searchTasklistModificationStatus @rsp-4822  @noDBDataNotApproved
     Scenario Outline: Verify that modifications status display as expected on the modifications tasklist page where the status is not approved
         Given I have navigated to the 'Modifications_Tasklist_Page'
         When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field

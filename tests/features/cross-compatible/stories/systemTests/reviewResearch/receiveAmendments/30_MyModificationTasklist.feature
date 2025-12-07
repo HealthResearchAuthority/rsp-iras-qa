@@ -310,7 +310,7 @@ Feature: SWR - My Modifications Tasklist page
             | Modification_Status_Review_In_Progress | Studywide_Reviewer | can        |
 
     # there is no data in db with not approved status
-    @searchMyModificationsTasklistNOtApprovedStatus @rsp-4822 @fail @dataIssue @noDBDataNotApproved
+    @searchMyModificationsTasklistNOtApprovedStatus @rsp-4822 @dataIssue @noDBDataNotApproved
     Scenario Outline: Verify that modifications status' display as expected on the my modifications tasklist page-Not approved
         When I enter an iras id for 'England' lead nation modification assigned to '<User>' with status '<Status>' into the search field
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'

@@ -118,7 +118,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
             | Full_Name     | Last     |
 
     # Then the no search results found message is displayed -- failing due to
-    @rsp-5233 @UserListSponsorOrgSearchNoResultsFound  @fail
+    @rsp-5233 @UserListSponsorOrgSearchNoResultsFound
     Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
         When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'

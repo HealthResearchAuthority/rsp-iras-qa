@@ -49,7 +49,7 @@ Feature: Team Manager Dashboard page
                         | Existing_IRAS_ID_Single | Team_Manager | With sponsor | Single             |
 
         # there is no data in db with not approved status
-        @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @fail @noDBDataNotApproved
+        @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @noDBDataNotApproved
         Scenario Outline: Verify that modifications status display as expected on the team manager dashboard where the status is not approved
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
@@ -600,7 +600,7 @@ Feature: Team Manager Dashboard page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<Team_Manager_User>'
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I select modifications by clicking the checkbox in the 'team manager dashboard' page
