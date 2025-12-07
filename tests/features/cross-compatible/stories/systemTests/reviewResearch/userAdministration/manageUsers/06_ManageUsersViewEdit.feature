@@ -1,8 +1,5 @@
 @UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @STSysAdmin
 Feature: Manage user profiles, view and edit user profile
-  As a user
-  I want the ability to edit and view a user profile record
-  So that I can access all the user information and keep user information up to date
 
   Background:
     Given I have navigated to the 'Home_Page'
