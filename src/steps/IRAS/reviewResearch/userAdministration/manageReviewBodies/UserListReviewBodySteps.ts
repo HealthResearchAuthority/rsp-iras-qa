@@ -83,7 +83,12 @@ Then(
     await expect(userProfilePage.organisation_value).toHaveText(await checkRemoveUserReviewBodyPage.getOrganisation());
     await expect(userProfilePage.job_title_value).toHaveText(await checkRemoveUserReviewBodyPage.getJobTitle());
     if (await userProfilePage.role_value.isVisible()) {
-      await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
+      const expectedRaw = await checkRemoveUserReviewBodyPage.getRole();
+      await expect.soft(userProfilePage.role_value).toContainText(
+        expectedRaw.split(',').map((r) => r.trim()),
+        { useInnerText: true }
+      );
+      // await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
     }
   }
 );

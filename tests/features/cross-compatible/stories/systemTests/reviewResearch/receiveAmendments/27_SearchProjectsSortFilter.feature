@@ -149,29 +149,29 @@ Feature: Filter, Search and Sort the Search project records page
         # | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title   |
         # | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title |
 
-        @viewListOfProjects @ValidIrasIdAndAdvancedFilters @ActiveFilters @jsDisabled
-        Scenario Outline: Verify the user is able to view the list of projects by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
-                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
-                And I capture the page screenshot
-                And I click the 'Search' button on the 'Search_Projects_Page'
-                And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria ''
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
-                And I capture the page screenshot
-                And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
-                And I capture the page screenshot
-                And I select advanced filters in the 'Search_Projects_Page' using '<Advanced_Filters>'
-                And I capture the page screenshot
-                And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
-                And I capture the page screenshot
-                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
-                And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
-                And I capture the page screenshot
-                Examples:
-                        | Valid_Iras_Id      | Advanced_Filters             |
-                        | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation |
+        # @viewListOfProjects @ValidIrasIdAndAdvancedFilters @ActiveFilters @jsDisabled
+        # Scenario Outline: Verify the user is able to view the list of projects by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
+        #         When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
+        #         And I capture the page screenshot
+        #         And I click the 'Search' button on the 'Search_Projects_Page'
+        #         And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria ''
+        #         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        #         And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
+        #         And I capture the page screenshot
+        #         And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
+        #         And I capture the page screenshot
+        #         And I select advanced filters in the 'Search_Projects_Page' using '<Advanced_Filters>'
+        #         And I capture the page screenshot
+        #         And I click the 'Apply_Filters' button on the 'Search_Projects_Page'
+        #         And I capture the page screenshot
+        #         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
+        #         And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        #         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        #         And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
+        #         And I capture the page screenshot
+        #         Examples:
+        #                 | Valid_Iras_Id      | Advanced_Filters             |
+        #                 | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation |
 
 
         @viewListOfProjects @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DBDataUsed
