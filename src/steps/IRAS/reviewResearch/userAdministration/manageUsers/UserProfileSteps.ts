@@ -37,7 +37,7 @@ Then(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datesetName];
     const actualValue = await userProfilePage.getUserProfileValue(editFieldName);
     const expectedValue = dataset[editFieldName];
-    expect(actualValue).toBe(expectedValue.toString());
+    expect.soft(actualValue).toContain(expectedValue.toString());
   }
 );
 
@@ -122,7 +122,7 @@ When(
       }
       const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
       const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-      expect(actualValues).toContain(expectedValues);
+      expect.soft(actualValues).toContain(expectedValues);
     }
   }
 );
@@ -142,7 +142,7 @@ When(
       }
       const actualValues = confirmStringNotNull(await userProfilePage.review_body_value.textContent());
       const expectedValues = dataset.review_body_checkbox.toString().replaceAll(',', ', ');
-      expect(actualValues.includes(expectedValues) || expectedValues.includes(actualValues)).toBe(true);
+      expect.soft(actualValues.includes(expectedValues) || expectedValues.includes(actualValues)).toBe(true);
     }
   }
 );

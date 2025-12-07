@@ -61,7 +61,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
       expectedSuccessBody
     );
   }
@@ -111,7 +111,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
       expectedSuccessBody
     );
   }

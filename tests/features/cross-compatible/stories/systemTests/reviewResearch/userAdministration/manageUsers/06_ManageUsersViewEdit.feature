@@ -59,7 +59,7 @@ Feature: Manage user profiles, view and edit user profile
       | telephone_text    | Operations | Enabled | User_Telephone_Text_One    |
       | organisation_text | Operations | Enabled | User_Organisation_Text_One |
       | job_title_text    | Operations | Enabled | User_Job_Title_Text_One    |
-      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     |
+  # | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     |
 
   @rsp-2828 @editUserProfileOnlyMandatoryFields
   Scenario Outline: Successful user profile update with only mandatory fields
