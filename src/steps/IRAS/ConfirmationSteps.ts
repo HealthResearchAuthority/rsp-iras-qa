@@ -206,18 +206,12 @@ Then(
       validationLabelsDataset.remove_user_confirmation_success_body_two_label +
       organisationName +
       '.';
-    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
-      expectedSuccessHeader
-    );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
-      expectedSuccessBody
-    );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
-      expectedSuccessHeader
-    );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
-      expectedSuccessBody
-    );
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedSuccessHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(expectedSuccessBody);
   }
 );
 
