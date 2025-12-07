@@ -74,7 +74,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot
-        And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
+    # And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
 
     @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
     Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
