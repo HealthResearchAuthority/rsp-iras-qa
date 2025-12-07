@@ -337,7 +337,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
@@ -353,7 +353,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(validationLabelsDataset.enable_confirmation_body_label);
   }
 );

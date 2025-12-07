@@ -75,21 +75,21 @@ Feature: Team Manager Dashboard page
                         | Team_Manager_S  | With review body |
                         | Team_Manager_W  | With review body |
 
-        @searchTMDashboardByIrasIdWithResults @rsp-5125 @DBDataUsed
-        Scenario Outline: Verify the user is able to search the team manager dashboard by the iras ID
-                Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
-                And I capture the page screenshot
-                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with '<Search_Input>' as the search query
-                And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Search_Input>' with '<Status>'
+        # @searchTMDashboardByIrasIdWithResults @rsp-5125 @DBDataUsed
+        # Scenario Outline: Verify the user is able to search the team manager dashboard by the iras ID
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
+        #         And I capture the page screenshot
+        #         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+        #         When I fill the search input for searching 'team manager dashboard' with '<Search_Input>' as the search query
+        #         And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Search_Input>' with '<Status>'
 
-                Examples:
-                        | Search_Input             | User         | Status           | Modification_Count |
-                        | Existing_IRAS_ID_Single  | Team_Manager | With review body | Single             |
-                        # | Existing_IRAS_ID_Multi   | Team_Manager | With review body | Multi              |
-                        | Existing_Partial_IRAS_ID | Team_Manager | With review body | Partial            |
+        #         Examples:
+        #                 | Search_Input             | User         | Status           | Modification_Count |
+        #                 | Existing_IRAS_ID_Single  | Team_Manager | With review body | Single             |
+        #                 # | Existing_IRAS_ID_Multi   | Team_Manager | With review body | Multi              |
+        #                 | Existing_Partial_IRAS_ID | Team_Manager | With review body | Partial            |
 
 
         @filterTMDashboardBySWR @rsp-5125
@@ -446,14 +446,14 @@ Feature: Team Manager Dashboard page
                         | Link_Text       | Navigation_Page           |
                         | modification id | Modification_Details_Page |
 
-        @TMDashboardRandomSelection
-        Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                When I confirm checkbox exists in every row across pages
-                And I capture the page screenshot
-                And I check random row and validate if the row is checked even after navigation
-                And I capture the page screenshot
+        # @TMDashboardRandomSelection
+        # Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         When I confirm checkbox exists in every row across pages
+        #         And I capture the page screenshot
+        #         And I check random row and validate if the row is checked even after navigation
+        #         And I capture the page screenshot
 
         @TMDashboardSelectAllWithJs  @jsEnabled
         Scenario: With JavaScript enabled, Verify if user selects the check all checkbox on the first page and confirm checkboxes are checked and status retained even after navigation

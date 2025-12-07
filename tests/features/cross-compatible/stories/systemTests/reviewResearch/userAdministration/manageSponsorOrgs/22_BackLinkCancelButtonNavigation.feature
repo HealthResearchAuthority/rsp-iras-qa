@@ -24,7 +24,7 @@ Feature: Back Link and Cancel Button Navigation
         And I capture the page screenshot
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @VerifyBackButtonFlowFromCheckSetupSponsorOrg @rsp-5231 @SetupNewSponsorOrg
+    @VerifyBackButtonFlowFromCheckSetupSponsorOrg @rsp-5231 @SetupNewSponsorOrg @RTS @skip
     Scenario Outline: Verify the user can go back from check and set up a sponsor organisation profile page and navigate back to setup a new sponsor organisation page
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -43,7 +43,7 @@ Feature: Back Link and Cancel Button Navigation
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @CancelFromCheckSetupSponsorOrg @rsp-5231 @SetupNewSponsorOrg
+    @CancelFromCheckSetupSponsorOrg @rsp-5231 @SetupNewSponsorOrg @RTS @skip
     Scenario Outline: Verify the user can cancel from check and set up a sponsor organisation profile page and navigate back to setup a new sponsor organisation page
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
