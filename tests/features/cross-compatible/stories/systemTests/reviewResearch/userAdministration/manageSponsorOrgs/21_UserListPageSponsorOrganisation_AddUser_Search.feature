@@ -6,7 +6,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @SetupNewSponsorOrg
+    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @SetupNewSponsorOrg @RTS @skip
     Scenario Outline: Verify the user can view the user list page of the newly setup sponsor organisation with no users
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country

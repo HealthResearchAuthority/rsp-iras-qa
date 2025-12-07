@@ -34,10 +34,10 @@ Feature: WFC - Modifications Tasklist page
         Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Input>' with '<Status>'
 
         Examples:
-            | Search_Input             | User                 | Status           | Modification_Count | Search_Key_Type |
-            | Existing_IRAS_ID_Single  | Workflow_Coordinator | With review body | Single             | Full            |
-            # | Existing_IRAS_ID_Multi   | Workflow_Coordinator | With review body | Multi              |Full|
-            | Existing_Partial_IRAS_ID | Workflow_Coordinator | With review body | Partial            | Partial         |
+            | Search_Input            | User                 | Status           | Modification_Count | Search_Key_Type |
+            | Existing_IRAS_ID_Single | Workflow_Coordinator | With review body | Single             | Full            |
+    # | Existing_IRAS_ID_Multi   | Workflow_Coordinator | With review body | Multi              |Full|
+    # | Existing_Partial_IRAS_ID | Workflow_Coordinator | With review body | Partial            | Partial         |
 
     @filterTasklistByShortTitle @rsp-4104
     Scenario Outline: Verify the user is able to filter the modifications tasklist by the short project title

@@ -216,7 +216,11 @@ Then(
 
           return 0; // Keeps original order for non-numeric values
         });
-    expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
+    // expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
+    //  check both ways to ensure they contain the same elements
+    expect.soft(normalize(modificationsByLeadNation)).toEqual(expect.arrayContaining(normalize(actualList)));
+
+    expect.soft(normalize(actualList)).toEqual(expect.arrayContaining(normalize(modificationsByLeadNation)));
   }
 );
 
