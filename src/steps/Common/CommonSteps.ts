@@ -1310,8 +1310,9 @@ Then(
     for (const key in filterDataset) {
       if (Object.hasOwn(filterDataset, key)) {
         if (key.endsWith('_checkbox')) {
-          await validateFilter(key, async (k) =>
-            commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
+          await validateFilter(
+            key,
+            async (k) => await commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
         } else if (
           key.startsWith('date_submitted') ||
@@ -1319,13 +1320,16 @@ Then(
           key.startsWith('date_project_created')
         ) {
           if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
-            await validateFilter(key, async (k) =>
-              commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
+            await validateFilter(
+              key,
+              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
             );
           }
         } else {
-          await validateFilter(key, async (k) =>
-            commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue)
+          await validateFilter(
+            key,
+            async (k) =>
+              await commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue)
           );
         }
       }

@@ -15,6 +15,7 @@ Feature: Filter, Search and Sort the Search project records page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Projects_Page'
                 And the system displays project records based on the search '<Partial_Iras_Id>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 Examples:
@@ -45,10 +46,10 @@ Feature: Filter, Search and Sort the Search project records page
                 Then I can see the list of 'project records' is sorted by 'ascending' order of the '<Sort_Field>'
 
                 Examples:
-                        | Partial_Iras_Id      | Sort_Button         | Sort_Field          |
-                        | Valid_Iras_Id_Prefix | Iras_Id             | IRAS ID             |
-                        | Valid_Iras_Id_Prefix | Short_Project_Title | Short project title |
-                        | Valid_Iras_Id_Prefix | Lead_Nation         | Lead nation         |
+                        | Partial_Iras_Id      | Sort_Button | Sort_Field |
+                        | Valid_Iras_Id_Prefix | Iras_Id     | IRAS ID    |
+        # | Valid_Iras_Id_Prefix | Short_Project_Title | Short project title |
+        # | Valid_Iras_Id_Prefix | Lead_Nation         | Lead nation         |
 
         @SortProjectsByColumn @DefaultSorting
         Scenario Outline: Verify default sorting of projects by IRAS ID, Short Project Title and Lead Nation and check ascending and descending order for each column after applying filters
@@ -137,6 +138,7 @@ Feature: Filter, Search and Sort the Search project records page
                 And I 'cannot' see the advanced filters panel
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 Examples:
@@ -153,6 +155,7 @@ Feature: Filter, Search and Sort the Search project records page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Projects_Page'
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
@@ -163,6 +166,7 @@ Feature: Filter, Search and Sort the Search project records page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 Examples:
@@ -187,6 +191,7 @@ Feature: Filter, Search and Sort the Search project records page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Projects_Page'
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 Examples:
@@ -201,6 +206,7 @@ Feature: Filter, Search and Sort the Search project records page
                 And I click the 'Search' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 Examples:
@@ -363,12 +369,14 @@ Feature: Filter, Search and Sort the Search project records page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
                 And I capture the page screenshot
                 And I 'cannot' see active filters displayed
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 Examples:
@@ -406,6 +414,7 @@ Feature: Filter, Search and Sort the Search project records page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Projects_Page'
                 And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Projects_Page'

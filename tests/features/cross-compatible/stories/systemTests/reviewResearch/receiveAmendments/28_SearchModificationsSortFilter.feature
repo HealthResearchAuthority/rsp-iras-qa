@@ -166,6 +166,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I 'cannot' see the advanced filters panel
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
@@ -187,6 +188,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
@@ -201,6 +203,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
@@ -211,6 +214,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
@@ -218,7 +222,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body | Full            |
                         | Valid_Full_Iras_Id       | Advanced_Filters_Nth | Single             | With review body | Partial         |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @fail
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -227,6 +231,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
@@ -234,6 +239,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
@@ -241,7 +247,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Lead_Nation | Partial            | With review body |
                         | Valid_Full_Iras_Id       | Advanced_Filters_Lead_Nation | Single             | With review body |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled @Run
+        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
@@ -250,6 +256,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
@@ -273,6 +280,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
@@ -289,6 +297,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I capture the page screenshot
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
@@ -490,12 +499,14 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I 'cannot' see active filters displayed
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
@@ -534,6 +545,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
@@ -631,6 +643,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
