@@ -199,19 +199,16 @@ Feature: Filter, Search and Sort the Search project records page
                         | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title |
 
         @viewListOfProjects @ValidIrasIdAndNoFilters @jsDisabled @DBDataUsed
-        Scenario Outline: Verify the user can view the list of projects based on the entered valid iras id and the search performed
+        Scenario: Verify the user can view the list of projects based on the entered valid iras id and the search performed
                 And I capture the iras id and short project title of the recently added project with status as 'Active' from the database
-                When I enter '<Valid_Iras_Id>' into the search field for 'Search_Projects_Page'
+                When I enter 'Project_Iras_Id_Retrieved_From_DB_With_Status_Active' into the search field for 'Search_Projects_Page'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
-                And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria ''
+                And the system displays project records based on the search 'Project_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria ''
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
-                Examples:
-                        | Valid_Iras_Id      |
-                        | Valid_Full_Iras_Id |
 
         @viewListOfProjects @NoIrasIdAndAdvancedFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of projects by selecting advanced filters and click on apply filters button

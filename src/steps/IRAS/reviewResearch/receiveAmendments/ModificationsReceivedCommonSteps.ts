@@ -93,7 +93,11 @@ Given(
       statusIndex = 5;
       await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
     } else if (pageType.toLowerCase() == 'ready to assign and reassign in team manager dashboard') {
-      searchInputDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries;
+      if (searchInput === 'Iras_Id_Retrieved_From_DB_With_Status_Active') {
+        searchInputDataset = await teamManagerDashboardPage.getModificationId();
+      } else {
+        searchInputDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries;
+      }
       modificationIdIndex = 1;
       shortProjectTitleIndex = 2;
       dateSubmittedIndex = 3;
@@ -158,7 +162,10 @@ Given(
         studyWideReviewerIndex
       );
     }
-    if (searchInput.toLowerCase().includes('single')) {
+    if (
+      searchInput.toLowerCase().includes('single') ||
+      searchInput === 'Iras_Id_Retrieved_From_DB_With_Status_Active'
+    ) {
       await expect
         .soft(commonItemsPage.search_results_count)
         .toHaveText(commonItemsPage.searchFilterResultsData.search_single_result_count);

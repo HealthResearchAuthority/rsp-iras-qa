@@ -85,8 +85,13 @@ When(
       const dataset = await searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
       await searchModificationsPage.iras_id_search_text.fill(dataset['iras_id_text']);
     } else if (pageValue === 'Search_Projects_Page') {
-      const dataset = await searchProjectsPage.searchProjectsPageTestData.Search_Queries[datasetName];
-      await searchModificationsPage.iras_id_search_text.fill(dataset['search_input_text']);
+      if (datasetName === 'Project_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+        const irasId = await searchProjectsPage.getIrasId();
+        await searchModificationsPage.iras_id_search_text.fill(irasId);
+      } else {
+        const dataset = await searchProjectsPage.searchProjectsPageTestData.Search_Queries[datasetName];
+        await searchModificationsPage.iras_id_search_text.fill(dataset['search_input_text']);
+      }
     }
   }
 );
@@ -132,8 +137,14 @@ Then(
     irasIdDatasetName,
     filterDatasetName
   ) => {
+    let irasId: string;
     const testData = searchProjectsPage.searchProjectsPageTestData;
-    const irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
+    if (irasIdDatasetName === 'Project_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+      irasId = await searchProjectsPage.getIrasId();
+    } else {
+      irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
+    }
+    // const irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { short_project_title_text: projectTitle } = filterDataset;
     const totalPagesCount = await commonItemsPage.getTotalPages();

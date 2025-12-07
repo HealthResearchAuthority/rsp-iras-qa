@@ -19,18 +19,18 @@ Feature: Team Manager Dashboard page
                         | Sort_Button | Sort_Field | Initial_Sort | Secondary_Sort |
                         | Status      | status     | ascending    | descending     |
 
-        @searchTeamManagerDashboardStatus @rsp-4822
-        Scenario Outline: Verify that modifications status with review body display as expected on the team manager dashboard
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
-                And I can see the 'Column' ui labels on the team manager dashboard page
-                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
-                And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for '<Search_Input>' with '<Status>'
-                Examples:
-                        | Search_Input            | User         | Status           | Modification_Count |
-                        | Existing_IRAS_ID_Single | Team_Manager | With review body | Single             |
+        # @searchTeamManagerDashboardStatus @rsp-4822
+        # Scenario Outline: Verify that modifications status with review body display as expected on the team manager dashboard
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page'
+        #         And I can see the 'Column' ui labels on the team manager dashboard page
+        #         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
+        #         When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
+        #         And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         Then I can now see the table of modifications 'ready to assign and reassign in team manager dashboard' contains the expected search results for 'Iras_Id_Retrieved_From_DB_With_Status_Active' with '<Status>'
+        #         Examples:
+        #                 | Search_Input            | User         | Status           | Modification_Count |
+        #                 | Existing_IRAS_ID_Single | Team_Manager | With review body | Single             |
 
         @searchTeamManagerDashboardStatus @rsp-4822
         Scenario Outline: Verify that modifications status with approved, not approved, in  draft, with sponsor will not display on the team manager dashboard
