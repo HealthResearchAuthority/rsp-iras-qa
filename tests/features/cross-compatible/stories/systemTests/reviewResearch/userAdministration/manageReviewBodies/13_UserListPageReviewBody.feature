@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @UserListReviewBody @rsp-3270 @STSysAdmin
-Feature: User Administration: Manage Review Bodies - View user list page of the review body, Search for the users and remove user from the review body
+Feature:View user list page of review body,Search for the users, remove user
 
     Background:
         Given I have navigated to the 'System_Administration_Page'

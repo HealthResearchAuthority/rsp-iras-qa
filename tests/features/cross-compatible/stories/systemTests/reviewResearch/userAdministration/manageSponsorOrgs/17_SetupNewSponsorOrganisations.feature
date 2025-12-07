@@ -1,5 +1,5 @@
 @SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage
-Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor organisation- JS Enabled and Disabled
+Feature: Set up new sponsor organisation
 
     Background:
         Given I have navigated to the 'System_Administration_Page'

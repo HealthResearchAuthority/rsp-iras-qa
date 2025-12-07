@@ -1,5 +1,5 @@
 # @UserAdministration @ManageReviewBodies @AddUserToReviewBody @SysAdminUser @SystemTest @rsp-3258 @STSysAdmin
-Feature: User Administration: Manage Review Bodies - Add user to review body
+Feature: Manage Review Bodies - Add user to review body
 
     Background:
         Given I have navigated to the 'Manage_Review_Bodies_Page'

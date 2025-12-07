@@ -1,5 +1,5 @@
 @UserAdministration @ManageUsers @SysAdminUser @SystemTest @AuditHistoryUser @rsp-2928 @STSysAdmin
-Feature: User Administration: Manage Users - View audit history for users
+Feature: Manage Users - View audit history for users
 
     Background:
         Given I have navigated to the 'Home_Page'

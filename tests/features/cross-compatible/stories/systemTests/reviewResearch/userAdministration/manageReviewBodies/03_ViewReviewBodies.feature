@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest @STSysAdmin
-Feature: User Administration: Manage Review Bodies list and view review bodies profile details
+Feature:Manage Review Bodies list and view review bodies profile details
 
     Background:
         Given I have navigated to the 'System_Administration_Page'

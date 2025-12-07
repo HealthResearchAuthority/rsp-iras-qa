@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @DisableEnableReviewBody @STSysAdmin
-Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bodies
+Feature: Manage Review Bodies - Enable / Disable Review Bodies
 
   Background:
     Given I have navigated to the 'System_Administration_Page'

@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570 @STSysAdmin
-Feature: User Administration: Manage Review Bodies - Create review body
+Feature: Manage Review Bodies - Create review body
 
     Background:
         Given I have navigated to the 'System_Administration_Page'

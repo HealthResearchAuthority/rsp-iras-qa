@@ -1,5 +1,5 @@
 @SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage
-Feature: User Administration: Manage Sponsor Organisations- Back Link and Cancel Button Navigation
+Feature: Back Link and Cancel Button Navigation
 
     Background:
         Given I have navigated to the 'System_Administration_Page'

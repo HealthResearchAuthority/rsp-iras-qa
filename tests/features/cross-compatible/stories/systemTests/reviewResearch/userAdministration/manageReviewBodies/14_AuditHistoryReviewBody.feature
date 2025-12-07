@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @AuditHistoryReviewBody @rsp-2927 @STSysAdmin
-Feature: User Administration: Manage Review Bodies - View audit history for review body
+Feature: View audit history for review body
 
     Background:
         Given I have navigated to the 'System_Administration_Page'

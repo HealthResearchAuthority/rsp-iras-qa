@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @AdvancedFilterReviewBody @SysAdminUser @SystemTest @STSysAdmin
-Feature: Review Bodies - Advanced Filter and Search combinations in the Manage review bodies page
+Feature: Manage review bodies-Advanced Filter and Search
 
   Background:
     Given I have navigated to the 'System_Administration_Page'

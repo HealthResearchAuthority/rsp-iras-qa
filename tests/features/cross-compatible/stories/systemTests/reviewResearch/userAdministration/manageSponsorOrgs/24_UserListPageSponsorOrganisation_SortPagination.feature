@@ -1,5 +1,5 @@
 @SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233
-Feature: User Administration: Manage Sponsor Organisations- Sort, search and pagination of users list in the selected sponsor organisation
+Feature: Sort, search and pagination of users list in the selected sponsor org
 
   Background:
     Given I have navigated to the 'System_Administration_Page'

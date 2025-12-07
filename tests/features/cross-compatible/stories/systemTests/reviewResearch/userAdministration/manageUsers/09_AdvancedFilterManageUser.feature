@@ -1,5 +1,5 @@
 @UserAdministration @ManageUsers @AdvancedFilterManageUser @SysAdminUser @SystemTest @rsp-3556 @STSysAdmin
-Feature: users - Advanced Filter and Search combinations in the Manage users page
+Feature: Manage Users - Advanced Filter and Search
 
     Background:
         Given I have navigated to the 'Home_Page'
@@ -191,7 +191,6 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Last_Logged_In_To_Date_Only                                         |
             | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    # @iBossSecurityIssue @fail
     @RemoveAllActiveFiltersOneByOne @rsp-5250
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'

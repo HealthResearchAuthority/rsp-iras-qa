@@ -1,5 +1,5 @@
 @UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin
-Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor organisation
+Feature: Add user to sponsor organisation
 
     Background:
         Given I have navigated to the 'System_Administration_Page'

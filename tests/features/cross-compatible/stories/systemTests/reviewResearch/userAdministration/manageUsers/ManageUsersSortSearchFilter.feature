@@ -1,5 +1,5 @@
-@RegressionManageUsersSortSearchFilter @RegressionManageUsers @SysAdminUser @BackStage @SystemTest
-Feature: User Administration: Manage Users- Sort, search and filter the manage users list
+@RegressionManageUsersSortSearchFilter @RegressionManageUsers @SysAdminUser @Regression @BackStage
+Feature: Manage Users- Sort
 
   Background:
     Given I have navigated to the 'Manage_Users_Page'
