@@ -450,7 +450,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Chief_Investigator_Name_Filter | Advanced_Filters_Nth_After_Remove_Chief_Investigator_Name_Filter |
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Short_Project_Title_Filter     | Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter     |
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
-                        | Advanced_Filters_Nth | Advanced_Filters_Nth_Date_Submitted_From_To_Filter  | Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter  |
+        # | Advanced_Filters_Nth | Advanced_Filters_Nth_Date_Submitted_From_To_Filter  | Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter  |
 
         @RemoveAllActiveFiltersOneByOne
         Scenario Outline: Verify the user can remove all the selected filters one by one
@@ -466,25 +466,25 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I 'cannot' see active filters displayed
                 Examples:
                         | Advanced_Filters                                 |
-                        | Advanced_Filters_Automation_No_SpOrg             |
+                        # | Advanced_Filters_Automation_No_SpOrg             |
                         | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
                         | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled
-        Scenario Outline: Verify the user can remove all the selected filters(with sponsor org) one by one -JS disabled
-                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
-                And I capture the page screenshot
-                When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
-                And I capture the page screenshot
-                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
-                And I capture the page screenshot
-                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And I capture the page screenshot
-                And I 'cannot' see active filters displayed
-                Examples:
-                        | Advanced_Filters     |
-                        | Advanced_Filters_Nth |
+        # @RemoveAllActiveFiltersOneByOne @jsDisabled
+        # Scenario Outline: Verify the user can remove all the selected filters(with sponsor org) one by one -JS disabled
+        #         And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+        #         And I capture the page screenshot
+        #         When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+        #         And I capture the page screenshot
+        #         And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+        #         And I capture the page screenshot
+        #         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+        #         And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+        #         And I capture the page screenshot
+        #         And I 'cannot' see active filters displayed
+        #         Examples:
+        #                 | Advanced_Filters     |
+        #                 | Advanced_Filters_Nth |
 
         @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID

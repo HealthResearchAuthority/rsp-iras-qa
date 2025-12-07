@@ -216,7 +216,7 @@ Feature: Manage Review Bodies - Create review body
             | Valid_Email_Data_Multiple_Sub_Domains |
             | Valid_Email_Data_Domain               |
 
-    @VerifyTheUserActionInReviewBodyAuditHistory @rsp-4819 @KNOWN-ISSUE-RSP-5003 @fail
+    @VerifyTheUserActionInReviewBodyAuditHistory @rsp-4819 @KNOWN-DEFECT-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after disabling a newly created review body
         And I capture the page screenshot
         When I fill the new review body page using '<Add_Review_Body>'

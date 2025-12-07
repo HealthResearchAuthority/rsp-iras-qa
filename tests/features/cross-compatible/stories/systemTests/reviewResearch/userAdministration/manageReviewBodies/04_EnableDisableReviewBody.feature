@@ -8,7 +8,7 @@ Feature: Manage Review Bodies - Enable / Disable Review Bodies
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     Then I can see the 'Create_Review_Body_Page'
 
-  @rsp-2573 @DisableReviewBody @fail  @rsp-4381 @ActiveFilterRemainAppliedAfterDisableReviewBody
+  @rsp-2573 @DisableReviewBody  @rsp-4381 @ActiveFilterRemainAppliedAfterDisableReviewBody
   Scenario Outline: Verify the user is able to disable a review body
     When I fill the new review body page using '<Add_Review_Body>'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'

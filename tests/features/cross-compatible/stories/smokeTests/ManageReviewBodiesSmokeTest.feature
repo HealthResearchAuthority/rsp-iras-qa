@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @ManageReviewBodiesSmokeVerifyEnableAndEditReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @fail
+    @ManageReviewBodiesSmokeVerifyEnableAndEditReviewBodyAuditHistory @KNOWN-DEFECT-RSP-5003 @fail
     Scenario Outline: Verify the user can view the audit history after enabling a review body
         When I enter 'QA Automation' into the search field
         And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'

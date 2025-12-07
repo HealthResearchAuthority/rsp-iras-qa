@@ -1,5 +1,5 @@
 @UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin
-Feature: Enable / Disable users in the selected Sponsor Organisations
+Feature: Enable/Disable users in the selected Sponsor Org
 
   Background:
     Given I have navigated to the 'System_Administration_Page'
