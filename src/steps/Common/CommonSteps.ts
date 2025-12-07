@@ -735,6 +735,11 @@ Then(
             expect.soft(actualMessage).toEqual(expectedMessage);
             const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
             await expect(element).toBeInViewport();
+          } else if (
+            errorMessageFieldAndSummaryDatasetName === 'JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error'
+          ) {
+            fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessageSponsor(key, page);
+            expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
           } else {
             fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
             if (fieldErrorMessagesActualValues.includes('Error: ')) {
@@ -1713,6 +1718,12 @@ Then(
             actualList.push(country);
           }
         }
+      }
+      if (lowerSortField.toLowerCase() === 'organisation name' || lowerSortField.toLowerCase() === 'status') {
+        actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
+          commonItemsPage.tableBodyRows,
+          columnIndex
+        );
       } else {
         actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
       }

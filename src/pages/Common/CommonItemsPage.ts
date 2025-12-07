@@ -1809,4 +1809,13 @@ export default class CommonItemsPage {
     }
     return actualListValues;
   }
+
+  async getFieldErrorMessageSponsor<PageObject>(key: string, page: PageObject) {
+    const element = await page[key].first();
+    const fieldErrorMessage = confirmStringNotNull(
+      await this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel).nth(0).textContent()
+    );
+
+    return fieldErrorMessage;
+  }
 }
