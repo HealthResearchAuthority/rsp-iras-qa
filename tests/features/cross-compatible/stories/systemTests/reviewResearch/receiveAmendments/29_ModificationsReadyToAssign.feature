@@ -515,7 +515,7 @@ Feature: WFC - Modifications Tasklist page
             | Valid_Iras_Id           | Workflow_Coordinator_User | Status           | Modification_Count |
             | Existing_IRAS_ID_Single | Workflow_Coordinator      | With review body | Single             |
 
-    @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849 @Run
+    @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
         Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
         And I capture the page screenshot
