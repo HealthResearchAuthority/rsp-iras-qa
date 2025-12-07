@@ -146,5 +146,5 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Link | Status_Enabled |
-      | Back            | enabled        |
+      | Navigation_Link | Status_Enabled | Disable_Label_Texts |
+      | Back            | enabled        | Disable_Label_Texts |

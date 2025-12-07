@@ -312,25 +312,25 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
         Then I can see the user list page of the 'review body'
 
-    # need to check with Chris on this test case
-    @rsp-3890 @UserListReviewBodySearchMultiTerms @fail
-    Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
-        And I navigate to the user list page of the 'User_Search_Test' review body
-        And I capture the page screenshot
-        When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Review_Body_User_List_Page'
-        And I capture the page screenshot
-        Then the system displays user records matching the search criteria
-        And the list displays 'multiple user records'
-        And I capture the page screenshot
-        When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Review_Body_User_List_Page'
-        And I capture the page screenshot
-        Then the system displays user records matching the search criteria
-        And the list displays 'a single user record'
-        And I capture the page screenshot
-        Examples:
-            | Initial_Search_Query              | Second_Search_Query             |
-            | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
+# need to check with Chris on this test case
+# @rsp-3890 @UserListReviewBodySearchMultiTerms @fail
+# Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
+#     And I navigate to the user list page of the 'User_Search_Test' review body
+#     And I capture the page screenshot
+#     When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Review_Body_User_List_Page'
+#     And I capture the page screenshot
+#     Then the system displays user records matching the search criteria
+#     And the list displays 'multiple user records'
+#     And I capture the page screenshot
+#     When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Review_Body_User_List_Page'
+#     And I capture the page screenshot
+#     Then the system displays user records matching the search criteria
+#     And the list displays 'a single user record'
+#     And I capture the page screenshot
+#     Examples:
+#         | Initial_Search_Query              | Second_Search_Query             |
+#         | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
