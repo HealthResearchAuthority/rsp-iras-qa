@@ -39,10 +39,12 @@ export default class ConfirmationPage {
       name: confirmationPageTestData.Project_Record_Created_Labels.page_heading,
     });
     this.success_message_body_text = this.mainPageContent.locator('.govuk-panel__body');
-    this.confirmation_body_label = this.confirmation_header_common_label
-      .locator('..')
-      .locator('p.govuk-body')
-      .or(this.confirmation_header_common_label.locator('..').locator('..').locator('p.govuk-body'));
+    this.confirmation_body_label = this.mainPageContent.locator('p.govuk-body');
+    // this.confirmation_body_label = this.confirmation_header_common_label
+    //   .locator('..')
+    //   .locator('p.govuk-body')
+    //   .first()
+    //   .or(this.confirmation_header_common_label.locator('..').locator('..').locator('p.govuk-body').first());
     this.what_happens_next_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
     });

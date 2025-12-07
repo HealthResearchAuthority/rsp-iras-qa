@@ -51,6 +51,7 @@ export default class CommonItemsPage {
   private _first_name: string;
   private _last_name: string;
   private _email_address: string;
+  private _disabled_User: string;
   private _status: string;
   private _user_full_name: Map<string, string>;
   readonly showAllSectionsAccordion: Locator;
@@ -187,6 +188,7 @@ export default class CommonItemsPage {
     this._first_name = '';
     this._last_name = '';
     this._email_address = '';
+    this._disabled_User = '';
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -555,6 +557,14 @@ export default class CommonItemsPage {
 
   async setFullName(value: Map<string, string>): Promise<void> {
     this._user_full_name = value;
+  }
+
+  async getUserDisabledStatusInMemory(): Promise<string> {
+    return this._disabled_User;
+  }
+
+  async setUserDisabledStatusInMemory(value: string): Promise<void> {
+    this._disabled_User = value;
   }
 
   //Page Methods
