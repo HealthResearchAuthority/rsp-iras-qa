@@ -67,9 +67,8 @@ When(
     const actualMinutes = await userProfilePage.last_updated_value
       .textContent()
       .then((text) => text.slice(text.indexOf(':') + 1));
-    await expect
-      .soft(userProfilePage.last_updated_value)
-      .toContainText(confirmStringNotNull(expectedValue.replace(expectedMinutes, '')));
+    const actualValue = confirmStringNotNull(await userProfilePage.last_updated_value.textContent());
+    expect.soft(actualValue).toBe(confirmStringNotNull(expectedValue));
     expect.soft(Number.parseInt(actualMinutes)).toBeGreaterThanOrEqual(Number.parseInt(expectedMinutes) - 1);
     expect.soft(Number.parseInt(actualMinutes)).toBeLessThanOrEqual(Number.parseInt(expectedMinutes) + 1);
   }
