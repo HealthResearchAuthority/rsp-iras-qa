@@ -39,6 +39,7 @@ export default class MyModificationsTasklistPage {
   readonly search_button_label: Locator;
   readonly modification_checkbox: Locator;
   readonly results_table: Locator;
+  readonly my_modifications_tasklist_no_result_heading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -112,6 +113,11 @@ export default class MyModificationsTasklistPage {
     this.search_button_label = this.page.getByText('Search');
     this.modification_checkbox = this.page.locator('input[name="selectedModificationIds"][type="checkbox"]');
     this.results_table = this.page.getByTestId('myTasklistTable');
+    this.my_modifications_tasklist_no_result_heading = this.page
+      .getByRole('heading')
+      .getByText(
+        this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.my_modification_no_result_heading_label
+      );
   }
 
   //Page Methods
@@ -128,6 +134,10 @@ export default class MyModificationsTasklistPage {
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.title);
+  }
+
+  async assertOnMyModificationsTaskNoResultPage() {
+    await expect.soft(this.my_modifications_tasklist_no_result_heading).toBeVisible();
   }
 
   async sqlGetModificationByLeadNationAndStatusCountSWR(
