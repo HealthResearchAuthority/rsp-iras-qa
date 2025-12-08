@@ -17,7 +17,7 @@ export default class ProjectPersonnelChangeChiefInvestigatorPage {
       projectPersonnelChangeChiefInvestigatorModificationPageTestData;
 
     //Locators
-    this.select_details_to_change_radio = this.page.getByTestId(/^IQA0889/);
+    this.select_details_to_change_radio = this.page.getByTestId('[id^="IQA0889_"]');
     this.chief_investigator_email_text = this.page
       .getByText(
         this.projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.chief_investigator_email_label,

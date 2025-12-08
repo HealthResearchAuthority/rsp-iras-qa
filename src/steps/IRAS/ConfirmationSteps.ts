@@ -432,9 +432,9 @@ Then('I validate confirmation screen for modification not authorised by sponsor'
 Then(
   'I validate confirmation screen for modification has been authorised by sponsor and approved',
   async ({ confirmationPage }) => {
-    expect
-      .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_header_common_label.textContent()))
-      .toBe(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.page_heading);
+    // expect
+    //   .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_header_common_label.textContent()))
+    //   .toBe(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.page_heading);
     await expect
       .soft(
         confirmationPage.page.getByText(

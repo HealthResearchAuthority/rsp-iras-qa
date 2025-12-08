@@ -1,4 +1,4 @@
-@RegressionReviewAmendments @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @KNOWN_DEFECT_RSP-5285 @KNOWN_DEFECT_RSP-5184 @fail
+@RegressionReviewAmendments @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
 Feature: Review Amendments- As a studywide reviewer I want to receive and not approve amendments
 
     Background:
@@ -39,7 +39,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and not ap
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @KNOWN_DEFECT_RSP-6343
+    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831
     Scenario Outline: Verify the modification approvals workflow
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'

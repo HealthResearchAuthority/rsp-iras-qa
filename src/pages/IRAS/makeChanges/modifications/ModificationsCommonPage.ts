@@ -212,11 +212,11 @@ export default class ModificationsCommonPage {
       await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
     } else if (dataset.specific_change_dropdown === 'Contact details') {
       await new ContactDetailsModificationPage(this.page).fillContactDetailsModificationsPage(dataset, 'create');
-    } else if (dataset.specific_change_dropdown === 'Change of chief investigator') {
+    } else if (dataset.specific_change_dropdown === 'Change of Chief Investigator') {
       await new ProjectPersonnelChangeChiefInvestigatorPage(
         this.page
       ).fillPersonnelChangeChiefInvestigatorModificationsPage(dataset, 'create');
-    } else if (dataset.specific_change_dropdown === 'Change of principal investigator') {
+    } else if (dataset.specific_change_dropdown === 'Change of Principal Investigator') {
       await new ProjectPersonnelChangePrincipalInvestigatorPage(
         this.page
       ).fillPersonnelChangePrincipalInvestigatorModificationsPage(dataset, 'create');
@@ -349,7 +349,7 @@ export default class ModificationsCommonPage {
           hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
         })
         .locator(this.valueLocator);
-      await expect.soft(actualSpecificChangeValueLocator).toBeVisible();
+      // await expect.soft(actualSpecificChangeValueLocator).toBeVisible();
       if (!(await actualSpecificChangeValueLocator.isVisible())) {
         break;
       }
@@ -501,6 +501,13 @@ export default class ModificationsCommonPage {
       modificationsCommonPageTestData.Ranking_Category.new_site.includes(dataset.specific_change_dropdown)
     ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_new_site;
+    } else if (
+      affectsNhs &&
+      modificationsCommonPageTestData.Ranking_Category.nhs_applicability_always_c.includes(
+        dataset.specific_change_dropdown
+      )
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_c;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {

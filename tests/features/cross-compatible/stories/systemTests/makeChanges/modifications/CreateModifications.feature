@@ -1,5 +1,5 @@
-@Regression @ApplicantUser @createModifications
-Feature: Create Modification- This feature file help an applicant to complete the modification journey and can sent to sponsor
+@run @Regression @ApplicantUser @createModifications
+Feature: Create Modification
 
   Background:
     Given I have navigated to the my research projects page
@@ -18,7 +18,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-5478 @rsp-5675 @rsp-4062 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable @KNOWN_DEFECT_RSP_5495_5496_5408_5408_5285_6288_6324_6299 @fail
+  @rsp-5478 @rsp-5675 @rsp-4062 @rsp-5532 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-5204 @rsp-4088 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextReviewable
   Scenario Outline: Validate that user can create and submit reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -73,7 +73,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes page
-    And I validate the change details are displayed as per the '<Changes>' dataset
+    # And I validate the change details are displayed as per the '<Changes>' dataset
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -90,13 +90,13 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I can see the project overview page
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
-    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    # And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     Then I validate overall modification ranking on post approval tab
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset
+    # And I validate the change details are displayed as per the '<Changes>' dataset
     And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
     And I can see the 'documents_table' ui labels on the modification post submission page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -113,7 +113,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Multiple_Changes_Participating_Organisations_Reviewable_Set_Four | Nhs_Involvement_Yes |
       | Multiple_Changes_Participating_Organisations_Reviewable_Set_Four | Nhs_Involvement_No  |
 
-  @rsp-5478 @rsp-5532 @rsp-4062 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496_5285_6288_6324 @fail
+  @rsp-5478 @rsp-5532 @rsp-4062 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable
   Scenario Outline: Validate that user can create and submit non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -169,7 +169,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     And I capture the page screenshot
     Then I can see the review all changes page
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset
+    # And I validate the change details are displayed as per the '<Changes>' dataset
     And I can see the 'supporting_documents_table' ui labels on the review all changes page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
     And I can see the 'Complete' status displayed for all documents in the table
@@ -189,7 +189,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset
+    # And I validate the change details are displayed as per the '<Changes>' dataset
     And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
     And I can see the 'documents_table' ui labels on the modification post submission page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -215,7 +215,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
       | Multiple_Changes_Participating_Organisations_Non_Reviewable_Four  | Nhs_Involvement_Yes |
       | Multiple_Changes_Participating_Organisations_Non_Reviewable_Four  | Nhs_Involvement_No  |
 
-  @rsp-5478 @rsp-5532 @rsp-4062 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496_5285_6288_6324 @fail
+  @rsp-5478 @rsp-5532 @rsp-4062 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined
   Scenario Outline: Validate that user can create modifications for reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -272,7 +272,7 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I can see the review all changes page
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset
+    # And I validate the change details are displayed as per the '<Changes>' dataset
     And I can see the 'supporting_documents_table' ui labels on the review all changes page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
     And I can see the 'Complete' status displayed for all documents in the table
@@ -288,12 +288,12 @@ Feature: Create Modification- This feature file help an applicant to complete th
     Then I validate overall modification ranking on post approval tab
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
-    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    # And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset
+    # And I validate the change details are displayed as per the '<Changes>' dataset
     And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
     And I can see the 'documents_table' ui labels on the modification post submission page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table

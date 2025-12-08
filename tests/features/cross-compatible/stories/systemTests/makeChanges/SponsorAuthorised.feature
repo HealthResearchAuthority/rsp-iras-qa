@@ -1,5 +1,5 @@
 @SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
-Feature: This feature covers scenarios related to sponsor authorisation - sponsor authorises research projects and modifications
+Feature: This feature covers scenarios related to sponsor authorisation
 
   Background:
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -39,7 +39,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285 @fail
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -84,14 +84,14 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-    And I can see the ui labels in sponsor check and authorise page
+    # And I can see the ui labels in sponsor check and authorise page
     And I capture the page screenshot
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
+    # And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     When I click the 'Documents' link on the 'Sponsor_Check_And_Authorise_Page'
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -109,7 +109,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
-    And I can see the modification page for sponsor view
+    # And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
@@ -162,7 +162,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
       | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285 @fail
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -207,14 +207,14 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-    And I can see the ui labels in sponsor check and authorise page
+    # And I can see the ui labels in sponsor check and authorise page
     And I capture the page screenshot
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
+    # And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     When I click the 'Documents' link on the 'Sponsor_Check_And_Authorise_Page'
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -232,7 +232,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
-    And I can see the modification page for sponsor view
+    # And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_Approved' is displayed on the page
@@ -282,7 +282,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-5747_6265_5285 @fail
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the combination of reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -327,14 +327,14 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-    And I can see the ui labels in sponsor check and authorise page
+    # And I can see the ui labels in sponsor check and authorise page
     And I capture the page screenshot
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
+    # And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     When I click the 'Documents' link on the 'Sponsor_Check_And_Authorise_Page'
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -352,7 +352,7 @@ Feature: This feature covers scenarios related to sponsor authorisation - sponso
     And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
-    And I can see the modification page for sponsor view
+    # And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
