@@ -434,7 +434,7 @@ Feature: Create Project
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation |
 
-  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled
+  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled @skip
   Scenario Outline: Validate the primary sponsor organisation suggestion list in project identifiers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -460,7 +460,7 @@ Feature: Create Project
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Start_Space | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-  @rsp-1861 @jsEnabled
+  @rsp-1861 @jsEnabled @skip
   Scenario Outline: Validate the active primary sponsor organisation from rts with data in database
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation

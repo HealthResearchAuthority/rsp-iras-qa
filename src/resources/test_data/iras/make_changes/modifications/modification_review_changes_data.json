@@ -18,6 +18,8 @@
     "chief_investigator_email": "New Chief Investigator email",
     "sponsor_contact_email": "Sponsor contact email",
     "name_text": "Name",
+    "ci_first_name_text": "First name",
+    "ci_last_name_text": "Last name",
     "email_text": "Email",
     "principal_investigator_email": "New principal investigator email"
   },

@@ -101,6 +101,11 @@ export default class ReviewYourDocumentInfomationModificationsPage {
       this.linkTextData.Review_Your_Answers_Page.Change
     );
     this.document_information = this.page.locator('[class*="govuk-summary-list govuk"]');
+    this.document_name_row = this.list_row.filter({
+      has: this.page.getByText(
+        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information.document_name_label
+      ),
+    });
   }
 
   //Getters & Setters for Private Variables

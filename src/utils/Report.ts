@@ -33,7 +33,7 @@ class MyReporter implements Reporter {
       jsonDir: './test-reports/' + reportFolderName + '/cucumber/json/',
       reportPath: './test-reports/' + reportFolderName + '/cucumber/html/',
       pageTitle: 'Multiple Cucumber HTML reporter',
-      reportName: 'Future IRAS Automation Test Report-Playwright',
+      reportName: 'Plan and Manage Health and Care Research - Automation Test Report - Playwright',
       displayDuration: true,
       pageFooter: '<div><p></p></div>',
       customMetadata: true,
