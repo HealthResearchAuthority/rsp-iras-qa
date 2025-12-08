@@ -1,0 +1,105 @@
+{
+  "System_Admin": {
+    "username": "FutureIRAS.SysAdmin@hra.nhs.uk",
+    "password": "`${process.env.SYSTEM_ADMIN_PASS}`",
+    "mfa": "`${process.env.SYSTEM_ADMIN_MFA_KEY}`",
+    "authPath": "system_admin"
+  },
+  "Applicant_User": {
+    "username": "futureiras.automation@hra.nhs.uk",
+    "password": "`${process.env.APPLICANT_USER_PASS}`",
+    "mfa": "`${process.env.APPLICANT_USER_MFA_KEY}`",
+    "authPath": "applicant_user"
+  },
+  "Studywide_Reviewer": {
+    "username": "FutureIRAS.BackStage@hra.nhs.uk",
+    "password": "`${process.env.STUDYWIDE_REVIEWER_PASS}`",
+    "mfa": "`${process.env.STUDYWIDE_REVIEWER_MFA_KEY}`",
+    "authPath": "studywide_reviewer"
+  },
+  "Studywide_Reviewer_NI": {
+    "username": "FutureIRASBackStageNI@hra.nhs.uk",
+    "password": "`${process.env.STUDYWIDE_REVIEWER_NI_PASS}`",
+    "mfa": "`${process.env.STUDYWIDE_REVIEWER_NI_MFA_KEY}`",
+    "authPath": "studywide_reviewer_ni"
+  },
+  "Studywide_Reviewer_S": {
+    "username": "FutureIRASBackStageS@hra.nhs.uk",
+    "password": "`${process.env.STUDYWIDE_REVIEWER_S_PASS}`",
+    "mfa": "`${process.env.STUDYWIDE_REVIEWER_S_MFA_KEY}`",
+    "authPath": "studywide_reviewer_s"
+  },
+  "Studywide_Reviewer_W": {
+    "username": "FutureIRASBackStageW@hra.nhs.uk",
+    "password": "`${process.env.STUDYWIDE_REVIEWER_W_PASS}`",
+    "mfa": "`${process.env.STUDYWIDE_REVIEWER_W_MFA_KEY}`",
+    "authPath": "studywide_reviewer_w"
+  },
+  "Team_Manager": {
+    "username": "FutureIRAS.TeamManager@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_PASS}`",
+    "mfa": "`${process.env.TEAM_MANAGER_MFA_KEY}`",
+    "authPath": "team_manager"
+  },
+  "Team_Manager_NI": {
+    "username": "FutureIRAS.TeamManager_NI@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_NI_PASS}`",
+    "mfa": "`${process.env.TEAM_MANAGER_NI_MFA_KEY}`",
+    "authPath": "team_manager_ni"
+  },
+  "Team_Manager_S": {
+    "username": "FutureIRAS.TeamManager_S@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_S_PASS}`",
+    "mfa": "`${process.env.TEAM_MANAGER_S_MFA_KEY}`",
+    "authPath": "team_manager_s"
+  },
+  "Team_Manager_W": {
+    "username": "FutureIRAS.TeamManager_W@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_W_PASS}`",
+    "mfa": "`${process.env.TEAM_MANAGER_W_MFA_KEY}`",
+    "authPath": "team_manager_w"
+  },
+  "Workflow_Coordinator": {
+    "username": "FutureIRAS.WorkflowCoordinator@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_PASS}`",
+    "mfa": "`${process.env.WORKFLOW_COORDINATOR_MFA_KEY}`",
+    "authPath": "workflow_coordinator"
+  },
+  "Workflow_Coordinator_NI": {
+    "username": "FutureIRAS.WorkflowCoordinator_NI@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_NI_PASS}`",
+    "mfa": "`${process.env.WORKFLOW_COORDINATOR_NI_MFA_KEY}`",
+    "authPath": "workflow_coordinator_ni"
+  },
+  "Workflow_Coordinator_S": {
+    "username": "FutureIRASWorkflowCoordinators@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_S_PASS}`",
+    "mfa": "`${process.env.WORKFLOW_COORDINATOR_S_MFA_KEY}`",
+    "authPath": "workflow_coordinator_s"
+  },
+  "Workflow_Coordinator_W": {
+    "username": "FutureIRAS.WorkflowCoordinator_W@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_W_PASS}`",
+    "mfa": "`${process.env.WORKFLOW_COORDINATOR_W_MFA_KEY}`",
+    "authPath": "workflow_coordinator_w"
+  },
+  "Sponsor_User": {
+    "username": "FutureIRAS.Sponsor@hra.nhs.uk",
+    "password": "`${process.env.SPONSOR_USER_PASS}`",
+    "mfa": "`${process.env.SPONSOR_USER_MFA_KEY}`",
+    "authPath": "sponsor_user"
+  },
+  "One_Login_Account_User": {
+    "username": "letruledru@necub.com",
+    "password": "`${process.env.ONE_LOGIN_ACCOUNT_USER_PASS}`",
+    "mfa": "`${process.env.ONE_LOGIN_ACCOUNT_USER_MFA_KEY}`",
+    "authPath": "one_login_account_user"
+  },
+  "DB_User": {
+    "username": "testhrasysadmin",
+    "password": "`${process.env.DB_USER_PASS}`"
+  },
+  "Login_Page": {
+    "header": "Create your GOV.UK One Login or sign in"
+  }
+}
