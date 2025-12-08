@@ -28,7 +28,6 @@ Then(
     } else {
       actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     }
-    // const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortField.toLowerCase() == 'modification id') {
       sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date submitted') {

@@ -88,7 +88,6 @@ Then(
         expectedRaw.split(',').map((r) => r.trim()),
         { useInnerText: true }
       );
-      // await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
     }
   }
 );

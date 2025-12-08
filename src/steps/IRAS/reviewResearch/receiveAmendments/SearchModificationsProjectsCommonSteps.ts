@@ -144,7 +144,6 @@ Then(
     } else {
       irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
     }
-    // const irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { short_project_title_text: projectTitle } = filterDataset;
     const totalPagesCount = await commonItemsPage.getTotalPages();

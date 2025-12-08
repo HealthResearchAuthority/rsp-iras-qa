@@ -1,11 +1,10 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
-import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, returnDataFromJSON } from '../../../../utils/UtilFunctions';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
 import { connect } from '../../../../utils/DbConfig';
 import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
-import { returnDataFromJSON } from '../../../../utils/UtilFunctions';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
 import path from 'node:path';
