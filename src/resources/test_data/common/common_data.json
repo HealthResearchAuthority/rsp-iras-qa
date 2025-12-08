@@ -38,5 +38,6 @@
     "actions_label": "Action"
   },
   "success_header_label": "Success",
-  "modification_details_page_heading": "Modification"
+  "modification_details_page_heading": "Modification",
+  "remove_label": "Remove"
 }

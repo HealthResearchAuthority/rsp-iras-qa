@@ -33,3 +33,27 @@ Then(
     }
   }
 );
+
+Then(
+  'I fill the project identification titles page using {string} dataset',
+  async (
+    {
+      commonItemsPage,
+      projectIdentificationSelectReferenceToChangePage,
+      projectIdentificationEnterReferenceNumbersPage,
+    },
+    datasetName: string
+  ) => {
+    const dataset =
+      projectIdentificationEnterReferenceNumbersPage.projectIdentificationEnterReferenceNumbersPageTestData[
+        datasetName
+      ];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'which_titles_do_you_need_to_change_checkboxes') {
+          await commonItemsPage.fillUIComponent(dataset, key, projectIdentificationSelectReferenceToChangePage);
+        }
+      }
+    }
+  }
+);

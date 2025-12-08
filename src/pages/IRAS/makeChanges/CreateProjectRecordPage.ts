@@ -29,5 +29,8 @@ export default class CreateProjectRecordPage {
     await expect(
       this.page.getByText(this.createProjectRecordPageTestData.Create_Project_Record_Page.guidance_text_three)
     ).toBeVisible();
+    await expect(
+      this.page.getByText(this.createProjectRecordPageTestData.Create_Project_Record_Page.guidance_text_Four)
+    ).toBeVisible();
   }
 }

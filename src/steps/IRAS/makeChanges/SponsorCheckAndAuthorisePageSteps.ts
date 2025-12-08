@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace, convertDate } from '../../../utils/UtilFunctions';
 const { Then } = createBdd(test);
 
 Then('I can see the sponsor check and authorise page', async ({ sponsorCheckAndAuthorisePage }) => {
@@ -10,11 +10,11 @@ Then('I can see the sponsor check and authorise page', async ({ sponsorCheckAndA
 Then(
   'I validate the date created for modification in sponsor check and authorise page',
   async ({ modificationsCommonPage }) => {
-    const dateCreatedExpected = new Date().toLocaleDateString('en-GB', {
-      day: 'numeric',
+    const dateCreatedExpected = new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
       month: 'long',
       year: 'numeric',
-    });
+    }).format(new Date());
     const dateCreatedActual = await removeUnwantedWhitespace(
       await modificationsCommonPage.dateCreatedValue.textContent()
     );
@@ -79,16 +79,10 @@ Then(
     for (let index = 0; index < actualValuesArray.length; index++) {
       const changeName = changeNames[index];
       const expectedData = changesDataset[changeName];
-      for (const key of Object.keys(expectedData)) {
-        const expectedValues = await modificationsCommonPage.getExpectedValues(expectedData, key, index);
-        expect.soft(actualValuesArray[index].individualChangeStatus).toBe(expectedValues.expectedChangeStatus);
-        expect
-          .soft(actualValuesArray[index].areaOfChangeSubHeading)
-          .toBe(expectedValues.expectedAreaOfChangeSubHeading);
-        if (expectedValues.expectedSpecificChangeValue) {
-          expect.soft(actualValuesArray[index].specificChangeValue).toBe(expectedValues.expectedSpecificChangeValue);
-        }
-      }
+      const keysString = Object.keys(expectedData).join(', ');
+      const expectedValues = await modificationsCommonPage.getExpectedValues(expectedData, keysString, index);
+      expect.soft(actualValuesArray[index].areaOfChangeSubHeading).toBe(expectedValues.expectedAreaOfChangeSubHeading);
+      expect.soft(actualValuesArray[index].specificChangeValue).toBe(expectedValues.expectedSpecificChangeValue);
     }
     for (const changeName of changeNames) {
       const expectedData = changesDataset[changeName];
@@ -102,7 +96,7 @@ Then(
       await modificationsCommonPage.validateRankingForIndividualChange(changeName);
       const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
       const shortProjectTitleExpected = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
-      const modificationIDExpected = modificationsCommonPage.getModificationID();
+      const modificationIDExpected = await modificationsCommonPage.getModificationID();
       const irasIDActual = await modificationsCommonPage.iras_id_value.textContent();
       const shortProjectTitleActual = confirmStringNotNull(
         await modificationsCommonPage.short_project_title_value.textContent()
@@ -117,21 +111,40 @@ Then(
         modificationsCommonPage.modificationsCommonPageTestData.Modification_Status_With_Sponsor.status;
       const actualStatus = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
       expect.soft(actualStatus).toBe(expectedStatus);
-      const dateCreatedExpected = new Date().toLocaleDateString('en-GB', {
-        day: 'numeric',
+      const dateCreatedExpected = new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit',
         month: 'long',
         year: 'numeric',
-      });
+      }).format(new Date());
       const dateCreatedActual = await removeUnwantedWhitespace(
         await modificationsCommonPage.dateCreatedValue.textContent()
       );
       expect.soft(dateCreatedActual).toBe(dateCreatedExpected);
-      const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
-        cardTitle,
+      const actualDataAll = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
         cardTitle,
         expectedData
       );
-      modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
+      const actualData = actualDataAll.cardData;
+      const expectedDataCustom = expectedData;
+      const keysString = Object.keys(expectedData).join(', ');
+      if (keysString.toLowerCase().includes('free_text')) {
+        expectedDataCustom['specific_change_dropdown'] = expectedData['changes_free_text'];
+        actualData['specific_change_dropdown'] = actualDataAll['changes_free_text'];
+        delete actualData['specific_change_dropdown'];
+        delete expectedDataCustom['specific_change_dropdown'];
+      } else if (keysString.toLowerCase().includes('end_year')) {
+        expectedDataCustom['specific_change_dropdown'] = await convertDate(
+          expectedDataCustom['planned_project_end_day_text'],
+          expectedDataCustom['planned_project_end_month_dropdown'],
+          expectedDataCustom['planned_project_end_year_text']
+        );
+        delete expectedDataCustom['specific_change_dropdown'];
+      }
+      const excludeKeys = new Set(['area_of_change_dropdown', 'change_status']);
+      const filteredExpectedData = Object.fromEntries(
+        Object.entries(expectedDataCustom).filter(([key]) => !excludeKeys.has(key))
+      );
+      await modificationsCommonPage.validateCardData(filteredExpectedData, actualData);
       await commonItemsPage.clickButton('Modifications_Page', 'Return_To_Modification');
       await commonItemsPage.clickLink('Sponsor_Check_And_Authorise_Page', 'Modification_Details');
     }

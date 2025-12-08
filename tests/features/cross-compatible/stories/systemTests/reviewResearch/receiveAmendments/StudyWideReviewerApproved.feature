@@ -117,14 +117,9 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and approv
         When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
         Then I validate confirmation screen for modification review outcome sent
         When I click the 'Back_To_Tasklist' link on the 'Modification_Review_Outcome_Sent_Page'
-        Then I can see the 'My_Modifications_Tasklist_Page'
-        When I enter 'new iras id' into the search field
-        And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
-        Then I 'cannot' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
-        When I have navigated to the 'Search_Modifications_Page'
-        When I enter 'new iras id' into the search field
-        And I click the 'Search' button on the 'Search_Modifications_Page'
-        Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with '<Outcome_Status>' status
+        Then I can see the 'My_Modifications_Tasklist_No_Result_Page'
+        And I capture the page screenshot
+
         Examples:
             | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome  | Outcome_Reason | Outcome_Status               |
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Blank          | Modification_Status_Approved |

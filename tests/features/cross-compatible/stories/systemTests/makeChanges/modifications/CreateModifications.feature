@@ -206,8 +206,10 @@ Feature: Create Modification
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability  | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability  | Nhs_Involvement_No  |
       | Change_Of_Sponsor_legal_Representative                            | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                        | Nhs_Involvement_Yes |
-      | Modification_To_Add_Administrative_Details                        | Nhs_Involvement_No  |
+      | Modification_To_Add_Administrative_Details_Set_One                | Nhs_Involvement_Yes |
+      | Modification_To_Add_Administrative_Details_Set_One                | Nhs_Involvement_No  |
+      | Modification_To_Add_Administrative_Details_Set_Two                | Nhs_Involvement_Yes |
+      | Modification_To_Add_Administrative_Details_Set_Two                | Nhs_Involvement_No  |
       | Multiple_Changes_Non_Reviewable_Set_Two                           | Nhs_Involvement_Yes |
       | Multiple_Changes_Non_Reviewable_Set_Two                           | Nhs_Involvement_No  |
       | Multiple_Changes_Participating_Organisations_Non_Reviewable_Three | Nhs_Involvement_Yes |

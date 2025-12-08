@@ -1,5 +1,5 @@
 @SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
-Feature: This feature covers scenarios related to sponsor not authorised
+Feature: This feature covers scenarios related to sponsor not authorised modifications
 
     Background:
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -106,7 +106,7 @@ Feature: This feature covers scenarios related to sponsor not authorised
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
-        And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
+        And I can see the searched modification to be present in the list with date actioned with 'Not authorised' status in the sponsor authorisations page
         And I capture the page screenshot
         Then I click on the searched modification id
         And I can see the modification page for sponsor view
@@ -229,7 +229,7 @@ Feature: This feature covers scenarios related to sponsor not authorised
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
-        And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
+        And I can see the searched modification to be present in the list with date actioned with 'Not authorised' status in the sponsor authorisations page
         And I capture the page screenshot
         Then I click on the searched modification id
         And I can see the modification page for sponsor view
@@ -277,8 +277,8 @@ Feature: This feature covers scenarios related to sponsor not authorised
             | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
             | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
             | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
-            | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
-            | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
+            | Modification_To_Add_Administrative_Details_Set_One               | Nhs_Involvement_Yes |
+            | Modification_To_Add_Administrative_Details_Set_Two               | Nhs_Involvement_No  |
             | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
             | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
@@ -349,7 +349,7 @@ Feature: This feature covers scenarios related to sponsor not authorised
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'Not authorised' status in the sponsor authorisations page
-        And I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page
+        And I can see the searched modification to be present in the list with date actioned with 'Not authorised' status in the sponsor authorisations page
         And I capture the page screenshot
         Then I click on the searched modification id
         And I can see the modification page for sponsor view
