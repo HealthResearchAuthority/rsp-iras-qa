@@ -421,7 +421,7 @@ Feature: WFC - Modifications Tasklist page
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+    @rsp-4381  @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
     Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
@@ -438,6 +438,7 @@ Feature: WFC - Modifications Tasklist page
         And I capture the page screenshot
         And the 'Next' button will be 'available' to the user
         And the 'Previous' button will be 'not available' to the user
+        When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         Then I sequentially navigate through each 'Modifications_Tasklist_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
