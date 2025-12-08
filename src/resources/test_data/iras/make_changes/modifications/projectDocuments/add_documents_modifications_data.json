@@ -15,7 +15,7 @@
     "upload_files_input": "Please upload at least one document"
   },
   "Invalid_Format_File_Error": {
-    "upload_files_input": " must be a permitted file type"
+    "upload_files_input": "The selected file must be a permitted file type"
   },
   "Duplicate_File_Upload_Error": {
     "upload_files_input": " has already been uploaded"

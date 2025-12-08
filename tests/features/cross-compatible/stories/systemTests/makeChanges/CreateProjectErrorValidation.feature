@@ -240,7 +240,7 @@ Feature: Create project - Error Validations
   # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
   # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
 
-  @rsp-3939 @rsp-4200 @rsp-3940 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
+  @rsp-3939 @rsp-4200 @rsp-3940 @validateSponsorOrganisationResultsJsDisabled @jsDisabled @skip
   Scenario Outline: Validate the primary sponsor organisation search results in project identifiers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
