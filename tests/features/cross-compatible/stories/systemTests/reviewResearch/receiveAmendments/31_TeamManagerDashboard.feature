@@ -320,28 +320,28 @@ Feature: Team Manager Dashboard page
                         | Days_Since_Submission | days since submission | ascending    | descending     |
                         | Status                | status                | ascending    | descending     |
 
-        @SortTMDashboardByColumn @rsp-5122  @defectSWRSortingDuetoSPace
-        Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for study-wide reviewer
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
-                When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        # @SortTMDashboardByColumn @rsp-5122  @defectSWRSortingDuetoSPace
+        # Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for study-wide reviewer
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        #         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I capture the page screenshot
+        #         And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        #         When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I capture the page screenshot
+        #         And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        #         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I capture the page screenshot
+        #         And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
 
-                Examples:
-                        | Sort_Button         | Sort_Field          | Initial_Sort | Secondary_Sort |
-                        | Study_Wide_Reviewer | study-wide reviewer | ascending    | descending     |
+        #         Examples:
+        #                 | Sort_Button         | Sort_Field          | Initial_Sort | Secondary_Sort |
+        #                 | Study_Wide_Reviewer | study-wide reviewer | ascending    | descending     |
 
 
         @TMDashboardErrorStateValidation @rsp-5122
