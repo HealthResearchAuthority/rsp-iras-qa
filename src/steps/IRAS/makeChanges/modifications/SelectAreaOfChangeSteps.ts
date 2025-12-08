@@ -131,6 +131,9 @@ Then(
         ' and Expected value = ' +
         expectedSpecificChangeDropdownValues,
     });
-    expect([...actualSpecificChangeDropdownValues].sort()).toEqual([...expectedSpecificChangeDropdownValues].sort());
+    const compare = (a: string, b: string) => a.localeCompare(b, undefined, { sensitivity: 'base' });
+    expect([...actualSpecificChangeDropdownValues].sort(compare)).toEqual(
+      [...expectedSpecificChangeDropdownValues].sort(compare)
+    );
   }
 );
