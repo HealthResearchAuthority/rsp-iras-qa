@@ -1,5 +1,5 @@
 async function globalSetup() {
-  process.env.BASE_URL = 'https://fd-rsp-applications-prod-uks-dqa3dydwg4h6f6dp.a02.azurefd.net/';
+  process.env.BASE_URL = 'https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/';
 }
 export default globalSetup;
 export const deviceDSafari = 'Desktop Safari';

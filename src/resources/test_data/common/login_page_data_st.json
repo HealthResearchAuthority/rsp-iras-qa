@@ -90,7 +90,7 @@
     "authPath": "sponsor_user"
   },
   "One_Login_Account_User": {
-    "username": "letruledru@necub.com",
+    "username": "hagnenulta@necub.com",
     "password": "`${process.env.ONE_LOGIN_ACCOUNT_USER_PASS}`",
     "mfa": "`${process.env.ONE_LOGIN_ACCOUNT_USER_MFA_KEY}`",
     "authPath": "one_login_account_user"

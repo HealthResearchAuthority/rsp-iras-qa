@@ -69,7 +69,7 @@
       ]
     },
     "Advanced_Filters_Short_Project_Title": {
-      "short_project_title_text": "Ai-AWARE"
+      "short_project_title_text": "HP in a UK cohort"
     },
     "Advanced_Filters_All": {
       "chief_investigator_name_text": "ci_test@test.com",
@@ -303,10 +303,10 @@
   },
   "Search_Queries": {
     "Valid_Iras_Id_Prefix": {
-      "search_input_text": "36"
+      "search_input_text": "25"
     },
     "Valid_Full_Iras_Id": {
-      "search_input_text": "361096"
+      "search_input_text": "255145"
     },
     "Invalid_Iras_Id_Letters": {
       "search_input_text": "abcdefg"
