@@ -114,7 +114,7 @@ Feature: Create project - Error Validations
       | Project_Details_Title | Field_Error_Message | Summary_Error_Message |
       | Invalid_Date_Today    | Field_Error_Message | Summary_Error_Message |
 
-  @rsp-1897 @rsp-4209 @KNOWN_DEFECT_RSP-5319
+  @rsp-1897 @rsp-4209
   Scenario Outline: Validate error messages displayed when user inputs invalid data in chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -191,7 +191,7 @@ Feature: Create project - Error Validations
       | Invalid_Date_No_Month | Date_Month_Field_Error_Message          |
       | Invalid_Date_No_Year  | Date_Year_Field_Error_Message           |
 
-  @rsp-1863 @rsp-4209 @saveLaterChiefInvEmailValidations @KNOWN_DEFECT_RSP-5319
+  @rsp-1863 @rsp-4209 @saveLaterChiefInvEmailValidations
   Scenario Outline: Validate error messages when user saves the project with invalid Chief Investigator email data on chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -351,7 +351,7 @@ Feature: Create project - Error Validations
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_No_Month       | Date_Month_Field_Error_Message          | Sponsor_Organisation_Text_Blank |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_No_Year        | Date_Year_Field_Error_Message           | Sponsor_Organisation_Text_Blank |
 
-  @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidations @KNOWN_DEFECT_RSP-5319
+  @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidations
   Scenario Outline: Validate chief investigator email error messages when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'

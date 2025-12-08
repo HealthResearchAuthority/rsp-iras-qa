@@ -164,7 +164,7 @@ Feature: Create Project
     Then I can see the project details title page
     And I capture the page screenshot
 
-  @rsp-1901 @rsp-2922 @ValidateUserAbleToFillResearchLocationsPage @KNOWN_DEFECT_RSP-5747 @fail
+  @rsp-1901 @rsp-2922 @ValidateUserAbleToFillResearchLocationsPage
   Scenario Outline: Validate user is able to fill research locations page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -618,7 +618,7 @@ Feature: Create Project
     And I can see the project overview page
     And I capture the page screenshot
 
-  @rsp-5340 @validateProjectRecordInDraftStatusRetains @KNOWN_DEFECT_RSP-5747 @fail
+  @rsp-5340 @validateProjectRecordInDraftStatusRetains
   Scenario: Validate project status in draft is retained if partial project information is saved
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -760,7 +760,7 @@ Feature: Create Project
     And I can see project details along with 'Valid_Data_All_Fields' sponsor organisation and 'Valid_Planned_End_Date' on the project overview page
     And I capture the page screenshot
 
-  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6187 @fail
+  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage
   Scenario: Validate return to iras id button and back button functionality in confirm project details page
     And I capture the page screenshot
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -998,7 +998,7 @@ Feature: Create Project
       | Advanced_Filter_All_Fields                | Advanced_Filter_All_Fields                |
       | Advanced_Filter_Submitted_Date_Field_Only | Advanced_Filter_Submitted_Date_Field_Only |
 
-  @rsp-2837 @rsp-3819 @rsp-4874 @rsp-4868 @reviewYourAnswersAllFields @KNOWN_DEFECT_RSP-5747 @fail
+  @rsp-2837 @rsp-3819 @rsp-4874 @rsp-4868 @reviewYourAnswersAllFields
   Scenario Outline: Verify that user completed all question and can review the answers on create project journey
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
