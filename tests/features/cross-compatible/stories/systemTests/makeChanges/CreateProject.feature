@@ -371,7 +371,7 @@ Feature: Create Project
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field | Valid_Data_All_Fields |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      | Valid_Data_All_Fields |
 
-  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled @KNOWN_DEFECT_RSP-5747 @fail
+  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled
   Scenario Outline: Validate user is able to fill sponsor organisation in project identifiers page with valid data
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'

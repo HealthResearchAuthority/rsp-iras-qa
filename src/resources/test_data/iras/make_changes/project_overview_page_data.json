@@ -78,9 +78,9 @@
   },
   "Project_Team_Tab": {
     "chief_investigator_label": "Chief Investigator",
-    "first_name_label": "First name",
-    "last_name_label": "Last name",
-    "email_label": "Email"
+    "first_name_label": "Chief Investigator first name",
+    "last_name_label": "Chief Investigator last name",
+    "email_label": "Chief Investigator email"
   },
   "Research_Locations_Tab": {
     "participating_nations_label": "Participating nations",
