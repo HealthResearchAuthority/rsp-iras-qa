@@ -1008,6 +1008,11 @@ Given(
       case 'Search_Modifications_Page':
         await searchModificationsPage.goto();
         await searchModificationsPage.assertOnSearchModificationsPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
         break;
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.goto();
@@ -1686,64 +1691,6 @@ Then(
 );
 
 Then(
-  'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
-  async ({ commonItemsPage }, sortListType: string, sortDirection: string, sortField: string, currentPage: string) => {
-    let sortedList: string[];
-    let columnIndex: number;
-    const lowerSortListType = sortListType.toLowerCase();
-    const lowerSortField = sortField.toLowerCase();
-    const lowerSortDirection = sortDirection.toLowerCase();
-    const lowerCurrentPage = currentPage.toLowerCase();
-    if (lowerSortListType === 'manage sponsor organisations' || lowerSortListType === 'manage review bodies') {
-      switch (lowerSortField) {
-        case 'organisation name':
-          columnIndex = 0;
-          break;
-        case 'country':
-          columnIndex = 1;
-          break;
-        case 'status':
-          columnIndex = 2;
-          break;
-        default:
-          throw new Error(`${lowerSortField} is not a valid option`);
-      }
-      let actualList: string[] = [];
-      if (lowerSortField == 'country') {
-        const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-        for (const country of originalList) {
-          if (country.includes(',')) {
-            actualList.push(country.slice(0, country.indexOf(',')));
-          } else {
-            actualList.push(country);
-          }
-        }
-      }
-      if (lowerSortField.toLowerCase() === 'organisation name' || lowerSortField.toLowerCase() === 'status') {
-        actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
-          commonItemsPage.tableBodyRows,
-          columnIndex
-        );
-      } else {
-        actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-      }
-      if (lowerSortDirection == 'ascending') {
-        sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-        if (lowerSortField == 'status' && lowerCurrentPage == 'first') {
-          expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
-        }
-      } else {
-        sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-        if (lowerSortField == 'status' && lowerCurrentPage == 'first') {
-          expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
-        }
-      }
-      expect.soft(actualList).toEqual(sortedList);
-    }
-  }
-);
-
-Then(
   'the system displays {string} matching the search criteria',
   async ({ commonItemsPage }, searchListType: string) => {
     if (searchListType.toLowerCase() === 'sponsor organisations' || searchListType.toLowerCase() === 'review bodies') {
@@ -1852,56 +1799,6 @@ Then(
       }
       const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
       expect(firstNameValues).toEqual(sortedList);
-    }
-  }
-);
-
-Then(
-  'I can see the {string} list sorted byby {string} order of the {string} on the {string} page',
-  async (
-    { manageUsersPage, commonItemsPage },
-    listType: string,
-    sortDirection: string,
-    sortField: string,
-    currentPage: string
-  ) => {
-    let sortedUserList: string[];
-    let userColumnIndex: number;
-    if (listType === 'manage users' || listType === 'sponsor organisation users') {
-      switch (sortField.toLowerCase()) {
-        case 'first name':
-          userColumnIndex = 0;
-          break;
-        case 'last name':
-          userColumnIndex = 1;
-          break;
-        case 'email address':
-          userColumnIndex = 2;
-          break;
-        case 'status':
-          userColumnIndex = 3;
-          break;
-        case 'last logged in':
-          userColumnIndex = 4;
-          break;
-        default:
-          throw new Error(`${sortField} is not a valid option`);
-      }
-      const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, userColumnIndex);
-      if (sortField.toLowerCase() == 'last logged in') {
-        sortedUserList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
-      } else if (sortDirection.toLowerCase() == 'ascending') {
-        sortedUserList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
-        }
-      } else {
-        sortedUserList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
-        }
-      }
-      expect.soft(actualList).toEqual(sortedUserList);
     }
   }
 );
@@ -2219,3 +2116,390 @@ Then('I download the document from supporting documents table', async ({ modific
     expect.soft(actualFileName).toBe(expectedFileName);
   }
 });
+
+Then(
+  'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
+  async (
+    { manageUsersPage, commonItemsPage },
+    listType: string,
+    sortDirection: string,
+    sortField: string,
+    currentPage: string
+  ) => {
+    const lowerListType = listType.toLowerCase();
+    const lowerSortField = sortField.toLowerCase();
+    const lowerSortDirection = sortDirection.toLowerCase();
+    const lowerCurrentPage = currentPage.toLowerCase();
+
+    // Common locals
+    let actualList: string[] = [];
+    let sortedList: string[] = [];
+    let columnIndex: number | undefined;
+
+    // ----- Branch: User-based lists -----
+    if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
+      // Map columns for user lists
+      switch (lowerSortField) {
+        case 'first name':
+          columnIndex = 0;
+          break;
+        case 'last name':
+          columnIndex = 1;
+          break;
+        case 'email address':
+          columnIndex = 2;
+          break;
+        case 'status':
+          columnIndex = 3;
+          break;
+        case 'last logged in':
+          columnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+
+      // Gather actual list values
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+
+      // Special handling for "Last logged in"
+      if (lowerSortField === 'last logged in') {
+        sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+      } else if (lowerSortDirection === 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) =>
+          a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+        }
+      } else {
+        sortedList = [...actualList].toSorted((a, b) =>
+          b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+        }
+      }
+
+      expect.soft(actualList).toEqual(sortedList);
+      return;
+    }
+
+    // ----- Branch: Organisation/Review-body lists -----
+    if (lowerListType === 'manage sponsor organisations' || lowerListType === 'manage review bodies') {
+      // Map columns for organisation/review-body lists
+      switch (lowerSortField) {
+        case 'organisation name':
+          columnIndex = 0;
+          break;
+        case 'country':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+
+      // Special handling for "country" (strip anything after a comma)
+      if (lowerSortField === 'country') {
+        const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+        actualList = originalList.map((country) =>
+          country.includes(',') ? country.slice(0, country.indexOf(',')) : country
+        );
+      }
+
+      // For "organisation name" or "status", use the short-title/SWR-aware extractor
+      // if (lowerSortField === 'organisation name' || lowerSortField === 'status') {
+      //   actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
+      //     commonItemsPage.tableBodyRows,
+      //     columnIndex
+      //   );
+      // } else
+      else {
+        // Otherwise the generic extractor
+        actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+      }
+
+      if (lowerSortDirection === 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) =>
+          a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+          expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
+        }
+      } else {
+        sortedList = [...actualList].toSorted((a, b) =>
+          b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+          expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
+        }
+      }
+
+      expect.soft(actualList).toEqual(sortedList);
+      return;
+    }
+
+    // ----- Unsupported list type -----
+    throw new Error(`${listType} is not a supported list type for this step`);
+  }
+);
+
+// Then(
+//   'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
+//   async (
+//     { manageUsersPage, commonItemsPage },
+//     listType: string,
+//     sortDirection: string,
+//     sortField: string,
+//     currentPage: string
+//   ) => {
+//     const lowerListType = listType.toLowerCase();
+//     const lowerSortField = sortField.toLowerCase();
+//     const lowerSortDirection = sortDirection.toLowerCase();
+//     const lowerCurrentPage = currentPage.toLowerCase();
+
+//     // Common locals
+//     let actualList: string[] = [];
+//     let sortedList: string[] = [];
+//     let columnIndex: number | undefined;
+
+//     // ----- Branch: User-based lists -----
+//     if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
+//       // Map columns for user lists
+//       switch (lowerSortField) {
+//         case 'first name':
+//           columnIndex = 0;
+//           break;
+//         case 'last name':
+//           columnIndex = 1;
+//           break;
+//         case 'email address':
+//           columnIndex = 2;
+//           break;
+//         case 'status':
+//           columnIndex = 3;
+//           break;
+//         case 'last logged in':
+//           columnIndex = 4;
+//           break;
+//         default:
+//           throw new Error(`${sortField} is not a valid option`);
+//       }
+
+//       // Gather actual list values
+//       actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+
+//       // Special handling for "Last logged in"
+//       if (lowerSortField === 'last logged in') {
+//         sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+//       } else {
+//         const compareFn = (a: string, b: string) =>
+//           lowerSortDirection === 'ascending'
+//             ? a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+//             : b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false });
+//         sortedList = [...actualList].toSorted(compareFn);
+//       }
+//       // else if (lowerSortDirection === 'ascending') {
+//       //     sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+//       //     if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+//       //       expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+//       //     }
+//       //   } else {
+//       //     sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+//       //     if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+//       //       expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+//       //     }
+//       //   }
+
+//       expect.soft(actualList).toEqual(sortedList);
+//       return;
+//     }
+
+//     // ----- Branch: Organisation/Review-body lists -----
+//     if (lowerListType === 'manage sponsor organisations' || lowerListType === 'manage review bodies') {
+//       // Map columns for organisation/review-body lists
+//       switch (lowerSortField) {
+//         case 'organisation name':
+//           columnIndex = 0;
+//           break;
+//         case 'country':
+//           columnIndex = 1;
+//           break;
+//         case 'status':
+//           columnIndex = 2;
+//           break;
+//         default:
+//           throw new Error(`${sortField} is not a valid option`);
+//       }
+
+//       // Special handling for "country" (strip anything after a comma)
+//       if (lowerSortField === 'country') {
+//         const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+//         actualList = originalList.map((country) =>
+//           country.includes(',') ? country.slice(0, country.indexOf(',')) : country
+//         );
+//       }
+
+//       // For "organisation name" or "status", use the short-title/SWR-aware extractor
+//       // if (lowerSortField === 'organisation name' || lowerSortField === 'status') {
+//       //   actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
+//       //     commonItemsPage.tableBodyRows,
+//       //     columnIndex
+//       //   );
+//       // } else
+//       else {
+//         // Otherwise the generic extractor
+//         actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+//       }
+//       {
+//         const compareFn = (a: string, b: string) =>
+//           lowerSortDirection === 'ascending'
+//             ? a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+//             : b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false });
+//         sortedList = [...actualList].toSorted(compareFn);
+//       }
+
+//       // if (lowerSortDirection === 'ascending') {
+//       //   sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+//       //   if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+//       //     expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
+//       //   }
+//       // } else {
+//       //   sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+//       //   if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+//       //     expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
+//       //   }
+//       // }
+
+//       expect.soft(actualList).toEqual(sortedList);
+//       return;
+//     }
+
+//     // ----- Unsupported list type -----
+//     throw new Error(`${listType} is not a supported list type for this step`);
+//   }
+// );
+
+// Then(
+//   'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
+//   async (
+//     { manageUsersPage, commonItemsPage },
+//     listType: string,
+//     sortDirection: string,
+//     sortField: string,
+//     currentPage: string
+//   ) => {
+//     const lowerListType = listType.toLowerCase();
+//     const lowerSortField = sortField.toLowerCase();
+//     const lowerSortDirection = sortDirection.toLowerCase();
+//     const lowerCurrentPage = currentPage.toLowerCase();
+
+//     // Common locals
+//     let actualList: string[] = [];
+//     let sortedList: string[] = [];
+//     let columnIndex: number | undefined;
+
+//     // ----- Branch: User-based lists -----
+//     if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
+//       // Map columns for user lists
+//       switch (lowerSortField) {
+//         case 'first name':
+//           columnIndex = 0;
+//           break;
+//         case 'last name':
+//           columnIndex = 1;
+//           break;
+//         case 'email address':
+//           columnIndex = 2;
+//           break;
+//         case 'status':
+//           columnIndex = 3;
+//           break;
+//         case 'last logged in':
+//           columnIndex = 4;
+//           break;
+//         default:
+//           throw new Error(`${sortField} is not a valid option`);
+//       }
+
+//       // Gather actual list values
+//       actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+
+//       // Special handling for "Last logged in"
+//       if (lowerSortField === 'last logged in') {
+//         sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+//       } else if (lowerSortDirection === 'ascending') {
+//         sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+//         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+//           expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+//         }
+//       } else {
+//         sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+//         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+//           expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+//         }
+//       }
+
+//       expect.soft(actualList).toEqual(sortedList);
+//       return;
+//     }
+
+//     // ----- Branch: Organisation/Review-body lists -----
+//     if (lowerListType === 'manage sponsor organisations' || lowerListType === 'manage review bodies') {
+//       // Map columns for organisation/review-body lists
+//       switch (lowerSortField) {
+//         case 'organisation name':
+//           columnIndex = 0;
+//           break;
+//         case 'country':
+//           columnIndex = 1;
+//           break;
+//         case 'status':
+//           columnIndex = 2;
+//           break;
+//         default:
+//           throw new Error(`${sortField} is not a valid option`);
+//       }
+
+//       // Special handling for "country" (strip anything after a comma)
+//       if (lowerSortField === 'country') {
+//         const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+//         actualList = originalList.map((country) =>
+//           country.includes(',') ? country.slice(0, country.indexOf(',')) : country
+//         );
+//       }
+
+//       // For "organisation name" or "status", use the short-title/SWR-aware extractor
+//       if (lowerSortField === 'organisation name' || lowerSortField === 'status') {
+//         actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
+//           commonItemsPage.tableBodyRows,
+//           columnIndex
+//         );
+//       } else if (lowerSortField !== 'country') {
+//         // Otherwise the generic extractor
+//         actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+//       }
+
+//       if (lowerSortDirection === 'ascending') {
+//         sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+//         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+//           expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
+//         }
+//       } else {
+//         sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+//         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+//           expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
+//         }
+//       }
+
+//       expect.soft(actualList).toEqual(sortedList);
+//       return;
+//     }
+
+//     // ----- Unsupported list type -----
+//     throw new Error(`${listType} is not a supported list type for this step`);
+//   }
+// );

@@ -48,8 +48,13 @@ Then(
     irasIdDatasetName,
     filterDatasetName
   ) => {
+    let irasId: string;
     const testData = searchModificationsPage.searchModificationsPageTestData;
-    const irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
+    if (irasIdDatasetName === 'Iras_Id_Retrieved_From_DB_With_Status_Active') {
+      irasId = await searchModificationsPage.getModificationId();
+    } else {
+      irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
+    }
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
