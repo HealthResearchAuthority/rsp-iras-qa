@@ -25,6 +25,9 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
+        And I click the 'Clear_All_Filters' link on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        Then I can see the selected filters 'Advanced_Filter_All_Countries_Disabled' are removed from active filters for manage review bodies page
         When I enter 'name of the previously used review body' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
