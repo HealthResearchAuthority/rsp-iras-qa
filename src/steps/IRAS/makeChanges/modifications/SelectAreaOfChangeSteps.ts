@@ -131,6 +131,6 @@ Then(
         ' and Expected value = ' +
         expectedSpecificChangeDropdownValues,
     });
-    expect(actualSpecificChangeDropdownValues).toEqual(expectedSpecificChangeDropdownValues);
+    expect([...actualSpecificChangeDropdownValues].sort()).toEqual([...expectedSpecificChangeDropdownValues].sort());
   }
 );

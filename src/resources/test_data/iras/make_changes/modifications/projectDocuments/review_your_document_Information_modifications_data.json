@@ -8,8 +8,8 @@
     "document_name_label": "Document name",
     "document_type_label": "Document type",
     "document_type_guidance_text": "Enter document type",
-    "sponsor_document_version_label": "Document version",
-    "sponsor_document_date_label": "Document date",
+    "sponsor_document_version_label": "Sponsor document version",
+    "sponsor_document_date_label": "Sponsor document date",
     "document_previously_approved_label": "Previously approved"
   },
   "Missing_Mandatory_Question_Previously_Approved_Error": {
@@ -28,7 +28,7 @@
     "document_name_row": "Enter document name",
     "sponsor_document_version_row": "Enter sponsor document version"
   },
-  "Missing_Mandatory_Question_Document_Date_Error": {
-    "sponsor_document_date_row": "Enter document date"
+  "Missing_Mandatory_Question_Document_Name_Error": {
+    "document_name_row": "Enter document name"
   }
 }

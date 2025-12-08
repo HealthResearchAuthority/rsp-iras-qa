@@ -138,7 +138,6 @@
     "document_previously_approved_radio": "Yes"
   },
   "Missing_Mandatory_Data_Fields_Optional_Version_Date": {
-    "document_name_text": "DocName",
     "document_type_dropdown": "Evidence of insurance or indemnity"
   },
   "Mandatory_Data_Fields_Mandatory_Version_Date": {
@@ -165,7 +164,10 @@
   },
   "Valid_Data_Fields_Mandatory_Date": {
     "sponsor_document_version_text": "1.5",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "Yes",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020"
   },
   "Valid_Data_Fields_Mandatory_Version_Date": {
     "sponsor_document_version_text": "1.5",
@@ -221,7 +223,7 @@
   },
   "Invalid_Date_No_Day_No_Month": {
     "sponsor_document_day_text": "",
-    "sponsor_document_month_dropdown": "",
+    "sponsor_document_month_dropdown": "Choose month",
     "sponsor_document_year_text": "2028"
   },
   "Invalid_Date_No_Day_No_Year": {
@@ -231,41 +233,41 @@
   },
   "Invalid_Date_No_Month_No_Year": {
     "sponsor_document_day_text": "1",
-    "sponsor_document_month_dropdown": "",
+    "sponsor_document_month_dropdown": "Choose month",
     "sponsor_document_year_text": ""
   },
   "Invalid_Date_No_Date_No_Month_No_Year": {
     "sponsor_document_day_text": "",
-    "sponsor_document_month_dropdown": "",
+    "sponsor_document_month_dropdown": "Choose month",
     "sponsor_document_year_text": ""
   },
   "Error_Validation": {
     "No_Sponsor_Document_Date_Error": {
-      "sponsor_document_date_summary_text": "Enter a sponsor document date"
+      "sponsor_document_day_text": "Enter a sponsor document date"
     },
     "No_Sponsor_Document_Date_Day_Error": {
-      "sponsor_document_day_text": "Date must include a day"
+      "sponsor_document_day_text": "Sponsor document date must include a day"
     },
     "No_Sponsor_Document_Date_Month_Error": {
-      "sponsor_document_day_text": "Date must include a month"
+      "sponsor_document_day_text": "Sponsor document date must include a month"
     },
     "No_Sponsor_Document_Date_Year_Error": {
-      "sponsor_document_day_text": "Date must include a year"
+      "sponsor_document_day_text": "Sponsor document date must include a year"
     },
     "No_Sponsor_Document_Date_Month_Year_Error": {
-      "sponsor_document_day_text": "Date must include a month and year"
+      "sponsor_document_day_text": "Sponsor document date must include a month and year"
     },
     "No_Sponsor_Document_Date_Day_Month_Error": {
-      "sponsor_document_day_text": "Date must include a day and month"
+      "sponsor_document_day_text": "Sponsor document date must include a day and month"
     },
     "No_Sponsor_Document_Date_Day_Year_Error": {
-      "sponsor_document_day_text": "Date must include a day and year"
+      "sponsor_document_day_text": "Sponsor document date must include a day and year"
     },
     "Invalid_Sponsor_Document_Date_Error": {
       "sponsor_document_day_text": "Enter a date in the correct format"
     },
     "Invalid_Sponsor_Document_Future_Date_Error": {
-      "sponsor_document_day_text": "Date must be today or a past date"
+      "sponsor_document_day_text": "Sponsor document date must be today or a past date"
     }
   }
 }

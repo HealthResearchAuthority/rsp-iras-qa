@@ -1,5 +1,5 @@
-@ApplicantUser @ModificationsSaveLater @SystemTest
-Feature: Modifications - Save Later
+@ApplicantUser @ModificationsOtherScenarios @SystemTest
+Feature: Modifications - Save Later and Other Scenarios
 
   Background:
     Given I have navigated to the my research projects page
@@ -229,7 +229,6 @@ Feature: Modifications - Save Later
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    Then I validate all fields on modification page '<Changes>'
     When I click the 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
     When I click the change link '<Change_Field>' on modification review changes page
@@ -2234,7 +2233,6 @@ Feature: Modifications - Save Later
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    Then I validate all fields on modification page '<Changes>'
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot

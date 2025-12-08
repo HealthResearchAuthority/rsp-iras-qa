@@ -265,12 +265,9 @@ Then(
         .delete_modification_page_heading +
       ' ' +
       modificationIDExpected;
-    const actualHeadingText = confirmStringNotNull(
-      await confirmationPage.confirmation_header_common_label.textContent()
-    );
     const expectedConfirmationBody =
       confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels.page_guidance_text;
-    expect(actualHeadingText).toBe(expectedHeadingText);
+    await expect(confirmationPage.confirmation_header_common_label.getByText(expectedHeadingText)).toBeVisible();
     await expect(confirmationPage.confirmation_body_label.getByText(expectedConfirmationBody)).toBeVisible();
   }
 );
