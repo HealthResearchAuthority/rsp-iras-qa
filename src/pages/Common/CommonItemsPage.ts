@@ -933,7 +933,7 @@ export default class CommonItemsPage {
     return auditMap;
   }
   async getSummaryErrorMessages() {
-    const summaryErrorActualValues = await this.summaryErrorLinks.allTextContents();
+    const summaryErrorActualValues = (await this.summaryErrorLinks.allTextContents()).map((x) => x.trim());
     return summaryErrorActualValues;
   }
 
@@ -1673,6 +1673,18 @@ export default class CommonItemsPage {
       const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent())
         .replaceAll(/\s+/g, ' ')
         .trim();
+      actualListValues.push(actualListValue);
+    }
+    return actualListValues;
+  }
+
+  async getActualListValuesWithoutTrim(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = await row
+        .getByRole('cell')
+        .nth(columnIndex)
+        .evaluate((node) => node.firstChild?.nodeValue ?? '');
       actualListValues.push(actualListValue);
     }
     return actualListValues;

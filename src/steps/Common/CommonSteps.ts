@@ -551,6 +551,7 @@ Then(
       chooseARecordTypeToSearchPage,
       teamManagerDashboardPage,
       plannedEndDateChangePage,
+      projectPersonnelChangePrincipalInvestigatorPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -682,6 +683,11 @@ Then(
       errorMessageFieldDataset =
         plannedEndDateChangePage.plannedEndDateChangePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = plannedEndDateChangePage;
+    } else if (pageKey == 'Project_Personnel_Change_Principal_Investigator_Page') {
+      errorMessageFieldDataset =
+        projectPersonnelChangePrincipalInvestigatorPage
+          .projectPersonnelChangePrincipalInvestigatorModificationPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectPersonnelChangePrincipalInvestigatorPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

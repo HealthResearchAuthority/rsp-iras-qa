@@ -12,7 +12,6 @@
     "new_full_project_title_textbox_label": "New full project title"
   },
   "Label_Texts": {
-    "enter_reference_numbers_hint_label": "Enter reference numbers for your project. If any of these don't apply to your project you can leave them blank.",
     "isrctn_reference_number_textbox_hint_label": "Enter a reference with the format ISRCTN followed by 8 numbers, for example ISRCTN12345678",
     "nct_reference_number_textbox_hint_label": "Enter a reference with the format NCT followed by 8 numbers, for example NCT12345678",
     "funder_name_textbox_hint_label": "Enter the name of the organisation responsible for funding all or part of this project",
@@ -52,10 +51,10 @@
   "Field_Summary_Error_Message_Invalid_Project_Reference": {
     "isrctn_reference_number_textbox": "Enter an ISRCTN number in the correct format",
     "nct_reference_number_textbox": "Enter an NCT number in the correct format",
-    "funder_name_textbox": "Funder name must be 100 characters or less",
-    "funder_reference_number_textbox": "Funder reference number must be 25 characters or less",
-    "other_reference_number_textbox": "Other reference number must be 25 characters or less",
-    "what_other_is_textbox": "What 'other' is must be 100 characters or less"
+    "funder_name_textbox": "Funder name must not contain more than 100 characters",
+    "funder_reference_number_textbox": "Funder reference number must not contain more than 25 characters",
+    "other_reference_number_textbox": "Other reference number must not contain more than 25 characters",
+    "what_other_is_textbox": "What 'other' is must not contain more than 100 characters"
   },
 
   "Modification_To_Add_Administrative_Details_Invalid_Data_Titles": {
@@ -65,11 +64,11 @@
     "which_titles_do_you_need_to_change_checkboxes": ["Short project title", "Full project title"],
     "Project_Reference": {
       "new_short_project_title_text": "QA_Automation - Max short study title length one two three four five six seven eight nine ten one END",
-      "new_full_project_title_text": "QA_Automation - Max full study title length one two three four five six seven eight nine ten one  END"
+      "new_full_project_title_text": "QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END QA_Automation - Max full study title length one two three four five six seven eight nine ten one END"
     }
   },
   "Field_Summary_Error_Message_Invalid_Project_Titles": {
-    "new_short_project_title_text": "Short project title must be between 3 to 100 characters",
-    "new_full_project_title_text": "Full project title must be 2000 characters or less"
+    "new_short_project_title_text": "Short project title must be between 3 and 100 characters",
+    "new_full_project_title_text": "Full project title must be between 3 and 2000 characters"
   }
 }

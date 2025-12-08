@@ -1,4 +1,4 @@
-@SysAdminUser  @ManageReviewBodiesSmokeFeature @Smoke
+@SysAdminUser @ManageReviewBodiesSmokeFeature @Smoke
 Feature: User Administration: Manage Review Bodies
 
     Background:
