@@ -923,7 +923,7 @@ export default class CommonItemsPage {
     return auditMap;
   }
   async getSummaryErrorMessages() {
-    const summaryErrorActualValues = await this.summaryErrorLinks.allTextContents();
+    const summaryErrorActualValues = (await this.summaryErrorLinks.allTextContents()).map((x) => x.trim());
     return summaryErrorActualValues;
   }
 

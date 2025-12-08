@@ -133,13 +133,16 @@
     "document_previously_approved_radio": "Yes"
   },
   "Mandatory_Data_Fields_Optional_Version_Date": {
+    "document_name_text": "DocName",
     "document_type_dropdown": "Evidence of insurance or indemnity",
     "document_previously_approved_radio": "Yes"
   },
   "Missing_Mandatory_Data_Fields_Optional_Version_Date": {
+    "document_name_text": "DocName",
     "document_type_dropdown": "Evidence of insurance or indemnity"
   },
   "Mandatory_Data_Fields_Mandatory_Version_Date": {
+    "document_name_text": "DocName",
     "document_type_dropdown": "Protocol / Clinical Investigation Plan",
     "sponsor_document_version_text": "1.5",
     "sponsor_document_day_text": "20",

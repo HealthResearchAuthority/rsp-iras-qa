@@ -21,7 +21,7 @@
   },
   "Contact_Details_Chief_Investigator_Valid_Data": {
     "specific_change_dropdown": "Contact details",
-    "select_contact_details_to_change_radio": "Chief investigator",
+    "select_contact_details_to_change_radio": "Chief Investigator",
     "chief_investigator_email_text": "ci_test_modified@test.com"
   },
   "Contact_Details_Sponsor_Contact_Valid_Data": {
@@ -79,27 +79,27 @@
     "contact_email_text": "other_contact_test_modified@test.com"
   },
   "Invalid_Email_CI_Data_One_Start_With_Dot": {
-    "select_contact_details_to_change_radio": "Chief investigator",
+    "select_contact_details_to_change_radio": "Chief Investigator",
     "chief_investigator_email_text": ".john@example.com"
   },
   "Invalid_Email_CI_Data_One_Double_Dot": {
-    "select_contact_details_to_change_radio": "Chief investigator",
+    "select_contact_details_to_change_radio": "Chief Investigator",
     "chief_investigator_email_text": "john..doe@example.com"
   },
   "Invalid_Email_CI_Data_One_TLD": {
-    "select_contact_details_to_change_radio": "Chief investigator",
+    "select_contact_details_to_change_radio": "Chief Investigator",
     "chief_investigator_email_text": "john.doe@example.1234"
   },
   "Invalid_Email_CI_Data_One_Reserved_Domain": {
-    "select_contact_details_to_change_radio": "Chief investigator",
+    "select_contact_details_to_change_radio": "Chief Investigator",
     "chief_investigator_email_text": "john.doe@localhost"
   },
   "Invalid_Email_CI_Data_One_Punycode": {
-    "select_contact_details_to_change_radio": "Chief investigator",
+    "select_contact_details_to_change_radio": "Chief Investigator",
     "chief_investigator_email_text": "john@example.xn--mgbh0fb"
   },
   "Invalid_Email_CI_Data_One_Max_Char": {
-    "select_contact_details_to_change_radio": "Chief investigator",
+    "select_contact_details_to_change_radio": "Chief Investigator",
     "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   },
   "Invalid_Email_SC_Data_One_Start_With_Dot": {

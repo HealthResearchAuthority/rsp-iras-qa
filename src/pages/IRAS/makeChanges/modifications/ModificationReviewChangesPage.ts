@@ -76,6 +76,12 @@ export default class ModificationReviewChangesPage {
   readonly principal_investigator_email_row: Locator;
   readonly principal_investigator_email_value: Locator;
   readonly principal_investigator_email_change_link: Locator;
+  readonly ci_first_name_text_row: Locator;
+  readonly ci_first_name_text_value: Locator;
+  readonly ci_first_name_text_change_link: Locator;
+  readonly ci_last_name_text_row: Locator;
+  readonly ci_last_name_text_value: Locator;
+  readonly ci_last_name_text_change_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -253,7 +259,7 @@ export default class ModificationReviewChangesPage {
       .locator('..')
       .locator('.govuk-summary-list__value');
     this.new_full_project_title_text_change_link = this.new_full_project_title_text_row.locator('..').getByRole('link');
-    this.select_details_to_change_row = this.page.locator('.govuk-summary-list__row');
+    this.select_details_to_change_row = this.page.getByTestId('Questions[0].SelectedOption');
     this.select_details_to_change_value = this.select_details_to_change_row
       .locator('..')
       .locator('.govuk-summary-list__value');
@@ -275,6 +281,16 @@ export default class ModificationReviewChangesPage {
     this.name_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.name_text);
     this.name_text_value = this.name_text_row.locator('..').locator('.govuk-summary-list__value');
     this.name_text_change_link = this.name_text_row.locator('..').getByRole('link');
+    this.ci_first_name_text_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.ci_first_name_text
+    );
+    this.ci_first_name_text_value = this.ci_first_name_text_row.locator('..').locator('.govuk-summary-list__value');
+    this.ci_first_name_text_change_link = this.ci_first_name_text_row.locator('..').getByRole('link');
+    this.ci_last_name_text_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.ci_last_name_text
+    );
+    this.ci_last_name_text_value = this.ci_last_name_text_row.locator('..').locator('.govuk-summary-list__value');
+    this.ci_last_name_text_change_link = this.ci_last_name_text_row.locator('..').getByRole('link');
     this.email_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.email_text, {
       exact: true,
     });
@@ -364,6 +380,12 @@ export default class ModificationReviewChangesPage {
         break;
       case 'name_text':
         await this.name_text_change_link.click();
+        break;
+      case 'ci_first_name_text':
+        await this.ci_first_name_text_change_link.click();
+        break;
+      case 'ci_last_name_text':
+        await this.ci_last_name_text_change_link.click();
         break;
       case 'email_text':
         await this.email_text_change_link.click();

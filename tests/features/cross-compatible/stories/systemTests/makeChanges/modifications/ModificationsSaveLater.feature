@@ -184,7 +184,7 @@ Feature: Modifications - Save Later
       | Changes                                            | Sponsor_Reference_Page |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Valid_Data_All_Fields  |
 
-  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications
   Scenario Outline: Verify the save for later functionality for sponsor reference modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -468,7 +468,7 @@ Feature: Modifications - Save Later
       | Valid_Data_All_Fields | NHS_HSC_Only               |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           |
 
-  @rsp-4108 @ValidateUiLabelsAffectedOrganisationQuestionsPage @KNOWN_DEFECT_RSP_5747
+  @rsp-4108 @ValidateUiLabelsAffectedOrganisationQuestionsPage
   Scenario Outline: Validate ui labels on modifications affected organisation questions page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -683,7 +683,7 @@ Feature: Modifications - Save Later
       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
 
-  @rsp-4171 @ModifyPlannedEndDateFromReviewChangesPage @KNOWN-DEFECT-RSP-5747 @fail
+  @rsp-4171 @ModifyPlannedEndDateFromReviewChangesPage
   Scenario Outline: Verify that user can change the planned end date from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -737,7 +737,7 @@ Feature: Modifications - Save Later
       | Change_Field         | Planned_End_Date      | Planned_End_Date_Change      | Organisation_Change_Affect | Affected_Org_Questions |
       | New_Planned_End_Date | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
-  @rsp-4171 @ModifyAffectedOrganisationTypesFromReviewChangesPage @KNOWN-DEFECT-RSP-4795 @looklater
+  @rsp-4171 @ModifyAffectedOrganisationTypesFromReviewChangesPage @looklater
   Scenario Outline: Verify that user can change the affected organisation types from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -789,7 +789,7 @@ Feature: Modifications - Save Later
       | Affected_Organisation_Types | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | NHS_HSC_Only                      | Valid_Data_All_Fields          | Valid_Data_All_Fields         |
       | Affected_Organisation_Types | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Non_NHS_HSC_Only           | NHS_HSC_Only                      | Valid_Data_Non_Nhs_All_Country | Valid_Data_All_Fields         |
 
-  @rsp-4171 @ModifyAffectedOrgQuestionsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795 @looklater
+  @rsp-4171 @ModifyAffectedOrgQuestionsFromReviewChangesPage @looklater
   Scenario Outline: Verify that user can change all affected organisation questions from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -872,7 +872,7 @@ Feature: Modifications - Save Later
       | Changes                                      |
       | Multiple_Changes_Planned_End_Date_Unfinished |
 
-  @rsp-4271 @rsp-5188 @ModificationsDetailsRemoveAllChanges @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4271 @rsp-5188 @ModificationsDetailsRemoveAllChanges
   Scenario Outline: Validate that user can remove all changes from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -904,7 +904,7 @@ Feature: Modifications - Save Later
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-  @rsp-4271 @UpdateDetailsFromModificationsDetailsPage @KNOWN_DEFECT_RSP-5275 @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4271 @UpdateDetailsFromModificationsDetailsPage
   Scenario Outline: Verify that user can update the details from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -940,7 +940,7 @@ Feature: Modifications - Save Later
       | Changes                           | Change_Field         | Planned_End_Date_Change      |
       | Multiple_Changes_Planned_End_Date | New_Planned_End_Date | Valid_Data_All_Fields_Change |
 
-  @rsp-4271 @ModificationsDetailsSaveForLater @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4271 @ModificationsDetailsSaveForLater
   Scenario Outline: Verify that user can save the modification progress from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -968,7 +968,7 @@ Feature: Modifications - Save Later
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-  @rsp-5675 @rsp-4539 @SaveForLaterWithoutSelectingDocumentType @KNOWN-DEFECT-RSP-5091-6299 @fail
+  @rsp-5675 @rsp-4539 @SaveForLaterWithoutSelectingDocumentType
   Scenario Outline: Verify the user is able to save for later without selecting document type in the review your information page
     Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1098,7 +1098,7 @@ Feature: Modifications - Save Later
       | Interviews_Or_Focus_Group_Topic_Guides           | mandatory    |
       | Questionnaire_Non_Validated                      | mandatory    |
 
-  @rsp-4980 @ContactDetailsModificationChangeLinks @KNOWN_DEFECT_RSP_5645 @fail
+  @rsp-4980 @ContactDetailsModificationChangeLinks
   Scenario Outline: Validate that user can update the saved contact details modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1157,7 +1157,7 @@ Feature: Modifications - Save Later
       | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Name_Text                | Contact_Name_Change                               | Contact_Details_Other_Page              |
       | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Email_Text               | Contact_Email_Change                              | Contact_Details_Other_Page              |
 
-  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_5645 @fail
+  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
   Scenario: Verify that save for later functionalities and page labels for contact details modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -1262,7 +1262,7 @@ Feature: Modifications - Save Later
       | Empty_Data_Other_Contact_All_Fields   | Other_Contact_Name       | Contact_Details_Other_Page              |
       | Empty_Data_Other_Contact_All_Fields   | Other_Contact_Email      | Contact_Details_Other_Page              |
 
-  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationChangeLinks @KNOWN_DEFECT_RSP_5645 @fail
+  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationChangeLinks
   Scenario Outline: Validate that user can update the saved chief investigator modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1316,11 +1316,11 @@ Feature: Modifications - Save Later
       | Research_Locations  | Changes                                                               | Change_Field             | Changes_Edited                                             | Page                                         |
       | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | Select_Details_To_Change | Change_CI_New_To_Temporary_Arrangement_Details             | Project_Personnel_Select_Change_Page         |
       | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | Chief_Investigator_Email | Chief_Investigator_New_Email_Name_Change                   | Project_Personnel_Chief_Investigator_Page    |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | Name_Text                | Chief_Investigator_New_Email_Name_Change                   | Project_Personnel_Chief_Investigator_Page    |
+      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | CI_First_Name_Text       | Chief_Investigator_New_Email_Name_Change                   | Project_Personnel_Chief_Investigator_Page    |
       | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | Chief_Investigator_Email | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | Name_Text                | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
+      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | CI_Last_Name_Text        | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationsLabelsAndSaveForLater
   Scenario: Verify that save for later functionalities and page labels for project personnel change chief investigator modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -1381,7 +1381,7 @@ Feature: Modifications - Save Later
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
-  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangeChiefInvestigator @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangeChiefInvestigator
   Scenario Outline: Validate the enter links on review your answers page for project personnel new chief investigator modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1409,12 +1409,12 @@ Feature: Modifications - Save Later
     Examples:
       | Modification_Data                              | Enter_Link               | Page                                         |
       | Empty_Data_Select_Details_To_Change_All_Fields | Select_Details_To_Change | Project_Personnel_Select_Change_Page         |
-      | Empty_Data_CI_Fields                           | Chief_Investigator       | Project_Personnel_Chief_Investigator_Page    |
-      | Empty_Data_CI_Fields                           | Name_Text                | Project_Personnel_Chief_Investigator_Page    |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Chief_Investigator       | Project_Personnel_Temporary_Arrangement_Page |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Name_Text                | Project_Personnel_Temporary_Arrangement_Page |
+      | Empty_Data_CI_Fields                           | Chief_Investigator_Email | Project_Personnel_Chief_Investigator_Page    |
+      | Empty_Data_CI_Fields                           | CI_First_Name_Text       | Project_Personnel_Chief_Investigator_Page    |
+      | Empty_Data_Temporary_Arrangement_All_Fields    | Chief_Investigator_Email | Project_Personnel_Temporary_Arrangement_Page |
+      | Empty_Data_Temporary_Arrangement_All_Fields    | CI_Last_Name_Text        | Project_Personnel_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationChangeLinks @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationChangeLinks
   Scenario Outline: Validate that user can update the saved principal investigator modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1431,8 +1431,14 @@ Feature: Modifications - Save Later
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes>' dataset
     And I fill the change principal investigator modifications page with '<Changes>' for 'create' action
-    And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes>' and '<Research_Locations>' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I can see the modification review changes page
@@ -1451,7 +1457,7 @@ Feature: Modifications - Save Later
     And I can see the '<Page>' page for modifications
     And I capture the page screenshot
     And I fill the change principal investigator modifications page with '<Changes_Edited>' for 'change' action
-    And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes_Edited>' and '<Research_Locations>' dataset
+    And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes_Edited>' dataset
     And I capture the page screenshot
     And I click the 'Save_Changes' button on the 'Modifications_Page'
     And I can see the modification review changes page
@@ -1466,13 +1472,13 @@ Feature: Modifications - Save Later
 
     Examples:
       | Research_Locations  | Changes                                                                   | Change_Field                 | Changes_Edited                                                 | Page                                                               |
-      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Select_Details_To_Change     | Change_CI_New_To_Temporary_Arrangement_Details                 | Project_Personnel_Principal_Investigator_Select_Change_Page        |
+      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Select_Details_To_Change     | Change_PI_New_To_Temporary_Arrangement_Details                 | Project_Personnel_Principal_Investigator_Select_Change_Page        |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Principal_Investigator_Email | Principal_Investigator_New_Email_Name_Change                   | Project_Personnel_Principal_Investigator_Page                      |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Name_Text                    | Principal_Investigator_New_Email_Name_Change                   | Project_Personnel_Principal_Investigator_Page                      |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data | Principal_Investigator_Email | Principal_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data | Name_Text                    | Principal_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationsLabelsAndSaveForLater
   Scenario: Verify that save for later functionalities and page labels for project personnel change principal investigator modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -1525,6 +1531,12 @@ Feature: Modifications - Save Later
     And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
     And I fill the change principal investigator modifications page with 'Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data' for 'create' action
     And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I can see the modification review changes page
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Modifications_Page'
@@ -1532,7 +1544,7 @@ Feature: Modifications - Save Later
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
-  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangePrincipalInvestigator @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangePrincipalInvestigator
   Scenario Outline: Validate the enter links on review your answers page for project personnel new principal investigator modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1551,6 +1563,12 @@ Feature: Modifications - Save Later
     And I fill the change principal investigator modifications page with '<Modification_Data>' for 'create' action
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I can see the modification review changes page
     And I capture the page screenshot
     Then I click enter link displayed on review your answers page for change principal investigator modification for '<Enter_Link>'
@@ -1558,12 +1576,11 @@ Feature: Modifications - Save Later
     And I capture the page screenshot
 
     Examples:
-      | Modification_Data                              | Enter_Link                   | Page                                                               |
-      | Empty_Data_Select_Details_To_Change_All_Fields | Select_Details_To_Change     | Project_Personnel_Principal_Investigator_Select_Change_Page        |
-      | Empty_Data_CI_Fields                           | Principal_Investigator_Email | Project_Personnel_Principal_Investigator_Page                      |
-      | Empty_Data_CI_Fields                           | Name_Text                    | Project_Personnel_Principal_Investigator_Page                      |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Principal_Investigator_Email | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Name_Text                    | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
+      | Modification_Data                           | Enter_Link                   | Page                                                               |
+      | Empty_Data_CI_Fields                        | Principal_Investigator_Email | Project_Personnel_Principal_Investigator_Page                      |
+      | Empty_Data_CI_Fields                        | Name_Text                    | Project_Personnel_Principal_Investigator_Page                      |
+      | Empty_Data_Temporary_Arrangement_All_Fields | Principal_Investigator_Email | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
+      | Empty_Data_Temporary_Arrangement_All_Fields | Name_Text                    | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
 
   @rsp-3929 @DownloadDocumentsOneByOneInModification
   Scenario Outline: Validate the user is able to download the documents one by one from documents added for page
@@ -2061,7 +2078,7 @@ Feature: Modifications - Save Later
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ModifyCurrentChangesInReviewAllChangesPage @KNOWN_DEFECT_RSP-5184 @fail
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ModifyCurrentChangesInReviewAllChangesPage
   Scenario Outline: Validate that user can create modification with multiple changes and modify current changes in review all changes page by clicking change link link from there
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2129,7 +2146,7 @@ Feature: Modifications - Save Later
       | Changes                           | New_Changes                              | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
 
-  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP_5495_5496_5285_6288_6324_6411 @fail
+  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission
   Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modifiction post submission page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2337,7 +2354,7 @@ Feature: Modifications - Save Later
       | Changes                                                  | Area_Of_Change                         | Specific_Change        | Project_Details_Title |
       | Modification_To_Add_Administrative_Details_Single_Change | Administrative_Details_For_The_Project | Project_Identification | Valid_Data_All_Fields |
 
-  @rsp-4094 @rsp-4095 @ProjectIdentificationEnterReferenceNumberSaveForLater @KNOWN_DEFECT_RSP-5747
+  @rsp-4094 @rsp-4095 @ProjectIdentificationEnterReferenceNumberSaveForLater
   Scenario Outline: Verify that user can create modifications and can save the changes on project identification enter reference number page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2375,63 +2392,3 @@ Feature: Modifications - Save Later
     Examples:
       | Changes                                                  | Area_Of_Change                         | Specific_Change        | Project_Details_Title | Label_Text_Data |
       | Modification_To_Add_Administrative_Details_Single_Change | Administrative_Details_For_The_Project | Project_Identification | Valid_Data_All_Fields | Label_Texts     |
-
-  @rsp-4314 @rsp-6167 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeOptionalDocumentVersionDate
-  Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are optional, for documents uploaded with an Incomplete status, and review the entered information
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I create '<Changes>' for the created modification
-    And I can see the modifications details page
-    And I capture the page screenshot
-    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
-    Then I can see add supporting documents page
-    And I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I can see the review uploaded documents for '<Specific_Change>' page
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    And I capture the page screenshot
-    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I can see the add document details for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
-    And I can see the review your document information page
-    Then I validate the field values 'Valid_Data_All_Fields' displayed in the review your document information page
-    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
-    Then I can see the add sponsor reference page
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I can see the modification progress saved successful message on project overview page
-    And I can see the project overview page
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    And I capture the page screenshot
-    Then I can see the review all changes page
-
-    Examples:
-      | Changes                                | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                                                                                       | Version_Date | Document_Details_Info_Optional          |
-      | Change_Of_Sponsor_legal_Representative | Change_Of_Sponsor_legal_Representative       | PNG_File              | Non_REC_Study_Types                         | Evidence_Of_Insurance_Or_Indemnity                                                                            | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant_Facing_Material_Other                                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Questionnaire_Validated                                                                                       | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Student_Research_Criteria_Eligibility_Declaration                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Dear_Investigator_Letter                                                                                      | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Funder_Letters_Outcome_Of_Funding_Panel                                                                       | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Statisticians_Letter                                                                                          | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referees_Or_Other_Scientific_Critique_Report                                                                  | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Sponsor_Site_Agreement                                                                                        | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Schedule_Of_Events_Or_Schedule_Of_Events_Cost_Attribution_Template_SoECAT                                     | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Data_Flow_Diagram_Or_Documents_Demonstrating_Conformity_With_Data_Protection_And_Confidentiality_Requirements | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Miscellaneous                                                                                                 | optional     | Valid_Data_Fields_Optional_Version_Date |
-      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher_Principal_Investigator                                          | optional     | Valid_Data_Mandatory_Fields             |
-      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher_Chief_Investigator                                              | optional     | Valid_Data_Mandatory_Fields             |
-      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher_Academic_Supervisor                                             | optional     | Valid_Data_Mandatory_Fields             |
-      | Change_Of_Sponsor_legal_Representative | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum_Vitae_CV_Suitability_Of_Researcher_Student                                                         | optional     | Valid_Data_Mandatory_Fields             |
-
