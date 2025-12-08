@@ -2337,7 +2337,7 @@ Feature: Modifications - Save Later
       | Changes                                                  | Area_Of_Change                         | Specific_Change        | Project_Details_Title |
       | Modification_To_Add_Administrative_Details_Single_Change | Administrative_Details_For_The_Project | Project_Identification | Valid_Data_All_Fields |
 
-  @rsp-4094 @rsp-4095 @ProjectIdentificationEnterReferenceNumberSaveForLater @KNOWN_DEFECT_RSP-5747
+  @rsp-4094 @rsp-4095 @ProjectIdentificationEnterReferenceNumberSaveForLater
   Scenario Outline: Verify that user can create modifications and can save the changes on project identification enter reference number page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

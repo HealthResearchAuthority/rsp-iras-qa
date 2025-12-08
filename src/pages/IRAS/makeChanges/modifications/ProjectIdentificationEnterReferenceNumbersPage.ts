@@ -36,10 +36,6 @@ export default class ProjectIdentificationEnterReferenceNumbersPage {
         .heading_label,
     });
 
-    this.enter_reference_numbers_hint_label = this.page.getByText(
-      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.enter_reference_numbers_hint_label
-    );
-
     this.isrctn_reference_number_textbox_hint_label = this.page.getByText(
       projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.isrctn_reference_number_textbox_hint_label
     );
