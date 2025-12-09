@@ -52,13 +52,18 @@ Then(
   'I can see the list of modifications received for sponsor approval is sorted by {string} order of the {string}',
   async ({ commonItemsPage, sponsorAuthorisationsPage }, sortDirection: string, sortField: string) => {
     const searchColumnIndex = await sponsorAuthorisationsPage.getColumnIndex(sortField);
-    const actualList = await commonItemsPage.getActualListValuesWithoutTrim(
-      commonItemsPage.tableBodyRows,
-      searchColumnIndex
-    );
+    const field = sortField.toLowerCase();
+    let actualList: any;
+    if (field === 'modification id') {
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
+    } else {
+      actualList = await commonItemsPage.getActualListValuesWithoutTrim(
+        commonItemsPage.tableBodyRows,
+        searchColumnIndex
+      );
+    }
     let sortedModsList: string[];
     const direction = sortDirection.toLowerCase();
-    const field = sortField.toLowerCase();
     if (field === 'modification id') {
       sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else {

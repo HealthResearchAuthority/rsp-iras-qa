@@ -760,7 +760,7 @@ Feature: Create Project
     And I can see project details along with 'Valid_Data_All_Fields' sponsor organisation and 'Valid_Planned_End_Date' on the project overview page
     And I capture the page screenshot
 
-  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage
+  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6187
   Scenario: Validate return to iras id button and back button functionality in confirm project details page
     And I capture the page screenshot
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -2052,7 +2052,7 @@ Feature: Create Project
       | Advanced_Filter_One_All | Advanced_Filter_One_All |
       | Advanced_Filter_Two     | Advanced_Filter_Two     |
 
-  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650 @KNOWN_DEFECT_RSP_6411 @fail
+  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650
   Scenario: Verify that active filters remain visible during pagination, and that they are cleared when navigating to a different page
     And I have navigated to the 'My_Research_Page'
     And I can see the 'My_Research_Page'
