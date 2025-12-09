@@ -19,7 +19,7 @@ Feature: Sort, search and pagination of users list in the selected sponsor org
     Then I can see the user list page of the 'sponsor organisation'
     And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'first name' on the 'first' page
 
-  @rsp-5233 @sortUserListByColumn @fail @KNOWN-DEFECT-RSP-6464
+  @rsp-5233 @sortUserListByColumn @KNOWN-DEFECT-RSP-6464
   Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column
     When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
