@@ -145,15 +145,15 @@ Feature: Add user to sponsor organisation
         And the no search results found message is displayed
         And I capture the page screenshot
 
-    @rsp-3890 @addUserSponsorOrgSearchMultiTerms
-    Scenario Outline: Verify the add user to sponsor organisation search utilises AND logic to produce accurate search results
-        When I fill the search input for searching 'adding users' with '<Initial_Search_Query>' as the search query
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-        And I capture the page screenshot
-        Then the system displays user records matching the search criteria
-        And the list displays 'multiple user records'
-        And I capture the page screenshot
-        Examples:
-            | Initial_Search_Query              |
-            | Admin_User_Full_Name_Email_Prefix |
+# @rsp-3890 @addUserSponsorOrgSearchMultiTerms @DataIssueInProd
+# Scenario Outline: Verify the add user to sponsor organisation search utilises AND logic to produce accurate search results
+#     When I fill the search input for searching 'adding users' with '<Initial_Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+#     And I capture the page screenshot
+#     Then the system displays user records matching the search criteria
+#     And the list displays 'multiple user records'
+#     And I capture the page screenshot
+#     Examples:
+#         | Initial_Search_Query              |
+#         | Admin_User_Full_Name_Email_Prefix |
