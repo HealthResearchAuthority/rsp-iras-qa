@@ -84,14 +84,14 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-    # And I can see the ui labels in sponsor check and authorise page
+    And I can see the ui labels in sponsor check and authorise page
     And I capture the page screenshot
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
+    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     When I click the 'Documents' link on the 'Sponsor_Check_And_Authorise_Page'
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -106,10 +106,10 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
-    And I can see the searched modification to be present in the list with date actioned with 'with reviewbody' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with date actioned with 'with review body' status in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
-    # And I can see the modification page for sponsor view
+    And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
@@ -207,14 +207,14 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-    # And I can see the ui labels in sponsor check and authorise page
+    And I can see the ui labels in sponsor check and authorise page
     And I capture the page screenshot
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
+    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     When I click the 'Documents' link on the 'Sponsor_Check_And_Authorise_Page'
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -232,7 +232,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I can see the searched modification to be present in the list with date actioned with 'Approved' status in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
-    # And I can see the modification page for sponsor view
+    And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_Approved' is displayed on the page
@@ -327,14 +327,14 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-    # And I can see the ui labels in sponsor check and authorise page
+    And I can see the ui labels in sponsor check and authorise page
     And I capture the page screenshot
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
+    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
     And I capture the page screenshot
     When I click the 'Documents' link on the 'Sponsor_Check_And_Authorise_Page'
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -352,7 +352,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I can see the searched modification to be present in the list with date actioned with 'With review body' status in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
-    # And I can see the modification page for sponsor view
+    And I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page

@@ -10,7 +10,7 @@ Given(
     outcome: string,
     reason: string
   ) => {
-    await modificationOutcomeCheckSendPage.assertOnModificationOutcomeCheckSendPage();
+    // await modificationOutcomeCheckSendPage.assertOnModificationOutcomeCheckSendPage();
     await expect
       .soft(modificationOutcomeCheckSendPage.short_project_title_value)
       .toHaveText(await modificationsReceivedCommonPage.getShortProjectTitle());

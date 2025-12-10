@@ -11,7 +11,6 @@ export default class ProjectPersonnelChangeChiefInvestigatorPage {
   readonly name_text: Locator;
   readonly first_name_text: Locator;
   readonly last_name_text: Locator;
-  readonly chief_investigator_temporary_arrangement_email_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -20,12 +19,13 @@ export default class ProjectPersonnelChangeChiefInvestigatorPage {
       projectPersonnelChangeChiefInvestigatorModificationPageTestData;
 
     //Locators
-    this.select_details_to_change_radio = this.page.getByTestId('[id^="IQA0889_"]');
-    this.chief_investigator_email_text = this.page
-      .getByText(
-        this.projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.chief_investigator_email_label,
-        { exact: true }
-      )
+    this.select_details_to_change_radio = this.page.getByTestId(/^IQA0889_OPT064/);
+    this.chief_investigator_email_text = this.page.getByTestId(/^(IQA0319_Text|IQA0311_Text)$/);
+
+    this.first_name_text = this.page
+      .getByText(this.projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.first_name_label, {
+        exact: true,
+      })
       .locator('..')
       .locator('input');
 

@@ -121,5 +121,5 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and not ap
         And I capture the page screenshot
 
         Examples:
-            | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome      | Outcome_Reason | Outcome_Status               |
-            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Not_Approved | Blank          | Modification_Status_Approved |
+            | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome      | Outcome_Reason   | Outcome_Status               |
+            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Not_Approved | Lack_Of_Evidence | Modification_Status_Approved |

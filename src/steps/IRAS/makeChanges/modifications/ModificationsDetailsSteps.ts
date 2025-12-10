@@ -61,13 +61,12 @@ Then('I validate all fields on modification page {string}', async ({ modificatio
   for (let index = 0; index < actualValuesArray.length; index++) {
     const changeName = changeNames[index];
     const expectedData = changesDataset[changeName];
-    for (const key of Object.keys(expectedData)) {
-      const expectedValues = await modificationsCommonPage.getExpectedValues(expectedData, key, index);
-      expect.soft(actualValuesArray[index].individualChangeStatus).toBe(expectedValues.expectedChangeStatus);
-      expect.soft(actualValuesArray[index].areaOfChangeSubHeading).toBe(expectedValues.expectedAreaOfChangeSubHeading);
-      if (expectedValues.expectedSpecificChangeValue) {
-        expect.soft(actualValuesArray[index].specificChangeValue).toBe(expectedValues.expectedSpecificChangeValue);
-      }
+    const keysString = Object.keys(expectedData).join(', ');
+    const expectedValues = await modificationsCommonPage.getExpectedValues(expectedData, keysString, index);
+    expect.soft(actualValuesArray[index].individualChangeStatus).toBe(expectedValues.expectedChangeStatus);
+    expect.soft(actualValuesArray[index].areaOfChangeSubHeading).toBe(expectedValues.expectedAreaOfChangeSubHeading);
+    if (expectedValues.expectedSpecificChangeValue) {
+      expect.soft(actualValuesArray[index].specificChangeValue).toBe(expectedValues.expectedSpecificChangeValue);
     }
   }
 });

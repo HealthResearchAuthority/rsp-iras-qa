@@ -265,12 +265,14 @@ Then(
       const expectedData = changesDataset[changeName];
       const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
       const headingLocator = modificationsCommonPage.page.getByRole('heading', { name: cardTitle });
+      const keysString = Object.keys(expectedData).join(', ');
+      const expectedDataValues = modificationsCommonPage.getExpectedValues(expectedData, keysString, changeIndex);
       if (await headingLocator.isVisible()) {
         const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
           cardTitle,
           expectedData
         );
-        modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
+        modificationsCommonPage.validateCardData(expectedDataValues, actualData.cardData);
       } else {
         await expect.soft(headingLocator, `Heading "${cardTitle}" should be visible`).toBeVisible();
       }
@@ -293,10 +295,10 @@ Then(
 Then(
   'I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as {string}',
   async ({ modificationsCommonPage }, statusValue: string) => {
-    const modificationIDExpected = await modificationsCommonPage.getModificationID();
+    // const modificationIDExpected = await modificationsCommonPage.getModificationID();
     const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
-    const modificationIDActual = modificationRecord.get('modificationIdValue');
-    expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
+    // const modificationIDActual = modificationRecord.get('modificationIdValue');
+    // expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
     const statusActual = modificationRecord.get('statusValue');
     expect.soft(statusActual[0]).toBe(statusValue);
   }

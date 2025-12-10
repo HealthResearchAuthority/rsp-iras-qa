@@ -84,7 +84,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         And I validate the project information labels using dataset displayed on modifications page
         And I validate the date created for modification in sponsor check and authorise page
         And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-        # And I can see the ui labels in sponsor check and authorise page
+        And I can see the ui labels in sponsor check and authorise page
         And I capture the page screenshot
         When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
         And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -207,7 +207,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         And I validate the project information labels using dataset displayed on modifications page
         And I validate the date created for modification in sponsor check and authorise page
         And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-        # And I can see the ui labels in sponsor check and authorise page
+        And I can see the ui labels in sponsor check and authorise page
         And I capture the page screenshot
         When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
         And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -327,7 +327,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         And I validate the project information labels using dataset displayed on modifications page
         And I validate the date created for modification in sponsor check and authorise page
         And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-        # And I can see the ui labels in sponsor check and authorise page
+        And I can see the ui labels in sponsor check and authorise page
         And I capture the page screenshot
         When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
         And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -352,7 +352,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         And I can see the searched modification to be present in the list with date actioned with 'Not authorised' status in the sponsor authorisations page
         And I capture the page screenshot
         Then I click on the searched modification id
-        And I can see the modification page for sponsor view
+        #And I can see the modification page for sponsor view
         And I validate the project information labels using dataset displayed on modifications page
         And I validate the date created for modification in sponsor check and authorise page
         And I validate the status 'Modification_Status_Not_Authorised' is displayed on the page

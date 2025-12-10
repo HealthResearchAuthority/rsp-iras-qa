@@ -18,14 +18,7 @@ export default class ProjectPersonnelChangePrincipalInvestigatorPage {
 
     //Locators
     this.select_details_to_change_radio = this.page.getByTestId(/^IQA0989/);
-    this.principal_investigator_email_text = this.page
-      .getByText(
-        this.projectPersonnelChangePrincipalInvestigatorModificationPageTestData.Label_Texts
-          .principal_investigator_email_label,
-        { exact: true }
-      )
-      .locator('..')
-      .locator('input');
+    this.principal_investigator_email_text = this.page.getByTestId(/^(IQA0633_Text|IQA0573_Text)$/);
     this.name_text = this.page
       .getByText(this.projectPersonnelChangePrincipalInvestigatorModificationPageTestData.Label_Texts.name_label, {
         exact: true,

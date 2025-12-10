@@ -1,4 +1,4 @@
-@run @Regression @ApplicantUser @createModifications
+@Regression @ApplicantUser @createModifications
 Feature: Create Modification
 
   Background:
@@ -73,7 +73,7 @@ Feature: Create Modification
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes page
-    # And I validate the change details are displayed as per the '<Changes>' dataset
+    And I validate the change details are displayed as per the '<Changes>' dataset
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -90,13 +90,13 @@ Feature: Create Modification
     Then I can see the project overview page
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
-    # And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     Then I validate overall modification ranking on post approval tab
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate the change details are displayed as per the '<Changes>' dataset
+    And I validate the change details are displayed as per the '<Changes>' dataset
     And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
     And I can see the 'documents_table' ui labels on the modification post submission page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -169,7 +169,7 @@ Feature: Create Modification
     And I capture the page screenshot
     Then I can see the review all changes page
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate the change details are displayed as per the '<Changes>' dataset
+    And I validate the change details are displayed as per the '<Changes>' dataset
     And I can see the 'supporting_documents_table' ui labels on the review all changes page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
     And I can see the 'Complete' status displayed for all documents in the table
@@ -189,7 +189,7 @@ Feature: Create Modification
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate the change details are displayed as per the '<Changes>' dataset
+    And I validate the change details are displayed as per the '<Changes>' dataset
     And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
     And I can see the 'documents_table' ui labels on the modification post submission page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
@@ -274,7 +274,7 @@ Feature: Create Modification
     Then I can see the review all changes page
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate the change details are displayed as per the '<Changes>' dataset
+    And I validate the change details are displayed as per the '<Changes>' dataset
     And I can see the 'supporting_documents_table' ui labels on the review all changes page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
     And I can see the 'Complete' status displayed for all documents in the table
@@ -290,12 +290,12 @@ Feature: Create Modification
     Then I validate overall modification ranking on post approval tab
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
-    # And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate the change details are displayed as per the '<Changes>' dataset
+    And I validate the change details are displayed as per the '<Changes>' dataset
     And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
     And I can see the 'documents_table' ui labels on the modification post submission page
     And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table

@@ -686,3 +686,14 @@ export async function processKnownDefectsAsync(jsonDir: string): Promise<number>
   }
   return knownDefectFailCount;
 }
+
+export function normalizeUiText(input: string | null | undefined): string {
+  const s = (input ?? '')
+    .normalize('NFKC')
+    .replace(/[’‘]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/\u00A0/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return s;
+}
