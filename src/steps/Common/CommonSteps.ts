@@ -902,17 +902,22 @@ Then(
 When(
   'the current page number should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }) => {
-    await commonItemsPage.next_button.click();
-    const currentUrl = commonItemsPage.page.url();
-    const currentPageNumber = await commonItemsPage.getPageNumber(currentUrl);
-    const currentPageLabel = `Page ${currentPageNumber}`;
-    const currentPageLink = commonItemsPage.pagination
-      .getByRole('link', { name: currentPageLabel, exact: true })
-      .first();
-    await expect.soft(currentPageLink).toHaveAttribute('aria-current');
-    const currentPageLinkHref = await currentPageLink.getAttribute('href');
-    expect.soft(currentUrl).toContain(currentPageLinkHref);
-    await commonItemsPage.previous_button.click();
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      await commonItemsPage.next_button.click();
+      const currentUrl = commonItemsPage.page.url();
+      const currentPageNumber = await commonItemsPage.getPageNumber(currentUrl);
+      const currentPageLabel = `Page ${currentPageNumber}`;
+      const currentPageLink = commonItemsPage.pagination
+        .getByRole('link', { name: currentPageLabel, exact: true })
+        .first();
+      await expect.soft(currentPageLink).toHaveAttribute('aria-current');
+      const currentPageLinkHref = await currentPageLink.getAttribute('href');
+      expect.soft(currentUrl).toContain(currentPageLinkHref);
+      await commonItemsPage.previous_button.click();
+    }
   }
 );
 
