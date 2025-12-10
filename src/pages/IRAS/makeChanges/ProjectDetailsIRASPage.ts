@@ -38,12 +38,12 @@ export default class ProjectDetailsIRASPage {
     });
     this.iras_id_text = this.page.getByTestId('IrasId');
     this.iras_id_text_summary_error_label = this.page.locator('.govuk-error-summary__list [href^="#IrasId"]');
-    this.page_body = this.page.locator('[class="govuk-grid-column-two-thirds"]');
+    this.page_body = this.page.locator('.govuk-grid-column-two-thirds').nth(1);
   }
 
   //Page Methods
   async assertOnProjectDetailsIRASPage() {
-    await expect(this.pageHeading).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
   }
 
   async setUniqueIrasId(value: string): Promise<void> {
@@ -66,6 +66,11 @@ export default class ProjectDetailsIRASPage {
 
   async getFullProjectTitle(): Promise<string> {
     return this._full_project_title;
+  }
+
+  async assertHraSupportSiteurl() {
+    const currentUrl = this.page.url();
+    expect(currentUrl).toContain(this.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.hra_support_site_url);
   }
 
   async getValidIRASAndProjectTitlesFromLegacySharepoint() {

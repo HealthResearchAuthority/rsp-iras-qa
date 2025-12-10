@@ -155,6 +155,7 @@ export default class CommonItemsPage {
   readonly myAccountGovUkBreadCrumbsLink: Locator;
   readonly page_heading: Locator;
   readonly govUkBackLink: Locator;
+  readonly removeLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -425,6 +426,7 @@ export default class CommonItemsPage {
       .getByTestId('govuk-notification-banner-title')
       .getByText(this.commonTestData.success_header_label);
     this.page_heading = this.page.getByRole('heading');
+    this.removeLink = this.page.locator('.govuk-link').getByText(commonTestData.remove_label);
   }
 
   //Getters & Setters for Private Variables
@@ -921,7 +923,7 @@ export default class CommonItemsPage {
     return auditMap;
   }
   async getSummaryErrorMessages() {
-    const summaryErrorActualValues = await this.summaryErrorLinks.allTextContents();
+    const summaryErrorActualValues = (await this.summaryErrorLinks.allTextContents()).map((x) => x.trim());
     return summaryErrorActualValues;
   }
 
@@ -1660,6 +1662,18 @@ export default class CommonItemsPage {
       const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent())
         .replaceAll(/\s+/g, ' ')
         .trim();
+      actualListValues.push(actualListValue);
+    }
+    return actualListValues;
+  }
+
+  async getActualListValuesWithoutTrim(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = await row
+        .getByRole('cell')
+        .nth(columnIndex)
+        .evaluate((node) => node.firstChild?.nodeValue ?? '');
       actualListValues.push(actualListValue);
     }
     return actualListValues;

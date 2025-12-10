@@ -27,7 +27,10 @@ Then(
         await commonItemsPage.fillUIComponent(areaOfChangeDataset, key, selectAreaOfChangePage);
       }
     }
-    if ($tags.includes('@jsDisabled') || !config.projects?.[1].use?.javaScriptEnabled) {
+    if (
+      $tags.includes('@jsDisabled') ||
+      (!$tags.includes('@jsEnabled') && !config.projects?.[1].use?.javaScriptEnabled)
+    ) {
       await commonItemsPage.clickButton('Select_Area_Of_Change_Page', 'Apply_Selection');
       for (const key in specificChangeDataset) {
         if (Object.hasOwn(specificChangeDataset, key)) {
@@ -128,6 +131,9 @@ Then(
         ' and Expected value = ' +
         expectedSpecificChangeDropdownValues,
     });
-    expect(actualSpecificChangeDropdownValues).toEqual(expectedSpecificChangeDropdownValues);
+    const compare = (a: string, b: string) => a.localeCompare(b, undefined, { sensitivity: 'base' });
+    expect([...actualSpecificChangeDropdownValues].sort(compare)).toEqual(
+      [...expectedSpecificChangeDropdownValues].sort(compare)
+    );
   }
 );

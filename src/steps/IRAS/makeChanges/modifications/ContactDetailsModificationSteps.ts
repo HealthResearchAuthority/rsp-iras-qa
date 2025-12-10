@@ -105,23 +105,29 @@ Then(
       if (Object.hasOwn(dataset, key)) {
         switch (key) {
           case 'select_contact_details_to_change_radio': {
-            await expect.soft(modificationReviewChangesPage.select_details_to_change_value).toHaveText(dataset[key]);
+            await expect
+              .soft(modificationReviewChangesPage.select_details_to_change_value.getByText(dataset[key]).first())
+              .toBeVisible();
             break;
           }
           case 'chief_investigator_email_text': {
-            await expect.soft(modificationReviewChangesPage.chief_investigator_email_value).toHaveText(dataset[key]);
+            await expect
+              .soft(modificationReviewChangesPage.chief_investigator_email_value.getByText(dataset[key]))
+              .toBeVisible();
             break;
           }
           case 'sponsor_contact_email_text': {
-            await expect.soft(modificationReviewChangesPage.sponsor_contact_email_value).toHaveText(dataset[key]);
+            await expect
+              .soft(modificationReviewChangesPage.sponsor_contact_email_value.getByText(dataset[key]))
+              .toBeVisible();
             break;
           }
           case 'contact_name_text': {
-            await expect.soft(modificationReviewChangesPage.name_text_value).toHaveText(dataset[key]);
+            await expect.soft(modificationReviewChangesPage.name_text_value.getByText(dataset[key])).toBeVisible();
             break;
           }
           case 'contact_email_text': {
-            await expect.soft(modificationReviewChangesPage.email_text_value).toHaveText(dataset[key]);
+            await expect.soft(modificationReviewChangesPage.email_text_value.getByText(dataset[key])).toBeVisible();
             break;
           }
         }

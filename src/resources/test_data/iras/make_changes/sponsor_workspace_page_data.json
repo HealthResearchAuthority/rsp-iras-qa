@@ -1,6 +1,6 @@
 {
   "Sponsor_Workspace_Page": {
-    "pageHeading": "Sponsor workspace"
+    "pageHeading": "Sponsor"
   },
   "Label_Texts": {
     "sponsor_workspace_label": "View and manage authorisations for projects {{sponsor_organisation_name}} sponsors or is responsible for authorising on behalf of the sponsor."

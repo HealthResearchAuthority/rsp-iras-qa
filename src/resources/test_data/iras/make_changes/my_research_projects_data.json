@@ -31,9 +31,7 @@
     "short_project_title_link": "Short project title",
     "iras_id_title": "IRAS ID",
     "date_created_title": "Date created",
-    "status_title": "Status",
-    "selected_checkboxes_hint_label": "selected",
-    "active_filters_label": "Active filters"
+    "status_title": "Status"
   },
   "Error_Validation": {
     "Invalid_Date_Created_Range_To_Before_From_Error": {

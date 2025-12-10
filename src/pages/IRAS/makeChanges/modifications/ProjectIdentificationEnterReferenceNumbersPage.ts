@@ -36,10 +36,6 @@ export default class ProjectIdentificationEnterReferenceNumbersPage {
         .heading_label,
     });
 
-    this.enter_reference_numbers_hint_label = this.page.getByText(
-      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.enter_reference_numbers_hint_label
-    );
-
     this.isrctn_reference_number_textbox_hint_label = this.page.getByText(
       projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.isrctn_reference_number_textbox_hint_label
     );
@@ -134,7 +130,8 @@ export default class ProjectIdentificationEnterReferenceNumbersPage {
           .new_full_project_title_textbox_label
       )
       .locator('..')
-      .getByTestId('IQA0789_Text');
+      .getByTestId('IQA0789_Text')
+      .first();
   }
 
   //Page Methods

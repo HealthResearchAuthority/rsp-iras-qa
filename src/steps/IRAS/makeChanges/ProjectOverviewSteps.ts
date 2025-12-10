@@ -32,14 +32,14 @@ Then(
         projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.short_project_title_text;
     } else {
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
-      expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+      expectedProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trim();
     }
     const projectTitle = confirmStringNotNull(await projectOverviewPage.project_overview_heading.textContent());
     const projectDetails = projectTitle.split('\n');
     const irasId = projectDetails[0].split(' ');
     const actualIrasId = irasId[2];
     const shortProjectTitle = projectDetails[3].trim();
-    const actualshortProjectTitle = shortProjectTitle.replace('Short project title: ', '');
+    const actualshortProjectTitle = shortProjectTitle.replace('Short project title: ', '').trim();
     expect.soft(actualshortProjectTitle).toBe(expectedProjectTitle);
     expect.soft(actualIrasId).toBe(expectedIrasId);
   }
@@ -121,7 +121,7 @@ Then(
         projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details.short_project_title_text;
     } else {
       expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
-      expectedProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+      expectedProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trim();
     }
     const actualProjectTitle = confirmStringNotNull(
       await projectOverviewPage.project_details_tab_short_project_title.textContent()
@@ -142,8 +142,8 @@ Then(
     } else {
       dataset = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetName];
     }
-    const expectedChiefInvestigatorFirstName = dataset.chief_investigator_first_name;
-    const expectedChiefInvestigatorLastName = dataset.chief_investigator_last_name;
+    const expectedChiefInvestigatorFirstName = dataset.chief_investigator_first_name_text;
+    const expectedChiefInvestigatorLastName = dataset.chief_investigator_last_name_text;
     const expectedChiefInvestigatorEmail = dataset.chief_investigator_email_text;
     const actualChiefInvestigatorFirstName = confirmStringNotNull(
       await projectOverviewPage.project_team_tab_chief_investigator_first_name.textContent()
@@ -400,7 +400,7 @@ Then(
     const actualIrasIdUpdated = actualIrasId
       .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.project_iras_id_label, '')
       .trim();
-    const expectedShortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+    const expectedShortProjectTitle = (await projectDetailsIRASPage.getShortProjectTitle()).trim();
     const actualShortProjectTitle = confirmStringNotNull(
       (await projectOverviewPage.project_short_title_label.textContent())
         ?.replaceAll(/[’‘]/g, "'")

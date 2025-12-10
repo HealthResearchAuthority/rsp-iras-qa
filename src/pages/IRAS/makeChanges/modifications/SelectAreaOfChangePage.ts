@@ -79,15 +79,17 @@ export default class ModificationsSelectAreaOfChangePage {
   async selectAreaOfChangeInModificationsPage(dataset: any, $tags: any) {
     const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        if (key === 'area_of_change_dropdown' || key === 'specific_change_dropdown') {
-          if ($tags.includes('@jsDisabled') || !config.projects?.[1].use?.javaScriptEnabled) {
-            await commonItemsPage.clickButton('Select_Area_Of_Change_Page', 'Apply_Selection');
-            await commonItemsPage.fillUIComponent(dataset, key, this);
-          } else {
-            await commonItemsPage.fillUIComponent(dataset, key, this);
-          }
+      if (!Object.hasOwn(dataset, key)) continue;
+      if (key === 'area_of_change_dropdown') {
+        await commonItemsPage.fillUIComponent(dataset, key, this);
+        if (
+          $tags.includes('@jsDisabled') ||
+          (!$tags.includes('@jsEnabled') && !config.projects?.[1].use?.javaScriptEnabled)
+        ) {
+          await commonItemsPage.clickButton('Select_Area_Of_Change_Page', 'Apply_Selection');
         }
+      } else if (key === 'specific_change_dropdown') {
+        await commonItemsPage.fillUIComponent(dataset, key, this);
       }
     }
     const saveAndContinueButton = commonItemsPage.buttonTextData['Select_Area_Of_Change_Page']['Save_Continue'];

@@ -128,6 +128,9 @@ When(
           )
         );
         break;
+      case 'My_Modifications_Tasklist_No_Result_Page':
+        await myModificationsTasklistPage.assertOnMyModificationsTaskNoResultPage();
+        break;
       case 'Select_Study_Wide_Reviewer_Page':
         await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
         break;
@@ -304,6 +307,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
       linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
+  } else if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
+    commonItemsPage.removeLink.click();
   } else {
     await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
@@ -545,6 +550,8 @@ Then(
       sponsorCheckAndAuthorisePage,
       chooseARecordTypeToSearchPage,
       teamManagerDashboardPage,
+      plannedEndDateChangePage,
+      projectPersonnelChangePrincipalInvestigatorPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -672,6 +679,15 @@ Then(
       errorMessageFieldDataset =
         teamManagerDashboardPage.teamManagerDashboardPageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
       page = teamManagerDashboardPage;
+    } else if (pageKey == 'Planned_End_Date_Change_Page') {
+      errorMessageFieldDataset =
+        plannedEndDateChangePage.plannedEndDateChangePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = plannedEndDateChangePage;
+    } else if (pageKey == 'Project_Personnel_Change_Principal_Investigator_Page') {
+      errorMessageFieldDataset =
+        projectPersonnelChangePrincipalInvestigatorPage
+          .projectPersonnelChangePrincipalInvestigatorModificationPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectPersonnelChangePrincipalInvestigatorPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

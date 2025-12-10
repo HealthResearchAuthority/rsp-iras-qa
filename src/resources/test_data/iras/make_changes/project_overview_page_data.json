@@ -28,7 +28,7 @@
   },
   "Project_URL": {
     "Test_Project": "projectoverview/projectdetails?projectRecordId=20251202184313",
-    "Salford Primary Care Workforce Study": "projectoverview/projectdetails?projectRecordId=20251202184313"
+    "Salford_Primary_Care_Workforce_Study": "projectoverview/projectdetails?projectRecordId=20251202184313"
   },
   "Modification_Status_Draft": {
     "status": "Draft"
@@ -40,27 +40,27 @@
   },
   "Valid_Research_Locations_Details_Nhs": {
     "Research_Locations": {
-      "participating_nations": "England Northern Ireland Scotland Wales",
+      "participating_nations": "EnglandScotlandNorthern IrelandWales",
       "nhs_hsc_organisations": "Yes",
       "lead_nation": "England"
     }
   },
   "Valid_Research_Locations_Details_Non_Nhs": {
     "Research_Locations": {
-      "participating_nations": "Northern Ireland Scotland Wales",
+      "participating_nations": "EnglandScotlandNorthern IrelandWales",
       "nhs_hsc_organisations": "No",
       "lead_nation": ""
     }
   },
-  "Salford Primary Care Workforce Study": {
+  "Salford_Primary_Care_Workforce_Study": {
     "status": "Active",
     "Project_Details": {
       "iras_id": "222827",
       "short_project_title_text": "Salford Primary Care Workforce Study"
     },
     "Project_Team": {
-      "chief_investigator_first_name": "Chief Investigator First name",
-      "chief_investigator_last_name": "Chief Investigator Last name",
+      "chief_investigator_first_name_text": "Chief Investigator First name",
+      "chief_investigator_last_name_text": "Chief Investigator Last name",
       "chief_investigator_email_text": "ci_test@test.com"
     },
     "Research_Locations": {
@@ -74,13 +74,13 @@
     "primary_sponsor_org_label": "Primary sponsor organisation",
     "short_project_title_label": "Short project title",
     "full_project_title_label": "Full project title",
-    "planned_project_end_date_label": "Project end date"
+    "planned_project_end_date_label": "Planned project end date"
   },
   "Project_Team_Tab": {
     "chief_investigator_label": "Chief Investigator",
-    "first_name_label": "First name",
-    "last_name_label": "Last name",
-    "email_label": "Email"
+    "first_name_label": "Chief Investigator first name",
+    "last_name_label": "Chief Investigator last name",
+    "email_label": "Chief Investigator email"
   },
   "Research_Locations_Tab": {
     "participating_nations_label": "Participating nations",

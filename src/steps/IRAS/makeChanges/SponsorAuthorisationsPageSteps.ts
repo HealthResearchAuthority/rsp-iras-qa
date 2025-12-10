@@ -21,8 +21,10 @@ Then(
 );
 
 Then(
-  'I can see the searched modification to be present in the list with date actioned in the sponsor authorisations page',
-  async ({ sponsorAuthorisationsPage, modificationsCommonPage, commonItemsPage }) => {
+  'I can see the searched modification to be present in the list with date actioned with {string} status in the sponsor authorisations page',
+  async ({ sponsorAuthorisationsPage, modificationsCommonPage, commonItemsPage }, status: string) => {
+    const modificationStatusForSponsor = await modificationsCommonPage.getModificationStatus(status);
+
     const dateActionedBySponsor = new Date().toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
@@ -31,6 +33,7 @@ Then(
     const modificationID = await modificationsCommonPage.getModificationID();
     const foundRecords = await sponsorAuthorisationsPage.findModification(commonItemsPage, modificationID, {
       dateActionedSponsor: dateActionedBySponsor,
+      statusForSponsor: modificationStatusForSponsor,
     });
     expect.soft(foundRecords).toBeDefined();
     expect.soft(foundRecords).toHaveCount(1);
@@ -49,7 +52,10 @@ Then(
   'I can see the list of modifications received for sponsor approval is sorted by {string} order of the {string}',
   async ({ commonItemsPage, sponsorAuthorisationsPage }, sortDirection: string, sortField: string) => {
     const searchColumnIndex = await sponsorAuthorisationsPage.getColumnIndex(sortField);
-    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
+    const actualList = await commonItemsPage.getActualListValuesWithoutTrim(
+      commonItemsPage.tableBodyRows,
+      searchColumnIndex
+    );
     let sortedModsList: string[];
     const direction = sortDirection.toLowerCase();
     const field = sortField.toLowerCase();
@@ -58,9 +64,8 @@ Then(
     } else {
       const compareFn = (a: string, b: string) =>
         direction === 'ascending'
-          ? a.localeCompare(b, 'en', { sensitivity: 'base' })
-          : b.localeCompare(a, 'en', { sensitivity: 'base' });
-
+          ? a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+          : b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false });
       sortedModsList = [...actualList].toSorted(compareFn);
     }
     expect.soft(actualList).toEqual(sortedModsList);
