@@ -185,6 +185,9 @@
     },
     "Post_Approval_Invalid_Date_To_Error": {
       "date_submitted_to_day_text": "'Search to' date must be in the correct format"
+    },
+    "Summary_Only_Error_Project_Closure": {
+      "error_message": "You can't close this project with ongoing modifications - wait until submitted modifications have been reviewed and delete any unsubmitted modifications to continue"
     }
   },
   "Document_Status_Incomplete": {
