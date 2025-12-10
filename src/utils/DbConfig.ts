@@ -6,8 +6,6 @@ import * as loginPageTestData from '../resources/test_data/common/login_page_dat
 const server = 'rspsqlserverpreprod.database.windows.net';
 //ST Automation server
 // const server = 'rspsqlserverautomationtest.database.windows.net';
-// prod server
-// const server = 'rspsqlserverprod.database.windows.net';
 const port = 1433;
 const user = loginPageTestData.DB_User.username;
 const secretKey = process.env.DB_USER_SECRET_KEY;
