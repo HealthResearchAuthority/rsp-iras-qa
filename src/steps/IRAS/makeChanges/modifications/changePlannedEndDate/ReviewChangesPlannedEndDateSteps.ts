@@ -31,7 +31,7 @@ Then(
     },
     datasetNamePlannedEndDate: string,
     datasetNameAffectedOrgSelection: string,
-    datasetNameAffectedOrgQuestions
+    datasetNameAffectedOrgQuestions: string
   ) => {
     const datasetPlannedEndDate = plannedEndDateChangePage.plannedEndDateChangePageTestData[datasetNamePlannedEndDate];
     const datasetAffectedOrgSelection =
@@ -46,44 +46,40 @@ Then(
       datasetPlannedEndDate.planned_project_end_month_dropdown,
       datasetPlannedEndDate.planned_project_end_year_text
     );
+    expect(actualNewPlannedEndDate).toBe(expectedNewPlannedEndDate);
     const actualAffectedOrgType = confirmStringNotNull(
       await modificationReviewChangesPage.affected_organisation_types_text.textContent()
     );
-    expect(actualNewPlannedEndDate).toBe(expectedNewPlannedEndDate);
     expect(actualAffectedOrgType).toBe(
       datasetAffectedOrgSelection.which_organisation_change_affect_checkbox.toString().replaceAll(',', '')
     );
     if (datasetNameAffectedOrgSelection !== 'Non_NHS_HSC_Only') {
-      validateNhsFields();
+      await validateNhsFields();
     } else {
-      validateNonNhsFields();
+      await validateNonNhsFields();
     }
-
     async function validateNhsFields() {
       const actualNhsAffectedLocations = confirmStringNotNull(
         await modificationReviewChangesPage.affected_nhs_hsc_locations_text.textContent()
-      );
-
-      const actualPortionOfAffected = confirmStringNotNull(
-        await modificationReviewChangesPage.portion_of_nhs_hsc_organisations_affected_text.textContent()
-      );
-
-      const actualAdditionalResourcesImplications = confirmStringNotNull(
-        await modificationReviewChangesPage.additional_resource_implications_text.textContent()
       );
       const expectedNhsAffectedLocations =
         datasetAffectedOrgQuestions.where_organisation_change_affect_nhs_question_checkbox
           .toString()
           .replaceAll(',', '');
       expect.soft(actualNhsAffectedLocations).toBe(expectedNhsAffectedLocations);
+      const actualPortionOfAffected = confirmStringNotNull(
+        await modificationReviewChangesPage.portion_of_nhs_hsc_organisations_affected_text.textContent()
+      );
       expect
         .soft(actualPortionOfAffected)
         .toBe(datasetAffectedOrgQuestions.will_some_or_all_organisations_be_affected_question_radio);
+      const actualAdditionalResourcesImplications = confirmStringNotNull(
+        await modificationReviewChangesPage.additional_resource_implications_text.textContent()
+      );
       expect
         .soft(actualAdditionalResourcesImplications)
         .toBe(datasetAffectedOrgQuestions.will_nhs_hsc_organisations_require_additional_resources_question_radio);
     }
-
     async function validateNonNhsFields() {
       const actualNonNhsAffectedLocations = confirmStringNotNull(
         await modificationReviewChangesPage.affected_non_nhs_hsc_locations_text.textContent()

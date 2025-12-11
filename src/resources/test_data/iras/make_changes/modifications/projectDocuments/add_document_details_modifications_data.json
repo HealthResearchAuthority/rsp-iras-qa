@@ -82,7 +82,10 @@
       "Questionnaire - non-validated",
       "Questionnaire - validated",
       "Participant diary (sample)",
-      "Curriculum vitae (CV) /suitability of researcher",
+      "Curriculum vitae (CV) / suitability of researcher - academic supervisor",
+      "Curriculum vitae (CV) / suitability of researcher - Chief Investigator",
+      "Curriculum vitae (CV) / suitability of researcher - Principal Investigator",
+      "Curriculum vitae (CV) / suitability of researcher - student",
       "Student research criteria eligibility declaration",
       "Dear investigator letter",
       "Funder's letter/outcome of funding panel",
@@ -106,7 +109,10 @@
     "Questionnaire_Non_Validated": "Questionnaire - non-validated",
     "Questionnaire_Validated": "Questionnaire - validated",
     "Participant_Diary_Sample": "Participant diary (sample)",
-    "Curriculum_Vitae_CV_Suitability_Of_Researcher": "Curriculum vitae (CV) /suitability of researcher",
+    "Curriculum_Vitae_CV_Suitability_Of_Researcher_Principal_Investigator": "Curriculum vitae (CV) / suitability of researcher - Principal Investigator",
+    "Curriculum_Vitae_CV_Suitability_Of_Researcher_Chief_Investigator": "Curriculum vitae (CV) / suitability of researcher - Chief Investigator",
+    "Curriculum_Vitae_CV_Suitability_Of_Researcher_Student": "Curriculum vitae (CV) / suitability of researcher - student",
+    "Curriculum_Vitae_CV_Suitability_Of_Researcher_Academic_Supervisor": "Curriculum vitae (CV) / suitability of researcher - academic supervisor",
     "Student_Research_Criteria_Eligibility_Declaration": "Student research criteria eligibility declaration",
     "Dear_Investigator_Letter": "Dear investigator letter",
     "Funder_Letters_Outcome_Of_Funding_Panel": "Funder's letter/outcome of funding panel",
@@ -119,9 +125,15 @@
   },
 
   "Valid_Data_Fields_Optional_Version_Date": {
+    "document_name_text": "DocName",
+    "document_previously_approved_radio": "Yes"
+  },
+  "Valid_Data_Mandatory_Fields": {
+    "document_name_text": "DocName",
     "document_previously_approved_radio": "Yes"
   },
   "Mandatory_Data_Fields_Optional_Version_Date": {
+    "document_name_text": "DocName",
     "document_type_dropdown": "Evidence of insurance or indemnity",
     "document_previously_approved_radio": "Yes"
   },
@@ -129,6 +141,7 @@
     "document_type_dropdown": "Evidence of insurance or indemnity"
   },
   "Mandatory_Data_Fields_Mandatory_Version_Date": {
+    "document_name_text": "DocName",
     "document_type_dropdown": "Protocol / Clinical Investigation Plan",
     "sponsor_document_version_text": "1.5",
     "sponsor_document_day_text": "20",
@@ -151,7 +164,10 @@
   },
   "Valid_Data_Fields_Mandatory_Date": {
     "sponsor_document_version_text": "1.5",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "Yes",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020"
   },
   "Valid_Data_Fields_Mandatory_Version_Date": {
     "sponsor_document_version_text": "1.5",
@@ -207,7 +223,7 @@
   },
   "Invalid_Date_No_Day_No_Month": {
     "sponsor_document_day_text": "",
-    "sponsor_document_month_dropdown": "",
+    "sponsor_document_month_dropdown": "Choose month",
     "sponsor_document_year_text": "2028"
   },
   "Invalid_Date_No_Day_No_Year": {
@@ -217,41 +233,41 @@
   },
   "Invalid_Date_No_Month_No_Year": {
     "sponsor_document_day_text": "1",
-    "sponsor_document_month_dropdown": "",
+    "sponsor_document_month_dropdown": "Choose month",
     "sponsor_document_year_text": ""
   },
   "Invalid_Date_No_Date_No_Month_No_Year": {
     "sponsor_document_day_text": "",
-    "sponsor_document_month_dropdown": "",
+    "sponsor_document_month_dropdown": "Choose month",
     "sponsor_document_year_text": ""
   },
   "Error_Validation": {
     "No_Sponsor_Document_Date_Error": {
-      "sponsor_document_date_summary_text": "Enter a sponsor document date"
+      "sponsor_document_day_text": "Enter a sponsor document date"
     },
     "No_Sponsor_Document_Date_Day_Error": {
-      "sponsor_document_day_text": "Date must include a day"
+      "sponsor_document_day_text": "Sponsor document date must include a day"
     },
     "No_Sponsor_Document_Date_Month_Error": {
-      "sponsor_document_day_text": "Date must include a month"
+      "sponsor_document_day_text": "Sponsor document date must include a month"
     },
     "No_Sponsor_Document_Date_Year_Error": {
-      "sponsor_document_day_text": "Date must include a year"
+      "sponsor_document_day_text": "Sponsor document date must include a year"
     },
     "No_Sponsor_Document_Date_Month_Year_Error": {
-      "sponsor_document_day_text": "Date must include a month and year"
+      "sponsor_document_day_text": "Sponsor document date must include a month and year"
     },
     "No_Sponsor_Document_Date_Day_Month_Error": {
-      "sponsor_document_day_text": "Date must include a day and month"
+      "sponsor_document_day_text": "Sponsor document date must include a day and month"
     },
     "No_Sponsor_Document_Date_Day_Year_Error": {
-      "sponsor_document_day_text": "Date must include a day and year"
+      "sponsor_document_day_text": "Sponsor document date must include a day and year"
     },
     "Invalid_Sponsor_Document_Date_Error": {
       "sponsor_document_day_text": "Enter a date in the correct format"
     },
     "Invalid_Sponsor_Document_Future_Date_Error": {
-      "sponsor_document_day_text": "Date must be today or a past date"
+      "sponsor_document_day_text": "Sponsor document date must be today or a past date"
     }
   }
 }

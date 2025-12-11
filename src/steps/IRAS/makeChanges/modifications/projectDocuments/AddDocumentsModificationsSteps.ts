@@ -100,3 +100,11 @@ Then(
     }
   }
 );
+
+Then('I validate invalid file type document error', async ({ commonItemsPage, addDocumentsModificationsPage }) => {
+  await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+  const expectedSummaryErrors =
+    addDocumentsModificationsPage.addDocumentsModificationsPageTestData.Invalid_Format_File_Error.upload_files_input;
+  const actualSummaryErrors = await commonItemsPage.getSummaryErrorMessages();
+  expect.soft(actualSummaryErrors).toContain(expectedSummaryErrors);
+});

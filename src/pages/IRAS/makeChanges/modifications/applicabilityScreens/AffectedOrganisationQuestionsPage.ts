@@ -22,6 +22,7 @@ export default class AffectedOrganisationQuestionsPage {
   readonly will_nhs_hsc_organisations_require_additional_resources_question_radio_fieldset: Locator;
   readonly will_nhs_hsc_organisations_require_additional_resources_question_radio: Locator;
   readonly remove_this_change_link: Locator;
+  readonly where_organisation_change_affect_non_nhs_question_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -93,6 +94,10 @@ export default class AffectedOrganisationQuestionsPage {
       name: this.linkTextData.Participating_Organisations_Page.Remove_This_Change,
       exact: true,
     });
+    this.where_organisation_change_affect_non_nhs_question_label = this.page
+      .getByTestId('Questions[3]_Answers')
+      .locator('legend')
+      .first();
   }
 
   //Page Methods

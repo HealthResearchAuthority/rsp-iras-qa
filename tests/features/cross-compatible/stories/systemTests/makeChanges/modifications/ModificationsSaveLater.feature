@@ -1,5 +1,5 @@
-@ApplicantUser @ModificationsSaveLater @SystemTest
-Feature: Create Modifications - ModificationsSaveLater: This feature file helps check all the partial journey
+@ApplicantUser @ModificationsOtherScenarios @SystemTest
+Feature: Modifications - Save Later and Other Scenarios
 
   Background:
     Given I have navigated to the my research projects page
@@ -155,7 +155,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @rsp-4364 @ValidateSponsorReferenceModifications @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4364 @ValidateSponsorReferenceModifications @jsEnabled
   Scenario Outline: Verify user is able to fill sponsor reference details for the modification
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -169,6 +169,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
@@ -176,14 +177,14 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    # Then I can see the review all changes modifications page
-    # Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
+    Then I can see the review all changes modifications page
+    Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
 
     Examples:
       | Changes                                            | Sponsor_Reference_Page |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Valid_Data_All_Fields  |
 
-  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications
   Scenario Outline: Verify the save for later functionality for sponsor reference modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -197,6 +198,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the add sponsor reference page
@@ -206,8 +208,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
 
     Examples:
-      | Changes                 |
-      | Change_Planned_End_Date |
+      | Changes                                |
+      | Change_Of_Sponsor_legal_Representative |
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-4818 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextUpdateFreeText
   Scenario Outline: Validate that user can create modifications to add free text and modify free text from modification details page
@@ -227,7 +229,6 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    Then I validate all fields on modification page '<Changes>'
     When I click the 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
     When I click the change link '<Change_Field>' on modification review changes page
@@ -244,9 +245,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I validate the individual and overall ranking of changes on the relevant modification page
 
     Examples:
-      | Changes                                                              | Research_Locations  | Change_Field      | Specific_Change                         | Changes_Edited                                                              |
-      | Bulk_Free_Text_Single_Change_Chief_Investigator_Conflict_Of_Interest | Nhs_Involvement_Yes | Changes_Free_Text | Chief_Investigator_Conflict_Of_Interest | Bulk_Free_Text_Single_Chief_Investigator_Conflict_Of_Interest_Change_Edited |
-      | Modification_To_Add_Administrative_Details_Single                    | Nhs_Involvement_Yes | select_change     | Chief_Investigator_Conflict_Of_Interest | Bulk_Free_Text_Single_Chief_Investigator_Conflict_Of_Interest_Change_Edited |
+      | Changes                                                              | Research_Locations  | Change_Field      | Changes_Edited                                                              |
+      | Bulk_Free_Text_Single_Change_Chief_Investigator_Conflict_Of_Interest | Nhs_Involvement_Yes | Changes_Free_Text | Bulk_Free_Text_Single_Chief_Investigator_Conflict_Of_Interest_Change_Edited |
 
   @rsp-5200 @rsp-4818 @ModificationsEnterFreeTextPageSaveForLater
   Scenario Outline: Verify that user can create modifications and validate the field values in enter free text page and can save the changes
@@ -467,7 +467,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | NHS_HSC_Only               |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           |
 
-  @rsp-4108 @ValidateUiLabelsAffectedOrganisationQuestionsPage @KNOWN_DEFECT_RSP_5747
+  @rsp-4108 @ValidateUiLabelsAffectedOrganisationQuestionsPage
   Scenario Outline: Validate ui labels on modifications affected organisation questions page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -588,9 +588,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Planned_End_Date      | Organisation_Change_Affect | Label_Texts           | Affected_Org_Questions         |
       | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields | Valid_Data_All_Fields          |
       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     |
-      | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Empty_Data_All_Fields          |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
-      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Empty_Data_Non_Nhs             |
 
   @rsp-4171 @rsp-4611 @SaveLaterReviewChangesPage
   Scenario Outline: Verify that modifications progress successfully saved when user saves the record from review changes page
@@ -635,7 +633,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields          |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country |
 
-  @rsp-4171 @ChangePlannedEndDateDataPersistenceValidations @KNOWN-DEFECT-RSP-5747 @fail
+  @rsp-4171 @ChangePlannedEndDateDataPersistenceValidations
   Scenario Outline: Verify that system retains the data on all modifications pages when user navigates back from review changes page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -665,14 +663,6 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I can see the change planned end date affected organisation questions page
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the modification review changes page
-    And I capture the page screenshot
-    Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-    When I click the 'Back' link on the 'Review_Changes_Planned_End_Date_Page'
-    Then I can see the change planned end date affected organisation questions page
-    And I capture the page screenshot
-    And I can see previously saved values for '<Affected_Org_Questions>' displayed on the affected organisation questions page
     When I click the 'Back' link on the 'Affected_Organisation_Questions_Page'
     Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
     And I capture the page screenshot
@@ -692,7 +682,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
 
-  @rsp-4171 @ModifyPlannedEndDateFromReviewChangesPage @KNOWN-DEFECT-RSP-5747 @fail
+  @rsp-4171 @ModifyPlannedEndDateFromReviewChangesPage
   Scenario Outline: Verify that user can change the planned end date from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -746,7 +736,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Change_Field         | Planned_End_Date      | Planned_End_Date_Change      | Organisation_Change_Affect | Affected_Org_Questions |
       | New_Planned_End_Date | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
-  @rsp-4171 @ModifyAffectedOrganisationTypesFromReviewChangesPage @KNOWN-DEFECT-RSP-4795 @looklater
+  @rsp-4171 @ModifyAffectedOrganisationTypesFromReviewChangesPage @looklater
   Scenario Outline: Verify that user can change the affected organisation types from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -798,7 +788,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Affected_Organisation_Types | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | NHS_HSC_Only                      | Valid_Data_All_Fields          | Valid_Data_All_Fields         |
       | Affected_Organisation_Types | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Non_NHS_HSC_Only           | NHS_HSC_Only                      | Valid_Data_Non_Nhs_All_Country | Valid_Data_All_Fields         |
 
-  @rsp-4171 @ModifyAffectedOrgQuestionsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795 @looklater
+  @rsp-4171 @ModifyAffectedOrgQuestionsFromReviewChangesPage @looklater
   Scenario Outline: Verify that user can change all affected organisation questions from review modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -851,36 +841,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
-  @rsp-4271 @ModificationsDetailsSaveAndContinue @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
-  Scenario Outline: Validate that user can create modifications and navigate to add sponsor reference page
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I capture the page screenshot
-    And I create '<Changes>' for the created modification
-    And I capture the page screenshot
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
-    And I can see the modifications details page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the ui labels on modification details page using 'Modification_Details_Label_Texts'
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    And I capture the page screenshot
-    # Further steps will be covered in RSP-4364
-
-    Examples:
-      | Changes                           |
-      | Multiple_Changes_Planned_End_Date |
-
-  @rsp-4271 @ModificationsDetailsUnfinishedModification @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4271 @ModificationsDetailsUnfinishedModification
   Scenario Outline: Verify that system prevents the user to proceed further when modification details are unfinished
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -894,8 +855,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I create '<Changes>' for the created modification
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
@@ -907,10 +868,10 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
 
     Examples:
-      | Changes                           |
-      | Multiple_Changes_Planned_End_Date |
+      | Changes                                      |
+      | Multiple_Changes_Planned_End_Date_Unfinished |
 
-  @rsp-4271 @rsp-5188 @ModificationsDetailsRemoveAllChanges @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4271 @rsp-5188 @ModificationsDetailsRemoveAllChanges
   Scenario Outline: Validate that user can remove all changes from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -924,8 +885,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I create '<Changes>' for the created modification
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Remove' link on the 'Modification_Details_Page'
@@ -942,7 +903,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-  @rsp-4271 @UpdateDetailsFromModificationsDetailsPage @KNOWN_DEFECT_RSP-5275 @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4271 @UpdateDetailsFromModificationsDetailsPage
   Scenario Outline: Verify that user can update the details from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -956,8 +917,8 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I create '<Changes>' for the created modification
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Change' link on the 'Modification_Details_Page'
@@ -978,7 +939,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           | Change_Field         | Planned_End_Date_Change      |
       | Multiple_Changes_Planned_End_Date | New_Planned_End_Date | Valid_Data_All_Fields_Change |
 
-  @rsp-4271 @ModificationsDetailsSaveForLater @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-4271 @ModificationsDetailsSaveForLater
   Scenario Outline: Verify that user can save the modification progress from modification details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -992,6 +953,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
     And I can see the modifications details page
@@ -1005,7 +967,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-  @rsp-5675 @rsp-4539 @SaveForLaterWithoutSelectingDocumentType @KNOWN-DEFECT-RSP-5091-6299 @fail
+  @rsp-5675 @rsp-4539 @SaveForLaterWithoutSelectingDocumentType
   Scenario Outline: Verify the user is able to save for later without selecting document type in the review your information page
     Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1060,7 +1022,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I can see the modifications details page
     And I capture the page screenshot
 
-  @rsp-4539 @SaveForLaterSelectingOnlyDocumentType @KNOWN-DEFECT-RSP-5091
+  @rsp-4539 @SaveForLaterSelectingOnlyDocumentType
   Scenario: Verify the user is able to save for later after selecting only document type in the review your information page
     Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1135,7 +1097,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Interviews_Or_Focus_Group_Topic_Guides           | mandatory    |
       | Questionnaire_Non_Validated                      | mandatory    |
 
-  @rsp-4980 @ContactDetailsModificationChangeLinks @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4980 @ContactDetailsModificationChangeLinks
   Scenario Outline: Validate that user can update the saved contact details modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1194,7 +1156,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Name_Text                | Contact_Name_Change                               | Contact_Details_Other_Page              |
       | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Email_Text               | Contact_Email_Change                              | Contact_Details_Other_Page              |
 
-  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
   Scenario: Verify that save for later functionalities and page labels for contact details modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -1266,7 +1228,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
-  @rsp-4980 @ValidateEnterLinksOnReviewAnswersPageContactDetails @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4980 @ValidateEnterLinksOnReviewAnswersPageContactDetails
   Scenario Outline: Validate the enter links on review your answers page for contact details modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1299,7 +1261,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Empty_Data_Other_Contact_All_Fields   | Other_Contact_Name       | Contact_Details_Other_Page              |
       | Empty_Data_Other_Contact_All_Fields   | Other_Contact_Email      | Contact_Details_Other_Page              |
 
-  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationChangeLinks @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationChangeLinks
   Scenario Outline: Validate that user can update the saved chief investigator modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1353,11 +1315,11 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Research_Locations  | Changes                                                               | Change_Field             | Changes_Edited                                             | Page                                         |
       | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | Select_Details_To_Change | Change_CI_New_To_Temporary_Arrangement_Details             | Project_Personnel_Select_Change_Page         |
       | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | Chief_Investigator_Email | Chief_Investigator_New_Email_Name_Change                   | Project_Personnel_Chief_Investigator_Page    |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | Name_Text                | Chief_Investigator_New_Email_Name_Change                   | Project_Personnel_Chief_Investigator_Page    |
+      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | CI_First_Name_Text       | Chief_Investigator_New_Email_Name_Change                   | Project_Personnel_Chief_Investigator_Page    |
       | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | Chief_Investigator_Email | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | Name_Text                | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
+      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | CI_Last_Name_Text        | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationsLabelsAndSaveForLater
   Scenario: Verify that save for later functionalities and page labels for project personnel change chief investigator modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -1418,7 +1380,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
-  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangeChiefInvestigator @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangeChiefInvestigator
   Scenario Outline: Validate the enter links on review your answers page for project personnel new chief investigator modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1446,12 +1408,12 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Examples:
       | Modification_Data                              | Enter_Link               | Page                                         |
       | Empty_Data_Select_Details_To_Change_All_Fields | Select_Details_To_Change | Project_Personnel_Select_Change_Page         |
-      | Empty_Data_CI_Fields                           | Chief_Investigator       | Project_Personnel_Chief_Investigator_Page    |
-      | Empty_Data_CI_Fields                           | Name_Text                | Project_Personnel_Chief_Investigator_Page    |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Chief_Investigator       | Project_Personnel_Temporary_Arrangement_Page |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Name_Text                | Project_Personnel_Temporary_Arrangement_Page |
+      | Empty_Data_CI_Fields                           | Chief_Investigator_Email | Project_Personnel_Chief_Investigator_Page    |
+      | Empty_Data_CI_Fields                           | CI_First_Name_Text       | Project_Personnel_Chief_Investigator_Page    |
+      | Empty_Data_Temporary_Arrangement_All_Fields    | Chief_Investigator_Email | Project_Personnel_Temporary_Arrangement_Page |
+      | Empty_Data_Temporary_Arrangement_All_Fields    | CI_Last_Name_Text        | Project_Personnel_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationChangeLinks @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationChangeLinks
   Scenario Outline: Validate that user can update the saved principal investigator modification by clicking change links in review changes page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1468,8 +1430,14 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes>' dataset
     And I fill the change principal investigator modifications page with '<Changes>' for 'create' action
-    And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes>' and '<Research_Locations>' dataset
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I can see the modification review changes page
@@ -1488,7 +1456,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the '<Page>' page for modifications
     And I capture the page screenshot
     And I fill the change principal investigator modifications page with '<Changes_Edited>' for 'change' action
-    And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes_Edited>' and '<Research_Locations>' dataset
+    And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes_Edited>' dataset
     And I capture the page screenshot
     And I click the 'Save_Changes' button on the 'Modifications_Page'
     And I can see the modification review changes page
@@ -1503,13 +1471,13 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
 
     Examples:
       | Research_Locations  | Changes                                                                   | Change_Field                 | Changes_Edited                                                 | Page                                                               |
-      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Select_Details_To_Change     | Change_CI_New_To_Temporary_Arrangement_Details                 | Project_Personnel_Principal_Investigator_Select_Change_Page        |
+      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Select_Details_To_Change     | Change_PI_New_To_Temporary_Arrangement_Details                 | Project_Personnel_Principal_Investigator_Select_Change_Page        |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Principal_Investigator_Email | Principal_Investigator_New_Email_Name_Change                   | Project_Personnel_Principal_Investigator_Page                      |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Name_Text                    | Principal_Investigator_New_Email_Name_Change                   | Project_Personnel_Principal_Investigator_Page                      |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data | Principal_Investigator_Email | Principal_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
       | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data | Name_Text                    | Principal_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
 
-  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationsLabelsAndSaveForLater @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationsLabelsAndSaveForLater
   Scenario: Verify that save for later functionalities and page labels for project personnel change principal investigator modifications journey
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -1562,6 +1530,12 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
     And I fill the change principal investigator modifications page with 'Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data' for 'create' action
     And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I can see the modification review changes page
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Modifications_Page'
@@ -1569,7 +1543,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
-  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangePrincipalInvestigator @KNOWN_DEFECT_RSP_6409_5645 @fail
+  @rsp-4982 @ValidateEnterLinksOnReviewAnswersPageProjectPersonnelChangePrincipalInvestigator
   Scenario Outline: Validate the enter links on review your answers page for project personnel new principal investigator modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1588,6 +1562,12 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I fill the change principal investigator modifications page with '<Modification_Data>' for 'create' action
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I can see the modification review changes page
     And I capture the page screenshot
     Then I click enter link displayed on review your answers page for change principal investigator modification for '<Enter_Link>'
@@ -1595,12 +1575,11 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
 
     Examples:
-      | Modification_Data                              | Enter_Link                   | Page                                                               |
-      | Empty_Data_Select_Details_To_Change_All_Fields | Select_Details_To_Change     | Project_Personnel_Principal_Investigator_Select_Change_Page        |
-      | Empty_Data_CI_Fields                           | Principal_Investigator_Email | Project_Personnel_Principal_Investigator_Page                      |
-      | Empty_Data_CI_Fields                           | Name_Text                    | Project_Personnel_Principal_Investigator_Page                      |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Principal_Investigator_Email | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Name_Text                    | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
+      | Modification_Data                           | Enter_Link                   | Page                                                               |
+      | Empty_Data_CI_Fields                        | Principal_Investigator_Email | Project_Personnel_Principal_Investigator_Page                      |
+      | Empty_Data_CI_Fields                        | Name_Text                    | Project_Personnel_Principal_Investigator_Page                      |
+      | Empty_Data_Temporary_Arrangement_All_Fields | Principal_Investigator_Email | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
+      | Empty_Data_Temporary_Arrangement_All_Fields | Name_Text                    | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
 
   @rsp-3929 @DownloadDocumentsOneByOneInModification
   Scenario Outline: Validate the user is able to download the documents one by one from documents added for page
@@ -1673,7 +1652,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click on the document link with status 'Document_Status_Incomplete' and download the uploaded document in the add document details for specific document page
     And I capture the page screenshot
 
-  @rsp-5341 @ValidateChangesAndModificationAdditionAndDeletionInStatusIndraft @KNOWN_DEFECT_RSP_5495_5408_5285 @fail
+  @rsp-5341 @ValidateChangesAndModificationAdditionAndDeletionInStatusIndraft
   Scenario Outline: Validate changes can be added or removed and modification can be deleted when the modification is in draft status
     Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1687,6 +1666,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I validate the project information labels using dataset displayed on modifications page
+    And I keep note of the individual and overall ranking of changes created using '<Primary_Change>' and 'Nhs_Involvement_Yes' dataset
     And I create '<Primary_Change>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
@@ -1707,6 +1687,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the select area of change page
     And I validate the project information labels using dataset displayed on modifications page
     # add changes
+    And I keep note of the individual and overall ranking of changes created using '<Secondary_Change>' and 'Nhs_Involvement_Yes' dataset
     And I create '<Secondary_Change>' for the created modification
     When I click the 'Save_For_Later' button on the 'Modification_Details_Page'
     Then I can see the project overview page
@@ -1997,7 +1978,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I capture the page screenshot
     And I can see the list of modifications submitted for sponsor approval is sorted by 'descending' order of the 'category'
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation @KNOWN_DEFECT_RSP_5495_5408_5285_5184 @fail
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till send modification to sponsor confirmation page and return to project overview page from there
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2030,7 +2011,6 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And the now sent to sponsor heading and hint text should be 'available' on the review all changes page
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
@@ -2042,7 +2022,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I click on the modification id hyperlink in the post approval tab
     And I capture the page screenshot
-    Then I can see the review all changes modifications page
+    Then I can see the modification post submission page
     And the 'Change' link should be 'unavailable' on the 'Review_All_Changes_Page'
     And the 'Delete_Modification' link should be 'unavailable' on the 'Review_All_Changes_Page'
     And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'
@@ -2054,7 +2034,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @SaveForLaterFromReviewAllChangesPage @KNOWN_DEFECT_RSP-5324 @KNOWN_DEFECT_RSP-5184 @fail
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @SaveForLaterFromReviewAllChangesPage
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till review all changes page and save for later from there
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2084,7 +2064,6 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I can see the review all changes modifications page
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Save_For_Later' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
@@ -2092,81 +2071,13 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I can see the modification progress saved successful message on project overview page
     And I can see the 'Post_Approval_Tab' ui labels on the project overview page
     And I capture the page screenshot
-    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'Draft'
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'In draft'
 
     Examples:
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ModifyCurrentChangesInReviewAllChangesPage @KNOWN_DEFECT_RSP-5184 @fail
-  Scenario Outline: Validate that user can create modification with multiple changes and modify current changes in review all changes page by clicking change link link from there
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I capture the page screenshot
-    And I create '<Changes>' for the created modification
-    And I can see the modifications details page
-    And I capture the page screenshot
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the individual and overall ranking of changes on the relevant modification page
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    And I capture the page screenshot
-    Then I can see the add sponsor reference page
-    And I validate the project information labels using dataset displayed on modifications page
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    And I capture the page screenshot
-    Then I can see the review all changes modifications page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the individual and overall ranking of changes on the relevant modification page
-    And I validate the change details are displayed as per the '<Changes>' dataset
-    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
-    And I keep note of the individual and overall ranking of changes created using '<New_Changes>' and '<Research_Locations>' dataset
-    And I modify the current changes with '<New_Changes>' for the created modification
-    And I capture the page screenshot
-    Then I can see the review all changes modifications page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I validate the change details are displayed as per the '<New_Changes>' dataset
-    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
-    And I validate the individual and overall ranking of changes on the relevant modification page
-    And I modify the current sponsor details with 'Valid_Data_All_Fields_Changes' for the created modification
-    And I capture the page screenshot
-    Then I can see the review all changes modifications page
-    And I validate the project information labels using dataset displayed on modifications page
-    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields_Changes'
-    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I capture the page screenshot
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
-    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
-    And I capture the page screenshot
-    Then I can see the project overview page
-    And I can see the 'Post_Approval_Tab' ui labels on the project overview page
-    And I capture the page screenshot
-    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
-    And I click on the modification id hyperlink in the post approval tab
-    And I capture the page screenshot
-    Then I can see the review all changes modifications page
-    And the 'Change' link should be 'unavailable' on the 'Review_All_Changes_Page'
-    And the 'Delete_Modification' link should be 'unavailable' on the 'Review_All_Changes_Page'
-    And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'
-    And the 'Save_For_Later' button should be 'unavailable' on the 'Review_All_Changes_Page'
-    And the now sent to sponsor heading and hint text should be 'unavailable' on the review all changes page
-    And I validate the individual and overall ranking of changes on the relevant modification page
-
-    Examples:
-      | Changes                           | New_Changes                              | Research_Locations  |
-      | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change | Nhs_Involvement_Yes |
-
-  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP_5495_5496_5285_6288_6324_6411 @fail
+  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission
   Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modifiction post submission page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2254,7 +2165,6 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    Then I validate all fields on modification page '<Changes>'
     And I validate the individual and overall ranking of changes on the relevant modification page
     When I click the 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
@@ -2275,7 +2185,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     Then I can see the project identification enter reference modification page
     And I capture the page screenshot
     And I validate the project information labels using dataset displayed on modifications page
-    And  I fill the project identification enter reference modification page using '<Valid_Data_Change>' dataset
+    And I fill the project identification enter reference modification page using '<Valid_Data_Change>' dataset
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     Then I can see the modification review changes page
@@ -2303,7 +2213,7 @@ Feature: Create Modifications - ModificationsSaveLater: This feature file helps 
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
     And I click on the modification id hyperlink in the post approval tab
-    Then I can see the review all changes page
+    Then I can see the modification post submission page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
 

@@ -1,5 +1,5 @@
 @ApplicantUser @createProject @createAmendment @SystemTest
-Feature: Create project error validations - This feature file helps check all the create project error validation journeys
+Feature: Create project - Error Validations
 
   Background:
     Given I have navigated to the my research projects page
@@ -29,7 +29,7 @@ Feature: Create project error validations - This feature file helps check all th
       | Invalid_IRAS_ID_Spaces_Seperator | Field_Error_Message                       |
       | Invalid_IRAS_ID_Blank            | Field_Error_Message_Iras_Id_Mandatory     |
 
-  @rsp-5185 @IRASIDNotInHARPInvalid
+  @rsp-5185 @IRASIDNotInHARPInvalid @jsEnabled
   Scenario: Validate project not currently eligible message displayed when user enter iras id not in harp system
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -42,7 +42,7 @@ Feature: Create project error validations - This feature file helps check all th
     When I click the 'Return_To_IRAS_ID' button on the 'IRAS_ID_Error_Page'
     Then I can see the project details iras page
 
-  @rsp-5185 @IRASIDAlreadyExistInvalid
+  @rsp-5185 @IRASIDAlreadyExistInvalid @jsEnabled
   Scenario: Validate project not currently eligible message displayed when user enter iras id already exist in system
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -82,17 +82,17 @@ Feature: Create project error validations - This feature file helps check all th
     And I capture the page screenshot
 
     Examples:
-      | Project_Details_Title | Field_And_Summary_Error_Message |
-      | Invalid_All_Fields    | All_Field_Error_Message         |
-      | Invalid_Day_Number    | Date_Day_Field_Error_Message    |
-      | Invalid_Day_Letters   | Date_Day_Field_Error_Message    |
-      | Invalid_Year_Number_1 | Date_Year_Field_Error_Message   |
-      | Invalid_Year_Number_2 | Date_Year_Field_Error_Message   |
-      | Invalid_Year_Letters  | Date_Year_Field_Error_Message   |
-      | Invalid_Date_Past     | Date_Day_Field_Error_Message    |
-      | Invalid_Date_No_Day   | Date_Day_Field_Error_Message    |
-      | Invalid_Date_No_Month | Date_Month_Field_Error_Message  |
-      | Invalid_Date_No_Year  | Date_Year_Field_Error_Message   |
+      | Project_Details_Title | Field_And_Summary_Error_Message         |
+      | Invalid_All_Fields    | All_Field_Error_Message                 |
+      | Invalid_Day_Number    | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Day_Letters   | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Year_Number_1 | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Year_Number_2 | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Year_Letters  | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Date_Past     | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Date_No_Day   | Date_Day_Field_Error_Message            |
+      | Invalid_Date_No_Month | Date_Month_Field_Error_Message          |
+      | Invalid_Date_No_Year  | Date_Year_Field_Error_Message           |
 
   @rsp-1859 @rsp-3819
   Scenario Outline: Validate error messages displayed when user fill todays date for project end date
@@ -114,7 +114,7 @@ Feature: Create project error validations - This feature file helps check all th
       | Project_Details_Title | Field_Error_Message | Summary_Error_Message |
       | Invalid_Date_Today    | Field_Error_Message | Summary_Error_Message |
 
-  @rsp-1897 @rsp-4209 @KNOWN_DEFECT_RSP-5319
+  @rsp-1897 @rsp-4209
   Scenario Outline: Validate error messages displayed when user inputs invalid data in chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -141,26 +141,26 @@ Feature: Create project error validations - This feature file helps check all th
       | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email | Summary_Error_Message |
       | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email | Summary_Error_Message |
       | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email | Summary_Error_Message |
-      # | Valid_Data_All_Fields | Invalid_Data_Max_Character_Limit                       | Field_Error_Max_Character_Limit_All_Fields | Summary_Error_Message_Max_Character_Limit_All_Fields |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Data_Max_Character_Limit                       | Field_Error_Max_Character_Limit_All_Fields | Summary_Error_Message_Max_Character_Limit_All_Fields |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email                    | Summary_Error_Message                                |
 
   @rsp-1863 @rsp-3819 @saveLaterProjTitleValidations
   Scenario Outline: Validate error messages when user saves the project with invalid data on project details page
@@ -179,19 +179,19 @@ Feature: Create project error validations - This feature file helps check all th
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_Title_Page'
 
     Examples:
-      | Project_Details_Title | Field_And_Summary_Error_Message |
-      | Invalid_All_Fields    | All_Field_Error_Message         |
-      | Invalid_Day_Number    | Date_Day_Field_Error_Message    |
-      | Invalid_Day_Letters   | Date_Day_Field_Error_Message    |
-      | Invalid_Year_Number_1 | Date_Year_Field_Error_Message   |
-      | Invalid_Year_Number_2 | Date_Year_Field_Error_Message   |
-      | Invalid_Year_Letters  | Date_Year_Field_Error_Message   |
-      | Invalid_Date_Past     | Date_Day_Field_Error_Message    |
-      | Invalid_Date_No_Day   | Date_Day_Field_Error_Message    |
-      | Invalid_Date_No_Month | Date_Month_Field_Error_Message  |
-      | Invalid_Date_No_Year  | Date_Year_Field_Error_Message   |
+      | Project_Details_Title | Field_And_Summary_Error_Message         |
+      | Invalid_All_Fields    | All_Field_Error_Message                 |
+      | Invalid_Day_Number    | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Day_Letters   | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Year_Number_1 | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Year_Number_2 | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Year_Letters  | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Date_Past     | Date_Must_Be_Future_Field_Error_Message |
+      | Invalid_Date_No_Day   | Date_Day_Field_Error_Message            |
+      | Invalid_Date_No_Month | Date_Month_Field_Error_Message          |
+      | Invalid_Date_No_Year  | Date_Year_Field_Error_Message           |
 
-  @rsp-1863 @rsp-4209 @saveLaterChiefInvEmailValidations @KNOWN_DEFECT_RSP-5319
+  @rsp-1863 @rsp-4209 @saveLaterChiefInvEmailValidations
   Scenario Outline: Validate error messages when user saves the project with invalid Chief Investigator email data on chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -220,27 +220,27 @@ Feature: Create project error validations - This feature file helps check all th
       | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email         |
       | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email         |
       | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
-      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
 
-  @rsp-3939 @rsp-4200 @rsp-3940 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
+  @rsp-3939 @rsp-4200 @rsp-3940 @validateSponsorOrganisationResultsJsDisabled @jsDisabled @skip
   Scenario Outline: Validate the primary sponsor organisation search results in project identifiers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -272,7 +272,7 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-4887 @DateSubmittedErrorValidationPostApproval
   Scenario Outline: Verify that correct validation is in place for the date submitted filter
-  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
@@ -308,7 +308,7 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-2837 @rsp-1867 @rsp-3819 @rsp-4868 @reviewAnswersProjTitleErrorValidations
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page
-  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
@@ -339,21 +339,21 @@ Feature: Create project error validations - This feature file helps check all th
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_Title_Page'
 
     Examples:
-      | Project_Details_Title       | Chief_Investigator          | Research_Locations          | Enter_Link_Field | Review_Answers             | Project_Details_Title_Enter | Field_And_Summary_Error_Message | Project_Identifiers             |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_All_Fields          | All_Field_Error_Message         | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Day_Number          | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Day_Letters         | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Year_Number_1       | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Year_Number_2       | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Year_Letters        | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_Past           | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_No_Day         | Date_Day_Field_Error_Message    | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_No_Month       | Date_Month_Field_Error_Message  | Sponsor_Organisation_Text_Blank |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_No_Year        | Date_Year_Field_Error_Message   | Sponsor_Organisation_Text_Blank |
+      | Project_Details_Title       | Chief_Investigator          | Research_Locations          | Enter_Link_Field | Review_Answers             | Project_Details_Title_Enter | Field_And_Summary_Error_Message         | Project_Identifiers             |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_All_Fields          | All_Field_Error_Message                 | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Day_Number          | Date_Must_Be_Future_Field_Error_Message | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Day_Letters         | Date_Must_Be_Future_Field_Error_Message | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Year_Number_1       | Date_Must_Be_Future_Field_Error_Message | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Year_Number_2       | Date_Must_Be_Future_Field_Error_Message | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Year_Letters        | Date_Must_Be_Future_Field_Error_Message | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_Past           | Date_Must_Be_Future_Field_Error_Message | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_No_Day         | Date_Day_Field_Error_Message            | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_No_Month       | Date_Month_Field_Error_Message          | Sponsor_Organisation_Text_Blank |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_End_Date | Enter_Links_Missing_Fields | Invalid_Date_No_Year        | Date_Year_Field_Error_Message           | Sponsor_Organisation_Text_Blank |
 
-  @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidations @KNOWN_DEFECT_RSP-5319
+  @rsp-2837 @rsp-1867 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidations
   Scenario Outline: Validate chief investigator email error messages when user redirected from review your answers page
-  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
@@ -413,7 +413,7 @@ Feature: Create project error validations - This feature file helps check all th
 
   @rsp-2837 @rsp-3819 @rsp-4868 @reviewAnswersProjTitleErrorValidationsChangeFlow
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page - change flow
-  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
@@ -443,21 +443,21 @@ Feature: Create project error validations - This feature file helps check all th
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_Title_Page'
 
     Examples:
-      | Project_Details_Title | Chief_Investigator    | Research_Locations    | Change_Link_Field | Project_Details_Title_Enter | Field_And_Summary_Error_Message | Project_Identifiers   |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_All_Fields          | All_Field_Error_Message         | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Day_Number          | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Day_Letters         | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Year_Number_1       | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Year_Number_2       | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Year_Letters        | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Date_Past           | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Date_No_Day         | Date_Day_Field_Error_Message    | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Date_No_Month       | Date_Month_Field_Error_Message  | Valid_Data_All_Fields |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Date_No_Year        | Date_Year_Field_Error_Message   | Valid_Data_All_Fields |
+      | Project_Details_Title | Chief_Investigator    | Research_Locations    | Change_Link_Field | Project_Details_Title_Enter | Field_And_Summary_Error_Message         | Project_Identifiers   |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_All_Fields          | All_Field_Error_Message                 | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Day_Number          | Date_Must_Be_Future_Field_Error_Message | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Day_Letters         | Date_Must_Be_Future_Field_Error_Message | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Year_Number_1       | Date_Must_Be_Future_Field_Error_Message | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Year_Number_2       | Date_Must_Be_Future_Field_Error_Message | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Year_Letters        | Date_Must_Be_Future_Field_Error_Message | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Date_Past           | Date_Must_Be_Future_Field_Error_Message | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Date_No_Day         | Date_Day_Field_Error_Message            | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Date_No_Month       | Date_Month_Field_Error_Message          | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Invalid_Date_No_Year        | Date_Year_Field_Error_Message           | Valid_Data_All_Fields |
 
-  @rsp-2837 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidation_ChangeFlow @KNOWN_DEFECT_RSP-5319
+  @rsp-2837 @rsp-4868 @reviewAnswersChiefInvestigatorEmailValidation_ChangeFlow
   Scenario Outline: Validate error message for chief investigator email when user redirected from review your answers page - change flow
-  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
@@ -514,9 +514,9 @@ Feature: Create project error validations - This feature file helps check all th
   # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | chief_investigator_email | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |Valid_Data_All_Fields|
   # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | chief_investigator_email | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |Valid_Data_All_Fields|
 
-  @rsp-1867 @rsp-3819 @rsp-4868 @ValidateErrorMessagesOnConfirmProjectPage @KNOWN_DEFECT_RSP-5418
+  @rsp-1867 @rsp-3819 @rsp-4868 @ValidateErrorMessagesOnConfirmProjectPage
   Scenario Outline: Validate user is able to see the error messages when user submit the review answer page when all mandatory fields are not entered correctly
-  And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
@@ -552,7 +552,7 @@ Feature: Create project error validations - This feature file helps check all th
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_is_nhs_hsc_organisation          | Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation | Sponsor_Organisation_Text_Blank |
 
   @ValidateLastLoggedInInvalidDateErrorMessageMyResearch @rsp-4650
-  Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date in my research page
+  Scenario Outline: Verify the user can see validation error message that search to date must be after Search from date in my research page
     And I have navigated to the 'My_Research_Page'
     And I can see the 'My_Research_Page'
     And I click the 'Advanced_Filters' button on the 'My_Research_Page'

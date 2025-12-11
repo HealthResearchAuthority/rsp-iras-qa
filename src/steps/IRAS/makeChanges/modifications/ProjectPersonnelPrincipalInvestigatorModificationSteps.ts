@@ -25,21 +25,12 @@ Then(
 );
 
 Then(
-  'I keep note of the individual and overall ranking of change principal investigator change created using {string} and {string} dataset',
-  async (
-    { projectPersonnelChangePrincipalInvestigatorPage, modificationsCommonPage, researchLocationsPage },
-    datasetName,
-    datasetNameResearchLocation
-  ) => {
+  'I keep note of the individual and overall ranking of change principal investigator change created using {string} dataset',
+  async ({ projectPersonnelChangePrincipalInvestigatorPage, modificationsCommonPage }, datasetName) => {
     const changeDataset =
       projectPersonnelChangePrincipalInvestigatorPage
         .projectPersonnelChangePrincipalInvestigatorModificationPageTestData[datasetName];
-    const researchLocationDataset = researchLocationsPage.researchLocationsPageTestData[datasetNameResearchLocation];
-    await modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(
-      datasetName,
-      changeDataset,
-      researchLocationDataset
-    );
+    await modificationsCommonPage.calculateAndStoreRankingForChangesForApplicability(datasetName, changeDataset);
     await modificationsCommonPage.calculateAndStoreOverallRanking();
   }
 );
@@ -65,7 +56,7 @@ Then(
               .projectPersonnelChangePrincipalInvestigatorModificationPageTestData.Label_Texts
               .principal_investigator_enter_link
           )
-          .first()
+          .filter({ has: projectPersonnelChangePrincipalInvestigatorPage.page.locator(':visible') })
           .click();
         break;
       }

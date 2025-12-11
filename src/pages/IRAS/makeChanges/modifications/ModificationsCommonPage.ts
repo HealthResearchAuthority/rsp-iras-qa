@@ -351,7 +351,7 @@ export default class ModificationsCommonPage {
         .locator(this.valueLocator);
       await expect.soft(actualSpecificChangeValueLocator).toBeVisible();
       if (!(await actualSpecificChangeValueLocator.isVisible())) {
-        break;
+        continue;
       }
       const actualSpecificChangeValue = confirmStringNotNull(
         await actualSpecificChangeValueLocator.textContent()
@@ -365,9 +365,11 @@ export default class ModificationsCommonPage {
       )
         .trim()
         .split('\n')[0];
-      const actualChangeStatus = confirmStringNotNull(
-        await card.locator(this.modificationStatusLabel).textContent()
-      ).trim();
+      let actualChangeStatus = null;
+      const locator = card.locator(this.modificationStatusLabel);
+      if (await locator.isVisible()) {
+        actualChangeStatus = (await locator.textContent()).trim();
+      }
       actualValuesArray.push({
         specificChangeValue: actualSpecificChangeValue,
         areaOfChangeSubHeading: actualAreaOfChangeSubHeading,
@@ -399,6 +401,8 @@ export default class ModificationsCommonPage {
         changeDataset['planned_project_end_month_dropdown'],
         changeDataset['planned_project_end_year_text']
       );
+    } else {
+      expectedSpecificChangeValue = changeDataset['specific_change_dropdown'];
     }
     return {
       expectedAreaOfChangeSubHeading,
@@ -623,29 +627,13 @@ export default class ModificationsCommonPage {
     this.setOverallRanking(modificationType, category, reviewType);
   }
 
-  async getMappedSummaryCardDataForRankingCategoryChanges(cardTitle: string, CardHeading: string, dataset: any) {
+  async getMappedSummaryCardDataForRankingCategoryChanges(cardTitle: string, dataset: any) {
     await this.page.waitForLoadState('domcontentloaded');
     const keys = Object.keys(dataset);
-    let cardLocator: any;
-    const pageHeading = (await this.page.locator('.govuk-heading-l').first().innerText()).trim();
-    if (pageHeading === 'Modification') {
-      const summaryCardByTitle = this.page.locator(
-        `.govuk-summary-card:has(.govuk-summary-card__title:has-text("${dataset.area_of_change_dropdown}"))`
-      );
-
-      if ((await summaryCardByTitle.count()) > 0) {
-        cardLocator = summaryCardByTitle.first();
-      } else {
-        const headingForArea = this.page.locator('h2, h3').filter({ hasText: dataset.area_of_change_dropdown });
-        cardLocator = headingForArea.locator('..').locator('..');
-      }
-    } else {
-      const changesHeading = this.page.locator('h2').filter({ hasText: 'Changes' });
-      cardLocator = changesHeading.locator('..').locator('..');
-    }
-    await expect.soft(cardLocator).toBeVisible({ timeout: 5000 });
+    const cardLocator = this.page.getByRole('heading', { name: cardTitle, exact: true }).locator('..').locator('..');
+    await this.page.waitForLoadState('domcontentloaded');
     const rows = cardLocator.locator('.govuk-summary-list__row');
-    await expect.soft(rows.first()).toBeVisible({ timeout: 5000 });
+    await expect.soft(rows.first()).toBeVisible();
     const rowCount = await rows.count();
     const specificChangeValue = await rows.nth(0).locator('.govuk-summary-list__key').innerText();
     const cardData: Record<string, any> = {};
@@ -654,18 +642,8 @@ export default class ModificationsCommonPage {
     }
     const modificationInfo: Record<string, string> = {};
     if (cardTitle.includes('Change')) {
-      let cardTitleValue: string | null = null;
-      const govukTitle = cardLocator.locator('.govuk-summary-card__title').first();
-      if (await govukTitle.count()) {
-        cardTitleValue = await govukTitle.innerText();
-      } else {
-        const headingInside = cardLocator.locator('h2, h3').first();
-        if (await headingInside.count()) {
-          cardTitleValue = await headingInside.innerText();
-        }
-      }
-      cardTitleValue = cardTitleValue?.trim() ?? '';
-      const areaOfChangeValue = cardTitleValue.split('-')[1]?.trim() ?? '';
+      const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
+      const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
       cardData['area_of_change_dropdown'] = areaOfChangeValue;
       cardData['specific_change_dropdown'] = specificChangeValue;
     }
@@ -675,7 +653,7 @@ export default class ModificationsCommonPage {
       const key = await row.locator('.govuk-summary-list__key').innerText();
       const value = await row.locator('.govuk-summary-list__value').innerText();
       const cleanedKey = key.trim();
-      const cleanedValue = confirmStringNotNull(value); // assuming this helper exists
+      const cleanedValue = confirmStringNotNull(value);
       switch (cleanedKey) {
         case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
           .planned_project_end_date_label: {

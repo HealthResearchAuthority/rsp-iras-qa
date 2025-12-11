@@ -72,7 +72,7 @@ Then(
     const pageBodyActual = (await projectDetailsIRASPage.page_body.textContent()).replaceAll(/\s+/g, ' ').trim();
     const pageBodyExpected =
       projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.project_not_eligible_page_body;
-    expect(pageBodyActual).toBe(pageBodyExpected);
+    expect.soft(pageBodyActual).toBe(pageBodyExpected);
     await commonItemsPage.clickLink('IRAS_ID_Error_Page', 'Follow_Existing_Processes');
     const followExistingProcessesPage = await context.waitForEvent('page');
     await followExistingProcessesPage.waitForLoadState('load');
@@ -82,18 +82,14 @@ Then(
     expect(followExistingProcessesUrlActual).toBe(followExistingProcessesUrlExpected);
     await followExistingProcessesPage.close();
     await commonItemsPage.clickLink('IRAS_ID_Error_Page', 'HRA_Support_Site');
-    const hraSupporSitePage = await context.waitForEvent('page');
-    await hraSupporSitePage.waitForLoadState('load');
-    const hraSupporSiteUrlActual = hraSupporSitePage.url();
-    const hraSupporSiteUrlExpected =
-      projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.hra_support_site_url;
-    expect(hraSupporSiteUrlActual).toBe(hraSupporSiteUrlExpected);
+    await projectDetailsIRASPage.assertHraSupportSiteurl();
+    await commonItemsPage.goBack();
   }
 );
 
 Then(
   'I validate that the project record already exists page is displayed',
-  async ({ commonItemsPage, projectDetailsIRASPage, context }) => {
+  async ({ commonItemsPage, projectDetailsIRASPage }) => {
     await expect(
       commonItemsPage.page_heading.getByText(
         projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.project_already_exist_heading
@@ -104,11 +100,7 @@ Then(
       projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.project_already_exist_page_body;
     expect(pageBodyActual).toBe(pageBodyExpected);
     await commonItemsPage.clickLink('IRAS_ID_Error_Page', 'HRA_Support_Site');
-    const hraSupporSitePage = await context.waitForEvent('page');
-    await hraSupporSitePage.waitForLoadState('load');
-    const hraSupporSiteUrlActual = hraSupporSitePage.url();
-    const hraSupporSiteUrlExpected =
-      projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.hra_support_site_url;
-    expect(hraSupporSiteUrlActual).toBe(hraSupporSiteUrlExpected);
+    await projectDetailsIRASPage.assertHraSupportSiteurl();
+    await commonItemsPage.goBack();
   }
 );
