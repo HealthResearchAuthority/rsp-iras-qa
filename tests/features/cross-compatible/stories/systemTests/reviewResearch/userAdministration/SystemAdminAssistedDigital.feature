@@ -5,7 +5,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
         Given I have navigated to the my research projects page
         And I can see the my research projects page
 
-    @AuthoriseAndApproveModification @abc
+    @AuthoriseAndApproveModification
     Scenario: Validate system admininstrator is able to authorise and approve a modification
         And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
         And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -118,7 +118,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
             | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes | Approved | Blank          |
 
 
-    @AuthoriseAndAssignModificationToStudyWideReviewer @abc
+    @AuthoriseAndAssignModificationToStudyWideReviewer
     Scenario: Validate system adminintrator is able to authorise and assign modification to a study wide reviewer
         And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
         And I click the 'Start' button on the 'Create_Project_Record_Page'
