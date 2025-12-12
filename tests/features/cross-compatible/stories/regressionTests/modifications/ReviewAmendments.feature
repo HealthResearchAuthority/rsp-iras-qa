@@ -1,4 +1,4 @@
-@RegressionReviewAmendments @RegressionTest @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @KNOWN_DEFECT_RSP-5285 @KNOWN_DEFECT_RSP-5184 @fail
+@RegressionReviewAmendments @RegressionTest @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @KNOWN_DEFECT_RSP-5285 @KNOWN_DEFECT_RSP-5184
 Feature: Review Amendments- As a studywide reviewer I want to receive and review amendments
 
     Background:
@@ -85,7 +85,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and review
         And I click the 'Search' button on the '<Backstage_Page>'
         Then I 'can' see the modification displayed in the '<Backstage_Page>' list with 'Modification_Status_Received' status
         When I click the modification id displayed on the '<Backstage_Page>'
-        Then I can see the modifications details page in the readonly view
+        Then I can see the modification post submission page
         And I validate the project information labels using dataset displayed on modifications page
         And I validate the date created for modification in sponsor check and authorise page
         And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page

@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
 
-        @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory @CreatedRevBodyCleanup @KNOWN-ISSUE-RSP-5003 @fail
+        @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory @CreatedRevBodyCleanup @KNOWN_DEFECT_RSP-5003
         Scenario Outline: Verify the user can view the audit history after disabling a newly created review body and the the user list page
                 # create review body from manage review body page
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
@@ -79,7 +79,7 @@ Feature: User Administration: Manage Review Bodies
                         | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
                         | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
 
-        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @RevBodyStatusSetup @KNOWN-ISSUE-RSP-5003 @fail
+        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @RevBodyStatusSetup @KNOWN_DEFECT_RSP-5003
         Scenario Outline: Verify the user can view the audit history after enabling a review body
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'

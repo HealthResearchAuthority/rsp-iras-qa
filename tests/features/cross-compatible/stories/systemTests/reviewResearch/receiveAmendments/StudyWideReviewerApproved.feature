@@ -108,7 +108,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and approv
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
         When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
-        Then I can see the modifications details page in the readonly view
+        Then I can see the modification post submission page
         When I click the 'Continue' link on the 'Modification_Details_Page'
         Then I can see the review outcome section
         When I provide the '<Outcome>' outcome for the modification with '<Outcome_Reason>' reason
