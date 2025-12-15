@@ -453,3 +453,29 @@ Then('I validate confirmation screen for modification review outcome sent', asyn
     .getByText(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.confirmation_body)
     .isVisible();
 });
+
+Then(
+  'I validate {string} labels displayed in the success confirmation page when the project has been sent to sponsor',
+  async ({ confirmationPage }, validationLabelsDatasetName) => {
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedSuccessHeader = validationLabelsDataset.page_heading;
+    const guidanceText = confirmationPage.confirmationPageTestData[validationLabelsDatasetName].page_guidance_text;
+    const whatHappensNextLabel =
+      confirmationPage.confirmationPageTestData[validationLabelsDatasetName].what_happens_next_label;
+    const expectedGuidanceText = confirmationPage.confirmation_body_label
+      .getByText(confirmationPage.confirmationPageTestData.Close_Project_Sent_To_Sponsor.confirmation_body)
+      .first()
+      .textContent();
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedSuccessHeader);
+    expect.soft(confirmStringNotNull(await expectedGuidanceText).trim()).toBe(guidanceText);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.what_happens_next_label.textContent()).trim())
+      .toBe(whatHappensNextLabel);
+  }
+);
+
+When('I can see the close project confirmation page', async ({ confirmationPage }) => {
+  await confirmationPage.assertOnConfirmationPage();
+});

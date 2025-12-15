@@ -101,6 +101,7 @@ import ChooseARecordTypeToSearchPage from '../pages/IRAS/reviewResearch/approval
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
 import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchProjectsPage';
 import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
+import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -202,6 +203,7 @@ type CustomFixtures = {
   teamManagerDashboardPage: TeamManagerDashboardPage;
   searchProjectsPage: SearchProjectsPage;
   modificationOutcomeCheckSendPage: ModificationOutcomeCheckSendPage;
+  closeProjectPage: CloseProjectPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -602,6 +604,9 @@ export const test = base.extend<CustomFixtures>({
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
+  },
+  closeProjectPage: async ({ page }, use) => {
+    await use(new CloseProjectPage(page));
   },
 
   //Set the Storage State based on User Tag from Feature File

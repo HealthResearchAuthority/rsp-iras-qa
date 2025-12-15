@@ -239,7 +239,8 @@
     "Create_New_Modification": "Create new modification",
     "Modification_Type": "Modification type",
     "Review_Type": "Review type",
-    "Category": "Category"
+    "Category": "Category",
+    "Close_Project": "Close project"
   },
   "Add_Document_Modifications_Page": {
     "Save_Continue": "Save and continue",
@@ -401,5 +402,8 @@
   },
   "Choose_A_Record_Type_To_Search_Page": {
     "Next": "Next"
+  },
+  "Close_Project_Page": {
+    "Send_To_Sponsor": "Send to sponsor"
   }
 }

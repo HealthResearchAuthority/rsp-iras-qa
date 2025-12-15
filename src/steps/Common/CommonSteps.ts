@@ -695,7 +695,8 @@ Then(
     if (
       errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
       errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error' ||
-      errorMessageFieldAndSummaryDatasetName === 'Both_Filters_Not_Selected_Same_Time_Summary_Only_Error'
+      errorMessageFieldAndSummaryDatasetName === 'Both_Filters_Not_Selected_Same_Time_Summary_Only_Error' ||
+      errorMessageFieldAndSummaryDatasetName === 'Summary_Only_Error_Project_Closure'
     ) {
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
       summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();

@@ -133,8 +133,8 @@ Feature: Close Project - This feature file helps to close project journeys
     And I click the 'Search' button on the 'Post_Approval_Page'
     And I can see the searched modification to be present in the list with 'With review body' status in project overview page
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Close_Project_page'
-    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Close_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
+    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Project_Overview_Page'
     And I capture the page screenshot  
   # Draft Modification
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -149,8 +149,8 @@ Feature: Close Project - This feature file helps to close project journeys
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
     Then I can see the modification progress saved successful message on project overview page
     Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
-    And I click the 'Close_Project' button on the 'Close_Project_page'
-    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Close_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
+    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Project_Overview_Page'
     And I capture the page screenshot  
  #With Sponsor
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -180,12 +180,84 @@ Feature: Close Project - This feature file helps to close project journeys
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Close_Project_page'
-    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Close_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
+    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Project_Overview_Page'
     And I capture the page screenshot  
   Examples:
       | Changes                                            | Research_Locations                     |
       | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_England          |
+ 
+ 
+  @rsp-4908 @ValidateProjectWithoutModificationsAndAuthorizedForClosure
+  Scenario Outline: Verify the project without modification and authorised for project closure
+    Given I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I validate 'Close_Project' button visible on the screen
+    And I capture the page screenshot
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
+    Then I can see the close project page
+    Then I validate the project information displayed on close project page
+    And I can see the 'Label_Texts' ui labels on close project page
+    Then I fill the close project page with 'Valid_Data_All_Fields'
+    When I click the 'Send_To_Sponsor' button on the 'Close_Project_page'
+    And I can see the close project confirmation page
+    Then I validate 'Close_Project_Sent_To_Sponsor' labels displayed in the success confirmation page when the project has been sent to sponsor
+    And I capture the page screenshot
+    And I click the 'Return_To_Project_Overview' button on the 'Close_Project_Confirmation_page'
+    And I capture the page screenshot
+    And I can see the project overview page
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
+    And I validate project ending section
+    And I validate the status 'Project_Status_With_Sponsor' is displayed on the page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I click the 'Project closures' link on the 'Sponsor_Check_And_Authorise_Page'
+    And I can see the project details to be present in the list with 'With sponsor' status in the sponsor authorisations page
+    And I capture the page screenshot
+    Then I click on the short project title 
+    And I can see the check and authorise project closure page
+    And I validate the project information 
+    And I validate the Planned project end date and Actual project closure date for project closure in check and authorise project closure page
+    And I can see the ui labels in check and authorise project closure page
+    And I capture the page screenshot
+    And I fill the check and authorise project closure page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_And_Authorise_Project_Closure_Page'
+    And I validate ui labels in project closure confirmation screen 
+    And I capture the page screenshot
+    And I validate 'Keep_Project_Open' button visible on the screen
+    And I click the 'Authorise closure' button on the 'Confirmation_Page'
+    And I validate the project closed success message
+    And I click the 'Return_To_Authorisations' button on the 'Project_Closure_Success_Page'
+    And I can see the closed project details to be present in the list with 'Authorised' status in the sponsor authorisations page
+    And I have navigated to the 'My_Research_Page'
+    And I can see the 'My_Research_Page'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Closed' on the project overview page
+    And I can see the project overview page
+    And I Validate the closed project details
+    And I capture the page screenshot
  
   @rsp-4908 @ValidateTheModificationApprovedAndNotApprovedByReviewBodyAndAuthorisedForProjectClosure 
   Scenario Outline: Verify the modification approved and not approved by reviewbody and authorised for project closure
@@ -313,14 +385,17 @@ Feature: Close Project - This feature file helps to close project journeys
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I validate 'Close_Project' button visible on the screen
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Clsoe_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
     Then I can see the close project page
     Then I validate the project information displayed on close project page
     And I can see the 'Label_Texts' ui labels on close project page
     Then I fill the close project page with 'Valid_Data_All_Fields'
     When I click the 'Send_To_Sponsor' button on the 'Close_Project_page'
     And I can see the close project confirmation page
+    Then I validate 'Close_Project_Sent_To_Sponsor' labels displayed in the success confirmation page when the project has been sent to sponsor
+    And I capture the page screenshot
     And I click the 'Return_To_Project_Overview' button on the 'Close_Project_Confirmation_page'
+    And I capture the page screenshot
     And I can see the project overview page
     And I capture the page screenshot
     Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
@@ -360,7 +435,84 @@ Feature: Close Project - This feature file helps to close project journeys
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England          | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator    | Studywide_Reviewer    | Approved     | Blank            | Modification_Status_Approved     |
             | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_Northern_Ireland | Studywide_Reviewer_NI           | Workflow_Coordinator_NI | Studywide_Reviewer_NI | Not_Approved | Lack_Of_Evidence | Modification_Status_Not_Approved |
   
-  @rsp-4908 @ValidateModificationSponsorChangesReviewableNotAuthorisedForProjectClosure 
+  @rsp-4908 @ValidateProjectWithoutModificationsAndNotAuthorizedForClosure
+  Scenario Outline: Verify the project without modification and authorised for project closure
+    Given I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+     And I capture the page screenshot
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
+    Then I can see the close project page
+    Then I validate the project information displayed on close project page
+    And I can see the 'Label_Texts' ui labels on close project page
+    Then I fill the close project page with 'Valid_Data_All_Fields'
+    When I click the 'Send_To_Sponsor' button on the 'Close_Project_page'
+    And I can see the close project confirmation page
+    And I click the 'Return_To_Project_Overview' button on the 'Close_Project_Confirmation_page'
+    And I can see the project overview page
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
+    And I validate project ending section
+    And I validate the status 'Project_Status_With_Sponsor' is displayed on the page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I click the 'Project closures' link on the 'Sponsor_Check_And_Authorise_Page'
+    And I can see the project details to be present in the list with 'With sponsor' status in the sponsor authorisations page
+    And I capture the page screenshot
+    Then I click on the short project title 
+    And I can see the check and authorise project closure page
+    And I validate the project information 
+    And I validate the Planned project end date and Actual project closure date for project closure in check and authorise project closure page
+    And I can see the ui labels in check and authorise project closure page
+    And I capture the page screenshot
+    And I fill the check and authorise project closure page with 'Sponsor_Not_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_And_Authorise_Project_Closure_Page'
+    And I validate the project not closed success message
+    And I click the 'Return_To_Authorisations' button on the 'Project_Closure_Success_Page'
+    And I can see the project details to be present in the list with 'Not authorised' status in the sponsor authorisations page
+    And I have navigated to the 'My_Research_Page'
+    And I can see the 'My_Research_Page'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    And I can see the project overview page
+    And I Validate the closed project details
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    And I upload 'Multiple_Files_Three' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the modification progress saved successful message on project overview page
+    Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
+    
+  @rsp-4908 @ValidateModificationSponsorChangesReviewableNotAuthorisedAndAuthorisedForProjectClosure 
   Scenario: Validate the project closure for reviewable modifications when sponsor not authorised
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -451,7 +603,7 @@ Feature: Close Project - This feature file helps to close project journeys
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I validate 'Close_Project' button visible on the screen
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Clsoe_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
     Then I can see the close project page
     Then I validate the project information displayed on close project page
     And I can see the 'Label_Texts' ui labels on close project page
@@ -585,7 +737,7 @@ Feature: Close Project - This feature file helps to close project journeys
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I validate 'Close_Project' button visible on the screen
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Clsoe_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
     Then I can see the close project page
     Then I validate the project information displayed on close project page
     And I can see the 'Label_Texts' ui labels on close project page
@@ -764,7 +916,7 @@ Feature: Close Project - This feature file helps to close project journeys
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I validate 'Close_Project' button visible on the screen
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Clsoe_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
     Then I can see the close project page
     Then I validate the project information displayed on close project page
     And I can see the 'Label_Texts' ui labels on close project page
@@ -855,8 +1007,8 @@ Feature: Close Project - This feature file helps to close project journeys
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Close_Project_page'
-    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Close_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
+    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Project_Overview_Page'
     And I capture the page screenshot  
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
@@ -870,8 +1022,8 @@ Feature: Close Project - This feature file helps to close project journeys
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
     Then I can see the modification progress saved successful message on project overview page
     Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
-    And I click the 'Close_Project' button on the 'Close_Project_page'
-    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Close_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
+    Then I validate 'Summary_Only_Error_Project_Closure' displayed on 'Project_Overview_Page'
     And I capture the page screenshot              
     Examples:
       | Changes                                                          | Research_Locations  |
@@ -963,7 +1115,7 @@ Feature: Close Project - This feature file helps to close project journeys
     And I capture the page screenshot
   And I validate 'Close_Project' button visible on the screen
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Clsoe_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
     Then I can see the close project page
     Then I validate the project information displayed on close project page
     And I can see the 'Label_Texts' ui labels on close project page
@@ -1096,7 +1248,7 @@ Feature: Close Project - This feature file helps to close project journeys
     And I capture the page screenshot
     And I validate 'Close_Project' button visible on the screen
     And I capture the page screenshot
-    And I click the 'Close_Project' button on the 'Clsoe_Project_page'
+    And I click the 'Close_Project' button on the 'Project_Overview_Page'
     Then I can see the close project page
     Then I validate the project information displayed on close project page
     And I can see the 'Label_Texts' ui labels on close project page
@@ -1226,7 +1378,7 @@ Feature: Close Project - This feature file helps to close project journeys
     And I can see the 'Label_Texts' ui labels on close project page
     Then I fill the close project page with 'Valid_Data_All_Fields'
     When I click the 'Send_To_Sponsor' button on the 'Close_Project_page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Close_Project_page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on '<Close_Project_page>'
 
     Examples: 
       | Close_Project_page                   | Field_And_Summary_Error_Message |
