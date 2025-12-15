@@ -134,7 +134,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id | System_Admin         | With sponsor     | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | With review body | Single             |
 
-        @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031
+        @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031 @KNOWN-DEFECT-RSP-6500
         Scenario: Verify In draft and WIth sponsor modifications in search modifications page
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
