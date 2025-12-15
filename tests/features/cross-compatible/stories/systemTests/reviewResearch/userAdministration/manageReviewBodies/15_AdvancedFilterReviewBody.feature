@@ -224,7 +224,7 @@ Feature: Manage review bodies-Advanced Filter and Search
     And the 'Previous' button will be 'available' to the user
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
-    Then I sequentially navigate through each 'Manage_Review_Bodies_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    Then I sequentially navigate through each 'Manage_Review_Bodies_Page' by clicking on 'previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot

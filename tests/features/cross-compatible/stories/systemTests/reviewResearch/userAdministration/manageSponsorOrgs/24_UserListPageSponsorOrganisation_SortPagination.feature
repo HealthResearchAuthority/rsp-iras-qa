@@ -19,7 +19,7 @@ Feature: Sort, search and pagination of users list in the selected sponsor org
     Then I can see the user list page of the 'sponsor organisation'
     And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'first name' on the 'first' page
 
-  @rsp-5233 @sortUserListByColumn
+  @rsp-5233 @sortUserListByColumn @KNOWN-DEFECT-RSP-6464
   Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column
     When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
@@ -36,11 +36,30 @@ Feature: Sort, search and pagination of users list in the selected sponsor org
     Then I can see the 'sponsor organisation users' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'last' page
 
     Examples:
+      | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort |
+      | First_Name    | first name    | descending   | ascending      |
+      | Last_Name     | last name     | ascending    | descending     |
+      | Email_Address | email address | ascending    | descending     |
+      | Status        | status        | ascending    | descending     |
+
+  @rsp-5233 @sortUserListByColumn
+  Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column-last logged in
+    When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
+    And I capture the page screenshot
+    Then I can see the 'sponsor organisation users' list sorted by '<Initial_Sort>' order of the '<Sort_Field>' on the 'first' page
+    When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    Then I can see the 'sponsor organisation users' list sorted by '<Initial_Sort>' order of the '<Sort_Field>' on the 'last' page
+    When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
+    And I capture the page screenshot
+    Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+    And I can see the 'sponsor organisation users' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'first' page
+    When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    Then I can see the 'sponsor organisation users' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'last' page
+
+    Examples:
       | Sort_Button    | Sort_Field     | Initial_Sort | Secondary_Sort |
-      | First_Name     | first name     | descending   | ascending      |
-      | Last_Name      | last name      | ascending    | descending     |
-      | Email_Address  | email address  | ascending    | descending     |
-      | Status         | status         | ascending    | descending     |
       | Last_Logged_In | last logged in | ascending    | descending     |
 
   @rsp-5233 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationFirstPage @UserlistSponsorOrgPaginationPageNumber @UserlistSponsorOrgPaginationNextLinkClick

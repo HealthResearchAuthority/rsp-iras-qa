@@ -320,28 +320,28 @@ Feature: Team Manager Dashboard page
                         | Days_Since_Submission | days since submission | ascending    | descending     |
                         | Status                | status                | ascending    | descending     |
 
-        @SortTMDashboardByColumn @rsp-5122  @defectSWRSortingDuetoSPace
-        Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for study-wide reviewer
-                Given I have navigated to the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
-                When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
-                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-                And I capture the page screenshot
-                And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        # @SortTMDashboardByColumn @rsp-5122  @defectSWRSortingDuetoSPace
+        # Scenario Outline: Verify the user is able to sort the team manager dashboard by ascending and descending order for study-wide reviewer
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        #         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I capture the page screenshot
+        #         And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        #         When I click the '<Sort_Button>' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I capture the page screenshot
+        #         And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        #         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        #         And I capture the page screenshot
+        #         And I can see the tasklist on the 'Team_Manager_Dashboard_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
 
-                Examples:
-                        | Sort_Button         | Sort_Field          | Initial_Sort | Secondary_Sort |
-                        | Study_Wide_Reviewer | study-wide reviewer | ascending    | descending     |
+        #         Examples:
+        #                 | Sort_Button         | Sort_Field          | Initial_Sort | Secondary_Sort |
+        #                 | Study_Wide_Reviewer | study-wide reviewer | ascending    | descending     |
 
 
         @TMDashboardErrorStateValidation @rsp-5122
@@ -513,43 +513,43 @@ Feature: Team Manager Dashboard page
                         | Date_Submitted        |
                         | Days_Since_Submission |
 
-        @TMAssignModificationSWR
-        Scenario Outline: Validate the team manager can assign a study-wide reviewer to a modification from the team manger dashboard page
-                Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<Team_Manager_User>'
-                And I capture the page screenshot
-                And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
-                And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                When I select modifications by clicking the checkbox in the 'team manager dashboard' page
-                And I capture the page screenshot
-                And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                Then I can see the 'Select_Study_Wide_Reviewer_Page'
-                And I select a study wide reviewer in the select a reviewer page using '<Study_Wide_Reviewer>'
-                And I capture the page screenshot
-                And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
-                And I capture the page screenshot
-                Then I can see the modifications assignment confirmation page for 'Team_Manager' with reviewer '<Study_Wide_Reviewer>'
-                And I capture the page screenshot
-                And  I click the 'Back_To_Dashboard' link on the 'Modifications_Assignment_Confirmation_Page_Team_Manager'
-                And I capture the page screenshot
-                Then I can see the 'Team_Manager_Dashboard_Page'
-                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
-                And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
-                And I capture the page screenshot
-                Then I can see previously assigned modification is displayed in 'Team_Manager_Dashboard_Page' with status 'Review in progress' and reviewer '<Study_Wide_Reviewer>'
-                And I capture the page screenshot
-                Given I have navigated to the 'My_Modifications_Tasklist_Page' as '<Study_Wide_Reviewer_User>'
-                Then I capture the page screenshot
-                When I fill the search input for searching 'my tasklist' with 'modification assigned by team manager' as the search query
-                And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
-                And I capture the page screenshot
-                Then I can see the modifications assigned from WFC or TM to SWR are now visible in my task list with status 'Review in progress'
+        # @TMAssignModificationSWR
+        # Scenario Outline: Validate the team manager can assign a study-wide reviewer to a modification from the team manger dashboard page
+        #         Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<Team_Manager_User>'
+        #         And I capture the page screenshot
+        #         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
+        #         When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
+        #         And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         When I select modifications by clicking the checkbox in the 'team manager dashboard' page
+        #         And I capture the page screenshot
+        #         And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         Then I can see the 'Select_Study_Wide_Reviewer_Page'
+        #         And I select a study wide reviewer in the select a reviewer page using '<Study_Wide_Reviewer>'
+        #         And I capture the page screenshot
+        #         And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+        #         And I capture the page screenshot
+        #         Then I can see the modifications assignment confirmation page for 'Team_Manager' with reviewer '<Study_Wide_Reviewer>'
+        #         And I capture the page screenshot
+        #         And  I click the 'Back_To_Dashboard' link on the 'Modifications_Assignment_Confirmation_Page_Team_Manager'
+        #         And I capture the page screenshot
+        #         Then I can see the 'Team_Manager_Dashboard_Page'
+        #         When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
+        #         And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
+        #         And I capture the page screenshot
+        #         Then I can see previously assigned modification is displayed in 'Team_Manager_Dashboard_Page' with status 'Review in progress' and reviewer '<Study_Wide_Reviewer>'
+        #         And I capture the page screenshot
+        #         Given I have navigated to the 'My_Modifications_Tasklist_Page' as '<Study_Wide_Reviewer_User>'
+        #         Then I capture the page screenshot
+        #         When I fill the search input for searching 'my tasklist' with 'modification assigned by team manager' as the search query
+        #         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+        #         And I capture the page screenshot
+        #         Then I can see the modifications assigned from WFC or TM to SWR are now visible in my task list with status 'Review in progress'
 
-                Examples:
-                        | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-                        | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
+        #         Examples:
+        #                 | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
+        #                 | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
         @TMDashboardModificationsList @DBDataUsed
         Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page

@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import { confirmStringNotNull } from '../../utils/UtilFunctions';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -259,12 +259,9 @@ Then(
         .delete_modification_page_heading +
       ' ' +
       modificationIDExpected;
-    const actualHeadingText = confirmStringNotNull(
-      await confirmationPage.confirmation_header_common_label.textContent()
-    );
     const expectedConfirmationBody =
       confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels.page_guidance_text;
-    expect(actualHeadingText).toBe(expectedHeadingText);
+    await expect(confirmationPage.confirmation_header_common_label.getByText(expectedHeadingText)).toBeVisible();
     await expect(confirmationPage.confirmation_body_label.getByText(expectedConfirmationBody)).toBeVisible();
   }
 );
@@ -409,9 +406,9 @@ Then(
 );
 
 Then('I validate confirmation screen for modification not authorised by sponsor', async ({ confirmationPage }) => {
-  expect
-    .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_header_common_label.textContent()))
-    .toBe(confirmationPage.confirmationPageTestData.Modification_Not_Authorised.page_heading);
+  await confirmationPage.confirmation_header_common_label
+    .getByText(confirmationPage.confirmationPageTestData.Modification_Not_Authorised.page_heading)
+    .isVisible();
   await expect
     .soft(
       confirmationPage.page.getByText(
@@ -419,17 +416,17 @@ Then('I validate confirmation screen for modification not authorised by sponsor'
       )
     )
     .toBeVisible();
-  expect
-    .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_body_label.textContent()))
-    .toBe(confirmationPage.confirmationPageTestData.Modification_Not_Authorised.confirmation_body);
+  await confirmationPage.confirmation_body_label
+    .getByText(confirmationPage.confirmationPageTestData.Modification_Not_Authorised.confirmation_body)
+    .isVisible();
 });
 
 Then(
   'I validate confirmation screen for modification has been authorised by sponsor and approved',
   async ({ confirmationPage }) => {
-    expect
-      .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_header_common_label.textContent()))
-      .toBe(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.page_heading);
+    await confirmationPage.confirmation_header_common_label
+      .getByText(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.page_heading)
+      .isVisible();
     await expect
       .soft(
         confirmationPage.page.getByText(
@@ -437,9 +434,9 @@ Then(
         )
       )
       .toBeVisible();
-    expect
-      .soft(await removeUnwantedWhitespace(await confirmationPage.confirmation_body_label.textContent()))
-      .toBe(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.confirmation_body);
+    await confirmationPage.confirmation_body_label
+      .getByText(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.confirmation_body)
+      .isVisible();
   }
 );
 

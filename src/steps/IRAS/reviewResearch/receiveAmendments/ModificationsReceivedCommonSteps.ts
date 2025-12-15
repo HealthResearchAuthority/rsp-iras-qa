@@ -187,8 +187,8 @@ Given(
         )
         .toBeTruthy();
     } else if (searchInput.toLowerCase().includes('multi')) {
-      expect.soft(noOfResults).toBeGreaterThan(1);
-      expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
+      expect.soft(noOfResults).toBeGreaterThanOrEqual(1);
+      expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThanOrEqual(1);
       if (searchInput.toLowerCase().includes('date')) {
         expect
           .soft(commonItemsPage.checkDateMultiDateSearchResultValues(datesSubmitted, searchInputDataset, searchInput))

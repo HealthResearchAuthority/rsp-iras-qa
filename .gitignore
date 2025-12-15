@@ -5,6 +5,8 @@ test-reports
 test-results
 generated-feature-files
 .env
+.env_st
+.env_prod
 .eslintcache
 artifacts
 user_profile_generate_test_data.json

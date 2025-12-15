@@ -142,18 +142,21 @@ When(
         searchKey = await teamManagerDashboardPage.getModificationId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await teamManagerDashboardPage.getModificationId()).substring(0, 2);
+        await teamManagerDashboardPage.setModificationId(searchKey);
       }
     } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'tasklist') {
       if (searchKeyType.toLowerCase() === 'full') {
         searchKey = await modificationsReadyToAssignPage.getModificationId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await modificationsReadyToAssignPage.getModificationId()).substring(0, 2);
+        await modificationsReadyToAssignPage.setModificationId(searchKey);
       }
     } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'modifications') {
       if (searchKeyType.toLowerCase() === 'full') {
         searchKey = await searchModificationsPage.getModificationId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await searchModificationsPage.getModificationId()).substring(0, 2);
+        await searchModificationsPage.setModificationId(searchKey);
       }
     } else if (
       searchQueryName === 'modification assigned by team manager' &&

@@ -39,7 +39,7 @@ Then(
     const irasId = projectDetails[0].split(' ');
     const actualIrasId = irasId[2];
     const shortProjectTitle = projectDetails[3].trim();
-    const actualshortProjectTitle = shortProjectTitle.replace('Short project title: ', '');
+    const actualshortProjectTitle = shortProjectTitle.replace('Short project title: ', '').trim();
     expect.soft(actualshortProjectTitle).toBe(expectedProjectTitle);
     expect.soft(actualIrasId).toBe(expectedIrasId);
   }
