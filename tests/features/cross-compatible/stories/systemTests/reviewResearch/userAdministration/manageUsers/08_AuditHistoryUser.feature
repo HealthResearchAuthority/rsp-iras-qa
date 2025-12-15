@@ -89,7 +89,7 @@ Feature: Manage Users - View audit history for users
             | Add_User_Profile                                           | Field_Name | Edit_User                 | Status_Enabled |
             | Valid_Data_In_All_Fields_Role_Team_Manager                 | Role       | User_Roles_Checkbox_Empty | Enabled        |
             | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       | User_Roles_Checkbox_Empty | Enabled        |
-    # | Valid_Data_All_Roles                                       | Role       | User_Roles_Checkbox_Empty | Enabled        |
+            | Valid_Data_All_Roles                                       | Role       | User_Roles_Checkbox_Empty | Enabled        |
 
     @VerifyAuditHistoryEnableDisableUser
     Scenario Outline: Verify the user can view the audit history after changing the status of a user

@@ -25,6 +25,6 @@ Feature: Manage Users- Sort
       | Sort_Button    | Sort_Field     | Initial_Sort | Secondary_Sort |
       | First_Name     | first name     | descending   | ascending      |
       | Last_Name      | last name      | ascending    | descending     |
-      # | Email_Address  | email address  | ascending    | descending     |
+      | Email_Address  | email address  | ascending    | descending     |
       | Status         | status         | ascending    | descending     |
       | Last_Logged_In | last logged in | ascending    | descending     |

@@ -232,34 +232,34 @@ Feature: Manage Users - Advanced Filter and Search
             | Advanced_Filter_All_Countries_Active | Advanced_Filter_Country_No_Review_Body_HRA_Role_No |
             | Advanced_Filter_All_Countries_Active | Advanced_Filter_Country_No_Review_Body_HRA_Role_No |
 
-    # @rsp-4418 @ValidateFilters
-    # Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters, and clicking the 'Apply filters' button
-    #     And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
-    #     And I select advanced filters in the manage users page using '<Advanced_Filters>'
-    #     And I capture the page screenshot
-    #     And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
-    #     And I capture the page screenshot
-    #     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
-    #     And I can see the results matching the search '' and filter criteria '<Advanced_Filters>' for manage users page
-    #     And I capture the page screenshot
-    #     When I click the 'View_Edit' link on the 'Manage_Users_Page'
-    #     And I can see the user profile page
-    #     And I capture the page screenshot
-    #     And I can see the '<Advanced_Filters>' user has the selected roles in the filter assigned on their profile page
-    #     And I can see the '<Advanced_Filters>' user has the selected review bodies in the filter assigned on their profile page
-    #     And I can see the '<Advanced_Filters>' user has the selected countries in the filter assigned on their profile page
+    @rsp-4418 @ValidateFilters
+    Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters, and clicking the 'Apply filters' button
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I can see the results matching the search '' and filter criteria '<Advanced_Filters>' for manage users page
+        And I capture the page screenshot
+        When I click the 'View_Edit' link on the 'Manage_Users_Page'
+        And I can see the user profile page
+        And I capture the page screenshot
+        And I can see the '<Advanced_Filters>' user has the selected roles in the filter assigned on their profile page
+        And I can see the '<Advanced_Filters>' user has the selected review bodies in the filter assigned on their profile page
+        And I can see the '<Advanced_Filters>' user has the selected countries in the filter assigned on their profile page
 
-    #     Examples:
-    #         | Advanced_Filters                                                        |
-    #         | Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active      |
-    #         | Advanced_Filter_Country_No_Review_Body_HRA_Role_No                      |
-    #         | Advanced_Filter_Country_No_Review_Body_HSCNI_Role_No                    |
-    #         | Advanced_Filter_Country_No_Review_Body_HCRW_Role_No                     |
-    #         | Advanced_Filter_Country_No_Review_Body_NRSPCC_Role_No                   |
-    #         | Advanced_Filter_Country_No_Review_Body_No_Role_Applicant                |
-    #         | Advanced_Filter_Country_No_Review_Body_No_Role_System_Admin             |
-    #         | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
-    #         | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
+        Examples:
+            | Advanced_Filters                                                        |
+            | Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active      |
+            | Advanced_Filter_Country_No_Review_Body_HRA_Role_No                      |
+            | Advanced_Filter_Country_No_Review_Body_HSCNI_Role_No                    |
+            | Advanced_Filter_Country_No_Review_Body_HCRW_Role_No                     |
+            | Advanced_Filter_Country_No_Review_Body_NRSPCC_Role_No                   |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Applicant                |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_System_Admin             |
+            | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
 
     # Few failures due to data issues- to be re executed once data issues are fixed(review body and country)
     @rsp-4418 @rsp-5250 @ValidateFilters @DataIssues

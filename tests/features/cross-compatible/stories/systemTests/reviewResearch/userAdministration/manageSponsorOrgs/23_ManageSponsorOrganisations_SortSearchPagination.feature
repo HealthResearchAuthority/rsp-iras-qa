@@ -25,7 +25,7 @@ Feature: Sort, search and pagination of sponsor org
             | Sort_Button | Sort_Field        | Initial_Sort | Secondary_Sort |
             | Org_Name    | organisation name | descending   | ascending      |
             | Country     | country           | ascending    | descending     |
-    # | Status      | status            | ascending    | descending     |
+            | Status      | status            | ascending    | descending     |
 
     @rsp-5229 @ManageSponsorOrgsPagination @ManageSponsorOrgsPaginationFirstPage @ManageSponsorOrgsPaginationPageNumber @ManageSponsorOrgsPaginationNextLinkClick
     Scenario: Verify pagination in manage sponsor organisation page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
