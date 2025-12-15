@@ -229,8 +229,6 @@ Feature: Manage review bodies-Advanced Filter and Search
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
     When I click the 'System_Admin_Breadcrumb' link on the 'Manage_Review_Bodies_Page'
-    # Then I can see the 'System_Administration_Page'
-    # And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
     Then I can see the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
