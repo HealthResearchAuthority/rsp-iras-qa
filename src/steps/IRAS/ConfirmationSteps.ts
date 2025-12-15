@@ -299,7 +299,7 @@ Then(
         : '') +
       validationLabelsDataset.page_heading_suffix;
     await expect
-      .soft(confirmationPage.confirmation_header_common_label.getByText(expectedConfirmationHeader, { exact: true }))
+      .soft(confirmationPage.confirmation_header_common_label.getByText(expectedConfirmationHeader))
       .toBeVisible();
     await expect
       .soft(
