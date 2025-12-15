@@ -1,5 +1,5 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin @KNOWN_DEFECT-RSP-5531
-Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Disable users in the selected Sponsor Organisations
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin
+Feature: Enable/Disable users in the selected Sponsor Org
 
   Background:
     Given I have navigated to the 'System_Administration_Page'
@@ -146,5 +146,5 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Link | Status_Enabled |
-      | Back            | enabled        |
+      | Navigation_Link | Status_Enabled | Disable_Label_Texts |
+      | Back            | enabled        | Disable_Label_Texts |

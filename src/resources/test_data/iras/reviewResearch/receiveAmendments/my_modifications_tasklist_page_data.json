@@ -7,7 +7,11 @@
     "advanced_filter_label": "Advanced filters",
     "maxPagesToVisit": 2,
     "days_since_suffix": "days",
-    "iras_id_search_box_label": "IRAS ID"
+    "iras_id_search_box_label": "IRAS ID",
+    "project_record_answer_option_lead_nation_england": "OPT0018",
+    "project_record_answer_option_lead_nation_northern_ireland": "OPT0019",
+    "project_record_answer_option_lead_nation_scotland": "OPT0020",
+    "project_record_answer_option_lead_nation_wales": "OPT0021"
   },
   "Column": {
     "short_project_title_column_label": "Short project title",
@@ -27,13 +31,13 @@
   },
   "Search_Queries": {
     "Existing_IRAS_ID_Single": {
-      "search_input_text": "293738"
+      "search_input_text": "244852"
     },
     "Existing_IRAS_ID": {
       "search_input_text": ""
     },
     "Existing_Partial_IRAS_ID": {
-      "search_input_text": ""
+      "search_input_text": "32"
     },
     "Existing_Title_Single": {
       "short_project_title_text": "Eight 11.08"
@@ -50,7 +54,7 @@
       "year_from_text": "2025",
       "day_to_text": "30",
       "month_to_dropdown": "July",
-      "year_to_text": "2025"
+      "year_to_text": "2028"
     },
     "Date_Range_Multi": {
       "day_from_text": "1",
@@ -58,17 +62,17 @@
       "year_from_text": "2025",
       "day_to_text": "9",
       "month_to_dropdown": "September",
-      "year_to_text": "2025"
+      "year_to_text": "2050"
     },
     "Date_From_Multi": {
       "day_from_text": "10",
       "month_from_dropdown": "September",
-      "year_from_text": "2025"
+      "year_from_text": "1900"
     },
     "Date_To_Multi": {
       "day_to_text": "12",
       "month_to_dropdown": "August",
-      "year_to_text": "2025"
+      "year_to_text": "2050"
     },
     "Days_Range_Multi": {
       "days_since_submission_from_text": "0",
@@ -79,7 +83,7 @@
       "days_since_submission_to_text": ""
     },
     "Days_From_Multi": {
-      "days_since_submission_from_text": "100"
+      "days_since_submission_from_text": "0"
     },
     "Days_To_Multi": {
       "days_since_submission_to_text": "100"
@@ -95,7 +99,7 @@
       "year_from_text": "2025",
       "day_to_text": "11",
       "month_to_dropdown": "August",
-      "year_to_text": "2025"
+      "year_to_text": "2028"
     },
     "IRAS_ID_Title_Date_Range_Single": {
       "search_input_text": "7465363",
@@ -105,7 +109,7 @@
       "year_from_text": "2025",
       "day_to_text": "30",
       "month_to_dropdown": "July",
-      "year_to_text": "2025"
+      "year_to_text": "2028"
     },
     "IRAS_ID_Title_Multi": {
       "search_input_text": "6483766",
@@ -118,7 +122,7 @@
       "year_from_text": "2001",
       "day_to_text": "2",
       "month_to_dropdown": "January",
-      "year_to_text": "2001"
+      "year_to_text": "2030"
     },
     "IRAS_ID_Title_Date_Range_Multi": {
       "search_input_text": "916481",
@@ -128,7 +132,7 @@
       "year_from_text": "2025",
       "day_to_text": "12",
       "month_to_dropdown": "August",
-      "year_to_text": "2025"
+      "year_to_text": "2032"
     },
     "Title_Days_Range_Multi": {
       "short_project_title_text": "QA Automation Lead nation:",
@@ -191,5 +195,11 @@
     "Date_Days_Simultaneous_Summary_Only_Error": {
       "error_message": "'Date submitted' and 'Days since submission' filters can't be applied at the same time - remove one to continue."
     }
+  },
+  "Study_Wide_Reviewer_Nations": {
+    "Studywide_Reviewer": "England",
+    "Studywide_Reviewer_NI": "Northern Ireland",
+    "Studywide_Reviewer_S": "Scotland",
+    "Studywide_Reviewer_W": "Wales"
   }
 }

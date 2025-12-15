@@ -8,7 +8,7 @@ Feature: Profile Management: Provide new users with the ability to create their 
         Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
         When I login to the application as the 'One_Login_Account_User'
 
-    @completeCheckAddProfile @rsp-5073 @rsp-5288 @fail @KNOWN-DEFECT-RSP-5329
+    @completeCheckAddProfile @rsp-5073 @rsp-5288 @KNOWN-DEFECT-RSP-5329
     Scenario: New users are directed to complete their profile when logging into the system for the first time
         Then I can see the 'Complete_Your_Profile_Page'
         And I capture the page screenshot

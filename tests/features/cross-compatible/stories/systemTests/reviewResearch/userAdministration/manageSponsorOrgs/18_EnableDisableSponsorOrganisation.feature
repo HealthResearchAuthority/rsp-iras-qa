@@ -1,5 +1,5 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableSponsorOrg @STSysAdmin @rsp-5264 @rsp-5327 @KNOWN_DEFECT-RSP-5531
-Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Disable Sponsor Organisations
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableSponsorOrg @STSysAdmin @rsp-5264 @rsp-5327
+Feature: Enable / Disable Sponsor Organisations
 
   Background:
     Given I have navigated to the 'System_Administration_Page'

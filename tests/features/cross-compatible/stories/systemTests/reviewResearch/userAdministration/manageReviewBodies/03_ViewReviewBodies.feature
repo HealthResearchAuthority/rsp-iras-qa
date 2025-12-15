@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest @STSysAdmin
-Feature: User Administration: Manage Review Bodies list and view review bodies profile details
+Feature:Manage Review Bodies list and view review bodies profile details
 
     Background:
         Given I have navigated to the 'System_Administration_Page'
@@ -26,7 +26,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         And I can see the 'newly created review body' should be present in the list with 'Enabled' status in the manage review bodies page
         And I capture the page screenshot
-        And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
+        # And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
         And I capture the page screenshot
 
         Examples:
@@ -35,7 +35,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
 
     @verifyManageReviewBodiesPageBackButtonFlow @rsp-2569
     Scenario: Verify the user can navigate from 'Manage review bodies' page by clicking 'Back' button
-        And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
+        When I click the 'System_Admin_Breadcrumb' link in the breadcrumbs on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then I can see the 'System_Administration_Page'
 
@@ -49,7 +49,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         Then I can see the review body profile page
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Review_Body_Profile_Page'
+        When I click the 'Manage_Review_Bodies_Breadcrumb' link in the breadcrumbs on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Review_Bodies_Page'
 

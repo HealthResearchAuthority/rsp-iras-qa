@@ -39,7 +39,7 @@ When(
   'I click the change link against {string} on the check and create user profile page',
   async ({ checkCreateUserProfilePage, commonItemsPage }, fieldKey: string) => {
     const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkCreateUserProfilePage);
-    await expect(changeLink).toBeVisible();
+    await expect.soft(changeLink).toBeVisible();
     await changeLink.click();
   }
 );

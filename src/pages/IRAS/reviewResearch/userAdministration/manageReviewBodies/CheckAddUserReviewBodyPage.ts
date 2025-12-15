@@ -26,7 +26,7 @@ export default class CheckAddUserReviewBodyPage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.checkAddUserReviewBodyPageData.Check_Add_User_Review_Body_Page.page_heading, { exact: true });
-    this.page_guidance_text = this.page.getByRole('paragraph');
+    this.page_guidance_text = this.page.getByRole('paragraph').nth(3);
     this.user_details_table = this.page.getByRole('table').locator('tbody');
     this.user_details_table_labels = this.user_details_table.getByRole('cell').locator('b');
     this.user_details_table_row = this.user_details_table.getByRole('row');

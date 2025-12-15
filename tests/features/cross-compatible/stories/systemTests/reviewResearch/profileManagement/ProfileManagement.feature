@@ -1,11 +1,11 @@
-@RegressionProfileSettings @ApplicantUser @OneLoginUser @SystemTest
+@ProfileManagement  @RegressionProfileSettings @ApplicantUser @OneLoginUser @SystemTest
 Feature: Profile Management: Provide users with the ability to create and update their profile on the system
     As a user
     I want to be able to complete and update my profile details
     So that my account is created and I can access the system
     and make updates to my profile when needed
 
-    @regressionCompleteCheckAddProfile @OneLoginUser @rsp-5073 @rsp-5288 @fail @KNOWN-DEFECT-RSP-5329
+    @regressionCompleteCheckAddProfile @OneLoginUser @rsp-5073 @rsp-5288 @KNOWN-DEFECT-RSP-5329
     Scenario: Users can complete and update their profile when logging into the system for the first time
         Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
         When I login to the application as the 'One_Login_Account_User'
@@ -49,6 +49,24 @@ Feature: Profile Management: Provide users with the ability to create and update
         Then I can see the users audit history with the expected events displayed
 
     @regressionViewProfileSettingsPage @rsp-5290
+    Scenario Outline: View the profile settings and edit settings pages for an authenticated, existing user-applicant
+        Given I have navigated to the 'Home_Page' as '<User>'
+        And I capture the page screenshot
+        When I click the 'Profile_Settings' link on the 'Banner'
+        Then I can see the 'Profile_Settings_Page'
+        And I can see a 'One_Login_Account' link on the 'Profile_Settings_Page'
+        And I capture the page screenshot
+        And I can see the read only one login details for my '<User>' account
+        And I can see the profile details for my '<User>' account
+        When I click the change link against '<Field_Name>' on the profile settings page
+        Then I can see the 'Edit_Your_Profile_Page'
+        And I can see a 'One_Login_Account' link on the 'Edit_Your_Profile_Page'
+
+        Examples:
+            | User           | Field_Name     |
+            | Applicant_User | Settings_Title |
+
+    @regressionViewProfileSettingsPage @rsp-5290 @KNOWN-DEFECT-RSP-5003
     Scenario Outline: View the profile settings and edit settings pages for an authenticated, existing user
         Given I have navigated to the 'Home_Page' as '<User>'
         And I capture the page screenshot
@@ -64,7 +82,6 @@ Feature: Profile Management: Provide users with the ability to create and update
 
         Examples:
             | User                   | Field_Name          |
-            | Applicant_User         | Settings_Title      |
             | Studywide_Reviewer_NI  | Settings_First_Name |
             | Workflow_Coordinator_W | Settings_Last_Name  |
 
