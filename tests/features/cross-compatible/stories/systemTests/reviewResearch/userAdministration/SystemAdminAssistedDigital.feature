@@ -98,7 +98,6 @@ Feature: This feature file is to validate the assisted digital test coverage as 
         And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
         Then I can see the 'Search_Modifications_Page'
         And I enter 'new iras id' into the search field
-        #And I fill the search input for searching 'modifications' with 'Iras_Id_Created' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
