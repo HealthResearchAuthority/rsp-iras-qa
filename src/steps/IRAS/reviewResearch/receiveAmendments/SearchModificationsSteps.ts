@@ -328,6 +328,6 @@ Then(
       countValue = '>';
     }
     const modificationId = await searchModificationsPage.sqlGetModificationByStatus(status, countValue);
-    await searchModificationsPage.saveModificationId(modificationId.toString(), modificationCount);
+    await searchModificationsPage.saveModificationIdSearch(modificationId.toString(), modificationCount);
   }
 );

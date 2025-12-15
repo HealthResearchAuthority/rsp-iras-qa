@@ -236,6 +236,6 @@ Then(
       status,
       countValue
     );
-    await modificationsReadyToAssignPage.saveModificationId(modificationId.toString(), modificationCount);
+    await modificationsReadyToAssignPage.saveModificationIdWFC(modificationId.toString(), modificationCount);
   }
 );

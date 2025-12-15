@@ -36,7 +36,7 @@ Then(
       status,
       countValue
     );
-    await teamManagerDashboardPage.saveModificationId(modificationId.toString(), modificationCount);
+    await teamManagerDashboardPage.saveModificationIdTM(modificationId.toString(), modificationCount);
     await teamManagerDashboardPage.page.waitForTimeout(2000);
   }
 );

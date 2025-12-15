@@ -259,7 +259,7 @@ ORDER BY NationQuery.CreatedDate DESC;
     return queryResult.recordset.map((row) => row.IrasId);
   }
 
-  async saveModificationId(modificationId: string, countval: string) {
+  async saveModificationIdWFC(modificationId: string, countval: string) {
     await this.setModificationId(modificationId);
     const filePath = path.resolve(pathToTestDataJson);
     await this.updateModificationIdTestDataJson(filePath, modificationId, countval);
