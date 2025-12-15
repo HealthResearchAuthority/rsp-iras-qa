@@ -1,12 +1,12 @@
 @ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest @TestApprovals @TestApprovalsTMWFCSWR
 Feature: WFC - Modifications Tasklist page
-    # pagination is missing
+
     @viewWFCTasklistByLeadNation @rsp-4201 @DBDataUsed
     Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation-England
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
         Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
-        And I see only modifications where the lead nation is the country linked to the review body of the '<User>' and with status '<Status>'
+        And I see only modifications where the lead nation is the country linked to the 'workflow coordinator' '<User>' and with status '<Status>'
         Examples:
             | User                 | Status           |
             | Workflow_Coordinator | With review body |
@@ -16,7 +16,7 @@ Feature: WFC - Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
         Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
-        And I see only modifications where the lead nation is the country linked to the review body of the '<User>' and with status '<Status>'
+        And I see only modifications where the lead nation is the country linked to the 'workflow coordinator' '<User>' and with status '<Status>'
         Examples:
             | User                    | Status           |
             | Workflow_Coordinator_NI | With review body |

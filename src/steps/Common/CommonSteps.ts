@@ -2260,259 +2260,50 @@ Then(
   }
 );
 
-// Then(
-//   'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
-//   async (
-//     { manageUsersPage, commonItemsPage },
-//     listType: string,
-//     sortDirection: string,
-//     sortField: string,
-//     currentPage: string
-//   ) => {
-//     const lowerListType = listType.toLowerCase();
-//     const lowerSortField = sortField.toLowerCase();
-//     const lowerSortDirection = sortDirection.toLowerCase();
-//     const lowerCurrentPage = currentPage.toLowerCase();
+Then(
+  'I see only modifications where the lead nation is the country linked to the {string} {string} and with status {string}',
+  async (
+    { modificationsReadyToAssignPage, teamManagerDashboardPage, commonItemsPage },
+    userType: string,
+    user: string,
+    status: string
+  ) => {
+    let modificationsByLeadNation: string[] = [];
+    if (userType.toLowerCase() === 'workflow coordinator') {
+      let leadNation =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
+      if (leadNation === 'Northern Ireland') {
+        leadNation = 'Northern_Ireland';
+      }
+      modificationsByLeadNation = await modificationsReadyToAssignPage.sqlGetModificationByLeadNationAndStatusWFC(
+        leadNation,
+        status
+      );
+    } else if (userType.toLowerCase() === 'team manager') {
+      let leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
+      if (leadNation === 'Northern Ireland') {
+        leadNation = 'Northern_Ireland';
+      }
+      modificationsByLeadNation = await teamManagerDashboardPage.sqlGetModificationByLeadNationAndStatus(
+        leadNation,
+        status
+      );
+    }
 
-//     // Common locals
-//     let actualList: string[] = [];
-//     let sortedList: string[] = [];
-//     let columnIndex: number | undefined;
+    const actualList = await commonItemsPage.getActualModificationListValues(commonItemsPage.tableBodyRows, 1);
 
-//     // ----- Branch: User-based lists -----
-//     if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
-//       // Map columns for user lists
-//       switch (lowerSortField) {
-//         case 'first name':
-//           columnIndex = 0;
-//           break;
-//         case 'last name':
-//           columnIndex = 1;
-//           break;
-//         case 'email address':
-//           columnIndex = 2;
-//           break;
-//         case 'status':
-//           columnIndex = 3;
-//           break;
-//         case 'last logged in':
-//           columnIndex = 4;
-//           break;
-//         default:
-//           throw new Error(`${sortField} is not a valid option`);
-//       }
+    const normalize = (arr: any[]) =>
+      arr
+        .map((item) => item.toString().trim())
+        .sort((a, b) => {
+          const numA = Number.parseFloat(a);
+          const numB = Number.parseFloat(b);
+          if (!Number.isNaN(numA) && !Number.isNaN(numB)) {
+            return numA - numB; // Numeric comparison
+          }
 
-//       // Gather actual list values
-//       actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-
-//       // Special handling for "Last logged in"
-//       if (lowerSortField === 'last logged in') {
-//         sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
-//       } else {
-//         const compareFn = (a: string, b: string) =>
-//           lowerSortDirection === 'ascending'
-//             ? a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
-//             : b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false });
-//         sortedList = [...actualList].toSorted(compareFn);
-//       }
-//       // else if (lowerSortDirection === 'ascending') {
-//       //     sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-//       //     if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-//       //       expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
-//       //     }
-//       //   } else {
-//       //     sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-//       //     if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-//       //       expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
-//       //     }
-//       //   }
-
-//       expect.soft(actualList).toEqual(sortedList);
-//       return;
-//     }
-
-//     // ----- Branch: Organisation/Review-body lists -----
-//     if (lowerListType === 'manage sponsor organisations' || lowerListType === 'manage review bodies') {
-//       // Map columns for organisation/review-body lists
-//       switch (lowerSortField) {
-//         case 'organisation name':
-//           columnIndex = 0;
-//           break;
-//         case 'country':
-//           columnIndex = 1;
-//           break;
-//         case 'status':
-//           columnIndex = 2;
-//           break;
-//         default:
-//           throw new Error(`${sortField} is not a valid option`);
-//       }
-
-//       // Special handling for "country" (strip anything after a comma)
-//       if (lowerSortField === 'country') {
-//         const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-//         actualList = originalList.map((country) =>
-//           country.includes(',') ? country.slice(0, country.indexOf(',')) : country
-//         );
-//       }
-
-//       // For "organisation name" or "status", use the short-title/SWR-aware extractor
-//       // if (lowerSortField === 'organisation name' || lowerSortField === 'status') {
-//       //   actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
-//       //     commonItemsPage.tableBodyRows,
-//       //     columnIndex
-//       //   );
-//       // } else
-//       else {
-//         // Otherwise the generic extractor
-//         actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-//       }
-//       {
-//         const compareFn = (a: string, b: string) =>
-//           lowerSortDirection === 'ascending'
-//             ? a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
-//             : b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false });
-//         sortedList = [...actualList].toSorted(compareFn);
-//       }
-
-//       // if (lowerSortDirection === 'ascending') {
-//       //   sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-//       //   if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-//       //     expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
-//       //   }
-//       // } else {
-//       //   sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-//       //   if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-//       //     expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
-//       //   }
-//       // }
-
-//       expect.soft(actualList).toEqual(sortedList);
-//       return;
-//     }
-
-//     // ----- Unsupported list type -----
-//     throw new Error(`${listType} is not a supported list type for this step`);
-//   }
-// );
-
-// Then(
-//   'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
-//   async (
-//     { manageUsersPage, commonItemsPage },
-//     listType: string,
-//     sortDirection: string,
-//     sortField: string,
-//     currentPage: string
-//   ) => {
-//     const lowerListType = listType.toLowerCase();
-//     const lowerSortField = sortField.toLowerCase();
-//     const lowerSortDirection = sortDirection.toLowerCase();
-//     const lowerCurrentPage = currentPage.toLowerCase();
-
-//     // Common locals
-//     let actualList: string[] = [];
-//     let sortedList: string[] = [];
-//     let columnIndex: number | undefined;
-
-//     // ----- Branch: User-based lists -----
-//     if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
-//       // Map columns for user lists
-//       switch (lowerSortField) {
-//         case 'first name':
-//           columnIndex = 0;
-//           break;
-//         case 'last name':
-//           columnIndex = 1;
-//           break;
-//         case 'email address':
-//           columnIndex = 2;
-//           break;
-//         case 'status':
-//           columnIndex = 3;
-//           break;
-//         case 'last logged in':
-//           columnIndex = 4;
-//           break;
-//         default:
-//           throw new Error(`${sortField} is not a valid option`);
-//       }
-
-//       // Gather actual list values
-//       actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-
-//       // Special handling for "Last logged in"
-//       if (lowerSortField === 'last logged in') {
-//         sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
-//       } else if (lowerSortDirection === 'ascending') {
-//         sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-//         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-//           expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
-//         }
-//       } else {
-//         sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-//         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-//           expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
-//         }
-//       }
-
-//       expect.soft(actualList).toEqual(sortedList);
-//       return;
-//     }
-
-//     // ----- Branch: Organisation/Review-body lists -----
-//     if (lowerListType === 'manage sponsor organisations' || lowerListType === 'manage review bodies') {
-//       // Map columns for organisation/review-body lists
-//       switch (lowerSortField) {
-//         case 'organisation name':
-//           columnIndex = 0;
-//           break;
-//         case 'country':
-//           columnIndex = 1;
-//           break;
-//         case 'status':
-//           columnIndex = 2;
-//           break;
-//         default:
-//           throw new Error(`${sortField} is not a valid option`);
-//       }
-
-//       // Special handling for "country" (strip anything after a comma)
-//       if (lowerSortField === 'country') {
-//         const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-//         actualList = originalList.map((country) =>
-//           country.includes(',') ? country.slice(0, country.indexOf(',')) : country
-//         );
-//       }
-
-//       // For "organisation name" or "status", use the short-title/SWR-aware extractor
-//       if (lowerSortField === 'organisation name' || lowerSortField === 'status') {
-//         actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
-//           commonItemsPage.tableBodyRows,
-//           columnIndex
-//         );
-//       } else if (lowerSortField !== 'country') {
-//         // Otherwise the generic extractor
-//         actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-//       }
-
-//       if (lowerSortDirection === 'ascending') {
-//         sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-//         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-//           expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
-//         }
-//       } else {
-//         sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-//         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-//           expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
-//         }
-//       }
-
-//       expect.soft(actualList).toEqual(sortedList);
-//       return;
-//     }
-
-//     // ----- Unsupported list type -----
-//     throw new Error(`${listType} is not a supported list type for this step`);
-//   }
-// );
+          return 0; // Keeps original order for non-numeric values
+        });
+    expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
+  }
+);

@@ -3,7 +3,7 @@ Feature: Team Manager Dashboard page
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        # pagination is missing in team mananger dashboard, swr sorting is not correct
+        # swr sorting is not correct
         @sortTeamManagerDashboardByColumn @rsp-4822
         Scenario Outline: Verify the user is able to sort the team manager dashboards by ascending and descending order for each results table column
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
@@ -48,7 +48,6 @@ Feature: Team Manager Dashboard page
                         | Existing_IRAS_ID_Single | Team_Manager | In draft     | Single             |
                         | Existing_IRAS_ID_Single | Team_Manager | With sponsor | Single             |
 
-        # there is no data in db with not approved status
         @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @noDBDataNotApproved
         Scenario Outline: Verify that modifications status display as expected on the team manager dashboard where the status is not approved
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
@@ -67,7 +66,7 @@ Feature: Team Manager Dashboard page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
                 Then the country linked to the '<User>' appears as the lead nation in the page description
-                And I see only modifications where the lead nation is the country linked to the '<User>' and with status '<Status>'
+                And I see only modifications where the lead nation is the country linked to the 'team manager' '<User>' and with status '<Status>'
                 Examples:
                         | User            | Status           |
                         | Team_Manager    | With review body |

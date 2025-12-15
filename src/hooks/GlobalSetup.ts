@@ -1,8 +1,8 @@
 async function globalSetup() {
   //Pre-prod url
-  process.env.BASE_URL = 'https://fd-rsp-applications-preprod-uks-f6esbkgtfncwc4gf.a03.azurefd.net/';
+  // process.env.BASE_URL = 'https://fd-rsp-applications-preprod-uks-f6esbkgtfncwc4gf.a03.azurefd.net/';
   // ST Automation URl
-  // process.env.BASE_URL = 'https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/';
+  process.env.BASE_URL = 'https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/';
 }
 export default globalSetup;
 export const deviceDSafari = 'Desktop Safari';

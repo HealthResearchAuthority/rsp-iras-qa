@@ -190,40 +190,6 @@ Then(
   }
 );
 
-Then(
-  'I see only modifications where the lead nation is the country linked to the review body of the {string} and with status {string}',
-  async ({ modificationsReadyToAssignPage, commonItemsPage }, user: string, status: string) => {
-    let leadNation =
-      modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
-    if (leadNation === 'Northern Ireland') {
-      leadNation = 'Northern_Ireland';
-    }
-    const modificationsByLeadNation = await modificationsReadyToAssignPage.sqlGetModificationByLeadNationAndStatusWFC(
-      leadNation,
-      status
-    );
-    const actualList = await commonItemsPage.getActualModificationListValues(commonItemsPage.tableBodyRows, 1);
-
-    const normalize = (arr: any[]) =>
-      arr
-        .map((item) => item.toString().trim())
-        .sort((a, b) => {
-          const numA = Number.parseFloat(a);
-          const numB = Number.parseFloat(b);
-          if (!Number.isNaN(numA) && !Number.isNaN(numB)) {
-            return numA - numB; // Numeric comparison
-          }
-
-          return 0; // Keeps original order for non-numeric values
-        });
-    // expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
-    //  check both ways to ensure they contain the same elements
-    expect.soft(normalize(modificationsByLeadNation)).toEqual(expect.arrayContaining(normalize(actualList)));
-
-    expect.soft(normalize(actualList)).toEqual(expect.arrayContaining(normalize(modificationsByLeadNation)));
-  }
-);
-
 When(
   'I can see previously assigned modification is displayed in {string} with status {string} and reviewer {string}',
   async (
