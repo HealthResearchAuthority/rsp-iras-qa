@@ -20,7 +20,7 @@
     "enable_button": "Enable review body"
   },
   "Disable_Label_Texts": {
-    "disable_sub_heading": "Disable this review body",
+    "disable_sub_heading": "Disable this review body?",
     "disable_guidance_text": "Disabling a review body will lock their account and can be reversed"
   },
   "Enable_Label_Texts": {

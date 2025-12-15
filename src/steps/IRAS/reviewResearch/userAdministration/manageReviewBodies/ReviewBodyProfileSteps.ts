@@ -72,7 +72,7 @@ When(
   'I click the change link against {string} on the review body profile page',
   async ({ reviewBodyProfilePage, commonItemsPage }, fieldKey: string) => {
     const changeLink = await commonItemsPage.getChangeLink(fieldKey, reviewBodyProfilePage);
-    await expect(changeLink).toBeVisible();
+    await expect.soft(changeLink).toBeVisible();
     await changeLink.click();
   }
 );

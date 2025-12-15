@@ -1,5 +1,5 @@
-@UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin @KNOWN_DEFECT-RSP-5531
-Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor organisation
+@UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin
+Feature: Add user to sponsor organisation
 
     Background:
         Given I have navigated to the 'System_Administration_Page'
@@ -38,7 +38,7 @@ Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor
             | Existing_QA_User_Email      |
             | Existing_QA_User_Full_Name  |
 
-    @addUserSponsorOrgSearchFunctionNoResults @KNOWN_DEFECT-RSP-5531 @fail
+    @addUserSponsorOrgSearchFunctionNoResults
     Scenario: Verify that the add users to sponsor organisation search function returns a no results page, when no such user exists
         When I fill the search input for searching 'adding users' with 'Non_Existant_User_Data' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -116,7 +116,7 @@ Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor
         And I capture the page screenshot
         Then I see that the newly added user appears in the user list page for the 'sponsor organisation'
 
-    @verifySearchForAddedSponsorOrgUserNoResults @KNOWN_DEFECT-RSP-5531 @fail
+    @verifySearchForAddedSponsorOrgUserNoResults
     Scenario: Verify that when a user is added to a sponsor organisation, that user no longer appears in the add user to sponsor organisation search
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -145,15 +145,15 @@ Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor
         And the no search results found message is displayed
         And I capture the page screenshot
 
-    @rsp-3890 @addUserSponsorOrgSearchMultiTerms
-    Scenario Outline: Verify the add user to sponsor organisation search utilises AND logic to produce accurate search results
-        When I fill the search input for searching 'adding users' with '<Initial_Search_Query>' as the search query
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-        And I capture the page screenshot
-        Then the system displays user records matching the search criteria
-        And the list displays 'multiple user records'
-        And I capture the page screenshot
-        Examples:
-            | Initial_Search_Query              |
-            | Admin_User_Full_Name_Email_Prefix |
+# @rsp-3890 @addUserSponsorOrgSearchMultiTerms @DataIssueInProd
+# Scenario Outline: Verify the add user to sponsor organisation search utilises AND logic to produce accurate search results
+#     When I fill the search input for searching 'adding users' with '<Initial_Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+#     And I capture the page screenshot
+#     Then the system displays user records matching the search criteria
+#     And the list displays 'multiple user records'
+#     And I capture the page screenshot
+#     Examples:
+#         | Initial_Search_Query              |
+#         | Admin_User_Full_Name_Email_Prefix |

@@ -69,8 +69,9 @@ export default class ProjectDetailsIRASPage {
   }
 
   async assertHraSupportSiteurl() {
-    const currentUrl = this.page.url();
-    expect(currentUrl).toContain(this.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.hra_support_site_url);
+    await expect(this.page).toHaveURL(
+      new RegExp(this.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.hra_support_site_url)
+    );
   }
 
   async getValidIRASAndProjectTitlesFromLegacySharepoint() {

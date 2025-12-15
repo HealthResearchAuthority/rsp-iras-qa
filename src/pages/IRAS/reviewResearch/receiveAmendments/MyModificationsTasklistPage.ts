@@ -3,6 +3,8 @@ import * as myModificationsTasklistPageTestData from '../../../../resources/test
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
 import path from 'node:path';
 import * as fse from 'fs-extra';
+import { connect } from '../../../../utils/DbConfig';
+import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
 import { returnDataFromJSON } from '../../../../utils/UtilFunctions';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/receiveAmendments/my_modifications_tasklist_page_data.json';
@@ -138,16 +140,76 @@ export default class MyModificationsTasklistPage {
     await expect.soft(this.my_modifications_tasklist_no_result_heading).toBeVisible();
   }
 
-  async saveModificationId(modificationId: string) {
-    const filePath = path.resolve(pathToTestDataJson);
-    await this.updateModificationIdTestDataJson(filePath, modificationId);
+  async sqlGetModificationByLeadNationAndStatusCountSWR(
+    lead_nation: string,
+    status: string,
+    countValue: string,
+    reviewername: string
+  ) {
+    const option = 'project_record_answer_option_lead_nation_' + lead_nation.toLowerCase();
+    const leadNationOption = myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page[option];
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(`
+      SELECT TOP 1
+    NationQuery.ModificationIdentifier,
+    NationQuery.IrasId,
+    ProjectRecordAnswers.Response,
+    NationQuery.CreatedDate,
+    NationQuery.[Status]
+FROM (
+    SELECT
+        ProjectModifications.ModificationIdentifier,
+        ProjectModifications.CreatedDate,
+        ProjectModifications.[Status],
+        ProjectRecords.Id,
+        ProjectRecords.IrasId,
+        ProjectRecordAnswers.ProjectRecordId,
+        ProjectRecordAnswers.QuestionId,
+        ProjectRecordAnswers.SelectedOptions,
+        ProjectRecordAnswers.Response,
+        ProjectRecords.[Status] AS ProjectRecordStatus,
+        COUNT(*) OVER (PARTITION BY ProjectRecords.IrasId) AS IrasIdCount
+    FROM ProjectModifications
+    INNER JOIN ProjectRecords
+        ON ProjectRecords.Id = ProjectModifications.ProjectRecordId
+    INNER JOIN ProjectRecordAnswers
+        ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+    WHERE
+        ProjectRecordAnswers.QuestionId = 'IQA0005' AND
+        ProjectRecordAnswers.SelectedOptions ='${leadNationOption}' AND
+        ProjectRecords.[Status] = 'Active' AND
+        ProjectModifications.[Status] = '${status}' AND ProjectModifications.ReviewerName ='${reviewername}'
+) AS NationQuery
+INNER JOIN ProjectRecordAnswers
+    ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
+WHERE
+    ProjectRecordAnswers.QuestionId = 'IQA0002'
+    AND NationQuery.IrasIdCount ${countValue} 1
+ORDER BY NationQuery.CreatedDate DESC;
+`);
+    await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(
+        `No suitable modification found in the system with ${leadNationOption} lead nation and ${status} status and ${countValue}`
+      );
+    }
+    return queryResult.recordset.map((row) => row.IrasId);
   }
 
-  async updateModificationIdTestDataJson(filePath: string, updateVal: string) {
+  async saveModificationId(modificationId: string, countval: string) {
+    const filePath = path.resolve(pathToTestDataJson);
+    await this.updateModificationIdTestDataJson(filePath, modificationId, countval);
+  }
+
+  async updateModificationIdTestDataJson(filePath: string, updateVal: string, countval: string) {
     (async () => {
       try {
         const data = await returnDataFromJSON(filePath);
-        data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
+        if (countval === 'Single') {
+          data.Search_Queries.Existing_IRAS_ID_Single.search_input_text = updateVal;
+        } else if (countval === 'Partial') {
+          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 2);
+        }
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {
         throw new Error(`${error} Error updating modification id to testdata json file:`);

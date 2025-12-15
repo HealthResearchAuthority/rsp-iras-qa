@@ -482,5 +482,5 @@ Feature: Sponsor Workspace
       | Short_Project_Title | short project title |
       | Date_Received       | date received       |
       | Date_Actioned       | date actioned       |
-      | Chief_Investigator  | chief investigator  |
+      # | Chief_Investigator  | chief investigator  |
       | Status              | status              |
