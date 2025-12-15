@@ -387,8 +387,8 @@ Then(
     const actualFreeTextSummaryError = confirmStringNotNull(
       await modificationsCommonPage.changes_free_text_summary_error.textContent()
     );
-    expect.soft(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    expect.soft(modificationsCommonPage.changes_free_text_summary_error).toBeVisible();
+    await expect.soft(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    await expect.soft(modificationsCommonPage.changes_free_text_summary_error).toBeVisible();
     expect.soft(actualFreeTextSummaryError).toBe(expectedFreeTextSummaryError);
   }
 );

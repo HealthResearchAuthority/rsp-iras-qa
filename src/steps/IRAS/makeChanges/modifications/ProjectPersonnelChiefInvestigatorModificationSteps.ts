@@ -16,7 +16,7 @@ Then(
       await commonItemsPage.fillUIComponent(dataset, radioKey, projectPersonnelChangeChiefInvestigatorPage);
       await commonItemsPage.clickButton('Modifications_Page', clickAction);
     }
-    const ExpectedKeys = ['chief_investigator_email_text', 'name_text'];
+    const ExpectedKeys = ['chief_investigator_email_text', 'first_name_text', 'last_name_text'];
     for (const key of ExpectedKeys) {
       if (dataset[key]) {
         await commonItemsPage.fillUIComponent(dataset, key, projectPersonnelChangeChiefInvestigatorPage);
@@ -66,6 +66,7 @@ Then(
             projectPersonnelChangeChiefInvestigatorPage.projectPersonnelChangeChiefInvestigatorModificationPageTestData
               .Label_Texts.chief_investigator_enter_link
           )
+          .filter({ has: projectPersonnelChangeChiefInvestigatorPage.page.locator(':visible') })
           .first()
           .click();
         break;
@@ -75,6 +76,26 @@ Then(
           .getByRole('link', {
             name: projectPersonnelChangeChiefInvestigatorPage
               .projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.name_enter_link,
+          })
+          .filter({ has: projectPersonnelChangeChiefInvestigatorPage.page.locator(':visible') })
+          .click();
+        break;
+      }
+      case 'CI_First_Name_Text': {
+        await projectPersonnelChangeChiefInvestigatorPage.page
+          .getByRole('link', {
+            name: projectPersonnelChangeChiefInvestigatorPage
+              .projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.ci_first_name_enter_link,
+          })
+          .filter({ has: projectPersonnelChangeChiefInvestigatorPage.page.locator(':visible') })
+          .click();
+        break;
+      }
+      case 'CI_Last_Name_Text': {
+        await projectPersonnelChangeChiefInvestigatorPage.page
+          .getByRole('link', {
+            name: projectPersonnelChangeChiefInvestigatorPage
+              .projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.ci_last_name_enter_link,
           })
           .filter({ has: projectPersonnelChangeChiefInvestigatorPage.page.locator(':visible') })
           .click();
