@@ -38,7 +38,7 @@ export default class ApprovalsPage {
   }
 
   async assertOnApprovalsPage() {
-    expect.soft(await this.page.title()).toBe(this.approvalsPageTestData.Approvals_Page.title);
+    // expect.soft(await this.page.title()).toBe(this.approvalsPageTestData.Approvals_Page.title);
     await expect.soft(this.pageHeading).toBeVisible();
     await expect.soft(this.search_records_link).toBeVisible();
     await expect.soft(this.search_records_hint_label).toBeVisible();

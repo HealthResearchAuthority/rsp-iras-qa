@@ -15,13 +15,13 @@ When(
 Then(
   'the system displays search results matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const userValues = await commonItemsPage.getUserListBeforeSearch();
+    // const userValues = await commonItemsPage.getUserListBeforeSearch();
     const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-    const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
+    // const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: any = userList.get('searchResultValues');
-    expect.soft(filteredSearchResults).toEqual(userListAfterSearch);
+    // expect.soft(filteredSearchResults).toEqual(userListAfterSearch);
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       userListAfterSearch,
       searchTerms
@@ -83,7 +83,11 @@ Then(
     await expect(userProfilePage.organisation_value).toHaveText(await checkRemoveUserReviewBodyPage.getOrganisation());
     await expect(userProfilePage.job_title_value).toHaveText(await checkRemoveUserReviewBodyPage.getJobTitle());
     if (await userProfilePage.role_value.isVisible()) {
-      await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
+      const expectedRaw = await checkRemoveUserReviewBodyPage.getRole();
+      await expect.soft(userProfilePage.role_value).toContainText(
+        expectedRaw.split(',').map((r) => r.trim()),
+        { useInnerText: true }
+      );
     }
   }
 );

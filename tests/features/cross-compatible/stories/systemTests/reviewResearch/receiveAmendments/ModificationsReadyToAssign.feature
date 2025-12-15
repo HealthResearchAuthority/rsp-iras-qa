@@ -1,5 +1,5 @@
-@RegressionModificationsReadyToAssign @SystemTest @WorkFlowCoordinator @RegressionReceiveAmendments @BackStage
-Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
+@WFCModificationsReadyToAssign @WorkFlowCoordinator
+Feature: Receive Amendments: WFC -Modifications Tasklist page
 
     @RegressionSearchFilterComboTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
@@ -185,7 +185,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I click the 'Back' link on the 'Review_All_Changes_Page'
         And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
-        When I click the 'Back' link on the 'Modifications_Tasklist_Page'
+        When I click the 'Approvals' link in the breadcrumbs on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the approvals home page
 

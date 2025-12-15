@@ -1,4 +1,5 @@
 async function globalSetup() {
+  // ST Automation URl
   process.env.BASE_URL = 'https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/';
 }
 export default globalSetup;
