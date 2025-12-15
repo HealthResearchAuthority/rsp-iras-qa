@@ -209,13 +209,14 @@ export default class ModificationsReceivedCommonPage {
     shortTitles: string[],
     daysSinceSubmission: string[],
     datesSubmitted: string[],
-    studyWideReviewers: string[],
     searchInputDataset: any,
-    searchInput: string
+    searchInput: string,
+    irasIdSearchKey: string,
+    studyWideReviewers?: string[]
   ): Promise<boolean> {
     let valuesMatch = false;
     if (searchInput.toLowerCase().includes('iras')) {
-      valuesMatch = irasIds.toString() == searchInputDataset[searchInput].search_input_text;
+      valuesMatch = irasIds.toString() == irasIdSearchKey;
     }
     if (searchInput.toLowerCase().includes('title')) {
       valuesMatch =

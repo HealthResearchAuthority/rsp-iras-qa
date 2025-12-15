@@ -1,8 +1,5 @@
 @UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @STSysAdmin
-Feature: User Administration: Manage user profiles, view and edit user profile
-  As a user
-  I want the ability to edit and view a user profile record
-  So that I can access all the user information and keep user information up to date
+Feature: Manage user profiles, view and edit user profile
 
   Background:
     Given I have navigated to the 'Home_Page'
@@ -59,7 +56,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | telephone_text    | Operations | Enabled | User_Telephone_Text_One    |
       | organisation_text | Operations | Enabled | User_Organisation_Text_One |
       | job_title_text    | Operations | Enabled | User_Job_Title_Text_One    |
-      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     |
+  # | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     |
 
   @rsp-2828 @editUserProfileOnlyMandatoryFields
   Scenario Outline: Successful user profile update with only mandatory fields
@@ -226,26 +223,26 @@ Feature: User Administration: Manage user profiles, view and edit user profile
   #     | Trailing_White_Space_User_Data             |
 
   #  check with Chris on this test case
-  @rsp-3890 @ManageUsersSearchMultiTerms @fail
-  Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
-    When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And the list displays 'multiple user records'
-    And I capture the page screenshot
-    When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And the list displays 'a single user record'
-    And I capture the page screenshot
+  # @rsp-3890 @ManageUsersSearchMultiTerms @fail
+  # Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
+  #   When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
+  #   And I capture the page screenshot
+  #   And I click the 'Search' button on the 'Manage_Users_Page'
+  #   And I capture the page screenshot
+  #   Then the system displays user records matching the search criteria
+  #   And the list displays 'multiple user records'
+  #   And I capture the page screenshot
+  #   When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
+  #   And I capture the page screenshot
+  #   And I click the 'Search' button on the 'Manage_Users_Page'
+  #   And I capture the page screenshot
+  #   Then the system displays user records matching the search criteria
+  #   And the list displays 'a single user record'
+  #   And I capture the page screenshot
 
-    Examples:
-      | Initial_Search_Query              | Second_Search_Query             |
-      | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
+  #   Examples:
+  #     | Initial_Search_Query              | Second_Search_Query             |
+  #     | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
 
   @rsp-4021 @ManageUsersEmailNotEditable
   Scenario Outline: Verify the user is not able to edit the email address

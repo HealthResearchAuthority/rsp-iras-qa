@@ -493,7 +493,7 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
       | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
   @rsp-4314
-  Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are optional, for documents uploaded with an Incomplete status, and review the entered information
+  Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are optional, for documents uploaded with an Incomplete status, and review the entered information test
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page

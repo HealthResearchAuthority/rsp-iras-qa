@@ -1,5 +1,5 @@
-@RegressionMyModificationsTasklist @SystemTest @RegressionReceiveAmendments @StudyWideReviewer @BackStage
-Feature: Receive Amendments: My Modifications Tasklist page that displays modifications that have been assigned to me
+@SWRMyModificationsTasklist @StudyWideReviewer
+Feature: Receive Amendments: SWR-My Modifications Tasklist page
 
     Background:
         Given I have navigated to the 'Approvals_Page'

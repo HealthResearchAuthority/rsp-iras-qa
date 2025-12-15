@@ -1,5 +1,5 @@
 @UserAdministration @ManageUsers @SysAdminUser @SystemTest @AuditHistoryUser @rsp-2928 @STSysAdmin
-Feature: User Administration: Manage Users - View audit history for users
+Feature: Manage Users - View audit history for users
 
     Background:
         Given I have navigated to the 'Home_Page'
@@ -53,7 +53,7 @@ Feature: User Administration: Manage Users - View audit history for users
             | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager       | Enabled        |
 
 
-    @VerifyAuditHistoryUserUnassignRole @fail @KNOWN-DEFECT-RSP-5927
+    @VerifyAuditHistoryUserUnassignRole
     Scenario Outline: Verify the user can view the unassign role event in the audit history
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page

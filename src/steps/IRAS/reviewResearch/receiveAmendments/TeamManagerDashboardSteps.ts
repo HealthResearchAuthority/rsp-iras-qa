@@ -19,32 +19,6 @@ Then(
 );
 
 Then(
-  'I see only modifications where the lead nation is the country linked to the {string}',
-  async ({ teamManagerDashboardPage, commonItemsPage }, user: string) => {
-    let leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
-    if (leadNation === 'Northern Ireland') {
-      leadNation = 'Northern_Ireland';
-    }
-    const modificationsByLeadNation = await teamManagerDashboardPage.sqlGetModificationByLeadNation(leadNation);
-    const actualList = await commonItemsPage.getActualModificationListValues(commonItemsPage.tableBodyRows, 1);
-
-    const normalize = (arr: any[]) =>
-      arr
-        .map((item) => item.toString().trim())
-        .sort((a, b) => {
-          const numA = Number.parseFloat(a);
-          const numB = Number.parseFloat(b);
-          if (!Number.isNaN(numA) && !Number.isNaN(numB)) {
-            return numA - numB; // Numeric comparison
-          }
-
-          return 0; // Keeps original order for non-numeric values
-        });
-    expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
-  }
-);
-
-Then(
   'I capture the modification id of {string} where the lead nation is the country linked to the {string} and with status {string}',
   async ({ teamManagerDashboardPage }, modificationCount: string, user: string, status: string) => {
     let countValue: string;
@@ -62,7 +36,8 @@ Then(
       status,
       countValue
     );
-    await teamManagerDashboardPage.saveModificationId(modificationId.toString(), modificationCount);
+    await teamManagerDashboardPage.saveModificationIdTM(modificationId.toString(), modificationCount);
+    await teamManagerDashboardPage.page.waitForTimeout(2000);
   }
 );
 

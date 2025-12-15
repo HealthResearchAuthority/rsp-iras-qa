@@ -194,7 +194,7 @@ export default class ManageReviewBodiesPage {
   ): Promise<boolean> {
     if (reviewBodyName === 'QA Automation') {
       const columns = await row.locator(this.listCell).allTextContents();
-      return columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus;
+      return (await columns[0].trim().includes(reviewBodyName)) && columns[2].trim() === reviewBodyStatus;
     } else {
       const searchRecord = await commonItemsPage.buildSearchRecord(reviewBodyName, reviewBodyStatus);
       const fullRowData = await commonItemsPage.getRowData(row, reviewBodyStatus);

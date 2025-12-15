@@ -48,8 +48,13 @@ Then(
     irasIdDatasetName,
     filterDatasetName
   ) => {
+    let irasId: string;
     const testData = searchModificationsPage.searchModificationsPageTestData;
-    const irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
+    if (irasIdDatasetName === 'Iras_Id_Retrieved_From_DB_With_Status_Active') {
+      irasId = await searchModificationsPage.getModificationId();
+    } else {
+      irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
+    }
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
@@ -197,6 +202,7 @@ Then(
     searchHintsDatasetName,
     pageValue: string
   ) => {
+    let searchResultFooterHintLabelExpected: string;
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const searchHintDataset =
@@ -225,7 +231,13 @@ Then(
       const searchResultFooterHintLabelActual = confirmStringNotNull(
         await searchModificationsPage.sponsor_organisation_jsdisabled_narrow_down_label.textContent()
       ).trim();
-      const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
+      if (pageValue === 'Setup_New_Sponsor_Organisation_Page') {
+        searchResultFooterHintLabelExpected =
+          `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}` +
+          '.';
+      } else {
+        searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
+      }
       const normalizedActual = searchResultFooterHintLabelActual.replaceAll(/\s+/g, ' ').trim();
       expect.soft(normalizedActual).toEqual(searchResultFooterHintLabelExpected);
     }
@@ -303,5 +315,19 @@ Then(
         )
         .toBe(commonItemsPage.commonTestData.rgb_green_color);
     }
+  }
+);
+
+Then(
+  'I capture the modification id of {string} with status {string}',
+  async ({ searchModificationsPage }, modificationCount: string, status: string) => {
+    let countValue: string;
+    if (modificationCount === 'Single' || modificationCount === 'Partial') {
+      countValue = '=';
+    } else {
+      countValue = '>';
+    }
+    const modificationId = await searchModificationsPage.sqlGetModificationByStatus(status, countValue);
+    await searchModificationsPage.saveModificationIdSearch(modificationId.toString(), modificationCount);
   }
 );
