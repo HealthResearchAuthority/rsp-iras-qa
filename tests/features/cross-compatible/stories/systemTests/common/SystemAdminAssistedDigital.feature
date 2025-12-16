@@ -18,7 +18,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
         Then I click the view edit link of the 'newly added sponsor organisation'
         And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
         And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
-        When I enter 'system admin' into the search field
+        When I enter 'system admin email' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
@@ -125,7 +125,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
         And I can now see a table of search results for 'modifications received for approval'
         When I click a 'modification id' on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And I click the 'Continue' button on the 'Modification_Page'
+        And I click the 'Continue' button on the 'Modifications_Page'
         When I provide the '<Outcome>' outcome for the modification with '<Outcome_Reason>' reason
         When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
         And I capture the page screenshot

@@ -822,7 +822,7 @@ When(
       case 'automation sponsor email':
         searchValue = loginPage.loginPageTestData.Sponsor_User.username;
         break;
-      case 'system admin':
+      case 'system admin email':
         searchValue = loginPage.loginPageTestData.System_Admin.username;
         break;
       case 'modification id':
