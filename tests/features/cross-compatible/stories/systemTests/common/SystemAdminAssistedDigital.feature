@@ -39,7 +39,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @AuthoriseAndApproveModification @abc
+    @AuthoriseAndApproveModification
     Scenario: Validate system admininstrator is able to authorise and approve a modification
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -137,7 +137,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
             | Changes                                            | Research_Locations  | Outcome  | Outcome_Reason |
             | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes | Approved | Blank          |
 
-    @AuthoriseAndAssignModificationToStudyWideReviewer @abc
+    @AuthoriseAndAssignModificationToStudyWideReviewer
     Scenario: Validate system adminintrator is able to authorise and assign modification to a study wide reviewer
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
