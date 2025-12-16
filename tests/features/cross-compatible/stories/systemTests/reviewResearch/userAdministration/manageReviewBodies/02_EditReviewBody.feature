@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @EditReviewBody @SysAdminUser @SystemTest @rsp-2572 @STSysAdmin
-Feature: User Administration: Manage Review Bodies - Edit review body
+Feature: Manage Review Bodies - Edit review body
 
     @accessReviewBodyProfile
     Scenario: Verify that view and edit link takes the user to the Review Body Profile Page

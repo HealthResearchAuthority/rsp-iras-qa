@@ -49,7 +49,8 @@
     "View_Edit": "View/Edit",
     "Advanced_Filters": "Advanced filters",
     "Clear_All_Filters": "Clear all filters",
-    "System_Admin_Breadcrumb": "System administration"
+    "System_Admin_Breadcrumb": "System administration",
+    "Manage_Users_Breadcrumb": "Manage users"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
@@ -171,7 +172,8 @@
   "Search_Modifications_Page": {
     "Advanced_Filters": "Advanced filters",
     "Clear_All_Filters": "Clear all filters",
-    "Back": "Back"
+    "Back": "Back",
+    "Approvals": "Approvals"
   },
   "Modifications_Tasklist_Page": {
     "Approvals": "Approvals",
@@ -343,7 +345,8 @@
     "Clear_All_Filters": "Clear all filters"
   },
   "Search_Projects_Page": {
-    "Clear_All_Filters": "Clear all filters"
+    "Clear_All_Filters": "Clear all filters",
+    "Approvals": "Approvals"
   },
   "Modifications_Assignment_Confirmation_Page_Team_Manager": {
     "Back_To_Dashboard": "Back to Dashboard"

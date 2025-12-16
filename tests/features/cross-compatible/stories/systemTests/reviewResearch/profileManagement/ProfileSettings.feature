@@ -5,6 +5,21 @@ Feature: Profile Management: Provide signed-in users with access to their profil
     So that I can review my account information and make updates to my profile when needed
 
     @viewProfileSettingsPage @rsp-5290
+    Scenario Outline: View profile settings for an authenticated, existing user-applicant
+        Given I have navigated to the 'Home_Page' as '<User>'
+        And I capture the page screenshot
+        When I click the 'Profile_Settings' link on the 'Banner'
+        Then I can see the 'Profile_Settings_Page'
+        And I can see a 'One_Login_Account' link on the 'Profile_Settings_Page'
+        And I capture the page screenshot
+        And I can see the read only one login details for my '<User>' account
+        And I can see the profile details for my '<User>' account
+
+        Examples:
+            | User           |
+            | Applicant_User |
+
+    @viewProfileSettingsPage @rsp-5290 @KNOWN-DEFECT-RSP-5003
     Scenario Outline: View profile settings for an authenticated, existing user
         Given I have navigated to the 'Home_Page' as '<User>'
         And I capture the page screenshot
@@ -17,7 +32,6 @@ Feature: Profile Management: Provide signed-in users with access to their profil
 
         Examples:
             | User                   |
-            | Applicant_User         |
             | Studywide_Reviewer_NI  |
             | Workflow_Coordinator_W |
 
@@ -37,7 +51,7 @@ Feature: Profile Management: Provide signed-in users with access to their profil
             | Settings_Job_Title    |
             | Settings_Organisation |
 
-    @editProfileSettings @rsp-5106 @OneLoginUser @fail @KNOWN-DEFECT-RSP-5329
+    @editProfileSettings @rsp-5106 @OneLoginUser @KNOWN-DEFECT-RSP-5329
     Scenario: Users can update their profile directly via profile settings
         Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
         And I login to the application as the 'One_Login_Account_User'

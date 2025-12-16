@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570 @STSysAdmin
-Feature: User Administration: Manage Review Bodies - Create review body
+Feature: Manage Review Bodies - Create review body
 
     Background:
         Given I have navigated to the 'System_Administration_Page'
@@ -41,6 +41,10 @@ Feature: User Administration: Manage Review Bodies - Create review body
 
         Examples:
             | Add_Review_Body         |
+            | Review_Body_HCRW_Data   |
+            | Review_Body_HSCNI_Data  |
+            | Review_Body_HRA_Data    |
+            | Review_Body_NRSPCC_Data |
             | Review_Body_RandD_Data  |
             | Review_Body_NIPS_Data   |
             | Review_Body_HFEA_Data   |
@@ -212,7 +216,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Valid_Email_Data_Multiple_Sub_Domains |
             | Valid_Email_Data_Domain               |
 
-    @VerifyTheUserActionInReviewBodyAuditHistory @rsp-4819
+    @VerifyTheUserActionInReviewBodyAuditHistory @rsp-4819 @KNOWN-DEFECT-RSP-5003
     Scenario Outline: Verify the user can view the audit history after disabling a newly created review body
         And I capture the page screenshot
         When I fill the new review body page using '<Add_Review_Body>'

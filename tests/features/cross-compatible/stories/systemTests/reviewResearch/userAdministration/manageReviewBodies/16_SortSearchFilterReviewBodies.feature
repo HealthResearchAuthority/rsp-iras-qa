@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @SortSearchFilterReviewBodies @SysAdminUser @SystemTest
-Feature: User Administration: Manage Review Bodies - Sort, search and filter the review body list
+Feature: Manage Review Bodies - Sort
 
     Background:
         Given I have navigated to the 'Manage_Review_Bodies_Page'

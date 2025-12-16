@@ -1,7 +1,6 @@
 @RegressionCreateManageUsers @RegressionManageUsers @Regression @SysAdminUser @BackStage
 Feature: User Administration: Create and edit manage users
 
-
     @RegressionTestCreateUserEvents @RevBodyUserListCleanup
     Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
         Given I have navigated to the 'Home_Page'

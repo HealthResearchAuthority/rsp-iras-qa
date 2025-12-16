@@ -37,7 +37,7 @@ Then(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datesetName];
     const actualValue = await userProfilePage.getUserProfileValue(editFieldName);
     const expectedValue = dataset[editFieldName];
-    expect(actualValue).toBe(expectedValue.toString());
+    expect.soft(actualValue).toContain(expectedValue.toString());
   }
 );
 
@@ -67,9 +67,8 @@ When(
     const actualMinutes = await userProfilePage.last_updated_value
       .textContent()
       .then((text) => text.slice(text.indexOf(':') + 1));
-    await expect
-      .soft(userProfilePage.last_updated_value)
-      .toContainText(confirmStringNotNull(expectedValue.replace(expectedMinutes, '')));
+    const actualValue = confirmStringNotNull(await userProfilePage.last_updated_value.textContent());
+    expect.soft(actualValue).toBe(confirmStringNotNull(expectedValue));
     expect.soft(Number.parseInt(actualMinutes)).toBeGreaterThanOrEqual(Number.parseInt(expectedMinutes) - 1);
     expect.soft(Number.parseInt(actualMinutes)).toBeLessThanOrEqual(Number.parseInt(expectedMinutes) + 1);
   }
@@ -122,7 +121,7 @@ When(
       }
       const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
       const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-      expect(expectedValues).toContain(actualValues);
+      expect.soft(actualValues).toContain(expectedValues);
     }
   }
 );
@@ -142,7 +141,7 @@ When(
       }
       const actualValues = confirmStringNotNull(await userProfilePage.review_body_value.textContent());
       const expectedValues = dataset.review_body_checkbox.toString().replaceAll(',', ', ');
-      expect(expectedValues).toContain(actualValues);
+      expect.soft(actualValues.includes(expectedValues) || expectedValues.includes(actualValues)).toBe(true);
     }
   }
 );

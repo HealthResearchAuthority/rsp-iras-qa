@@ -418,6 +418,7 @@
       ],
       "role_checkbox": [
         "Applicant",
+        "Sponsor",
         "Study-wide reviewer",
         "System administrator",
         "Team manager",

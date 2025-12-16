@@ -1,8 +1,8 @@
-@ReceiveAmendments @SearchProjectRecordsSortFilter @SysAdminUser @SystemTest @rsp-5456
-Feature: Receive Amendments: Display project records on the Search Projects page for System Administrators, Team Managers, Workflow Coordinators, and Study-wide Reviewers, filtered by status
+@ReceiveAmendments @SearchProjectRecordsSortFilter @SysAdminUser @SystemTest @rsp-5456 @TestApprovals @TestApprovalsSearch
+Feature: Display project records on the Search Projects page status and roles
 
         # There is no back link to navigate back from Project Record Overview page to Search project records page of Approvals workspace
-        @DraftStatusProjectSysAdmin @SearchProjectsTitleBackLinksNav @KNOWN_DEFECT
+        @DraftStatusProjectSysAdmin @SearchProjectsTitleBackLinksNav
         Scenario: Verify that project records are displayed on the Search Projects page for System Administrators, when the status 'In draft'
                 Verify back and short project title link navigation for search projects tasklist
                 Given I have navigated to the 'My_Research_Page' as 'Applicant_User'
@@ -50,7 +50,7 @@ Feature: Receive Amendments: Display project records on the Search Projects page
         # And I capture the page screenshot
         # Then I can see the 'Search_Projects_Page'
 
-        @ActiveStatusProjectSysAdminSWRWFCTeamManager @KNOWN_DEFECT
+        @ActiveStatusProjectSysAdminSWRWFCTeamManager
         Scenario Outline:Verify that project records are displayed on the Search Projects page for System Administrators, Team Managers, Workflow Coordinators, and Study-wide Reviewers when the status 'Active'
                 Given I have navigated to the 'My_Research_Page' as 'Applicant_User'
                 And I can see the my research projects page
@@ -104,9 +104,8 @@ Feature: Receive Amendments: Display project records on the Search Projects page
                         | Team_Manager         |
                         | Workflow_Coordinator |
 
-
-        @DraftStatusProjectSWRWFCTeamManager @fail @KNOWN_DEFECT
-        Scenario Outline: Verify that project records are not displayed on the Search Projects page for Team Managers, Workflow Coordinators, and Study-wide Reviewers, when the status 'In draft'
+        @DraftStatusProjectSWRWFCTeamManager @KNOWN-DEFECT-RSP-6500
+        Scenario Outline: Verify that In draft project records are not displayed on the Search Projects page for TM, WFC, and SWR
                 Given I have navigated to the 'My_Research_Page' as 'Applicant_User'
                 And I can see the my research projects page
                 And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
