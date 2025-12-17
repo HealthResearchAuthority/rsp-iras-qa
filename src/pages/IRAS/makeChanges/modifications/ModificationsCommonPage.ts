@@ -668,7 +668,7 @@ export default class ModificationsCommonPage {
       const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
       cardData['area_of_change_dropdown'] = areaOfChangeValue;
       cardData['specific_change_dropdown'] = specificChangeValue;
-    } else if (!(cardTitle == 'Sponsor details')) {
+    } else if (cardTitle != 'Sponsor details') {
       const areaOfChangeValueViewDetails = (
         await this.page.getByRole('heading', { name: cardTitle }).textContent()
       ).trim();

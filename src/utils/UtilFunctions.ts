@@ -690,10 +690,10 @@ export async function processKnownDefectsAsync(jsonDir: string): Promise<number>
 export function normalizeUiText(input: string | null | undefined): string {
   const s = (input ?? '')
     .normalize('NFKC')
-    .replace(/[’‘]/g, "'")
-    .replace(/[“”]/g, '"')
-    .replace(/\u00A0/g, ' ')
-    .replace(/\s+/g, ' ')
+    .replaceAll(/[’‘]/g, "'")
+    .replaceAll(/[“”]/g, '"')
+    .replaceAll(/\u00A0/g, ' ')
+    .replaceAll(/\s+/g, ' ')
     .trim();
   return s;
 }
