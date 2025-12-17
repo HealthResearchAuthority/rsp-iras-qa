@@ -2079,7 +2079,7 @@ Feature: Create Project
       | page number       | Advanced_Filter_Project_Created_From_Date_Only |
       | next link         | Advanced_Filter_Project_Created_From_Date_Only |
 
-  @rsp-6169 @ModificationDetailsAsEditableFormatWhenTheDocumentStatusComplete
+  @rsp-6169 @ModificationDetailsAsEditableFormatWhenTheDocumentStatusComplete 
   Scenario: Validate the editable modification details page when the modification has a complete status
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -2210,6 +2210,7 @@ Feature: Create Project
     Then I can see the review all changes page
     And I capture the page screenshot
   
+  #For the execution of the below scenario, we need data in the database for the 'With sponsor' status
   @rsp-6169 @verifyDocumentStatusIsWithSponsorFlow 
   Scenario Outline: Validate the read only modification details page when the modification has a with sponsor status
     Given I navigate to a 'With sponsor' project documents tab
@@ -2222,9 +2223,11 @@ Feature: Create Project
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
-    And I validate the fields are read only format
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
    
+  #For the execution of the below scenario, we need data in the database for the 'Not authorised' status
   @rsp-6169 @verifyDocumentStatusIsNotAuthorisedFlow 
   Scenario Outline: Validate the read only modification details page when the modification has a not authorised status
     Given I navigate to a 'Not authorised' project documents tab
@@ -2237,10 +2240,11 @@ Feature: Create Project
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
-    And I validate the fields are read only format
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
-
  
+  #For the execution of the below scenario, we need data in the database for the 'With review body' status
   @rsp-6169 @verifyDocumentStatusIsWithReviewBodyFlow  
   Scenario Outline: Validate the read only modification details page when the modification has a with review body status
     Given I navigate to a 'With review body' project documents tab
@@ -2253,9 +2257,11 @@ Feature: Create Project
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
-    And I validate the fields are read only format
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
-
+  
+  #For the execution of the below scenario, we need data in the database for the 'Approved' status
   @rsp-6169 @verifyDocumentStatusIsApprovedFlow 
   Scenario Outline: Validate the read only modification details page when the modification has a approved status
     Given I navigate to a 'Approved' project documents tab
@@ -2268,9 +2274,11 @@ Feature: Create Project
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
-    And I validate the fields are read only format
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
-
+ 
+  #For the execution of the below scenario, we need data in the database for the 'Not approved' status
   @rsp-6169 @verifyDocumentStatusIsNotApprovedFlow 
   Scenario Outline: Validate the read only modification details page when the modification has a not approved status
     Given I navigate to a 'Not approved' project documents tab
@@ -2283,6 +2291,6 @@ Feature: Create Project
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
-    And I validate the fields are read only format
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
-

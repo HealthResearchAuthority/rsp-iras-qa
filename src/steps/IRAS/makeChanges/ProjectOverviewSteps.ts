@@ -69,12 +69,12 @@ Then(
 
 Then(
   'I can see the {string} ui labels on the project overview page',
-  async ({ projectOverviewPage }, datasetName: string) => {
+  async ({ projectOverviewPage, commonItemsPage }, datasetName: string) => {
     const dataset = projectOverviewPage.projectOverviewPageTestData.Project_Documents_Tab[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        const locator: Locator = projectOverviewPage[key];
-        await expect.soft(locator).toBeVisible();
+        const labelValue = await commonItemsPage.getUiLabel(key, projectOverviewPage);
+        expect(labelValue).toBe(dataset[key]);
       }
     }
   }
@@ -577,19 +577,3 @@ Then(
     await projectOverviewPage.page.waitForLoadState('domcontentloaded');
   }
 );
-
-Then('I validate the fields are read only format', async ({ page }) => {
-  const rowDetails = page.locator('#modifications-changes dd');
-  const count = await rowDetails.count();
-  expect(count).toBeGreaterThan(0);
-  for (let i = 0; i < count; i++) {
-    const rowValue = rowDetails.nth(i);
-    await expect(rowValue).toBeVisible();
-    const text = (await rowValue.textContent())?.trim() ?? '';
-    expect(text.length).toBeGreaterThan(0);
-    const editableValue = rowValue.locator(
-      'input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [contenteditable="true"], [role="textbox"]'
-    );
-    await expect(editableValue).toHaveCount(0);
-  }
-});

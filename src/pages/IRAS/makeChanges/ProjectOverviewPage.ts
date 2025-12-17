@@ -69,7 +69,7 @@ export default class ProjectOverviewPage {
   readonly document_date_project_documents: Locator;
   readonly status_project_documents: Locator;
   readonly modification_id_project_documents: Locator;
-  readonly action_header: Locator;
+  readonly table_header: Locator;
   readonly advanced_filters_project_documents: Locator;
   readonly search_project_documents: Locator;
   readonly results_count_project_documents: Locator;
@@ -483,11 +483,11 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.document_type_project_documents,
     });
     this.document_name_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_name_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_name_project_documents,
       exact: true,
     });
     this.file_name_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Project_Documents_Tab.file_name_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.file_name_project_documents,
       exact: true,
     });
     this.version_project_documents = this.page.getByRole('button', {
@@ -502,9 +502,9 @@ export default class ProjectOverviewPage {
       exact: true,
     });
     this.modification_id_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Project_Documents_Tab.modification_id_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.modification_id_project_documents,
     });
-    this.action_header = this.page.locator('th');
+    this.table_header = this.page.locator('th');
     this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
     this.modification_table_data = page.locator('.govuk-table.modifications-tasklist-table td');
     this.date_submitted_to_date_error_message = this.page
