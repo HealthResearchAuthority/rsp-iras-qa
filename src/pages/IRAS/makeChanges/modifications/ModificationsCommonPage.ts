@@ -657,26 +657,15 @@ export default class ModificationsCommonPage {
     const rows = cardLocator.locator('.govuk-summary-list__row');
     await expect.soft(rows.first()).toBeVisible();
     const rowCount = await rows.count();
+    const specificChangeValue = await rows.nth(0).locator('.govuk-summary-list__key').innerText();
     const cardData: Record<string, any> = {};
     if (keys.includes('Project_Reference')) {
       cardData['Project_Reference'] = {};
     }
     const modificationInfo: Record<string, string> = {};
-    const toLines = (text: string) => text.split('\n');
-    const setDate = (value: string, dayKey: string, monthKey: string, yearKey: string) => {
-      const [day, month, year] = value.split(' ');
-      cardData[dayKey] = day;
-      cardData[monthKey] = month;
-      cardData[yearKey] = year;
-    };
-    const setNested = (objKey: string, fieldKey: string, value: string) => {
-      cardData[objKey] ??= {};
-      cardData[objKey][fieldKey] = value;
-    };
     if (cardTitle.includes('Change')) {
       const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
       const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
-      const specificChangeValue = await rows.nth(0).locator('.govuk-summary-list__key').innerText();
       cardData['area_of_change_dropdown'] = areaOfChangeValue;
       cardData['specific_change_dropdown'] = specificChangeValue;
     } else if (cardTitle !== 'Sponsor details') {
@@ -691,99 +680,180 @@ export default class ModificationsCommonPage {
       cardData['area_of_change_dropdown'] = areaOfChangeValueViewDetails;
       cardData['specific_change_dropdown'] = specificChangeValueViewDetails.trim();
     }
-    const change = this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts;
-    const ranking = this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts;
-    const sponsor = this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts;
-    const handlers: Record<string, (value: string) => void> = {
-      [change.planned_project_end_date_label]: (value) =>
-        setDate(
-          value,
-          'planned_project_end_day_text',
-          'planned_project_end_month_dropdown',
-          'planned_project_end_year_text'
-        ),
-      [change.affected_organisation_types_label]: (value) =>
-        (cardData['which_organisation_change_affect_checkbox'] = toLines(value)),
-      [change.affected_nhs_hsc_locations_label]: (value) =>
-        (cardData['where_organisation_change_affect_nhs_question_checkbox'] = toLines(value)),
-      [change.affected_non_nhs_hsc_locations_label]: (value) =>
-        (cardData['where_organisation_change_affect_non_nhs_question_checkbox'] = toLines(value)),
-      [ranking.modification_type_label]: (value) => (modificationInfo['modification_type'] = value),
-      [ranking.category_label]: (value) => (modificationInfo['category'] = value),
-      [ranking.review_type_label]: (value) => (modificationInfo['review_type'] = value),
-      [change.portion_of_nhs_hsc_organisations_affected_label]: (value) =>
-        (cardData['will_some_or_all_organisations_be_affected_question_radio'] = value),
-      [change.additional_resource_implications_label]: (value) =>
-        (cardData['will_nhs_hsc_organisations_require_additional_resources_question_radio'] = value),
-      [sponsor.sponsor_reference_label]: (value) => (cardData['sponsor_modification_reference_textbox'] = value),
-      [sponsor.sponsor_date_label]: (value) =>
-        setDate(
-          value,
-          'sponsor_modification_date_day_textbox',
-          'sponsor_modification_date_month_dropdown',
-          'sponsor_modification_date_year_textbox'
-        ),
-      [sponsor.sponsor_summary_label]: (value) => (cardData['sponsor_summary_textbox'] = value),
-      [change.project_reference_numbers_radio_label]: (value) =>
-        (cardData['which_reference_do_you_need_to_change_checkboxes'] = toLines(value)),
-      [change.title_radio_label]: (value) => (cardData['title_radio'] = toLines(value)),
-      [change.isrctn_reference_number_label]: (value) =>
-        setNested('Project_Reference', 'isrctn_reference_number_textbox', value),
-      [change.nct_reference_number_label]: (value) =>
-        setNested('Project_Reference', 'nct_reference_number_textbox', value),
-      [change.funder_name_label]: (value) => setNested('Project_Reference', 'funder_name_textbox', value),
-      [change.funder_reference_number_label]: (value) =>
-        setNested('Project_Reference', 'funder_reference_number_textbox', value),
-      [change.other_reference_number_label]: (value) =>
-        setNested('Project_Reference', 'other_reference_number_textbox', value),
-      [change.what_other_is_label]: (value) => setNested('Project_Reference', 'what_other_is_textbox', value),
-      [change.new_short_project_title_label]: (value) =>
-        setNested('Project_Reference', 'new_short_project_title_text', value),
-      [change.new_full_project_title_label]: (value) =>
-        setNested('Project_Reference', 'new_full_project_title_text', value),
-      [change.which_titles_do_you_need_to_change_label]: (value) =>
-        (cardData['which_titles_do_you_need_to_change_checkboxes'] = toLines(value)),
-      [change.first_name_label]: (value) => (cardData['first_name_text'] = value),
-      [change.last_name_label]: (value) => (cardData['last_name_text'] = value),
-      [change.new_chief_investigator_email_label]: (value) => (cardData['chief_investigator_email_text'] = value),
-      [change.new_principal_investigator_email_label]: (value) =>
-        (cardData['principal_investigator_email_text'] = value),
-      [change.name_label]: (value) => (cardData['name_text'] = value),
-      [change.sponsor_contact_email_label]: (value) => (cardData['sponsor_contact_email_text'] = value),
-      [change.email_label]: (value) => (cardData['email_text'] = value),
-    };
     for (let cardRowIndex = 0; cardRowIndex < rowCount; cardRowIndex++) {
       await this.page.waitForLoadState('domcontentloaded');
       const row = rows.nth(cardRowIndex);
-      const key = (await row.locator('.govuk-summary-list__key').innerText()).trim();
-      const value = confirmStringNotNull(await row.locator('.govuk-summary-list__value').innerText());
-      if (key === dataset['specific_change_dropdown']) {
-        if (
-          modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset['specific_change_dropdown'])
-        ) {
-          cardData['changes_free_text'] = value;
-        } else if (
-          dataset['specific_change_dropdown'] === 'Project identification' &&
-          keys.includes('project_reference_numbers_radio')
-        ) {
-          cardData['project_reference_numbers_radio'] = value;
-        } else if (dataset['specific_change_dropdown'] === 'Project identification' && keys.includes('title_radio')) {
-          cardData['title_radio'] = value;
-        } else if (
-          dataset['specific_change_dropdown'] === 'Change of Chief Investigator' ||
-          dataset['specific_change_dropdown'] === 'Change of Principal Investigator'
-        ) {
-          cardData['select_details_to_change_radio'] = value;
-        } else if (keys.includes('select_contact_details_to_change_radio')) {
-          cardData['select_contact_details_to_change_radio'] = value;
-        } else {
-          dataset['specific_change_dropdown'] = value;
+      const key = await row.locator('.govuk-summary-list__key').innerText();
+      const value = await row.locator('.govuk-summary-list__value').innerText();
+      const cleanedKey = key.trim();
+      const cleanedValue = confirmStringNotNull(value);
+      switch (cleanedKey) {
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .planned_project_end_date_label: {
+          const [day, month, year] = cleanedValue.split(' ');
+          cardData['planned_project_end_day_text'] = day;
+          cardData['planned_project_end_month_dropdown'] = month;
+          cardData['planned_project_end_year_text'] = year;
+          break;
         }
-        continue;
-      }
-      const handle = handlers[key];
-      if (handle) {
-        handle(value);
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .affected_organisation_types_label: {
+          cardData['which_organisation_change_affect_checkbox'] = cleanedValue.split('\n');
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .affected_nhs_hsc_locations_label: {
+          cardData['where_organisation_change_affect_nhs_question_checkbox'] = cleanedValue.split('\n');
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .affected_non_nhs_hsc_locations_label: {
+          cardData['where_organisation_change_affect_non_nhs_question_checkbox'] = cleanedValue.split('\n');
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label: {
+          modificationInfo['modification_type'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.category_label: {
+          modificationInfo['category'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.review_type_label: {
+          modificationInfo['review_type'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .portion_of_nhs_hsc_organisations_affected_label: {
+          cardData['will_some_or_all_organisations_be_affected_question_radio'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .additional_resource_implications_label: {
+          cardData['will_nhs_hsc_organisations_require_additional_resources_question_radio'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts.sponsor_reference_label: {
+          cardData['sponsor_modification_reference_textbox'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts.sponsor_date_label: {
+          const [day, month, year] = cleanedValue.split(' ');
+          cardData['sponsor_modification_date_day_textbox'] = day;
+          cardData['sponsor_modification_date_month_dropdown'] = month;
+          cardData['sponsor_modification_date_year_textbox'] = year;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts.sponsor_summary_label: {
+          cardData['sponsor_summary_textbox'] = cleanedValue;
+          break;
+        }
+        case dataset['specific_change_dropdown']: {
+          if (
+            modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset['specific_change_dropdown'])
+          ) {
+            cardData['changes_free_text'] = cleanedValue;
+          } else if (
+            dataset['specific_change_dropdown'] === 'Project identification' &&
+            keys.includes('project_reference_numbers_radio')
+          ) {
+            cardData['project_reference_numbers_radio'] = cleanedValue;
+          } else if (dataset['specific_change_dropdown'] === 'Project identification' && keys.includes('title_radio')) {
+            cardData['title_radio'] = cleanedValue;
+          } else if (
+            dataset['specific_change_dropdown'] === 'Change of Chief Investigator' ||
+            dataset['specific_change_dropdown'] === 'Change of Principal Investigator'
+          ) {
+            cardData['select_details_to_change_radio'] = cleanedValue;
+          } else if (keys.includes('select_contact_details_to_change_radio')) {
+            cardData['select_contact_details_to_change_radio'] = cleanedValue;
+          } else {
+            dataset['specific_change_dropdown'] = cleanedValue;
+          }
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .project_reference_numbers_radio_label: {
+          cardData['which_reference_do_you_need_to_change_checkboxes'] = cleanedValue.split('\n');
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.title_radio_label: {
+          cardData['title_radio'] = cleanedValue.split('\n');
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .isrctn_reference_number_label: {
+          cardData['Project_Reference']['isrctn_reference_number_textbox'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.nct_reference_number_label: {
+          cardData['Project_Reference']['nct_reference_number_textbox'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.funder_name_label: {
+          cardData['Project_Reference']['funder_name_textbox'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .funder_reference_number_label: {
+          cardData['Project_Reference']['funder_reference_number_textbox'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .other_reference_number_label: {
+          cardData['Project_Reference']['other_reference_number_textbox'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.what_other_is_label: {
+          cardData['Project_Reference']['what_other_is_textbox'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .new_short_project_title_label: {
+          cardData['Project_Reference']['new_short_project_title_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .new_full_project_title_label: {
+          cardData['Project_Reference']['new_full_project_title_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .which_titles_do_you_need_to_change_label: {
+          cardData['which_titles_do_you_need_to_change_checkboxes'] = cleanedValue.split('\n');
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.first_name_label: {
+          cardData['first_name_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.last_name_label: {
+          cardData['last_name_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .new_chief_investigator_email_label: {
+          cardData['chief_investigator_email_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .new_principal_investigator_email_label: {
+          cardData['principal_investigator_email_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.name_label: {
+          cardData['name_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .sponsor_contact_email_label: {
+          cardData['sponsor_contact_email_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.email_label: {
+          cardData['email_text'] = cleanedValue;
+          break;
+        }
       }
     }
     return { cardData, modificationInfo };
