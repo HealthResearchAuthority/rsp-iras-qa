@@ -1,8 +1,14 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
-import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, returnDataFromJSON } from '../../../../utils/UtilFunctions';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
+import { connect } from '../../../../utils/DbConfig';
+import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
+const pathToTestDataJson =
+  './src/resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
+import path from 'node:path';
+import * as fse from 'fs-extra';
 
 //Declare Page Objects
 export default class SearchModificationsPage {
@@ -10,6 +16,7 @@ export default class SearchModificationsPage {
   readonly searchModificationsPageTestData: typeof searchModificationsPageTestData;
   readonly linkTextData: typeof linkTextData;
   private _modifications_list_after_search: string[];
+  private _modification_id: string;
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
   readonly iras_id_search_text: Locator;
@@ -71,6 +78,7 @@ export default class SearchModificationsPage {
     this.page = page;
     this.searchModificationsPageTestData = searchModificationsPageTestData;
     this._modifications_list_after_search = [];
+    this._modification_id = '';
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
@@ -321,6 +329,14 @@ export default class SearchModificationsPage {
     this._modifications_list_after_search = value;
   }
 
+  async getModificationId(): Promise<string> {
+    return this._modification_id;
+  }
+
+  async setModificationId(value: string): Promise<void> {
+    this._modification_id = value;
+  }
+
   //Page Methods
 
   async assertOnSearchModificationsPage() {
@@ -432,5 +448,72 @@ export default class SearchModificationsPage {
   async getExpectedResultsCountLabelNoResults(commonItemsPage: CommonItemsPage) {
     const expectedResultCountLabel = commonItemsPage.commonTestData.result_count_heading;
     return '0' + expectedResultCountLabel;
+  }
+
+  async sqlGetModificationByStatus(status: string, countValue: string) {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(`
+      SELECT TOP 1
+    NationQuery.ModificationIdentifier,
+    NationQuery.IrasId,
+    ProjectRecordAnswers.Response,
+    NationQuery.CreatedDate,
+    NationQuery.[Status]
+FROM (
+    SELECT
+        ProjectModifications.ModificationIdentifier,
+        ProjectModifications.CreatedDate,
+        ProjectModifications.[Status],
+        ProjectRecords.Id,
+        ProjectRecords.IrasId,
+        ProjectRecordAnswers.ProjectRecordId,
+        ProjectRecordAnswers.QuestionId,
+        ProjectRecordAnswers.SelectedOptions,
+        ProjectRecordAnswers.Response,
+        ProjectRecords.[Status] AS ProjectRecordStatus,
+        COUNT(*) OVER (PARTITION BY ProjectRecords.IrasId) AS IrasIdCount
+    FROM ProjectModifications
+    INNER JOIN ProjectRecords
+        ON ProjectRecords.Id = ProjectModifications.ProjectRecordId
+    INNER JOIN ProjectRecordAnswers
+        ON ProjectRecordAnswers.ProjectRecordId = ProjectRecords.Id
+    WHERE
+        ProjectRecordAnswers.QuestionId = 'IQA0005' AND
+        ProjectRecordAnswers.SelectedOptions IN ('OPT0021', 'OPT0020', 'OPT0019','OPT0018') AND
+        ProjectRecords.[Status] = 'Active' AND
+        ProjectModifications.[Status] = '${status}' 
+) AS NationQuery
+INNER JOIN ProjectRecordAnswers
+    ON ProjectRecordAnswers.ProjectRecordId = NationQuery.Id
+WHERE
+    ProjectRecordAnswers.QuestionId = 'IQA0002'   AND NationQuery.IrasIdCount ${countValue} 1 
+ORDER BY NationQuery.CreatedDate DESC;
+`);
+    await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(`No suitable modification found in the system with ${status} status`);
+    }
+    return queryResult.recordset.map((row) => row.IrasId);
+  }
+  async saveModificationIdSearch(modificationId: string, countval: string) {
+    await this.setModificationId(modificationId);
+    const filePath = path.resolve(pathToTestDataJson);
+    await this.updateModificationIdTestDataJson(filePath, modificationId, countval);
+  }
+
+  async updateModificationIdTestDataJson(filePath: string, updateVal: string, countval: string) {
+    (async () => {
+      try {
+        const data = await returnDataFromJSON(filePath);
+        if (countval === 'Single') {
+          data.Search_Queries.Valid_Full_Iras_Id.search_input_text = updateVal;
+        } else if (countval === 'Partial') {
+          data.Search_Queries.Existing_Partial_IRAS_ID.search_input_text = updateVal.substring(0, 2);
+        }
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating modification id to testdata json file:`);
+      }
+    })();
   }
 }

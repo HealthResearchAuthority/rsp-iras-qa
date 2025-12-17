@@ -76,14 +76,14 @@ Then('I click the {string} tab on the modification details page', async ({ modif
 });
 
 Given('I can see the review outcome section', async ({ modificationsDetailsPage }) => {
-  await expect(modificationsDetailsPage.review_comment_heading).toBeVisible();
-  await expect(modificationsDetailsPage.review_comment_show).toBeVisible();
-  await expect(modificationsDetailsPage.review_comment_guidance).toBeHidden();
-  await expect(modificationsDetailsPage.review_comment_box).toBeHidden();
-  await expect(modificationsDetailsPage.review_outcome_heading).toBeVisible();
-  await expect(modificationsDetailsPage.approved_outcome_option).toBeVisible();
-  await expect(modificationsDetailsPage.not_approved_outcome_option).toBeVisible();
-  await expect(modificationsDetailsPage.review_outcome_guidance).toBeVisible();
+  await expect.soft(modificationsDetailsPage.review_comment_heading).toBeVisible();
+  await expect.soft(modificationsDetailsPage.review_comment_show).toBeVisible();
+  await expect.soft(modificationsDetailsPage.review_comment_guidance).toBeHidden();
+  await expect.soft(modificationsDetailsPage.review_comment_box).toBeHidden();
+  await expect.soft(modificationsDetailsPage.review_outcome_heading).toBeVisible();
+  await expect.soft(modificationsDetailsPage.approved_outcome_option).toBeVisible();
+  await expect.soft(modificationsDetailsPage.not_approved_outcome_option).toBeVisible();
+  await expect.soft(modificationsDetailsPage.review_outcome_guidance).toBeVisible();
 });
 
 When(

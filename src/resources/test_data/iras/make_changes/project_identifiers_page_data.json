@@ -8,6 +8,9 @@
   "Valid_Data_All_Fields": {
     "primary_sponsor_organisation_text": "University of Southampton"
   },
+  "Cardiff_University": {
+    "primary_sponsor_organisation_text": "Cardiff University"
+  },
   "Valid_Email_Data_Special_Characters": {
     "primary_sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST"
   },

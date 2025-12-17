@@ -75,9 +75,11 @@ Then(
     const pageBodyExpected =
       projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.project_not_eligible_page_body;
     expect.soft(pageBodyActual).toBe(pageBodyExpected);
-    await commonItemsPage.clickLink('IRAS_ID_Error_Page', 'Follow_Existing_Processes');
-    const followExistingProcessesPage = await context.waitForEvent('page');
-    await followExistingProcessesPage.waitForLoadState('load');
+    const [followExistingProcessesPage] = await Promise.all([
+      context.waitForEvent('page'),
+      commonItemsPage.clickLink('IRAS_ID_Error_Page', 'Follow_Existing_Processes'),
+    ]);
+    await followExistingProcessesPage.waitForLoadState();
     const followExistingProcessesUrlActual = followExistingProcessesPage.url();
     const followExistingProcessesUrlExpected =
       projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.follow_existing_process_url;

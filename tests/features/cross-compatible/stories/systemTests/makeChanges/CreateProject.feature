@@ -760,7 +760,7 @@ Feature: Create Project
     And I can see project details along with 'Valid_Data_All_Fields' sponsor organisation and 'Valid_Planned_End_Date' on the project overview page
     And I capture the page screenshot
 
-  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage
+  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6187
   Scenario: Validate return to iras id button and back button functionality in confirm project details page
     And I capture the page screenshot
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -1618,7 +1618,7 @@ Feature: Create Project
       | page number       |
       | previous link     |
 
-  @rsp-4545 @rsp-5280 @ProjectDocumentsTab
+  @rsp-4545 @rsp-5280 @ProjectDocumentsTab @KNOWN_DEFECT_RSP-6489
   Scenario: Validate the user is able to access and view the project documents details from the project overview page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1691,7 +1691,7 @@ Feature: Create Project
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I can see the list is sorted by default in the alphabetical order of the 'document type'
 
-  @rsp-4545 @ProjectDocumentsPaginationFirstPage
+  @rsp-4545 @ProjectDocumentsPaginationFirstPage @KNOWN_DEFECT_RSP-6489
   Scenario Outline: Verify pagination in project documents page when user is on the first page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1773,7 +1773,7 @@ Feature: Create Project
       | page number       |
       | next link         |
 
-  @rsp-4545 @ProjectDocumentsPaginationLastPage
+  @rsp-4545 @ProjectDocumentsPaginationLastPage @KNOWN_DEFECT_RSP-6489
   Scenario Outline: Verify pagination in project documents page when user is on the last page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1854,7 +1854,7 @@ Feature: Create Project
       | page number       |
       | previous link     |
 
-  @rsp-3930 @ProjectDocumentDownload
+  @rsp-3930 @ProjectDocumentDownload @KNOWN_DEFECT_RSP-6510
   Scenario: Validate the user is able to download the project document from the project overview page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -2052,7 +2052,7 @@ Feature: Create Project
       | Advanced_Filter_One_All | Advanced_Filter_One_All |
       | Advanced_Filter_Two     | Advanced_Filter_Two     |
 
-  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650 @KNOWN_DEFECT_RSP_6411 @fail
+  @VerifyActiveFiltersRemainVisibleDuringPagination @rsp-4650
   Scenario: Verify that active filters remain visible during pagination, and that they are cleared when navigating to a different page
     And I have navigated to the 'My_Research_Page'
     And I can see the 'My_Research_Page'

@@ -34,8 +34,12 @@ Then(
         sortField
       );
     }
-    if (sortField.toLowerCase() === 'short project title') {
-      actualList = await commonItemsPage.getActualListValuesShortProjectTitle(
+    if (
+      sortField.toLowerCase() === 'short project title' ||
+      sortField.toLowerCase() === 'study-wide reviewer' ||
+      sortField.toLowerCase() === 'status'
+    ) {
+      actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
         commonItemsPage.tableBodyRows,
         searchColumnIndex
       );
@@ -78,11 +82,16 @@ When(
   'I enter {string} into the search field for {string}',
   async ({ searchModificationsPage, searchProjectsPage }, datasetName: string, pageValue: string) => {
     if (pageValue === 'Search_Modifications_Page') {
-      const dataset = searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
+      const dataset = await searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
       await searchModificationsPage.iras_id_search_text.fill(dataset['iras_id_text']);
     } else if (pageValue === 'Search_Projects_Page') {
-      const dataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[datasetName];
-      await searchModificationsPage.iras_id_search_text.fill(dataset['search_input_text']);
+      if (datasetName === 'Project_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+        const irasId = await searchProjectsPage.getIrasId();
+        await searchModificationsPage.iras_id_search_text.fill(irasId);
+      } else {
+        const dataset = await searchProjectsPage.searchProjectsPageTestData.Search_Queries[datasetName];
+        await searchModificationsPage.iras_id_search_text.fill(dataset['search_input_text']);
+      }
     }
   }
 );
@@ -128,8 +137,13 @@ Then(
     irasIdDatasetName,
     filterDatasetName
   ) => {
+    let irasId: string;
     const testData = searchProjectsPage.searchProjectsPageTestData;
-    const irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
+    if (irasIdDatasetName === 'Project_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+      irasId = await searchProjectsPage.getIrasId();
+    } else {
+      irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
+    }
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { short_project_title_text: projectTitle } = filterDataset;
     const totalPagesCount = await commonItemsPage.getTotalPages();

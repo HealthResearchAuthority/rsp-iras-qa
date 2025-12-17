@@ -2,6 +2,7 @@ import sql from 'mssql';
 import { getDecryptedValue, resolveEnvExpression } from './UtilFunctions';
 import * as loginPageTestData from '../resources/test_data/common/login_page_data.json';
 
+//ST Automation server
 const server = 'rspsqlserverautomationtest.database.windows.net';
 const port = 1433;
 const user = loginPageTestData.DB_User.username;

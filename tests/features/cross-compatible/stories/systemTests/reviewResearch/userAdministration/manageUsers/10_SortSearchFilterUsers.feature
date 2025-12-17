@@ -1,5 +1,5 @@
 @UserAdministration @ManageUsers @SortSearchFilterUsers @SysAdminUser @SystemTest
-Feature: User Administration: Manage Users - Sort, search and filter the manage users list
+Feature: Manage Users - Sort
 
   Background:
     Given I have navigated to the 'Manage_Users_Page'
