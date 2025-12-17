@@ -349,7 +349,7 @@ export default class ModificationsCommonPage {
           hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
         })
         .locator(this.valueLocator);
-      // await expect.soft(actualSpecificChangeValueLocator).toBeVisible();
+      await expect.soft(actualSpecificChangeValueLocator).toBeVisible();
       if (!(await actualSpecificChangeValueLocator.isVisible())) {
         continue;
       }
@@ -832,16 +832,12 @@ export default class ModificationsCommonPage {
           break;
         }
         case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
-          .new_chief_investigator_email_label:
-        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
-          .new_chief_investigator_email_lower_case_label: {
+          .new_chief_investigator_email_label: {
           cardData['chief_investigator_email_text'] = cleanedValue;
           break;
         }
         case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
-          .new_principal_investigator_email_label:
-        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
-          .new_principal_investigator_email_lower_case_label: {
+          .new_principal_investigator_email_label: {
           cardData['principal_investigator_email_text'] = cleanedValue;
           break;
         }

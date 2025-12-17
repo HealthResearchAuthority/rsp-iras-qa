@@ -74,7 +74,7 @@ Then(
   async ({ modificationsCommonPage, commonItemsPage, projectDetailsIRASPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset).reverse();
-    // expect.soft(modificationsCommonPage.overall_modification_ranking_sub_heading).toBeVisible();
+    expect.soft(modificationsCommonPage.overall_modification_ranking_sub_heading).toBeVisible();
     expect.soft(modificationsCommonPage.ranking_sub_heading).toBeVisible();
     const actualValuesArray = await modificationsCommonPage.getActualFieldValuesOnModificationPage(
       modificationsCommonPage.allChangeCards,
@@ -108,7 +108,7 @@ Then(
       const shortProjectTitleActual = confirmStringNotNull(
         await modificationsCommonPage.short_project_title_value.textContent()
       );
-      const normalizedshortProjectTitleActual = await normalizeUiText(shortProjectTitleActual);
+      const normalizedshortProjectTitleActual = normalizeUiText(shortProjectTitleActual);
       const modificationIDActual = confirmStringNotNull(
         await modificationsCommonPage.modification_id_value.textContent()
       );

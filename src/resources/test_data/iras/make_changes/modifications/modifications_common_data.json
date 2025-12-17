@@ -79,9 +79,7 @@
     "first_name_label": "First name",
     "last_name_label": "Last name",
     "new_chief_investigator_email_label": "New Chief Investigator email",
-    "new_chief_investigator_email_lower_case_label": "New chief investigator email",
     "new_principal_investigator_email_label": "New Principal Investigator email",
-    "new_principal_investigator_email_lower_case_label": "New principal investigator email",
     "name_label": "Name",
     "sponsor_contact_email_label": "Sponsor contact email",
     "email_label": "Email"
