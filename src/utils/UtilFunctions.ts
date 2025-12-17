@@ -692,7 +692,7 @@ export function normalizeUiText(input: string | null | undefined): string {
     .normalize('NFKC')
     .replaceAll(/[’‘]/g, "'")
     .replaceAll(/[“”]/g, '"')
-    .replaceAll(/\u00A0/g, ' ')
+    .replaceAll(/\u00A0/, ' ')
     .replaceAll(/\s+/g, ' ')
     .trim();
   return s;
