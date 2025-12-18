@@ -1,4 +1,4 @@
-@RegressionReviewAmendments @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @KNOWN_DEFECT_RSP-5184 @fail
+@RegressionReviewAmendments @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
 Feature: Review Amendments- As a studywide reviewer I want to receive and not approve amendments
 
     Background:
@@ -108,7 +108,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and not ap
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
         When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
-        Then I can see the modifications details page in the readonly view
+        Then I can see the modification post submission page
         When I click the 'Continue' link on the 'Modification_Details_Page'
         Then I can see the review outcome section
         When I provide the '<Outcome>' outcome for the modification with '<Outcome_Reason>' reason
@@ -121,5 +121,5 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and not ap
         And I capture the page screenshot
 
         Examples:
-            | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome      | Outcome_Reason | Outcome_Status               |
-            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Not_Approved | Blank          | Modification_Status_Approved |
+            | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome      | Outcome_Reason   | Outcome_Status               |
+            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Not_Approved | Lack_Of_Evidence | Modification_Status_Approved |
