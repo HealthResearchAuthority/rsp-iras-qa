@@ -6,6 +6,7 @@ import CommonItemsPage from '../../Common/CommonItemsPage';
 import * as dbConfigData from '../../../resources/test_data/common/database/db_config_data.json';
 import { connect } from '../../../utils/DbConfig';
 import { IResult } from 'mssql';
+
 //Declare Page Objects
 export default class ProjectOverviewPage {
   readonly page: Page;
@@ -123,16 +124,15 @@ export default class ProjectOverviewPage {
   readonly project_details_tab_planned_project_end_date: Locator;
   readonly tableCell: Locator;
   readonly tableRows: Locator;
-  private _doc_name: string;
-  private _doc_modification_id: string;
-  private _doc_status: string;
-  private _project_rec_id: string;
+  private projectRecordID: string;
+  private modificationRecordID: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.projectOverviewPageTestData = projectOverviewPageTestData;
     this.linkTextData = linkTextData;
+
     //Locators
 
     this.pageHeading = this.page
@@ -492,6 +492,7 @@ export default class ProjectOverviewPage {
     });
     this.version_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.version_project_documents,
+      exact: true,
     });
     this.document_date_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.document_date_project_documents,
@@ -503,6 +504,7 @@ export default class ProjectOverviewPage {
     });
     this.modification_id_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.modification_id_project_documents,
+      exact: true,
     });
     this.table_header = this.page.locator('th');
     this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
@@ -525,30 +527,12 @@ export default class ProjectOverviewPage {
     this.tableRows = this.page.getByRole('table').getByRole('row');
   }
 
-  //Getters & Setters for Private Variables
-  public get doc_name(): string {
-    return this._doc_name;
+  public getProjectRecordID(): string {
+    return this.projectRecordID;
   }
-  public set doc_name(value: string) {
-    this._doc_name = value;
-  }
-  public get doc_status(): string {
-    return this._doc_status;
-  }
-  public set doc_status(value: string) {
-    this._doc_status = value;
-  }
-  public get doc_modification_id(): string {
-    return this._doc_modification_id;
-  }
-  public set doc_modification_id(value: string) {
-    this._doc_modification_id = value;
-  }
-  public get project_rec_id(): string {
-    return this._project_rec_id;
-  }
-  public set project_rec_id(value: string) {
-    this._project_rec_id = value;
+
+  public getModificationRecordID(): string {
+    return this.modificationRecordID;
   }
 
   //Page Methods
@@ -665,14 +649,10 @@ export default class ProjectOverviewPage {
     await this.page.goto(`projectoverview/projectdocuments?projectRecordId=${projectRecordId}&backRoute=app%3AWelcome`);
   }
   async setAllProjectDocumentsValues(sqlQueryResult: IResult<any>): Promise<void> {
-    console.dir(sqlQueryResult);
-    this.project_rec_id = sqlQueryResult.recordset[0].ProjectRecordId;
-    this._doc_status = sqlQueryResult.recordset[0].Status;
-    this._doc_name = sqlQueryResult.recordset[0].FileName;
-    this._doc_modification_id = sqlQueryResult.recordset[0].ModificationIdentifier;
+    this.projectRecordID = sqlQueryResult.recordset[0].ProjectRecordId;
+    this.modificationRecordID = sqlQueryResult.recordset[0].ModificationIdentifier;
   }
 
-  // SQL STATEMENTS //
   async sqlGetProjectDocumentsRecordByStatus(status: string): Promise<void> {
     const sqlConnection = await connect(dbConfigData.Application_Service);
     const queryResult = await sqlConnection.query(

@@ -2079,7 +2079,7 @@ Feature: Create Project
       | page number       | Advanced_Filter_Project_Created_From_Date_Only |
       | next link         | Advanced_Filter_Project_Created_From_Date_Only |
 
-  @rsp-6169 @ModificationDetailsAsEditableFormatWhenTheDocumentStatusComplete 
+  @rsp-6169 @ModificationDetailsAsEditableFormatWhenTheDocumentStatusComplete
   Scenario: Validate the editable modification details page when the modification has a complete status
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -2146,15 +2146,15 @@ Feature: Create Project
     Then I can see the project overview page
     And I capture the page screenshot
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
-    And I can see the 'Project_Documents_Table' ui labels on the project overview page
+    And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the documents status of project overview page with status as 'Complete'
-    And I click on the modification id hyperlink in the project documents tab for complete and incomplete status
+    And I click on the searched modification id
     And I capture the page screenshot
     Then I can see the review all changes page
     And I capture the page screenshot
 
-  @rsp-6169 @ModificationDetailsAsEditableFormatWhenTheDocumentStatusInComplete 
+  @rsp-6169 @ModificationDetailsAsEditableFormatWhenTheDocumentStatusInComplete
   Scenario: Validate the editable modification details page when the modification has a incomplete status
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -2205,20 +2205,20 @@ Feature: Create Project
     And I can see the 'Project_Documents_Table' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the documents status of project overview page with status as 'Incomplete'
-    And I click on the modification id hyperlink in the project documents tab for complete and incomplete status
+    And I click on the searched modification id
     And I capture the page screenshot
     Then I can see the review all changes page
     And I capture the page screenshot
   
   #For the execution of the below scenario, we need data in the database for the 'With sponsor' status
-  @rsp-6169 @verifyDocumentStatusIsWithSponsorFlow 
+  @rsp-6169 @verifyDocumentStatusIsWithSponsorFlow
   Scenario Outline: Validate the read only modification details page when the modification has a with sponsor status
     Given I navigate to a 'With sponsor' project documents tab
     And I capture the page screenshot
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the documents status of project overview page with status as 'With sponsor'
-    And I click on the modification id hyperlink in the project documents tab
+    And I click on the modification id hyperlink in the project documents tab of project overview page
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
@@ -2235,7 +2235,7 @@ Feature: Create Project
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the documents status of project overview page with status as 'Not authorised'
-    And I click on the modification id hyperlink in the project documents tab
+    And I click on the modification id hyperlink in the project documents tab of project overview page
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
@@ -2252,7 +2252,7 @@ Feature: Create Project
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the documents status of project overview page with status as 'With review body'
-    And I click on the modification id hyperlink in the project documents tab
+    And I click on the modification id hyperlink in the project documents tab of project overview page
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
@@ -2269,7 +2269,7 @@ Feature: Create Project
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the documents status of project overview page with status as 'Approved'
-    And I click on the modification id hyperlink in the project documents tab
+    And I click on the modification id hyperlink in the project documents tab of project overview page
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
@@ -2286,7 +2286,7 @@ Feature: Create Project
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I capture the page screenshot
     And I can see the documents status of project overview page with status as 'Not approved'
-    And I click on the modification id hyperlink in the project documents tab
+    And I click on the modification id hyperlink in the project documents tab of project overview page
     Then I can see the modification post submission page
     And I capture the page screenshot
     And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'

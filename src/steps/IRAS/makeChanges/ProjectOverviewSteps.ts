@@ -70,11 +70,11 @@ Then(
 Then(
   'I can see the {string} ui labels on the project overview page',
   async ({ projectOverviewPage, commonItemsPage }, datasetName: string) => {
-    const dataset = projectOverviewPage.projectOverviewPageTestData.Project_Documents_Tab[datasetName];
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        const labelValue = await commonItemsPage.getUiLabel(key, projectOverviewPage);
-        expect(labelValue).toBe(dataset[key]);
+        const labelValue = await commonItemsPage.getInnerLabel(key, projectOverviewPage);
+        expect.soft(labelValue).toBe(dataset[key]);
       }
     }
   }
@@ -82,7 +82,7 @@ Then(
 
 Then('I navigate to a {string} project documents tab', async ({ projectOverviewPage }, status: string) => {
   await projectOverviewPage.sqlGetProjectDocumentsRecordByStatus(status);
-  await projectOverviewPage.goto(projectOverviewPage.project_rec_id);
+  await projectOverviewPage.goto(projectOverviewPage.getProjectRecordID());
   await projectOverviewPage.assertOnProjectOverviewPage();
 });
 
@@ -561,18 +561,19 @@ When(
 );
 
 Then(
-  'I click on the modification id hyperlink in the project documents tab for complete and incomplete status',
-  async ({ modificationsCommonPage, commonItemsPage }) => {
-    const modificationIDExpected = await modificationsCommonPage.getModificationID();
-    await commonItemsPage.govUkLink.getByText(modificationIDExpected).click();
-    await modificationsCommonPage.page.waitForLoadState('domcontentloaded');
+  'I can see the documents status of project overview page with status as {string}',
+  async ({ modificationsCommonPage }, statusExpected: string) => {
+    const statusActual = confirmStringNotNull(
+      await modificationsCommonPage.tableRows.nth(1).getByRole('cell').nth(5).textContent()
+    );
+    expect.soft(statusActual).toBe(statusExpected);
   }
 );
 
 Then(
-  'I click on the modification id hyperlink in the project documents tab',
+  'I click on the modification id hyperlink in the project documents tab of project overview page',
   async ({ projectOverviewPage, commonItemsPage }) => {
-    const modificationIDExpected = projectOverviewPage.doc_modification_id;
+    const modificationIDExpected = projectOverviewPage.getModificationRecordID();
     await commonItemsPage.govUkLink.getByText(modificationIDExpected).first().click();
     await projectOverviewPage.page.waitForLoadState('domcontentloaded');
   }

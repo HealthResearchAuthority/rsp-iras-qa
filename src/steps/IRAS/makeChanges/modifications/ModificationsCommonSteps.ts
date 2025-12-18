@@ -676,12 +676,3 @@ Then('I validate the missing document notification details', async ({ modificati
     )
     .toBeVisible();
 });
-
-Then(
-  'I can see the documents status of project overview page with status as {string}',
-  async ({ modificationsCommonPage }, statusValue: string) => {
-    const modificationRecord = await modificationsCommonPage.getModificationProjectDocumentsPage();
-    const statusActual = modificationRecord.get('statusValue');
-    expect.soft(statusActual[0]).toBe(statusValue);
-  }
-);
