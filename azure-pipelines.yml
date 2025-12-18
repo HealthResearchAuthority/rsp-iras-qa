@@ -30,8 +30,8 @@ parameters:
     type: string
     default: STAutomation
     values:
-      - STAutomation
-      - PreProd
+      - System test
+      - Pre production
   - name: browser
     displayName: Select browser (only for desktop)
     type: string
