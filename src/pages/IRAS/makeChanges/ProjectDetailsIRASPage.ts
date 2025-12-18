@@ -87,7 +87,7 @@ export default class ProjectDetailsIRASPage {
       let currentShortProjectTitle: string | null = null;
       let currentFullProjectTitle: string | null = null;
       try {
-        const csvFilePath = await this.getEnvironmentDetails();
+        const csvFilePath = await this.getEnvironmentFilePath();
         const fileMeta: any = await client.api(`/drives/${sharePointDriveId}/root:/${csvFilePath}:/`).get();
         const etag = fileMeta['@odata.etag'] || fileMeta.eTag;
         const downloadUrl = fileMeta['@microsoft.graph.downloadUrl'];
@@ -158,7 +158,7 @@ export default class ProjectDetailsIRASPage {
     return { foundIRASID, foundShortProjectTitle, foundFullProjectTitle };
   }
 
-  async getEnvironmentDetails() {
+  async getEnvironmentFilePath() {
     let filePath: string;
     if (process.env.ENVIRONMENT === 'PreProd') {
       filePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_PreProd_file_path;
