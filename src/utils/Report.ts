@@ -54,7 +54,7 @@ class MyReporter implements Reporter {
       ],
 
       customData: {
-        title: 'Run Info',
+        title: 'Execution Metrics',
         data: [
           { label: 'Environment', value: 'QA' },
           { label: 'Operating System', value: getOSNameVersion() },
