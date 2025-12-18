@@ -76,7 +76,13 @@ export default class ProjectDetailsIRASPage {
 
   async getValidIRASAndProjectTitlesFromLegacySharepoint() {
     const sharePointDriveId = `${process.env.sharepoint_drive_id}`;
-    const csvFilePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_file_path;
+    let csvFilePath: any;
+    if (process.env.ENVIRONMENT === 'PreProd') {
+      csvFilePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_PreProd_file_path;
+    } else {
+      csvFilePath =
+        this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_STAutomation_file_path;
+    }
     const maxRetries = new CommonItemsPage(this.page).commonTestData.sharepoint_max_retries;
     const client = await getSharpointGraphClient();
     let attempt = 0;

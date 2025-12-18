@@ -25,6 +25,13 @@ parameters:
     values:
       - desktop
       - mobile
+  - name: environment
+    displayName: Select environment for test execution
+    type: string
+    default: STAutomation
+    values:
+      - STAutomation
+      - PreProd
   - name: browser
     displayName: Select browser (only for desktop)
     type: string
