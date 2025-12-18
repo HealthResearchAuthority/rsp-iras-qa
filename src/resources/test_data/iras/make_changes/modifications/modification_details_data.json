@@ -9,6 +9,9 @@
     "review_comment_show": "Show",
     "review_comment_hide": "Hide"
   },
+  "View_Modification_Page": {
+    "heading": "Modification"
+  },
   "Modification_Review_Outcome_Section": {
     "review_comment_heading": "Leave a comment",
     "review_comment_guidance": "If you have any comments on this document add them to the box below. Comments are only visible to other reviewers and are not shared with the applicant.",

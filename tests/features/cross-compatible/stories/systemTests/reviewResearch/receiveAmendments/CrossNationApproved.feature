@@ -99,7 +99,7 @@ Feature: Login as a role which is not same lead nation who created project: sear
         Then I can now see a table of search results for 'modifications received for approval'
         And I 'can' see the modification displayed in the 'Search_Modifications_Page' list with 'Modification_Status_Received' status
         When I click the modification id displayed on the 'Search_Modifications_Page'
-        #Then I can see the modifications details page in the readonly view //This will be uncommented once the page heading story validated.
+        #Then I can see the 'reviewable' modifications page in the readonly view //This will be uncommented once the page heading story validated.
         When I click the 'Continue' link on the 'Modification_Details_Page'
         Then I can see the review outcome section
         When I provide the '<Outcome>' outcome for the modification with '<Outcome_Reason>' reason

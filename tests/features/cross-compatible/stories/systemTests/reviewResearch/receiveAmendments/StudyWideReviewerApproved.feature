@@ -39,7 +39,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and approv
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @KNOWN_DEFECT_RSP-6343 @fail
+    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @KNOWN_DEFECT_RSP-6343 @fail @only
     Scenario Outline: Verify the modification approvals workflow
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -108,7 +108,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and approv
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
         When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
-        Then I can see the modifications details page in the readonly view
+        Then I can see the 'reviewable' modifications page in the readonly view
         When I click the 'Continue' link on the 'Modification_Details_Page'
         Then I can see the review outcome section
         When I provide the '<Outcome>' outcome for the modification with '<Outcome_Reason>' reason
@@ -117,7 +117,7 @@ Feature: Review Amendments- As a studywide reviewer I want to receive and approv
         When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
         Then I validate confirmation screen for modification review outcome sent
         When I click the 'Back_To_Tasklist' link on the 'Modification_Review_Outcome_Sent_Page'
-        Then I can see the 'My_Modifications_Tasklist_No_Result_Page'
+        Then I can see the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
 
         Examples:

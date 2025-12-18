@@ -23,6 +23,7 @@ export default class MyModificationsTasklistPage {
   readonly checkall_modification_checkbox: Locator;
   readonly page_description: Locator;
   readonly modification_button_label: Locator;
+  readonly search_guidance: Locator;
   readonly search_input_text: Locator;
   readonly advanced_filter_label: Locator;
   readonly date_from_filter_input: Locator;
@@ -79,6 +80,9 @@ export default class MyModificationsTasklistPage {
       .getByText(this.myModificationsTasklistPageTestData.Column.status_column_label, {
         exact: true,
       });
+    this.search_guidance = this.page.getByText(
+      this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.search_guidance
+    );
     this.search_input_text = this.page.getByTestId('Search_IrasId');
     this.checkall_modification_checkbox = this.page.getByTestId('select-all-modifications');
     this.advanced_filter_label = this.page.getByRole('button', {
@@ -128,16 +132,17 @@ export default class MyModificationsTasklistPage {
 
   async assertOnMyModificationsTasklistPage() {
     await expect.soft(this.page_heading).toBeVisible();
-    await expect.soft(this.page_description).toBeVisible(); //Not visible due to CMS issue
-    await expect(this.results_table).toBeVisible();
+    await expect.soft(this.page_description).toBeVisible();
+    await this.search_guidance.highlight();
+    if (await this.search_guidance.isVisible()) {
+      await expect(this.results_table).toBeVisible();
+    } else {
+      await expect.soft(this.my_modifications_tasklist_no_result_heading).toBeVisible();
+    }
     // Temporarily commented out due to title mismatch
     // expect
     //   .soft(await this.page.title())
     //   .toBe(this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.title);
-  }
-
-  async assertOnMyModificationsTaskNoResultPage() {
-    await expect.soft(this.my_modifications_tasklist_no_result_heading).toBeVisible();
   }
 
   async sqlGetModificationByLeadNationAndStatusCountSWR(

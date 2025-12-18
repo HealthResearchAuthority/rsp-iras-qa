@@ -10,6 +10,7 @@ export default class ModificationsDetailsPage {
   readonly linkTextData: typeof linkTextData;
   readonly buttonTextData: typeof buttonTextData;
   readonly pageHeading: Locator;
+  readonly viewModificationHeading: Locator;
   readonly removeModificationPageHeading: Locator;
   readonly removeModificationSuccessMessageText: Locator;
   readonly modificationUnfinishedErrorPageHeading: Locator;
@@ -54,6 +55,10 @@ export default class ModificationsDetailsPage {
     this.pageHeading = this.page.getByRole('heading', {
       name: modificationsDetailsPageTestData.Modification_Details_Page.heading,
     });
+    this.viewModificationHeading = this.page.getByRole('heading', {
+      name: modificationsDetailsPageTestData.View_Modification_Page.heading,
+      exact: true,
+    });
     this.removeModificationPageHeading = this.page.getByRole('heading', {
       name: modificationsDetailsPageTestData.Remove_Modifications_Page.heading,
     });
@@ -85,16 +90,16 @@ export default class ModificationsDetailsPage {
     this.change_link = this.page.getByRole('link').getByText(this.linkTextData.Modification_Details_Page.Change);
     this.tab_links_container = this.page.getByTestId('main-content').locator('.govuk-service-navigation__list');
     this.sponsor_details_link = this.tab_links_container
-      .getByRole('listitem')
+      .locator('label')
       .getByText(this.linkTextData.Modification_Details_Page.Sponsor_Details);
     this.modification_details_link = this.tab_links_container
-      .getByRole('listitem')
+      .locator('label')
       .getByText(this.linkTextData.Modification_Details_Page.Modification_Details);
     this.documents_link = this.tab_links_container
-      .getByRole('listitem')
+      .locator('label')
       .getByText(this.linkTextData.Modification_Details_Page.Documents);
     this.history_link = this.tab_links_container
-      .getByRole('listitem')
+      .locator('label')
       .getByText(this.linkTextData.Modification_Details_Page.History);
     this.next_steps_heading = this.page
       .locator('.govuk-heading-m')
@@ -145,6 +150,10 @@ export default class ModificationsDetailsPage {
   //Page Methods
   async assertOnModificationsDetailsPage() {
     await expect.soft(this.pageHeading).toBeVisible();
+  }
+
+  async assertOnModificationsPage() {
+    await expect.soft(this.viewModificationHeading).toBeVisible();
   }
 
   async assertOnRemoveModificationsPage() {
