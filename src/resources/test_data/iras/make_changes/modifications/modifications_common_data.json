@@ -21,7 +21,7 @@
     "review_type_review_required": "Review required",
     "review_type_no_review_required": "No review required",
     "changes_free_textbox_label": "Enter details here describing this change",
-    "overall_modification_ranking_label": "Overall modification ranking",
+    "overall_modification_ranking_label": "Summary details",
     "ranking_label": "Ranking",
     "changes_label": "Changes",
     "change_label": "Change",
@@ -42,6 +42,10 @@
     "new_site": [
       "Addition of sites undertaking the same activities as existing sites",
       "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
+    ],
+    "nhs_applicability_always_c": [
+      "GDPR wording - Unaccepted alternative wording used",
+      "Other minor change to project management"
     ],
     "nhs_applicability_always_c": [
       "GDPR wording - Unaccepted alternative wording used",
@@ -79,7 +83,7 @@
     "first_name_label": "First name",
     "last_name_label": "Last name",
     "new_chief_investigator_email_label": "New Chief Investigator email",
-    "new_principal_investigator_email_label": "New Principal Investigator email",
+    "new_principal_investigator_email_label": "New principal investigator email",
     "name_label": "Name",
     "sponsor_contact_email_label": "Sponsor contact email",
     "email_label": "Email"

@@ -40,6 +40,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
     @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
+    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
     Scenario Outline: Validate that sponsor can action to not authorise the reviewable modifications
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -162,7 +163,7 @@ Feature: This feature covers scenarios related to sponsor not authorised modific
             | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
             | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
-    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP-6470 @fail
+    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised
     Scenario Outline: Validate that sponsor can action to not authorise the non reviewable modifications
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
