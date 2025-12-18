@@ -28,7 +28,7 @@ parameters:
   - name: environment
     displayName: Select environment for test execution
     type: string
-    default: STAutomation
+    default: System test
     values:
       - System test
       - Pre production
