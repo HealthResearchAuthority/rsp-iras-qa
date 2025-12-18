@@ -11,7 +11,6 @@ export default class ProjectPersonnelChangeChiefInvestigatorPage {
   readonly name_text: Locator;
   readonly first_name_text: Locator;
   readonly last_name_text: Locator;
-  readonly chief_investigator_temporary_arrangement_email_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -24,6 +23,7 @@ export default class ProjectPersonnelChangeChiefInvestigatorPage {
     this.chief_investigator_email_text = this.page
       .getByTestId('IQA0311_Text')
       .or(this.page.getByTestId('IQA0319_Text'));
+
     this.first_name_text = this.page
       .getByText(this.projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.first_name_label, {
         exact: true,

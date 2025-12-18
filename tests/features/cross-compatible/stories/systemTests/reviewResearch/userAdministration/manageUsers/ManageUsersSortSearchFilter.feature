@@ -1,4 +1,4 @@
-@RegressionManageUsersSortSearchFilter @RegressionManageUsers @SysAdminUser @Regression @BackStage
+@RegressionManageUsersSortSearchFilter @RegressionManageUsers @SysAdminUser @BackStage
 Feature: Manage Users- Sort
 
   Background:
