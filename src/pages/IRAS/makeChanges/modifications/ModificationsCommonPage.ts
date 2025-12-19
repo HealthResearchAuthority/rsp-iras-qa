@@ -28,6 +28,7 @@ export default class ModificationsCommonPage {
   readonly changes_modification_type: Locator;
   readonly changes_free_text_summary_error: Locator;
   readonly overall_modification_ranking_sub_heading: Locator;
+  readonly overall_modification_summary_heading: Locator;
   readonly changes_sub_heading: Locator;
   readonly ranking_sub_heading: Locator;
   readonly allChangeCards: Locator;
@@ -83,6 +84,9 @@ export default class ModificationsCommonPage {
     this.modificationStatusLabel = this.page.locator('h2 strong');
     this.overall_modification_ranking_sub_heading = this.pageHeading.getByText(
       modificationsCommonPageTestData.Label_Texts.overall_modification_ranking_label
+    );
+    this.overall_modification_summary_heading = this.page.getByText(
+      modificationsCommonPageTestData.Label_Texts.overall_modification_summary_label
     );
     this.ranking_sub_heading = this.pageHeading
       .getByText(modificationsCommonPageTestData.Label_Texts.ranking_label)
