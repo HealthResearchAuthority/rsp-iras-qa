@@ -1460,7 +1460,9 @@ Feature: Create Project
 
   @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050
   Scenario Outline: Validate the expected data is available and displayed on the project overview page
-    And I navigate to the project overview page of the '<Project_Name>' project
+    When I enter 'existing iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
     And I capture the page screenshot
     And I can see the 'existing' project details on project overview page for '<Project_Name>'
     And I can see the project status for '<Project_Name>' displayed on the project overview page
@@ -2228,7 +2230,7 @@ Feature: Create Project
     And I capture the page screenshot
    
   #For the execution of the below scenario, we need data in the database for the 'Not authorised' status
-  @rsp-6169 @verifyDocumentStatusIsNotAuthorisedFlow 
+  @rsp-6169 @verifyDocumentStatusIsNotAuthorisedFlow
   Scenario Outline: Validate the read only modification details page when the modification has a not authorised status
     Given I navigate to a 'Not authorised' project documents tab
     And I capture the page screenshot
@@ -2245,7 +2247,7 @@ Feature: Create Project
     And I capture the page screenshot
  
   #For the execution of the below scenario, we need data in the database for the 'With review body' status
-  @rsp-6169 @verifyDocumentStatusIsWithReviewBodyFlow  
+  @rsp-6169 @verifyDocumentStatusIsWithReviewBodyFlow
   Scenario Outline: Validate the read only modification details page when the modification has a with review body status
     Given I navigate to a 'With review body' project documents tab
     And I capture the page screenshot
@@ -2262,7 +2264,7 @@ Feature: Create Project
     And I capture the page screenshot
   
   #For the execution of the below scenario, we need data in the database for the 'Approved' status
-  @rsp-6169 @verifyDocumentStatusIsApprovedFlow 
+  @rsp-6169 @verifyDocumentStatusIsApprovedFlow
   Scenario Outline: Validate the read only modification details page when the modification has a approved status
     Given I navigate to a 'Approved' project documents tab
     And I capture the page screenshot
@@ -2279,7 +2281,7 @@ Feature: Create Project
     And I capture the page screenshot
  
   #For the execution of the below scenario, we need data in the database for the 'Not approved' status
-  @rsp-6169 @verifyDocumentStatusIsNotApprovedFlow 
+  @rsp-6169 @verifyDocumentStatusIsNotApprovedFlow
   Scenario Outline: Validate the read only modification details page when the modification has a not approved status
     Given I navigate to a 'Not approved' project documents tab
     And I capture the page screenshot

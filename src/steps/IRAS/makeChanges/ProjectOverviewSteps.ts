@@ -14,14 +14,6 @@ Then('I can see the project overview page', async ({ projectOverviewPage }) => {
 });
 
 Then(
-  'I navigate to the project overview page of the {string} project',
-  async ({ projectOverviewPage }, projectName: string) => {
-    await projectOverviewPage.gotoSpecificProjectPage(projectName);
-    await projectOverviewPage.assertOnProjectOverviewPage();
-  }
-);
-
-Then(
   'I can see the {string} project details on project overview page for {string}',
   async ({ projectDetailsIRASPage, projectOverviewPage }, projectType: string, datasetName: string) => {
     let expectedIrasId: string;

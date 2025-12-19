@@ -62,5 +62,9 @@
   },
   "IRAS_ID_Not_In_HARP": {
     "iras_id_text": "3467856"
+  },
+  "Existing_IRAS_ID": {
+    "iras_id_text": "222827",
+    "short_project_title_text": "Salford Primary Care Workforce Study"
   }
 }

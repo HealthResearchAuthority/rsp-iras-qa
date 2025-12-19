@@ -154,7 +154,7 @@ export default class ProjectOverviewPage {
     this.modification_saved_success_message_text = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
-    this.delete_modification_success_message_text = this.page.locator('.govuk-notification-banner__heading');
+    this.delete_modification_success_message_text = this.page.locator('#govuk-notification-banner-message');
     this.project_overview_heading = this.page.locator('.govuk-inset-text');
     this.project_team_heading = this.page.getByText(
       this.projectOverviewPageTestData.Project_Overview_Page.project_team_heading
@@ -538,10 +538,6 @@ export default class ProjectOverviewPage {
   //Page Methods
   async assertOnProjectOverviewPage() {
     await expect.soft(this.pageHeading).toBeVisible();
-  }
-
-  async gotoSpecificProjectPage(projectName: string) {
-    await this.page.goto(this.projectOverviewPageTestData.Project_URL[projectName]);
   }
 
   async getStatus(row: any) {
