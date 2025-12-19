@@ -1,5 +1,5 @@
 async function globalSetup() {
-  if (process.env.ENVIRONMENT === 'PreProd') {
+  if (process.env.ENVIRONMENT.toLowerCase() === 'preprod') {
     process.env.BASE_URL = 'https://fd-rsp-applications-preprod-uks-f6esbkgtfncwc4gf.a03.azurefd.net/';
   } else {
     // STAutomation URL

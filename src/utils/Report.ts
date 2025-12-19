@@ -18,10 +18,10 @@ import {
 class MyReporter implements Reporter {
   async onEnd(result: FullResult) {
     let environmentValue: any;
-    if (process.env.ENVIRONMENT === 'PreProd') {
-      environmentValue = 'Pre Production';
+    if (process.env.ENVIRONMENT.toLowerCase() === 'PreProd') {
+      environmentValue = 'Pre-production';
     } else {
-      environmentValue = 'System Test';
+      environmentValue = 'System Test - Automation';
     }
     const endTime = new Date().toLocaleString();
     const reportFolderName = getReportFolderName();
