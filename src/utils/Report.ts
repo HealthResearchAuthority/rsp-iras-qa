@@ -17,6 +17,12 @@ import {
 
 class MyReporter implements Reporter {
   async onEnd(result: FullResult) {
+    let environmentValue: any;
+    if (process.env.ENVIRONMENT.toLowerCase() === 'preprod') {
+      environmentValue = 'Pre-production';
+    } else {
+      environmentValue = 'System Test - Automation';
+    }
     const endTime = new Date().toLocaleString();
     const reportFolderName = getReportFolderName();
     const jsonDir = `./test-reports/${reportFolderName}/cucumber/json/`;
@@ -56,7 +62,7 @@ class MyReporter implements Reporter {
       customData: {
         title: 'Execution Metrics',
         data: [
-          { label: 'Environment', value: 'QA' },
+          { label: 'Environment', value: environmentValue },
           { label: 'Operating System', value: getOSNameVersion() },
           { label: 'Known Defect Failures - Pending', value: knownDefectFailCount },
           {
