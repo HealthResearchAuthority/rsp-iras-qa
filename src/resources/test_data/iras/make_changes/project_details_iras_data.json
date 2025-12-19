@@ -1,7 +1,7 @@
 {
   "Project_Details_IRAS_Page": {
     "heading": "Project identifiers",
-    "legacy_iras_lookup_STAutomation_file_path": "/Input Test Data/Automation/IRAS_Test_Data.csv",
+    "legacy_iras_lookup_STAutomation_file_path": "/Input Test Data/Automation/STAutomation_IRAS_Test_Data.csv",
     "legacy_iras_lookup_PreProd_file_path": "/Input Test Data/Automation/PreProd_IRAS_Test_Data.csv"
   },
   "IRAS_ID_Error_Page": {
