@@ -18,7 +18,7 @@ import {
 class MyReporter implements Reporter {
   async onEnd(result: FullResult) {
     let environmentValue: any;
-    if (process.env.ENVIRONMENT.toLowerCase() === 'PreProd') {
+    if (process.env.ENVIRONMENT.toLowerCase() === 'preprod') {
       environmentValue = 'Pre-production';
     } else {
       environmentValue = 'System Test - Automation';

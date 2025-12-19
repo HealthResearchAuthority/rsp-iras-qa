@@ -160,7 +160,7 @@ export default class ProjectDetailsIRASPage {
 
   async getEnvironmentFilePath() {
     let filePath: string;
-    if (process.env.ENVIRONMENT === 'PreProd') {
+    if (process.env.ENVIRONMENT.toLowerCase() === 'preprod') {
       filePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_PreProd_file_path;
     } else {
       filePath =

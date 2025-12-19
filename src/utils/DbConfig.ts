@@ -3,7 +3,7 @@ import { getDecryptedValue, resolveEnvExpression } from './UtilFunctions';
 import * as loginPageTestData from '../resources/test_data/common/login_page_data.json';
 
 let server: any;
-if (process.env.ENVIRONMENT === 'PreProd') {
+if (process.env.ENVIRONMENT.toLowerCase() === 'preprod') {
   server = 'rspsqlserverpreprod.database.windows.net';
 } else {
   //STAutomation DB server
