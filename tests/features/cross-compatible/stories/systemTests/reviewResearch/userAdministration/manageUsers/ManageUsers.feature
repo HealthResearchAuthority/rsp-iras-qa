@@ -144,7 +144,7 @@ Feature: User Administration: Create and edit manage users
             | Add_User_Profile                                   | Add_Another_User_Profile                                   |
             | Valid_Data_In_All_Fields_Role_System_Administrator | Valid_Data_In_All_Fields_Role_System_Administrator_Another |
 
-    @RegressionTestUnassignUserRoles @fail @KNOWN-DEFECT-RSP-5927
+    @RegressionTestUnassignUserRoles
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
         Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Add_User_Profile>'
