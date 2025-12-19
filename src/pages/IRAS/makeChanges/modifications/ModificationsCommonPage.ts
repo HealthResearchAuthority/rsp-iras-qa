@@ -88,7 +88,7 @@ export default class ModificationsCommonPage {
       .getByText(modificationsCommonPageTestData.Label_Texts.ranking_label)
       .first();
     this.changes_sub_heading = this.pageHeading.getByText(modificationsCommonPageTestData.Label_Texts.changes_label);
-    this.allChangeCards = this.page.locator('.govuk-summary-card');
+    this.allChangeCards = this.page.locator('.govuk-summary-card:visible');
     this.allModificationTypeKeys = this.page.locator('dt.govuk-summary-list__key').filter({
       hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label,
     });
