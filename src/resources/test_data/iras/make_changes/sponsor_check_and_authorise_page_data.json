@@ -1,10 +1,10 @@
 {
   "Sponsor_Check_And_Authorise_Page": {
     "pageHeading": "Check and authorise",
-    "overallModificationRankingHeading": "Overall modification ranking",
+    "overallModificationRankingHeading": "Summary details",
     "overallModificationRankingSubHeading": "Ranking",
     "outcomeHeading": "Outcome",
-    "outcomeBody": "When you've finished checking the modification, select an outcome. Selecting 'Authorise' will authorise and submit the modification. If you select 'Not authorised' the researcher will need to prepare a new modification if changes are still required"
+    "outcomeBody": "When you've finished checking the modification, select an outcome. Selecting 'Authorised' will authorise and submit the modification. If you select 'Not authorised' the researcher will need to prepare a new modification if changes are still required."
   },
 
   "Summary_Only_Error_Select_Outcome": {

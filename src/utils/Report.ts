@@ -41,7 +41,17 @@ class MyReporter implements Reporter {
       pageTitle: 'Multiple Cucumber HTML reporter',
       reportName: 'Plan and Manage Health and Care Research - Automation Test Report - Playwright',
       displayDuration: true,
-      pageFooter: '<div><p></p></div>',
+      pageFooter: `
+      <div><p></p></div>
+      <style>
+      /* Hide the entire Features card */
+      .x_panel:has(#feature-chart),
+      .col-md-6.col-lg-4.col-xs-12:has(#feature-chart),
+      td.chart:has(#feature-chart) {
+        display: none !important;
+      }
+      </style>
+   `,
       customMetadata: true,
       metadata: [
         { name: 'Device Type', value: `${deviceTypeVal}` },
@@ -50,7 +60,7 @@ class MyReporter implements Reporter {
       ],
 
       customData: {
-        title: 'Run Info',
+        title: 'Execution Metrics',
         data: [
           { label: 'Environment', value: environmentValue },
           { label: 'Operating System', value: getOSNameVersion() },
