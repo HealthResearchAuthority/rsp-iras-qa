@@ -54,7 +54,9 @@ export default class SponsorReferencePage {
       .getByRole('textbox');
     this.sponsor_modification_date_hint_label = this.page.getByTestId('Questions[1]_AnswerText-hint').locator('p');
     this.sponsor_modification_date_label = this.page.getByTestId('Questions[1].AnswerText').locator('legend').first();
-    this.characters_remaining_label = this.page.locator('div[aria-hidden="true"].govuk-character-count__message');
+    this.characters_remaining_label = this.page.locator(
+      '.govuk-character-count__message.govuk-character-count__status'
+    );
   }
 
   //Page Methods
