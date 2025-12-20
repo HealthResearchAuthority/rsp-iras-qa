@@ -25,6 +25,13 @@ parameters:
     values:
       - desktop
       - mobile
+  - name: environment
+    displayName: Select environment
+    type: string
+    default: System Test - Automation
+    values:
+      - System Test - Automation
+      - Pre-production
   - name: browser
     displayName: Select browser (only for desktop)
     type: string
