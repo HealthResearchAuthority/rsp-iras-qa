@@ -122,7 +122,7 @@ export default class ModificationsCommonPage {
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
       .locator('..')
-      .locator('[class$="value"]');
+      .locator('a');
     this.modification_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)

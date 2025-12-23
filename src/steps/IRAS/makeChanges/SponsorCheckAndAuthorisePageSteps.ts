@@ -146,7 +146,9 @@ Then(
         actualData['specific_change_dropdown'] = actualPlannedEndDate;
       } else if (
         keysString.toLowerCase().includes('select_details_to_change_radio') ||
-        keysString.toLowerCase().includes('select_contact_details_to_change_radio')
+        keysString.toLowerCase().includes('select_contact_details_to_change_radio') ||
+        keysString.toLowerCase().includes('project_reference_numbers_radio') ||
+        keysString.toLowerCase().includes('title_radio')
       ) {
         actualData['specific_change_dropdown'] = expectedData['specific_change_dropdown'];
       }
