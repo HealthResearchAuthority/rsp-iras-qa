@@ -84,7 +84,8 @@
     "Delete_Modification": "Delete modification",
     "Delete_Documents": "Delete documents",
     "Delete_Document": "Delete document",
-    "Return_To_Authorisations": "Return to authorisations"
+    "Return_To_Authorisations": "Return to authorisations",
+    "Disable": "Disable"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"

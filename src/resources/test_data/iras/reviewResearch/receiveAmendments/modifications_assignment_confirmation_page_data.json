@@ -1,8 +1,8 @@
 {
   "Modifications_Assignment_Confirmation_Page": {
     "selected_tab_top": "Modifications",
-    "confirmation_message": "Modifications have been successfully assigned",
-    "consent": " will be notified that they have been assigned modifications",
+    "confirmation_message": "Modifications assigned",
+    "consent": "The modifications are now available for ",
     "back_to_task_list_link": "Back to Tasklist",
     "back_to_dashboard_link": "Back to Dashboard"
   }
