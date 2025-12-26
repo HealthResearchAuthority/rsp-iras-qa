@@ -76,7 +76,6 @@ export default class ProjectDetailsIRASPage {
 
   async getValidIRASAndProjectTitlesFromLegacySharepoint() {
     const sharePointDriveId = `${process.env.sharepoint_drive_id}`;
-    const csvFilePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_file_path;
     const maxRetries = new CommonItemsPage(this.page).commonTestData.sharepoint_max_retries;
     const client = await getSharpointGraphClient();
     let attempt = 0;
@@ -88,6 +87,7 @@ export default class ProjectDetailsIRASPage {
       let currentShortProjectTitle: string | null = null;
       let currentFullProjectTitle: string | null = null;
       try {
+        const csvFilePath = await this.getEnvironmentFilePath();
         const fileMeta: any = await client.api(`/drives/${sharePointDriveId}/root:/${csvFilePath}:/`).get();
         const etag = fileMeta['@odata.etag'] || fileMeta.eTag;
         const downloadUrl = fileMeta['@microsoft.graph.downloadUrl'];
@@ -156,5 +156,16 @@ export default class ProjectDetailsIRASPage {
       }
     }
     return { foundIRASID, foundShortProjectTitle, foundFullProjectTitle };
+  }
+
+  async getEnvironmentFilePath() {
+    let filePath: string;
+    if (process.env.ENVIRONMENT.toLowerCase() === 'preprod') {
+      filePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_PreProd_file_path;
+    } else {
+      filePath =
+        this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_STAutomation_file_path;
+    }
+    return filePath;
   }
 }

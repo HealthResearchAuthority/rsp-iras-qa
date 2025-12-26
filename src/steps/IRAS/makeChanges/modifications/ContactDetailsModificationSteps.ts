@@ -13,12 +13,7 @@ Then(
       await commonItemsPage.fillUIComponent(dataset, radioKey, contactDetailsModificationPage);
       await commonItemsPage.clickButton('Modifications_Page', clickAction);
     }
-    const contactKeys = [
-      'chief_investigator_email_text',
-      'sponsor_contact_email_text',
-      'contact_name_text',
-      'contact_email_text',
-    ];
+    const contactKeys = ['chief_investigator_email_text', 'sponsor_contact_email_text', 'name_text', 'email_text'];
     for (const key of contactKeys) {
       if (dataset[key]) {
         await commonItemsPage.fillUIComponent(dataset, key, contactDetailsModificationPage);
@@ -122,11 +117,11 @@ Then(
               .toBeVisible();
             break;
           }
-          case 'contact_name_text': {
+          case 'name_text': {
             await expect.soft(modificationReviewChangesPage.name_text_value.getByText(dataset[key])).toBeVisible();
             break;
           }
-          case 'contact_email_text': {
+          case 'email_text': {
             await expect.soft(modificationReviewChangesPage.email_text_value.getByText(dataset[key])).toBeVisible();
             break;
           }

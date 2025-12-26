@@ -6,8 +6,8 @@
     "project_details_heading": "Project details",
     "project_details_hint_label": "View and edit key information about this project.",
     "modification_saved_success_message_header_text": "Success",
-    "modification_saved_success_message_text": "Modification progress successfully saved",
-    "delete_modification_success_message_text": "Modification {{modificationNumber}} has been successfully deleted",
+    "modification_saved_success_message_text": "Modification progress saved",
+    "delete_modification_success_message_text": "Modification {{modificationNumber}} has been deleted",
     "project_overview_irasid_header": "IRAS ID:",
     "project_overview_shorttitle_header": "Short project title:",
     "project_details_irasid": "IRAS ID",
@@ -25,10 +25,6 @@
     "event_description_project_draft": "Project record draft started",
     "event_description_project_created": "Project record created",
     "audit_modification_id": "Not applicable"
-  },
-  "Project_URL": {
-    "Test_Project": "projectoverview/projectdetails?projectRecordId=20251211164907",
-    "Salford_Primary_Care_Workforce_Study": "projectoverview/projectdetails?projectRecordId=20251211164907"
   },
   "Modification_Status_Draft": {
     "status": "Draft"

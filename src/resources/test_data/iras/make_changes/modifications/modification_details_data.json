@@ -30,7 +30,7 @@
   },
   "Remove_Modifications_Page": {
     "heading": "Are you sure you want to remove Change to planned end date?",
-    "remove_modification_success_message": "Change to planned end date has been successfully removed"
+    "remove_modification_success_message": "Change to planned end date has been removed"
   },
   "Modification_Details_Label_Texts": {
     "supporting_documents_label": "Supporting documents",

@@ -819,12 +819,21 @@ When(
       case 'automation sponsor email':
         searchValue = loginPage.loginPageTestData.Sponsor_User.username;
         break;
+      case 'system admin email':
+        searchValue = loginPage.loginPageTestData.System_Admin.username;
+        break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
         break;
       case 'new iras id':
       case 'iras id':
         searchValue = await projectDetailsIRASPage.getUniqueIrasId();
+        break;
+      case 'existing iras id':
+        searchValue = projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID.iras_id_text;
+        projectDetailsIRASPage.setShortProjectTitle(
+          projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID.short_project_title_text
+        );
         break;
       case 'short project title':
         searchValue = await projectDetailsIRASPage.getShortProjectTitle();

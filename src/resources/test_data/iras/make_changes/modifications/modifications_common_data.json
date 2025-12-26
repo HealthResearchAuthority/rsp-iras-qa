@@ -21,7 +21,7 @@
     "review_type_review_required": "Review required",
     "review_type_no_review_required": "No review required",
     "changes_free_textbox_label": "Enter details here describing this change",
-    "overall_modification_ranking_label": "Overall modification ranking",
+    "overall_modification_ranking_label": "Summary details",
     "ranking_label": "Ranking",
     "changes_label": "Changes",
     "change_label": "Change",
@@ -42,6 +42,14 @@
     "new_site": [
       "Addition of sites undertaking the same activities as existing sites",
       "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
+    ],
+    "nhs_applicability_always_c": [
+      "GDPR wording - Unaccepted alternative wording used",
+      "Other minor change to project management"
+    ],
+    "nhs_applicability_always_c": [
+      "GDPR wording - Unaccepted alternative wording used",
+      "Other minor change to project management"
     ]
   },
   "Audit_History_Events": {
@@ -71,7 +79,14 @@
     "what_other_is_label": "What ‘other’ is",
     "new_short_project_title_label": "New short project title",
     "new_full_project_title_label": "New full project title",
-    "which_titles_do_you_need_to_change_label": "Which titles do you need to change?"
+    "which_titles_do_you_need_to_change_label": "Which titles do you need to change?",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "new_chief_investigator_email_label": "New Chief Investigator email",
+    "new_principal_investigator_email_label": "New principal investigator email",
+    "name_label": "Name",
+    "sponsor_contact_email_label": "Sponsor contact email",
+    "email_label": "Email"
   },
   "Modifications_To_Add_Free_Text": [
     "Other significant change to participant procedures",
@@ -227,11 +242,11 @@
     },
     "Project_Personnel_Chief_Investigator_Page": {
       "page_header": "Change of Chief Investigator",
-      "page_component_label": "New chief investigator email"
+      "page_component_label": "New Chief Investigator email"
     },
     "Project_Personnel_Temporary_Arrangement_Page": {
       "page_header": "Change of Chief Investigator",
-      "page_component_label": "New chief investigator email"
+      "page_component_label": "New Chief Investigator email"
     },
     "Project_Personnel_Principal_Investigator_Select_Change_Page": {
       "page_header": "Change of Principal Investigator",
@@ -739,13 +754,13 @@
     "Chief_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Chief Investigator: conflict of interest",
-      "changes_free_text": "This is a free text change for Chief investigator: conflict of interest",
+      "changes_free_text": "This is a free text change for Chief Investigator: conflict of interest",
       "change_status": "Change ready for submission"
     },
     "Principal_Investigator_Conflict_Of_Interest": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Principal Investigator: conflict of interest",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text change for Principal Investigator: conflict of interest",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -767,7 +782,7 @@
     "Change_To_Background_Information_That_Affects_Scientific_Value_Of_The_Project": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Change to background information that affects scientific value of the project",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text change for Change to background information that affects scientific value of the project",
       "which_organisation_change_affect_checkbox": ["NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -777,7 +792,7 @@
     "Change_To_The_Endpoint_Or_The_Main_Objective": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Change to the endpoint or the main objective",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text Change to the endpoint or the main objective",
       "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
       "where_organisation_change_affect_non_nhs_question_checkbox": [
         "England",
@@ -790,7 +805,7 @@
     "Change_To_The_Inclusion_Or_Exclusion_Criteria_Non_Significant": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Change to the inclusion or exclusion criteria: non-significant",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text change for Change to the inclusion or exclusion criteria: non-significant",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -806,7 +821,7 @@
     "Additional_Or_New_Control_Group_placebo_Or_Arm_To_The_Project": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Additional or new control group (placebo) or arm to the project",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text change for Additional or new control group (placebo) or arm to the project",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -822,7 +837,7 @@
     "Other_Non_Significant_Change_To_The_Project_Design": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Other non-significant change to the project design",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text change for Other non-significant change to the project design",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -838,7 +853,7 @@
     "Change_To_The_Participant_Sample_Size_Non_Significant_Change": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Change to the participant sample size: non-significant change",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text change for Change to the participant sample size: non-significant change",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -884,7 +899,7 @@
     "Changes_To_Funding_Arrangements_Such_As_Payments_Benefits_Or_Incentives_To_Be_Received_By_Participants": {
       "area_of_change_dropdown": "Project management",
       "specific_change_dropdown": "Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text change for Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -906,7 +921,7 @@
     "Participant_Procedures_Non_Significant_Change": {
       "area_of_change_dropdown": "Participant procedures",
       "specific_change_dropdown": "Participant procedures: non-significant change",
-      "changes_free_text": "This is a free text change for Other significant change to participant procedures.",
+      "changes_free_text": "This is a free text change for Participant procedures: non-significant change",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -983,8 +998,8 @@
       "area_of_change_dropdown": "Administrative details for the project",
       "specific_change_dropdown": "Contact details",
       "select_contact_details_to_change_radio": "Other",
-      "contact_name_text": "New modified contact name",
-      "contact_email_text": "other_contact_test_modified@test.com",
+      "name_text": "New modified contact name",
+      "email_text": "other_contact_test_modified@test.com",
       "change_status": "Change ready for submission"
     }
   },
