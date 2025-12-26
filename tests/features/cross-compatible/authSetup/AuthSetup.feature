@@ -23,3 +23,4 @@ Feature: Authenticate Test Users once only, before test run
                   | Workflow_Coordinator_S  | Home_Page |
                   | Workflow_Coordinator_W  | Home_Page |
                   | Sponsor_User            | Home_Page |
+                  | Sponsor_Org_Admin_User  | Home_Page |
