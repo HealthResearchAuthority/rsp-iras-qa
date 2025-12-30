@@ -1460,7 +1460,9 @@ Feature: Create Project
 
   @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050
   Scenario Outline: Validate the expected data is available and displayed on the project overview page
-    And I navigate to the project overview page of the '<Project_Name>' project
+    When I enter 'existing iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
     And I capture the page screenshot
     And I can see the 'existing' project details on project overview page for '<Project_Name>'
     And I can see the project status for '<Project_Name>' displayed on the project overview page
@@ -2078,3 +2080,219 @@ Feature: Create Project
       | Navigation_Method | Advanced_Filters                               |
       | page number       | Advanced_Filter_Project_Created_From_Date_Only |
       | next link         | Advanced_Filter_Project_Created_From_Date_Only |
+
+  @rsp-6169 @ModificationDetailsAsEditableFormatWhenTheDocumentStatusComplete
+  Scenario: Validate the editable modification details page when the modification has a complete status
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and '<Research_Locations>' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'PNG_File' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    And I capture the page screenshot
+    And I can see the review your document information page
+    And I capture the page screenshot
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    And the 'Add_Documents' button should be 'available' on the 'Review_All_Changes_Page'
+    Then I click the 'Save_For_Later' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
+    Then I can see the modification progress saved successful message on project overview page
+    Then I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I can see the 'Project_Documents_Tab' ui labels on the project overview page
+    And I capture the page screenshot
+    And I can see the documents status of project overview page with status as 'Complete'
+    And I click on the searched modification id
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And I capture the page screenshot
+
+  @rsp-6169 @ModificationDetailsAsEditableFormatWhenTheDocumentStatusInComplete
+  Scenario: Validate the editable modification details page when the modification has a incomplete status
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and '<Research_Locations>' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I can see the modifications details page
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    Then I can see add supporting documents page
+    And I upload 'PNG_File' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_For_Later' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
+    Then I can see the modification progress saved successful message on project overview page
+    Then I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I can see the 'Project_Documents_Table' ui labels on the project overview page
+    And I capture the page screenshot
+    And I can see the documents status of project overview page with status as 'Incomplete'
+    And I click on the searched modification id
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And I capture the page screenshot
+  
+  #For the execution of the below scenario, we need data in the database for the 'With sponsor' status
+  @rsp-6169 @verifyDocumentStatusIsWithSponsorFlow
+  Scenario Outline: Validate the read only modification details page when the modification has a with sponsor status
+    Given I navigate to a 'With sponsor' project documents tab
+    And I capture the page screenshot
+    And I can see the 'Project_Documents_Tab' ui labels on the project overview page
+    And I capture the page screenshot
+    And I can see the documents status of project overview page with status as 'With sponsor'
+    And I click on the modification id hyperlink in the project documents tab of project overview page
+    Then I can see the modification post submission page
+    And I capture the page screenshot
+    And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
+    And I capture the page screenshot
+   
+  #For the execution of the below scenario, we need data in the database for the 'Not authorised' status
+  @rsp-6169 @verifyDocumentStatusIsNotAuthorisedFlow
+  Scenario Outline: Validate the read only modification details page when the modification has a not authorised status
+    Given I navigate to a 'Not authorised' project documents tab
+    And I capture the page screenshot
+    And I can see the 'Project_Documents_Tab' ui labels on the project overview page
+    And I capture the page screenshot
+    And I can see the documents status of project overview page with status as 'Not authorised'
+    And I click on the modification id hyperlink in the project documents tab of project overview page
+    Then I can see the modification post submission page
+    And I capture the page screenshot
+    And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
+    And I capture the page screenshot
+ 
+  #For the execution of the below scenario, we need data in the database for the 'With review body' status
+  @rsp-6169 @verifyDocumentStatusIsWithReviewBodyFlow
+  Scenario Outline: Validate the read only modification details page when the modification has a with review body status
+    Given I navigate to a 'With review body' project documents tab
+    And I capture the page screenshot
+    And I can see the 'Project_Documents_Tab' ui labels on the project overview page
+    And I capture the page screenshot
+    And I can see the documents status of project overview page with status as 'With review body'
+    And I click on the modification id hyperlink in the project documents tab of project overview page
+    Then I can see the modification post submission page
+    And I capture the page screenshot
+    And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
+    And I capture the page screenshot
+  
+  #For the execution of the below scenario, we need data in the database for the 'Approved' status
+  @rsp-6169 @verifyDocumentStatusIsApprovedFlow
+  Scenario Outline: Validate the read only modification details page when the modification has a approved status
+    Given I navigate to a 'Approved' project documents tab
+    And I capture the page screenshot
+    And I can see the 'Project_Documents_Tab' ui labels on the project overview page
+    And I capture the page screenshot
+    And I can see the documents status of project overview page with status as 'Approved'
+    And I click on the modification id hyperlink in the project documents tab of project overview page
+    Then I can see the modification post submission page
+    And I capture the page screenshot
+    And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
+    And I capture the page screenshot
+ 
+  #For the execution of the below scenario, we need data in the database for the 'Not approved' status
+  @rsp-6169 @verifyDocumentStatusIsNotApprovedFlow
+  Scenario Outline: Validate the read only modification details page when the modification has a not approved status
+    Given I navigate to a 'Not approved' project documents tab
+    And I capture the page screenshot
+    And I can see the 'Project_Documents_Tab' ui labels on the project overview page
+    And I capture the page screenshot
+    And I can see the documents status of project overview page with status as 'Not approved'
+    And I click on the modification id hyperlink in the project documents tab of project overview page
+    Then I can see the modification post submission page
+    And I capture the page screenshot
+    And I click the 'Modification_Details' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
+    And I can see the modification post submission page
+    And I cannot see a 'Change' link on the 'Modification_Details_Page'
+    And I capture the page screenshot

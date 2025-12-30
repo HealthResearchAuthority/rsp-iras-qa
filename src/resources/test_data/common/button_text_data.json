@@ -84,7 +84,8 @@
     "Delete_Modification": "Delete modification",
     "Delete_Documents": "Delete documents",
     "Delete_Document": "Delete document",
-    "Return_To_Authorisations": "Return to authorisations"
+    "Return_To_Authorisations": "Return to authorisations",
+    "Disable": "Disable"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -252,7 +253,7 @@
     "Save_For_Later": "Save for later"
   },
   "Select_Study_Wide_Reviewer_Page": {
-    "Complete_Assignment": "Complete assignment"
+    "Complete_Assignment": "Assign"
   },
   "Add_Document_Details_Modifications_Page": {
     "Save_Continue": "Save and continue",

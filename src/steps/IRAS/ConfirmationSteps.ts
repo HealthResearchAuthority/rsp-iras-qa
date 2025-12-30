@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
-import { confirmStringNotNull } from '../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -247,7 +247,9 @@ Then(
       validationLabelsDataset.page_heading_body_prefix +
       ' ' +
       (await projectDetailsIRASPage.getUniqueIrasId()).toString();
-    const actualSuccessMessage = confirmStringNotNull(await confirmationPage.success_message_body_text.textContent());
+    const actualSuccessMessage = await removeUnwantedWhitespace(
+      await confirmationPage.success_message_body_text.textContent()
+    );
     await expect(confirmationPage.success_message_body_text.getByText(expectedSuccessMessage)).toBeVisible();
     expect(actualSuccessMessage).toBe(expectedSuccessMessage);
   }

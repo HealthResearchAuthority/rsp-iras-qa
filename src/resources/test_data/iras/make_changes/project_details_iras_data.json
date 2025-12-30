@@ -1,7 +1,8 @@
 {
   "Project_Details_IRAS_Page": {
     "heading": "Project identifiers",
-    "legacy_iras_lookup_file_path": "/Input Test Data/Automation/IRAS_Test_Data.csv"
+    "legacy_iras_lookup_STAutomation_file_path": "/Input Test Data/Automation/STAutomation_IRAS_Test_Data.csv",
+    "legacy_iras_lookup_PreProd_file_path": "/Input Test Data/Automation/PreProd_IRAS_Test_Data.csv"
   },
   "IRAS_ID_Error_Page": {
     "project_not_eligible_page_heading": "Your project is not currently eligible to use this service",
@@ -62,5 +63,9 @@
   },
   "IRAS_ID_Not_In_HARP": {
     "iras_id_text": "3467856"
+  },
+  "Existing_IRAS_ID": {
+    "iras_id_text": "222827",
+    "short_project_title_text": "Salford Primary Care Workforce Study"
   }
 }
