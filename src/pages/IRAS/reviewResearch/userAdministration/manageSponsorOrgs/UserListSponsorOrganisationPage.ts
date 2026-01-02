@@ -64,10 +64,14 @@ export default class UserListReviewBodyPage {
     await expect.soft(this.guidance_text).toBeVisible();
     await expect.soft(commonItemsPage.search_box_label).toBeVisible();
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
+      //these labels need to be changed after deployment
+      //await expect.soft(commonItemsPage.name).toBeVisible();
       await expect.soft(commonItemsPage.first_name_label).toBeVisible();
       await expect.soft(commonItemsPage.last_name_label).toBeVisible();
       await expect.soft(commonItemsPage.email_address_label).toBeVisible();
       await expect.soft(commonItemsPage.status_label).toBeVisible();
+      //await expect.soft(commonItemsPage.role).toBeVisible();
+      //await expect.soft(commonItemsPage.authoriser).toBeVisible();
       await expect.soft(commonItemsPage.last_logged_in_label).toBeVisible();
       await expect.soft(commonItemsPage.actions_label).toBeVisible();
     }
