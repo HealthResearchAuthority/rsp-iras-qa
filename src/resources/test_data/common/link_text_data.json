@@ -356,5 +356,8 @@
   "My_Organisations_Page": {
     "View": "View",
     "Manage": "Manage"
+  },  
+  "My_Organisations_Sponsor_Org_Profile_Page": {
+    "Users": "Users"  
   }
 }

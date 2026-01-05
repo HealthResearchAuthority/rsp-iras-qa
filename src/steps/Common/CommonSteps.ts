@@ -311,6 +311,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.removeLink.click();
   } else if (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
+  } else if (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users') {
+    await commonItemsPage.govUkLink.getByText(linkValue).click();
   } else {
     await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
   }
