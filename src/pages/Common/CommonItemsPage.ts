@@ -146,9 +146,12 @@ export default class CommonItemsPage {
   readonly email_address_value_first_row: Locator;
   readonly status_value_first_row: Locator;
   readonly last_name_label: Locator;
+  readonly name_label: Locator;
   readonly email_address_label: Locator;
   readonly status_label: Locator;
   readonly last_logged_in_label: Locator;
+  readonly role_label: Locator;
+  readonly authoriser_label: Locator;
   readonly actions_label: Locator;
   readonly back_to_users_link: Locator;
   readonly success_message_header_text: Locator;
@@ -402,12 +405,25 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.Column_Header_Labels.last_name_label, {
         exact: true,
       });
+    this.name_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.name_label, { exact: true });
     this.email_address_label = this.userListTableRows
       .locator('th')
       .getByText(this.commonTestData.Column_Header_Labels.email_address_label, { exact: true });
     this.status_label = this.userListTableRows
       .locator('th')
       .getByText(this.commonTestData.Column_Header_Labels.status_label, {
+        exact: true,
+      });
+    this.role_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.role_label, {
+        exact: true,
+      });
+    this.authoriser_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.authoriser_label, {
         exact: true,
       });
     this.last_logged_in_label = this.userListTableRows

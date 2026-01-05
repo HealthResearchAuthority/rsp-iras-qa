@@ -5,8 +5,8 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I authorise the rts api using '<RTS_API_Data>'
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
+    When I authorise the rts api using 'RTS_NIHR_FHIR_Config'
+    Then I make a request to the rts api using 'RTS_Active_Sponsor_Organisation_NHS' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
     When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
@@ -22,8 +22,8 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
 
-  @rsp-6422 @MyOrganisationsPageLabelValidation @Run
-  Scenario: Validate that <Login_User> able to navigate to Users page for the selected sponsor organisation'My Organisations' page successfully
+  @rsp-6422 @MyOrganisationsPageLabelValidation
+  Scenario: Validate that <Login_User> able to navigate to Users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -46,14 +46,20 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     # And I can see the sponsor organisation profile page from my organisations
     And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
     And I capture the page screenshot
-    Then I am taken to the Users page for the selected sponsor organisation
+    Then I can see the 'My_Organisations_Users_Page'
+    Then I can see tabs are displayed based on the logged in user role '<Login_User>'
+    And the 'Users' tab is underlined
+    And the 'Add_A_User_Section_Visibility' based on the logged in user role
+    And the 'Action_Column_Visibility' based on the logged in user role
+    And the list is sorted alphabetically by Name in ascending order
+    #  And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'first name' on the 'first' page
 
 
     Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility     | Action_Column_Visibility                  |
+      | Sponsor_User           | automation sponsor email | View   | Add a user section is not visible | Action column shows View as a hyperlink   |
+      | System_Admin           | system admin email       | Manage | Add a user section is visible     | Action column shows Manage as a hyperlink |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Add a user section is visible     | Action column shows Manage as a hyperlink |
 
 #  https://nihr.atlassian.net/browse/RSP-6422
 
@@ -300,6 +306,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 # Then the data on the previous page should be displayed
 
 # And the current page number should be visually highlighted to indicate the active page
+
 
 # https://nihr.atlassian.net/browse/RSP-6461
 

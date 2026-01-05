@@ -64,6 +64,7 @@ When(
       searchProjectsPage,
       projectOverviewPage,
       modificationsReceivedCommonPage,
+      mySponsorOrgUsersPage,
     },
     page: string
   ) => {
@@ -186,6 +187,9 @@ When(
       case 'Modification_Details_Page':
         await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
         break;
+      case 'My_Organisations_Users_Page':
+        await mySponsorOrgUsersPage.assertOnMySponsorOrgUsersPage(commonItemsPage);
+        break;
 
       default:
         throw new Error(`${page} is not a valid option`);
@@ -284,7 +288,7 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 });
 
 Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
-  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  const linkValue = await commonItemsPage.linkTextData[pageKey][linkKey];
   const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
   if (pageKey === 'Progress_Bar') {
     await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
@@ -297,7 +301,7 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     linkKey === 'Back_To_Users'
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else if (noOfLinksFound > 1 && linkKey != 'Back') {
+  } else if (noOfLinksFound > 1 && linkKey != 'Back' && linkKey != 'View') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
   } else if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
