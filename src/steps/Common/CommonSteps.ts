@@ -825,6 +825,9 @@ When(
       case 'system admin email':
         searchValue = loginPage.loginPageTestData.System_Admin.username;
         break;
+      case 'sponsor org admin email':
+        searchValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
+        break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
         break;

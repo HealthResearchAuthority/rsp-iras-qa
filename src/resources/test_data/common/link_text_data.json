@@ -26,7 +26,7 @@
     "Member_management": "Member management",
     "My_research": "My research",
     "REC_members": "REC members",
-    "Sponsor": "Sponsor",
+    "Sponsor": "Sponsor workspace",
     "System_Administration": "System administration",
     "Technical_Assurance": "Technical Assurance",
     "Technical_Assurance_reviewers": "Technical Assurance reviewers"
@@ -323,7 +323,8 @@
   },
   "Sponsor_Workspace_Page": {
     "My_Account": "My account",
-    "Authorisations": "Authorisations"
+    "Authorisations": "Authorisations",
+    "My_Organisations": "My organisations"
   },
   "Modification_Post_Submission_Page": {
     "Documents": "Documents",
@@ -350,5 +351,9 @@
   },
   "Modifications_Assignment_Confirmation_Page_Team_Manager": {
     "Back_To_Dashboard": "Back to Dashboard"
+  },
+  "My_Organisations_Page": {
+    "View": "View",
+    "Manage": "Manage"
   }
 }
