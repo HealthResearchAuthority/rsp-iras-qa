@@ -28,6 +28,7 @@ export default class ModificationsCommonPage {
   readonly changes_modification_type: Locator;
   readonly changes_free_text_summary_error: Locator;
   readonly overall_modification_ranking_sub_heading: Locator;
+  readonly overall_modification_summary_heading: Locator;
   readonly changes_sub_heading: Locator;
   readonly ranking_sub_heading: Locator;
   readonly allChangeCards: Locator;
@@ -84,11 +85,14 @@ export default class ModificationsCommonPage {
     this.overall_modification_ranking_sub_heading = this.pageHeading.getByText(
       modificationsCommonPageTestData.Label_Texts.overall_modification_ranking_label
     );
+    this.overall_modification_summary_heading = this.page.getByText(
+      modificationsCommonPageTestData.Label_Texts.overall_modification_summary_label
+    );
     this.ranking_sub_heading = this.pageHeading
       .getByText(modificationsCommonPageTestData.Label_Texts.ranking_label)
       .first();
     this.changes_sub_heading = this.pageHeading.getByText(modificationsCommonPageTestData.Label_Texts.changes_label);
-    this.allChangeCards = this.page.locator('.govuk-summary-card');
+    this.allChangeCards = this.page.locator('.govuk-summary-card:visible');
     this.allModificationTypeKeys = this.page.locator('dt.govuk-summary-list__key').filter({
       hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label,
     });
@@ -118,7 +122,7 @@ export default class ModificationsCommonPage {
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
       .locator('..')
-      .locator('[class$="value"]');
+      .locator('a');
     this.modification_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)

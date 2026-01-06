@@ -89,6 +89,12 @@
     "mfa": "`${process.env.SPONSOR_USER_MFA_KEY}`",
     "authPath": "sponsor_user"
   },
+  "Sponsor_Org_Admin_User": {
+    "username": "futureiras.automation.SponsorOrgAdmin@hra.nhs.uk",
+    "password": "`${process.env.SPONSOR_ORG_ADMIN_USER_PASS}`",
+    "mfa": "`${process.env.SPONSOR_ORG_ADMIN_USER_MFA_KEY}`",
+    "authPath": "sponsor_org_admin_user"
+  },
   "One_Login_Account_User": {
     "username": "hagnenulta@necub.com",
     "password": "`${process.env.ONE_LOGIN_ACCOUNT_USER_PASS}`",

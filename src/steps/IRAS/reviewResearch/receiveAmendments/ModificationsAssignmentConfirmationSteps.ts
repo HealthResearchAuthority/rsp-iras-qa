@@ -15,8 +15,9 @@ Then(
     const dataset = selectStudyWideReviewerPage.selectStudywideReviewerPageData.Study_Wide_Reviewer[datasetName];
     await modificationsAssignmentConfirmationPage.assertOnModificationsAssignmentConfirmationPage(roleName);
     const expectedConsent =
+      modificationsAssignmentConfirmationPageTestData.Modifications_Assignment_Confirmation_Page.consent +
       dataset.study_wide_reviewer_dropdown +
-      modificationsAssignmentConfirmationPageTestData.Modifications_Assignment_Confirmation_Page.consent;
+      ' to review.';
     const valConsentUI: string | null = await modificationsAssignmentConfirmationPage.consentVal.textContent();
     const actualConsent = await removeUnwantedWhitespace(confirmStringNotNull(valConsentUI));
     expect.soft(actualConsent).toBe(expectedConsent);
