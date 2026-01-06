@@ -157,6 +157,17 @@ export default class CommonItemsPage {
   readonly page_heading: Locator;
   readonly govUkBackLink: Locator;
   readonly removeLink: Locator;
+  readonly users_sponsor_org_name_label: Locator;
+  readonly users_sponsor_org_name_value_first_row: Locator;
+  readonly users_sponsor_org_email_label: Locator;
+  readonly users_sponsor_org_email_value_first_row: Locator;
+  readonly users_sponsor_org_status_label: Locator;
+  readonly users_sponsor_org_status_value_first_row: Locator;
+  readonly users_sponsor_org_role_label: Locator;
+  readonly users_sponsor_org_role_value_first_row: Locator;
+  readonly users_sponsor_org_authoriser_label: Locator;
+  readonly users_sponsor_org_authoriser_value_first_row: Locator;
+  readonly users_sponsor_org_actions_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -429,6 +440,39 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.success_header_label);
     this.page_heading = this.page.getByRole('heading');
     this.removeLink = this.page.locator('.govuk-link').getByText(commonTestData.remove_label);
+    this.users_sponsor_org_name_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.name_label, {
+        exact: true,
+      });
+    this.users_sponsor_org_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').first();
+    this.users_sponsor_org_email_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.email_address_label, { exact: true });
+    this.users_sponsor_org_email_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(1);
+    this.users_sponsor_org_status_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.status_label, {
+        exact: true,
+      });
+    this.users_sponsor_org_status_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(2);
+    this.users_sponsor_org_role_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.role_label, {
+        exact: true,
+      });
+    this.users_sponsor_org_role_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(3);
+    this.users_sponsor_org_authoriser_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.authoriser_label, {
+        exact: true,
+      });
+    this.users_sponsor_org_authoriser_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(4);
+    this.users_sponsor_org_actions_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.actions_label, {
+        exact: true,
+      });
   }
 
   //Getters & Setters for Private Variables
@@ -1005,6 +1049,45 @@ export default class CommonItemsPage {
       ['firstNameValues', firstNameValues],
       ['lastNameValues', lastNameValues],
       ['emailAddressValues', emailAddressValues],
+    ]);
+    return userMap;
+  }
+
+  async getUsersInSponsorOrganisations(): Promise<Map<string, string[]>> {
+    const firstNames: string[] = [];
+    const lastNames: string[] = [];
+    const emailAddresses: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const fullName = confirmStringNotNull(await columns.nth(0).textContent());
+        const parts = fullName.trim().split(/\s+/);
+        if (parts.length === 1) {
+          // Only one name provided
+          firstNames.push(parts[0]);
+          lastNames.push('');
+        } else {
+          const lastName = parts.pop() as string;
+          const firstName = parts.join(' ');
+          firstNames.push(firstName);
+          lastNames.push(lastName);
+        }
+        const emailAddress = confirmStringNotNull(await columns.nth(1).textContent());
+        emailAddresses.push(emailAddress);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const userMap = new Map([
+      ['firstNames', firstNames],
+      ['lastNames', lastNames],
+      ['emailAddresses', emailAddresses],
     ]);
     return userMap;
   }

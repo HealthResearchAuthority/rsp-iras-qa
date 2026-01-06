@@ -1771,6 +1771,21 @@ Then(
       await expect(userListReviewBodyPage.page_heading).toHaveText(
         userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
       );
+      if ((await commonItemsPage.userListTableRows.count()) >= 2) {
+        const userList = await commonItemsPage.getUsers();
+        const emailAddress: any = userList.get('emailAddressValues');
+        await commonItemsPage.setUserEmail(emailAddress);
+        const firstName: any = userList.get('firstNameValues');
+        await commonItemsPage.setUserFirstName(firstName);
+        const lastName: any = userList.get('lastNameValues');
+        await commonItemsPage.setUserLastName(lastName);
+        await commonItemsPage.setFirstName(firstName[0]);
+        await commonItemsPage.setLastName(lastName[0]);
+        await commonItemsPage.setEmail(emailAddress[0]);
+        if (await commonItemsPage.firstPage.isVisible()) {
+          await commonItemsPage.firstPage.click();
+        }
+      }
     } else if (orgType === 'sponsor organisation') {
       await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage(commonItemsPage);
       const organisationName = await sponsorOrganisationProfilePage.getOrgName();
@@ -1778,20 +1793,20 @@ Then(
         userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
           .heading_prefix_label + organisationName
       );
-    }
-    if ((await commonItemsPage.userListTableRows.count()) >= 2) {
-      const userList = await commonItemsPage.getUsers();
-      const emailAddress: any = userList.get('emailAddressValues');
-      await commonItemsPage.setUserEmail(emailAddress);
-      const firstName: any = userList.get('firstNameValues');
-      await commonItemsPage.setUserFirstName(firstName);
-      const lastName: any = userList.get('lastNameValues');
-      await commonItemsPage.setUserLastName(lastName);
-      await commonItemsPage.setFirstName(firstName[0]);
-      await commonItemsPage.setLastName(lastName[0]);
-      await commonItemsPage.setEmail(emailAddress[0]);
-      if (await commonItemsPage.firstPage.isVisible()) {
-        await commonItemsPage.firstPage.click();
+      if ((await commonItemsPage.userListTableRows.count()) >= 2) {
+        const userList = await commonItemsPage.getUsersInSponsorOrganisations();
+        const emailAddress: any = userList.get('emailAddresses');
+        await commonItemsPage.setUserEmail(emailAddress);
+        const firstName: any = userList.get('firstNames');
+        await commonItemsPage.setUserFirstName(firstName);
+        const lastName: any = userList.get('lastNames');
+        await commonItemsPage.setUserLastName(lastName);
+        await commonItemsPage.setFirstName(firstName[0]);
+        await commonItemsPage.setLastName(lastName[0]);
+        await commonItemsPage.setEmail(emailAddress[0]);
+        if (await commonItemsPage.firstPage.isVisible()) {
+          await commonItemsPage.firstPage.click();
+        }
       }
     }
   }
@@ -2159,7 +2174,7 @@ Then(
     let columnIndex: number | undefined;
 
     // ----- Branch: User-based lists -----
-    if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
+    if (lowerListType === 'manage users') {
       // Map columns for user lists
       switch (lowerSortField) {
         case 'first name':
@@ -2188,6 +2203,51 @@ Then(
       if (lowerSortField === 'last logged in') {
         sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
       } else if (lowerSortDirection === 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) =>
+          a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+        }
+      } else {
+        sortedList = [...actualList].toSorted((a, b) =>
+          b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+        }
+      }
+
+      expect.soft(actualList).toEqual(sortedList);
+      return;
+    }
+
+    if (lowerListType === 'sponsor organisation users') {
+      // Map columns for user lists after clicking on 'View this sponsor organisation's list of users' in 'Manage Sponsor Organisations'
+      switch (lowerSortField) {
+        case 'name':
+          columnIndex = 0;
+          break;
+        case 'email address':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        case 'role':
+          columnIndex = 3;
+          break;
+        case 'authoriser':
+          columnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+
+      // Gather actual list values
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+
+      if (lowerSortDirection === 'ascending') {
         sortedList = [...actualList].toSorted((a, b) =>
           a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
         );
