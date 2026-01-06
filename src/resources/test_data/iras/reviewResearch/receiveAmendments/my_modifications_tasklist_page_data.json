@@ -2,7 +2,7 @@
   "My_Modifications_Tasklist_Page": {
     "title": "My changes to review - Modifications - Approvals - System Administration - Plan and manage health and care research",
     "page_heading": "My tasklist",
-    "my_modification_no_result_heading_label": "Assign modifications task list",
+    "my_modification_no_result_heading_label": "My tasklist",
     "page_description": "This page shows all the modifications that are ready for you to review.",
     "advanced_filter_label": "Advanced filters",
     "maxPagesToVisit": 2,
