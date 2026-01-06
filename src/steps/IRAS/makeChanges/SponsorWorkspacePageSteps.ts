@@ -15,8 +15,8 @@ Then(
         '{{sponsor_organisation_name}}',
         await checkSetupSponsorOrganisationPage.getOrgName()
       );
-    await expect(sponsorWorkspacePage.mainPageContent.getByText(authorisationsBodyLabel)).toBeVisible();
+    await expect.soft(sponsorWorkspacePage.mainPageContent.getByText(authorisationsBodyLabel)).toBeVisible();
     const myOrganisationsLabel = sponsorWorkspacePage.sponsorWorkspacePageTestData.Label_Texts.my_organisations_label;
-    await expect(sponsorWorkspacePage.mainPageContent.getByText(myOrganisationsLabel)).toBeVisible();
+    await expect.soft(sponsorWorkspacePage.mainPageContent.getByText(myOrganisationsLabel)).toBeVisible();
   }
 );
