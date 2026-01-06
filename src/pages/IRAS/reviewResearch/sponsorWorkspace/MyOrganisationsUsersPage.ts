@@ -15,6 +15,9 @@ export default class MyOrganisationsUsersPage {
   readonly user_in_sponsor_organisation_disabled_success_message_text: Locator;
   readonly user_in_sponsor_organisation_enabled_success_message_text: Locator;
   readonly search_guidance_text: Locator;
+  readonly navList: Locator;
+  readonly navLinks: Locator;
+  readonly mainPageContent: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -56,6 +59,9 @@ export default class MyOrganisationsUsersPage {
         exact: true,
       }
     );
+    this.mainPageContent = this.page.getByTestId('main-content');
+    this.navList = this.mainPageContent.locator('ul.govuk-service-navigation__list');
+    this.navLinks = this.navList.getByRole('link');
   }
 
   async goto(): Promise<void> {
@@ -80,5 +86,25 @@ export default class MyOrganisationsUsersPage {
       await expect.soft(commonItemsPage.authoriser_label).toBeVisible();
       await expect.soft(commonItemsPage.actions_label).toBeVisible();
     }
+    if ((await commonItemsPage.userListTableRows.count()) >= 2) {
+      const userList = await commonItemsPage.getSponsorUsers();
+      const emailAddress: any = userList.get('emailAddressValues');
+      await commonItemsPage.setUserEmail(emailAddress);
+      const firstName: any = userList.get('firstNameValues');
+      await commonItemsPage.setUserFirstName(firstName);
+      const lastName: any = userList.get('lastNameValues');
+      await commonItemsPage.setUserLastName(lastName);
+      await commonItemsPage.setFirstName(firstName[0]);
+      await commonItemsPage.setLastName(lastName[0]);
+      await commonItemsPage.setEmail(emailAddress[0]);
+      if (await commonItemsPage.firstPage.isVisible()) {
+        await commonItemsPage.firstPage.click();
+      }
+    }
+  }
+
+  async getVisibleTabNames(): Promise<string[]> {
+    const names = await this.navLinks.allTextContents();
+    return names.map((name) => name.trim());
   }
 }

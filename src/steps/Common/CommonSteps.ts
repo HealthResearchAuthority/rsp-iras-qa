@@ -1829,7 +1829,7 @@ Then(
         throw new Error(`${sortField} is not a valid option`);
       }
       const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-      expect(firstNameValues).toEqual(sortedList);
+      expect.soft(firstNameValues).toEqual(sortedList);
     }
   }
 );
@@ -2168,10 +2168,13 @@ Then(
     let columnIndex: number | undefined;
 
     // ----- Branch: User-based lists -----
-    if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
+    if (lowerListType === 'manage users') {
       // Map columns for user lists
       switch (lowerSortField) {
         case 'first name':
+          columnIndex = 0;
+          break;
+        case 'name':
           columnIndex = 0;
           break;
         case 'last name':
@@ -2197,6 +2200,50 @@ Then(
       if (lowerSortField === 'last logged in') {
         sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
       } else if (lowerSortDirection === 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) =>
+          a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+        }
+      } else {
+        sortedList = [...actualList].toSorted((a, b) =>
+          b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+        }
+      }
+
+      expect.soft(actualList).toEqual(sortedList);
+      return;
+    }
+    if (lowerListType === 'sponsor organisation users') {
+      // Map columns for user lists
+      switch (lowerSortField) {
+        case 'name':
+          columnIndex = 0;
+          break;
+        case 'email address':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        case 'role':
+          columnIndex = 3;
+          break;
+        case 'authoriser':
+          columnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+
+      // Gather actual list values
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+
+      if (lowerSortDirection === 'ascending') {
         sortedList = [...actualList].toSorted((a, b) =>
           a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
         );

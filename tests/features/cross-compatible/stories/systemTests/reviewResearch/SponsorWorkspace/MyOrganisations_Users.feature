@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive
+@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive @Run
 Feature: Sponsor Workspace - My Organisations Page - Users
 
   Background:
@@ -22,7 +22,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
 
-  @rsp-6422 @MyOrganisationsPageLabelValidation
+  @rsp-6422 @MyOrganisationsUsersPage
   Scenario: Validate that <Login_User> able to navigate to Users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -49,17 +49,253 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Then I can see the 'My_Organisations_Users_Page'
     Then I can see tabs are displayed based on the logged in user role '<Login_User>'
     And the 'Users' tab is underlined
-    And the 'Add_A_User_Section_Visibility' based on the logged in user role
-    And the 'Action_Column_Visibility' based on the logged in user role
-    And the list is sorted alphabetically by Name in ascending order
-    #  And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'first name' on the 'first' page
+    And the add a user section is '<Add_A_User_Section_Visibility>' based on the logged in user role
+    And the action column section shows the hyperlink as '<Action_Column_Visibility>' based on the logged in user role
+    And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'name' on the 'first' page
+    Examples:
+      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility |
+      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     |
+      | System_Admin           | system admin email       | Manage | visible                       | Manage                   |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   |
 
+  @rsp-6422 @sortUserListByColumn
+  Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
+    And I capture the page screenshot
+    And I can now see a table of results for my organisations
+    And I can see the associated organisations displaying in the table for '<Login_User>'
+    And I click the '<Link>' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    # And I can see the sponsor organisation profile page from my organisations
+    And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'My_Organisations_Users_Page'
+    When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
+    And I capture the page screenshot
+    Then I can see the 'sponsor organisation users' list sorted by '<Initial_Sort>' order of the '<Sort_Field>' on the 'first' page
+    When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    Then I can see the 'sponsor organisation users' list sorted by '<Initial_Sort>' order of the '<Sort_Field>' on the 'last' page
+    When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
+    And I capture the page screenshot
+    Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+    And I can see the 'sponsor organisation users' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'first' page
+    When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    Then I can see the 'sponsor organisation users' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'last' page
 
     Examples:
-      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility     | Action_Column_Visibility                  |
-      | Sponsor_User           | automation sponsor email | View   | Add a user section is not visible | Action column shows View as a hyperlink   |
-      | System_Admin           | system admin email       | Manage | Add a user section is visible     | Action column shows Manage as a hyperlink |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Add a user section is visible     | Action column shows Manage as a hyperlink |
+      | Login_User   | User_Email               | Link | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort |
+      | Sponsor_User | automation sponsor email | View | Name          | name          | descending   | ascending      |
+      | Sponsor_User | automation sponsor email | View | Email_Address | email address | ascending    | descending     |
+      | Sponsor_User | automation sponsor email | View | Status        | status        | ascending    | descending     |
+      | Sponsor_User | automation sponsor email | View | Role          | role          | ascending    | descending     |
+      | Sponsor_User | automation sponsor email | View | Authoriser    | authoriser    | ascending    | descending     |
+  # | System_Admin           | system admin email       | Manage | Name          | name          | descending   | ascending      |
+  # | System_Admin           | system admin email       | Manage | Email_Address | email address | ascending    | descending     |
+  # | System_Admin           | system admin email       | Manage | Status        | status        | ascending    | descending     |
+  # | System_Admin           | system admin email       | Manage | Role          | role          | ascending    | descending     |
+  # | System_Admin           | system admin email       | Manage | Authoriser    | authoriser    | ascending    | descending     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Name          | name          | descending   | ascending      |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | email address | ascending    | descending     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Status        | status        | ascending    | descending     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Role          | role          | ascending    | descending     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Authoriser    | authoriser    | ascending    | descending     |
+
+
+  @rsp-6422 @UserListSponsorOrgSearchResultsFound
+  Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
+    And I capture the page screenshot
+    And I can now see a table of results for my organisations
+    And I can see the associated organisations displaying in the table for '<Login_User>'
+    And I click the '<Link>' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    # And I can see the sponsor organisation profile page from my organisations
+    And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'My_Organisations_Users_Page'
+    When I enter the '<Field_Name>' of the '<Position>' user shown on the current 'sponsor organisation' users list, into the search field
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    And I capture the page screenshot
+    Then the system displays search results matching the search criteria
+    When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
+    And I can see the sponsor organisation profile page
+
+    Examples:
+      | Login_User   | User_Email               | Link | Field_Name    | Position |
+      | Sponsor_User | automation sponsor email | View | First_Name    | First    |
+      | Sponsor_User | automation sponsor email | View | Last_Name     | First    |
+      | Sponsor_User | automation sponsor email | View | Email_Address | First    |
+      | Sponsor_User | automation sponsor email | View | First_Name    | Last     |
+      | Sponsor_User | automation sponsor email | View | Last_Name     | Last     |
+      | Sponsor_User | automation sponsor email | View | Email_Address | Last     |
+      | Sponsor_User | automation sponsor email | View | Full_Name     | First    |
+      | Sponsor_User | automation sponsor email | View | Full_Name     | Last     |
+  # | System_Admin           | system admin email       | Manage | First_Name    | First    |
+  # | System_Admin           | system admin email       | Manage | Last_Name     | First    |
+  # | System_Admin           | system admin email       | Manage | Email_Address | First    |
+  # | System_Admin           | system admin email       | Manage | First_Name    | Last     |
+  # | System_Admin           | system admin email       | Manage | Last_Name     | Last     |
+  # | System_Admin           | system admin email       | Manage | Email_Address | Last     |
+  # | System_Admin           | system admin email       | Manage | Full_Name     | First    |
+  # | System_Admin           | system admin email       | Manage | Full_Name     | Last     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | First    |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | First    |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | First    |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | Last     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | Last     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | Last     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | First    |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | Last     |
+
+  @rsp-6422 @UserListSponsorOrgSearchNoResultsFound
+  Scenario Outline: Verify no results found message if there is no sponsor organisation on the system that matches the search criteria
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
+    And I capture the page screenshot
+    And I can now see a table of results for my organisations
+    And I can see the associated organisations displaying in the table for '<Login_User>'
+    And I click the '<Link>' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    # And I can see the sponsor organisation profile page from my organisations
+    And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'My_Organisations_Users_Page'
+    When I fill the search input for searching 'users in sponsor organisations' with '<Search_Query>' as the search query
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    And I capture the page screenshot
+    Then the no search results found message is displayed
+    And I capture the page screenshot
+    Examples:
+      | Login_User             | User_Email               | Link   | Search_Query           |
+      | Sponsor_User           | automation sponsor email | View   | Non_Existant_User_Data |
+      | System_Admin           | system admin email       | Manage | Non_Existant_User_Data |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Non_Existant_User_Data |
+
+  @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationFirstPage @UserlistSponsorOrgPaginationPageNumber @UserlistSponsorOrgPaginationNextLinkClick
+  Scenario: Verify pagination in user tab of sponsor organisation when user is on the first page and navigate through each page by clicking page number or by by clicking next link
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
+    And I capture the page screenshot
+    And I can now see a table of results for my organisations
+    And I can see the associated organisations displaying in the table for '<Login_User>'
+    And I click the '<Link>' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    # And I can see the sponsor organisation profile page from my organisations
+    And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'My_Organisations_Users_Page'
+    And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    And the default page size should be 'twenty'
+    And the 'Next' button will be 'available' to the user
+    And the 'Previous' button will be 'not available' to the user
+    And the current page number should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    Then I sequentially navigate through each 'Sponsor_Org_User_List_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+    Examples:
+      | Login_User             | User_Email               | Link   | Navigation_Method |
+      | Sponsor_User           | automation sponsor email | View   | page number       |
+      | Sponsor_User           | automation sponsor email | View   | next link         |
+      | System_Admin           | system admin email       | Manage | page number       |
+      | System_Admin           | system admin email       | Manage | next link         |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | next link         |
+
+  @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationLastPage @UserlistSponsorOrgPaginationPageNumber @MUserlistSponsorOrgPaginationPreviousLinkClick
+  Scenario: Verify pagination in user tab of sponsor organisation when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
+    And I capture the page screenshot
+    And I can now see a table of results for my organisations
+    And I can see the associated organisations displaying in the table for '<Login_User>'
+    And I click the '<Link>' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    # And I can see the sponsor organisation profile page from my organisations
+    And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'My_Organisations_Users_Page'
+    And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    And I capture the page screenshot
+    And the 'Previous' button will be 'available' to the user
+    And the 'Next' button will be 'not available' to the user
+    And I capture the page screenshot
+    Then I sequentially navigate through each 'Sponsor_Org_User_List_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+    Examples:
+      | Login_User             | User_Email               | Link   | Navigation_Method |
+      | Sponsor_User           | automation sponsor email | View   | page number       |
+      | Sponsor_User           | automation sponsor email | View   | previous link     |
+      | System_Admin           | system admin email       | Manage | page number       |
+      | System_Admin           | system admin email       | Manage | previous link     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | previous link     |
 
 #  https://nihr.atlassian.net/browse/RSP-6422
 
@@ -306,90 +542,3 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 # Then the data on the previous page should be displayed
 
 # And the current page number should be visually highlighted to indicate the active page
-
-
-# https://nihr.atlassian.net/browse/RSP-6461
-
-# # Organisation Administrator/System Administrator  visibility of Add user tab
-
-# Given I am signed in as an Organisation Administrator or System Administrator
-
-# When I am on the Users page of the Sponsor Organisation Profile
-
-# Then I see a clickable "Add user" tab
-
-# And the "Add user" tab is visible only to Organisation Administrators
-
-
-
-# # Navigate to Add user page
-
-# Given I am signed in as an Organisation Administrator or System Administrator
-
-# And I am on the Users page of the Sponsor Organisation Profile
-
-# When I click the "Add user" tab
-
-# Then I am taken to the page titled "Add user to <Organisation Name>"
-
-
-
-# # Back breadcrumb returns to Users page
-
-# Given I am on the "Add user to <Organisation Name>" page
-
-# And I see a breadcrumb labelled "Back" at the top left
-
-# When I click "Back"
-
-# Then I am returned to the Users page
-
-
-
-# # Email field and primary action are present
-
-# Given I am on the "Add user to <Organisation Name>" page
-
-# Then I see an input field labelled "Email address"
-
-# And I see a "Save and continue" control below the email field
-
-
-
-# # Error when email is not a registered user
-
-# Given I enter an email address that is not registered on the system
-
-# When I click "Save and continue"
-
-# Then I see a notification page stating "An account does not exist for this email address"
-
-# And I see guidance notes per the design
-
-# And I cannot proceed until a registered user's email address is entered
-
-
-
-# # Error when email is invalid or blank
-
-# Given the email field is blank or contains an invalid email format
-
-# When I click "Save and continue"
-
-# Then I see a notification page stating "There is a problem"
-
-# And I see guidance notes per the design
-
-# And I cannot proceed until a valid registered user's email address is entered
-
-
-
-# # Proceed to Add user role on valid registered email
-
-# Given I enter a valid email address for a registered user
-
-# When I click "Save and continue"
-
-# Then I am taken to the "Add user role" page for that user
-
-

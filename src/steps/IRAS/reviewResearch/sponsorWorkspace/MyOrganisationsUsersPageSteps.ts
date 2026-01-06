@@ -1,43 +1,62 @@
-// import { createBdd } from 'playwright-bdd';
-// import { expect, test } from '../../../../hooks/CustomFixtures';
-// const { Then } = createBdd(test);
+import { createBdd } from 'playwright-bdd';
+import { expect, test } from '../../../../hooks/CustomFixtures';
+const { Then } = createBdd(test);
 
-// Then(
-//   'I can see the {string} successful message on sponsor organisation user list page',
-//   async ({ userListSponsorOrganisationPage, commonItemsPage }, activityName: string) => {
-//     await expect.soft(commonItemsPage.success_message_header_text).toBeVisible();
-//     switch (activityName) {
-//       case 'user added':
-//         await expect
-//           .soft(userListSponsorOrganisationPage.user_added_to_sponsor_organisation__success_message_text)
-//           .toBeVisible();
-//         break;
-//       case 'user in the selected sponsor organisation disabled':
-//         await expect
-//           .soft(userListSponsorOrganisationPage.user_in_sponsor_organisation_disabled_success_message_text)
-//           .toBeVisible();
-//         break;
-//       case 'user in the selected sponsor organisation enabled':
-//         await expect
-//           .soft(userListSponsorOrganisationPage.user_in_sponsor_organisation_enabled_success_message_text)
-//           .toBeVisible();
-//         break;
-//       default:
-//         throw new Error(`${activityName} is not a valid option`);
-//     }
-//     expect
-//       .soft(
-//         await userListSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
-//           getComputedStyle(e).getPropertyValue('border-color')
-//         )
-//       )
-//       .toBe(commonItemsPage.commonTestData.rgb_green_color);
-//     expect
-//       .soft(
-//         await userListSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
-//           getComputedStyle(e).getPropertyValue('background-color')
-//         )
-//       )
-//       .toBe(commonItemsPage.commonTestData.rgb_green_color);
-//   }
-// );
+Then(
+  'I can see tabs are displayed based on the logged in user role {string}',
+  async ({ mySponsorOrgUsersPage }, userLoggedIn: string) => {
+    if (userLoggedIn === 'Sponsor_Org_Admin_User' || userLoggedIn === 'System_Admin') {
+      const tabNames = await mySponsorOrgUsersPage.getVisibleTabNames();
+      expect
+        .soft(tabNames)
+        .toEqual(
+          mySponsorOrgUsersPage.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.org_admin_sys_admin_tabs.slice()
+        );
+    } else if (userLoggedIn === 'Sponsor_User') {
+      const tabNames = await mySponsorOrgUsersPage.getVisibleTabNames();
+      expect
+        .soft(tabNames)
+        .toEqual(
+          mySponsorOrgUsersPage.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.sponsor_user_tabs.slice()
+        );
+    }
+  }
+);
+
+Then('the {string} tab is underlined', async ({ mySponsorOrgUsersPage }, activeTab: string) => {
+  const usersLink = mySponsorOrgUsersPage.page.getByRole('link', { name: activeTab });
+  await expect.soft(usersLink).toBeVisible();
+  await expect.soft(usersLink).toHaveCSS('text-decoration-line', 'underline');
+  const computed = await usersLink.evaluate((el) => getComputedStyle(el).textDecoration);
+  expect.soft(computed.toLowerCase()).toContain('underline');
+  const usersItem = mySponsorOrgUsersPage.page
+    .locator('li.govuk-service-navigation__item--active')
+    .filter({ has: mySponsorOrgUsersPage.page.getByRole('link', { name: activeTab }) });
+  await expect.soft(usersItem).toHaveCount(1);
+});
+
+Then(
+  'the add a user section is {string} based on the logged in user role',
+  async ({ mySponsorOrgUsersPage }, visibility: string) => {
+    const addUserButton = mySponsorOrgUsersPage.page.getByRole('button', { name: 'Add a user' });
+    if (visibility === 'not visible') {
+      expect.soft(addUserButton).toBeHidden();
+    } else if (visibility === 'visible') {
+      expect.soft(addUserButton).toBeVisible();
+    }
+  }
+);
+
+Then(
+  'the action column section shows the hyperlink as {string} based on the logged in user role',
+  async ({ mySponsorOrgUsersPage }, visibleLink: string) => {
+    const actionLinks = mySponsorOrgUsersPage.page.locator('tbody tr td:last-child a.govuk-link');
+    const texts = (await actionLinks.allTextContents()).map((t) => t.trim());
+    texts.forEach((t) => expect.soft(t).toBe(visibleLink));
+    const hrefs = await actionLinks.evaluateAll((anchors) =>
+      anchors.map((a) => (a as HTMLAnchorElement).getAttribute('href') || '')
+    );
+    // ensure none are null/empty if that’s expected
+    hrefs.forEach((href) => expect.soft(href).not.toBeNull());
+  }
+);

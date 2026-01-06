@@ -1,5 +1,5 @@
 @SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive
-Feature: Sponsor Workspace - My Organisations Page - Users
+Feature: Sponsor Workspace-My Organisations-Users-Add user
 
   Background:
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -22,7 +22,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
 
-  @rsp-6461 @MyOrganisationsPageLabelValidation @Run
+  @rsp-6461 @MyOrganisationsPageLabelValidation
   Scenario: Validate that <Login_User> able to navigate to Users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
