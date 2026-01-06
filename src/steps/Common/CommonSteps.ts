@@ -297,9 +297,7 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     linkKey === 'Back_To_Users'
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else if (pageKey === 'My_Organisations_Page' && (linkKey === 'View' || linkKey === 'Manage')) {
-    await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
-  } else if (noOfLinksFound > 1 && linkKey != 'Back') {
+  } else if (noOfLinksFound > 1 && linkKey != 'Back' && linkKey != 'View') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
   } else if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&

@@ -1,7 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../hooks/CustomFixtures';
-//import { Locator } from '@playwright/test';
-//import MyOrgSponsorOrgProfilePage from '../../../pages/IRAS/makeChanges/MyOrgSponsorOrgProfilePage';
 
 const { Then } = createBdd(test);
 
