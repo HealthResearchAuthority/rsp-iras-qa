@@ -51,6 +51,12 @@ Then('I fill the existing iras id in project details iras page', async ({ projec
   await projectDetailsIRASPage.iras_id_text.fill(irasIdRunTime);
 });
 
+Then('I fill the {string} in project details iras page', async ({ projectDetailsIRASPage }, datasetName) => {
+  const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
+  const irasId = dataset.iras_id_text;
+  await projectDetailsIRASPage.iras_id_text.fill(irasId);
+});
+
 Then(
   'I can see previously saved values for {string} displayed on the project details iras page',
   async ({ commonItemsPage, projectDetailsIRASPage }, datasetName: string) => {

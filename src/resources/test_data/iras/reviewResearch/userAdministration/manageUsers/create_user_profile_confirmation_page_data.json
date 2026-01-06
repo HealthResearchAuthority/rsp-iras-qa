@@ -1,8 +1,8 @@
 {
   "Create_User_Profile_Confirmation_Page": {
     "selected_tab_top": "Manage Users",
-    "confirmation_message": "User has been successfully added",
-    "consent": " has been sent an email confirming their account details. Their status is now active.",
+    "confirmation_message": "User has been added",
+    "consent": "'s account is active. They can now sign in using GOV.UK One Login from the home page of Plan and manage health and care research.",
     "add_another_user_link": "Add another user",
     "back_to_manage_user_link": "Back to Manage users"
   }

@@ -74,8 +74,8 @@ Then(
   async ({ modificationsCommonPage, commonItemsPage, projectDetailsIRASPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset).reverse();
-    expect.soft(modificationsCommonPage.overall_modification_ranking_sub_heading).toBeVisible();
-    expect.soft(modificationsCommonPage.ranking_sub_heading).toBeVisible();
+    await expect.soft(modificationsCommonPage.overall_modification_summary_heading).toBeVisible();
+    await expect.soft(modificationsCommonPage.ranking_sub_heading).toBeVisible();
     const actualValuesArray = await modificationsCommonPage.getActualFieldValuesOnModificationPage(
       modificationsCommonPage.allChangeCards,
       changesDataset,
@@ -146,7 +146,9 @@ Then(
         actualData['specific_change_dropdown'] = actualPlannedEndDate;
       } else if (
         keysString.toLowerCase().includes('select_details_to_change_radio') ||
-        keysString.toLowerCase().includes('select_contact_details_to_change_radio')
+        keysString.toLowerCase().includes('select_contact_details_to_change_radio') ||
+        keysString.toLowerCase().includes('project_reference_numbers_radio') ||
+        keysString.toLowerCase().includes('title_radio')
       ) {
         actualData['specific_change_dropdown'] = expectedData['specific_change_dropdown'];
       }
