@@ -1069,7 +1069,7 @@ export default class CommonItemsPage {
           firstNames.push(parts[0]);
           lastNames.push('');
         } else {
-          const lastName = parts.pop() as string;
+          const lastName = parts.pop();
           const firstName = parts.join(' ');
           firstNames.push(firstName);
           lastNames.push(lastName);
