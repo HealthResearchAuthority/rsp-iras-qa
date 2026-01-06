@@ -30,6 +30,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
+    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -43,7 +44,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    # And I can see the sponsor organisation profile page from my organisations
     And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
     And I capture the page screenshot
     Then I can see the 'My_Organisations_Users_Page'
@@ -66,6 +66,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
+    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -79,7 +80,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    # And I can see the sponsor organisation profile page from my organisations
     And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
     And I capture the page screenshot
     Then I can see the 'My_Organisations_Users_Page'
@@ -98,22 +98,22 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Then I can see the 'sponsor organisation users' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'last' page
 
     Examples:
-      | Login_User   | User_Email               | Link | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort |
-      | Sponsor_User | automation sponsor email | View | Name          | name          | descending   | ascending      |
-      | Sponsor_User | automation sponsor email | View | Email_Address | email address | ascending    | descending     |
-      | Sponsor_User | automation sponsor email | View | Status        | status        | ascending    | descending     |
-      | Sponsor_User | automation sponsor email | View | Role          | role          | ascending    | descending     |
-      | Sponsor_User | automation sponsor email | View | Authoriser    | authoriser    | ascending    | descending     |
-  # | System_Admin           | system admin email       | Manage | Name          | name          | descending   | ascending      |
-  # | System_Admin           | system admin email       | Manage | Email_Address | email address | ascending    | descending     |
-  # | System_Admin           | system admin email       | Manage | Status        | status        | ascending    | descending     |
-  # | System_Admin           | system admin email       | Manage | Role          | role          | ascending    | descending     |
-  # | System_Admin           | system admin email       | Manage | Authoriser    | authoriser    | ascending    | descending     |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Name          | name          | descending   | ascending      |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | email address | ascending    | descending     |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Status        | status        | ascending    | descending     |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Role          | role          | ascending    | descending     |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Authoriser    | authoriser    | ascending    | descending     |
+      | Login_User             | User_Email               | Link   | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort |
+      | Sponsor_User           | automation sponsor email | View   | Name          | name          | descending   | ascending      |
+      | Sponsor_User           | automation sponsor email | View   | Email_Address | email address | ascending    | descending     |
+      | Sponsor_User           | automation sponsor email | View   | Status        | status        | ascending    | descending     |
+      | Sponsor_User           | automation sponsor email | View   | Role          | role          | ascending    | descending     |
+      | Sponsor_User           | automation sponsor email | View   | Authoriser    | authoriser    | ascending    | descending     |
+      | System_Admin           | system admin email       | Manage | Name          | name          | descending   | ascending      |
+      | System_Admin           | system admin email       | Manage | Email_Address | email address | ascending    | descending     |
+      | System_Admin           | system admin email       | Manage | Status        | status        | ascending    | descending     |
+      | System_Admin           | system admin email       | Manage | Role          | role          | ascending    | descending     |
+      | System_Admin           | system admin email       | Manage | Authoriser    | authoriser    | ascending    | descending     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Name          | name          | descending   | ascending      |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | email address | ascending    | descending     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Status        | status        | ascending    | descending     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Role          | role          | ascending    | descending     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Authoriser    | authoriser    | ascending    | descending     |
 
 
   @rsp-6422 @UserListSponsorOrgSearchResultsFound
@@ -124,6 +124,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
+    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -137,7 +138,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    # And I can see the sponsor organisation profile page from my organisations
     And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
     And I capture the page screenshot
     Then I can see the 'My_Organisations_Users_Page'
@@ -146,35 +146,33 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
     Then the system displays search results matching the search criteria
-    When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
-    And I can see the sponsor organisation profile page
 
     Examples:
-      | Login_User   | User_Email               | Link | Field_Name    | Position |
-      | Sponsor_User | automation sponsor email | View | First_Name    | First    |
-      | Sponsor_User | automation sponsor email | View | Last_Name     | First    |
-      | Sponsor_User | automation sponsor email | View | Email_Address | First    |
-      | Sponsor_User | automation sponsor email | View | First_Name    | Last     |
-      | Sponsor_User | automation sponsor email | View | Last_Name     | Last     |
-      | Sponsor_User | automation sponsor email | View | Email_Address | Last     |
-      | Sponsor_User | automation sponsor email | View | Full_Name     | First    |
-      | Sponsor_User | automation sponsor email | View | Full_Name     | Last     |
-  # | System_Admin           | system admin email       | Manage | First_Name    | First    |
-  # | System_Admin           | system admin email       | Manage | Last_Name     | First    |
-  # | System_Admin           | system admin email       | Manage | Email_Address | First    |
-  # | System_Admin           | system admin email       | Manage | First_Name    | Last     |
-  # | System_Admin           | system admin email       | Manage | Last_Name     | Last     |
-  # | System_Admin           | system admin email       | Manage | Email_Address | Last     |
-  # | System_Admin           | system admin email       | Manage | Full_Name     | First    |
-  # | System_Admin           | system admin email       | Manage | Full_Name     | Last     |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | First    |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | First    |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | First    |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | Last     |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | Last     |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | Last     |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | First    |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | Last     |
+      | Login_User             | User_Email               | Link   | Field_Name    | Position |
+      | Sponsor_User           | automation sponsor email | View   | First_Name    | First    |
+      | Sponsor_User           | automation sponsor email | View   | Last_Name     | First    |
+      | Sponsor_User           | automation sponsor email | View   | Email_Address | First    |
+      | Sponsor_User           | automation sponsor email | View   | First_Name    | Last     |
+      | Sponsor_User           | automation sponsor email | View   | Last_Name     | Last     |
+      | Sponsor_User           | automation sponsor email | View   | Email_Address | Last     |
+      | Sponsor_User           | automation sponsor email | View   | Full_Name     | First    |
+      | Sponsor_User           | automation sponsor email | View   | Full_Name     | Last     |
+      | System_Admin           | system admin email       | Manage | First_Name    | First    |
+      | System_Admin           | system admin email       | Manage | Last_Name     | First    |
+      | System_Admin           | system admin email       | Manage | Email_Address | First    |
+      | System_Admin           | system admin email       | Manage | First_Name    | Last     |
+      | System_Admin           | system admin email       | Manage | Last_Name     | Last     |
+      | System_Admin           | system admin email       | Manage | Email_Address | Last     |
+      | System_Admin           | system admin email       | Manage | Full_Name     | First    |
+      | System_Admin           | system admin email       | Manage | Full_Name     | Last     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | First    |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | First    |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | First    |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | Last     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | Last     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | Last     |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | First    |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | Last     |
 
   @rsp-6422 @UserListSponsorOrgSearchNoResultsFound
   Scenario Outline: Verify no results found message if there is no sponsor organisation on the system that matches the search criteria
@@ -184,6 +182,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
+    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -197,7 +196,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    # And I can see the sponsor organisation profile page from my organisations
     And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
     And I capture the page screenshot
     Then I can see the 'My_Organisations_Users_Page'
@@ -221,6 +219,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
+    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -234,7 +233,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    # And I can see the sponsor organisation profile page from my organisations
     And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
     And I capture the page screenshot
     Then I can see the 'My_Organisations_Users_Page'
@@ -264,6 +262,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
+    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -277,7 +276,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    # And I can see the sponsor organisation profile page from my organisations
     And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
     And I capture the page screenshot
     Then I can see the 'My_Organisations_Users_Page'
@@ -299,7 +297,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 #  https://nihr.atlassian.net/browse/RSP-6422
 
-# # Breadcrumb navigation is displayed and functional
+# # Breadcrumb navigation is displayed and functional -not covering via automation
 
 # Given I am on the Users page
 
@@ -312,7 +310,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 # Then I am navigated back to the respective page
 
 
-# # Role-based navigation tabs
+# # Role-based navigation tabs -automated
 
 # Given I am on the Sponsor Organisation Profile page
 
@@ -324,7 +322,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# Given I am on the Sponsor Organisation Profile page
+# Given I am on the Sponsor Organisation Profile page -automated
 
 # And my role is Sponsor
 
@@ -333,7 +331,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 # And the "Users" tab is underlined
 
 
-# # Add User tab visibility
+# # Add User tab visibility -automated
 
 # Given I am on the Users page
 
@@ -344,7 +342,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 # And the tab allows adding a registered user to the organisation
 
 
-# # Default view shows user list
+# # Default view shows user list -automated
 
 # Given I am on the Users page
 
@@ -355,7 +353,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 # And the list is sorted alphabetically by Name in ascending order
 
 
-# # Search with input
+# # Search with input -automated
 
 # Given I enter letters, numbers, or a mix into the search bar
 
@@ -369,7 +367,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# # Search with no input
+# # Search with no input - not automated
 
 # Given the search bar is empty
 
@@ -381,7 +379,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# # No matching results
+# # No matching results-automated
 
 # Given I enter a name that does not exist as the Organisation Administrator or Sponsor or System Administrator
 
@@ -393,7 +391,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# # Role-based actions in Action column
+# # Role-based actions in Action column -automated
 
 # Given I am on the Users page
 
@@ -403,7 +401,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# Given I am on the Users page
+# Given I am on the Users page -automated
 
 # And my role is Sponsor
 
@@ -411,7 +409,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# # Non-member is denied when attempting to open the Users page
+# # Non-member is denied when attempting to open the Users page - not automated
 
 # Given I am signed in
 
@@ -429,7 +427,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# # Non-member is denied when using a direct URL to the Users page
+# # Non-member is denied when using a direct URL to the Users page - not automated
 
 # Given I paste or follow a direct URL that points to a sponsor organisation's "Users" page as a non-member
 
@@ -445,7 +443,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# # Member of a different organisation is denied access
+# # Member of a different organisation is denied access - not automated
 
 # Given I am associated with sponsor organisation A
 
@@ -461,7 +459,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-## Pagination behaviour for project list
+## Pagination behaviour for project list - automated
 
 # Given there are more than 20 users in the list
 
@@ -473,7 +471,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-## First Page Behaviour
+## First Page Behaviour - automated
 
 # Given I am on the first page
 
@@ -489,7 +487,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# # Last Page Behaviour
+# # Last Page Behaviour - automated
 
 # Given I am on the last page
 
@@ -505,7 +503,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# #Page Number Selection
+# #Page Number Selection - automated
 
 # Given I identify which page I am on
 
@@ -521,7 +519,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# #Next Button Navigation
+# #Next Button Navigation - automated
 
 # Given I can view the "Next" link
 
@@ -533,7 +531,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
 
-# #Previous Button Navigation
+# #Previous Button Navigation - automated
 
 # Given I can view the "Previous" link
 
