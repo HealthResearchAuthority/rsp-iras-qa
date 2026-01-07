@@ -19,7 +19,7 @@ Feature: Sort, search and pagination of users list in the selected sponsor org
     Then I can see the user list page of the 'sponsor organisation'
     And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'name' on the 'first' page
 
-  @rsp-5233 @rsp-6488 @sortUserListByColumn
+  @rsp-5233 @rsp-6488 @sortUserListByColumn @knowndefect_6634
   Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column
     When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
@@ -36,12 +36,12 @@ Feature: Sort, search and pagination of users list in the selected sponsor org
     Then I can see the 'sponsor organisation users' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'last' page
 
     Examples:
-      | Sort_Button | Sort_Field | Initial_Sort | Secondary_Sort |
-      | Name        | name       | descending   | ascending      |
-      #    | Email_Address | email address | ascending    | descending     |# this sorting fails defect 6634
-      | Status      | status     | ascending    | descending     |
-      # | Role        | role       | ascending    | descending     |# this sorting fails defect 6634
-      | Authoriser  | authoriser | ascending    | descending     |
+      | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort |
+      | Name          | name          | descending   | ascending      |
+      | Email_Address | email address | ascending    | descending     |
+      | Status        | status        | ascending    | descending     |
+      | Role          | role          | ascending    | descending     |
+      | Authoriser    | authoriser    | ascending    | descending     |
 
   @rsp-5233 @sortUserListByColumn @skip
   #this scenario can be removed

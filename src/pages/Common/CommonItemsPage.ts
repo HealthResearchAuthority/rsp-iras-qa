@@ -1054,9 +1054,9 @@ export default class CommonItemsPage {
   }
 
   async getUsersInSponsorOrganisations(): Promise<Map<string, string[]>> {
-    const firstNames: string[] = [];
-    const lastNames: string[] = [];
-    const emailAddresses: string[] = [];
+    const firstNameValues: string[] = [];
+    const lastNameValues: string[] = [];
+    const emailAddressValues: string[] = [];
     let dataFound = false;
     while (!dataFound) {
       const rowCount = await this.tableRows.count();
@@ -1066,16 +1066,16 @@ export default class CommonItemsPage {
         const parts = fullName.trim().split(/\s+/);
         if (parts.length === 1) {
           // Only one name provided
-          firstNames.push(parts[0]);
-          lastNames.push('');
+          firstNameValues.push(parts[0]);
+          lastNameValues.push('');
         } else {
           const lastName = parts.pop();
           const firstName = parts.join(' ');
-          firstNames.push(firstName);
-          lastNames.push(lastName);
+          firstNameValues.push(firstName);
+          lastNameValues.push(lastName);
         }
         const emailAddress = confirmStringNotNull(await columns.nth(1).textContent());
-        emailAddresses.push(emailAddress);
+        emailAddressValues.push(emailAddress);
       }
       if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
@@ -1085,9 +1085,9 @@ export default class CommonItemsPage {
       }
     }
     const userMap = new Map([
-      ['firstNames', firstNames],
-      ['lastNames', lastNames],
-      ['emailAddresses', emailAddresses],
+      ['firstNameValues', firstNameValues],
+      ['lastNameValues', lastNameValues],
+      ['emailAddressValues', emailAddressValues],
     ]);
     return userMap;
   }
