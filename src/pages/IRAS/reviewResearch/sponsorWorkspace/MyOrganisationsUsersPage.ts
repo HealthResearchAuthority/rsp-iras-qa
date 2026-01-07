@@ -71,13 +71,8 @@ export default class MyOrganisationsUsersPage {
   }
 
   async assertOnMySponsorOrgUsersPage(commonItemsPage: CommonItemsPage): Promise<void> {
-    // this will be uncommented when KNOWN_DEFECT-RSP-5531 is fixed
-    // expect
-    //   .soft(await this.page.title())
-    //   .toBe(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.title);
-    const pageUrl = await this.page.url();
-    console.log(`Current Page URL: ${pageUrl}`);
-    await expect.soft(pageUrl).toContain(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.partial_url);
+    const pageUrl = this.page.url();
+    expect.soft(pageUrl).toContain(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.partial_url);
     await expect.soft(commonItemsPage.search_box_label).toBeVisible();
     await expect.soft(this.search_guidance_text).toBeVisible();
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
@@ -114,26 +109,26 @@ export default class MyOrganisationsUsersPage {
 
   async sqlGetAutomationActiveUserEmails() {
     const sqlConnection = await connect(dbConfigData.Identity_Service);
-    const queryResult = await sqlConnection.query(`SELECT Top 25 Email
+    const queryResult = await sqlConnection.query(`SELECT Top 20 Email
 FROM Users
 WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='active';`);
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.Email);
   }
-  async sqlGetAutomationDisabledUserEmails() {
-    const sqlConnection = await connect(dbConfigData.Identity_Service);
-    const queryResult = await sqlConnection.query(`SELECT Top 5 Email
-FROM Users
-WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='disabled';`);
-    await sqlConnection.close();
-    return queryResult.recordset.map((row) => row.Email);
-  }
+  //   async sqlGetAutomationDisabledUserEmails() {
+  //     const sqlConnection = await connect(dbConfigData.Identity_Service);
+  //     const queryResult = await sqlConnection.query(`SELECT Top 5 Email
+  // FROM Users
+  // WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='disabled';`);
+  //     await sqlConnection.close();
+  //     return queryResult.recordset.map((row) => row.Email);
+  //   }
 
   async getAutomationUserEmails() {
     const activeUsers = new Set(await this.sqlGetAutomationActiveUserEmails());
-    const disabledUsers = new Set(await this.sqlGetAutomationDisabledUserEmails());
-    // Union of two sets
-    const all = new Set<string>([...activeUsers, ...disabledUsers]);
-    return all;
+    // const disabledUsers = new Set(await this.sqlGetAutomationDisabledUserEmails());
+    // // Union of two sets
+    // const all = new Set<string>([...activeUsers, ...disabledUsers]);
+    return activeUsers;
   }
 }
