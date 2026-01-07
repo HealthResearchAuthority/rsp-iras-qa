@@ -26,7 +26,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6422 @MyOrganisationsUsersPage @Test
+  @rsp-6422 @MyOrganisationsUsersPage
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -49,7 +49,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I can see the 'My_Organisations_Table' ui labels on the my organisations page
     And I capture the page screenshot
     And I can now see a table of results for my organisations
-    When I enter '<Invalid_Input>' into the search field
+    When I enter '<Sponsor_Organisation>' into the search field
     Then I click the 'Search' button on the 'My_Organisations_Page'
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
@@ -63,10 +63,10 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And the action column section shows the hyperlink as '<Action_Column_Visibility>' based on the logged in user role
     And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'name' on the 'first' page
     Examples:
-      | Login_User   | User_Email               | Link | Add_A_User_Section_Visibility | Action_Column_Visibility |
-      | Sponsor_User | automation sponsor email | View | not visible                   | View                     |
-  # | System_Admin           | system admin email       | Manage | visible                       | Manage                   |
-  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   |
+      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility | Sponsor_Organisation      |
+      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton |
+      | System_Admin           | system admin email       | Manage | visible                       | Manage                   | University of Southampton |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   | University of Southampton |
 
   @rsp-6422 @sortUserListByColumn
   Scenario Outline: Verify that <Login_User> is able to sort the users list for <Sort_Button>
