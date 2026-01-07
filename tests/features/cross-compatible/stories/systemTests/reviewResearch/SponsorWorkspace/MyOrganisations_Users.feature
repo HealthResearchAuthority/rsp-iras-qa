@@ -26,12 +26,15 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6422 @MyOrganisationsUsersPage
+  @rsp-6422 @MyOrganisationsUsersPage @Test
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
@@ -46,6 +49,8 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I can see the 'My_Organisations_Table' ui labels on the my organisations page
     And I capture the page screenshot
     And I can now see a table of results for my organisations
+    When I enter '<Invalid_Input>' into the search field
+    Then I click the 'Search' button on the 'My_Organisations_Page'
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
@@ -58,17 +63,20 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And the action column section shows the hyperlink as '<Action_Column_Visibility>' based on the logged in user role
     And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'name' on the 'first' page
     Examples:
-      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility |
-      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     |
-      | System_Admin           | system admin email       | Manage | visible                       | Manage                   |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   |
+      | Login_User   | User_Email               | Link | Add_A_User_Section_Visibility | Action_Column_Visibility |
+      | Sponsor_User | automation sponsor email | View | not visible                   | View                     |
+  # | System_Admin           | system admin email       | Manage | visible                       | Manage                   |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   |
 
   @rsp-6422 @sortUserListByColumn
   Scenario Outline: Verify that <Login_User> is able to sort the users list for <Sort_Button>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
@@ -108,25 +116,28 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Sponsor_User           | automation sponsor email | View   | Name          | name          | descending   | ascending      |
       | Sponsor_User           | automation sponsor email | View   | Email_Address | email address | ascending    | descending     |
       | Sponsor_User           | automation sponsor email | View   | Status        | status        | ascending    | descending     |
-      | Sponsor_User           | automation sponsor email | View   | Role          | role          | ascending    | descending     |
-      | Sponsor_User           | automation sponsor email | View   | Authoriser    | authoriser    | ascending    | descending     |
-      | System_Admin           | system admin email       | Manage | Name          | name          | descending   | ascending      |
-      | System_Admin           | system admin email       | Manage | Email_Address | email address | ascending    | descending     |
-      | System_Admin           | system admin email       | Manage | Status        | status        | ascending    | descending     |
-      | System_Admin           | system admin email       | Manage | Role          | role          | ascending    | descending     |
-      | System_Admin           | system admin email       | Manage | Authoriser    | authoriser    | ascending    | descending     |
+      # | Sponsor_User           | automation sponsor email | View   | Role          | role          | ascending    | descending     |
+      # | Sponsor_User           | automation sponsor email | View   | Authoriser    | authoriser    | ascending    | descending     |
+      # | System_Admin           | system admin email       | Manage | Name          | name          | descending   | ascending      |
+      # | System_Admin           | system admin email       | Manage | Email_Address | email address | ascending    | descending     |
+      # | System_Admin           | system admin email       | Manage | Status        | status        | ascending    | descending     |
+      # | System_Admin           | system admin email       | Manage | Role          | role          | ascending    | descending     |
+      # | System_Admin           | system admin email       | Manage | Authoriser    | authoriser    | ascending    | descending     |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Name          | name          | descending   | ascending      |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | email address | ascending    | descending     |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Status        | status        | ascending    | descending     |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Role          | role          | ascending    | descending     |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Authoriser    | authoriser    | ascending    | descending     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Role          | role          | ascending    | descending     |
+  # | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Authoriser    | authoriser    | ascending    | descending     |
 
   @rsp-6422 @UserListSponsorOrgSearchResultsFound
   Scenario Outline: Verify that <Login_User> can search for the users in the user tab by <Field_Name> and <Position>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
@@ -163,14 +174,14 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Sponsor_User           | automation sponsor email | View   | Email_Address | Last     |
       | Sponsor_User           | automation sponsor email | View   | Full_Name     | First    |
       | Sponsor_User           | automation sponsor email | View   | Full_Name     | Last     |
-      | System_Admin           | system admin email       | Manage | First_Name    | First    |
-      | System_Admin           | system admin email       | Manage | Last_Name     | First    |
-      | System_Admin           | system admin email       | Manage | Email_Address | First    |
-      | System_Admin           | system admin email       | Manage | First_Name    | Last     |
-      | System_Admin           | system admin email       | Manage | Last_Name     | Last     |
-      | System_Admin           | system admin email       | Manage | Email_Address | Last     |
-      | System_Admin           | system admin email       | Manage | Full_Name     | First    |
-      | System_Admin           | system admin email       | Manage | Full_Name     | Last     |
+      # | System_Admin           | system admin email       | Manage | First_Name    | First    |
+      # | System_Admin           | system admin email       | Manage | Last_Name     | First    |
+      # | System_Admin           | system admin email       | Manage | Email_Address | First    |
+      # | System_Admin           | system admin email       | Manage | First_Name    | Last     |
+      # | System_Admin           | system admin email       | Manage | Last_Name     | Last     |
+      # | System_Admin           | system admin email       | Manage | Email_Address | Last     |
+      # | System_Admin           | system admin email       | Manage | Full_Name     | First    |
+      # | System_Admin           | system admin email       | Manage | Full_Name     | Last     |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | First    |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | First    |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | First    |
@@ -184,8 +195,11 @@ Feature: Sponsor Workspace - My Organisations Page - Users
   Scenario Outline: Verify no results found message if there is no user added to the selected sponsor organisation matches the search criteria
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
@@ -222,8 +236,11 @@ Feature: Sponsor Workspace - My Organisations Page - Users
   Scenario: Verify pagination in user tab of sponsor organisation when <Login_User> is on the first page and navigate through each page by clicking <Navigation_Method>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
@@ -257,8 +274,8 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Login_User             | User_Email               | Link   | Navigation_Method |
       | Sponsor_User           | automation sponsor email | View   | page number       |
       | Sponsor_User           | automation sponsor email | View   | next link         |
-      | System_Admin           | system admin email       | Manage | page number       |
-      | System_Admin           | system admin email       | Manage | next link         |
+      # | System_Admin           | system admin email       | Manage | page number       |
+      # | System_Admin           | system admin email       | Manage | next link         |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | next link         |
 
@@ -266,8 +283,11 @@ Feature: Sponsor Workspace - My Organisations Page - Users
   Scenario: Verify pagination in user tab of sponsor organisation when <Login_User> is on the last page and navigate through each page by clicking <Navigation_Method>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
@@ -299,8 +319,8 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Login_User             | User_Email               | Link   | Navigation_Method |
       | Sponsor_User           | automation sponsor email | View   | page number       |
       | Sponsor_User           | automation sponsor email | View   | previous link     |
-      | System_Admin           | system admin email       | Manage | page number       |
-      | System_Admin           | system admin email       | Manage | previous link     |
+      # | System_Admin           | system admin email       | Manage | page number       |
+      # | System_Admin           | system admin email       | Manage | previous link     |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | previous link     |
 

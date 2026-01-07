@@ -36,7 +36,6 @@ Then(
     await expect.soft(orgNameValue).toBe(sponsorOrgName);
     const countryValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(2)').innerText();
     await expect.soft(countryValue).toBe(countryName);
-
     const linkName = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(3)').innerText();
     if (user === 'Sponsor_User') {
       await expect.soft(linkName).toBe('View');
