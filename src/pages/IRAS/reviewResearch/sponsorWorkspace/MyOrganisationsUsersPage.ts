@@ -114,7 +114,7 @@ export default class MyOrganisationsUsersPage {
 
   async sqlGetAutomationActiveUserEmails() {
     const sqlConnection = await connect(dbConfigData.Identity_Service);
-    const queryResult = await sqlConnection.query(`SELECT Top 20 Email
+    const queryResult = await sqlConnection.query(`SELECT Top 25 Email
 FROM Users
 WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='active';`);
     await sqlConnection.close();

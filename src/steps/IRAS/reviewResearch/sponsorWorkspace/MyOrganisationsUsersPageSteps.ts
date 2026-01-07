@@ -69,15 +69,16 @@ Then(
     const emails = Array.from(automationUserEmailsSet).slice(0, 25);
     for (let i = 0; i < emails.length; i++) {
       await commonItemsPage.govUkLink.getByText('Add a new user profile record', { exact: true }).click();
-      await commonItemsPage.page.waitForTimeout(500);
+      await commonItemsPage.page.waitForTimeout(2000);
       const email = emails[i];
       console.log(`Adding user with email: ${email}`);
       await commonItemsPage.search_text.fill(email);
       await commonItemsPage.govUkButton.getByText('Search', { exact: true }).click();
-      await commonItemsPage.page.waitForTimeout(500);
+      await commonItemsPage.page.waitForTimeout(1000);
       await commonItemsPage.govUkLink.getByText('Add user', { exact: true }).click();
-      await commonItemsPage.page.waitForTimeout(500);
+      await commonItemsPage.page.waitForTimeout(1000);
       await commonItemsPage.govUkButton.getByText('Add user', { exact: true }).click();
+      await commonItemsPage.page.waitForTimeout(1000);
     }
   }
 );

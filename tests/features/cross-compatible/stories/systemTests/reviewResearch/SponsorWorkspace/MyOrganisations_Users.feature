@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive @Run
+@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace - My Organisations Page - Users
 
   Background:
@@ -21,16 +21,30 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Then I click the view edit link of the 'newly added sponsor organisation'
     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
-
-  @rsp-6422 @MyOrganisationsUsersPage
-  Scenario: Validate that <Login_User> able to navigate to Users page for the selected sponsor organisation
-    When I enter '<User_Email>' into the search field
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'system admin email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'sponsor org admin email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
+
+  @rsp-6422 @MyOrganisationsUsersPage
+  Scenario Outline: Validate that <Login_User> is able to navigate to Users page for the selected sponsor organisation
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -59,14 +73,14 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   |
 
   @rsp-6422 @sortUserListByColumn
-  Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column
-    When I enter '<User_Email>' into the search field
-    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
-    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
+  Scenario Outline: Verify that <Login_User> is able to sort the users list for <Sort_Button>
+    # When I enter '<User_Email>' into the search field
+    # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    # When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    # And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    # Then I can see the 'user added' successful message on sponsor organisation user list page
+    # And I capture the page screenshot
+    # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -117,14 +131,14 @@ Feature: Sponsor Workspace - My Organisations Page - Users
 
 
   @rsp-6422 @UserListSponsorOrgSearchResultsFound
-  Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
-    When I enter '<User_Email>' into the search field
-    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
-    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
+  Scenario Outline: Verify that <Login_User> can search for the users in the user tab by <Field_Name> and <Position>
+    # When I enter '<User_Email>' into the search field
+    # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    # When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    # And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    # Then I can see the 'user added' successful message on sponsor organisation user list page
+    # And I capture the page screenshot
+    # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -175,14 +189,14 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | Last     |
 
   @rsp-6422 @UserListSponsorOrgSearchNoResultsFound
-  Scenario Outline: Verify no results found message if there is no sponsor organisation on the system that matches the search criteria
-    When I enter '<User_Email>' into the search field
-    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
-    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
+  Scenario Outline: Verify no results found message if there is no user added to the selected sponsor organisation matches the search criteria
+    # When I enter '<User_Email>' into the search field
+    # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    # When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    # And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    # Then I can see the 'user added' successful message on sponsor organisation user list page
+    # And I capture the page screenshot
+    # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -211,15 +225,15 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | System_Admin           | system admin email       | Manage | Non_Existant_User_Data |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Non_Existant_User_Data |
 
-  @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationFirstPage @UserlistSponsorOrgPaginationPageNumber @UserlistSponsorOrgPaginationNextLinkClick
-  Scenario: Verify pagination in user tab of sponsor organisation when user is on the first page and navigate through each page by clicking page number or by by clicking next link
-    When I enter '<User_Email>' into the search field
-    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
-    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
+  @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationFirstPage @UserlistSponsorOrgPaginationPageNumber @UserlistSponsorOrgPaginationNextLinkClick @Run
+  Scenario: Verify pagination in user tab of sponsor organisation when <Login_User> is on the first page and navigate through each page by clicking <Navigation_Method>
+    # When I enter '<User_Email>' into the search field
+    # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    # When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    # And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    # Then I can see the 'user added' successful message on sponsor organisation user list page
+    # And I capture the page screenshot
+    # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -254,15 +268,15 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | next link         |
 
-  @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationLastPage @UserlistSponsorOrgPaginationPageNumber @MUserlistSponsorOrgPaginationPreviousLinkClick
-  Scenario: Verify pagination in user tab of sponsor organisation when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
-    When I enter '<User_Email>' into the search field
-    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
-    And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
+  @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationLastPage @UserlistSponsorOrgPaginationPageNumber @MUserlistSponsorOrgPaginationPreviousLinkClick @Run
+  Scenario: Verify pagination in user tab of sponsor organisation when <Login_User> is on the last page and navigate through each page by clicking <Navigation_Method>
+    # When I enter '<User_Email>' into the search field
+    # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    # When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    # And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    # Then I can see the 'user added' successful message on sponsor organisation user list page
+    # And I capture the page screenshot
+    # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
