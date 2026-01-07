@@ -2858,4 +2858,62 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
-  
+
+  @axeAccessibilityMyOrganisationsPage @SponsorUser @SetupNewSponsorOrgGoLive
+  Scenario: My Organisations Page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    Then I can see the sponsor workspace page
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySponsorOrganisationProfilePage @SponsorUser @SetupNewSponsorOrgGoLive
+  Scenario: Sponsor Organisation Profile Page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    Then I can see the sponsor workspace page
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    Then I click the 'View' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    And I can see the sponsor organisation profile page from my organisations
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations

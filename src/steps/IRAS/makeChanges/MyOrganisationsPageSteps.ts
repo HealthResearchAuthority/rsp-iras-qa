@@ -1,7 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { Locator } from '@playwright/test';
-//import MyOrganisationsPage from '../../../pages/IRAS/makeChanges/MyOrganisationsPage';
 
 const { Then } = createBdd(test);
 
@@ -33,14 +32,14 @@ Then(
     const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
     const countryName = await checkSetupSponsorOrganisationPage.getCountry();
     const orgNameValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(1)').innerText();
-    await expect.soft(orgNameValue).toBe(sponsorOrgName);
+    expect.soft(orgNameValue).toBe(sponsorOrgName);
     const countryValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(2)').innerText();
-    await expect.soft(countryValue).toBe(countryName);
+    expect.soft(countryValue).toBe(countryName);
     const linkName = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(3)').innerText();
     if (user === 'Sponsor_User') {
-      await expect.soft(linkName).toBe('View');
+      expect.soft(linkName).toBe('View');
     } else {
-      await expect.soft(linkName).toBe('Manage');
+      expect.soft(linkName).toBe('Manage');
     }
   }
 );
