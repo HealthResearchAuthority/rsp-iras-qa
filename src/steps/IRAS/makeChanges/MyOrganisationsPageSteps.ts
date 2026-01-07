@@ -43,3 +43,12 @@ Then(
     }
   }
 );
+
+Then(
+  'I enter partial organisation name into the search field',
+  async ({ commonItemsPage, checkSetupSponsorOrganisationPage }) => {
+    const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
+    const partialText = sponsorOrgName.slice(0, Math.floor(Math.random() * sponsorOrgName.length));
+    await commonItemsPage.search_text.fill(partialText);
+  }
+);

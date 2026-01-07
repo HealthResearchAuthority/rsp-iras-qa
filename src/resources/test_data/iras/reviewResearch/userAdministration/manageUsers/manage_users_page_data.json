@@ -292,6 +292,10 @@
       "role_checkbox": ["System administrator"],
       "status_radio": "Active"
     },
+    "Advanced_Filter_Role_Organisation_Administrator_Status_Active": {
+      "role_checkbox": ["Organisation administrator"],
+      "status_radio": "Active"
+    },
     "Advanced_Filter_Role_Studywide_Reviewer_Status_Active": {
       "role_checkbox": ["Study-wide reviewer"],
       "status_radio": "Active"
