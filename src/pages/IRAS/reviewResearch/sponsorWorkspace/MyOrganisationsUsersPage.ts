@@ -11,7 +11,7 @@ export default class MyOrganisationsUsersPage {
   readonly mySponsorOrgUsersPageTestData: typeof mySponsorOrgUsersPageTestData;
   readonly commonTestData: typeof commonTestData;
   readonly page_heading: Locator;
-  readonly guidance_text: Locator;
+  readonly page_caption: Locator;
   readonly user_added_to_sponsor_organisation__success_message_text: Locator;
   readonly information_alert_banner: Locator;
   readonly user_in_sponsor_organisation_disabled_success_message_text: Locator;
@@ -20,6 +20,12 @@ export default class MyOrganisationsUsersPage {
   readonly navList: Locator;
   readonly navLinks: Locator;
   readonly mainPageContent: Locator;
+  readonly add_a_user_button: Locator;
+  readonly usersLink: Locator;
+  readonly users_tab_active: Locator;
+  readonly add_a_user_section_heading: Locator;
+  readonly add_a_user_section_hint_text: Locator;
+  readonly actionLinks: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -28,14 +34,6 @@ export default class MyOrganisationsUsersPage {
     this.commonTestData = commonTestData;
 
     //Locators
-    this.page_heading = this.page
-      .getByRole('heading')
-      .getByText(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.heading_prefix_label);
-    this.guidance_text = this.page
-      .getByRole('paragraph')
-      .getByText(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.guidance_text, {
-        exact: true,
-      });
     this.user_added_to_sponsor_organisation__success_message_text = this.page
       .getByRole('heading')
       .getByText(
@@ -64,15 +62,39 @@ export default class MyOrganisationsUsersPage {
     this.mainPageContent = this.page.getByTestId('main-content');
     this.navList = this.mainPageContent.locator('ul.govuk-service-navigation__list');
     this.navLinks = this.navList.getByRole('link');
+    this.add_a_user_button = this.page.getByRole('button', {
+      name: mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.add_a_user_button,
+    });
+    this.usersLink = this.page.getByRole('link', {
+      name: mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.users_tab_label,
+    });
+    this.users_tab_active = this.page.locator('li.govuk-service-navigation__item--active').filter({
+      has: this.page.getByRole('link', {
+        name: mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.users_tab_label,
+      }),
+    });
+    this.add_a_user_section_heading = this.mainPageContent.getByLabel(
+      mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.add_a_user_section_heading
+    );
+    this.add_a_user_section_hint_text = this.mainPageContent.getByLabel(
+      mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.add_a_user_section_hint_text
+    );
+    this.actionLinks = this.page.locator('tbody tr td:last-child a.govuk-link');
+    this.page_caption = this.mainPageContent.locator('div.govuk-caption-l');
+    this.page_heading = this.mainPageContent.getByRole('heading', { level: 1 });
   }
 
   async goto(): Promise<void> {
     this.page.goto('');
   }
 
-  async assertOnMySponsorOrgUsersPage(commonItemsPage: CommonItemsPage): Promise<void> {
+  async assertOnMySponsorOrgUsersPage(sponsor_organisation: string, commonItemsPage: CommonItemsPage): Promise<void> {
     const pageUrl = this.page.url();
     expect.soft(pageUrl).toContain(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.partial_url);
+    await expect
+      .soft(this.page_caption)
+      .toHaveText(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.page_caption);
+    await expect.soft(this.page_heading).toHaveText(sponsor_organisation);
     await expect.soft(commonItemsPage.search_box_label).toBeVisible();
     await expect.soft(this.search_guidance_text).toBeVisible();
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
@@ -130,5 +152,42 @@ WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='active';`);
     // // Union of two sets
     // const all = new Set<string>([...activeUsers, ...disabledUsers]);
     return activeUsers;
+  }
+
+  async assertOnMySponsorOrgAddUsersPage(
+    sponsor_organisation: string,
+    commonItemsPage: CommonItemsPage
+  ): Promise<void> {
+    const pageUrl = this.page.url();
+    expect.soft(pageUrl).toContain(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.add_user_partial_url);
+    await expect
+      .soft(this.page_caption)
+      .toHaveText(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.page_caption);
+    await expect.soft(this.page_heading).toHaveText(sponsor_organisation);
+    await expect.soft(commonItemsPage.search_box_label).toBeVisible();
+    await expect.soft(this.search_guidance_text).toBeVisible();
+    if ((await commonItemsPage.userListTableRows.count()) >= 2) {
+      await expect.soft(commonItemsPage.name_label).toBeVisible();
+      await expect.soft(commonItemsPage.email_address_label).toBeVisible();
+      await expect.soft(commonItemsPage.status_label).toBeVisible();
+      await expect.soft(commonItemsPage.role_label).toBeVisible();
+      await expect.soft(commonItemsPage.authoriser_label).toBeVisible();
+      await expect.soft(commonItemsPage.actions_label).toBeVisible();
+    }
+    if ((await commonItemsPage.userListTableRows.count()) >= 2) {
+      const userList = await commonItemsPage.getSponsorUsers();
+      const emailAddress: any = userList.get('emailAddressValues');
+      await commonItemsPage.setUserEmail(emailAddress);
+      const firstName: any = userList.get('firstNameValues');
+      await commonItemsPage.setUserFirstName(firstName);
+      const lastName: any = userList.get('lastNameValues');
+      await commonItemsPage.setUserLastName(lastName);
+      await commonItemsPage.setFirstName(firstName[0]);
+      await commonItemsPage.setLastName(lastName[0]);
+      await commonItemsPage.setEmail(emailAddress[0]);
+      if (await commonItemsPage.firstPage.isVisible()) {
+        await commonItemsPage.firstPage.click();
+      }
+    }
   }
 }

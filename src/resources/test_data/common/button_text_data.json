@@ -406,5 +406,8 @@
   },
   "My_Organisations_Page": {
     "Search": "Search"
+  },
+  "My_Organisations_Users_Page": {
+    "Add_User": "Add a user"
   }
 }

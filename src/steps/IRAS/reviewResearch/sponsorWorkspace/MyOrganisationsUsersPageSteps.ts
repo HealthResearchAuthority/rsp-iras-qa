@@ -3,17 +3,23 @@ import { expect, test } from '../../../../hooks/CustomFixtures';
 const { Then } = createBdd(test);
 
 Then(
+  'I can see the users tab in the sponsor organisation profile for the selected sponsor organisation {string}',
+  async ({ mySponsorOrgUsersPage, commonItemsPage }, sponsorOrg: string) => {
+    await mySponsorOrgUsersPage.assertOnMySponsorOrgUsersPage(sponsorOrg, commonItemsPage);
+  }
+);
+
+Then(
   'I can see tabs are displayed based on the logged in user role {string}',
   async ({ mySponsorOrgUsersPage }, userLoggedIn: string) => {
+    const tabNames = await mySponsorOrgUsersPage.getVisibleTabNames();
     if (userLoggedIn === 'Sponsor_Org_Admin_User' || userLoggedIn === 'System_Admin') {
-      const tabNames = await mySponsorOrgUsersPage.getVisibleTabNames();
       expect
         .soft(tabNames)
         .toEqual(
           mySponsorOrgUsersPage.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.org_admin_sys_admin_tabs.slice()
         );
     } else if (userLoggedIn === 'Sponsor_User') {
-      const tabNames = await mySponsorOrgUsersPage.getVisibleTabNames();
       expect
         .soft(tabNames)
         .toEqual(
@@ -23,26 +29,22 @@ Then(
   }
 );
 
-Then('the {string} tab is underlined', async ({ mySponsorOrgUsersPage }, activeTab: string) => {
-  const usersLink = mySponsorOrgUsersPage.page.getByRole('link', { name: activeTab });
-  await expect.soft(usersLink).toBeVisible();
-  //   await expect.soft(usersLink).toHaveCSS('text-decoration-line', 'underline');
-  //   const computed = await usersLink.evaluate((el) => getComputedStyle(el).textDecoration);
-  //   expect.soft(computed.toLowerCase()).toContain('underline');
-  const usersItem = mySponsorOrgUsersPage.page
-    .locator('li.govuk-service-navigation__item--active')
-    .filter({ has: mySponsorOrgUsersPage.page.getByRole('link', { name: activeTab }) });
-  await expect.soft(usersItem).toHaveCount(1);
+Then('the users tab is underlined', async ({ mySponsorOrgUsersPage }) => {
+  await expect.soft(mySponsorOrgUsersPage.usersLink).toBeVisible();
+  await expect.soft(mySponsorOrgUsersPage.users_tab_active).toHaveCount(1);
 });
 
 Then(
   'the add a user section is {string} based on the logged in user role',
   async ({ mySponsorOrgUsersPage }, visibility: string) => {
-    const addUserButton = mySponsorOrgUsersPage.page.getByRole('button', { name: 'Add a user' });
     if (visibility === 'not visible') {
-      expect.soft(addUserButton).toBeHidden();
+      await expect.soft(mySponsorOrgUsersPage.add_a_user_section_heading).toBeHidden();
+      await expect.soft(mySponsorOrgUsersPage.add_a_user_section_hint_text).toBeHidden();
+      await expect.soft(mySponsorOrgUsersPage.add_a_user_button).toBeHidden();
     } else if (visibility === 'visible') {
-      expect.soft(addUserButton).toBeVisible();
+      await expect.soft(mySponsorOrgUsersPage.add_a_user_section_heading).toBeVisible();
+      await expect.soft(mySponsorOrgUsersPage.add_a_user_section_hint_text).toBeVisible();
+      await expect.soft(mySponsorOrgUsersPage.add_a_user_button).toBeVisible();
     }
   }
 );
@@ -50,10 +52,9 @@ Then(
 Then(
   'the action column section shows the hyperlink as {string} based on the logged in user role',
   async ({ mySponsorOrgUsersPage }, visibleLink: string) => {
-    const actionLinks = mySponsorOrgUsersPage.page.locator('tbody tr td:last-child a.govuk-link');
-    const texts = (await actionLinks.allTextContents()).map((t) => t.trim());
+    const texts = (await mySponsorOrgUsersPage.actionLinks.allTextContents()).map((t) => t.trim());
     texts.forEach((t) => expect.soft(t).toBe(visibleLink));
-    const hrefs = await actionLinks.evaluateAll((anchors) =>
+    const hrefs = await mySponsorOrgUsersPage.actionLinks.evaluateAll((anchors) =>
       anchors.map((a) => (a as HTMLAnchorElement).getAttribute('href') || '')
     );
     // ensure none are null/empty if that’s expected
