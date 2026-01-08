@@ -37,7 +37,15 @@ Then(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datesetName];
     const actualValue = await userProfilePage.getUserProfileValue(editFieldName);
     const expectedValue = dataset[editFieldName];
-    expect.soft(actualValue).toContain(expectedValue.toString());
+    if (typeof expectedValue === 'string') {
+      expect.soft(actualValue).toContain(expectedValue);
+    } else {
+      const newExpValue = Object.keys(expectedValue)
+        .sort((a, b) => Number(a) - Number(b))
+        .map((k) => expectedValue[k])
+        .join(', ');
+      expect.soft(actualValue).toContain(newExpValue);
+    }
   }
 );
 
