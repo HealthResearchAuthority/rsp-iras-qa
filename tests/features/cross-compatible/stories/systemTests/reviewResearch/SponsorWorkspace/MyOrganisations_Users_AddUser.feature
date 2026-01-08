@@ -74,17 +74,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
       | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin |
 
 
-# https://nihr.atlassian.net/browse/RSP-6461
-
-# # Organisation Administrator/System Administrator  visibility of Add user tab
-
-# Given I am signed in as an Organisation Administrator or System Administrator
-
-# When I am on the Users page of the Sponsor Organisation Profile
-
-# Then I see a clickable "Add user" tab
-
-# And the "Add user" tab is visible only to Organisation Administrators
+##  https://nihr.atlassian.net/browse/RSP-6461
 
 
 
@@ -157,5 +147,193 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
 # When I click "Save and continue"
 
 # Then I am taken to the "Add user role" page for that user
+
+
+##  https://nihr.atlassian.net/browse/RSP-6425
+
+## Back breadcrumb from Add user role
+
+#   Given I am on the "Add user role", Add permission, and check and add user page
+
+#   Then I see a breadcrumb labelled "Back"
+
+#   When I click "Back"
+
+#   Then I return to the respective previous page
+
+
+# # Validation error when no role selected
+
+#   Given I am on the "Add user role" page
+
+#   And no role is selected
+
+#   When I click "Save and continue"
+
+#   Then a notification page stating "There is a problem" is displayed with guidance notes
+
+#   And I cannot proceed until a role is selected
+
+
+# #Authorisation capability based on role and permission
+
+# Given the user has role: Organisation Administrator or Sponsor with authorisation = Yes
+
+# Then they can authorise project modifications/submissions.
+
+
+
+# Given  the user has role: Sponsor with authorisation = No
+
+# Then they have view‑only access to project modifications/submissions.
+
+
+## https://nihr.atlassian.net/browse/RSP-6465
+
+
+## Display role options and guidance
+
+# Given I am on the "Add user role" page
+
+# Then I see an important guidance banner “Authorisation Guidance”
+
+# And I see a "Role" section with radio options "Organisation Administrator" and "Sponsor"
+
+# And guidance notes are displayed for the role selection
+
+# And only one role can be selected by the Organisation Administrator or System Administrator
+
+
+
+# Back breadcrumb from Add user role
+
+# Given I am on the "Add user role" page
+
+# Then I see a breadcrumb labelled "Back"
+
+# When I click "Back"
+
+# Then I return to the "Add users" page
+
+
+
+# Selecting Organisation Administrator auto-assigns authoriser and proceeds
+
+# Given I select the role "Organisation Administrator"
+
+# When I click "Save and continue"
+
+# Then the user’s authoriser permission is set to "Yes" automatically
+
+# And I am navigated to the "Check and confirm user" page
+
+
+
+# Selecting Sponsor proceeds to Add user permission page
+
+# Given I select the role "Sponsor"
+
+# When I click "Save and continue"
+
+# Then I am navigated to the "Add user permission" page
+
+
+
+# Validation error when no role selected
+
+# Given I am on the "Add user role" page
+
+# And no role is selected
+
+# When I click "Save and continue"
+
+# Then a notification page stating "There is a problem" is displayed with guidance notes
+
+# And I cannot proceed until a role is selected
+
+
+
+# Display permission option for Sponsor
+
+# Given I am on the "Add user permission" page
+
+# Then I see a permissions section with guidance
+
+# And I see a checkbox labelled "User can authorise submissions"
+
+# And I see a breadcrumb labelled "Back" that returns to the "Add user role" page
+
+
+
+# Save and continue from Add user permission
+
+# Given I have optionally ticked the checkbox "User can authorise submissions" for a sponsor assigned role
+
+# When I click "Save and continue"
+
+# Then I am navigated to the "Check and confirm user" page
+
+
+
+# Review assigned details and change if needed
+
+# Given I am on the "Check and confirm user" page
+
+# Then I see three rows: "Email address", "Role", and "Authoriser"
+
+# And each row has a "Change" hyperlink
+
+# When I click "Change" on "Email address"
+
+# Then I am taken to the "Add users" page
+
+# When I click "Change" on "Role"
+
+# Then I am taken to the "Add user role" page
+
+# When I click "Change" on "Authoriser"
+
+# Then I am taken to the "Add user permission" page
+
+
+
+# Confirm saves details and shows success banner
+
+# Given I am satisfied with the details on the "Check and confirm user" page
+
+# When I click "Confirm"
+
+# Then the user details are saved
+
+# And I see a success notification banner "User added" on the Users page
+
+
+
+# Cancel discards details and returns to Users page
+
+# Given I am on the "Check and confirm user" page
+
+# When I click "Cancel"
+
+# Then no changes are saved
+
+# And I am returned to the Users page
+
+
+
+# Authorisation capability based on role and permission
+
+# Given the user has role: Organisation Administrator or Sponsor with authorisation = Yes
+
+# Then they can authorise project modifications/submissions.
+
+
+
+# Given  the user has role: Sponsor with authorisation = No
+
+# Then they have view‑only access to project modifications/submissions.
+
+
+
 
 
