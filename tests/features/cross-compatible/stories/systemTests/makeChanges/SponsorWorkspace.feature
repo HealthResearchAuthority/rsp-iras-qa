@@ -537,7 +537,7 @@ Feature: Sponsor Workspace
       | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
 
-  @rsp-6419 @MyOrganisationsPageSearchValidation @KNOWN_DEFECT_RSP-6676
+  @rsp-6419 @MyOrganisationsPageSearchValidation
   Scenario: Validate the search box functionality of my organisations for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'

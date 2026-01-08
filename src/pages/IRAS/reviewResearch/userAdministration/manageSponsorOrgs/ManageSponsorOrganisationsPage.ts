@@ -58,7 +58,7 @@ export default class ManageSponsorOrganisationsPage {
         .sponsor_organisation_search_box_label,
     });
     this.sponsor_organisation_added_success_message_header_text = this.page
-      .getByTestId('govuk-notification-banner-title')
+      .locator('h2.govuk-notification-banner__title')
       .getByText(
         this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page
           .sponsor_organisation_added_success_message_header_text
