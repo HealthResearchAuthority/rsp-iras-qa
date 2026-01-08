@@ -14,7 +14,7 @@ When(
     await checkAddUserSponsorOrganisationPage.assertOnCheckAddUserSponsorOrganisationPage();
     await expect
       .soft(
-        checkAddUserSponsorOrganisationPage.mainPageContent.getByRole('heading', {
+        checkAddUserSponsorOrganisationPage.mainPageContent.getByRole('paragraph', {
           name:
             checkAddUserSponsorOrganisationPage.checkAddUserSponsorOrgPageTestData
               .Check_Add_User_Sponsor_Organisation_Page.page_guidance_prefix_text +

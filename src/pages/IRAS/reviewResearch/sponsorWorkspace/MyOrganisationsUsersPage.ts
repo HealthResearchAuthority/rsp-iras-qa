@@ -76,7 +76,7 @@ export default class MyOrganisationsUsersPage {
     this.add_a_user_section_heading = this.mainPageContent.getByLabel(
       mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.add_a_user_section_heading
     );
-    this.add_a_user_section_hint_text = this.mainPageContent.getByLabel(
+    this.add_a_user_section_hint_text = this.mainPageContent.getByText(
       mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.add_a_user_section_hint_text
     );
     this.actionLinks = this.page.locator('tbody tr td:last-child a.govuk-link');
