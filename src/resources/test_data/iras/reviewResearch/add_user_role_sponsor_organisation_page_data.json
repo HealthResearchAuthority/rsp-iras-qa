@@ -3,7 +3,7 @@
     "title": "",
     "page_heading": "Add user role",
     "add_user_role_sponsor_workspace_partial_url": "/sponsorworkspace/myorganisationusersadduserrole?rtsId",
-    "add_user_role_sponsor_workspace_page_caption": "Sponsor organisations profile",
+    "add_user_role_sponsor_workspace_page_caption": "Sponsor organisation profile",
     "add_user_role_sponsor_workspace_hint_text": "Select the roles for this user.",
     "add_user_role_system_admin_workspace_partial_url": "/sponsororganisations/adduserrole?userId",
     "add_user_role_system_admin_workspace_page_caption": "Sponsor organisation's profile",

@@ -38,10 +38,12 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
     When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -72,11 +74,11 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And the action column section shows the hyperlink as '<Action_Column_Visibility>' based on the logged in user role
     # And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'name' on the 'first' page
     Examples:
-      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission |
-      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Authoriser_Yes         |
-      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Authoriser_No          |
-      | System_Admin           | system admin email       | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | Not_Applicable         |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | Not_Applicable         |
+      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
+      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
+      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
+      | System_Admin           | system admin email       | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6422 @sortUserListByColumn
   Scenario Outline: Verify that <Login_User> is able to sort the users list for <Sort_Button>
