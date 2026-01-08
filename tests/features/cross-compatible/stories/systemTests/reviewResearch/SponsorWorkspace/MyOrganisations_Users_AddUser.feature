@@ -33,6 +33,11 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
+    Then I can see the add user role page
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -64,9 +69,9 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
 
     Examples:
-      | Login_User             | User_Email              | Link   | Add_A_User_Section_Visibility | Sponsor_Organisation      |
-      | System_Admin           | system admin email      | Manage | visible                       | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton |
+      | Login_User             | User_Email              | Link   | Add_A_User_Section_Visibility | Sponsor_Organisation      | Select_User_Role                |
+      # | System_Admin           | system admin email      | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin |
 
 
 # https://nihr.atlassian.net/browse/RSP-6461

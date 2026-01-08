@@ -153,41 +153,4 @@ WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='active';`);
     // const all = new Set<string>([...activeUsers, ...disabledUsers]);
     return activeUsers;
   }
-
-  async assertOnMySponsorOrgAddUsersPage(
-    sponsor_organisation: string,
-    commonItemsPage: CommonItemsPage
-  ): Promise<void> {
-    const pageUrl = this.page.url();
-    expect.soft(pageUrl).toContain(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.add_user_partial_url);
-    await expect
-      .soft(this.page_caption)
-      .toHaveText(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.page_caption);
-    await expect.soft(this.page_heading).toHaveText(sponsor_organisation);
-    await expect.soft(commonItemsPage.search_box_label).toBeVisible();
-    await expect.soft(this.search_guidance_text).toBeVisible();
-    if ((await commonItemsPage.userListTableRows.count()) >= 2) {
-      await expect.soft(commonItemsPage.name_label).toBeVisible();
-      await expect.soft(commonItemsPage.email_address_label).toBeVisible();
-      await expect.soft(commonItemsPage.status_label).toBeVisible();
-      await expect.soft(commonItemsPage.role_label).toBeVisible();
-      await expect.soft(commonItemsPage.authoriser_label).toBeVisible();
-      await expect.soft(commonItemsPage.actions_label).toBeVisible();
-    }
-    if ((await commonItemsPage.userListTableRows.count()) >= 2) {
-      const userList = await commonItemsPage.getSponsorUsers();
-      const emailAddress: any = userList.get('emailAddressValues');
-      await commonItemsPage.setUserEmail(emailAddress);
-      const firstName: any = userList.get('firstNameValues');
-      await commonItemsPage.setUserFirstName(firstName);
-      const lastName: any = userList.get('lastNameValues');
-      await commonItemsPage.setUserLastName(lastName);
-      await commonItemsPage.setFirstName(firstName[0]);
-      await commonItemsPage.setLastName(lastName[0]);
-      await commonItemsPage.setEmail(emailAddress[0]);
-      if (await commonItemsPage.firstPage.isVisible()) {
-        await commonItemsPage.firstPage.click();
-      }
-    }
-  }
 }

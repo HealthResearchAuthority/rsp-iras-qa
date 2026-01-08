@@ -409,5 +409,8 @@
   },
   "My_Organisations_Users_Page": {
     "Add_User": "Add a user"
+  },
+  "Add_User_Role_Sponsor_Org_Page": {
+    "Save_Continue": "Save and continue"
   }
 }

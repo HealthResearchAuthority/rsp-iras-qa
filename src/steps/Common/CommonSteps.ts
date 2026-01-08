@@ -64,7 +64,6 @@ When(
       searchProjectsPage,
       projectOverviewPage,
       modificationsReceivedCommonPage,
-      mySponsorOrgUsersPage,
     },
     page: string
   ) => {
@@ -187,10 +186,6 @@ When(
       case 'Modification_Details_Page':
         await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
         break;
-      case 'My_Organisations_Users_Page':
-        await mySponsorOrgUsersPage.assertOnMySponsorOrgUsersPage(commonItemsPage);
-        break;
-
       default:
         throw new Error(`${page} is not a valid option`);
     }

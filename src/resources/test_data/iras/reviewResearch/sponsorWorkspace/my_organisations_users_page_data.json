@@ -6,7 +6,6 @@
     "search_box_hint_text": "You can search by first name, last name or email address",
     "search_button": "Search",
     "partial_url": "/sponsorworkspace/myorganisationusers?rtsId",
-    "add_user_partial_url": "/sponsorworkspace/myorganisationusersadduser?rtsId",
     "sponsor_user_tabs": ["Profile", "Projects", "Users"],
     "org_admin_sys_admin_tabs": ["Profile", "Projects", "Users", "Audit"],
     "users_tab_label": "Users",

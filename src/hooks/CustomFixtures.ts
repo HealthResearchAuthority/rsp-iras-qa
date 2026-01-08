@@ -104,6 +104,9 @@ import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/recei
 import MyOrganisationsPage from '../pages/IRAS/makeChanges/MyOrganisationsPage';
 import MyOrgSponsorOrgProfilePage from '../pages/IRAS/makeChanges/MyOrgSponsorOrgProfilePage';
 import MySponsorOrgUsersPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsUsersPage';
+import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAddUserPage';
+import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
+import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -208,6 +211,9 @@ type CustomFixtures = {
   searchProjectsPage: SearchProjectsPage;
   modificationOutcomeCheckSendPage: ModificationOutcomeCheckSendPage;
   mySponsorOrgUsersPage: MySponsorOrgUsersPage;
+  mySponsorOrgAddUserPage: MySponsorOrgAddUserPage;
+  addUserRoleSponsorOrgPage: AddUserRoleSponsorOrgPage;
+  addUserPermissionSponsorOrgPage: AddUserPermissionSponsorOrgPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -615,6 +621,18 @@ export const test = base.extend<CustomFixtures>({
 
   mySponsorOrgUsersPage: async ({ page }, use) => {
     await use(new MySponsorOrgUsersPage(page));
+  },
+
+  mySponsorOrgAddUserPage: async ({ page }, use) => {
+    await use(new MySponsorOrgAddUserPage(page));
+  },
+
+  addUserRoleSponsorOrgPage: async ({ page }, use) => {
+    await use(new AddUserRoleSponsorOrgPage(page));
+  },
+
+  addUserPermissionSponsorOrgPage: async ({ page }, use) => {
+    await use(new AddUserPermissionSponsorOrgPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
