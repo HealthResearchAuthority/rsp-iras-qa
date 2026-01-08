@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as checkAddUserSponsorOrgPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageSponsorOrgs/check_add_user_sponsor_organisation_page_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CheckAddUserSponsorOrganisationPage {
@@ -73,5 +74,6 @@ export default class CheckAddUserSponsorOrganisationPage {
       .toContainText(
         this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.page_guidance_prefix_text
       );
+    await this.setUserEmail(confirmStringNotNull(await this.user_email_value.textContent()));
   }
 }

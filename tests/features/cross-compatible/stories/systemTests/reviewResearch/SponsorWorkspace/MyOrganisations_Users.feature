@@ -27,7 +27,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
 
   @rsp-6422 @6425 @MyOrganisationsUsersPage @AddUserRolePermission @Run
-  Scenario Outline: Validate that <Login_User> is able to navigate to Users page for the selected sponsor organisation
+  Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot

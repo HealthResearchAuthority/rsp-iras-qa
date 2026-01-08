@@ -26,8 +26,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6461 @MyOrganisationsUsersPage
-  Scenario Outline: Validate that <Login_User> is able to navigate to Users page for the selected sponsor organisation
+  @rsp-6461 @MyOrganisationsAddUserPage
+  Scenario Outline: Validate that <Login_User> is able to navigate to add users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
