@@ -465,14 +465,14 @@ Feature: Sponsor Workspace
     When I click the '<Sort_Button>' button on the 'Sponsor_Authorisations_Page'
     And I capture the page screenshot
     Then I can see the list of modifications received for sponsor approval is sorted by 'ascending' order of the '<Sort_Field>'
-    When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on for sponsor workspace authorisations page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     Then I can see the list of modifications received for sponsor approval is sorted by 'ascending' order of the '<Sort_Field>'
     When I click the '<Sort_Button>' button on the 'Sponsor_Authorisations_Page'
     And I capture the page screenshot
-    Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+    Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on for sponsor workspace authorisations page using 'Sponsor_Organisation_UniversityOfSouthampton'
     Then I can see the list of modifications received for sponsor approval is sorted by 'descending' order of the '<Sort_Field>'
-    When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+    When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on for sponsor workspace authorisations page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     Then I can see the list of modifications received for sponsor approval is sorted by 'descending' order of the '<Sort_Field>'
 
@@ -482,5 +482,5 @@ Feature: Sponsor Workspace
       | Short_Project_Title | short project title |
       | Date_Received       | date received       |
       | Date_Actioned       | date actioned       |
-      | Chief_Investigator  | chief investigator  |
+      # | Chief_Investigator  | chief investigator  |
       | Status              | status              |

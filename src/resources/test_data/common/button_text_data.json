@@ -84,7 +84,8 @@
     "Delete_Modification": "Delete modification",
     "Delete_Documents": "Delete documents",
     "Delete_Document": "Delete document",
-    "Return_To_Authorisations": "Return to authorisations"
+    "Return_To_Authorisations": "Return to authorisations",
+    "Disable": "Disable"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -177,7 +178,7 @@
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
-    "Studywide_Reveiwer": "Study-wide reviewer",
+    "Study_Wide_Reviewer": "Study-wide reviewer",
     "Status": "Status",
     "Continue_to_assign_modifications": "Continue to assign modifications",
     "Continue": "Continue to assign modifications"
@@ -218,7 +219,8 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes",
-    "Return_To_Modification": "Return to modification"
+    "Return_To_Modification": "Return to modification",
+    "Continue": "Continue"
   },
   "Affected_Organisation_Selection_Page": {
     "Save_Continue": "Save and continue",
@@ -252,7 +254,7 @@
     "Save_For_Later": "Save for later"
   },
   "Select_Study_Wide_Reviewer_Page": {
-    "Complete_Assignment": "Complete assignment"
+    "Complete_Assignment": "Assign"
   },
   "Add_Document_Details_Modifications_Page": {
     "Save_Continue": "Save and continue",

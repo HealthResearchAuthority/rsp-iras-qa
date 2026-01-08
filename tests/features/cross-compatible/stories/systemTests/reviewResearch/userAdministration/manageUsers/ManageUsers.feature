@@ -1,7 +1,6 @@
 @RegressionCreateManageUsers @RegressionManageUsers @Regression @SysAdminUser @BackStage
 Feature: User Administration: Create and edit manage users
 
-
     @RegressionTestCreateUserEvents @RevBodyUserListCleanup
     Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
         Given I have navigated to the 'Home_Page'
@@ -145,7 +144,7 @@ Feature: User Administration: Create and edit manage users
             | Add_User_Profile                                   | Add_Another_User_Profile                                   |
             | Valid_Data_In_All_Fields_Role_System_Administrator | Valid_Data_In_All_Fields_Role_System_Administrator_Another |
 
-    @RegressionTestUnassignUserRoles @fail @KNOWN-DEFECT-RSP-5927
+    @RegressionTestUnassignUserRoles
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
         Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -213,7 +212,7 @@ Feature: User Administration: Create and edit manage users
         When I click the 'Disable_User_Record' button on the 'User_Profile_Page'
         And I validate 'Disable_User_Profile_Labels' labels displayed in disable user profile confirmation page using the '<Add_User_Profile>' details
         And I capture the page screenshot
-        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I click the 'Disable' button on the 'Confirmation_Page'
         And I capture the current time for 'Audit_History_User_Page'
         And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Users_Page'

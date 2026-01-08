@@ -27,43 +27,48 @@ When(
   ) => {
     let searchQueryDataset: any;
     if (searchType.toLowerCase() == 'users') {
-      searchQueryDataset = manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
+      searchQueryDataset =
+        await manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'review bodies') {
       searchQueryDataset =
-        manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[searchQueryName];
+        await manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[
+          searchQueryName
+        ];
     } else if (searchType.toLowerCase() == 'adding users') {
       searchQueryDataset =
-        searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
+        await searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
           searchQueryName
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
-      searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset =
+        await searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'project records') {
-      searchQueryDataset = searchProjectsPage.searchProjectsPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset = await searchProjectsPage.searchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'tasklist') {
       searchQueryDataset =
-        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
+        await modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'my tasklist') {
       searchQueryDataset =
-        myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries[searchQueryName];
+        await myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'organisations') {
       searchQueryDataset =
-        participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
+        await participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'sponsor organisations') {
       searchQueryDataset =
-        manageSponsorOrganisationPage.manageSponsorOrganisationsPageTestData.Search_For_Sponsor_Organisations
+        await manageSponsorOrganisationPage.manageSponsorOrganisationsPageTestData.Search_For_Sponsor_Organisations
           .Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'users in sponsor organisations') {
       searchQueryDataset =
-        userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Search_For_Users_In_Sponsor_Organisations
+        await userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Search_For_Users_In_Sponsor_Organisations
           .Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'my research') {
-      searchQueryDataset = myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset = await myResearchProjectsPage.myResearchProjectsPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'modifications in post approval') {
       searchQueryDataset =
-        projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchQueryName];
+        await projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'team manager dashboard') {
-      searchQueryDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset =
+        await teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
@@ -72,8 +77,24 @@ When(
       searchKey = await searchAddUserReviewBodyPage.getUserEmail();
     } else if (searchQueryName === 'Valid_Full_Iras_Id of recently added project') {
       searchKey = await searchProjectsPage.getIrasId();
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'team manager dashboard') {
+      searchKey = await teamManagerDashboardPage.getModificationId();
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'tasklist') {
+      searchKey = await modificationsReadyToAssignPage.getModificationId();
+    } else if (
+      searchQueryName === 'modification assigned by team manager' &&
+      searchType.toLowerCase() == 'my tasklist'
+    ) {
+      searchKey = await teamManagerDashboardPage.getModificationId();
+    } else if (
+      searchQueryName === 'modification assigned by workflow co-ordinator' &&
+      searchType.toLowerCase() == 'my tasklist'
+    ) {
+      searchKey = await modificationsReadyToAssignPage.getModificationId();
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'modifications') {
+      searchKey = await searchModificationsPage.getModificationId();
     } else {
-      searchKey = searchQueryDataset['search_input_text'];
+      searchKey = await searchQueryDataset['search_input_text'];
     }
     expect.soft(searchKey).toBeTruthy();
     await commonItemsPage.setSearchKey(searchKey);
@@ -105,3 +126,53 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
     expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThanOrEqual(1);
   }
 });
+
+When(
+  'I fill the search input for searching {string} with {string} as the search query as {string}',
+  async (
+    { modificationsReadyToAssignPage, commonItemsPage, teamManagerDashboardPage, searchModificationsPage },
+    searchType: string,
+    searchQueryName: string,
+    searchKeyType: string
+  ) => {
+    let searchKey: string;
+    let searchQueryDataset: any;
+    if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'team manager dashboard') {
+      if (searchKeyType.toLowerCase() === 'full') {
+        searchKey = await teamManagerDashboardPage.getModificationId();
+      } else if (searchKeyType.toLowerCase() === 'partial') {
+        searchKey = (await teamManagerDashboardPage.getModificationId()).substring(0, 2);
+        await teamManagerDashboardPage.setModificationId(searchKey);
+      }
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'tasklist') {
+      if (searchKeyType.toLowerCase() === 'full') {
+        searchKey = await modificationsReadyToAssignPage.getModificationId();
+      } else if (searchKeyType.toLowerCase() === 'partial') {
+        searchKey = (await modificationsReadyToAssignPage.getModificationId()).substring(0, 2);
+        await modificationsReadyToAssignPage.setModificationId(searchKey);
+      }
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'modifications') {
+      if (searchKeyType.toLowerCase() === 'full') {
+        searchKey = await searchModificationsPage.getModificationId();
+      } else if (searchKeyType.toLowerCase() === 'partial') {
+        searchKey = (await searchModificationsPage.getModificationId()).substring(0, 2);
+        await searchModificationsPage.setModificationId(searchKey);
+      }
+    } else if (
+      searchQueryName === 'modification assigned by team manager' &&
+      searchType.toLowerCase() == 'my tasklist'
+    ) {
+      searchKey = await teamManagerDashboardPage.getModificationId();
+    } else if (
+      searchQueryName === 'modification assigned by workflow co-ordinator' &&
+      searchType.toLowerCase() == 'my tasklist'
+    ) {
+      searchKey = await modificationsReadyToAssignPage.getModificationId();
+    } else {
+      searchKey = await searchQueryDataset['search_input_text'];
+    }
+    expect.soft(searchKey).toBeTruthy();
+    await commonItemsPage.setSearchKey(searchKey);
+    await commonItemsPage.search_text.fill(searchKey);
+  }
+);

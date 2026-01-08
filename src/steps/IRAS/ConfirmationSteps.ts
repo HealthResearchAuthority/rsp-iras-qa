@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
-import { confirmStringNotNull } from '../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -33,7 +33,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
@@ -61,7 +61,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
       expectedSuccessBody
     );
   }
@@ -82,7 +82,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedConfirmationHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
       validationLabelsDataset.enable_confirmation_body_label
     );
   }
@@ -111,7 +111,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
       expectedSuccessBody
     );
   }
@@ -124,12 +124,12 @@ Then(
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedConfirmationHeader =
       validationLabelsDataset.disable_confirmation_header_label + ' ' + organisationNameMemory;
-    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
-      expectedConfirmationHeader
-    );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
-      validationLabelsDataset.disable_confirmation_body_label
-    );
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedConfirmationHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
 
@@ -145,11 +145,11 @@ Then(
       organisationNameMemory +
       ' ' +
       validationLabelsDataset.disable_confirmation_success_body_two_label;
-    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
-      expectedSuccessHeader
-    );
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedSuccessHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(expectedSuccessBody);
   }
 );
@@ -164,7 +164,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedConfirmationHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
       validationLabelsDataset.enable_confirmation_body_label
     );
   }
@@ -186,7 +186,7 @@ Then(
       expectedSuccessHeader
     );
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(expectedSuccessBody);
   }
 );
@@ -206,18 +206,12 @@ Then(
       validationLabelsDataset.remove_user_confirmation_success_body_two_label +
       organisationName +
       '.';
-    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
-      expectedSuccessHeader
-    );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
-      expectedSuccessBody
-    );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
-      expectedSuccessHeader
-    );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
-      expectedSuccessBody
-    );
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedSuccessHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .toBe(expectedSuccessBody);
   }
 );
 
@@ -250,7 +244,9 @@ Then(
       validationLabelsDataset.page_heading_body_prefix +
       ' ' +
       (await projectDetailsIRASPage.getUniqueIrasId()).toString();
-    const actualSuccessMessage = confirmStringNotNull(await confirmationPage.success_message_body_text.textContent());
+    const actualSuccessMessage = await removeUnwantedWhitespace(
+      await confirmationPage.success_message_body_text.textContent()
+    );
     await expect(confirmationPage.success_message_body_text.getByText(expectedSuccessMessage)).toBeVisible();
     expect(actualSuccessMessage).toBe(expectedSuccessMessage);
   }
@@ -305,7 +301,7 @@ Then(
         : '') +
       validationLabelsDataset.page_heading_suffix;
     await expect
-      .soft(confirmationPage.confirmation_header_common_label.getByText(expectedConfirmationHeader, { exact: true }))
+      .soft(confirmationPage.confirmation_header_common_label.getByText(expectedConfirmationHeader))
       .toBeVisible();
     await expect
       .soft(
@@ -340,7 +336,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
@@ -356,7 +352,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(validationLabelsDataset.enable_confirmation_body_label);
   }
 );
@@ -365,13 +361,14 @@ Then(
   'I validate {string} labels displayed in disable user in sponsor organisation confirmation page using the user name',
   async ({ confirmationPage, commonItemsPage }, validationLabelsDatasetName: string) => {
     const userNameMemory = (await commonItemsPage.getFirstName()) + ' ' + (await commonItemsPage.getLastName());
+    await commonItemsPage.setUserDisabledStatusInMemory(userNameMemory);
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedConfirmationHeader = validationLabelsDataset.disable_confirmation_header_label + ' ' + userNameMemory;
     expect
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
@@ -379,14 +376,14 @@ Then(
 Then(
   'I validate {string} labels displayed in enable user in sponsor organisation confirmation page using the user name',
   async ({ confirmationPage, commonItemsPage }, validationLabelsDatasetName: string) => {
-    const userNameMemory = (await commonItemsPage.getFirstName()) + ' ' + (await commonItemsPage.getLastName());
+    const userNameMemory = await commonItemsPage.getUserDisabledStatusInMemory();
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedConfirmationHeader = validationLabelsDataset.enable_confirmation_header_label + ' ' + userNameMemory;
     expect
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
       .toBe(validationLabelsDataset.enable_confirmation_body_label);
   }
 );

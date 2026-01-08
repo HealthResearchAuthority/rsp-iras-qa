@@ -1,5 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
+import { Locator } from 'playwright/test';
+import * as dbConfigData from '../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../utils/DbConfig';
 
 const { Then } = createBdd(test);
 
@@ -52,13 +55,18 @@ Then(
   'I can see the list of modifications received for sponsor approval is sorted by {string} order of the {string}',
   async ({ commonItemsPage, sponsorAuthorisationsPage }, sortDirection: string, sortField: string) => {
     const searchColumnIndex = await sponsorAuthorisationsPage.getColumnIndex(sortField);
-    const actualList = await commonItemsPage.getActualListValuesWithoutTrim(
-      commonItemsPage.tableBodyRows,
-      searchColumnIndex
-    );
+    const field = sortField.toLowerCase();
+    let actualList: any;
+    if (field === 'modification id') {
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
+    } else {
+      actualList = await commonItemsPage.getActualListValuesWithoutTrim(
+        commonItemsPage.tableBodyRows,
+        searchColumnIndex
+      );
+    }
     let sortedModsList: string[];
     const direction = sortDirection.toLowerCase();
-    const field = sortField.toLowerCase();
     if (field === 'modification id') {
       sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else {
@@ -69,5 +77,59 @@ Then(
       sortedModsList = [...actualList].toSorted(compareFn);
     }
     expect.soft(actualList).toEqual(sortedModsList);
+  }
+);
+
+Then(
+  'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on for sponsor workspace authorisations page using {string}',
+  async (
+    { commonItemsPage, setupNewSponsorOrganisationPage },
+    position: string,
+    sponsorOrganisationDatasetName: string
+  ) => {
+    const sponsorOrganisationDataset =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
+        sponsorOrganisationDatasetName
+      ];
+    const sponsorOrganisationName = sponsorOrganisationDataset.sponsor_organisation_text;
+    let pageLocator: Locator;
+    const sqlConnectionRTSService = await connect(dbConfigData.Rts_Service);
+    const orgResult = await sqlConnectionRTSService.query(`
+      SELECT Org.Id
+      FROM OrganisationRole OrgRole
+      INNER JOIN Organisation Org
+        ON OrgRole.OrganisationId = Org.Id
+      WHERE OrgRole.Id = 'CRSPNSR@2.16.840.1.113883.5.110'
+        AND Org.Name = '${sponsorOrganisationName}'
+        AND OrgRole.Status = 'Active'
+    `);
+    const orgId = orgResult.recordset[0]?.Id;
+    await sqlConnectionRTSService.close();
+    if (!orgId) {
+      throw new Error('Sponsor organisation not found in database');
+    }
+    const sqlConnectionApplicationService = await connect(dbConfigData.Application_Service);
+    const countResult = await sqlConnectionApplicationService.query(`
+      SELECT COUNT(*) AS ModificationCount
+      FROM ProjectModifications pm
+      WHERE pm.Status = 'With sponsor'
+        AND pm.ProjectRecordId IN (
+          SELECT pra.ProjectRecordId
+          FROM ProjectRecordAnswers pra
+          WHERE pra.Response = '${orgId}'
+        )
+    `);
+    await sqlConnectionApplicationService.close();
+    const recordsCount = countResult.recordset[0].ModificationCount;
+    if (recordsCount > 20) {
+      if (position.toLowerCase() === 'first') {
+        pageLocator = commonItemsPage.firstPage;
+      } else {
+        const totalPages = await commonItemsPage.getTotalPages();
+        commonItemsPage.setNumberofTotalPages(totalPages);
+        pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
+      }
+      await expect(pageLocator).toHaveAttribute('aria-current', 'page');
+    }
   }
 );

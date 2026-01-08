@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { generateIrasId } from '../.././../utils/GenerateTestData';
+import { normalizeUiText } from '../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -39,7 +40,8 @@ Then(
 Then('I fill the unique iras id in project details iras page', async ({ projectDetailsIRASPage }) => {
   const uniqueIrasId = await projectDetailsIRASPage.getValidIRASAndProjectTitlesFromLegacySharepoint();
   await projectDetailsIRASPage.setUniqueIrasId(uniqueIrasId.foundIRASID);
-  await projectDetailsIRASPage.setShortProjectTitle(uniqueIrasId.foundShortProjectTitle);
+  const normalizedShortProjectTitle = normalizeUiText(uniqueIrasId.foundShortProjectTitle);
+  await projectDetailsIRASPage.setShortProjectTitle(normalizedShortProjectTitle);
   await projectDetailsIRASPage.setFullProjectTitle(uniqueIrasId.foundFullProjectTitle);
   await projectDetailsIRASPage.iras_id_text.fill(await projectDetailsIRASPage.getUniqueIrasId());
 });
@@ -47,6 +49,12 @@ Then('I fill the unique iras id in project details iras page', async ({ projectD
 Then('I fill the existing iras id in project details iras page', async ({ projectDetailsIRASPage }) => {
   const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
   await projectDetailsIRASPage.iras_id_text.fill(irasIdRunTime);
+});
+
+Then('I fill the {string} in project details iras page', async ({ projectDetailsIRASPage }, datasetName) => {
+  const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
+  const irasId = dataset.iras_id_text;
+  await projectDetailsIRASPage.iras_id_text.fill(irasId);
 });
 
 Then(
@@ -73,9 +81,11 @@ Then(
     const pageBodyExpected =
       projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.project_not_eligible_page_body;
     expect.soft(pageBodyActual).toBe(pageBodyExpected);
-    await commonItemsPage.clickLink('IRAS_ID_Error_Page', 'Follow_Existing_Processes');
-    const followExistingProcessesPage = await context.waitForEvent('page');
-    await followExistingProcessesPage.waitForLoadState('load');
+    const [followExistingProcessesPage] = await Promise.all([
+      context.waitForEvent('page'),
+      commonItemsPage.clickLink('IRAS_ID_Error_Page', 'Follow_Existing_Processes'),
+    ]);
+    await followExistingProcessesPage.waitForLoadState();
     const followExistingProcessesUrlActual = followExistingProcessesPage.url();
     const followExistingProcessesUrlExpected =
       projectDetailsIRASPage.projectDetailsIRASPageTestData.IRAS_ID_Error_Page.follow_existing_process_url;

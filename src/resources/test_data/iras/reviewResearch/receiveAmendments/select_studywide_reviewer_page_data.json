@@ -3,7 +3,7 @@
     "page_heading": "Select a reviewer",
     "page_guidance_text": "Enter the IRAS ID to search for all modifications received, including those submitted for notification only",
     "title": "Select a reviewer - Modifications ready to assign - Modifications - Approvals - System Administration - Plan and manage healthcare research",
-    "study_wide_reviewer_dropdown_label": "Select a study-wide reviewer to manage the modifications"
+    "study_wide_reviewer_dropdown_label": "Study-wide reviewer to assign the modifications to"
   },
   "Study_Wide_Reviewer": {
     "Study_Wide_Reviewer_HRA_England": {

@@ -175,6 +175,7 @@ BeforeScenario(
         'Workflow_Coordinator_S',
         'Workflow_Coordinator_W',
         'Sponsor_User',
+        'Sponsor_Org_Admin_User',
       ];
 
       for (const user of users) {
@@ -205,6 +206,7 @@ BeforeScenario(
         '@WorkFlowCoordinatorSco': 'workflow_coordinator_s',
         '@WorkFlowCoordinatorWal': 'workflow_coordinator_w',
         '@SponsorUser': 'sponsor_user',
+        '@SponsorOrgAdminUser': 'sponsor_org_admin_user',
       };
 
       for (const tag in tagToUserMap) {
@@ -238,3 +240,12 @@ AfterScenario(
     }
   }
 );
+
+AfterScenario({ name: 'Cleanup cucumber report to remove large items' }, async function ({ $testInfo }) {
+  if ($testInfo.attachments?.length) {
+    $testInfo.attachments = $testInfo.attachments.filter((att) => !(att.body && att.body.length > 200_000));
+  }
+  if ($testInfo.error?.message && $testInfo.error.message.length > 50_000) {
+    $testInfo.error.message = '[removed large error message]';
+  }
+});

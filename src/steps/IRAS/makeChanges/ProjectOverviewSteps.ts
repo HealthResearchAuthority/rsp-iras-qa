@@ -14,14 +14,6 @@ Then('I can see the project overview page', async ({ projectOverviewPage }) => {
 });
 
 Then(
-  'I navigate to the project overview page of the {string} project',
-  async ({ projectOverviewPage }, projectName: string) => {
-    await projectOverviewPage.gotoSpecificProjectPage(projectName);
-    await projectOverviewPage.assertOnProjectOverviewPage();
-  }
-);
-
-Then(
   'I can see the {string} project details on project overview page for {string}',
   async ({ projectDetailsIRASPage, projectOverviewPage }, projectType: string, datasetName: string) => {
     let expectedIrasId: string;
@@ -79,6 +71,12 @@ Then(
     }
   }
 );
+
+Then('I navigate to a {string} project documents tab', async ({ projectOverviewPage }, status: string) => {
+  await projectOverviewPage.sqlGetProjectDocumentsRecordByStatus(status);
+  await projectOverviewPage.goto(projectOverviewPage.getProjectRecordID());
+  await projectOverviewPage.assertOnProjectOverviewPage();
+});
 
 Then(
   'I can see the status of modifications displayed is {string}',
@@ -551,5 +549,24 @@ When(
       .soft(confirmArrayNotNull(actualProjectAuditLog.get('modificationIdValue'))[index])
       .toBe(modificationIdExpected);
     expect.soft(confirmArrayNotNull(actualProjectAuditLog.get('userEmailValue'))[index]).toBe(userEmailExpected);
+  }
+);
+
+Then(
+  'I can see the documents status of project overview page with status as {string}',
+  async ({ modificationsCommonPage }, statusExpected: string) => {
+    const statusActual = confirmStringNotNull(
+      await modificationsCommonPage.tableRows.nth(1).getByRole('cell').nth(5).textContent()
+    );
+    expect.soft(statusActual).toBe(statusExpected);
+  }
+);
+
+Then(
+  'I click on the modification id hyperlink in the project documents tab of project overview page',
+  async ({ projectOverviewPage, commonItemsPage }) => {
+    const modificationIDExpected = projectOverviewPage.getModificationRecordID();
+    await commonItemsPage.govUkLink.getByText(modificationIDExpected).first().click();
+    await projectOverviewPage.page.waitForLoadState('domcontentloaded');
   }
 );

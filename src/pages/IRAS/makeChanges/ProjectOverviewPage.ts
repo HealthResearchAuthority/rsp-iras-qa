@@ -3,6 +3,9 @@ import * as projectOverviewPageTestData from '../../../resources/test_data/iras/
 import { confirmStringNotNull } from '../../../utils/UtilFunctions';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
 import CommonItemsPage from '../../Common/CommonItemsPage';
+import * as dbConfigData from '../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../utils/DbConfig';
+import { IResult } from 'mssql';
 
 //Declare Page Objects
 export default class ProjectOverviewPage {
@@ -67,7 +70,7 @@ export default class ProjectOverviewPage {
   readonly document_date_project_documents: Locator;
   readonly status_project_documents: Locator;
   readonly modification_id_project_documents: Locator;
-  readonly action_header: Locator;
+  readonly table_header: Locator;
   readonly advanced_filters_project_documents: Locator;
   readonly search_project_documents: Locator;
   readonly results_count_project_documents: Locator;
@@ -121,6 +124,8 @@ export default class ProjectOverviewPage {
   readonly project_details_tab_planned_project_end_date: Locator;
   readonly tableCell: Locator;
   readonly tableRows: Locator;
+  private projectRecordID: string;
+  private modificationRecordID: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -149,7 +154,7 @@ export default class ProjectOverviewPage {
     this.modification_saved_success_message_text = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
-    this.delete_modification_success_message_text = this.page.locator('.govuk-notification-banner__heading');
+    this.delete_modification_success_message_text = this.page.locator('#govuk-notification-banner-message');
     this.project_overview_heading = this.page.locator('.govuk-inset-text');
     this.project_team_heading = this.page.getByText(
       this.projectOverviewPageTestData.Project_Overview_Page.project_team_heading
@@ -501,6 +506,7 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Project_Documents_Tab.modification_id_project_documents,
       exact: true,
     });
+    this.table_header = this.page.locator('th');
     this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
     this.modification_table_data = page.locator('.govuk-table.modifications-tasklist-table td');
     this.date_submitted_to_date_error_message = this.page
@@ -521,13 +527,17 @@ export default class ProjectOverviewPage {
     this.tableRows = this.page.getByRole('table').getByRole('row');
   }
 
+  public getProjectRecordID(): string {
+    return this.projectRecordID;
+  }
+
+  public getModificationRecordID(): string {
+    return this.modificationRecordID;
+  }
+
   //Page Methods
   async assertOnProjectOverviewPage() {
     await expect.soft(this.pageHeading).toBeVisible();
-  }
-
-  async gotoSpecificProjectPage(projectName: string) {
-    await this.page.goto(this.projectOverviewPageTestData.Project_URL[projectName]);
   }
 
   async getStatus(row: any) {
@@ -630,5 +640,25 @@ export default class ProjectOverviewPage {
       ['userEmailValue', userEmailValues],
     ]);
     return auditProjectMap;
+  }
+  async goto(projectRecordId: string) {
+    await this.page.goto(`projectoverview/projectdocuments?projectRecordId=${projectRecordId}&backRoute=app%3AWelcome`);
+  }
+  async setAllProjectDocumentsValues(sqlQueryResult: IResult<any>): Promise<void> {
+    this.projectRecordID = sqlQueryResult.recordset[0].ProjectRecordId;
+    this.modificationRecordID = sqlQueryResult.recordset[0].ModificationIdentifier;
+  }
+
+  async sqlGetProjectDocumentsRecordByStatus(status: string): Promise<void> {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(
+      `select top 1 ModificationDocuments.[FileName], ModificationDocuments.Status, ProjectModifications.ProjectRecordId, ProjectModifications.ModificationIdentifier from ProjectModifications, ModificationDocuments where ProjectModifications.ProjectRecordId = ModificationDocuments.ProjectRecordId and ProjectModifications.[Status] = '${status}' ORDER BY NEWID()`
+    );
+    await sqlConnection.close();
+    if (queryResult.recordset.length == 0) {
+      throw new Error(`No suitable modification found in the system with ${status} status`);
+    } else {
+      await this.setAllProjectDocumentsValues(queryResult);
+    }
   }
 }

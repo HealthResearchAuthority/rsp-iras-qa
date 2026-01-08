@@ -1581,7 +1581,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Empty_Data_Temporary_Arrangement_All_Fields | Principal_Investigator_Email | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
       | Empty_Data_Temporary_Arrangement_All_Fields | Name_Text                    | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
 
-  @rsp-3929 @DownloadDocumentsOneByOneInModification
+  @rsp-3929 @DownloadDocumentsOneByOneInModification @KNOWN_DEFECT_RSP-6510
   Scenario Outline: Validate the user is able to download the documents one by one from documents added for page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1616,7 +1616,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I download the documents one by one from the documents added page of specific change modifications in reference to the uploaded 'Multiple_Files_Three' documents
     And I capture the page screenshot
 
-  @rsp-3929 @DownloadDocumentFromAddDocumentDetailsModification
+  @rsp-3929 @DownloadDocumentFromAddDocumentDetailsModification @KNOWN_DEFECT_RSP-6510
   Scenario Outline: Validate the user is able to download the documents from add document details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2077,7 +2077,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission
+  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP-6489
   Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modifiction post submission page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

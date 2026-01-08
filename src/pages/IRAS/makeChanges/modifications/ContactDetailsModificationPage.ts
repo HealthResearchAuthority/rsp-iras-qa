@@ -9,8 +9,8 @@ export default class ContactDetailsModificationPage {
   readonly select_contact_details_to_change_radio: Locator;
   readonly chief_investigator_email_text: Locator;
   readonly sponsor_contact_email_text: Locator;
-  readonly contact_name_text: Locator;
-  readonly contact_email_text: Locator;
+  readonly name_text: Locator;
+  readonly email_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -27,11 +27,11 @@ export default class ContactDetailsModificationPage {
       .getByText(this.contactDetailsModificationPageTestData.Label_Texts.sponsor_contact_email_label)
       .locator('..')
       .locator('input');
-    this.contact_name_text = this.page
+    this.name_text = this.page
       .getByText(this.contactDetailsModificationPageTestData.Label_Texts.contact_name_label)
       .locator('..')
       .locator('input');
-    this.contact_email_text = this.page
+    this.email_text = this.page
       .getByText(this.contactDetailsModificationPageTestData.Label_Texts.contact_email_label)
       .locator('..')
       .locator('input');
@@ -45,12 +45,7 @@ export default class ContactDetailsModificationPage {
       await commonItemsPage.fillUIComponent(dataset, 'select_contact_details_to_change_radio', this);
     }
     await commonItemsPage.clickButton('Modifications_Page', clickAction);
-    const contactKeys = [
-      'chief_investigator_email_text',
-      'sponsor_contact_email_text',
-      'contact_name_text',
-      'contact_email_text',
-    ];
+    const contactKeys = ['chief_investigator_email_text', 'sponsor_contact_email_text', 'name_text', 'email_text'];
     for (const key of contactKeys) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, this);

@@ -1,5 +1,5 @@
 @UserAdministration @ManageUsers @SysAdminUser @SystemTest @DisableEnableUser @STSysAdmin
-Feature: User Administration: Manage Users - Enable / Disable users
+Feature: Manage Users - Enable / Disable users
 
     Background:
         Given I have navigated to the 'Home_Page'
@@ -72,7 +72,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
             | Add_User_Profile                           | Navigation_Link | Status_Enabled | Advanced_Filters_Users                          |
             | Valid_Data_In_All_Fields_Role_Team_Manager | Back            | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active |
 
-    @rsp-2930 @EnableUserProfile @rsp-4381 @ActiveFilterRemainAppliedAfterEnableUserProfile 
+    @rsp-2930 @EnableUserProfile @rsp-4381 @ActiveFilterRemainAppliedAfterEnableUserProfile
     Scenario Outline: Verify the user is able to enable a disabled a user profile
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'

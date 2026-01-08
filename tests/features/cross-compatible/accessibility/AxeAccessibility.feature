@@ -951,7 +951,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I enter 'Valid_Iras_Id_Ln_England_Pn_England' into the search field in the modifications ready to assign page
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-    When I select modifications with ids as 'Modification_Id_Ln_England_Pn_England_Five_Six' by clicking the checkbox in the 'modifications ready to assign' page
+    When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
     When I Scan the page with the Axe Accessibilty Tool
@@ -963,7 +963,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I enter 'Valid_Iras_Id_Ln_England_Pn_England' into the search field in the modifications ready to assign page
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-    When I select modifications with ids as 'Modification_Id_Ln_England_Pn_England_One' by clicking the checkbox in the 'modifications ready to assign' page
+    When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
     And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
@@ -1242,22 +1242,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I enter values in the 'Advanced_Filter_All_Fields' of the post approval page
     And I click the 'Apply_Filters' button on the 'Post_Approval_Page'
     And I can see the results matching the search 'Partial_Modification_ID' and filter criteria 'Advanced_Filter_All_Fields' for post approval page
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
-  @axeAccessibilityProjectOverviewPostApprovalPageSpecificProject @ApplicantUser
-  Scenario: Project overview post approvals page for a specific project
-    When I navigate to the project overview page of the 'Test_Project' project
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
-  @axeAccessibilityProjectOverviewProjectDocumentsSpecificProject @ApplicantUser
-  Scenario: Project overview project documents page for a specific project
-    When I navigate to the project overview page of the 'Test_Project' project
-    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -2832,3 +2816,46 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityProjectOverviewProjectTab @ApplicantUser
+  Scenario: Project documents page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    And I upload 'PNG_File' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And the 'Add_Documents' button should be 'available' on the 'Review_All_Changes_Page'
+    Then I click the 'Save_For_Later' button on the 'Review_All_Changes_Page'
+    Then I can see the project overview page
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    Then I can see the modifications details page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+  

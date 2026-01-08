@@ -1,5 +1,5 @@
 @UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser @STSysAdmin
-Feature: User Administration: Manage Users - Create user
+Feature: Manage Users - Create user
 
   Background:
     Given I have navigated to the 'Home_Page'

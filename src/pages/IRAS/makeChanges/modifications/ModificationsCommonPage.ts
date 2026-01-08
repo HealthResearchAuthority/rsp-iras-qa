@@ -28,6 +28,7 @@ export default class ModificationsCommonPage {
   readonly changes_modification_type: Locator;
   readonly changes_free_text_summary_error: Locator;
   readonly overall_modification_ranking_sub_heading: Locator;
+  readonly overall_modification_summary_heading: Locator;
   readonly changes_sub_heading: Locator;
   readonly ranking_sub_heading: Locator;
   readonly allChangeCards: Locator;
@@ -84,11 +85,14 @@ export default class ModificationsCommonPage {
     this.overall_modification_ranking_sub_heading = this.pageHeading.getByText(
       modificationsCommonPageTestData.Label_Texts.overall_modification_ranking_label
     );
+    this.overall_modification_summary_heading = this.page.getByText(
+      modificationsCommonPageTestData.Label_Texts.overall_modification_summary_label
+    );
     this.ranking_sub_heading = this.pageHeading
       .getByText(modificationsCommonPageTestData.Label_Texts.ranking_label)
       .first();
     this.changes_sub_heading = this.pageHeading.getByText(modificationsCommonPageTestData.Label_Texts.changes_label);
-    this.allChangeCards = this.page.locator('.govuk-summary-card');
+    this.allChangeCards = this.page.locator('.govuk-summary-card:visible');
     this.allModificationTypeKeys = this.page.locator('dt.govuk-summary-list__key').filter({
       hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label,
     });
@@ -118,7 +122,7 @@ export default class ModificationsCommonPage {
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
       .locator('..')
-      .locator('[class$="value"]');
+      .locator('a');
     this.modification_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
@@ -401,6 +405,20 @@ export default class ModificationsCommonPage {
         changeDataset['planned_project_end_month_dropdown'],
         changeDataset['planned_project_end_year_text']
       );
+    } else if (
+      changeDataset['specific_change_dropdown'] === 'Change of Chief Investigator' ||
+      changeDataset['specific_change_dropdown'] === 'Change of Principal Investigator'
+    ) {
+      expectedSpecificChangeValue = changeDataset['select_details_to_change_radio'];
+    } else if (changeDataset['specific_change_dropdown'] === 'Contact details') {
+      expectedSpecificChangeValue = changeDataset['select_contact_details_to_change_radio'];
+    } else if (
+      changeDataset['specific_change_dropdown'] === 'Project identification' &&
+      key.includes('project_reference_numbers_radio')
+    ) {
+      expectedSpecificChangeValue = changeDataset['project_reference_numbers_radio'];
+    } else if (changeDataset['specific_change_dropdown'] === 'Project identification' && key.includes('title_radio')) {
+      expectedSpecificChangeValue = changeDataset['title_radio'];
     } else {
       expectedSpecificChangeValue = changeDataset['specific_change_dropdown'];
     }
@@ -510,6 +528,13 @@ export default class ModificationsCommonPage {
       modificationsCommonPageTestData.Ranking_Category.new_site.includes(dataset.specific_change_dropdown)
     ) {
       category = this.modificationsCommonPageTestData.Label_Texts.category_new_site;
+    } else if (
+      affectsNhs &&
+      modificationsCommonPageTestData.Ranking_Category.nhs_applicability_always_c.includes(
+        dataset.specific_change_dropdown
+      )
+    ) {
+      category = this.modificationsCommonPageTestData.Label_Texts.category_c;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'some') {
       category = this.modificationsCommonPageTestData.Label_Texts.category_b;
     } else if (affectsNhs && requiresResources === 'no' && affectedOrgs === 'all') {
@@ -630,6 +655,7 @@ export default class ModificationsCommonPage {
   async getMappedSummaryCardDataForRankingCategoryChanges(cardTitle: string, dataset: any) {
     await this.page.waitForLoadState('domcontentloaded');
     const keys = Object.keys(dataset);
+    const specificChangeDataValue = dataset['specific_change_dropdown'];
     const cardLocator = this.page.getByRole('heading', { name: cardTitle, exact: true }).locator('..').locator('..');
     await this.page.waitForLoadState('domcontentloaded');
     const rows = cardLocator.locator('.govuk-summary-list__row');
@@ -646,6 +672,17 @@ export default class ModificationsCommonPage {
       const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
       cardData['area_of_change_dropdown'] = areaOfChangeValue;
       cardData['specific_change_dropdown'] = specificChangeValue;
+    } else if (cardTitle !== 'Sponsor details') {
+      const areaOfChangeValueViewDetails = (
+        await this.page.getByRole('heading', { name: cardTitle }).textContent()
+      ).trim();
+      const specificChangeValueViewDetails = await this.page
+        .locator('.govuk-summary-list__key', { hasText: specificChangeDataValue })
+        .locator('..')
+        .locator('.govuk-summary-list__value')
+        .textContent();
+      cardData['area_of_change_dropdown'] = areaOfChangeValueViewDetails;
+      cardData['specific_change_dropdown'] = specificChangeValueViewDetails.trim();
     }
     for (let cardRowIndex = 0; cardRowIndex < rowCount; cardRowIndex++) {
       await this.page.waitForLoadState('domcontentloaded');
@@ -727,6 +764,15 @@ export default class ModificationsCommonPage {
             cardData['project_reference_numbers_radio'] = cleanedValue;
           } else if (dataset['specific_change_dropdown'] === 'Project identification' && keys.includes('title_radio')) {
             cardData['title_radio'] = cleanedValue;
+          } else if (
+            dataset['specific_change_dropdown'] === 'Change of Chief Investigator' ||
+            dataset['specific_change_dropdown'] === 'Change of Principal Investigator'
+          ) {
+            cardData['select_details_to_change_radio'] = cleanedValue;
+          } else if (keys.includes('select_contact_details_to_change_radio')) {
+            cardData['select_contact_details_to_change_radio'] = cleanedValue;
+          } else {
+            dataset['specific_change_dropdown'] = cleanedValue;
           }
           break;
         }
@@ -779,6 +825,37 @@ export default class ModificationsCommonPage {
         case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
           .which_titles_do_you_need_to_change_label: {
           cardData['which_titles_do_you_need_to_change_checkboxes'] = cleanedValue.split('\n');
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.first_name_label: {
+          cardData['first_name_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.last_name_label: {
+          cardData['last_name_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .new_chief_investigator_email_label: {
+          cardData['chief_investigator_email_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .new_principal_investigator_email_label: {
+          cardData['principal_investigator_email_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.name_label: {
+          cardData['name_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .sponsor_contact_email_label: {
+          cardData['sponsor_contact_email_text'] = cleanedValue;
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.email_label: {
+          cardData['email_text'] = cleanedValue;
           break;
         }
       }

@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @DisableEnableReviewBody @STSysAdmin
-Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bodies
+Feature: Manage Review Bodies - Enable / Disable Review Bodies
 
   Background:
     Given I have navigated to the 'System_Administration_Page'
@@ -8,7 +8,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     Then I can see the 'Create_Review_Body_Page'
 
-  @rsp-2573 @DisableReviewBody @fail  @rsp-4381 @ActiveFilterRemainAppliedAfterDisableReviewBody
+  @rsp-2573 @DisableReviewBody  @rsp-4381 @ActiveFilterRemainAppliedAfterDisableReviewBody
   Scenario Outline: Verify the user is able to disable a review body
     When I fill the new review body page using '<Add_Review_Body>'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -26,6 +26,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I validate '<Disable_Review_Body_Labels>' labels displayed in disable review body confirmation page using the organisation name
     And I capture the page screenshot
     When I click the 'Confirm' button on the 'Confirmation_Page'
+    And I capture the page screenshot
     Then I validate '<Disable_Review_Body_Labels>' labels displayed in disable review body success page using the organisation name
     And I capture the page screenshot
     When I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'

@@ -1,5 +1,5 @@
-@RegressionManageSponsorOrganisations @SystemTest @SysAdminUser @UserAdministration @BackStage
-Feature: User Administration: Manage sponsor organisations
+@RegressionManageSponsorOrganisations @SysAdminUser @UserAdministration @BackStage
+Feature: Manage sponsor organisations
 
         Background:
                 Given I have navigated to the 'System_Administration_Page'

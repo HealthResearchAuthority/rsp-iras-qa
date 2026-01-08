@@ -61,13 +61,12 @@ Then('I validate all fields on modification page {string}', async ({ modificatio
   for (let index = 0; index < actualValuesArray.length; index++) {
     const changeName = changeNames[index];
     const expectedData = changesDataset[changeName];
-    for (const key of Object.keys(expectedData)) {
-      const expectedValues = await modificationsCommonPage.getExpectedValues(expectedData, key, index);
-      expect.soft(actualValuesArray[index].individualChangeStatus).toBe(expectedValues.expectedChangeStatus);
-      expect.soft(actualValuesArray[index].areaOfChangeSubHeading).toBe(expectedValues.expectedAreaOfChangeSubHeading);
-      if (expectedValues.expectedSpecificChangeValue) {
-        expect.soft(actualValuesArray[index].specificChangeValue).toBe(expectedValues.expectedSpecificChangeValue);
-      }
+    const keysString = Object.keys(expectedData).join(', ');
+    const expectedValues = await modificationsCommonPage.getExpectedValues(expectedData, keysString, index);
+    expect.soft(actualValuesArray[index].individualChangeStatus).toBe(expectedValues.expectedChangeStatus);
+    expect.soft(actualValuesArray[index].areaOfChangeSubHeading).toBe(expectedValues.expectedAreaOfChangeSubHeading);
+    if (expectedValues.expectedSpecificChangeValue) {
+      expect.soft(actualValuesArray[index].specificChangeValue).toBe(expectedValues.expectedSpecificChangeValue);
     }
   }
 });
@@ -77,14 +76,14 @@ Then('I click the {string} tab on the modification details page', async ({ modif
 });
 
 Given('I can see the review outcome section', async ({ modificationsDetailsPage }) => {
-  await expect(modificationsDetailsPage.review_comment_heading).toBeVisible();
-  await expect(modificationsDetailsPage.review_comment_show).toBeVisible();
-  await expect(modificationsDetailsPage.review_comment_guidance).toBeHidden();
-  await expect(modificationsDetailsPage.review_comment_box).toBeHidden();
-  await expect(modificationsDetailsPage.review_outcome_heading).toBeVisible();
-  await expect(modificationsDetailsPage.approved_outcome_option).toBeVisible();
-  await expect(modificationsDetailsPage.not_approved_outcome_option).toBeVisible();
-  await expect(modificationsDetailsPage.review_outcome_guidance).toBeVisible();
+  await expect.soft(modificationsDetailsPage.review_comment_heading).toBeVisible();
+  await expect.soft(modificationsDetailsPage.review_comment_show).toBeVisible();
+  await expect.soft(modificationsDetailsPage.review_comment_guidance).toBeHidden();
+  await expect.soft(modificationsDetailsPage.review_comment_box).toBeHidden();
+  await expect.soft(modificationsDetailsPage.review_outcome_heading).toBeVisible();
+  await expect.soft(modificationsDetailsPage.approved_outcome_option).toBeVisible();
+  await expect.soft(modificationsDetailsPage.not_approved_outcome_option).toBeVisible();
+  await expect.soft(modificationsDetailsPage.review_outcome_guidance).toBeVisible();
 });
 
 When(

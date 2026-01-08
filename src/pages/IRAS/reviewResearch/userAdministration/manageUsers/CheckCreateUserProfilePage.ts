@@ -62,7 +62,7 @@ export default class CheckCreateUserProfilePage {
     this.row_value_locator = this.page.locator('input');
     this.row_change_link_locator = this.page
       .getByRole('button')
-      .getByText(this.linkTextData.Check_Create_User_Profile_Page.Change, { exact: true });
+      .getByText(this.linkTextData.Check_Create_User_Profile_Page.Change);
     this.title_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')

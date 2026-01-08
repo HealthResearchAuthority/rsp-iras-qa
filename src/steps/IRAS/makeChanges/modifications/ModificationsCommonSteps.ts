@@ -265,12 +265,14 @@ Then(
       const expectedData = changesDataset[changeName];
       const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
       const headingLocator = modificationsCommonPage.page.getByRole('heading', { name: cardTitle });
+      const keysString = Object.keys(expectedData).join(', ');
+      const expectedDataValues = modificationsCommonPage.getExpectedValues(expectedData, keysString, changeIndex);
       if (await headingLocator.isVisible()) {
         const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
           cardTitle,
           expectedData
         );
-        modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
+        modificationsCommonPage.validateCardData(expectedDataValues, actualData.cardData);
       } else {
         await expect.soft(headingLocator, `Heading "${cardTitle}" should be visible`).toBeVisible();
       }

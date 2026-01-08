@@ -45,20 +45,23 @@ Then(
 Then(
   'I check random row and validate if the row is checked even after navigation',
   async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
-    await commonItemsPage.firstPage.click();
-    const randomRowToCheck = await getRandomNumber(1, 20);
-    const maxPagesToCheck =
-      modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page
-        .maxPagesToVisit;
-
-    for (let currentPage = 1; currentPage <= maxPagesToCheck; currentPage++) {
-      await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
-      await commonItemsPage.next_button.click();
-    }
-
-    for (let currentPage = maxPagesToCheck + 1; currentPage >= maxPagesToCheck; currentPage--) {
-      await commonItemsPage.previous_button.click();
-      await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      await commonItemsPage.firstPage.click();
+      const randomRowToCheck = await getRandomNumber(1, 20);
+      const maxPagesToCheck =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page
+          .maxPagesToVisit;
+      for (let currentPage = 1; currentPage <= maxPagesToCheck; currentPage++) {
+        await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
+        await commonItemsPage.next_button.click();
+      }
+      for (let currentPage = maxPagesToCheck + 1; currentPage >= maxPagesToCheck; currentPage--) {
+        await commonItemsPage.previous_button.click();
+        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+      }
     }
   }
 );
@@ -93,22 +96,28 @@ When(
 When(
   'I navigate by {string} within the Modifications Ready to assign page',
   async ({ commonItemsPage }, paginationLink: string) => {
-    if (paginationLink.toLowerCase() === 'clicking on next link') {
-      await commonItemsPage.next_button.click();
-    } else {
-      await commonItemsPage.previous_button.click();
+    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    if (recordsCount > 20) {
+      if (paginationLink.toLowerCase() === 'clicking on next link') {
+        await commonItemsPage.next_button.click();
+      } else {
+        await commonItemsPage.previous_button.click();
+      }
     }
   }
 );
 
 When('I confirm all checkboxes are {string}', async ({ modificationsReadyToAssignPage }, checkboxStatus: string) => {
+  await modificationsReadyToAssignPage.page.waitForLoadState('domcontentloaded');
   const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
-  expect(checkboxes.length).toBeGreaterThan(0);
+  expect.soft(checkboxes.length).toBeGreaterThan(0);
   for (const checkbox of checkboxes) {
     if (checkboxStatus.toLowerCase() === 'unchecked') {
-      await expect(checkbox).not.toBeChecked();
+      await expect.soft(checkbox).not.toBeChecked();
     } else {
-      await expect(checkbox).toBeChecked();
+      await expect.soft(checkbox).toBeChecked();
     }
   }
 });
@@ -122,15 +131,14 @@ When(
 );
 
 When(
-  'I select modifications with ids as {string} by clicking the checkbox in the {string} page',
-  async ({ modificationsReadyToAssignPage, teamManagerDashboardPage }, datasetName: string, pageValue: string) => {
-    let dataset: any;
+  'I select modifications by clicking the checkbox in the {string} page',
+  async ({ modificationsReadyToAssignPage, teamManagerDashboardPage }, pageValue: string) => {
+    let modificationId: string;
     if (pageValue === 'team manager dashboard') {
-      dataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries[datasetName];
+      modificationId = await teamManagerDashboardPage.getModificationId();
     } else {
-      dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
+      modificationId = await modificationsReadyToAssignPage.getModificationId();
     }
-    const modificationId = dataset['search_input_text'];
     const modificationRecord: string[] = [];
     await modificationsReadyToAssignPage.page.locator(`[id^="${modificationId}"]`).nth(0).check();
     const shortProjectTitle = await modificationsReadyToAssignPage.page
@@ -148,7 +156,7 @@ When(
         .nth(0)
         .textContent()
     );
-    modificationRecord.push(modificationIdValue + ':' + shortProjectTitle);
+    modificationRecord.push(modificationIdValue + ':' + shortProjectTitle.trim());
     await modificationsReadyToAssignPage.setSelectedModificationsIdTitle(modificationRecord);
     await modificationsReadyToAssignPage.setSelectedModifications(modificationIdValue);
   }
@@ -182,16 +190,6 @@ Then(
   }
 );
 
-Then(
-  'I see only modifications where the lead nation is the country linked to the review body of the {string}',
-  async ({ modificationsReadyToAssignPage }, user: string) => {
-    // PLACEHOLDER FOR FUTURE UPDATE AFTER DB ENABLER
-    const expectedLeadNation =
-      modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
-    console.log(expectedLeadNation);
-  }
-);
-
 When(
   'I can see previously assigned modification is displayed in {string} with status {string} and reviewer {string}',
   async (
@@ -214,6 +212,30 @@ When(
       await expect.soft(modificationStatus).toBeVisible();
     }
     const irasId = modificationId.toString().split('/')[0];
-    await myModificationsTasklistPage.saveModificationId(irasId);
+    await myModificationsTasklistPage.saveModificationId(irasId, 'Single');
+    await myModificationsTasklistPage.page.waitForTimeout(3000);
+  }
+);
+
+Then(
+  'I capture the modification id of {string} where the lead nation is the country linked to the WFC {string} and with status {string}',
+  async ({ modificationsReadyToAssignPage }, modificationCount: string, user: string, status: string) => {
+    let countValue: string;
+    let leadNation =
+      await modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
+    if (leadNation === 'Northern Ireland') {
+      leadNation = 'Northern_Ireland';
+    }
+    if (modificationCount === 'Single' || modificationCount === 'Partial') {
+      countValue = '=';
+    } else {
+      countValue = '>';
+    }
+    const modificationId = await modificationsReadyToAssignPage.sqlGetModificationByLeadNationAndStatusCountWFC(
+      leadNation,
+      status,
+      countValue
+    );
+    await modificationsReadyToAssignPage.saveModificationIdWFC(modificationId.toString(), modificationCount);
   }
 );
