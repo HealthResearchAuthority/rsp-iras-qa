@@ -11,8 +11,7 @@ export default class AddUserPermissionSponsorOrgPage {
   readonly page_caption: Locator;
   readonly mainPageContent: Locator;
   readonly permissions_label: Locator;
-  readonly org_admin_hint_text: Locator;
-  readonly sponsor_hint_text: Locator;
+  readonly permission_hint_text: Locator;
   readonly permission_fieldset: Locator;
   readonly authoriser_checkbox: Locator;
 
@@ -28,8 +27,7 @@ export default class AddUserPermissionSponsorOrgPage {
     this.page_heading = this.mainPageContent.getByRole('heading', {
       name: addUserPermissionSponsorOrgPageTestData.Add_User_Permission_Page.page_heading,
     });
-    this.org_admin_hint_text = this.mainPageContent.getByTestId('orgAdmin-item-hint');
-    this.sponsor_hint_text = this.mainPageContent.getByTestId('sponsor-item-hint');
+    this.permission_hint_text = this.mainPageContent.getByTestId('permissions-hint');
     this.permissions_label = this.mainPageContent
       .getByRole('paragraph')
       .getByText(this.addUserPermissionSponsorOrgPageTestData.Add_User_Permission_Page.permissions_label, {
@@ -86,7 +84,6 @@ export default class AddUserPermissionSponsorOrgPage {
     }
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.permissions_label).toBeVisible();
-    await expect.soft(this.org_admin_hint_text).toBeVisible();
-    await expect.soft(this.sponsor_hint_text).toBeVisible();
+    await expect.soft(this.permission_hint_text).toBeVisible();
   }
 }

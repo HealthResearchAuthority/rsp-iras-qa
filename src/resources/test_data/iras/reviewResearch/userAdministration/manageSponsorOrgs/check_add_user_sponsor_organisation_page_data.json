@@ -11,7 +11,8 @@
       "Telephone",
       "Organisation",
       "Job title",
-      "Role"
+      "Role",
+      "Authoriser"
     ]
   }
 }

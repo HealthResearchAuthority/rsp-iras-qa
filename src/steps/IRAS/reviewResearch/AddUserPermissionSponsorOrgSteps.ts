@@ -5,7 +5,7 @@ const { Given, When, Then } = createBdd(test);
 Given(
   'I can see the add user permission page based on {string}',
   async ({ addUserPermissionSponsorOrgPage }, availability: string) => {
-    if (availability.toLowerCase() != 'No_Permission_To_Select') {
+    if (availability.toLowerCase() != 'no_permission_to_select') {
       await addUserPermissionSponsorOrgPage.assertOnAddUserPermissionSponsorOrganisationPage();
     }
   }
@@ -30,7 +30,7 @@ Then(
   'I click the {string} button on the {string} based on {string}',
   async ({ commonItemsPage }, buttonKey: string, pageKey: string, availability: string) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-    if (availability.toLowerCase() != 'No_Permission_To_Select') {
+    if (availability.toLowerCase() !== 'no_permission_to_select') {
       await commonItemsPage.govUkButton
         .getByText(buttonValue, { exact: true })
         .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
