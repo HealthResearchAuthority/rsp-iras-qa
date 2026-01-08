@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { Locator } from '@playwright/test';
+import { randomInt } from 'crypto';
 
 const { Then } = createBdd(test);
 
@@ -48,7 +49,11 @@ Then(
   'I enter partial organisation name into the search field',
   async ({ commonItemsPage, checkSetupSponsorOrganisationPage }) => {
     const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
-    const partialText = sponsorOrgName.slice(0, Math.floor(Math.random() * sponsorOrgName.length));
+    const minLen = 3;
+    const start = randomInt(0, sponsorOrgName.length - minLen);
+    const maxLen = sponsorOrgName.length - start;
+    const len = randomInt(minLen, maxLen + 1);
+    const partialText = sponsorOrgName.slice(start, start + len);
     await commonItemsPage.search_text.fill(partialText);
   }
 );
