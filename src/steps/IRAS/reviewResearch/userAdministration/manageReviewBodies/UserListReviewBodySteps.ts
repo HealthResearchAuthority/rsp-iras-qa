@@ -92,8 +92,9 @@ Then(
           .filter(Boolean);
       const expectedRoleValues = toTokens(expectedRaw);
       const actualRoleValues = toTokens(actualRoleRaw.join(','));
-      const expectedRoleSorted = [...expectedRoleValues].sort();
-      const actualRoleSorted = [...actualRoleValues].sort();
+      const alphabetical = (a: string, b: string) => a.localeCompare(b);
+      const expectedRoleSorted = [...expectedRoleValues].sort(alphabetical);
+      const actualRoleSorted = [...actualRoleValues].sort(alphabetical);
       expect.soft(actualRoleSorted).toEqual(expectedRoleSorted);
     }
   }
