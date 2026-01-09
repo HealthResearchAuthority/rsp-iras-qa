@@ -1,0 +1,37 @@
+{
+  "My_Organisations_Users_Page": {
+    "title": "",
+    "page_caption": "Sponsor organisations profile",
+    "search_box_label": "Find a user",
+    "search_box_hint_text": "You can search by first name, last name or email address",
+    "search_button": "Search",
+    "partial_url": "/sponsorworkspace/myorganisationusers?rtsId",
+    "sponsor_user_tabs": ["Profile", "Projects", "Users"],
+    "org_admin_sys_admin_tabs": ["Profile", "Projects", "Users", "Audit"],
+    "users_tab_label": "Users",
+    "add_a_user_button": "Add a user",
+    "add_a_user_section_heading": "Add an existing user to an organisation",
+    "add_a_user_section_hint_text": "You can add existing users to give them access to projects",
+    "Column_Header_Labels": {
+      "name_label": "Name",
+      "email_address_label": "Email address",
+      "status_label": "Status",
+      "last_logged_in_label": "Last logged in",
+      "actions_label": "Action"
+    },
+    "user_added_to_sponsor_organisation_success_message_header_text": "Success",
+    "user_added_to_sponsor_organisation__success_message_text": "User added to this organisation",
+    "user_in_sponsor_organisation_disabled_success_message_header_text": "Success",
+    "user_in_sponsor_organisation_disabled_success_message_text": "User disabled",
+    "user_in_sponsor_organisation_enabled_success_message_header_text": "Success",
+    "user_in_sponsor_organisation_enabled_success_message_text": "User enabled"
+  },
+  "Search_For_Users_In_Sponsor_Organisations": {
+    "Search_Queries": {
+      "Existing_QA_User_First_Name": { "search_input_text": "Sponsor" },
+      "Existing_QA_User_Last_Name": { "search_input_text": "User" },
+      "Existing_QA_User_Email": { "search_input_text": "FutureIRAS.Sponsor@hra.nhs.uk" },
+      "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" }
+    }
+  }
+}

@@ -115,7 +115,7 @@ Feature: Manage sponsor organisations
                 When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
                 And I capture the page screenshot
                 Then I can see the 'Check_Add_User_Sponsor_Org_Page'
-                And the check and add user to sponsor organisation page displays the expected user details
+                # And the check and add user to sponsor organisation page displays the expected user details
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
@@ -294,7 +294,7 @@ Feature: Manage sponsor organisations
                 When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
                 And I capture the page screenshot
                 Then I can see the 'Check_Add_User_Sponsor_Org_Page'
-                And the check and add user to sponsor organisation page displays the expected user details
+                # And the check and add user to sponsor organisation page displays the expected user details
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot

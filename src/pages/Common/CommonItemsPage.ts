@@ -146,9 +146,12 @@ export default class CommonItemsPage {
   readonly email_address_value_first_row: Locator;
   readonly status_value_first_row: Locator;
   readonly last_name_label: Locator;
+  readonly name_label: Locator;
   readonly email_address_label: Locator;
   readonly status_label: Locator;
   readonly last_logged_in_label: Locator;
+  readonly role_label: Locator;
+  readonly authoriser_label: Locator;
   readonly actions_label: Locator;
   readonly back_to_users_link: Locator;
   readonly success_message_header_text: Locator;
@@ -218,6 +221,7 @@ export default class CommonItemsPage {
       .or(this.page.getByTestId('SearchTerm'))
       .or(this.page.getByTestId('Search.SearchNameTerm'))
       .or(this.page.getByTestId('Search.ModificationId'))
+      .or(this.page.getByTestId('Search_SearchTerm'))
       .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
@@ -402,12 +406,25 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.Column_Header_Labels.last_name_label, {
         exact: true,
       });
+    this.name_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.name_label, { exact: true });
     this.email_address_label = this.userListTableRows
       .locator('th')
       .getByText(this.commonTestData.Column_Header_Labels.email_address_label, { exact: true });
     this.status_label = this.userListTableRows
       .locator('th')
       .getByText(this.commonTestData.Column_Header_Labels.status_label, {
+        exact: true,
+      });
+    this.role_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.role_label, {
+        exact: true,
+      });
+    this.authoriser_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.authoriser_label, {
         exact: true,
       });
     this.last_logged_in_label = this.userListTableRows
@@ -425,7 +442,7 @@ export default class CommonItemsPage {
     });
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.success_message_header_text = this.page
-      .getByTestId('govuk-notification-banner-title')
+      .getByRole('heading')
       .getByText(this.commonTestData.success_header_label);
     this.page_heading = this.page.getByRole('heading');
     this.removeLink = this.page.locator('.govuk-link').getByText(commonTestData.remove_label);
@@ -1828,5 +1845,40 @@ export default class CommonItemsPage {
     );
 
     return fieldErrorMessage;
+  }
+
+  async getSponsorUsers(): Promise<Map<string, string[]>> {
+    const fullNameValues: string[] = [];
+    const firstNameValues: string[] = [];
+    const lastNameValues: string[] = [];
+    const emailAddressValues: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const fullName = confirmStringNotNull(await columns.nth(0).textContent());
+        fullNameValues.push(fullName);
+        const firstName = fullName.split(' ')[0];
+        firstNameValues.push(firstName);
+        const lastName = fullName.split(' ')[1];
+        lastNameValues.push(lastName);
+        const emailAddress = confirmStringNotNull(await columns.nth(1).textContent());
+        emailAddressValues.push(emailAddress);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const userMap = new Map([
+      ['fullNameValues', fullNameValues],
+      ['firstNameValues', firstNameValues],
+      ['lastNameValues', lastNameValues],
+      ['emailAddressValues', emailAddressValues],
+    ]);
+    return userMap;
   }
 }

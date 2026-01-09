@@ -1,7 +1,7 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled
+@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace
 
-  @rsp-4846 @SponsorWorkspacePageLabelValidation @SetupNewSponsorOrgGoLive
+  @rsp-4846 @SponsorWorkspacePageLabelValidation
   Scenario: Validate the sponsor workspace page
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -35,7 +35,7 @@ Feature: Sponsor Workspace
     Then I can see the sponsor workspace page
     And I can see the ui labels in sponsor workspace page
 
-  @rsp-4846 @SponsorWorkspacePageValidationWhenUserEnabledOrDisabled @SetupNewSponsorOrgGoLive
+  @rsp-4846 @SponsorWorkspacePageValidationWhenUserEnabledOrDisabled
   Scenario: Validate the sponsor workspace page when the user is enabled or disabled for a sponsor organisation in backstage
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -110,7 +110,7 @@ Feature: Sponsor Workspace
     And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
-  @rsp-4846 @SponsorWorkspacePageValidationWhenSponsorOrganisationEnabledOrDisabled @SetupNewSponsorOrgGoLive
+  @rsp-4846 @SponsorWorkspacePageValidationWhenSponsorOrganisationEnabledOrDisabled
   Scenario: Validate the sponsor workspace page when the sponsor organisation is enabled or disabled in backstage
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -177,7 +177,7 @@ Feature: Sponsor Workspace
     And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
-  @rsp-5191 @SetupNewSponsorOrgGoLive @SponsorAuthorisationMandatorySelectionOnOutcomeError @jsEnabled
+  @rsp-5191 @SponsorAuthorisationMandatorySelectionOnOutcomeError @jsEnabled
   Scenario: Validate error message displayed in sponsor check and and authorise page when no option selection to action the modification
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -251,7 +251,7 @@ Feature: Sponsor Workspace
     And I validate 'Summary_Only_Error_Select_Outcome' displayed on 'Sponsor_Check_And_Authorise_Page'
     And I capture the page screenshot
 
-  @CreateDataApprovedModificationAuthorizationListPage @SetupNewSponsorOrgGoLive
+  @CreateDataApprovedModificationAuthorizationListPage
   Scenario Outline: Create approved modifications for modification authorization list page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -341,7 +341,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @CreateDataNotApprovedModificationAuthorizationListPage @SetupNewSponsorOrgGoLive
+  @CreateDataNotApprovedModificationAuthorizationListPage
   Scenario Outline: Create not approved modifications for modification authorization list page
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -434,7 +434,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @rsp-5190 @ValidateModificationListPageSortingPagination @SetupNewSponsorOrgGoLive
+  @rsp-5190 @ValidateModificationListPageSortingPagination
   Scenario: Verify that a sponsor user can access the modification authorization list page, view all modification records, apply sorting on the list, and navigate through records using pagination.
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -484,3 +484,102 @@ Feature: Sponsor Workspace
       | Date_Actioned       | date actioned       |
       # | Chief_Investigator  | chief investigator  |
       | Status              | status              |
+
+  @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation @KNOWN_DEFECT_RSP-6628
+  Scenario: Validate that <Login_User> able to navigate to 'My Organisations' page successfully
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I authorise the rts api using '<RTS_API_Data>'
+    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    And I can see the ui labels in sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
+    And I capture the page screenshot
+    And I can now see a table of results for my organisations
+    And I can see the associated organisations displaying in the table for '<Login_User>'
+    And I can see the 'sponsor organisations' list sorted by 'ascending' order of the 'organisation name' on the 'My_Organisations_Page' page
+    Then I click the '<Link>' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    And I can see the sponsor organisation profile page from my organisations
+
+    Examples:
+      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         |
+      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+
+  @rsp-6419 @MyOrganisationsPageSearchValidation
+  Scenario: Validate the search box functionality of my organisations
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I authorise the rts api using '<RTS_API_Data>'
+    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    Then I can see the my organisations page
+    When I enter '<Invalid_Input>' into the search field
+    Then I click the 'Search' button on the 'My_Organisations_Page'
+    And the no search results found message is displayed
+    And I capture the page screenshot
+    When I enter '<Empty_Input>' into the search field
+    Then I click the 'Search' button on the 'My_Organisations_Page'
+    And I can see the associated organisations displaying in the table for '<Login_User>'
+    And I capture the page screenshot
+
+    Examples:
+      | Login_User   | User_Email               | Link | RTS_API_Data         | RTS_Request                         | Invalid_Input | Empty_Input |
+      | Sponsor_User | automation sponsor email | View | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
+# | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
+# | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |

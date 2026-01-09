@@ -323,7 +323,8 @@
   },
   "Sponsor_Workspace_Page": {
     "My_Account": "My account",
-    "Authorisations": "Authorisations"
+    "Authorisations": "Authorisations",
+    "My_Organisations": "My organisations"
   },
   "Modification_Post_Submission_Page": {
     "Documents": "Documents",
@@ -351,5 +352,12 @@
   },
   "Modifications_Assignment_Confirmation_Page_Team_Manager": {
     "Back_To_Dashboard": "Back to Dashboard"
+  },
+  "My_Organisations_Page": {
+    "View": "View",
+    "Manage": "Manage"
+  },  
+  "My_Organisations_Sponsor_Org_Profile_Page": {
+    "Users": "Users"  
   }
 }

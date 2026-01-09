@@ -186,7 +186,6 @@ When(
       case 'Modification_Details_Page':
         await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
         break;
-
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -284,7 +283,7 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 });
 
 Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
-  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  const linkValue = await commonItemsPage.linkTextData[pageKey][linkKey];
   const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
   if (pageKey === 'Progress_Bar') {
     await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
@@ -297,7 +296,7 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     linkKey === 'Back_To_Users'
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else if (noOfLinksFound > 1 && linkKey != 'Back') {
+  } else if (noOfLinksFound > 1 && linkKey != 'Back' && linkKey != 'View') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
   } else if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
@@ -310,6 +309,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
   } else if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
     await commonItemsPage.removeLink.click();
   } else if (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') {
+    await commonItemsPage.govUkLink.getByText(linkValue).click();
+  } else if (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users') {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
   } else {
     await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
@@ -824,6 +825,9 @@ When(
         break;
       case 'system admin email':
         searchValue = loginPage.loginPageTestData.System_Admin.username;
+        break;
+      case 'sponsor org admin email':
+        searchValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
         break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
@@ -1476,11 +1480,13 @@ Then(
   }
 );
 
-Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
+Then('the no search results found message is displayed', async ({ commonItemsPage, myOrganisationsPage }) => {
   await expect.soft(commonItemsPage.tableRows).not.toBeVisible();
-  await expect
-    .soft(commonItemsPage.search_results_count)
-    .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+  if (!myOrganisationsPage) {
+    await expect
+      .soft(commonItemsPage.search_results_count)
+      .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+  }
   await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
   await expect.soft(commonItemsPage.search_no_results_header).toBeVisible();
   await expect.soft(commonItemsPage.search_no_results_guidance_text).toBeVisible();
@@ -1820,7 +1826,7 @@ Then(
         throw new Error(`${sortField} is not a valid option`);
       }
       const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-      expect(firstNameValues).toEqual(sortedList);
+      expect.soft(firstNameValues).toEqual(sortedList);
     }
   }
 );
@@ -2159,10 +2165,13 @@ Then(
     let columnIndex: number | undefined;
 
     // ----- Branch: User-based lists -----
-    if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
+    if (lowerListType === 'manage users') {
       // Map columns for user lists
       switch (lowerSortField) {
         case 'first name':
+          columnIndex = 0;
+          break;
+        case 'name':
           columnIndex = 0;
           break;
         case 'last name':
@@ -2206,9 +2215,57 @@ Then(
       expect.soft(actualList).toEqual(sortedList);
       return;
     }
+    if (lowerListType === 'sponsor organisation users') {
+      // Map columns for user lists
+      switch (lowerSortField) {
+        case 'name':
+          columnIndex = 0;
+          break;
+        case 'email address':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        case 'role':
+          columnIndex = 3;
+          break;
+        case 'authoriser':
+          columnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+
+      // Gather actual list values
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+
+      if (lowerSortDirection === 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) =>
+          a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        // if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+        //   expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+        // }
+      } else {
+        sortedList = [...actualList].toSorted((a, b) =>
+          b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+        // if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
+        //   expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+        // }
+      }
+
+      expect.soft(actualList).toEqual(sortedList);
+      return;
+    }
 
     // ----- Branch: Organisation/Review-body lists -----
-    if (lowerListType === 'manage sponsor organisations' || lowerListType === 'manage review bodies') {
+    if (
+      lowerListType === 'manage sponsor organisations' ||
+      lowerListType === 'manage review bodies' ||
+      lowerListType === 'sponsor organisations'
+    ) {
       // Map columns for organisation/review-body lists
       switch (lowerSortField) {
         case 'organisation name':

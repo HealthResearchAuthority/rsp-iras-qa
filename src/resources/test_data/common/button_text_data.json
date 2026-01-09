@@ -338,11 +338,11 @@
   },
   "Sponsor_Org_User_List_Page": {
     "Search": "Search",
-    "First_Name": "First name",
-    "Last_Name": "Last name",
+    "Name": "Name",
     "Email_Address": "Email address",
     "Status": "Status",
-    "Last_Logged_In": "Last logged in"
+    "Role": "Role",
+    "Authoriser": "Authoriser"
   },
   "Complete_Your_Profile_Page": {
     "Save_Continue": "Save and continue"
@@ -403,5 +403,17 @@
   },
   "Choose_A_Record_Type_To_Search_Page": {
     "Next": "Next"
+  },
+  "My_Organisations_Page": {
+    "Search": "Search"
+  },
+  "My_Organisations_Users_Page": {
+    "Add_User": "Add a user"
+  },
+  "Add_User_Role_Sponsor_Org_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Add_User_Permission_Sponsor_Org_Page": {
+    "Save_Continue": "Save and continue"
   }
 }
