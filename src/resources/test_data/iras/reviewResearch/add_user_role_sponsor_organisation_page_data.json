@@ -17,6 +17,11 @@
     },
     "Sponsor_Org_User_Role_Sponsor": {
       "role_radio": "Sponsor"
+    },
+    "Error_Validation": {
+      "No_Role_Selected_Error": {
+        "no_role_selected_link_text": "You must select a user role before continuing."
+      }
     }
   }
 }

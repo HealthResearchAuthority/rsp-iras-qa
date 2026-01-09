@@ -38,6 +38,12 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -69,10 +75,25 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
 
     Examples:
-      | Login_User             | User_Email              | Link   | Add_A_User_Section_Visibility | Sponsor_Organisation      | Select_User_Role                |
-      # | System_Admin           | system admin email      | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin |
+      | Login_User             | User_Email              | Link   | Add_A_User_Section_Visibility | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
+      | System_Admin           | system admin email      | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
+
+
+
+
+# # Validation error when no role selected
+
+# Given I am on the "Add user role" page
+
+# And no role is selected
+
+# When I click "Save and continue"
+
+# Then a notification page stating "There is a problem" is displayed with guidance notes
+
+# And I cannot proceed until a role is selected
 
 ##  https://nihr.atlassian.net/browse/RSP-6461
 
@@ -150,29 +171,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
 
 
 ##  https://nihr.atlassian.net/browse/RSP-6425
-
-## Back breadcrumb from Add user role
-
-#   Given I am on the "Add user role", Add permission, and check and add user page
-
-#   Then I see a breadcrumb labelled "Back"
-
-#   When I click "Back"
-
-#   Then I return to the respective previous page
-
-
-# # Validation error when no role selected
-
-#   Given I am on the "Add user role" page
-
-#   And no role is selected
-
-#   When I click "Save and continue"
-
-#   Then a notification page stating "There is a problem" is displayed with guidance notes
-
-#   And I cannot proceed until a role is selected
 
 
 # #Authorisation capability based on role and permission

@@ -26,7 +26,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6422 @6425 @MyOrganisationsUsersPage @AddUserRolePermission @Run
+  @rsp-6422 @6425 @MyOrganisationsUsersPage @AddUserRolePermission
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -79,6 +79,85 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
       | System_Admin           | system admin email       | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+
+  @6425 @BackBreadCrumbs
+  Scenario Outline: Validate that back breadcrumb from add user role page
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    Then I can see the add user role page
+    And I click the 'Back' link on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    Then I can see the 'Search_Add_User_Sponsor_Org_Page'
+    Examples:
+      | User_Email               |
+      | automation sponsor email |
+
+  @6425 @BackBreadCrumbs
+  Scenario Outline: Validate that back breadcrumb from add permission page
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    Then I can see the add user role page
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    And I click the 'Back' link on the 'Add_User_Permission_Sponsor_Org_Page'
+    And I capture the page screenshot
+    Then I can see the add user role page
+    Examples:
+      | User_Email               | Select_User_Role              | Select_User_Permission |
+      | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes |
+      | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  |
+
+  @6425 @BackBreadCrumbs
+  Scenario Outline: Validate that back breadcrumb from check and add user page
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    Then I can see the add user role page
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
+    And I click the 'Back' link on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    Examples:
+      | User_Email               | Select_User_Role                | Select_User_Permission  | Sponsor_Organisation      |
+      | automation sponsor email | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | University of Southampton |
+      | automation sponsor email | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | University of Southampton |
+      | system admin email       | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | University of Southampton |
+      | sponsor org admin email  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | University of Southampton |
+
+  @6425 @NoUserRoleSelectedError
+  Scenario Outline: Validate that Validation error when no role selected on add user role page
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    Then I can see the add user role page
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    Then I validate '<Summary_Error_Message>' displayed when no role selected in 'Add_User_Role_Sponsor_Org_Page'
+    Examples:
+      | User_Email               | Summary_Error_Message  |
+      | automation sponsor email | No_Role_Selected_Error |
 
   @rsp-6422 @sortUserListByColumn
   Scenario Outline: Verify that <Login_User> is able to sort the users list for <Sort_Button>

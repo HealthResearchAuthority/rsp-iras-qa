@@ -1,7 +1,7 @@
 {
   "My_Organisations_Add_User_Page": {
     "title": "",
-    "page_caption": "Sponsor organisations profile",
+    "page_caption": "Sponsor organisation profile",
     "heading_prefix_label": "Add user to ",
     "email_text_box_prefix_hint_text": "Enter the email address of the user you want to add to ",
     "email_search_box_label": "Email",

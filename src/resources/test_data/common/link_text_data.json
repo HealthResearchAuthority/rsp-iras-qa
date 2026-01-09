@@ -356,8 +356,14 @@
   "My_Organisations_Page": {
     "View": "View",
     "Manage": "Manage"
-  },  
+  },
   "My_Organisations_Sponsor_Org_Profile_Page": {
-    "Users": "Users"  
+    "Users": "Users"
+  },
+  "Add_User_Role_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
+  "Add_User_Permission_Sponsor_Org_Page": {
+    "Back": "Back"
   }
 }
