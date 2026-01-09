@@ -52,7 +52,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised @Run
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -157,23 +157,23 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
 
     Examples:
-      | Changes                                            | Research_Locations            |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
-  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_Northern_Ireland |
-  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_Scotland         |
-  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_Wales            |
-  # | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_England          |
-  # | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_Northern_Ireland |
-  # | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_Scotland         |
-  # | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_Wales            |
-  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
-  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Northern_Ireland |
-  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
-  # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Wales            |
-  # | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_England          |
-  # | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Northern_Ireland |
-  # | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
-  # | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
+      | Changes                                            | Research_Locations                     |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England          |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_Northern_Ireland |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_Scotland         |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_Wales            |
+      | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_England          |
+      | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_Northern_Ireland |
+      | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_Scotland         |
+      | Other_Minor_Change_To_Project_Management           | Data_With_Lead_Nation_Wales            |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Northern_Ireland |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Wales            |
+      | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_England          |
+      | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Northern_Ireland |
+      | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
+      | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
   @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the non reviewable modifications
