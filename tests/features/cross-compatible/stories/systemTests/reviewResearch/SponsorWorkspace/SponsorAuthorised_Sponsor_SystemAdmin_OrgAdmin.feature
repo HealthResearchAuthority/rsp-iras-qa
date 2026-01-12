@@ -1,4 +1,4 @@
-@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @rsp-6425 @6465
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SysAdminUser @jsEnabled @rsp-6425 @6465
 Feature: This feature covers scenarios related to sponsor authorisation modifications
 
   Background:
@@ -6,22 +6,26 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
     When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfBirmingham'
-    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I capture the page screenshot
     And I keep note of the organisation name for sponsor organisation setup
     When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
-    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
     And I capture the page screenshot
-    When I enter 'name of the newly added sponsor organisation' into the search field
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    # When I enter 'name of the newly added sponsor organisation' into the search field
+    When I enter 'University of Birmingham' into the search field
     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I capture the page screenshot
     And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
     Then I click the view edit link of the 'newly added sponsor organisation'
+    And I capture the page screenshot
     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I capture the page screenshot
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
   @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
-  Scenario Outline: Validate that sponsor can authorise the reviewable modifications
+  Scenario Outline: Validate that <Login_User> can authorise the reviewable modifications
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -48,7 +52,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfBirmingham'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -163,8 +167,8 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
       # | System_Admin           | system admin email       | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
       | Sponsor_Org_Admin_User | sponsor org admin email  | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700 @TestTiji
-  Scenario Outline: Validate that sponsor can authorise the reviewable modifications
+  @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
+  Scenario Outline: Validate that <Login_User> can authorise the reviewable modifications
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -191,7 +195,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfBirmingham'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -241,6 +245,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I can see the sponsor check and authorise page
     # Then they have view‑only access to project modifications/submissions
     And I capture the page screenshot
+    And the 'Confirm_Selection' button will be 'not available' to the user
     Examples:
       | Login_User   | User_Email               | Sponsor_Organisation     | Select_User_Role              | Select_User_Permission | Changes                                            | Research_Locations            |
       | Sponsor_User | automation sponsor email | University of Birmingham | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
