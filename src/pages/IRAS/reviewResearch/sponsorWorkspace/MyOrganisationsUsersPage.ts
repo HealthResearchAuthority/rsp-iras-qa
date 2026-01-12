@@ -90,7 +90,9 @@ export default class MyOrganisationsUsersPage {
 
   async assertOnMySponsorOrgUsersPage(sponsor_organisation: string, commonItemsPage: CommonItemsPage): Promise<void> {
     const pageUrl = this.page.url();
-    expect.soft(pageUrl).toContain(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.partial_url);
+    await expect
+      .soft(pageUrl.toLowerCase())
+      .toContain(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.partial_url);
     await expect
       .soft(this.page_caption)
       .toHaveText(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.page_caption);

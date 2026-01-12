@@ -6,6 +6,46 @@
     "email_text_box_prefix_hint_text": "Enter the email address of the user you want to add to ",
     "email_search_box_label": "Email",
     "save_add_continue_button": "Save and continue",
-    "add_user_partial_url": "/sponsorworkspace/myorganisationusersadduser?rtsId"
+    "add_user_partial_url": "/sponsorworkspace/myorganisationusersadduser?rtsId",
+    "non_registered_user_error_heading": "User account doesn't exist",
+    "Non_Registered_User": {
+      "email_address_text": "hscrd@health.org"
+    },
+    "Invalid_Email_Data_Leading_Dot": {
+      "email_address_text": ".john@example.com"
+    },
+    "Invalid_Email_Data_Trailing_Dot": {
+      "email_address_text": "john.@example.com"
+    },
+    "Invalid_Email_Data_Double_Dot": {
+      "email_address_text": "john..doe@example.com"
+    },
+    "Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour": {
+      "email_address_text": "DomainThatExceeds64CharactersDomainThatExceeds64CharactersDomainT@DomainThatExceeds64Characters.com"
+    },
+    "Invalid_Email_Data_Reserved_Domain": {
+      "email_address_text": "john.doe@localhost"
+    },
+    "Incorrect_Format_Invalid_Character_Limit_Email_Data": {
+      "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@examplecom"
+    },
+    "System_Admin": {
+      "email_address_text": "hscrd@health.org"
+    },
+    "Sponsor_Org_Admin_User": {
+      "email_address_text": "hscrd@health.org"
+    },
+    "Sponsor_User": {
+      "email_address_text": "hscrd@health.org"
+    },
+    "Error_Validation": {
+      "Blank_Email_Address_Error": {
+        "no_role_selected_link_text": "Enter a user email"
+      },
+      "User_Exists_Message": {
+        "banner_heading": "Important",
+        "user_exists_notification_text": "This user already exists in "
+      }
+    }
   }
 }
