@@ -1,11 +1,11 @@
-@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @6425 @6465 @skip
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @rsp-6425 @6465
 Feature: This feature covers scenarios related to sponsor authorisation modifications
 
   Background:
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfBirmingham'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
@@ -158,13 +158,13 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I can see the 'With review body' status displayed for all documents in the table
     And I capture the page screenshot
     Examples:
-      | Login_User             | User_Email               | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Changes                                            | Research_Locations            |
-      | Sponsor_User           | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
-      | System_Admin           | system admin email       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      | Login_User             | User_Email               | Sponsor_Organisation     | Select_User_Role                | Select_User_Permission  | Changes                                            | Research_Locations            |
+      | Sponsor_User           | automation sponsor email | University of Birmingham | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      # | System_Admin           | system admin email       | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorAuthorised  @KNOWN-DEFECT-RSP-6700
-  Scenario Outline: Validate that sponsor without authoriser can view the modifications to authorise
+  @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700 @TestTiji
+  Scenario Outline: Validate that sponsor can authorise the reviewable modifications
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -238,9 +238,9 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
-    # And I can see the sponsor check and authorise page
+    And I can see the sponsor check and authorise page
     # Then they have view‑only access to project modifications/submissions
     And I capture the page screenshot
     Examples:
-      | Login_User   | User_Email               | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Changes                                            | Research_Locations            |
-      | Sponsor_User | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      | Login_User   | User_Email               | Sponsor_Organisation     | Select_User_Role              | Select_User_Permission | Changes                                            | Research_Locations            |
+      | Sponsor_User | automation sponsor email | University of Birmingham | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |

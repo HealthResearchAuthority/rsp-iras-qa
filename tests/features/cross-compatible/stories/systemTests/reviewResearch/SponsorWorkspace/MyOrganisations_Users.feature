@@ -6,8 +6,8 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
     When I authorise the rts api using 'RTS_NIHR_FHIR_Config'
-    Then I make a request to the rts api using 'RTS_Active_Sponsor_Organisation_NHS' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    Then I make a request to the rts api using 'RTS_Active_Sponsor_Organisation_NHS' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfBirmingham' and  retrive country
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfBirmingham'
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I capture the page screenshot
     And I keep note of the organisation name for sponsor organisation setup
@@ -26,7 +26,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6422 @6425 @MyOrganisationsUsersPage @AddUserRolePermission
+  @rsp-6422 @rsp-6425 @MyOrganisationsUsersPage @AddUserRolePermission
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -74,13 +74,13 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And the action column section shows the hyperlink as '<Action_Column_Visibility>' based on the logged in user role
     # And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'name' on the 'first' page
     Examples:
-      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
-      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
-      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
-      | System_Admin           | system admin email       | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility | Sponsor_Organisation     | Select_User_Role                | Select_User_Permission  |
+      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Birmingham | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
+      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Birmingham | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
+      # | System_Admin           | system admin email       | Manage | visible                       | Manage                   | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-  @6425 @BackBreadCrumbs
+  @rsp-6425 @BackBreadCrumbs
   Scenario Outline: Validate that back breadcrumb from add user role page
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -95,7 +95,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | User_Email               |
       | automation sponsor email |
 
-  @6425 @BackBreadCrumbs
+  @rsp-6425 @BackBreadCrumbs
   Scenario Outline: Validate that back breadcrumb from add permission page
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -116,7 +116,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes |
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  |
 
-  @6425 @BackBreadCrumbs
+  @rsp-6425 @BackBreadCrumbs
   Scenario Outline: Validate that back breadcrumb from check and add user page
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -138,13 +138,13 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
     And I can see the add user permission page based on '<Select_User_Permission>'
     Examples:
-      | User_Email               | Select_User_Role                | Select_User_Permission  | Sponsor_Organisation      |
-      | automation sponsor email | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | University of Southampton |
-      | automation sponsor email | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | University of Southampton |
-      | system admin email       | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | University of Southampton |
-      | sponsor org admin email  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | University of Southampton |
+      | User_Email               | Select_User_Role                | Select_User_Permission  | Sponsor_Organisation     |
+      | automation sponsor email | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | University of Birmingham |
+      | automation sponsor email | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | University of Birmingham |
+      # | system admin email       | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | University of Birmingham |
+      | sponsor org admin email  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | University of Birmingham |
 
-  @6425 @NoUserRoleSelectedError @KNOWN-DEFECT-RSP-6697
+  @rsp-6425 @NoUserRoleSelectedError @KNOWN-DEFECT-RSP-6697
   Scenario Outline: Validate that Validation error when no role selected on add user role page
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -205,22 +205,22 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Then I can see the 'sponsor organisation users' list sorted by '<Secondary_Sort>' order of the '<Sort_Field>' on the 'last' page
 
     Examples:
-      | Login_User             | User_Email               | Link   | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | Name          | name          | descending   | ascending      | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Email_Address | email address | ascending    | descending     | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Status        | status        | ascending    | descending     | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Role          | role          | ascending    | descending     | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Authoriser    | authoriser    | ascending    | descending     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Name          | name          | descending   | ascending      | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Email_Address | email address | ascending    | descending     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Status        | status        | ascending    | descending     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Role          | role          | ascending    | descending     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Authoriser    | authoriser    | ascending    | descending     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Name          | name          | descending   | ascending      | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | email address | ascending    | descending     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Status        | status        | ascending    | descending     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Role          | role          | ascending    | descending     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Authoriser    | authoriser    | ascending    | descending     | University of Southampton |
+      | Login_User             | User_Email               | Link   | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort | Sponsor_Organisation     |
+      | Sponsor_User           | automation sponsor email | View   | Name          | name          | descending   | ascending      | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Email_Address | email address | ascending    | descending     | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Status        | status        | ascending    | descending     | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Role          | role          | ascending    | descending     | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Authoriser    | authoriser    | ascending    | descending     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Name          | name          | descending   | ascending      | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Email_Address | email address | ascending    | descending     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Status        | status        | ascending    | descending     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Role          | role          | ascending    | descending     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Authoriser    | authoriser    | ascending    | descending     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Name          | name          | descending   | ascending      | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | email address | ascending    | descending     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Status        | status        | ascending    | descending     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Role          | role          | ascending    | descending     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Authoriser    | authoriser    | ascending    | descending     | University of Birmingham |
 
   @rsp-6422 @UserListSponsorOrgSearchResultsFound
   Scenario Outline: Verify that <Login_User> can search for the users in the user tab by <Field_Name> and <Position>
@@ -260,31 +260,31 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Then the system displays search results matching the search criteria
 
     Examples:
-      | Login_User             | User_Email               | Link   | Field_Name    | Position | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | First_Name    | First    | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Last_Name     | First    | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Email_Address | First    | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | First_Name    | Last     | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Last_Name     | Last     | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Email_Address | Last     | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Full_Name     | First    | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | Full_Name     | Last     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | First_Name    | First    | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Last_Name     | First    | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Email_Address | First    | University of Southampton |
-      | System_Admin           | system admin email       | Manage | First_Name    | Last     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Last_Name     | Last     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Email_Address | Last     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Full_Name     | First    | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Full_Name     | Last     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | First    | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | First    | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | First    | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | Last     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | Last     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | Last     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | First    | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | Last     | University of Southampton |
+      | Login_User             | User_Email               | Link   | Field_Name    | Position | Sponsor_Organisation     |
+      | Sponsor_User           | automation sponsor email | View   | First_Name    | First    | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Last_Name     | First    | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Email_Address | First    | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | First_Name    | Last     | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Last_Name     | Last     | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Email_Address | Last     | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Full_Name     | First    | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | Full_Name     | Last     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | First_Name    | First    | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Last_Name     | First    | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Email_Address | First    | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | First_Name    | Last     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Last_Name     | Last     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Email_Address | Last     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Full_Name     | First    | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Full_Name     | Last     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | First    | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | First    | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | First    | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | Last     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | Last     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | Last     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | First    | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Full_Name     | Last     | University of Birmingham |
 
   @rsp-6422 @UserListSponsorOrgSearchNoResultsFound
   Scenario Outline: Verify no results found message if there is no user added to the selected sponsor organisation matches the search criteria
@@ -324,10 +324,10 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Then the no search results found message is displayed
     And I capture the page screenshot
     Examples:
-      | Login_User             | User_Email               | Link   | Search_Query           | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | Non_Existant_User_Data | University of Southampton |
-      | System_Admin           | system admin email       | Manage | Non_Existant_User_Data | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Non_Existant_User_Data | University of Southampton |
+      | Login_User             | User_Email               | Link   | Search_Query           | Sponsor_Organisation     |
+      | Sponsor_User           | automation sponsor email | View   | Non_Existant_User_Data | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | Non_Existant_User_Data | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Non_Existant_User_Data | University of Birmingham |
 
   @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationFirstPage @UserlistSponsorOrgPaginationPageNumber @UserlistSponsorOrgPaginationNextLinkClick
   Scenario: Verify pagination in user tab of sponsor organisation when <Login_User> is on the first page and navigate through each page by clicking <Navigation_Method>
@@ -370,13 +370,13 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Then I sequentially navigate through each 'Sponsor_Org_User_List_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
     Examples:
-      | Login_User             | User_Email               | Link   | Navigation_Method | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | page number       | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | next link         | University of Southampton |
-      | System_Admin           | system admin email       | Manage | page number       | University of Southampton |
-      | System_Admin           | system admin email       | Manage | next link         | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | next link         | University of Southampton |
+      | Login_User             | User_Email               | Link   | Navigation_Method | Sponsor_Organisation     |
+      | Sponsor_User           | automation sponsor email | View   | page number       | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | next link         | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | page number       | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | next link         | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | next link         | University of Birmingham |
 
   @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationLastPage @UserlistSponsorOrgPaginationPageNumber @MUserlistSponsorOrgPaginationPreviousLinkClick
   Scenario: Verify pagination in user tab of sponsor organisation when <Login_User> is on the last page and navigate through each page by clicking <Navigation_Method>
@@ -417,13 +417,13 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Then I sequentially navigate through each 'Sponsor_Org_User_List_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
     Examples:
-      | Login_User             | User_Email               | Link   | Navigation_Method | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | page number       | University of Southampton |
-      | Sponsor_User           | automation sponsor email | View   | previous link     | University of Southampton |
-      | System_Admin           | system admin email       | Manage | page number       | University of Southampton |
-      | System_Admin           | system admin email       | Manage | previous link     | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | previous link     | University of Southampton |
+      | Login_User             | User_Email               | Link   | Navigation_Method | Sponsor_Organisation     |
+      | Sponsor_User           | automation sponsor email | View   | page number       | University of Birmingham |
+      | Sponsor_User           | automation sponsor email | View   | previous link     | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | page number       | University of Birmingham |
+      | System_Admin           | system admin email       | Manage | previous link     | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       | University of Birmingham |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | previous link     | University of Birmingham |
 
 #  https://nihr.atlassian.net/browse/RSP-6422
 

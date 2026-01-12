@@ -2044,7 +2044,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityCheckAddUserToSponsorOrgPage @SysAdminUser @6425
+  @axeAccessibilityCheckAddUserToSponsorOrgPage @SysAdminUser
   Scenario: Check and add user to sponsor organisation page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
@@ -3010,7 +3010,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityMyOrganisationsUsersPage @SponsorUser @SetupNewSponsorOrgGoLive @6425
+  @axeAccessibilityMyOrganisationsUsersPage @SponsorUser @SetupNewSponsorOrgGoLive
   Scenario: Add a user role page from system admin workspace of manage sponsor organisations
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -3032,7 +3032,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityMyOrganisationsUsersPage @SponsorUser @SetupNewSponsorOrgGoLive @6425
+  @axeAccessibilityMyOrganisationsUsersPage @SponsorUser @SetupNewSponsorOrgGoLive
   Scenario: Add a user permission page from system admin workspace of manage sponsor organisations
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
