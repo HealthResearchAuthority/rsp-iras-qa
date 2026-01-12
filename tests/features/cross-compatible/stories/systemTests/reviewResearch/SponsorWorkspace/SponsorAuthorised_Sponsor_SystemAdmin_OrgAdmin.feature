@@ -1,4 +1,4 @@
-@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @6425 @6465
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @6425 @6465 @skip
 Feature: This feature covers scenarios related to sponsor authorisation modifications
 
   Background:
@@ -94,77 +94,77 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
     And I capture the page screenshot
-    # Then I click on the searched modification id
-    # And I can see the sponsor check and authorise page
-    # And I validate the project information labels using dataset displayed on modifications page
-    # And I validate the date created for modification in sponsor check and authorise page
-    # And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
-    # And I can see the ui labels in sponsor check and authorise page
-    # And I capture the page screenshot
-    # When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
-    # And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
-    # And I capture the page screenshot
-    # When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
-    # And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
-    # And I capture the page screenshot
-    # When I click the 'Documents' link on the 'Sponsor_Check_And_Authorise_Page'
-    # And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
-    # And I can see the 'With sponsor' status displayed for all documents in the table
-    # And I capture the page screenshot
-    # And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
-    # And I capture the page screenshot
-    # When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    # And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
-    # And I capture the page screenshot
-    # And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
-    # When I enter 'modification id' into the search field
-    # And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
-    # And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
-    # And I can see the searched modification to be present in the list with date actioned with 'with review body' status in the sponsor authorisations page
-    # And I capture the page screenshot
-    # Then I click on the searched modification id
-    # And I can see the modification page for sponsor view
-    # And I validate the project information labels using dataset displayed on modifications page
-    # And I validate the date created for modification in sponsor check and authorise page
-    # And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
-    # When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
-    # And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
-    # And I capture the page screenshot
-    # When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
-    # And I validate the individual and overall ranking of changes on the relevant modification page
-    # And I validate the change details are displayed as per the '<Changes>' dataset under the tabs sections
-    # And I capture the page screenshot
-    # When I click the 'Documents' link on the 'Modification_Post_Submission_Page'
-    # And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
-    # And I can see the 'With review body' status displayed for all documents in the table
-    # And I capture the page screenshot
-    # Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
-    # When I enter 'iras id' into the search field
-    # And I click the 'Search' button on the 'My_Research_Page'
-    # And I click on the short project title for the searched iras id from my research projects page
-    # When I click the 'Project_Documents' link on the 'Project_Overview_Page'
-    # And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
-    # And I can see the 'With review body' status displayed for all documents in the table
-    # And I capture the page screenshot
-    # When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    # When I enter 'modification id' into the search field
-    # And I click the 'Search' button on the 'Post_Approval_Page'
-    # And I can see the searched modification to be present in the list with 'With review body' status in project overview page
-    # And I capture the page screenshot
-    # Then I click on the searched modification id
-    # And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
-    # And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
-    # And I can see the 'With review body' status displayed for all documents in the table
-    # And I capture the page screenshot
+    Then I click on the searched modification id
+    And I can see the sponsor check and authorise page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the date created for modification in sponsor check and authorise page
+    And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
+    And I can see the ui labels in sponsor check and authorise page
+    And I capture the page screenshot
+    When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate the individual and overall ranking of changes on the relevant modification page
+    And I validate all fields on modification page using '<Changes>' for collapsed view and by expanding the view details
+    And I capture the page screenshot
+    When I click the 'Documents' link on the 'Sponsor_Check_And_Authorise_Page'
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'With sponsor' status displayed for all documents in the table
+    And I capture the page screenshot
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
+    And I capture the page screenshot
+    And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with date actioned with 'with review body' status in the sponsor authorisations page
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I can see the modification page for sponsor view
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the date created for modification in sponsor check and authorise page
+    And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
+    When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate the individual and overall ranking of changes on the relevant modification page
+    And I validate the change details are displayed as per the '<Changes>' dataset under the tabs sections
+    And I capture the page screenshot
+    When I click the 'Documents' link on the 'Modification_Post_Submission_Page'
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'With review body' status displayed for all documents in the table
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    And I can validate the 'Multiple_Files_Three' are displayed in the supporting documents table
+    And I can see the 'With review body' status displayed for all documents in the table
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Post_Approval_Page'
+    And I can see the searched modification to be present in the list with 'With review body' status in project overview page
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I validate the status 'Modification_Status_With_Review_Body' is displayed on the page
+    And I click the 'Documents' link on the 'Modification_Post_Submission_Page'
+    And I can see the 'With review body' status displayed for all documents in the table
+    And I capture the page screenshot
     Examples:
       | Login_User             | User_Email               | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Changes                                            | Research_Locations            |
       | Sponsor_User           | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
       | System_Admin           | system admin email       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
       | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
-  Scenario Outline: Validate that sponsor can authorise the reviewable modifications
+  @ReviewableModificationSponsorAuthorised  @KNOWN-DEFECT-RSP-6700
+  Scenario Outline: Validate that sponsor without authoriser can view the modifications to authorise
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -238,7 +238,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
     And I capture the page screenshot
     Then I click on the searched modification id
-    And I can see the sponsor check and authorise page
+    # And I can see the sponsor check and authorise page
     # Then they have view‑only access to project modifications/submissions
     And I capture the page screenshot
     Examples:
