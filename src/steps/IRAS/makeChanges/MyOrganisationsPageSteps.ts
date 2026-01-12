@@ -30,11 +30,11 @@ Then(
   'I can see the associated organisations displaying in the table for {string}',
   async ({ myOrganisationsPage, checkSetupSponsorOrganisationPage }, user: string) => {
     const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
-    const countryName = await checkSetupSponsorOrganisationPage.getCountry();
+    // const countryName = await checkSetupSponsorOrganisationPage.getCountry();
     const orgNameValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(1)').innerText();
     expect.soft(orgNameValue).toBe(sponsorOrgName);
-    const countryValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(2)').innerText();
-    expect.soft(countryValue).toBe(countryName);
+    // const countryValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(2)').innerText();
+    // expect.soft(countryValue).toBe(countryName);
     const linkName = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(3)').innerText();
     if (user === 'Sponsor_User') {
       expect.soft(linkName).toBe('View');

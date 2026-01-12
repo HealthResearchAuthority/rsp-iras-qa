@@ -25,7 +25,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
 
   @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
-  Scenario Outline: Validate that <Login_User> can authorise the reviewable modifications
+  Scenario Outline: Validate that <Login_User> can authorise the reviewable modifications since the authoriser permission is set to 'Yes' while adding user to sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -168,7 +168,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
       | Sponsor_Org_Admin_User | sponsor org admin email  | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
   @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
-  Scenario Outline: Validate that <Login_User> can authorise the reviewable modifications
+  Scenario Outline: Validate that <Login_User> can't authorise the reviewable modifications but only view access since the authoriser permission is set to 'No' while adding user to sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'

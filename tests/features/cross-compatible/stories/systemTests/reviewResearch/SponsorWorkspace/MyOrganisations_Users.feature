@@ -24,7 +24,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6422 @rsp-6425 @MyOrganisationsUsersPage @AddUserRolePermission
+  @rsp-6422 @rsp-6425 @MyOrganisationsUsersPage @AddUserRolePermission @KNOWN-DEFECT-RSP-6723
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -72,11 +72,11 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And the action column section shows the hyperlink as '<Action_Column_Visibility>' based on the logged in user role
     # And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'name' on the 'first' page
     Examples:
-      | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility | Sponsor_Organisation     | Select_User_Role                | Select_User_Permission  |
-      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Birmingham | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
-      | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Birmingham | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
+      | Login_User             | User_Email               | Link | Add_A_User_Section_Visibility | Action_Column_Visibility | Sponsor_Organisation     | Select_User_Role                | Select_User_Permission  |
+      | Sponsor_User           | automation sponsor email | View | not visible                   | View                     | University of Birmingham | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
+      | Sponsor_User           | automation sponsor email | View | not visible                   | View                     | University of Birmingham | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
       # | System_Admin           | system admin email       | Manage | visible                       | Manage                   | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | View | visible                       | Manage                   | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6425 @BackBreadCrumbs
   Scenario Outline: Validate that back breadcrumb from add user role page

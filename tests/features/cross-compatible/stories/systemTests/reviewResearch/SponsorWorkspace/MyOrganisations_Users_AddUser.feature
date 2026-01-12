@@ -24,7 +24,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6461 @MyOrganisationsAddUserPage
+  @rsp-6461 @MyOrganisationsAddUserPage @KNOWN-DEFECT-RSP-6723
   Scenario Outline: Validate that <Login_User> is able to navigate to add users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -54,12 +54,13 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I capture the page screenshot
     And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
     And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I capture the page screenshot
     Then I can see the my organisations page
     And I can see the 'My_Organisations_Table' ui labels on the my organisations page
-    And I capture the page screenshot
     And I can now see a table of results for my organisations
     When I enter '<Sponsor_Organisation>' into the search field
     Then I click the 'Search' button on the 'My_Organisations_Page'
+    And I capture the page screenshot
     And I can see the associated organisations displaying in the table for '<Login_User>'
     And I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
@@ -70,12 +71,13 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the users tab is underlined
     And the add a user section is '<Add_A_User_Section_Visibility>' based on the logged in user role
     Then I click the 'Add_User' button on the 'My_Organisations_Users_Page'
+    And I capture the page screenshot
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
 
     Examples:
-      | Login_User             | User_Email              | Link   | Add_A_User_Section_Visibility | Sponsor_Organisation     | Select_User_Role                | Select_User_Permission  |
+      | Login_User             | User_Email              | Link | Add_A_User_Section_Visibility | Sponsor_Organisation     | Select_User_Role                | Select_User_Permission  |
       # | System_Admin           | system admin email      | Manage | visible                       | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Sponsor_Org_Admin_User | sponsor org admin email | View | visible                       | University of Birmingham | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
 
 

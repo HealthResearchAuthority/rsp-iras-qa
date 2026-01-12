@@ -38,7 +38,7 @@ export default class MyOrganisationsUsersPage {
       .getByRole('heading')
       .getByText(
         this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page
-          .user_added_to_sponsor_organisation__success_message_text
+          .user_added_to_sponsor_organisation_success_message_text
       );
     this.information_alert_banner = this.page.getByRole('alert');
     this.user_in_sponsor_organisation_disabled_success_message_text = this.page

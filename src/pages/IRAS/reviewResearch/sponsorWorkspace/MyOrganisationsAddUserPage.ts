@@ -53,7 +53,7 @@ export default class MyOrganisationsAddUserPage {
       .toBeVisible();
     await expect
       .soft(
-        this.mainPageContent.getByLabel(
+        this.mainPageContent.getByText(
           this.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.email_text_box_prefix_hint_text +
             sponsor_organisation
         )
