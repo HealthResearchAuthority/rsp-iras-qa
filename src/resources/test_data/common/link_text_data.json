@@ -351,5 +351,24 @@
   },
   "Modifications_Assignment_Confirmation_Page_Team_Manager": {
     "Back_To_Dashboard": "Back to Dashboard"
+  },
+  "My_Organisations_Page": {
+    "View": "View",
+    "Manage": "Manage"
+  },
+  "My_Organisations_Sponsor_Org_Profile_Page": {
+    "Users": "Users"
+  },
+  "Add_User_Role_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
+  "Add_User_Permission_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
+  "My_Organisations_Users_Add_User_Page": {
+    "Back": "Back"
+  },
+  "My_Organisations_Users_Add_User_Non_Registered_User_Error_Page": {
+    "Back": "Back"
   }
 }
