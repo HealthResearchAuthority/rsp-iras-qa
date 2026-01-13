@@ -107,6 +107,7 @@ import MySponsorOrgUsersPage from '../pages/IRAS/reviewResearch/sponsorWorkspace
 import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAddUserPage';
 import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
 import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
+import CheckConfirmUserToAddToSponsorOrganisationPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/CheckConfirmUserToAddToSponsorOrganisationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -214,6 +215,7 @@ type CustomFixtures = {
   mySponsorOrgAddUserPage: MySponsorOrgAddUserPage;
   addUserRoleSponsorOrgPage: AddUserRoleSponsorOrgPage;
   addUserPermissionSponsorOrgPage: AddUserPermissionSponsorOrgPage;
+  checkConfirmUserToAddToSponsorOrganisationPage: CheckConfirmUserToAddToSponsorOrganisationPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -633,6 +635,10 @@ export const test = base.extend<CustomFixtures>({
 
   addUserPermissionSponsorOrgPage: async ({ page }, use) => {
     await use(new AddUserPermissionSponsorOrgPage(page));
+  },
+
+  checkConfirmUserToAddToSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckConfirmUserToAddToSponsorOrganisationPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

@@ -24,8 +24,8 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6422 @rsp-6425 @MyOrganisationsUsersPage @AddUserRolePermission @KNOWN-DEFECT-RSP-6723
-  Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> and add a user with <Select_User_Role> and <Select_User_Permission>
+  @rsp-6422 @rsp-6425 @rsp-6490 @MyOrganisationsUsersPage @AddUserRolePermission @KNOWN-DEFECT-RSP-6723 @KNOWN-DEFECT-RSP-6749 @KNOWN-DEFECT-RSP-6752
+  Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> from Manage sposnor organisations of System admin workspace and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
@@ -46,6 +46,12 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    And I capture the page screenshot
+    When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
+    And I capture the page screenshot
+    And the view and edit user profile page displays the expected user details for the selected '<Select_User_Permission>'
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
@@ -114,7 +120,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes |
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  |
 
-  @rsp-6425 @BackBreadCrumbs
+  @rsp-6425 @BackBreadCrumbs @KNOWN-DEFECT-RSP-6752
   Scenario Outline: Validate that back breadcrumb from check and add user page
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'

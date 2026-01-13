@@ -48,7 +48,7 @@ export default class MyOrganisationsAddUserPage {
   async assertOnMySponsorOrgAddUsersPage(sponsor_organisation: string): Promise<void> {
     const pageUrl = this.page.url();
     expect
-      .soft(pageUrl)
+      .soft(pageUrl.toLowerCase())
       .toContain(this.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.add_user_partial_url);
     await expect
       .soft(this.page_caption)
