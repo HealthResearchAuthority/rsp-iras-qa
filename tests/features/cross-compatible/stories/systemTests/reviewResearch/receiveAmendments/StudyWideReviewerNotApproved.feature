@@ -1,5 +1,5 @@
 @RegressionReviewAmendments @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
-Feature: Review Amendments- As a studywide reviewer I want to receive and not approve amendments
+Feature: Studywide reviewer receive and not approve amendments
 
     Background:
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
