@@ -84,10 +84,18 @@ Then(
     await expect(userProfilePage.job_title_value).toHaveText(await checkRemoveUserReviewBodyPage.getJobTitle());
     if (await userProfilePage.role_value.isVisible()) {
       const expectedRaw = await checkRemoveUserReviewBodyPage.getRole();
-      await expect.soft(userProfilePage.role_value).toContainText(
-        expectedRaw.split(',').map((r) => r.trim()),
-        { useInnerText: true }
-      );
+      const actualRoleRaw = await userProfilePage.role_value.allTextContents();
+      const toTokens = (text: string) =>
+        text
+          .split(',')
+          .map((t) => t.trim())
+          .filter(Boolean);
+      const expectedRoleValues = toTokens(expectedRaw);
+      const actualRoleValues = toTokens(actualRoleRaw.join(','));
+      const alphabetical = (a: string, b: string) => a.localeCompare(b);
+      const expectedRoleSorted = [...expectedRoleValues].sort(alphabetical);
+      const actualRoleSorted = [...actualRoleValues].sort(alphabetical);
+      expect.soft(actualRoleSorted).toEqual(expectedRoleSorted);
     }
   }
 );
