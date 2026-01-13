@@ -1,4 +1,4 @@
-@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @KNOWN_DEFECT_RSP_6644 @fail
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
 Feature: This feature covers scenarios related to sponsor authorisation modifications
 
   Background:

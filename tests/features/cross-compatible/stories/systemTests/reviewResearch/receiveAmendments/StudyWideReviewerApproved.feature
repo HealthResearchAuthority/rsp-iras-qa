@@ -1,4 +1,4 @@
-@RegressionReviewAmendments @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled @KNOWN_DEFECT_RSP_6644 @fail
+@RegressionReviewAmendments @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
 Feature: Studywide reviewer receive and approve amendments
 
     Background:
