@@ -37,9 +37,9 @@ Feature: Sort, search and pagination of users list in the selected sponsor org
 
     Examples:
       | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort |
-      #| Name          | name          | descending   | ascending      |
+      | Name          | name          | descending   | ascending      |
       | Email_Address | email address | ascending    | descending     |
-      #  | Status        | status        | ascending    | descending     |
+      | Status        | status        | ascending    | descending     |
       | Role          | role          | ascending    | descending     |
       | Authoriser    | authoriser    | ascending    | descending     |
 
