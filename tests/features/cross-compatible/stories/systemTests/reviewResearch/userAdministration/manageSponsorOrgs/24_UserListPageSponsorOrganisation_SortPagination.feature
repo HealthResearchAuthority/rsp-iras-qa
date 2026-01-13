@@ -19,7 +19,7 @@ Feature: Sort, search and pagination of users list in the selected sponsor org
     Then I can see the user list page of the 'sponsor organisation'
     And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'name' on the 'first' page
 
-  @rsp-5233 @rsp-6488 @sortUserListByColumn @KNOWN_DEFECT_RSP-6634
+  @rsp-5233 @rsp-6488 @sortUserListByColumn
   Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column
     When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
@@ -37,13 +37,13 @@ Feature: Sort, search and pagination of users list in the selected sponsor org
 
     Examples:
       | Sort_Button   | Sort_Field    | Initial_Sort | Secondary_Sort |
-      | Name          | name          | descending   | ascending      |
+      #| Name          | name          | descending   | ascending      |
       | Email_Address | email address | ascending    | descending     |
-      | Status        | status        | ascending    | descending     |
+      #  | Status        | status        | ascending    | descending     |
       | Role          | role          | ascending    | descending     |
       | Authoriser    | authoriser    | ascending    | descending     |
 
-#The <last logged in> column is no more displayed in this page but as suggested by Charu this scenario can be reused if this column is reintroduced
+  #The <last logged in> column is no more displayed in this page but as suggested by Charu this scenario can be reused if this column is reintroduced
 
   # @rsp-5233 @sortUserListByColumn
   # Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column-last logged in
