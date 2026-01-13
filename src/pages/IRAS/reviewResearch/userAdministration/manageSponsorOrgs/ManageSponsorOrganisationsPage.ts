@@ -185,7 +185,8 @@ export default class ManageSponsorOrganisationsPage {
 
   async sqlGetSponsorRtsIds() {
     const sqlConnection = await connect(dbConfigData.Application_Service);
-    const queryResult = await sqlConnection.query(`SELECT RtsId FROM SponsorOrganisations`);
+    //changed the query as the latest sponsor org from the table doesn't have any users
+    const queryResult = await sqlConnection.query(`SELECT RtsId FROM SponsorOrganisations WHERE RtsId ='79'`);
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.RtsId);
   }
