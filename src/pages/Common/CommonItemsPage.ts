@@ -1070,41 +1070,6 @@ export default class CommonItemsPage {
     return userMap;
   }
 
-  async getSponsorUsers(): Promise<Map<string, string[]>> {
-    const fullNameValues: string[] = [];
-    const firstNameValues: string[] = [];
-    const lastNameValues: string[] = [];
-    const emailAddressValues: string[] = [];
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.tableRows.count();
-      for (let i = 1; i < rowCount; i++) {
-        const columns = this.tableRows.nth(i).getByRole('cell');
-        const fullName = confirmStringNotNull(await columns.nth(0).textContent());
-        fullNameValues.push(fullName);
-        const firstName = fullName.split(' ')[0];
-        firstNameValues.push(firstName);
-        const lastName = fullName.split(' ')[1];
-        lastNameValues.push(lastName);
-        const emailAddress = confirmStringNotNull(await columns.nth(1).textContent());
-        emailAddressValues.push(emailAddress);
-      }
-      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
-        await this.next_button.click();
-        await this.page.waitForLoadState('domcontentloaded');
-      } else {
-        dataFound = true;
-      }
-    }
-    const userMap = new Map([
-      ['fullNameValues', fullNameValues],
-      ['firstNameValues', firstNameValues],
-      ['lastNameValues', lastNameValues],
-      ['emailAddressValues', emailAddressValues],
-    ]);
-    return userMap;
-  }
-
   async getAllUsersFromTheTable(): Promise<Map<string, string[]>> {
     const searchResultValues: string[] = [];
     await this.page.waitForLoadState('domcontentloaded');
