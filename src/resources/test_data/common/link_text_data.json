@@ -363,6 +363,18 @@
     "Users": "Users",
     "Audit": "Audit"
   },
+  "Add_User_Role_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
+  "Add_User_Permission_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
+  "My_Organisations_Users_Add_User_Page": {
+    "Back": "Back"
+  },
+  "My_Organisations_Users_Add_User_Non_Registered_User_Error_Page": {
+    "Back": "Back"
+  },
   "My_Organisations_Audit_History_Page": {
     "My_Account_Breadcrumb": "My account",
     "Sponsor_Workspace_Breadcrumb": "Sponsor workspace",
