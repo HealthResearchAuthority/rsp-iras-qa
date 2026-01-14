@@ -19,7 +19,6 @@ When(
       await mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        // if (key === 'email_address_text') {
         const locator = mySponsorOrgAddUserPage[key];
         if (datasetName === 'Non_Registered_User') {
           const uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
@@ -27,16 +26,15 @@ When(
         } else if (datasetName.startsWith('Invalid_Email_')) {
           valueToFill = await dataset[key];
         } else if (datasetName === 'Sponsor_Org_Admin_User') {
-          valueToFill = await loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
+          valueToFill = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
         } else if (datasetName === 'System_Admin') {
-          valueToFill = await loginPage.loginPageTestData.System_Admin.username;
+          valueToFill = loginPage.loginPageTestData.System_Admin.username;
         } else if (datasetName === 'Sponsor_User') {
-          valueToFill = await loginPage.loginPageTestData.Sponsor_User.username;
+          valueToFill = loginPage.loginPageTestData.Sponsor_User.username;
         }
         if (valueToFill) {
           await locator.fill(valueToFill);
         }
-        // }
       }
     }
   }

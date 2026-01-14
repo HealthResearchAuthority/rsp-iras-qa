@@ -26,11 +26,11 @@ When(
       )
       .toBeVisible();
     if (datasetName === 'Sponsor_Org_Admin_User') {
-      userEmailValue = await loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
+      userEmailValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
     } else if (datasetName === 'System_Admin') {
-      userEmailValue = await loginPage.loginPageTestData.System_Admin.username;
+      userEmailValue = loginPage.loginPageTestData.System_Admin.username;
     } else if (datasetName === 'Sponsor_User') {
-      userEmailValue = await loginPage.loginPageTestData.Sponsor_User.username;
+      userEmailValue = loginPage.loginPageTestData.Sponsor_User.username;
     }
     expect
       .soft(confirmStringNotNull(await checkConfirmUserToAddToSponsorOrganisationPage.user_email_value.textContent()))

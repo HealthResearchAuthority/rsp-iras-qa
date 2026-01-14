@@ -139,20 +139,9 @@ WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='active';`);
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.Email);
   }
-  //   async sqlGetAutomationDisabledUserEmails() {
-  //     const sqlConnection = await connect(dbConfigData.Identity_Service);
-  //     const queryResult = await sqlConnection.query(`SELECT Top 5 Email
-  // FROM Users
-  // WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='disabled';`);
-  //     await sqlConnection.close();
-  //     return queryResult.recordset.map((row) => row.Email);
-  //   }
 
   async getAutomationUserEmails() {
     const activeUsers = new Set(await this.sqlGetAutomationActiveUserEmails());
-    // const disabledUsers = new Set(await this.sqlGetAutomationDisabledUserEmails());
-    // // Union of two sets
-    // const all = new Set<string>([...activeUsers, ...disabledUsers]);
     return activeUsers;
   }
 }

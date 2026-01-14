@@ -1,8 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as mySponsorOrgAddUserPageTestData from '../../../../resources/test_data/iras/reviewResearch/sponsorWorkspace/my_organisations_add_user_page_data.json';
 import * as commonTestData from '../../../../resources/test_data/common/common_data.json';
-// import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
-// import { connect } from '../../../../utils/DbConfig';
 
 //Declare Page Objects
 export default class MyOrganisationsAddUserPage {

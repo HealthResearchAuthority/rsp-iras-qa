@@ -136,7 +136,6 @@ export default class CheckConfirmUserToAddToSponsorOrganisationPage {
           .check_confirm_add_user_role_sponsor_workspace_page_caption
       );
     await expect.soft(this.page_heading).toBeVisible();
-    // await expect.soft(this.page_guidance_text).toBeVisible();
     await expect
       .soft(this.page_guidance_text)
       .toContainText(
