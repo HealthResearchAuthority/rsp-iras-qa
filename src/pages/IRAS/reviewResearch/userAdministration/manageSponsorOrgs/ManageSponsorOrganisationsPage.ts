@@ -185,7 +185,9 @@ export default class ManageSponsorOrganisationsPage {
 
   async sqlGetSponsorRtsIds() {
     const sqlConnection = await connect(dbConfigData.Application_Service);
-    const queryResult = await sqlConnection.query(`SELECT RtsId FROM SponsorOrganisations`);
+    const queryResult = await sqlConnection.query(
+      `SELECT RtsId FROM SponsorOrganisationsUsers GROUP BY RtsId HAVING COUNT(SponsorRole) > 20;`
+    );
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.RtsId);
   }
