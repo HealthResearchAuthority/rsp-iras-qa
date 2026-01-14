@@ -22,9 +22,18 @@ Then(
 
 Then(
   'I keep note of the organisation name for sponsor organisation setup',
-  async ({ checkSetupSponsorOrganisationPage }) => {
-    await checkSetupSponsorOrganisationPage.setOrgName(
-      confirmStringNotNull(await checkSetupSponsorOrganisationPage.organisation_name_value.textContent())
-    );
+  async ({ checkSetupSponsorOrganisationPage, myOrgSponsorOrgProfilePage }) => {
+    const orgName = confirmStringNotNull(await checkSetupSponsorOrganisationPage.organisation_name_value.textContent());
+    await checkSetupSponsorOrganisationPage.setOrgName(orgName);
+    await myOrgSponsorOrgProfilePage.setOrgName(orgName);
+    const startSearchText = 'RtsId=';
+    const endSearchText = '&SponsorOrganisationName';
+    const startIndex = checkSetupSponsorOrganisationPage.page.url().indexOf(startSearchText);
+    const endIndex = checkSetupSponsorOrganisationPage.page.url().indexOf(endSearchText);
+    const rtsId = checkSetupSponsorOrganisationPage.page
+      .url()
+      .substring(startIndex, endIndex)
+      .replace(startSearchText, '');
+    await myOrgSponsorOrgProfilePage.setRtsId(rtsId);
   }
 );

@@ -1,0 +1,13 @@
+{
+  "My_Organisations_Edit_User_Profile_Page": {
+    "page_heading": "Edit user profile record",
+    "profile_heading": "Profile details",
+    "details_heading": "Further details",
+    "role_label": "Role",
+    "authoriser_label": "Authoriser",
+    "Role_Sponsor_Authoriser_No": {
+      "role_radio": "Sponsor",
+      "authoriser_radio": "No"
+    }
+  }
+}

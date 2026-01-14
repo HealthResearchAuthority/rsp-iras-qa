@@ -356,8 +356,22 @@
   "My_Organisations_Page": {
     "View": "View",
     "Manage": "Manage"
-  },  
+  },
   "My_Organisations_Sponsor_Org_Profile_Page": {
-    "Users": "Users"  
+    "Profile": "Profile",
+    "Projects": "Projects",
+    "Users": "Users",
+    "Audit": "Audit"
+  },
+  "My_Organisations_Audit_History_Page": {
+    "My_Account_Breadcrumb": "My account",
+    "Sponsor_Workspace_Breadcrumb": "Sponsor workspace",
+    "My_Organisations_Breadcrumb": "My organisations"
+  },
+  "My_Organisations_Users_Page": {
+    "Manage": "Manage"
+  },
+  "My_Organisations_User_Profile_Page": {
+    "Change": "Change"
   }
 }
