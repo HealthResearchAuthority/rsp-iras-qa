@@ -339,10 +339,12 @@
   "Sponsor_Org_User_List_Page": {
     "Search": "Search",
     "Name": "Name",
+    "Name": "Name",
     "Email_Address": "Email address",
     "Status": "Status",
     "Role": "Role",
-    "Authoriser": "Authoriser"
+    "Authoriser": "Authoriser",
+    "Action": "Action"
   },
   "Complete_Your_Profile_Page": {
     "Save_Continue": "Save and continue"

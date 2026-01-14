@@ -6,14 +6,6 @@
     "search_box_label": "Find a user",
     "search_box_hint_text": "You can search by first name, last name or email address",
     "search_button": "Search",
-    "Column_Header_Labels": {
-      "first_name_label": "First name",
-      "last_name_label": "Last name",
-      "email_address_label": "Email address",
-      "status_label": "Status",
-      "last_logged_in_label": "Last logged in",
-      "actions_label": "Action"
-    },
     "user_added_to_sponsor_organisation_success_message_header_text": "Success",
     "user_added_to_sponsor_organisation_success_message_text": "User added to organisation",
     "user_in_sponsor_organisation_disabled_success_message_header_text": "Success",
