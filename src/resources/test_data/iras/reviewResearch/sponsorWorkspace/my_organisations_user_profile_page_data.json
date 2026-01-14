@@ -1,5 +1,20 @@
 {
   "My_Organisations_User_Profile_Page": {
-    "page_caption": "User profile"
+    "page_caption": "User profile",
+    "authoriser_yes": "Yes",
+    "authoriser_no": "No",
+    "change_link": "Change",
+    "Row_Labels": {
+      "title_label": "Title",
+      "first_name_label": "First name",
+      "last_name_label": "Last name",
+      "email_label": "Email",
+      "telephone_label": "Telephone",
+      "organisation_label": "Organisation",
+      "job_title_label": "Job title",
+      "role_label": "Role",
+      "authoriser_label": "Authoriser",
+      "status_label": "Status"
+    }
   }
 }

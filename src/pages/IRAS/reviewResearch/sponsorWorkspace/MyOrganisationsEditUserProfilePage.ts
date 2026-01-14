@@ -44,6 +44,8 @@ export default class MyOrganisationsEditUserProfilePage {
     this.authoriser_radio = this.authoriser_fieldset.getByRole('radio');
   }
 
+  //Page Methods
+
   async assertOnMySponsorOrgEditUserProfilePage(): Promise<void> {
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.details_heading).toBeVisible();

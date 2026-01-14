@@ -24,6 +24,8 @@ export default class MyOrganisationsAuditHistoryPage {
     this.username_label = this.page.locator('th').last();
   }
 
+  //Page Methods
+
   async assertOnMyOrgAuditHistory() {
     await expect.soft(this.page_heading).toBeVisible();
   }

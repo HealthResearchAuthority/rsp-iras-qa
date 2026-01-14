@@ -33,7 +33,7 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
 
-    @rsp-6423 @ViewAuditPage @KNOWN_DEFECT_RSP-6681 @fail
+    @rsp-6423 @ViewMyOrgAuditPage @KNOWN_DEFECT_RSP-6681 @fail
     Scenario Outline: Validate that the my organisations audit page displays the event history as expected
         When I enter '<User_Email>' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -94,7 +94,7 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
             | Login_User   | User_Email         | Sponsor_Organisation | Select_User_Role                | Select_User_Permission  |
             | System_Admin | system admin email | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-    @rsp-6423 @AccessAuditPage
+    @rsp-6423 @AccessMyOrgAuditPage
     Scenario Outline: Validate that the my organisations audit page can only be accessed by administrators
         When I enter '<User_Email>' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
