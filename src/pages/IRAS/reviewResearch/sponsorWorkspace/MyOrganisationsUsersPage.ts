@@ -109,18 +109,7 @@ export default class MyOrganisationsUsersPage {
     }
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
       const userList = await commonItemsPage.getSponsorUsers();
-      const emailAddress: any = userList.get('emailAddressValues');
-      await commonItemsPage.setUserEmail(emailAddress);
-      const firstName: any = userList.get('firstNameValues');
-      await commonItemsPage.setUserFirstName(firstName);
-      const lastName: any = userList.get('lastNameValues');
-      await commonItemsPage.setUserLastName(lastName);
-      await commonItemsPage.setFirstName(firstName[0]);
-      await commonItemsPage.setLastName(lastName[0]);
-      await commonItemsPage.setEmail(emailAddress[0]);
-      if (await commonItemsPage.firstPage.isVisible()) {
-        await commonItemsPage.firstPage.click();
-      }
+      await commonItemsPage.setUserFirstNameLastNameEmail(userList);
     }
   }
 

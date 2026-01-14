@@ -1788,12 +1788,14 @@ Then(
     },
     orgType: string
   ) => {
+    let userList: Map<string, string[]>;
     if (orgType === 'review body') {
       await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
       const organisationName = await reviewBodyProfilePage.getOrgName();
       await expect(userListReviewBodyPage.page_heading).toHaveText(
         userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
       );
+      userList = await commonItemsPage.getUsers();
     } else if (orgType === 'sponsor organisation') {
       await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage(commonItemsPage);
       const organisationName = await sponsorOrganisationProfilePage.getOrgName();
@@ -1801,27 +1803,10 @@ Then(
         userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
           .heading_prefix_label + organisationName
       );
+      userList = await commonItemsPage.getSponsorUsers();
     }
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
-      let userList;
-      if (orgType === 'review body') {
-        userList = await commonItemsPage.getUsers();
-      }
-      if (orgType === 'sponsor organisation') {
-        userList = await commonItemsPage.getSponsorUsers();
-      }
-      const emailAddress: any = userList.get('emailAddressValues');
-      await commonItemsPage.setUserEmail(emailAddress);
-      const firstName: any = userList.get('firstNameValues');
-      await commonItemsPage.setUserFirstName(firstName);
-      const lastName: any = userList.get('lastNameValues');
-      await commonItemsPage.setUserLastName(lastName);
-      await commonItemsPage.setFirstName(firstName[0]);
-      await commonItemsPage.setLastName(lastName[0]);
-      await commonItemsPage.setEmail(emailAddress[0]);
-      if (await commonItemsPage.firstPage.isVisible()) {
-        await commonItemsPage.firstPage.click();
-      }
+      await commonItemsPage.setUserFirstNameLastNameEmail(userList);
     }
   }
 );

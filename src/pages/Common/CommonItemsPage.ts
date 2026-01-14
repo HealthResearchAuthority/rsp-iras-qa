@@ -1925,4 +1925,19 @@ export default class CommonItemsPage {
     ]);
     return userMap;
   }
+
+  async setUserFirstNameLastNameEmail(userList: Map<string, string[]>) {
+    const emailAddress: any = userList.get('emailAddressValues');
+    await this.setUserEmail(emailAddress);
+    const firstName: any = userList.get('firstNameValues');
+    await this.setUserFirstName(firstName);
+    const lastName: any = userList.get('lastNameValues');
+    await this.setUserLastName(lastName);
+    await this.setFirstName(firstName[0]);
+    await this.setLastName(lastName[0]);
+    await this.setEmail(emailAddress[0]);
+    if (await this.firstPage.isVisible()) {
+      await this.firstPage.click();
+    }
+  }
 }
