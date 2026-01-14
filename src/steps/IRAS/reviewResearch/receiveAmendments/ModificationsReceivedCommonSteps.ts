@@ -31,7 +31,7 @@ Then(
     if (sortField.toLowerCase() == 'modification id') {
       sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date submitted') {
-      sortedList = await modificationsReceivedCommonPage.sortDateSubmittedListValues(actualList, sortDirection);
+      sortedList = await commonItemsPage.sortDateSubmittedListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'days since submission') {
       sortedList = await modificationsReceivedCommonPage.sortDaysSinceSubmittedListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {

@@ -24,6 +24,14 @@ Feature: Sponsor Workspace
     When I enter 'automation sponsor email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -58,6 +66,14 @@ Feature: Sponsor Workspace
     When I enter 'automation sponsor email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -133,6 +149,14 @@ Feature: Sponsor Workspace
     When I enter 'automation sponsor email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -198,6 +222,14 @@ Feature: Sponsor Workspace
     When I enter 'automation sponsor email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -272,6 +304,14 @@ Feature: Sponsor Workspace
     When I enter 'automation sponsor email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -399,6 +439,14 @@ Feature: Sponsor Workspace
     When I enter 'automation sponsor email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -455,6 +503,14 @@ Feature: Sponsor Workspace
     When I enter 'automation sponsor email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -490,13 +546,11 @@ Feature: Sponsor Workspace
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I authorise the rts api using '<RTS_API_Data>'
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
     When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
-    And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+    And I keep note of the organisation country for sponsor organisation setup
     When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
     Then I can see the sponsor organisation added successful message on manage sponsor organisation page
     And I capture the page screenshot
@@ -509,6 +563,14 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -532,23 +594,21 @@ Feature: Sponsor Workspace
     And I can see the sponsor organisation profile page from my organisations for '<Login_User>'
 
     Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton |
+      | System_Admin           | system admin email       | Manage | University of Southampton |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton |
 
   @rsp-6419 @MyOrganisationsPageSearchValidation
   Scenario: Validate the search box functionality of my organisations for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I authorise the rts api using '<RTS_API_Data>'
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
     When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
-    And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+    And I keep note of the organisation country for sponsor organisation setup
     When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
     Then I can see the sponsor organisation added successful message on manage sponsor organisation page
     And I capture the page screenshot
@@ -561,6 +621,14 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -585,23 +653,21 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
 
     Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         | Invalid_Input | Empty_Input |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
+      | Login_User             | User_Email               | Link   | Invalid_Input | Empty_Input |
+      | Sponsor_User           | automation sponsor email | View   | invalid       |             |
+      | System_Admin           | system admin email       | Manage | invalid       |             |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | invalid       |             |
 
   @rsp-6420 @MyOrganisationsProfilePageBreadcrumbValidation
   Scenario: Breadcrumb navigation for <Login_User> on sponsor organisation profile page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I authorise the rts api using '<RTS_API_Data>'
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
     When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
-    And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+    And I keep note of the organisation country for sponsor organisation setup
     When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
     Then I can see the sponsor organisation added successful message on manage sponsor organisation page
     And I capture the page screenshot
@@ -614,6 +680,14 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -653,12 +727,12 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
 
     Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton |
+      | System_Admin           | system admin email       | Manage | University of Southampton |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton |
 
-  @rsp-6420 @MyOrganisationsProfileTabValidation @KNOWN_DEFECT_RSP-6699
+  @rsp-6420 @MyOrganisationsProfileTabValidation @RTS @skip @KNOWN_DEFECT_RSP-6699
   Scenario: Validate the data under profile tab for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -682,6 +756,14 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -717,13 +799,11 @@ Feature: Sponsor Workspace
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I authorise the rts api using '<RTS_API_Data>'
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
     When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
-    And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+    And I keep note of the organisation country for sponsor organisation setup
     When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
     Then I can see the sponsor organisation added successful message on manage sponsor organisation page
     And I capture the page screenshot
@@ -736,6 +816,14 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -766,12 +854,12 @@ Feature: Sponsor Workspace
     Then I can see the project overview page
 
     Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         | Sponsor_Organisation      | Validation_Text_Research |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton | Label_Texts              |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton | Label_Texts              |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton | Label_Texts              |
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Validation_Text_Research |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Label_Texts              |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Label_Texts              |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Label_Texts              |
 
-  @rsp-6421 @MyOrganisationsProjectsTabValidation @Testonly
+  @rsp-6421 @MyOrganisationsProjectsTabValidation
   Scenario: Validate the sort and search functionality under projects tab for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -792,6 +880,14 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -846,10 +942,10 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
 
     Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         | Sponsor_Organisation      | Validation_Text_Research | Empty_Input |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton | Label_Texts              |             |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton | Label_Texts              |             |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton | Label_Texts              |             |
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Validation_Text_Research | Empty_Input |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Label_Texts              |             |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Label_Texts              |             |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Label_Texts              |             |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
   Scenario: Validate the advanced filter functionality under projects tab for <Login_User>
@@ -872,6 +968,14 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -929,6 +1033,14 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot

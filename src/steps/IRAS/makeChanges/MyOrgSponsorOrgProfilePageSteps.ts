@@ -70,11 +70,7 @@ Then('I can see the project data displaying in the table', async ({ myOrgSponsor
 
 Then(
   'I can see the project records are sorted by {string} order of {string}',
-  async (
-    { myResearchProjectsPage, myOrgSponsorOrgProfilePage, commonItemsPage },
-    sortDirection: string,
-    sortField: string
-  ) => {
+  async ({ myResearchProjectsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
     let sortedList: string[];
     let columnIndex: number;
     switch (sortField.toLowerCase()) {
@@ -99,7 +95,7 @@ Then(
     if (sortField.toLowerCase() == 'iras id') {
       sortedList = await myResearchProjectsPage.sortIrasIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date created') {
-      sortedList = await myOrgSponsorOrgProfilePage.sortDateSubmittedList(actualList, sortDirection);
+      sortedList = await commonItemsPage.sortDateSubmittedListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'short project title') {
       const compareFn = (a: string, b: string) =>
         sortDirection.toLowerCase() === 'ascending'

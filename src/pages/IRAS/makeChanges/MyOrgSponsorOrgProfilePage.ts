@@ -73,33 +73,4 @@ export default class MyOrgSponsorOrgProfilePage {
     expect.soft(actualLabels).toEqual(expectedLabels);
     expect.soft(actualValues).toEqual(expectedValues);
   }
-
-  async sortDateSubmittedList(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
-    const listAsDates: Date[] = [];
-    const sortedListAsStrings: string[] = [];
-    const formattedDatesSubmitted = datesSubmitted.map((dates) => {
-      const [day, month, year] = dates.split(' ');
-      return [day, month, year];
-    });
-
-    for (const entry of formattedDatesSubmitted.entries()) {
-      const usFormattedEntry = entry[1].toReversed();
-      const dateEntryString = `${usFormattedEntry[0]} ${usFormattedEntry[1]} ${usFormattedEntry[2]}`;
-      const dateFormattedEntry = new Date(dateEntryString);
-      listAsDates.push(dateFormattedEntry);
-    }
-
-    if (sortDirection.toLowerCase() == 'descending') {
-      listAsDates.sort((a, b) => b.getTime() - a.getTime());
-    } else {
-      listAsDates.sort((a, b) => a.getTime() - b.getTime());
-    }
-
-    for (const date of listAsDates) {
-      sortedListAsStrings.push(
-        date.toLocaleString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).replace('Sept', 'Sep')
-      );
-    }
-    return sortedListAsStrings;
-  }
 }

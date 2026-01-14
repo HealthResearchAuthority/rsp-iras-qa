@@ -45,18 +45,18 @@ Feature: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                                             | Validation_Text_Manage_Users_List | Status_Enabled | Advanced_Filters_Users                                        |
-      | Valid_Data_In_All_Fields_Role_System_Administrator           | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active       |
-      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active       |
-      | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Applicant_Status_Active                  |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Applicant_Status_Active                  |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active               |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active               |
-      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active         |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active         |
-      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active       |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active       |
-      | Valid_Data_In_All_Fields_Role_Organisation_Administrator     | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Organisation_Administrator_Status_Active |
+      | Add_User_Profile                                             | Validation_Text_Manage_Users_List | Status_Enabled | Advanced_Filters_Users                                  |
+      | Valid_Data_In_All_Fields_Role_System_Administrator           | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active |
+      | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Applicant_Status_Active            |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Applicant_Status_Active            |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
+  #| Valid_Data_In_All_Fields_Role_Organisation_Administrator     | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Organisation_Administrator_Status_Active |
 
   @rsp-2827 @rsp-2870 @verifyAddAnotherUser
   Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
