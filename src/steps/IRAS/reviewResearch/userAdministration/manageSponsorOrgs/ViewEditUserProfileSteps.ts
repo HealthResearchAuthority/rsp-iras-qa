@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
-const { Then } = createBdd(test);
+const { When, Then } = createBdd(test);
 
 Then(
   'I can see the view and edit user profile page of the sponsor organisation',
@@ -44,6 +44,38 @@ Then(
         .toContain(
           viewEditUserProfilePage.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.sponsor_role_value
         );
+    }
+  }
+);
+
+When(
+  'the view and edit user profile page displays the expected user details for the selected {string}',
+  async ({ viewEditUserProfilePage, addUserRoleSponsorOrgPage }, permissionSelected: string) => {
+    await viewEditUserProfilePage.assertOnViewEditUserProfilePage();
+    if (permissionSelected === 'No_Permission_To_Select') {
+      expect
+        .soft(confirmStringNotNull(await viewEditUserProfilePage.role_value.textContent()))
+        .toBe(
+          addUserRoleSponsorOrgPage.addUserRoleSponsorOrgPageTestData.Add_User_Role_Page.Sponsor_Org_User_Role_Org_Admin
+            .role_radio
+        );
+      expect.soft(confirmStringNotNull(await viewEditUserProfilePage.authoriser_value.textContent())).toBe('Yes');
+    } else if (permissionSelected === 'Sponsor_Authoriser_Yes') {
+      expect
+        .soft(confirmStringNotNull(await viewEditUserProfilePage.role_value.textContent()))
+        .toBe(
+          addUserRoleSponsorOrgPage.addUserRoleSponsorOrgPageTestData.Add_User_Role_Page.Sponsor_Org_User_Role_Sponsor
+            .role_radio
+        );
+      expect.soft(confirmStringNotNull(await viewEditUserProfilePage.authoriser_value.textContent())).toBe('Yes');
+    } else if (permissionSelected === 'Sponsor_Authoriser_No') {
+      expect
+        .soft(confirmStringNotNull(await viewEditUserProfilePage.role_value.textContent()))
+        .toBe(
+          addUserRoleSponsorOrgPage.addUserRoleSponsorOrgPageTestData.Add_User_Role_Page.Sponsor_Org_User_Role_Sponsor
+            .role_radio
+        );
+      expect.soft(confirmStringNotNull(await viewEditUserProfilePage.authoriser_value.textContent())).toBe('No');
     }
   }
 );

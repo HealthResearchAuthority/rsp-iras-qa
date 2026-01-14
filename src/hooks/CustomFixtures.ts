@@ -107,6 +107,7 @@ import MySponsorOrgUsersPage from '../pages/IRAS/reviewResearch/sponsorWorkspace
 import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAddUserPage';
 import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
 import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
+import CheckConfirmUserToAddToSponsorOrganisationPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/CheckConfirmUserToAddToSponsorOrganisationPage';
 import MyOrganisationsAuditHistoryPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAuditHistoryPage';
 import MyOrganisationsUserProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsUserProfilePage';
 import MyOrganisationsEditUserProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsEditUserProfilePage';
@@ -217,6 +218,7 @@ type CustomFixtures = {
   mySponsorOrgAddUserPage: MySponsorOrgAddUserPage;
   addUserRoleSponsorOrgPage: AddUserRoleSponsorOrgPage;
   addUserPermissionSponsorOrgPage: AddUserPermissionSponsorOrgPage;
+  checkConfirmUserToAddToSponsorOrganisationPage: CheckConfirmUserToAddToSponsorOrganisationPage;
   myOrganisationsAuditHistoryPage: MyOrganisationsAuditHistoryPage;
   myOrganisationsUserProfilePage: MyOrganisationsUserProfilePage;
   myOrganisationsEditUserProfilePage: MyOrganisationsEditUserProfilePage;
@@ -639,6 +641,10 @@ export const test = base.extend<CustomFixtures>({
 
   addUserPermissionSponsorOrgPage: async ({ page }, use) => {
     await use(new AddUserPermissionSponsorOrgPage(page));
+  },
+
+  checkConfirmUserToAddToSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckConfirmUserToAddToSponsorOrganisationPage(page));
   },
 
   myOrganisationsAuditHistoryPage: async ({ page }, use) => {

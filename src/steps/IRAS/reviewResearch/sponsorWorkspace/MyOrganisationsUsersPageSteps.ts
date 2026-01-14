@@ -63,6 +63,34 @@ Then(
 );
 
 Then(
+  'I can see the {string} successful message on users tab in the sponsor organisation profile for the selected sponsor organisation',
+  async ({ mySponsorOrgUsersPage, commonItemsPage }, activityName: string) => {
+    await expect.soft(commonItemsPage.success_message_header_text).toBeVisible();
+    switch (activityName) {
+      case 'user added':
+        await expect.soft(mySponsorOrgUsersPage.user_added_to_sponsor_organisation__success_message_text).toBeVisible();
+        break;
+      default:
+        throw new Error(`${activityName} is not a valid option`);
+    }
+    expect
+      .soft(
+        await mySponsorOrgUsersPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await mySponsorOrgUsersPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);
+
+Then(
   'I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page',
   async ({ mySponsorOrgUsersPage, commonItemsPage }) => {
     const automationUserEmailsSet = await mySponsorOrgUsersPage.getAutomationUserEmails();

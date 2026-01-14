@@ -9,7 +9,7 @@ Feature: Authenticate Test Users once only, before test run
             Examples:
                   | User                   | Page      |
                   | System_Admin           | Home_Page |
-                  # | Applicant_User          | Home_Page |
+                  | Applicant_User         | Home_Page |
                   # | Studywide_Reviewer      | Home_Page |
                   # | Studywide_Reviewer_NI   | Home_Page |
                   # | Studywide_Reviewer_S    | Home_Page |
