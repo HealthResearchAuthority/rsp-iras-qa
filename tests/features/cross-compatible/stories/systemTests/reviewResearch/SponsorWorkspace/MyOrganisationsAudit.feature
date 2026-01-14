@@ -127,5 +127,3 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
 
 # And the users tab is underlined ---replacing this with common step in profile below
 # And the 'Audit' tab is active and underlined
-
-# UPDATE ALL INSTANCES OF user_added_to_sponsor_organisation__success_message_text

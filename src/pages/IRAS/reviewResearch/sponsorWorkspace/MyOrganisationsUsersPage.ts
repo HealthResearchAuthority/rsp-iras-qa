@@ -12,7 +12,7 @@ export default class MyOrganisationsUsersPage {
   readonly commonTestData: typeof commonTestData;
   readonly page_heading: Locator;
   readonly page_caption: Locator;
-  readonly user_added_to_sponsor_organisation__success_message_text: Locator;
+  readonly user_added_to_sponsor_organisation_success_message_text: Locator;
   readonly information_alert_banner: Locator;
   readonly user_in_sponsor_organisation_disabled_success_message_text: Locator;
   readonly user_in_sponsor_organisation_enabled_success_message_text: Locator;
@@ -34,7 +34,7 @@ export default class MyOrganisationsUsersPage {
     this.commonTestData = commonTestData;
 
     //Locators
-    this.user_added_to_sponsor_organisation__success_message_text = this.page
+    this.user_added_to_sponsor_organisation_success_message_text = this.page
       .getByRole('heading')
       .getByText(
         this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page

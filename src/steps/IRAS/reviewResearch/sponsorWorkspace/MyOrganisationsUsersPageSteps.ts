@@ -68,7 +68,7 @@ Then(
     await expect.soft(commonItemsPage.success_message_header_text).toBeVisible();
     switch (activityName) {
       case 'user added':
-        await expect.soft(mySponsorOrgUsersPage.user_added_to_sponsor_organisation__success_message_text).toBeVisible();
+        await expect.soft(mySponsorOrgUsersPage.user_added_to_sponsor_organisation_success_message_text).toBeVisible();
         break;
       default:
         throw new Error(`${activityName} is not a valid option`);
