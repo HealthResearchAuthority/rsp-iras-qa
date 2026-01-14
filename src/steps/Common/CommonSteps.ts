@@ -287,18 +287,28 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
   const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
   if (pageKey === 'Progress_Bar') {
     await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
-  } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
+    return;
+  }
+  if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
     await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
-  } else if (linkKey.includes('_Filter_Panel')) {
+    return;
+  }
+  if (linkKey.includes('_Filter_Panel')) {
     await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
-  } else if (
+    return;
+  }
+  if (
     (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
     linkKey === 'Back_To_Users'
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else if (noOfLinksFound > 1 && linkKey != 'Back' && linkKey != 'View') {
+    return;
+  }
+  if (noOfLinksFound > 1 && linkKey !== 'Back' && linkKey !== 'View') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
-  } else if (
+    return;
+  }
+  if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
     (linkKey === 'Sponsor_Details' ||
       linkKey === 'Modification_Details' ||
@@ -306,15 +316,20 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
       linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
-  } else if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
-    await commonItemsPage.removeLink.click();
-  } else if (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') {
-    await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else if (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users') {
-    await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else {
-    await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+    return;
   }
+  if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
+    await commonItemsPage.removeLink.click();
+    return;
+  }
+  if (
+    (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') ||
+    (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users')
+  ) {
+    await commonItemsPage.govUkLink.getByText(linkValue).click();
+    return;
+  }
+  await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
 });
 
 Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
