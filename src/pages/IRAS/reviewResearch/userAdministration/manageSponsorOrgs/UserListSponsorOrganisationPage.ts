@@ -64,11 +64,11 @@ export default class UserListReviewBodyPage {
     await expect.soft(this.guidance_text).toBeVisible();
     await expect.soft(commonItemsPage.search_box_label).toBeVisible();
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
-      await expect.soft(commonItemsPage.first_name_label).toBeVisible();
-      await expect.soft(commonItemsPage.last_name_label).toBeVisible();
-      await expect.soft(commonItemsPage.email_address_label).toBeVisible();
-      await expect.soft(commonItemsPage.status_label).toBeVisible();
-      await expect.soft(commonItemsPage.last_logged_in_label).toBeVisible();
+      await expect.soft(commonItemsPage.users_sponsor_org_name_label).toBeVisible();
+      await expect.soft(commonItemsPage.users_sponsor_org_email_label).toBeVisible();
+      await expect.soft(commonItemsPage.users_sponsor_org_status_label).toBeVisible();
+      await expect.soft(commonItemsPage.users_sponsor_org_role_label).toBeVisible();
+      await expect.soft(commonItemsPage.users_sponsor_org_authoriser_label).toBeVisible();
       await expect.soft(commonItemsPage.actions_label).toBeVisible();
     }
   }
