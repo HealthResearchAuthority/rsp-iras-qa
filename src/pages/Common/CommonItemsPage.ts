@@ -426,7 +426,7 @@ export default class CommonItemsPage {
     });
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.success_message_header_text = this.page
-      .locator('h2.govuk-notification-banner__title')
+      .getByRole('heading')
       .getByText(this.commonTestData.success_header_label);
     this.page_heading = this.page.getByRole('heading');
     this.removeLink = this.page.locator('.govuk-link').getByText(commonTestData.remove_label);
