@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { Locator } from '@playwright/test';
-import { randomInt } from 'crypto';
+import { randomInt } from 'node:crypto';
 
 const { Then } = createBdd(test);
 
@@ -16,7 +16,7 @@ Then(
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         const locator: Locator = myOrganisationsPage[key];
-        await expect(locator).toBeVisible();
+        await expect.soft(locator).toBeVisible();
       }
     }
   }
@@ -46,14 +46,26 @@ Then(
 );
 
 Then(
-  'I enter partial organisation name into the search field',
-  async ({ commonItemsPage, checkSetupSponsorOrganisationPage }) => {
-    const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
-    const minLen = 3;
-    const start = randomInt(0, sponsorOrgName.length - minLen);
-    const maxLen = sponsorOrgName.length - start;
-    const len = randomInt(minLen, maxLen + 1);
-    const partialText = sponsorOrgName.slice(start, start + len);
-    await commonItemsPage.search_text.fill(partialText);
+  'I enter partial {string} into the search field',
+  async ({ commonItemsPage, checkSetupSponsorOrganisationPage, myOrgSponsorOrgProfilePage }, fieldKey: string) => {
+    if (fieldKey == 'organisation name') {
+      const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
+      const minLen = 3;
+      const start = randomInt(0, sponsorOrgName.length - minLen);
+      const maxLen = sponsorOrgName.length - start;
+      const len = randomInt(minLen, maxLen + 1);
+      const partialText = sponsorOrgName.slice(start, start + len);
+      await commonItemsPage.search_text.fill(partialText);
+    }
+    if (fieldKey == 'iras id') {
+      const irasId = await myOrgSponsorOrgProfilePage.projects_table
+        .locator('tbody tr td:nth-child(2)')
+        .first()
+        .innerText();
+      const startIndex = randomInt(0, irasId.length);
+      const endIndex = randomInt(startIndex + 1, irasId.length + 1);
+      const partialIrasId = irasId.substring(startIndex, endIndex);
+      await commonItemsPage.search_text.fill(partialIrasId);
+    }
   }
 );

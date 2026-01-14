@@ -328,7 +328,12 @@
   },
   "Sponsor_Organisation_Profile_Page": {
     "Disable": "Disable",
-    "Enable": "Enable"
+    "Enable": "Enable",
+    "Search": "Search",
+    "Advanced_filter": "Advanced filter",
+    "Short_Project_Title": "Short project title",
+    "Iras_Id": "IRAS ID",
+    "Date_Created": "Date created"
   },
   "Search_Add_User_Sponsor_Org_Page": {
     "Search": "Search"

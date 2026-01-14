@@ -114,7 +114,9 @@ Then(
           ) {
             const name = element.resource.name;
             const country = element.resource.address?.[0]?.country || 'Unknown';
-            rtsPage.rtsResponseListRecord.push({ name, country });
+            const address = element.resource.address;
+            const lastUpdated = element.resource.meta.lastUpdated;
+            rtsPage.rtsResponseListRecord.push({ name, country, address, lastUpdated });
           }
         }
       }
