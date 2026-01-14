@@ -910,20 +910,6 @@ Then(
           throw new Error(`Unsupported button state: ${availabilityVal}`);
         }
       }
-    } else if (linkLabel === 'Confirm_Selection') {
-      const buttonValue = commonItemsPage.buttonTextData['Sponsor_Check_And_Authorise_Page']['Confirm_Selection'];
-      const locatorVal: Locator = await commonItemsPage.govUkButton
-        .getByText(buttonValue, { exact: true })
-        .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-        .first();
-      if (availabilityVal.toLowerCase() === 'available') {
-        await expect.soft(locatorVal).toBeVisible();
-        await expect.soft(locatorVal).toBeEnabled();
-      } else if (availabilityVal.toLowerCase() === 'not available') {
-        await expect.soft(locatorVal).toBeHidden();
-      } else {
-        throw new Error(`Unsupported button state: ${availabilityVal}`);
-      }
     }
   }
 );
@@ -2260,16 +2246,10 @@ Then(
         sortedList = [...actualList].toSorted((a, b) =>
           a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
         );
-        // if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-        //   expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
-        // }
       } else {
         sortedList = [...actualList].toSorted((a, b) =>
           b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
         );
-        // if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-        //   expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
-        // }
       }
 
       expect.soft(actualList).toEqual(sortedList);
@@ -2394,9 +2374,9 @@ Then(
   'the {string} link will be {string} to the user in the {string}',
   async ({ commonItemsPage }, linkKey: string, availabilityVal: string, pageKey: string) => {
     const linkValue = await commonItemsPage.linkTextData[pageKey][linkKey];
-    const locatorVal: Locator = await commonItemsPage.govUkLink
+    const locatorVal: Locator = commonItemsPage.govUkLink
       .getByText(linkValue, { exact: true })
-      .or(await commonItemsPage.govUkLink.getByText(linkValue))
+      .or(commonItemsPage.govUkLink.getByText(linkValue))
       .first();
     if (availabilityVal.toLowerCase() === 'available') {
       await expect.soft(locatorVal).toBeVisible();

@@ -66,12 +66,8 @@ Then(
   'I can see the {string} successful message on users tab in the sponsor organisation profile for the selected sponsor organisation',
   async ({ mySponsorOrgUsersPage, commonItemsPage }, activityName: string) => {
     await expect.soft(commonItemsPage.success_message_header_text).toBeVisible();
-    switch (activityName) {
-      case 'user added':
-        await expect.soft(mySponsorOrgUsersPage.user_added_to_sponsor_organisation__success_message_text).toBeVisible();
-        break;
-      default:
-        throw new Error(`${activityName} is not a valid option`);
+    if (activityName === 'user added') {
+      await expect.soft(mySponsorOrgUsersPage.user_added_to_sponsor_organisation__success_message_text).toBeVisible();
     }
     expect
       .soft(
