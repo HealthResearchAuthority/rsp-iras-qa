@@ -23,7 +23,9 @@ export default class AddUserPermissionSponsorOrgPage {
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
-    this.page_caption = this.mainPageContent.locator('div.govuk-caption-l');
+    this.page_caption = this.mainPageContent
+      .locator('div.govuk-caption-l')
+      .or(this.mainPageContent.locator('div.govuk-label'));
     this.page_heading = this.mainPageContent.getByRole('heading', {
       name: addUserPermissionSponsorOrgPageTestData.Add_User_Permission_Page.page_heading,
     });
