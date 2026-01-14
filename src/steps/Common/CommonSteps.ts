@@ -1785,7 +1785,7 @@ Then(
         userList = await commonItemsPage.getUsers();
       }
       if (orgType === 'sponsor organisation') {
-        userList = await commonItemsPage.getUsersInSponsorOrganisations();
+        userList = await commonItemsPage.getSponsorUsers();
       }
       const emailAddress: any = userList.get('emailAddressValues');
       await commonItemsPage.setUserEmail(emailAddress);

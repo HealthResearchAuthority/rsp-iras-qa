@@ -1053,7 +1053,8 @@ export default class CommonItemsPage {
     return userMap;
   }
 
-  async getUsersInSponsorOrganisations(): Promise<Map<string, string[]>> {
+  async getSponsorUsers(): Promise<Map<string, string[]>> {
+    const fullNameValues: string[] = [];
     const firstNameValues: string[] = [];
     const lastNameValues: string[] = [];
     const emailAddressValues: string[] = [];
@@ -1063,17 +1064,11 @@ export default class CommonItemsPage {
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
         const fullName = confirmStringNotNull(await columns.nth(0).textContent());
-        const parts = fullName.trim().split(/\s+/);
-        if (parts.length === 1) {
-          // Only one name provided
-          firstNameValues.push(parts[0]);
-          lastNameValues.push('');
-        } else {
-          const lastName = parts.pop();
-          const firstName = parts.join(' ');
-          firstNameValues.push(firstName);
-          lastNameValues.push(lastName);
-        }
+        fullNameValues.push(fullName);
+        const firstName = fullName.split(' ')[0];
+        firstNameValues.push(firstName);
+        const lastName = fullName.split(' ')[1];
+        lastNameValues.push(lastName);
         const emailAddress = confirmStringNotNull(await columns.nth(1).textContent());
         emailAddressValues.push(emailAddress);
       }
@@ -1085,6 +1080,7 @@ export default class CommonItemsPage {
       }
     }
     const userMap = new Map([
+      ['fullNameValues', fullNameValues],
       ['firstNameValues', firstNameValues],
       ['lastNameValues', lastNameValues],
       ['emailAddressValues', emailAddressValues],
