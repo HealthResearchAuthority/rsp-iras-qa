@@ -32,11 +32,11 @@ Then(
   async ({ myOrganisationsPage, checkSetupSponsorOrganisationPage }, user: string) => {
     const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
     const countryName = await checkSetupSponsorOrganisationPage.getCountry();
-    const orgNameValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(1)').innerText();
+    const orgNameValue = await myOrganisationsPage.orgName_Locator.innerText();
     expect.soft(orgNameValue).toBe(sponsorOrgName);
-    const countryValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(2)').innerText();
+    const countryValue = await myOrganisationsPage.country_Locator.innerText();
     expect.soft(countryValue).toBe(countryName);
-    const linkName = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(3)').innerText();
+    const linkName = await myOrganisationsPage.action_Locator.innerText();
     if (user === 'Sponsor_User') {
       expect.soft(linkName).toBe('View');
     } else {
@@ -58,10 +58,7 @@ Then(
       await commonItemsPage.search_text.fill(partialText);
     }
     if (fieldKey == 'iras id') {
-      const irasId = await myOrgSponsorOrgProfilePage.projects_table
-        .locator('tbody tr td:nth-child(2)')
-        .first()
-        .innerText();
+      const irasId = await myOrgSponsorOrgProfilePage.irasid_Locator.first().innerText();
       const startIndex = randomInt(0, irasId.length);
       const endIndex = randomInt(startIndex + 1, irasId.length + 1);
       const partialIrasId = irasId.substring(startIndex, endIndex);

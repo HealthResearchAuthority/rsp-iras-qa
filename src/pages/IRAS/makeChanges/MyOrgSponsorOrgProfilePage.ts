@@ -14,6 +14,9 @@ export default class MyOrgSponsorOrgProfilePage {
   readonly table: Locator;
   readonly tableRows: Locator;
   readonly projects_table: Locator;
+  readonly profile_tabnav: Locator;
+  readonly irasid_Locator: Locator;
+  readonly firstRow_Locator: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -29,13 +32,16 @@ export default class MyOrgSponsorOrgProfilePage {
     this.table = this.page.locator('.govuk-summary-list');
     this.tableRows = this.page.locator('.govuk-summary-list__row');
     this.projects_table = this.page.locator('#modificationsTable');
+    this.profile_tabnav = this.page.locator('.govuk-service-navigation__item--active').getByText('Profile');
+    this.irasid_Locator = this.projects_table.locator('tbody tr td:nth-child(2)');
+    this.firstRow_Locator = this.projects_table.locator('tbody tr').first().locator('td');
   }
 
   //Page Methods
   async assertOnMyOrgSponsorOrgProfilePage(expSponOrgName, user) {
     await expect(this.pageLabel).toBeVisible();
     await expect.soft(this.pageHeading.getByText(expSponOrgName)).toBeVisible();
-    await expect.soft(this.page.locator('.govuk-service-navigation__item--active').getByText('Profile')).toBeVisible();
+    await expect.soft(this.profile_tabnav).toBeVisible();
     const commonTabs = [
       myOrgSponsorOrgProfilePageTestData.My_Org_SponsorOrg_Profile_Page.Profile_Link,
       myOrgSponsorOrgProfilePageTestData.My_Org_SponsorOrg_Profile_Page.Projects_Link,

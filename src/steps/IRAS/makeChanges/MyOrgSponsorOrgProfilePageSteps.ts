@@ -46,20 +46,12 @@ Then('I click on the short project title for sponsor organisation', async ({ myO
 });
 
 Then('I keep note of the project data displayed in the table', async ({ myOrgSponsorOrgProfilePage }) => {
-  const firstRowData = await myOrgSponsorOrgProfilePage.projects_table
-    .locator('tbody tr')
-    .first()
-    .locator('td')
-    .allInnerTexts();
+  const firstRowData = await myOrgSponsorOrgProfilePage.firstRow_Locator.allInnerTexts();
   [shortProjectTitle, irasId, dateCreated, status] = firstRowData;
 });
 
 Then('I can see the project data displaying in the table', async ({ myOrgSponsorOrgProfilePage }) => {
-  const actualDataRecord = await myOrgSponsorOrgProfilePage.projects_table
-    .locator('tbody tr')
-    .first()
-    .locator('td')
-    .allInnerTexts();
+  const actualDataRecord = await myOrgSponsorOrgProfilePage.firstRow_Locator.allInnerTexts();
   const [actualShortProjectTitle, actualIrasId, actualDateCreated, actualStatus] = actualDataRecord;
   expect.soft(actualShortProjectTitle).toBe(shortProjectTitle);
   expect.soft(actualIrasId).toBe(irasId);

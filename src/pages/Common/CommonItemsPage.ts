@@ -168,6 +168,7 @@ export default class CommonItemsPage {
   readonly users_sponsor_org_authoriser_label: Locator;
   readonly users_sponsor_org_authoriser_value_first_row: Locator;
   readonly users_sponsor_org_actions_label: Locator;
+  readonly myOrganisationBreadCrumbLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -474,6 +475,9 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.actions_label, {
         exact: true,
       });
+    this.myOrganisationBreadCrumbLink = this.page
+      .locator('.govuk-breadcrumbs__link')
+      .getByText('My organisations', { exact: true });
   }
 
   //Getters & Setters for Private Variables
@@ -1918,9 +1922,7 @@ export default class CommonItemsPage {
     } else {
       listAsDates.sort((a, b) => a.getTime() - b.getTime());
     }
-    if (
-      await this.page.locator('.govuk-breadcrumbs__link').getByText('My organisations', { exact: true }).isVisible()
-    ) {
+    if (await this.myOrganisationBreadCrumbLink.isVisible()) {
       for (const date of listAsDates) {
         sortedListAsStrings.push(
           date.toLocaleString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).replace('Sept', 'Sep')

@@ -13,6 +13,9 @@ export default class MyOrganisationsPage {
   readonly organisations_table: Locator;
   readonly row_view_link_locator: Locator;
   readonly row_manage_link_locator: Locator;
+  readonly orgName_Locator: Locator;
+  readonly country_Locator: Locator;
+  readonly action_Locator: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -32,6 +35,9 @@ export default class MyOrganisationsPage {
     this.row_manage_link_locator = this.page
       .getByRole('cell')
       .getByText(this.linkTextData.My_Organisations_Page.Manage);
+    this.orgName_Locator = this.organisations_table.locator('tbody tr td:nth-child(1)');
+    this.country_Locator = this.organisations_table.locator('tbody tr td:nth-child(2)');
+    this.action_Locator = this.organisations_table.locator('tbody tr td:nth-child(3)');
   }
 
   //Page Methods
