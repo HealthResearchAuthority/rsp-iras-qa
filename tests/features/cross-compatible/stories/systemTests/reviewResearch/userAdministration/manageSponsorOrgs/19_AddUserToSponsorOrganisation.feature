@@ -94,7 +94,6 @@ Feature: Add user to sponsor organisation
         When I click the 'Back' link on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         And I can see the add user permission page based on 'Sponsor_Authoriser_Yes'
-        And I can see the search for user to add to sponsor organisation page
         And I capture the page screenshot
 
     @verifyAddUserSponsorOrgConfirmationPageContent

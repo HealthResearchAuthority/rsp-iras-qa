@@ -1264,7 +1264,8 @@ Then(
         pagename == 'My_Research_Projects_Page' ||
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
-        pagename === 'Review_All_Changes_Page'
+        pagename === 'Review_All_Changes_Page' ||
+        pagename === 'Manage_Sponsor_Organisations_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
@@ -1984,17 +1985,17 @@ Given(
         .soft(commonItemsPage.last_name_value_first_row)
         .toHaveText(await searchAddUserReviewBodyPage.getUserLastName());
     } else if (orgType === 'sponsor organisation') {
-      await expect(commonItemsPage.first_name_value_first_row).toHaveText(
+      await expect(commonItemsPage.users_sponsor_org_name_value_first_row).toHaveText(
         (await searchAddUserReviewBodyPage.getUserFirstName()) +
           ' ' +
           (await searchAddUserReviewBodyPage.getUserLastName())
       );
     }
     await expect
-      .soft(commonItemsPage.email_address_value_first_row)
+      .soft(commonItemsPage.users_sponsor_org_email_value_first_row)
       .toHaveText(await searchAddUserReviewBodyPage.getUserEmail());
     await expect
-      .soft(commonItemsPage.status_value_first_row)
+      .soft(commonItemsPage.users_sponsor_org_status_value_first_row)
       .toHaveText(await searchAddUserReviewBodyPage.getUserStatus());
   }
 );
