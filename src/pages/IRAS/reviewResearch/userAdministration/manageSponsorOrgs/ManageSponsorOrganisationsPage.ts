@@ -58,7 +58,7 @@ export default class ManageSponsorOrganisationsPage {
         .sponsor_organisation_search_box_label,
     });
     this.sponsor_organisation_added_success_message_header_text = this.page
-      .getByTestId('govuk-notification-banner-title')
+      .getByRole('heading')
       .getByText(
         this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page
           .sponsor_organisation_added_success_message_header_text
@@ -185,7 +185,9 @@ export default class ManageSponsorOrganisationsPage {
 
   async sqlGetSponsorRtsIds() {
     const sqlConnection = await connect(dbConfigData.Application_Service);
-    const queryResult = await sqlConnection.query(`SELECT RtsId FROM SponsorOrganisations`);
+    const queryResult = await sqlConnection.query(
+      `SELECT RtsId FROM SponsorOrganisationsUsers GROUP BY RtsId HAVING COUNT(SponsorRole) > 20;`
+    );
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.RtsId);
   }
