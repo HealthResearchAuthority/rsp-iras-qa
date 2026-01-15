@@ -49,6 +49,7 @@ Feature: Set up new sponsor organisation
         And I capture the page screenshot
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
+        And I keep note of the organisation name for sponsor organisation setup
         # And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
         When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
         And I capture the current time for 'Sponsor_Organisation_Profile_Page'
