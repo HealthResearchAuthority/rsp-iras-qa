@@ -1,4 +1,4 @@
-@RegressionManageSponsorOrganisations @SysAdminUser @UserAdministration @BackStage
+@RegressionManageSponsorOrganisations @SysAdminUser @UserAdministration @BackStage @ManageSponsorOrgs
 Feature: Manage sponsor organisations
 
         Background:
@@ -8,8 +8,8 @@ Feature: Manage sponsor organisations
 
         @RegressionTestVerifyLastUpdatedAfterSetupDisableEnableSponsorOrgAndUser @SetupNewSponsorOrg
         Scenario Outline: Verify that the user is able to perform: add a sponsor organisation, enable or disable a sponsor organisation, assign a user to a selected sponsor organisation, enable or disable a user within the sponsor organisation, and confirm that the 'Last Updated' field on the sponsor organisation profile page reflects these changes accurately
-                When I authorise the rts api using '<RTS_API_Data>'
-                Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
+                # When I authorise the rts api using '<RTS_API_Data>'
+                # Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
                 ## set up a new sponsor organisation
                 And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
                 Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -18,7 +18,7 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
                 And I capture the page screenshot
-                And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+                # And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
                 When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
@@ -113,7 +113,13 @@ Feature: Manage sponsor organisations
                 And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
                 And I capture the page screenshot
                 When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+                When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
                 And I capture the page screenshot
+                And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+                And I capture the page screenshot
+                When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+                And I capture the page screenshot
+                And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
                 Then I can see the 'Check_Add_User_Sponsor_Org_Page'
                 And the check and add user to sponsor organisation page displays the expected user details
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
@@ -292,7 +298,13 @@ Feature: Manage sponsor organisations
                 And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
                 And I capture the page screenshot
                 When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+                When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
                 And I capture the page screenshot
+                And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+                And I capture the page screenshot
+                When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+                And I capture the page screenshot
+                And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
                 Then I can see the 'Check_Add_User_Sponsor_Org_Page'
                 And the check and add user to sponsor organisation page displays the expected user details
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'

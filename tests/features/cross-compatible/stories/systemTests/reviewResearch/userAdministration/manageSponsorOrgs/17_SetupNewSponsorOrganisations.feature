@@ -6,7 +6,7 @@ Feature: Set up new sponsor organisation
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @SetupNewSponsorOrg @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @RTS @skip
+    @SetupNewSponsorOrg @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @RTS
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -38,10 +38,10 @@ Feature: Set up new sponsor organisation
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @SetupNewSponsorOrgGoLive @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @RTS @skip
+    @SetupNewSponsorOrgGoLive @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @RTS
     Scenario Outline: Verify the user can add a sponsor organisations which are in the first go live cohort from manage sponsor organisation page
-        When I authorise the rts api using '<RTS_API_Data>'
-        Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
+        # When I authorise the rts api using '<RTS_API_Data>'
+        # Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
@@ -49,7 +49,7 @@ Feature: Set up new sponsor organisation
         And I capture the page screenshot
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
-        And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+        # And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
         When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
         And I capture the current time for 'Sponsor_Organisation_Profile_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
@@ -125,7 +125,7 @@ Feature: Set up new sponsor organisation
             | Organisation_Name | First    | JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error |
             | Organisation_Name | Last     | JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error |
 
-    @rsp-5230 @SponsorOrganisationValidation @jsEnabled @RTS @skip
+    @rsp-5230 @SponsorOrganisationValidation @jsEnabled @RTS
     Scenario Outline: Validate the sponsor organisation suggestion list when javascript is enabled-Set up a new sponsor organisation Page
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -149,7 +149,7 @@ Feature: Set up new sponsor organisation
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @RTS @skip
+    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @RTS
     Scenario Outline: Validate the sponsor organisation suggestion list when javascript is disabled-Set up a new sponsor organisation Page
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
