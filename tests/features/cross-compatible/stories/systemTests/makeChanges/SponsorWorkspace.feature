@@ -563,13 +563,16 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    When I fill the add user role page using '<Select_User_Role>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
-    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -594,10 +597,12 @@ Feature: Sponsor Workspace
     And I can see the sponsor organisation profile page from my organisations for '<Login_User>'
 
     Examples:
-      | Login_User             | User_Email               | Link   | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | University of Southampton |
-      | System_Admin           | system admin email       | Manage | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton |
+
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6419 @MyOrganisationsPageSearchValidation
   Scenario: Validate the search box functionality of my organisations for <Login_User>
@@ -621,14 +626,16 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    When I fill the add user role page using '<Select_User_Role>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
-    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -653,10 +660,11 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
 
     Examples:
-      | Login_User             | User_Email               | Link   | Invalid_Input | Empty_Input |
-      | Sponsor_User           | automation sponsor email | View   | invalid       |             |
-      | System_Admin           | system admin email       | Manage | invalid       |             |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | invalid       |             |
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Invalid_Input | Empty_Input |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | invalid       |             |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | invalid       |             |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | invalid       |             |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | invalid       |             |
 
   @rsp-6420 @MyOrganisationsProfilePageBreadcrumbValidation
   Scenario: Breadcrumb navigation for <Login_User> on sponsor organisation profile page
@@ -680,13 +688,16 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    When I fill the add user role page using '<Select_User_Role>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
-    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -727,13 +738,15 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
 
     Examples:
-      | Login_User             | User_Email               | Link   | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | University of Southampton |
-      | System_Admin           | system admin email       | Manage | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton |
+
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6420 @MyOrganisationsProfileTabValidation @RTS @skip @KNOWN_DEFECT_RSP-6699
-  Scenario: Validate the data under profile tab for <Login_User>
+  Scenario: Validate the data under profile tab for <Login_User> with rts data
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -756,13 +769,16 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    When I fill the add user role page using '<Select_User_Role>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
-    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -785,14 +801,16 @@ Feature: Sponsor Workspace
     Then I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
     And I can see the sponsor organisation profile page from my organisations for '<Login_User>'
-    And I validate the sponsor organisation data displayed in profile tab
+    And I validate the sponsor organisation data displayed in profile tab with rts data
     And I capture the page screenshot
 
     Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         | Sponsor_Organisation      |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | University of Southampton |
+
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | RTS_API_Data         | RTS_Request                         |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
   Scenario: Validate the data under projects tab for <Login_User>
@@ -816,13 +834,16 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    When I fill the add user role page using '<Select_User_Role>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
-    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -854,10 +875,12 @@ Feature: Sponsor Workspace
     Then I can see the project overview page
 
     Examples:
-      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Validation_Text_Research |
-      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Label_Texts              |
-      | System_Admin           | system admin email       | Manage | University of Southampton | Label_Texts              |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Label_Texts              |
+
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Validation_Text_Research |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Label_Texts              |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | Label_Texts              |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Label_Texts              |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Label_Texts              |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
   Scenario: Validate the sort and search functionality under projects tab for <Login_User>
@@ -880,13 +903,16 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    When I fill the add user role page using '<Select_User_Role>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
-    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -942,10 +968,12 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
 
     Examples:
-      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Validation_Text_Research | Empty_Input |
-      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Label_Texts              |             |
-      | System_Admin           | system admin email       | Manage | University of Southampton | Label_Texts              |             |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Label_Texts              |             |
+
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Empty_Input |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |             |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |             |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |             |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |             |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
   Scenario: Validate the advanced filter functionality under projects tab for <Login_User>
@@ -968,13 +996,16 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    When I fill the add user role page using '<Select_User_Role>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
-    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -1007,10 +1038,12 @@ Feature: Sponsor Workspace
 
 
     Examples:
-      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Advanced_Filters                                         | Search_Queries              |
-      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Advanced_Filter_Project_Created_From_Date_Only           | Existing_Iras_Id_Data_Three |
-      | System_Admin           | system admin email       | Manage | University of Southampton | Advanced_Filter_Project_Created_To_Date_Only             | Non_Existant_Data           |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Advanced_Filter_Project_Created_To_Date_Before_From_Date | Existing_Iras_Id_Data       |
+
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Advanced_Filters                                         | Search_Queries              |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Advanced_Filter_Project_Created_From_Date_Only           | Existing_Iras_Id_Data_Three |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | Advanced_Filter_Project_Created_To_Date_Only             | Non_Existant_Data           |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Advanced_Filter_Project_Created_To_Date_Before_From_Date | Existing_Iras_Id_Data       |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Advanced_Filter_Project_Created_From_Date_Only           | Existing_Iras_Id_Data_Three |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
   Scenario: Validate the pagination functionality under projects tab for <Login_User>
@@ -1033,13 +1066,16 @@ Feature: Sponsor Workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    When I fill the add user role page using '<Select_User_Role>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     And I capture the page screenshot
-    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -1075,7 +1111,9 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
 
     Examples:
-      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Navigation_Method1 | Navigation_Method2 |
-      | Sponsor_User           | automation sponsor email | View   | University of Southampton | page number        | page number        |
-      | System_Admin           | system admin email       | Manage | University of Southampton | next link          | previous link      |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | page number        | previous link      |
+
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Navigation_Method1 | Navigation_Method2 |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | page number        | page number        |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | next link          | previous link      |
+      | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | page number        | previous link      |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | page number        | next link          |

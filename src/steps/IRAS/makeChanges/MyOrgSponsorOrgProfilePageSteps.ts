@@ -17,7 +17,7 @@ Then(
 );
 
 Then(
-  'I validate the sponsor organisation data displayed in profile tab',
+  'I validate the sponsor organisation data displayed in profile tab with rts data',
   async ({ myOrgSponsorOrgProfilePage, rtsPage }) => {
     const expSponOrg = rtsPage.rtsResponseListRecord[0].name;
     const expCountry = rtsPage.rtsResponseListRecord[0].country;
