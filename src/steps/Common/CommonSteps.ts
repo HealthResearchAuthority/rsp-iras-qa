@@ -1780,7 +1780,13 @@ Then(
       );
     }
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
-      const userList = await commonItemsPage.getUsers();
+      let userList;
+      if (orgType === 'review body') {
+        userList = await commonItemsPage.getUsers();
+      }
+      if (orgType === 'sponsor organisation') {
+        userList = await commonItemsPage.getSponsorUsers();
+      }
       const emailAddress: any = userList.get('emailAddressValues');
       await commonItemsPage.setUserEmail(emailAddress);
       const firstName: any = userList.get('firstNameValues');
@@ -2159,7 +2165,7 @@ Then(
     let columnIndex: number | undefined;
 
     // ----- Branch: User-based lists -----
-    if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
+    if (lowerListType === 'manage users') {
       // Map columns for user lists
       switch (lowerSortField) {
         case 'first name':
@@ -2180,7 +2186,30 @@ Then(
         default:
           throw new Error(`${sortField} is not a valid option`);
       }
-
+    }
+    if (lowerListType === 'sponsor organisation users') {
+      // Map columns for user lists after clicking on 'View this sponsor organisation's list of users' in 'Manage Sponsor Organisations'
+      switch (lowerSortField) {
+        case 'name':
+          columnIndex = 0;
+          break;
+        case 'email address':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        case 'role':
+          columnIndex = 3;
+          break;
+        case 'authoriser':
+          columnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+    }
+    if (lowerListType === 'manage users' || lowerListType === 'sponsor organisation users') {
       // Gather actual list values
       actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
 

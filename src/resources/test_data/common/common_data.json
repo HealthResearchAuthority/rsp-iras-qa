@@ -37,6 +37,14 @@
     "last_logged_in_label": "Last logged in",
     "actions_label": "Action"
   },
+  "Users_Sponsor_Org_Column_Header_Labels": {
+    "name_label": "Name",
+    "email_address_label": "Email address",
+    "status_label": "Status",
+    "role_label": "Role",
+    "authoriser_label": "Authoriser",
+    "actions_label": "Action"
+  },
   "success_header_label": "Success",
   "modification_details_page_heading": "Modification",
   "remove_label": "Remove"

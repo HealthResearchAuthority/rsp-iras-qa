@@ -338,11 +338,12 @@
   },
   "Sponsor_Org_User_List_Page": {
     "Search": "Search",
-    "First_Name": "First name",
-    "Last_Name": "Last name",
+    "Name": "Name",
     "Email_Address": "Email address",
     "Status": "Status",
-    "Last_Logged_In": "Last logged in"
+    "Role": "Role",
+    "Authoriser": "Authoriser",
+    "Action": "Action"
   },
   "Complete_Your_Profile_Page": {
     "Save_Continue": "Save and continue"
