@@ -23,8 +23,7 @@ Then(
     const expCountry = rtsPage.rtsResponseListRecord[0].country;
     const expRawAddress = (rtsPage.rtsResponseListRecord as unknown as { address: { text?: string }[] }[])[0]
       ?.address?.[0]?.text;
-    const expAddress = expRawAddress?.replace(/,/g, ' ').replace(/\s+/g, ' ').trim();
-
+    const expAddress = expRawAddress?.replaceAll(/,/g, ' ').replaceAll(/\s+/g, ' ').trim();
     const rawLastUpdated = rtsPage.rtsResponseListRecord[0].lastUpdated;
     const dateObj = new Date(rawLastUpdated);
     const day = String(dateObj.getDate()).padStart(2, '0');
