@@ -3,7 +3,7 @@
     "page_heading": "Users for ",
     "guidance_text": "Search, assign or remove users from this review body",
     "no_results_heading": "No results found",
-    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, go to Manage users where you can check if a user profile exists and create one if needed.",
+    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, go to manage users where you can check if a user profile exists and create one if needed.",
     "search_box_label": "Find a user",
     "back_to_users_link": "Back to Users for ",
     "Column_Header_Labels": {
