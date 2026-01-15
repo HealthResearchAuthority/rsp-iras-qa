@@ -78,3 +78,12 @@ When(
     }
   }
 );
+
+When(
+  'I click the change link against {string} on the check and confirm page to add user to sponsor organisation page',
+  async ({ checkConfirmUserToAddToSponsorOrganisationPage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkConfirmUserToAddToSponsorOrganisationPage);
+    await expect.soft(changeLink).toBeVisible();
+    await changeLink.click();
+  }
+);

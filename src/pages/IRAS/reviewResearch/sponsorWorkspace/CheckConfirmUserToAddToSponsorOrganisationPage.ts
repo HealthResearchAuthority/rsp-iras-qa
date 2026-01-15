@@ -47,7 +47,9 @@ export default class CheckConfirmUserToAddToSponsorOrganisationPage {
     this.user_details_table = this.page.getByRole('table').locator('tbody');
     this.user_details_table_labels = this.user_details_table.getByRole('cell').locator('b');
     this.user_details_table_row = this.user_details_table.getByRole('row');
-
+    // this.row_change_link_locator = this.page
+    //   .getByRole('button')
+    //   .getByText(this.linkTextData.Check_Create_User_Profile_Page.Change);
     this.user_email_row = this.user_details_table_row.filter({
       hasText:
         this.checkConfirmAddUserSponsorOrgPageTestData.Check_And_Confirm_User_To_Add_To_Sponsor_Organisation_Page

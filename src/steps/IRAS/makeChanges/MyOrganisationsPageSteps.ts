@@ -25,13 +25,15 @@ Then('I can now see a table of results for my organisations', async ({ myOrganis
   await expect.soft(myOrganisationsPage.organisations_table).toBeVisible();
   expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
 });
-
 Then(
   'I can see the associated organisations displaying in the table for {string}',
   async ({ myOrganisationsPage, checkSetupSponsorOrganisationPage }, user: string) => {
     const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
+    const countryName = await checkSetupSponsorOrganisationPage.getCountry();
     const orgNameValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(1)').innerText();
     expect.soft(orgNameValue).toBe(sponsorOrgName);
+    const countryValue = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(2)').innerText();
+    expect.soft(countryValue).toBe(countryName);
     const linkName = await myOrganisationsPage.organisations_table.locator('tbody tr td:nth-child(3)').innerText();
     if (user === 'Sponsor_User') {
       expect.soft(linkName).toBe('View');
