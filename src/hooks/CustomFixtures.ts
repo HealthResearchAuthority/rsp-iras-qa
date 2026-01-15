@@ -103,6 +103,7 @@ import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/S
 import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
 import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
 import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
+import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -206,6 +207,7 @@ type CustomFixtures = {
   modificationOutcomeCheckSendPage: ModificationOutcomeCheckSendPage;
   addUserRoleSponsorOrgPage: AddUserRoleSponsorOrgPage;
   addUserPermissionSponsorOrgPage: AddUserPermissionSponsorOrgPage;
+  closeProjectPage: CloseProjectPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -614,6 +616,9 @@ export const test = base.extend<CustomFixtures>({
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
+  },
+  closeProjectPage: async ({ page }, use) => {
+    await use(new CloseProjectPage(page));
   },
 
   //Set the Storage State based on User Tag from Feature File

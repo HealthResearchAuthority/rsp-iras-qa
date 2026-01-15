@@ -241,7 +241,8 @@
     "Create_New_Modification": "Create new modification",
     "Modification_Type": "Modification type",
     "Review_Type": "Review type",
-    "Category": "Category"
+    "Category": "Category",
+    "Close_Project": "Close project"
   },
   "Add_Document_Modifications_Page": {
     "Save_Continue": "Save and continue",
@@ -422,5 +423,8 @@
   },
   "My_Organisations_Users_Add_User_Non_Registered_User_Error_Page": {
     "Return_To_Sponsor_Org_profile": "Return to sponsor organisation profile"
+  },
+  "Close_Project_Page": {
+    "Send_To_Sponsor": "Send to sponsor"
   }
 }
