@@ -172,6 +172,10 @@ export default class CommonItemsPage {
   readonly users_sponsor_org_authoriser_value_first_row: Locator;
   readonly users_sponsor_org_actions_label: Locator;
   readonly myOrganisationBreadCrumbLink: Locator;
+  readonly addNewUserSponsorOrgLink: Locator;
+  readonly searchButton: Locator;
+  readonly addUserLink: Locator;
+  readonly addUserButton: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -494,6 +498,17 @@ export default class CommonItemsPage {
     this.myOrganisationBreadCrumbLink = this.page
       .locator('.govuk-breadcrumbs__link')
       .getByText('My organisations', { exact: true });
+    this.addNewUserSponsorOrgLink = this.govUkLink.getByText(
+      linkTextData.Sponsor_Org_User_List_Page.Add_A_New_User_Profile_Record,
+      { exact: true }
+    );
+    this.searchButton = this.govUkButton.getByText(buttonTextData.Sponsor_Org_User_List_Page.Search, { exact: true });
+    this.addUserLink = this.govUkLink.getByText(linkTextData.Search_Add_User_Sponsor_Org_Page.Add_User, {
+      exact: true,
+    });
+    this.addUserButton = this.govUkButton.getByText(buttonTextData.Check_Add_User_Sponsor_Org_Page.Add_User, {
+      exact: true,
+    });
   }
 
   //Getters & Setters for Private Variables
@@ -1973,19 +1988,19 @@ export default class CommonItemsPage {
     const emails = Array.from(automationUserEmailsSet).slice(0, 25);
     for (let i = 0; i < emails.length; i++) {
       console.log(`${i}`);
-      await this.govUkLink.getByText('Add a new user profile record', { exact: true }).click();
+      await this.addNewUserSponsorOrgLink.click();
       await this.page.reload({ waitUntil: 'networkidle' });
       await this.page.waitForTimeout(2000);
       const email = emails[i];
       await this.search_text.fill(email);
-      await this.govUkButton.getByText('Search', { exact: true }).click();
+      await this.searchButton.click();
       await this.page.reload({ waitUntil: 'networkidle' });
       await this.page.waitForTimeout(2000);
-      await this.govUkLink.getByText('Add user', { exact: true }).click();
+      await this.addUserLink.click();
       await this.page.reload({ waitUntil: 'networkidle' });
       await this.page.waitForTimeout(2000);
       await this.page.reload({ waitUntil: 'networkidle' });
-      await this.govUkButton.getByText('Add user', { exact: true }).click();
+      await this.addUserButton.click();
       await this.page.reload({ waitUntil: 'networkidle' });
       await this.page.waitForTimeout(2000);
     }
