@@ -186,7 +186,6 @@ When(
       case 'Modification_Details_Page':
         await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
         break;
-
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -284,22 +283,32 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 });
 
 Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
-  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  const linkValue = await commonItemsPage.linkTextData[pageKey][linkKey];
   const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
   if (pageKey === 'Progress_Bar') {
     await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
-  } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
+    return;
+  }
+  if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
     await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
-  } else if (linkKey.includes('_Filter_Panel')) {
+    return;
+  }
+  if (linkKey.includes('_Filter_Panel')) {
     await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
-  } else if (
+    return;
+  }
+  if (
     (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
     linkKey === 'Back_To_Users'
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else if (noOfLinksFound > 1 && linkKey != 'Back' && linkKey != 'View') {
+    return;
+  }
+  if (noOfLinksFound > 1 && linkKey !== 'Back' && linkKey !== 'View') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
-  } else if (
+    return;
+  }
+  if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
     (linkKey === 'Sponsor_Details' ||
       linkKey === 'Modification_Details' ||
@@ -307,13 +316,20 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
       linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
-  } else if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
-    await commonItemsPage.removeLink.click();
-  } else if (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') {
-    await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else {
-    await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+    return;
   }
+  if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
+    await commonItemsPage.removeLink.click();
+    return;
+  }
+  if (
+    (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') ||
+    (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users')
+  ) {
+    await commonItemsPage.govUkLink.getByText(linkValue).click();
+    return;
+  }
+  await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
 });
 
 Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
@@ -894,18 +910,20 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
 Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
-    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-      await commonItemsPage.search_results_count.textContent()
-    );
-    if (recordsCount > 20) {
-      const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-      if (availabilityVal.toLowerCase() === 'available') {
-        await expect(locatorVal).toBeVisible();
-        await expect(locatorVal).toBeEnabled();
-      } else if (availabilityVal.toLowerCase() === 'not available') {
-        await expect(locatorVal).toBeHidden();
-      } else {
-        throw new Error(`Unsupported button state: ${availabilityVal}`);
+    if (linkLabel === 'Next' || linkLabel === 'Previous') {
+      const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+        await commonItemsPage.search_results_count.textContent()
+      );
+      if (recordsCount > 20) {
+        const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
+        if (availabilityVal.toLowerCase() === 'available') {
+          await expect.soft(locatorVal).toBeVisible();
+          await expect.soft(locatorVal).toBeEnabled();
+        } else if (availabilityVal.toLowerCase() === 'not available') {
+          await expect.soft(locatorVal).toBeHidden();
+        } else {
+          throw new Error(`Unsupported button state: ${availabilityVal}`);
+        }
       }
     }
   }
@@ -1770,12 +1788,14 @@ Then(
     },
     orgType: string
   ) => {
+    let userList: Map<string, string[]>;
     if (orgType === 'review body') {
       await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
       const organisationName = await reviewBodyProfilePage.getOrgName();
       await expect(userListReviewBodyPage.page_heading).toHaveText(
         userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
       );
+      userList = await commonItemsPage.getUsers();
     } else if (orgType === 'sponsor organisation') {
       await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage(commonItemsPage);
       const organisationName = await sponsorOrganisationProfilePage.getOrgName();
@@ -1783,27 +1803,10 @@ Then(
         userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
           .heading_prefix_label + organisationName
       );
+      userList = await commonItemsPage.getSponsorUsers();
     }
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
-      let userList;
-      if (orgType === 'review body') {
-        userList = await commonItemsPage.getUsers();
-      }
-      if (orgType === 'sponsor organisation') {
-        userList = await commonItemsPage.getSponsorUsers();
-      }
-      const emailAddress: any = userList.get('emailAddressValues');
-      await commonItemsPage.setUserEmail(emailAddress);
-      const firstName: any = userList.get('firstNameValues');
-      await commonItemsPage.setUserFirstName(firstName);
-      const lastName: any = userList.get('lastNameValues');
-      await commonItemsPage.setUserLastName(lastName);
-      await commonItemsPage.setFirstName(firstName[0]);
-      await commonItemsPage.setLastName(lastName[0]);
-      await commonItemsPage.setEmail(emailAddress[0]);
-      if (await commonItemsPage.firstPage.isVisible()) {
-        await commonItemsPage.firstPage.click();
-      }
+      await commonItemsPage.setUserFirstNameLastNameEmail(userList);
     }
   }
 );
@@ -1831,7 +1834,7 @@ Then(
         throw new Error(`${sortField} is not a valid option`);
       }
       const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-      expect(firstNameValues).toEqual(sortedList);
+      expect.soft(firstNameValues).toEqual(sortedList);
     }
   }
 );
@@ -2176,6 +2179,9 @@ Then(
         case 'first name':
           columnIndex = 0;
           break;
+        case 'name':
+          columnIndex = 0;
+          break;
         case 'last name':
           columnIndex = 1;
           break;
@@ -2235,6 +2241,44 @@ Then(
         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
           expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
         }
+      }
+
+      expect.soft(actualList).toEqual(sortedList);
+      return;
+    }
+    if (lowerListType === 'sponsor organisation users') {
+      // Map columns for user lists
+      switch (lowerSortField) {
+        case 'name':
+          columnIndex = 0;
+          break;
+        case 'email address':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        case 'role':
+          columnIndex = 3;
+          break;
+        case 'authoriser':
+          columnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+
+      // Gather actual list values
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+
+      if (lowerSortDirection === 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) =>
+          a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+      } else {
+        sortedList = [...actualList].toSorted((a, b) =>
+          b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
       }
 
       expect.soft(actualList).toEqual(sortedList);
@@ -2352,5 +2396,24 @@ Then(
           return 0; // Keeps original order for non-numeric values
         });
     expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
+  }
+);
+
+Then(
+  'the {string} link will be {string} to the user in the {string}',
+  async ({ commonItemsPage }, linkKey: string, availabilityVal: string, pageKey: string) => {
+    const linkValue = await commonItemsPage.linkTextData[pageKey][linkKey];
+    const locatorVal: Locator = commonItemsPage.govUkLink
+      .getByText(linkValue, { exact: true })
+      .or(commonItemsPage.govUkLink.getByText(linkValue))
+      .first();
+    if (availabilityVal.toLowerCase() === 'available') {
+      await expect.soft(locatorVal).toBeVisible();
+      await expect.soft(locatorVal).toBeEnabled();
+    } else if (availabilityVal.toLowerCase() === 'not available') {
+      await expect.soft(locatorVal).toBeHidden();
+    } else {
+      throw new Error(`Unsupported button state: ${availabilityVal}`);
+    }
   }
 );

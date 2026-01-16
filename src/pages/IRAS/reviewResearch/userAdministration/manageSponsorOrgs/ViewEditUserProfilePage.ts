@@ -44,6 +44,9 @@ export default class ViewEditUserProfilePage {
   readonly enable_guidance_text: Locator;
   readonly disable_button: Locator;
   readonly enable_button: Locator;
+  readonly authoriser_row: Locator;
+  readonly authoriser_value: Locator;
+  readonly row_change_link_locator: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -129,7 +132,26 @@ export default class ViewEditUserProfilePage {
           exact: true,
         }),
     });
-    this.role_value = this.role_row.locator('td', { has: this.row_value_locator });
+    this.role_value = this.page
+      .locator(
+        'tr:has-text("' + this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.role_label + '") td'
+      )
+      .nth(1);
+    this.authoriser_row = this.page.locator('tr', {
+      has: this.page
+        .getByRole('cell')
+        .getByText(this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.authoriser_label, {
+          exact: true,
+        }),
+    });
+    this.authoriser_value = this.page
+      .locator(
+        'tr:has-text("' +
+          this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.authoriser_label +
+          '") td'
+      )
+      .nth(1);
+    this.row_change_link_locator = this.page.getByRole('cell').getByText(this.linkTextData.User_Profile_Page.Change);
     this.disable_header_label = this.enable_header_label = this.page.locator('h2[class="govuk-heading-m"]');
     this.disable_hint_label = this.enable_hint_label = this.page.locator('div[class="govuk-hint"]');
     this.disable_sub_heading = this.page
@@ -216,6 +238,17 @@ export default class ViewEditUserProfilePage {
     //   .soft(await this.page.title())
     //   .toBe(this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.title);
     await expect.soft(this.page_heading).toBeVisible();
+    await expect.soft(this.title_value).toBeVisible();
+    await expect.soft(this.first_name_value).toBeVisible();
+    await expect.soft(this.last_name_value).toBeVisible();
+    await expect.soft(this.email_address_value).toBeVisible();
+    await expect.soft(this.telephone_value).toBeVisible();
+    await expect.soft(this.organisation_value).toBeVisible();
+    await expect.soft(this.job_title_value).toBeVisible();
+    await expect.soft(this.role_value).toBeVisible();
+    await expect.soft(this.role_row).toHaveCount(1);
+    await expect.soft(this.authoriser_value).toBeVisible();
+    await expect.soft(this.authoriser_row).toHaveCount(1);
   }
 
   async goto() {

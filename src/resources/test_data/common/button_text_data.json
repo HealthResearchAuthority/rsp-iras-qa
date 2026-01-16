@@ -427,5 +427,9 @@
   },
   "My_Organisations_Users_Add_User_Non_Registered_User_Error_Page": {
     "Return_To_Sponsor_Org_profile": "Return to sponsor organisation profile"
+  },
+  "Check_Confirm_User_To_Add_Sponsor_Org_Page": {
+    "Confirm": "Confirm",
+    "Cancel": "Cancel"
   }
 }

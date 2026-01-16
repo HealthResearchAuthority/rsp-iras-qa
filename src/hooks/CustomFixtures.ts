@@ -101,10 +101,13 @@ import ChooseARecordTypeToSearchPage from '../pages/IRAS/reviewResearch/approval
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
 import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchProjectsPage';
 import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
-import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
-import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
 import MyOrganisationsPage from '../pages/IRAS/makeChanges/MyOrganisationsPage';
 import MyOrgSponsorOrgProfilePage from '../pages/IRAS/makeChanges/MyOrgSponsorOrgProfilePage';
+import MySponsorOrgUsersPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsUsersPage';
+import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAddUserPage';
+import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
+import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
+import CheckConfirmUserToAddToSponsorOrganisationPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/CheckConfirmUserToAddToSponsorOrganisationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -208,8 +211,11 @@ type CustomFixtures = {
   teamManagerDashboardPage: TeamManagerDashboardPage;
   searchProjectsPage: SearchProjectsPage;
   modificationOutcomeCheckSendPage: ModificationOutcomeCheckSendPage;
+  mySponsorOrgUsersPage: MySponsorOrgUsersPage;
+  mySponsorOrgAddUserPage: MySponsorOrgAddUserPage;
   addUserRoleSponsorOrgPage: AddUserRoleSponsorOrgPage;
   addUserPermissionSponsorOrgPage: AddUserPermissionSponsorOrgPage;
+  checkConfirmUserToAddToSponsorOrganisationPage: CheckConfirmUserToAddToSponsorOrganisationPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -615,12 +621,24 @@ export const test = base.extend<CustomFixtures>({
     await use(new ModificationOutcomeCheckSendPage(page));
   },
 
+  mySponsorOrgUsersPage: async ({ page }, use) => {
+    await use(new MySponsorOrgUsersPage(page));
+  },
+
+  mySponsorOrgAddUserPage: async ({ page }, use) => {
+    await use(new MySponsorOrgAddUserPage(page));
+  },
+
   addUserRoleSponsorOrgPage: async ({ page }, use) => {
     await use(new AddUserRoleSponsorOrgPage(page));
   },
 
   addUserPermissionSponsorOrgPage: async ({ page }, use) => {
     await use(new AddUserPermissionSponsorOrgPage(page));
+  },
+
+  checkConfirmUserToAddToSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckConfirmUserToAddToSponsorOrganisationPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
