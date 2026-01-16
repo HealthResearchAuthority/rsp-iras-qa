@@ -297,7 +297,7 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     linkKey === 'Back_To_Users'
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else if (noOfLinksFound > 1 && linkKey != 'Back') {
+  } else if (noOfLinksFound > 1 && linkKey != 'Back' && linkKey != 'View') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
   } else if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
@@ -824,6 +824,9 @@ When(
         break;
       case 'system admin email':
         searchValue = loginPage.loginPageTestData.System_Admin.username;
+        break;
+      case 'sponsor org admin email':
+        searchValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
         break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
@@ -1476,11 +1479,13 @@ Then(
   }
 );
 
-Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
+Then('the no search results found message is displayed', async ({ commonItemsPage, myOrganisationsPage }) => {
   await expect.soft(commonItemsPage.tableRows).not.toBeVisible();
-  await expect
-    .soft(commonItemsPage.search_results_count)
-    .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+  if (!myOrganisationsPage) {
+    await expect
+      .soft(commonItemsPage.search_results_count)
+      .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+  }
   await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
   await expect.soft(commonItemsPage.search_no_results_header).toBeVisible();
   await expect.soft(commonItemsPage.search_no_results_guidance_text).toBeVisible();
@@ -2237,7 +2242,11 @@ Then(
     }
 
     // ----- Branch: Organisation/Review-body lists -----
-    if (lowerListType === 'manage sponsor organisations' || lowerListType === 'manage review bodies') {
+    if (
+      lowerListType === 'manage sponsor organisations' ||
+      lowerListType === 'manage review bodies' ||
+      lowerListType === 'sponsor organisations'
+    ) {
       // Map columns for organisation/review-body lists
       switch (lowerSortField) {
         case 'organisation name':

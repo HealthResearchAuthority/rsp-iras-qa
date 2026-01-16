@@ -29,7 +29,7 @@ Feature: Manage user profiles, view and edit user profile
       | ACTIVE   |
       | DISABLED |
 
-  @rsp-2828 @editUserProfileDetails
+  @rsp-2828 @rsp-6424 @editUserProfileDetails
   Scenario Outline: Verify that user can edit the user profile details
     When I enter 'QA Automation' into the search field
     And I capture the page screenshot
@@ -56,7 +56,8 @@ Feature: Manage user profiles, view and edit user profile
       | telephone_text    | Operations | Enabled | User_Telephone_Text_One    |
       | organisation_text | Operations | Enabled | User_Organisation_Text_One |
       | job_title_text    | Operations | Enabled | User_Job_Title_Text_One    |
-  # | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     |
+      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     |
+      | role_checkbox     | Operations | Enabled | All_Role_Checkbox_Fields   |
 
   @rsp-2828 @editUserProfileOnlyMandatoryFields
   Scenario Outline: Successful user profile update with only mandatory fields

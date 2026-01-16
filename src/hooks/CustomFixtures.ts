@@ -103,6 +103,8 @@ import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/S
 import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
 import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
 import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
+import MyOrganisationsPage from '../pages/IRAS/makeChanges/MyOrganisationsPage';
+import MyOrgSponsorOrgProfilePage from '../pages/IRAS/makeChanges/MyOrgSponsorOrgProfilePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -195,6 +197,8 @@ type CustomFixtures = {
   projectPersonnelChangeChiefInvestigatorPage: ProjectPersonnelChangeChiefInvestigatorPage;
   projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
   sponsorWorkspacePage: SponsorWorkspacePage;
+  myOrganisationsPage: MyOrganisationsPage;
+  myOrgSponsorOrgProfilePage: MyOrgSponsorOrgProfilePage;
   confirmProjectDetailsPage: ConfirmProjectDetailsPage;
   modificationPostSubmissionPage: ModificationPostSubmissionPage;
   sponsorAuthorisationsPage: SponsorAuthorisationsPage;
@@ -569,6 +573,14 @@ export const test = base.extend<CustomFixtures>({
 
   sponsorWorkspacePage: async ({ page }, use) => {
     await use(new SponsorWorkspacePage(page));
+  },
+
+  myOrganisationsPage: async ({ page }, use) => {
+    await use(new MyOrganisationsPage(page));
+  },
+
+  myOrgSponsorOrgProfilePage: async ({ page }, use) => {
+    await use(new MyOrgSponsorOrgProfilePage(page));
   },
 
   confirmProjectDetailsPage: async ({ page }, use) => {

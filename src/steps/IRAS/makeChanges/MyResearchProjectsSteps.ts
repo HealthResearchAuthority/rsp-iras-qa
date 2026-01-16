@@ -27,11 +27,7 @@ Then(
 
 Then(
   'I can see my research page is sorted by {string} order of the {string}',
-  async (
-    { myResearchProjectsPage, modificationsReceivedCommonPage, commonItemsPage },
-    sortDirection: string,
-    sortField: string
-  ) => {
+  async ({ myResearchProjectsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
     let sortedList: string[];
     let columnIndex: number;
     switch (sortField.toLowerCase()) {
@@ -54,7 +50,7 @@ Then(
     if (sortField.toLowerCase() == 'iras id') {
       sortedList = await myResearchProjectsPage.sortIrasIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date created') {
-      sortedList = await modificationsReceivedCommonPage.sortDateSubmittedListValues(actualList, sortDirection);
+      sortedList = await commonItemsPage.sortDateSubmittedListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
       sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
