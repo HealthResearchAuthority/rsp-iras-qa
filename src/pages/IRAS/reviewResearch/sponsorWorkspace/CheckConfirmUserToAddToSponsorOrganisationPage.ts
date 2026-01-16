@@ -20,6 +20,10 @@ export default class CheckConfirmUserToAddToSponsorOrganisationPage {
   readonly user_authoriser_row: Locator;
   readonly user_authoriser_value: Locator;
   readonly page_caption: Locator;
+  readonly row_change_link_locator: Locator;
+  readonly email_change_link: Locator;
+  readonly role_change_link: Locator;
+  readonly authoriser_change_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -47,27 +51,33 @@ export default class CheckConfirmUserToAddToSponsorOrganisationPage {
     this.user_details_table = this.page.getByRole('table').locator('tbody');
     this.user_details_table_labels = this.user_details_table.getByRole('cell').locator('b');
     this.user_details_table_row = this.user_details_table.getByRole('row');
-    // this.row_change_link_locator = this.page
-    //   .getByRole('button')
-    //   .getByText(this.linkTextData.Check_Create_User_Profile_Page.Change);
+    this.row_change_link_locator = this.page
+      .getByRole('link')
+      .getByText(
+        this.checkConfirmAddUserSponsorOrgPageTestData.Check_And_Confirm_User_To_Add_To_Sponsor_Organisation_Page
+          .change_link
+      );
     this.user_email_row = this.user_details_table_row.filter({
       hasText:
         this.checkConfirmAddUserSponsorOrgPageTestData.Check_And_Confirm_User_To_Add_To_Sponsor_Organisation_Page
           .user_details_table_labels[0],
     });
     this.user_email_value = this.user_email_row.getByRole('cell').nth(1);
+    this.email_change_link = this.user_email_row.locator(this.row_change_link_locator);
     this.user_role_row = this.user_details_table_row.filter({
       hasText:
         this.checkConfirmAddUserSponsorOrgPageTestData.Check_And_Confirm_User_To_Add_To_Sponsor_Organisation_Page
           .user_details_table_labels[1],
     });
     this.user_role_value = this.user_role_row.getByRole('cell').nth(1);
+    this.role_change_link = this.user_role_row.locator(this.row_change_link_locator);
     this.user_authoriser_row = this.user_details_table_row.filter({
       hasText:
         this.checkConfirmAddUserSponsorOrgPageTestData.Check_And_Confirm_User_To_Add_To_Sponsor_Organisation_Page
           .user_details_table_labels[2],
     });
     this.user_authoriser_value = this.user_authoriser_row.getByRole('cell').nth(1);
+    this.authoriser_change_link = this.user_authoriser_row.locator(this.row_change_link_locator);
   }
 
   //Getters & Setters for Private Variables

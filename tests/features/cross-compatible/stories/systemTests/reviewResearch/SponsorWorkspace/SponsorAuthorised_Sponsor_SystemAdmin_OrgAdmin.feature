@@ -5,7 +5,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfBirmingham'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I capture the page screenshot
     And I keep note of the organisation name for sponsor organisation setup
@@ -13,7 +13,6 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
     Then I can see the sponsor organisation added successful message on manage sponsor organisation page
     When I enter 'name of the newly added sponsor organisation' into the search field
-    # When I enter 'University of Southampton' into the search field
     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     And I capture the page screenshot
     And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
@@ -52,7 +51,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfBirmingham'
+    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -195,7 +194,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfBirmingham'
+    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -309,7 +308,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfBirmingham'
+    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -491,7 +490,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfBirmingham'
+    And I fill the project identifiers page with 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
