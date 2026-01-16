@@ -38,7 +38,6 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     Then I can see the 'Check_Add_User_Sponsor_Org_Page'
-    And the check and add user to sponsor organisation page displays the expected user details
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -133,7 +132,6 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     Then I can see the 'Check_Add_User_Sponsor_Org_Page'
-    And the check and add user to sponsor organisation page displays the expected user details
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page

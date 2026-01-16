@@ -21,6 +21,9 @@
     "Error_Validation": {
       "No_Role_Selected_Error": {
         "no_role_selected_link_text": "You must select a user role before continuing."
+      },
+      "No_Role_Selected_Sponsor_Workspace_Error": {
+        "no_role_selected_link_text": "Select a user role"
       }
     }
   }

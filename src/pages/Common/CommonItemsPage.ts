@@ -146,9 +146,12 @@ export default class CommonItemsPage {
   readonly email_address_value_first_row: Locator;
   readonly status_value_first_row: Locator;
   readonly last_name_label: Locator;
+  readonly name_label: Locator;
   readonly email_address_label: Locator;
   readonly status_label: Locator;
   readonly last_logged_in_label: Locator;
+  readonly role_label: Locator;
+  readonly authoriser_label: Locator;
   readonly actions_label: Locator;
   readonly back_to_users_link: Locator;
   readonly success_message_header_text: Locator;
@@ -168,6 +171,11 @@ export default class CommonItemsPage {
   readonly users_sponsor_org_authoriser_label: Locator;
   readonly users_sponsor_org_authoriser_value_first_row: Locator;
   readonly users_sponsor_org_actions_label: Locator;
+  readonly myOrganisationBreadCrumbLink: Locator;
+  readonly addNewUserSponsorOrgLink: Locator;
+  readonly searchButton: Locator;
+  readonly addUserLink: Locator;
+  readonly addUserButton: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -229,6 +237,7 @@ export default class CommonItemsPage {
       .or(this.page.getByTestId('SearchTerm'))
       .or(this.page.getByTestId('Search.SearchNameTerm'))
       .or(this.page.getByTestId('Search.ModificationId'))
+      .or(this.page.getByTestId('Search_SearchTerm'))
       .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
@@ -413,12 +422,25 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.Column_Header_Labels.last_name_label, {
         exact: true,
       });
+    this.name_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.name_label, { exact: true });
     this.email_address_label = this.userListTableRows
       .locator('th')
       .getByText(this.commonTestData.Column_Header_Labels.email_address_label, { exact: true });
     this.status_label = this.userListTableRows
       .locator('th')
       .getByText(this.commonTestData.Column_Header_Labels.status_label, {
+        exact: true,
+      });
+    this.role_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.role_label, {
+        exact: true,
+      });
+    this.authoriser_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Column_Header_Labels.authoriser_label, {
         exact: true,
       });
     this.last_logged_in_label = this.userListTableRows
@@ -473,6 +495,20 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.actions_label, {
         exact: true,
       });
+    this.myOrganisationBreadCrumbLink = this.page
+      .locator('.govuk-breadcrumbs__link')
+      .getByText('My organisations', { exact: true });
+    this.addNewUserSponsorOrgLink = this.govUkLink.getByText(
+      linkTextData.Sponsor_Org_User_List_Page.Add_A_New_User_Profile_Record,
+      { exact: true }
+    );
+    this.searchButton = this.govUkButton.getByText(buttonTextData.Sponsor_Org_User_List_Page.Search, { exact: true });
+    this.addUserLink = this.govUkLink.getByText(linkTextData.Search_Add_User_Sponsor_Org_Page.Add_User, {
+      exact: true,
+    });
+    this.addUserButton = this.govUkButton.getByText(buttonTextData.Check_Add_User_Sponsor_Org_Page.Add_User, {
+      exact: true,
+    });
   }
 
   //Getters & Setters for Private Variables
@@ -1759,10 +1795,7 @@ export default class CommonItemsPage {
   async getActualListValuesWithoutTrim(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
     const actualListValues: string[] = [];
     for (const row of await tableBodyRows.all()) {
-      const actualListValue = await row
-        .getByRole('cell')
-        .nth(columnIndex)
-        .evaluate((node) => node.firstChild?.nodeValue ?? '');
+      const actualListValue = await row.getByRole('cell').nth(columnIndex).textContent();
       actualListValues.push(actualListValue);
     }
     return actualListValues;
@@ -1891,15 +1924,6 @@ export default class CommonItemsPage {
     return actualListValues;
   }
 
-  async getActualListValuesShortProjectTitleSWRStatus(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
-    const actualListValues: string[] = [];
-    for (const row of await tableBodyRows.all()) {
-      const actualListValue = await row.getByRole('cell').nth(columnIndex).textContent();
-      actualListValues.push(actualListValue);
-    }
-    return actualListValues;
-  }
-
   async getFieldErrorMessageSponsor<PageObject>(key: string, page: PageObject) {
     const element = await page[key].first();
     const fieldErrorMessage = confirmStringNotNull(
@@ -1907,5 +1931,78 @@ export default class CommonItemsPage {
     );
 
     return fieldErrorMessage;
+  }
+
+  async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
+    const listAsDates: Date[] = [];
+    const sortedListAsStrings: string[] = [];
+    const formattedDatesSubmitted = datesSubmitted.map((dates) => {
+      const [day, month, year] = dates.split(' ');
+      return [day, month, year];
+    });
+
+    for (const entry of formattedDatesSubmitted.entries()) {
+      const usFormattedEntry = entry[1].toReversed();
+      const dateEntryString = `${usFormattedEntry[0]} ${usFormattedEntry[1]} ${usFormattedEntry[2]}`;
+      const dateFormattedEntry = new Date(dateEntryString);
+      listAsDates.push(dateFormattedEntry);
+    }
+
+    if (sortDirection.toLowerCase() == 'descending') {
+      listAsDates.sort((a, b) => b.getTime() - a.getTime());
+    } else {
+      listAsDates.sort((a, b) => a.getTime() - b.getTime());
+    }
+    if (await this.myOrganisationBreadCrumbLink.isVisible()) {
+      for (const date of listAsDates) {
+        sortedListAsStrings.push(
+          date.toLocaleString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).replace('Sept', 'Sep')
+        );
+      }
+    } else {
+      for (const date of listAsDates) {
+        sortedListAsStrings.push(
+          date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace('Sept', 'Sep')
+        );
+      }
+    }
+    return sortedListAsStrings;
+  }
+
+  async setUserFirstNameLastNameEmail(userList: Map<string, string[]>) {
+    const emailAddress: any = userList.get('emailAddressValues');
+    await this.setUserEmail(emailAddress);
+    const firstName: any = userList.get('firstNameValues');
+    await this.setUserFirstName(firstName);
+    const lastName: any = userList.get('lastNameValues');
+    await this.setUserLastName(lastName);
+    await this.setFirstName(firstName[0]);
+    await this.setLastName(lastName[0]);
+    await this.setEmail(emailAddress[0]);
+    if (await this.firstPage.isVisible()) {
+      await this.firstPage.click();
+    }
+  }
+
+  async createUsersUnderSponsorOrg(automationUserEmailsSet: Set<any>) {
+    const emails = Array.from(automationUserEmailsSet).slice(0, 25);
+    for (let i = 0; i < emails.length; i++) {
+      console.log(`${i}`);
+      await this.addNewUserSponsorOrgLink.click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      const email = emails[i];
+      await this.search_text.fill(email);
+      await this.searchButton.click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      await this.addUserLink.click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.addUserButton.click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+    }
   }
 }
