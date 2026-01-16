@@ -579,7 +579,7 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
 
     Examples:
-      | Login_User   | User_Email               | Link | RTS_API_Data         | RTS_Request                         | Invalid_Input | Empty_Input |
-      | Sponsor_User | automation sponsor email | View | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
-# | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
-# | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
+      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         | Invalid_Input | Empty_Input |
+      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
+      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
