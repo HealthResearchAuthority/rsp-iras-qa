@@ -90,24 +90,6 @@ Then(
   'I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page',
   async ({ mySponsorOrgUsersPage, commonItemsPage }) => {
     const automationUserEmailsSet = await mySponsorOrgUsersPage.getAutomationUserEmails();
-    const emails = Array.from(automationUserEmailsSet).slice(0, 25);
-    for (let i = 0; i < emails.length; i++) {
-      console.log(`${i}`);
-      await commonItemsPage.govUkLink.getByText('Add a new user profile record', { exact: true }).click();
-      await commonItemsPage.page.reload({ waitUntil: 'networkidle' });
-      await commonItemsPage.page.waitForTimeout(2000);
-      const email = emails[i];
-      await commonItemsPage.search_text.fill(email);
-      await commonItemsPage.govUkButton.getByText('Search', { exact: true }).click();
-      await commonItemsPage.page.reload({ waitUntil: 'networkidle' });
-      await commonItemsPage.page.waitForTimeout(2000);
-      await commonItemsPage.govUkLink.getByText('Add user', { exact: true }).click();
-      await commonItemsPage.page.reload({ waitUntil: 'networkidle' });
-      await commonItemsPage.page.waitForTimeout(2000);
-      await commonItemsPage.page.reload({ waitUntil: 'networkidle' });
-      await commonItemsPage.govUkButton.getByText('Add user', { exact: true }).click();
-      await commonItemsPage.page.reload({ waitUntil: 'networkidle' });
-      await commonItemsPage.page.waitForTimeout(2000);
-    }
+    commonItemsPage.createUsersUnderSponsorOrg(automationUserEmailsSet);
   }
 );

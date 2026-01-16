@@ -1968,4 +1968,26 @@ export default class CommonItemsPage {
       await this.firstPage.click();
     }
   }
+
+  async createUsersUnderSponsorOrg(automationUserEmailsSet: Set<any>) {
+    const emails = Array.from(automationUserEmailsSet).slice(0, 25);
+    for (let i = 0; i < emails.length; i++) {
+      console.log(`${i}`);
+      await this.govUkLink.getByText('Add a new user profile record', { exact: true }).click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      const email = emails[i];
+      await this.search_text.fill(email);
+      await this.govUkButton.getByText('Search', { exact: true }).click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      await this.govUkLink.getByText('Add user', { exact: true }).click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.govUkButton.getByText('Add user', { exact: true }).click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+    }
+  }
 }
