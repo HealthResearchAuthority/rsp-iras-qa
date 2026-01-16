@@ -67,7 +67,6 @@ Feature: Add user to sponsor organisation
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-    # And the check and add user to sponsor organisation page displays the expected user details
 
     @verifyCheckAddUserSponsorOrgPageBackLink
     Scenario: Verify the user can navigate back from the check add user to sponsor organisation page using the back link
@@ -104,7 +103,6 @@ Feature: Add user to sponsor organisation
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
-        # And the check and add user to sponsor organisation page displays the expected user details
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -125,7 +123,6 @@ Feature: Add user to sponsor organisation
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
-        # And the check and add user to sponsor organisation page displays the expected user details
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         Then I can see the 'user added' successful message on sponsor organisation user list page
