@@ -12,38 +12,24 @@ Then(
   'I can see the sponsor organisation profile page from my organisations for {string}',
   async ({ myOrgSponsorOrgProfilePage, checkSetupSponsorOrganisationPage }, user: string) => {
     const expSponOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
-    await myOrgSponsorOrgProfilePage.assertOnMyOrgSponsorOrgProfilePage(expSponOrgName, user);
+    await expect.soft(myOrgSponsorOrgProfilePage.pageLabel).toBeVisible();
+    await expect.soft(myOrgSponsorOrgProfilePage.pageHeading.getByText(expSponOrgName)).toBeVisible();
+    await expect.soft(myOrgSponsorOrgProfilePage.profile_tabnav).toBeVisible();
+    await myOrgSponsorOrgProfilePage.assertOnMyOrgSponsorOrgProfilePage(user);
   }
 );
 
 Then(
   'I validate the sponsor organisation data displayed in profile tab with rts data',
   async ({ myOrgSponsorOrgProfilePage, rtsPage }) => {
-    const expSponOrg = rtsPage.rtsResponseListRecord[0].name;
-    const expCountry = rtsPage.rtsResponseListRecord[0].country;
-    const expRawAddress = (rtsPage.rtsResponseListRecord as unknown as { address: { text?: string }[] }[])[0]
-      ?.address?.[0]?.text;
-    const expAddress = expRawAddress?.replaceAll(/,/g, ' ').replaceAll(/\s+/g, ' ').trim();
-    const rawLastUpdated = rtsPage.rtsResponseListRecord[0].lastUpdated;
-    const dateObj = new Date(rawLastUpdated);
-    const day = String(dateObj.getDate()).padStart(2, '0');
-    const monthShort = dateObj.toLocaleString('en-GB', { month: 'short' });
-    const year = dateObj.getFullYear();
-    const hours = String(dateObj.getHours()).padStart(2, '0');
-    const minutes = String(dateObj.getMinutes()).padStart(2, '0');
-    const expLastUpdated = `${day} ${monthShort} ${year} at ${hours}:${minutes}`;
-
-    await myOrgSponsorOrgProfilePage.validateProfileTabData(expSponOrg, expCountry, expAddress, expLastUpdated);
+    const [expSponOrg, expCountry, expAddress, expLastUpdated] =
+      await myOrgSponsorOrgProfilePage.getRtsSponsorOrgProfileData(rtsPage);
+    const [actualLabels, expectedLabels, actualValues, expectedValues] =
+      await myOrgSponsorOrgProfilePage.validateProfileTabData(expSponOrg, expCountry, expAddress, expLastUpdated);
+    expect.soft(actualLabels).toEqual(expectedLabels);
+    expect.soft(actualValues).toEqual(expectedValues);
   }
 );
-
-Then('I click on the short project title for sponsor organisation', async ({ myOrgSponsorOrgProfilePage }) => {
-  const shortProjectTitleLabel = await myOrgSponsorOrgProfilePage.projects_table
-    .locator('tbody tr td:nth-child(1)')
-    .first()
-    .innerText();
-  await myOrgSponsorOrgProfilePage.page.getByText(shortProjectTitleLabel, { exact: true }).click();
-});
 
 Then('I keep note of the project data displayed in the table', async ({ myOrgSponsorOrgProfilePage }) => {
   const firstRowData = await myOrgSponsorOrgProfilePage.firstRow_Locator.allInnerTexts();
@@ -61,45 +47,17 @@ Then('I can see the project data displaying in the table', async ({ myOrgSponsor
 
 Then(
   'I can see the project records are sorted by {string} order of {string}',
-  async ({ myResearchProjectsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
-    let sortedList: string[];
-    let columnIndex: number;
-    switch (sortField.toLowerCase()) {
-      case 'short project title':
-        columnIndex = 0;
-        break;
-      case 'iras id':
-        columnIndex = 1;
-        break;
-      case 'date created':
-        columnIndex = 2;
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
-    }
-    let actualList: any;
-    if (sortDirection.toLowerCase() == 'ascending' && sortField.toLowerCase() == 'short project title') {
-      actualList = await commonItemsPage.getActualListValuesWithoutTrim(commonItemsPage.tableBodyRows, columnIndex);
-    } else {
-      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-    }
-    if (sortField.toLowerCase() == 'iras id') {
-      sortedList = await myResearchProjectsPage.sortIrasIdListValues(actualList, sortDirection);
-    } else if (sortField.toLowerCase() == 'date created') {
-      sortedList = await commonItemsPage.sortDateSubmittedListValues(actualList, sortDirection);
-    } else if (sortField.toLowerCase() == 'short project title') {
-      const compareFn = (a: string, b: string) =>
-        sortDirection.toLowerCase() === 'ascending'
-          ? a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
-          : b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false });
-      sortedList = [...actualList].toSorted(compareFn);
-    }
-    if (sortedList.map((date) => date.includes('Sept'))) {
-      //Only for September month its returning Sept instead Sep. Hence this temporary fix
-      const updatedSortedList = sortedList.map((date) => date.replace('Sept', 'Sep'));
-      expect.soft(actualList).toEqual(updatedSortedList);
-    } else {
-      expect.soft(actualList).toEqual(sortedList);
-    }
+  async (
+    { myResearchProjectsPage, commonItemsPage, myOrgSponsorOrgProfilePage },
+    sortDirection: string,
+    sortField: string
+  ) => {
+    const [actualList, sortedList] = await myOrgSponsorOrgProfilePage.getSortedProjectRecords(
+      sortDirection,
+      sortField,
+      commonItemsPage,
+      myResearchProjectsPage
+    );
+    expect.soft(actualList).toEqual(sortedList);
   }
 );

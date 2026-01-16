@@ -1,7 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { Locator } from '@playwright/test';
-import { randomInt } from 'node:crypto';
 
 const { Then } = createBdd(test);
 
@@ -47,22 +46,15 @@ Then(
 
 Then(
   'I enter partial {string} into the search field',
-  async ({ commonItemsPage, checkSetupSponsorOrganisationPage, myOrgSponsorOrgProfilePage }, fieldKey: string) => {
-    if (fieldKey == 'organisation name') {
-      const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
-      const minLen = 3;
-      const start = randomInt(0, sponsorOrgName.length - minLen);
-      const maxLen = sponsorOrgName.length - start;
-      const len = randomInt(minLen, maxLen + 1);
-      const partialText = sponsorOrgName.slice(start, start + len);
-      await commonItemsPage.search_text.fill(partialText);
-    }
-    if (fieldKey == 'iras id') {
-      const irasId = await myOrgSponsorOrgProfilePage.irasid_Locator.first().innerText();
-      const startIndex = randomInt(0, irasId.length);
-      const endIndex = randomInt(startIndex + 1, irasId.length + 1);
-      const partialIrasId = irasId.substring(startIndex, endIndex);
-      await commonItemsPage.search_text.fill(partialIrasId);
-    }
+  async (
+    { myOrganisationsPage, commonItemsPage, checkSetupSponsorOrganisationPage, myOrgSponsorOrgProfilePage },
+    fieldKey: string
+  ) => {
+    const partialString = myOrganisationsPage.generatePartialString(
+      fieldKey,
+      checkSetupSponsorOrganisationPage,
+      myOrgSponsorOrgProfilePage
+    );
+    await commonItemsPage.search_text.fill(await partialString);
   }
 );

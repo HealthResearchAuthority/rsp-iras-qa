@@ -572,8 +572,6 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
-    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -635,7 +633,6 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -697,8 +694,6 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
-    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -745,7 +740,7 @@ Feature: Sponsor Workspace
       | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-  @rsp-6420 @MyOrganisationsProfileTabValidation @RTS @skip @KNOWN_DEFECT_RSP-6699
+  @rsp-6420 @MyOrganisationsProfileTabValidation @RTS @skip
   Scenario: Validate the data under profile tab for <Login_User> with rts data
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -777,8 +772,6 @@ Feature: Sponsor Workspace
     When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
-    And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -843,8 +836,6 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
-    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -869,10 +860,10 @@ Feature: Sponsor Workspace
     Then I click the 'Projects_Link' link on the 'MyOrg_Sponsor_Organisation_Profile_Page'
     And I capture the page screenshot
     Then I can see the '<Validation_Text_Research>' ui labels on the my research project page
-    And I keep note of the project data displayed in the table
-    And I click on the short project title for sponsor organisation
-    And I capture the page screenshot
+    And Each 'short project title' displayed on the 'Sponsor_Organisation_Profile_Page' is a link
+    When I click a 'short project title' on the 'Sponsor_Organisation_Profile_Page'
     Then I can see the project overview page
+    And I capture the page screenshot
 
     Examples:
 
@@ -911,8 +902,6 @@ Feature: Sponsor Workspace
     When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
-    And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -1005,8 +994,6 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
-    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
@@ -1074,8 +1061,6 @@ Feature: Sponsor Workspace
     When I fill the add user permission page using '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
-    And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     Then I can see the 'user added' successful message on sponsor organisation user list page

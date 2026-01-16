@@ -333,6 +333,8 @@ export default class ModificationsReceivedCommonPage {
           pageType.toLowerCase() == 'team_manager_dashboard_page'
         ) {
           columnIndex = 2;
+        } else if (pageType == 'Sponsor_Organisation_Profile_Page') {
+          columnIndex = 0;
         } else {
           columnIndex = 1;
         }

@@ -1,6 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as myOrganisationsPageTestData from '../../../resources/test_data/iras/make_changes/my_organisations_page_data.json';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
+import { randomInt } from 'node:crypto';
+import CheckSetupSponsorOrganisationPage from '../reviewResearch/userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
+import MyOrgSponsorOrgProfilePage from './MyOrgSponsorOrgProfilePage';
 
 //Declare Page Objects
 export default class MyOrganisationsPage {
@@ -43,5 +46,27 @@ export default class MyOrganisationsPage {
   //Page Methods
   async assertOnMyOrganisationsPage() {
     await expect.soft(this.pageHeading).toBeVisible();
+  }
+
+  async generatePartialString(
+    fieldKey: string,
+    checkSetupSponsorOrganisationPage: CheckSetupSponsorOrganisationPage,
+    myOrgSponsorOrgProfilePage: MyOrgSponsorOrgProfilePage
+  ) {
+    let partialString: string;
+    if (fieldKey == 'organisation name') {
+      const sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
+      const minLen = 3;
+      const start = randomInt(0, sponsorOrgName.length - minLen);
+      const maxLen = sponsorOrgName.length - start;
+      const len = randomInt(minLen, maxLen + 1);
+      partialString = sponsorOrgName.slice(start, start + len);
+    } else if (fieldKey == 'iras id') {
+      const irasId = await myOrgSponsorOrgProfilePage.irasid_Locator.first().innerText();
+      const startIndex = randomInt(0, irasId.length);
+      const endIndex = randomInt(startIndex + 1, irasId.length + 1);
+      partialString = irasId.substring(startIndex, endIndex);
+    }
+    return partialString;
   }
 }
