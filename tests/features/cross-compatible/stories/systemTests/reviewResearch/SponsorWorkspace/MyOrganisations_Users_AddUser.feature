@@ -232,7 +232,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
       | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
-
   @rsp-6465 @AddUserRolePermissionCancel
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> from sponsor workspace and add a user with <Select_User_Role> and <Select_User_Permission> and Cancel discards details and returns to Users page
     When I enter '<User_Email>' into the search field

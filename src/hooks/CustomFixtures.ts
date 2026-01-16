@@ -107,8 +107,6 @@ import MySponsorOrgUsersPage from '../pages/IRAS/reviewResearch/sponsorWorkspace
 import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAddUserPage';
 import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
 import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
-import MyOrganisationsPage from '../pages/IRAS/makeChanges/MyOrganisationsPage';
-import MyOrgSponsorOrgProfilePage from '../pages/IRAS/makeChanges/MyOrgSponsorOrgProfilePage';
 import CheckConfirmUserToAddToSponsorOrganisationPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/CheckConfirmUserToAddToSponsorOrganisationPage';
 
 type CustomFixtures = {
