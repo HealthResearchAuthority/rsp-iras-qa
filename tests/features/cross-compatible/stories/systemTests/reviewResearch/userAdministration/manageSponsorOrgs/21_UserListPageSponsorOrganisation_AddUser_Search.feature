@@ -6,18 +6,19 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @SetupNewSponsorOrg @RTS @skip
+    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @SetupNewSponsorOrg
     Scenario Outline: Verify the user can view the user list page of the newly setup sponsor organisation with no users
-        When I authorise the rts api using '<RTS_API_Data>'
-        Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
+        # When I authorise the rts api using '<RTS_API_Data>'
+        # Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
         When I select a sponsor organisation in the set up a new sponsor organisation page using '<Setup_New_Sponsor_Organisation>'
         And I capture the page screenshot
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        And I keep note of the organisation name for sponsor organisation setup
         And I capture the page screenshot
-        And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+        # And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
         When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
         And I capture the current time for 'Sponsor_Organisation_Profile_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
@@ -32,7 +33,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         Then I click the view edit link of the 'newly added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
-        And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+        # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
         And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot

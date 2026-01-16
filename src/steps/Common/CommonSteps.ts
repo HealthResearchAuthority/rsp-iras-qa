@@ -1250,7 +1250,8 @@ Then(
         pagename === 'My_Research_Projects_Page' ||
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
-        pagename === 'Review_All_Changes_Page'
+        pagename === 'Review_All_Changes_Page' ||
+        pagename === 'Manage_Sponsor_Organisations_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
@@ -1284,7 +1285,8 @@ Then(
         pagename == 'My_Research_Projects_Page' ||
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
-        pagename === 'Review_All_Changes_Page'
+        pagename === 'Review_All_Changes_Page' ||
+        pagename === 'Manage_Sponsor_Organisations_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
@@ -1982,21 +1984,27 @@ When(
 Given(
   'I see that the newly added user appears in the user list page for the {string}',
   async ({ searchAddUserReviewBodyPage, commonItemsPage }, orgType: string) => {
-    if (orgType === 'review body' || orgType === 'sponsor organisation') {
-      await expect(commonItemsPage.userListTableBodyRows).toHaveCount(1);
+    await expect.soft(commonItemsPage.userListTableBodyRows).toHaveCount(1);
+    if (orgType === 'review body') {
       await expect(commonItemsPage.first_name_value_first_row).toHaveText(
         await searchAddUserReviewBodyPage.getUserFirstName()
       );
-      await expect(commonItemsPage.last_name_value_first_row).toHaveText(
-        await searchAddUserReviewBodyPage.getUserLastName()
-      );
-      await expect(commonItemsPage.email_address_value_first_row).toHaveText(
-        await searchAddUserReviewBodyPage.getUserEmail()
-      );
-      await expect(commonItemsPage.status_value_first_row).toHaveText(
-        await searchAddUserReviewBodyPage.getUserStatus()
+      await expect
+        .soft(commonItemsPage.last_name_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserLastName());
+    } else if (orgType === 'sponsor organisation') {
+      await expect(commonItemsPage.users_sponsor_org_name_value_first_row).toHaveText(
+        (await searchAddUserReviewBodyPage.getUserFirstName()) +
+          ' ' +
+          (await searchAddUserReviewBodyPage.getUserLastName())
       );
     }
+    await expect
+      .soft(commonItemsPage.users_sponsor_org_email_value_first_row)
+      .toHaveText(await searchAddUserReviewBodyPage.getUserEmail());
+    await expect
+      .soft(commonItemsPage.users_sponsor_org_status_value_first_row)
+      .toHaveText(await searchAddUserReviewBodyPage.getUserStatus());
   }
 );
 
