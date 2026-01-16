@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { expect, test } from '../../../hooks/CustomFixtures';
+import { expect, test } from '../../../../hooks/CustomFixtures';
 import { Locator } from '@playwright/test';
 
 const { Then } = createBdd(test);

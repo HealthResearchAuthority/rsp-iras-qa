@@ -1,9 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as myOrgSponsorOrgProfilePageTestData from '../../../resources/test_data/iras/make_changes/my_org_sponsor_org_profile_page_data.json';
-import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
-import RtsPage from '../../Common/RtsPage';
-import CommonItemsPage from '../../Common/CommonItemsPage';
-import MyResearchProjectsPage from './MyResearchProjectsPage';
+import * as myOrgSponsorOrgProfilePageTestData from '../../../../resources/test_data/iras/reviewResearch/sponsorWorkspace/my_org_sponsor_org_profile_page_data.json';
+import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
+import RtsPage from '../../../Common/RtsPage';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
+import MyResearchProjectsPage from '../../makeChanges/MyResearchProjectsPage';
 
 //Declare Page Objects
 export default class MyOrgSponsorOrgProfilePage {

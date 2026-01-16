@@ -1,8 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as myOrganisationsPageTestData from '../../../resources/test_data/iras/make_changes/my_organisations_page_data.json';
-import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
+import * as myOrganisationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/sponsorWorkspace/my_organisations_page_data.json';
+import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import { randomInt } from 'node:crypto';
-import CheckSetupSponsorOrganisationPage from '../reviewResearch/userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
+import CheckSetupSponsorOrganisationPage from '../userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
 import MyOrgSponsorOrgProfilePage from './MyOrgSponsorOrgProfilePage';
 
 //Declare Page Objects

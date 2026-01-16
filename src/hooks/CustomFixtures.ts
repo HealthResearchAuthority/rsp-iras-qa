@@ -101,8 +101,8 @@ import ChooseARecordTypeToSearchPage from '../pages/IRAS/reviewResearch/approval
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
 import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchProjectsPage';
 import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
-import MyOrganisationsPage from '../pages/IRAS/makeChanges/MyOrganisationsPage';
-import MyOrgSponsorOrgProfilePage from '../pages/IRAS/makeChanges/MyOrgSponsorOrgProfilePage';
+import MyOrganisationsPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsPage';
+import MyOrgSponsorOrgProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrgSponsorOrgProfilePage';
 import MySponsorOrgUsersPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsUsersPage';
 import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAddUserPage';
 import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
