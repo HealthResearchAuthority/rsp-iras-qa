@@ -171,6 +171,7 @@ export default class CommonItemsPage {
   readonly users_sponsor_org_authoriser_label: Locator;
   readonly users_sponsor_org_authoriser_value_first_row: Locator;
   readonly users_sponsor_org_actions_label: Locator;
+  readonly myOrganisationBreadCrumbLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -490,6 +491,9 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.actions_label, {
         exact: true,
       });
+    this.myOrganisationBreadCrumbLink = this.page
+      .locator('.govuk-breadcrumbs__link')
+      .getByText('My organisations', { exact: true });
   }
 
   //Getters & Setters for Private Variables
@@ -1776,10 +1780,7 @@ export default class CommonItemsPage {
   async getActualListValuesWithoutTrim(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
     const actualListValues: string[] = [];
     for (const row of await tableBodyRows.all()) {
-      const actualListValue = await row
-        .getByRole('cell')
-        .nth(columnIndex)
-        .evaluate((node) => node.firstChild?.nodeValue ?? '');
+      const actualListValue = await row.getByRole('cell').nth(columnIndex).textContent();
       actualListValues.push(actualListValue);
     }
     return actualListValues;
@@ -1908,15 +1909,6 @@ export default class CommonItemsPage {
     return actualListValues;
   }
 
-  async getActualListValuesShortProjectTitleSWRStatus(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
-    const actualListValues: string[] = [];
-    for (const row of await tableBodyRows.all()) {
-      const actualListValue = await row.getByRole('cell').nth(columnIndex).textContent();
-      actualListValues.push(actualListValue);
-    }
-    return actualListValues;
-  }
-
   async getFieldErrorMessageSponsor<PageObject>(key: string, page: PageObject) {
     const element = await page[key].first();
     const fieldErrorMessage = confirmStringNotNull(
@@ -1924,6 +1916,42 @@ export default class CommonItemsPage {
     );
 
     return fieldErrorMessage;
+  }
+
+  async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
+    const listAsDates: Date[] = [];
+    const sortedListAsStrings: string[] = [];
+    const formattedDatesSubmitted = datesSubmitted.map((dates) => {
+      const [day, month, year] = dates.split(' ');
+      return [day, month, year];
+    });
+
+    for (const entry of formattedDatesSubmitted.entries()) {
+      const usFormattedEntry = entry[1].toReversed();
+      const dateEntryString = `${usFormattedEntry[0]} ${usFormattedEntry[1]} ${usFormattedEntry[2]}`;
+      const dateFormattedEntry = new Date(dateEntryString);
+      listAsDates.push(dateFormattedEntry);
+    }
+
+    if (sortDirection.toLowerCase() == 'descending') {
+      listAsDates.sort((a, b) => b.getTime() - a.getTime());
+    } else {
+      listAsDates.sort((a, b) => a.getTime() - b.getTime());
+    }
+    if (await this.myOrganisationBreadCrumbLink.isVisible()) {
+      for (const date of listAsDates) {
+        sortedListAsStrings.push(
+          date.toLocaleString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).replace('Sept', 'Sep')
+        );
+      }
+    } else {
+      for (const date of listAsDates) {
+        sortedListAsStrings.push(
+          date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace('Sept', 'Sep')
+        );
+      }
+    }
+    return sortedListAsStrings;
   }
 
   async setUserFirstNameLastNameEmail(userList: Map<string, string[]>) {

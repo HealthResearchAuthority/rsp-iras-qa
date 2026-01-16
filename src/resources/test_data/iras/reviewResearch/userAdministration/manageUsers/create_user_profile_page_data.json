@@ -13,6 +13,7 @@
     "role_label": "Role",
     "role_checkbox": [
       "Applicant",
+      "Organisation administrator",
       "Sponsor",
       "Study-wide reviewer",
       "System administrator",
@@ -99,7 +100,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20251223181108179hscrd@health.org",
+    "email_address_unique": "QAAutomation20260108132459688hscrd@health.org",
     "Role_TM_SWR_WFC": {
       "role_checkbox": ["Study-wide reviewer", "Team manager", "Workflow co-ordinator"]
     },
@@ -256,6 +257,26 @@
       "last_name_text": "Test Last Name Role_System_Administrator_Another",
       "email_address_text": "hscrd@health.org",
       "role_checkbox": ["System administrator"]
+    },
+    "Valid_Data_In_All_Fields_Role_Organisation_Administrator": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Organisation_Administrator HRA",
+      "last_name_text": "Test Last Name Role_Organisation_Administrator HRA",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Organisation_Administrator HRA",
+      "job_title_text": "Sr.Reviewer Role_Organisation_Administrator HRA",
+      "role_checkbox": ["Organisation administrator"]
+    },
+    "Valid_Data_In_All_Fields_Role_Organisation_Administrator": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Organisation_Administrator HRA",
+      "last_name_text": "Test Last Name Role_Organisation_Administrator HRA",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Organisation_Administrator HRA",
+      "job_title_text": "Sr.Reviewer Role_Organisation_Administrator HRA",
+      "role_checkbox": ["Organisation administrator"]
     },
     "Valid_Data_In_All_Fields_Role_Applicant": {
       "title_text": "Mr",
@@ -450,6 +471,9 @@
       "organisation_text": "QA Automation HRA Role_All",
       "job_title_text": "Sr.Reviewer Role_All",
       "role_checkbox": [
+        "Applicant",
+        "Organisation administrator",
+        "Sponsor",
         "Study-wide reviewer",
         "Team manager",
         "Workflow co-ordinator",

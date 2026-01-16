@@ -27,7 +27,7 @@
     "day_to_label": "Day",
     "month_to_label": "Month",
     "year_to_label": "Year",
-    "short_project_title_label": "Enter the name of the short project title"
+    "short_project_title_label": "Enter the short project title"
   },
   "Search_Queries": {
     "Existing_IRAS_ID_Single": {
