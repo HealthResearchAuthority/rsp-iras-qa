@@ -46,9 +46,37 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Modification_Id     | modification id     | Advanced_Filters_Lead_Nation |
                         | Short_Project_Title | short project title | Advanced_Filters_Lead_Nation |
                         | Modification_Type   | modification type   | Advanced_Filters_Lead_Nation |
-                        | Chief_Investigator  | chief investigator  | Advanced_Filters_Lead_Nation |
                         | Lead_Nation         | lead nation         | Advanced_Filters_Lead_Nation |
                         | Status              | status              | Advanced_Filters_Lead_Nation |
+
+        @SortModificationsByColumn @rsp-4090 @rsp-4822 @KNOWN-DEFECT-RSP-6647
+        Scenario Outline: Verify the user is able to sort modifications by ascending and descending order for column-chief investigator
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I capture the page screenshot
+                And I can now see a table of search results for 'modifications received for approval'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
+                And I capture the page screenshot
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
+                Examples:
+                        | Sort_Button        | Sort_Field         | Advanced_Filters             |
+                        | Chief_Investigator | chief investigator | Advanced_Filters_Lead_Nation |
 
         @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link

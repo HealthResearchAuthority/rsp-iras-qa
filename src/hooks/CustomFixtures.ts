@@ -101,8 +101,13 @@ import ChooseARecordTypeToSearchPage from '../pages/IRAS/reviewResearch/approval
 import TeamManagerDashboardPage from '../pages/IRAS/reviewResearch/receiveAmendments/TeamManagerDashboardPage';
 import SearchProjectsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchProjectsPage';
 import ModificationOutcomeCheckSendPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationOutcomeCheckSendPage';
+import MyOrganisationsPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsPage';
+import MyOrgSponsorOrgProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrgSponsorOrgProfilePage';
+import MySponsorOrgUsersPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsUsersPage';
+import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAddUserPage';
 import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
 import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
+import CheckConfirmUserToAddToSponsorOrganisationPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/CheckConfirmUserToAddToSponsorOrganisationPage';
 import CreateModificationErrorPage from '../pages/IRAS/makeChanges/modifications/CreateModificationErrorPage';
 
 type CustomFixtures = {
@@ -196,6 +201,8 @@ type CustomFixtures = {
   projectPersonnelChangeChiefInvestigatorPage: ProjectPersonnelChangeChiefInvestigatorPage;
   projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
   sponsorWorkspacePage: SponsorWorkspacePage;
+  myOrganisationsPage: MyOrganisationsPage;
+  myOrgSponsorOrgProfilePage: MyOrgSponsorOrgProfilePage;
   confirmProjectDetailsPage: ConfirmProjectDetailsPage;
   modificationPostSubmissionPage: ModificationPostSubmissionPage;
   sponsorAuthorisationsPage: SponsorAuthorisationsPage;
@@ -205,8 +212,11 @@ type CustomFixtures = {
   teamManagerDashboardPage: TeamManagerDashboardPage;
   searchProjectsPage: SearchProjectsPage;
   modificationOutcomeCheckSendPage: ModificationOutcomeCheckSendPage;
+  mySponsorOrgUsersPage: MySponsorOrgUsersPage;
+  mySponsorOrgAddUserPage: MySponsorOrgAddUserPage;
   addUserRoleSponsorOrgPage: AddUserRoleSponsorOrgPage;
   addUserPermissionSponsorOrgPage: AddUserPermissionSponsorOrgPage;
+  checkConfirmUserToAddToSponsorOrganisationPage: CheckConfirmUserToAddToSponsorOrganisationPage;
   createModificationErrorPage: CreateModificationErrorPage;
 
   makeAxeBuilder: () => AxeBuilder;
@@ -573,6 +583,14 @@ export const test = base.extend<CustomFixtures>({
     await use(new SponsorWorkspacePage(page));
   },
 
+  myOrganisationsPage: async ({ page }, use) => {
+    await use(new MyOrganisationsPage(page));
+  },
+
+  myOrgSponsorOrgProfilePage: async ({ page }, use) => {
+    await use(new MyOrgSponsorOrgProfilePage(page));
+  },
+
   confirmProjectDetailsPage: async ({ page }, use) => {
     await use(new ConfirmProjectDetailsPage(page));
   },
@@ -605,12 +623,24 @@ export const test = base.extend<CustomFixtures>({
     await use(new ModificationOutcomeCheckSendPage(page));
   },
 
+  mySponsorOrgUsersPage: async ({ page }, use) => {
+    await use(new MySponsorOrgUsersPage(page));
+  },
+
+  mySponsorOrgAddUserPage: async ({ page }, use) => {
+    await use(new MySponsorOrgAddUserPage(page));
+  },
+
   addUserRoleSponsorOrgPage: async ({ page }, use) => {
     await use(new AddUserRoleSponsorOrgPage(page));
   },
 
   addUserPermissionSponsorOrgPage: async ({ page }, use) => {
     await use(new AddUserPermissionSponsorOrgPage(page));
+  },
+
+  checkConfirmUserToAddToSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckConfirmUserToAddToSponsorOrganisationPage(page));
   },
 
   createModificationErrorPage: async ({ page }, use) => {

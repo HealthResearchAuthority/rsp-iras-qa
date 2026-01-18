@@ -39,7 +39,7 @@ Then(
       sortField.toLowerCase() === 'study-wide reviewer' ||
       sortField.toLowerCase() === 'status'
     ) {
-      actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
+      actualList = await commonItemsPage.getActualListValuesWithoutTrim(
         commonItemsPage.tableBodyRows,
         searchColumnIndex
       );

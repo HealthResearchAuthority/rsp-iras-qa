@@ -9,7 +9,7 @@ Then(
     switch (activityName) {
       case 'user added':
         await expect
-          .soft(userListSponsorOrganisationPage.user_added_to_sponsor_organisation__success_message_text)
+          .soft(userListSponsorOrganisationPage.user_added_to_sponsor_organisation_success_message_text)
           .toBeVisible();
         break;
       case 'user in the selected sponsor organisation disabled':

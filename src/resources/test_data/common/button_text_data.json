@@ -145,7 +145,7 @@
     "Modification_Id": "Modification ID",
     "Short_Project_Title": "Short project title",
     "Modification_Type": "Modification type",
-    "Chief_Investigator": "Chief Investigator",
+    "Chief_Investigator": "Chief investigator",
     "Lead_Nation": "Lead Nation",
     "Status": "Status"
   },
@@ -328,7 +328,12 @@
   },
   "Sponsor_Organisation_Profile_Page": {
     "Disable": "Disable",
-    "Enable": "Enable"
+    "Enable": "Enable",
+    "Search": "Search",
+    "Advanced_filter": "Advanced filter",
+    "Short_Project_Title": "Short project title",
+    "Iras_Id": "IRAS ID",
+    "Date_Created": "Date created"
   },
   "Search_Add_User_Sponsor_Org_Page": {
     "Search": "Search"
@@ -422,6 +427,10 @@
   },
   "My_Organisations_Users_Add_User_Non_Registered_User_Error_Page": {
     "Return_To_Sponsor_Org_profile": "Return to sponsor organisation profile"
+  },
+  "Check_Confirm_User_To_Add_Sponsor_Org_Page": {
+    "Confirm": "Confirm",
+    "Cancel": "Cancel"
   },
   "Create_Modification_Error_Page": {
     "Return_To_Project_Overview": "Return to project overview"

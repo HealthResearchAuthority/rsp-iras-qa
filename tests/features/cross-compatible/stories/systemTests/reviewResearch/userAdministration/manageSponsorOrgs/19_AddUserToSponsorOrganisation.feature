@@ -65,20 +65,34 @@ Feature: Add user to sponsor organisation
         And I can see that the add users to 'sponsor organisation' search page contains 'Results'
         And I capture the page screenshot
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        And the check and add user to sponsor organisation page displays the expected user details
 
     @verifyCheckAddUserSponsorOrgPageBackLink
     Scenario: Verify the user can navigate back from the check add user to sponsor organisation page using the back link
         And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        And I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         When I click the 'Back' link on the 'Check_Add_User_Sponsor_Org_Page'
-        And I can see the search for user to add to sponsor organisation page
+        And I capture the page screenshot
+        And I can see the add user permission page based on 'Sponsor_Authoriser_Yes'
         And I capture the page screenshot
 
     @verifyAddUserSponsorOrgConfirmationPageContent
@@ -87,7 +101,14 @@ Feature: Add user to sponsor organisation
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
-        And I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         When I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
@@ -102,9 +123,14 @@ Feature: Add user to sponsor organisation
         And I can see that the add users to 'sponsor organisation' search page contains 'Results'
         And I capture the page screenshot
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
         And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
-        And the check and add user to sponsor organisation page displays the expected user details
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -123,9 +149,14 @@ Feature: Add user to sponsor organisation
         And I can see that the add users to 'sponsor organisation' search page contains 'Results'
         And I capture the page screenshot
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
         And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
-        And the check and add user to sponsor organisation page displays the expected user details
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         Then I can see the 'user added' successful message on sponsor organisation user list page

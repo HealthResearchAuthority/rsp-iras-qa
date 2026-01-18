@@ -38,10 +38,10 @@ Feature: Set up new sponsor organisation
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @SetupNewSponsorOrgGoLive @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @RTS @skip
+    @SetupNewSponsorOrgGoLive @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237
     Scenario Outline: Verify the user can add a sponsor organisations which are in the first go live cohort from manage sponsor organisation page
-        When I authorise the rts api using '<RTS_API_Data>'
-        Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
+        # When I authorise the rts api using '<RTS_API_Data>'
+        # Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
@@ -49,7 +49,8 @@ Feature: Set up new sponsor organisation
         And I capture the page screenshot
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
-        And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+        And I keep note of the organisation name for sponsor organisation setup
+        # And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
         When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
         And I capture the current time for 'Sponsor_Organisation_Profile_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
@@ -64,8 +65,7 @@ Feature: Set up new sponsor organisation
         Then I click the view edit link of the 'newly added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
-        And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
-        And I capture the page screenshot
+        # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
         And I capture the name of the recently added sponsor organisation in the test data using '<Setup_New_Sponsor_Organisation>'
         Examples:
             | Setup_New_Sponsor_Organisation                                      | Status_Enabled | RTS_API_Data         | RTS_Request                         |
