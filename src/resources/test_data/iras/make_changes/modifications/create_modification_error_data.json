@@ -1,0 +1,12 @@
+{
+  "Create_Modification_Error_Page": {
+    "heading": "",
+    "sub_heading": ""
+  },
+  "Label_Texts": {
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title",
+    "create_modification_error_line_one": "You can't currently create a new modification as you already have one in draft. You can only have one modification with the status 'In draft' at a time. You'll need to either submit or delete your 'In draft' modification before creating another’",
+    "create_modification_error_line_two": "If you also have a modification that is currently with sponsor or review body, you'll need to wait until a final outcome has been issued before you can submit another."
+  }
+}

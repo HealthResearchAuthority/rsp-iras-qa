@@ -403,5 +403,8 @@
   },
   "Choose_A_Record_Type_To_Search_Page": {
     "Next": "Next"
+  },
+  "Create_Modification_Error_Page": {
+    "Return_To_Project_Overview": "Return to project overview"
   }
 }

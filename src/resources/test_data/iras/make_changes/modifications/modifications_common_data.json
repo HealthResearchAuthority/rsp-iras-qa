@@ -1190,6 +1190,12 @@
       }
     }
   },
+  "Modification_In_Draft": {
+    "Modification_One": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Chief Investigator: conflict of interest"
+    }
+  },
   "Multiple_Modifications_In_Draft": {
     "Modification_One": {
       "area_of_change_dropdown": "Project personnel",
