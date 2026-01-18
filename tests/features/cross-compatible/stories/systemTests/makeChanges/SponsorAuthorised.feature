@@ -1,5 +1,5 @@
 @SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
-Feature: This feature covers scenarios related to sponsor authorisation modifications
+Feature: This feature covers the sponsor authorisation modifications
 
   Background:
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -21,7 +21,16 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     When I enter 'automation sponsor email' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
@@ -39,7 +48,6 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
   @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can authorise the reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
@@ -163,7 +171,7 @@ Feature: This feature covers scenarios related to sponsor authorisation modifica
       | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP_6666
   Scenario Outline: Validate that sponsor can authorise the non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

@@ -46,7 +46,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgDefaultSort
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgDefaultSort
     Scenario: Verify the user can view the user list page of any selected sponsor organisation and it is sorted by default in the alphabetical order of the 'First Name'
         When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
@@ -68,7 +68,13 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
         And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
         Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -76,7 +82,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I capture the page screenshot
     # And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
 
-    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
     Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
         When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
@@ -94,6 +100,13 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
@@ -117,8 +130,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
             | Full_Name     | First    |
             | Full_Name     | Last     |
 
-    # Then the no search results found message is displayed -- failing due to
-    @rsp-5233 @UserListSponsorOrgSearchNoResultsFound
+    @rsp-5233 @rsp-6488 @UserListSponsorOrgSearchNoResultsFound
     Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
         When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'

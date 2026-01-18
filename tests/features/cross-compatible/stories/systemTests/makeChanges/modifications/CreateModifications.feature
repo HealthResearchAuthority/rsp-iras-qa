@@ -113,7 +113,7 @@ Feature: Create Modification
       | Multiple_Changes_Participating_Organisations_Reviewable_Set_Four | Nhs_Involvement_Yes |
       | Multiple_Changes_Participating_Organisations_Reviewable_Set_Four | Nhs_Involvement_No  |
 
-  @rsp-5478 @rsp-5532 @rsp-4062 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable
+  @rsp-5478 @rsp-5532 @rsp-4062 @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @rsp-4980 @rsp-4982 @rsp-5588 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_6666
   Scenario Outline: Validate that user can create and submit non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

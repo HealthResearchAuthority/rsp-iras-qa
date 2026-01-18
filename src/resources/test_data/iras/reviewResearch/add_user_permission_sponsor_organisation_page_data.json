@@ -1,0 +1,18 @@
+{
+  "Add_User_Permission_Page": {
+    "title": "",
+    "page_heading": "Add user permission",
+    "add_user_permission_sponsor_workspace_partial_url": "/sponsorworkspace/myorganisationusersadduserpermission?rtsId",
+    "add_user_permission_sponsor_workspace_page_caption": "Sponsor organisation profile",
+    "add_user_permission_sponsor_workspace_hint_text": "Select the permissions for this user.",
+    "add_user_permission_system_admin_workspace_partial_url": "/sponsororganisations/adduserpermission",
+    "add_user_permission_system_admin_workspace_page_caption": "Sponsor organisation's profile",
+    "add_user_permission_system_admin_workspace_hint_text": "Fill in the permissions that you want to assign to the user.",
+    "permissions_label": "Permissions",
+    "permissions_hint_text": "This user has permission to authorise all modification submissions on behalf of the sponsor organisation.",
+    "save_add_continue_button": "Save and continue",
+    "Sponsor_Authoriser_Yes": {
+      "authoriser_checkbox": ["User can authorise submissions"]
+    }
+  }
+}
