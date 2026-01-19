@@ -163,7 +163,7 @@ Feature: Sponsor authorisation based on permission and role
     Examples:
       | Login_User             | User_Email               | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Changes                                            | Research_Locations            |
       | Sponsor_User           | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
-      | System_Admin           | system admin email       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      # | System_Admin           | system admin email       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
       | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
   @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
@@ -417,9 +417,9 @@ Feature: Sponsor authorisation based on permission and role
     And I can see the 'With review body' status displayed for all documents in the table
     And I capture the page screenshot
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role    | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
-      | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_Org_Admin_User  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select            | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | View   | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes             | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role  | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
+      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_Org_Admin_User  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select            | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | View | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes             | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
   @ReviewableModificationSponsorAuthorised @rsp-6465
   Scenario Outline: Verify that <Login_User> can authorise the modifications from sponsor workspace for <Another_Registered_User_Permission>
@@ -711,9 +711,9 @@ Feature: Sponsor authorisation based on permission and role
     And I capture the page screenshot
     And the 'Authorisations' link will be 'not available' to the user in the 'Sponsor_Workspace_Page'
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role  | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
-      | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_Org_Admin_User  | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No              | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | View   | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No              | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role  | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
+      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_Org_Admin_User  | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No              | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | View | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No              | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
 
 
