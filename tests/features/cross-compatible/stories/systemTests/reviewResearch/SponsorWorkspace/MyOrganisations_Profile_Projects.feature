@@ -2,7 +2,7 @@
 Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
   @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation @KNOWN_DEFECT_RSP-6628
-  Scenario: Validate that <Login_User> able to navigate to 'My Organisations' page successfully
+  Scenario: Validate that <Login_User> able to navigate to 'My Organisations' page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -61,7 +61,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation @KNOWN_DEFECT_RSP-6628
-  Scenario: Validate that the user with role <Login_User> able to navigate to 'My Organisations' page successfully
+  Scenario: Validate that the user with role <Login_User> able to navigate to 'My Organisations' page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -118,7 +118,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_User | automation sponsor email | View | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  |
 
   @rsp-6419 @MyOrganisationsPageSearchValidation
-  Scenario: Validate the search box functionality of my organisations for <Login_User>
+  Scenario: Validate the search of my organisations for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -178,7 +178,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | invalid       |             |
 
   @rsp-6419 @MyOrganisationsPageSearchValidation
-  Scenario: Validate the search box functionality of my organisations for user with role <Login_User>
+  Scenario: Validate the search of my organisations for user with role <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -643,7 +643,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_User | automation sponsor email | View | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | Label_Texts              |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
-  Scenario: Validate the sort and search functionality under projects tab for <Login_User>
+  Scenario: Validate the sort and search under projects tab for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -731,7 +731,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |             |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
-  Scenario: Validate the sort and search functionality under projects tab for user with role <Login_User>
+  Scenario: Validate the sort and search under projects tab for user with role <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -819,7 +819,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_User | automation sponsor email | View | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  |             |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
-  Scenario: Validate the advanced filter functionality under projects tab for <Login_User>
+  Scenario: Validate the advanced filter under projects tab for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -883,7 +883,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Advanced_Filter_Project_Created_From_Date_Only           | Existing_Iras_Id_Data_Three |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
-  Scenario: Validate the advanced filter functionality under projects tab for user with role <Login_User>
+  Scenario: Validate the advanced filter under projects tab for user with role <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -948,7 +948,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_User | automation sponsor email | View | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | Advanced_Filter_Project_Created_To_Date_Only | Non_Existant_Data |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
-  Scenario: Validate the pagination functionality under projects tab for <Login_User>
+  Scenario: Validate the pagination under projects tab for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -1016,7 +1016,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | page number        | next link          |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
-  Scenario: Validate the pagination functionality under projects tab for user with role <Login_User>
+  Scenario: Validate the pagination under projects tab for user with role <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -1082,102 +1082,3 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
       | Login_User   | User_Email               | Link | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Navigation_Method1 | Navigation_Method2 |
       | Sponsor_User | automation sponsor email | View | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | next link          | previous link      |
-
-  @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation @KNOWN_DEFECT_RSP-6628 @RTS @skip
-  Scenario: Validate that <Login_User> able to navigate to 'My Organisations' page successfully and validate the data with RTS
-    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
-    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
-    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I authorise the rts api using '<RTS_API_Data>'
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
-    And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
-    And I keep note of the organisation name for sponsor organisation setup
-    And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
-    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
-    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
-    And I capture the page screenshot
-    When I enter 'name of the newly added sponsor organisation' into the search field
-    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
-    Then I click the view edit link of the 'newly added sponsor organisation'
-    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
-    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
-    When I enter '<User_Email>' into the search field
-    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
-    When I have navigated to the 'Home_Page' as '<Login_User>'
-    Then I click the 'Sponsor' link on the 'Home_Page'
-    And I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
-    Then I capture the page screenshot
-    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
-    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
-    Then I can see the my organisations page
-    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
-    And I capture the page screenshot
-    And I can now see a table of results for my organisations
-    And I can see the associated organisations displaying in the table for '<Login_User>'
-    And I can see the 'sponsor organisations' list sorted by 'ascending' order of the 'organisation name' on the 'My_Organisations_Page' page
-    Then I click the '<Link>' link on the 'My_Organisations_Page'
-    And I capture the page screenshot
-    And I can see the sponsor organisation profile page from my organisations for '<Login_User>'
-
-    Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-
-  @rsp-6419 @MyOrganisationsPageSearchValidation
-  Scenario: Validate the search box functionality of my organisations
-    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
-    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
-    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I authorise the rts api using '<RTS_API_Data>'
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation 'Sponsor_Organisation_UniversityOfSouthampton' and  retrive country
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
-    And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
-    And I keep note of the organisation name for sponsor organisation setup
-    And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
-    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
-    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
-    And I capture the page screenshot
-    When I enter 'name of the newly added sponsor organisation' into the search field
-    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
-    Then I click the view edit link of the 'newly added sponsor organisation'
-    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
-    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
-    When I enter '<User_Email>' into the search field
-    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
-    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
-    When I have navigated to the 'Home_Page' as '<Login_User>'
-    Then I click the 'Sponsor' link on the 'Home_Page'
-    And I can see the sponsor workspace page
-    Then I capture the page screenshot
-    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
-    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
-    Then I can see the my organisations page
-    When I enter '<Invalid_Input>' into the search field
-    Then I click the 'Search' button on the 'My_Organisations_Page'
-    And the no search results found message is displayed
-    And I capture the page screenshot
-    When I enter '<Empty_Input>' into the search field
-    Then I click the 'Search' button on the 'My_Organisations_Page'
-    And I can see the associated organisations displaying in the table for '<Login_User>'
-    And I capture the page screenshot
-
-    Examples:
-      | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         | Invalid_Input | Empty_Input |
-      | Sponsor_User           | automation sponsor email | View   | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
-      | System_Admin           | system admin email       | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | invalid       |             |

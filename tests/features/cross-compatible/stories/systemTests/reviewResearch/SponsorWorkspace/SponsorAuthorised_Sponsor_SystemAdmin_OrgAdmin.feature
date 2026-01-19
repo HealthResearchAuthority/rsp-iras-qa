@@ -1,5 +1,5 @@
 @SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SysAdminUser @jsEnabled @rsp-6425 @rsp-6465
-Feature: This feature covers scenarios related to sponsor authorisation based on permission and role
+Feature: Sponsor authorisation based on permission and role
 
   Background:
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -24,7 +24,7 @@ Feature: This feature covers scenarios related to sponsor authorisation based on
     And I capture the page screenshot
 
   @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
-  Scenario Outline: Validate that <Login_User> can authorise the reviewable modifications since the authoriser permission is set to 'Yes' while adding user to sponsor organisation
+  Scenario Outline: Validate that <Login_User> can authorise modifications while adding user by system admin
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -167,7 +167,7 @@ Feature: This feature covers scenarios related to sponsor authorisation based on
       | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
   @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
-  Scenario Outline: Validate that <Login_User> can't authorise the reviewable modifications but only view access since the authoriser permission is set to 'No' while adding user to sponsor organisation
+  Scenario Outline: Validate that <Login_User> can't authorise modifications while adding user by system admin
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -242,7 +242,7 @@ Feature: This feature covers scenarios related to sponsor authorisation based on
       | Sponsor_User | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
   @ReviewableModificationSponsorAuthorised @rsp-6465
-  Scenario Outline: Verify that <Login_User> can authorise the reviewable modifications since the authoriser permission is set to 'Yes' while adding user to sponsor organisation from sponsor workspace
+  Scenario Outline: Verify that <Login_User> can authorise modifications while adding user from sponsor workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -422,7 +422,7 @@ Feature: This feature covers scenarios related to sponsor authorisation based on
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | View   | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes             | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
   @ReviewableModificationSponsorAuthorised @rsp-6465
-  Scenario Outline: Verify that <Login_User> can authorise the reviewable modifications since the authoriser permission is set to 'Yes' while adding user to sponsor organisation from sponsor workspace for <Another_Registered_User_Permission>
+  Scenario Outline: Verify that <Login_User> can authorise the modifications from sponsor workspace for <Another_Registered_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
@@ -602,7 +602,7 @@ Feature: This feature covers scenarios related to sponsor authorisation based on
 
 
   @ReviewableModificationSponsorAuthorised @KNOWN-DEFECT-RSP-6700
-  Scenario Outline: Validate that <Login_User> can't authorise the reviewable modifications but only view access since the authoriser permission is set to 'No' while adding user to sponsor organisation from sponsor workspace
+  Scenario Outline: Validate that <Login_User> can't authorise modifications while adding user from sponsor workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
