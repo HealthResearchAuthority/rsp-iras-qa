@@ -4,6 +4,7 @@
     "check_confirm_add_user_role_sponsor_workspace_page_caption": "Sponsor organisation profile",
     "page_heading": "Check and confirm user",
     "page_guidance_prefix_text": "Check the information here is correct before adding the user to ",
-    "user_details_table_labels": ["Email", "Role", "Authoriser"]
+    "user_details_table_labels": ["Email", "Role", "Authoriser"],
+    "change_link": "Change"
   }
 }

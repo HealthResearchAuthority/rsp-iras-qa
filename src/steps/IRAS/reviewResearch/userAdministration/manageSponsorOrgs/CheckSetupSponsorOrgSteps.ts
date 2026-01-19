@@ -37,3 +37,12 @@ Then(
     await myOrgSponsorOrgProfilePage.setRtsId(rtsId);
   }
 );
+
+Then(
+  'I keep note of the organisation country for sponsor organisation setup',
+  async ({ checkSetupSponsorOrganisationPage }) => {
+    await checkSetupSponsorOrganisationPage.setCountry(
+      confirmStringNotNull(await checkSetupSponsorOrganisationPage.country_value.textContent())
+    );
+  }
+);

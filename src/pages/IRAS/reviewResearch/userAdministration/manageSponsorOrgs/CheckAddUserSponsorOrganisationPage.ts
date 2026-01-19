@@ -111,7 +111,6 @@ export default class CheckAddUserSponsorOrganisationPage {
     //   .soft(await this.page.title())
     //   .toBe(this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.title);
     await expect.soft(this.page_heading).toBeVisible();
-    // await expect.soft(this.page_guidance_text).toBeVisible();
     await expect
       .soft(this.mainPageContent.getByRole('paragraph'))
       .toContainText(

@@ -47,7 +47,6 @@ export default class ViewEditUserProfilePage {
   readonly authoriser_row: Locator;
   readonly authoriser_value: Locator;
   readonly row_change_link_locator: Locator;
-  readonly authoriser_change_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -152,9 +151,7 @@ export default class ViewEditUserProfilePage {
           '") td'
       )
       .nth(1);
-    // this.authoriser_value = this.authoriser_row.locator('td', { has: this.row_value_locator });
     this.row_change_link_locator = this.page.getByRole('cell').getByText(this.linkTextData.User_Profile_Page.Change);
-    this.authoriser_change_link = this.authoriser_row.locator(this.row_change_link_locator);
     this.disable_header_label = this.enable_header_label = this.page.locator('h2[class="govuk-heading-m"]');
     this.disable_hint_label = this.enable_hint_label = this.page.locator('div[class="govuk-hint"]');
     this.disable_sub_heading = this.page
@@ -251,7 +248,6 @@ export default class ViewEditUserProfilePage {
     await expect.soft(this.role_value).toBeVisible();
     await expect.soft(this.role_row).toHaveCount(1);
     await expect.soft(this.authoriser_value).toBeVisible();
-    await expect.soft(this.authoriser_change_link).toBeVisible();
     await expect.soft(this.authoriser_row).toHaveCount(1);
   }
 

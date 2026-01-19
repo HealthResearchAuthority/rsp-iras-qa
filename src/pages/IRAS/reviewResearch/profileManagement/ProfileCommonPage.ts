@@ -81,7 +81,7 @@ export default class ProfileCommonPage {
       .getByRole('heading')
       .getByText(this.profileCommonPageTestData.Profile_Common_Page.profile_details_header);
     this.success_notification_title = this.page
-      .getByTestId('govuk-notification-banner-title')
+      .getByRole('heading')
       .getByText(this.profileCommonPageTestData.Profile_Common_Page.success_notification_title);
     this.success_notification_container = this.page.locator('.govuk-notification-banner--success', {
       has: this.success_notification_title,

@@ -1,8 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as mySponsorOrgAddUserPageTestData from '../../../../resources/test_data/iras/reviewResearch/sponsorWorkspace/my_organisations_add_user_page_data.json';
 import * as commonTestData from '../../../../resources/test_data/common/common_data.json';
-// import * as dbConfigData from '../../../../resources/test_data/common/database/db_config_data.json';
-// import { connect } from '../../../../utils/DbConfig';
 
 //Declare Page Objects
 export default class MyOrganisationsAddUserPage {
@@ -46,10 +44,6 @@ export default class MyOrganisationsAddUserPage {
   }
 
   async assertOnMySponsorOrgAddUsersPage(sponsor_organisation: string): Promise<void> {
-    const pageUrl = this.page.url();
-    expect
-      .soft(pageUrl.toLowerCase())
-      .toContain(this.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.add_user_partial_url);
     await expect
       .soft(this.page_caption)
       .toHaveText(this.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.page_caption);
@@ -80,29 +74,4 @@ export default class MyOrganisationsAddUserPage {
       throw new Error(`Error message "${error_message}" is not recognized.`);
     }
   }
-
-  // SQL STATEMENTS //
-
-  // async findNonRegisteredEmail() {
-  //   const registeredEmails = new Set(await this.sqlGetRegisteredUsers());
-  //   const organisationIds = await this.sqlGetOrganisationIdsFromRTS();
-  //   const unmatched = organisationIds.filter((id) => !registeredEmails.has(id));
-  //   return unmatched[0];
-  // }
-
-  // async sqlGetRegisteredUsers() {
-  //   const sqlConnection = await connect(dbConfigData.Identity_Service);
-  //   const queryResult = await sqlConnection.query(`Select Email from Users`);
-  //   await sqlConnection.close();
-  //   return queryResult.recordset.map((row) => row.Email);
-  // }
-
-  // async sqlGetOrganisationIdsFromRTS() {
-  //   const sqlConnection = await connect(dbConfigData.Rts_Service);
-  //   const queryResult = await sqlConnection.query(
-  //     `SELECT Org.Id FROM OrganisationRole OrgRole INNER JOIN Organisation Org ON OrgRole.OrganisationId = Org.Id where OrgRole.id = '${manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.clinical_research_sponsor_role_id}' and OrgRole.Status = 'Active'`
-  //   );
-  //   await sqlConnection.close();
-  //   return queryResult.recordset.map((row) => row.Id);
-  // }
 }

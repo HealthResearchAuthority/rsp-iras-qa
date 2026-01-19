@@ -21,17 +21,14 @@ Then(
       sortField.toLowerCase() === 'study-wide reviewer' ||
       sortField.toLowerCase() === 'status'
     ) {
-      actualList = await commonItemsPage.getActualListValuesShortProjectTitleSWRStatus(
-        commonItemsPage.tableBodyRows,
-        columnIndex
-      );
+      actualList = await commonItemsPage.getActualListValuesWithoutTrim(commonItemsPage.tableBodyRows, columnIndex);
     } else {
       actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     }
     if (sortField.toLowerCase() == 'modification id') {
       sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date submitted') {
-      sortedList = await modificationsReceivedCommonPage.sortDateSubmittedListValues(actualList, sortDirection);
+      sortedList = await commonItemsPage.sortDateSubmittedListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'days since submission') {
       sortedList = await modificationsReceivedCommonPage.sortDaysSinceSubmittedListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {

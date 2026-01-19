@@ -160,6 +160,22 @@ export default class CommonItemsPage {
   readonly page_heading: Locator;
   readonly govUkBackLink: Locator;
   readonly removeLink: Locator;
+  readonly users_sponsor_org_name_label: Locator;
+  readonly users_sponsor_org_name_value_first_row: Locator;
+  readonly users_sponsor_org_email_label: Locator;
+  readonly users_sponsor_org_email_value_first_row: Locator;
+  readonly users_sponsor_org_status_label: Locator;
+  readonly users_sponsor_org_status_value_first_row: Locator;
+  readonly users_sponsor_org_role_label: Locator;
+  readonly users_sponsor_org_role_value_first_row: Locator;
+  readonly users_sponsor_org_authoriser_label: Locator;
+  readonly users_sponsor_org_authoriser_value_first_row: Locator;
+  readonly users_sponsor_org_actions_label: Locator;
+  readonly myOrganisationBreadCrumbLink: Locator;
+  readonly addNewUserSponsorOrgLink: Locator;
+  readonly searchButton: Locator;
+  readonly addUserLink: Locator;
+  readonly addUserButton: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -446,6 +462,53 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.success_header_label);
     this.page_heading = this.page.getByRole('heading');
     this.removeLink = this.page.locator('.govuk-link').getByText(commonTestData.remove_label);
+    this.users_sponsor_org_name_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.name_label, {
+        exact: true,
+      });
+    this.users_sponsor_org_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').first();
+    this.users_sponsor_org_email_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.email_address_label, { exact: true });
+    this.users_sponsor_org_email_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(1);
+    this.users_sponsor_org_status_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.status_label, {
+        exact: true,
+      });
+    this.users_sponsor_org_status_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(2);
+    this.users_sponsor_org_role_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.role_label, {
+        exact: true,
+      });
+    this.users_sponsor_org_role_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(3);
+    this.users_sponsor_org_authoriser_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.authoriser_label, {
+        exact: true,
+      });
+    this.users_sponsor_org_authoriser_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(4);
+    this.users_sponsor_org_actions_label = this.userListTableRows
+      .locator('th')
+      .getByText(this.commonTestData.Users_Sponsor_Org_Column_Header_Labels.actions_label, {
+        exact: true,
+      });
+    this.myOrganisationBreadCrumbLink = this.page
+      .locator('.govuk-breadcrumbs__link')
+      .getByText('My organisations', { exact: true });
+    this.addNewUserSponsorOrgLink = this.govUkLink.getByText(
+      linkTextData.Sponsor_Org_User_List_Page.Add_A_New_User_Profile_Record,
+      { exact: true }
+    );
+    this.searchButton = this.govUkButton.getByText(buttonTextData.Sponsor_Org_User_List_Page.Search, { exact: true });
+    this.addUserLink = this.govUkLink.getByText(linkTextData.Search_Add_User_Sponsor_Org_Page.Add_User, {
+      exact: true,
+    });
+    this.addUserButton = this.govUkButton.getByText(buttonTextData.Check_Add_User_Sponsor_Org_Page.Add_User, {
+      exact: true,
+    });
   }
 
   //Getters & Setters for Private Variables
@@ -1019,6 +1082,41 @@ export default class CommonItemsPage {
       }
     }
     const userMap = new Map([
+      ['firstNameValues', firstNameValues],
+      ['lastNameValues', lastNameValues],
+      ['emailAddressValues', emailAddressValues],
+    ]);
+    return userMap;
+  }
+
+  async getSponsorUsers(): Promise<Map<string, string[]>> {
+    const fullNameValues: string[] = [];
+    const firstNameValues: string[] = [];
+    const lastNameValues: string[] = [];
+    const emailAddressValues: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const fullName = confirmStringNotNull(await columns.nth(0).textContent());
+        fullNameValues.push(fullName);
+        const firstName = fullName.split(' ')[0];
+        firstNameValues.push(firstName);
+        const lastName = fullName.split(' ')[1];
+        lastNameValues.push(lastName);
+        const emailAddress = confirmStringNotNull(await columns.nth(1).textContent());
+        emailAddressValues.push(emailAddress);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const userMap = new Map([
+      ['fullNameValues', fullNameValues],
       ['firstNameValues', firstNameValues],
       ['lastNameValues', lastNameValues],
       ['emailAddressValues', emailAddressValues],
@@ -1697,10 +1795,7 @@ export default class CommonItemsPage {
   async getActualListValuesWithoutTrim(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
     const actualListValues: string[] = [];
     for (const row of await tableBodyRows.all()) {
-      const actualListValue = await row
-        .getByRole('cell')
-        .nth(columnIndex)
-        .evaluate((node) => node.firstChild?.nodeValue ?? '');
+      const actualListValue = await row.getByRole('cell').nth(columnIndex).textContent();
       actualListValues.push(actualListValue);
     }
     return actualListValues;
@@ -1829,15 +1924,6 @@ export default class CommonItemsPage {
     return actualListValues;
   }
 
-  async getActualListValuesShortProjectTitleSWRStatus(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
-    const actualListValues: string[] = [];
-    for (const row of await tableBodyRows.all()) {
-      const actualListValue = await row.getByRole('cell').nth(columnIndex).textContent();
-      actualListValues.push(actualListValue);
-    }
-    return actualListValues;
-  }
-
   async getFieldErrorMessageSponsor<PageObject>(key: string, page: PageObject) {
     const element = await page[key].first();
     const fieldErrorMessage = confirmStringNotNull(
@@ -1847,38 +1933,76 @@ export default class CommonItemsPage {
     return fieldErrorMessage;
   }
 
-  async getSponsorUsers(): Promise<Map<string, string[]>> {
-    const fullNameValues: string[] = [];
-    const firstNameValues: string[] = [];
-    const lastNameValues: string[] = [];
-    const emailAddressValues: string[] = [];
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.tableRows.count();
-      for (let i = 1; i < rowCount; i++) {
-        const columns = this.tableRows.nth(i).getByRole('cell');
-        const fullName = confirmStringNotNull(await columns.nth(0).textContent());
-        fullNameValues.push(fullName);
-        const firstName = fullName.split(' ')[0];
-        firstNameValues.push(firstName);
-        const lastName = fullName.split(' ')[1];
-        lastNameValues.push(lastName);
-        const emailAddress = confirmStringNotNull(await columns.nth(1).textContent());
-        emailAddressValues.push(emailAddress);
+  async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
+    const listAsDates: Date[] = [];
+    const sortedListAsStrings: string[] = [];
+    const formattedDatesSubmitted = datesSubmitted.map((dates) => {
+      const [day, month, year] = dates.split(' ');
+      return [day, month, year];
+    });
+
+    for (const entry of formattedDatesSubmitted.entries()) {
+      const usFormattedEntry = entry[1].toReversed();
+      const dateEntryString = `${usFormattedEntry[0]} ${usFormattedEntry[1]} ${usFormattedEntry[2]}`;
+      const dateFormattedEntry = new Date(dateEntryString);
+      listAsDates.push(dateFormattedEntry);
+    }
+
+    if (sortDirection.toLowerCase() == 'descending') {
+      listAsDates.sort((a, b) => b.getTime() - a.getTime());
+    } else {
+      listAsDates.sort((a, b) => a.getTime() - b.getTime());
+    }
+    if (await this.myOrganisationBreadCrumbLink.isVisible()) {
+      for (const date of listAsDates) {
+        sortedListAsStrings.push(
+          date.toLocaleString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).replace('Sept', 'Sep')
+        );
       }
-      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
-        await this.next_button.click();
-        await this.page.waitForLoadState('domcontentloaded');
-      } else {
-        dataFound = true;
+    } else {
+      for (const date of listAsDates) {
+        sortedListAsStrings.push(
+          date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace('Sept', 'Sep')
+        );
       }
     }
-    const userMap = new Map([
-      ['fullNameValues', fullNameValues],
-      ['firstNameValues', firstNameValues],
-      ['lastNameValues', lastNameValues],
-      ['emailAddressValues', emailAddressValues],
-    ]);
-    return userMap;
+    return sortedListAsStrings;
+  }
+
+  async setUserFirstNameLastNameEmail(userList: Map<string, string[]>) {
+    const emailAddress: any = userList.get('emailAddressValues');
+    await this.setUserEmail(emailAddress);
+    const firstName: any = userList.get('firstNameValues');
+    await this.setUserFirstName(firstName);
+    const lastName: any = userList.get('lastNameValues');
+    await this.setUserLastName(lastName);
+    await this.setFirstName(firstName[0]);
+    await this.setLastName(lastName[0]);
+    await this.setEmail(emailAddress[0]);
+    if (await this.firstPage.isVisible()) {
+      await this.firstPage.click();
+    }
+  }
+
+  async createUsersUnderSponsorOrg(automationUserEmailsSet: Set<any>) {
+    const emails = Array.from(automationUserEmailsSet).slice(0, 25);
+    for (let i = 0; i < emails.length; i++) {
+      console.log(`${i}`);
+      await this.addNewUserSponsorOrgLink.click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      const email = emails[i];
+      await this.search_text.fill(email);
+      await this.searchButton.click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      await this.addUserLink.click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.addUserButton.click();
+      await this.page.reload({ waitUntil: 'networkidle' });
+      await this.page.waitForTimeout(2000);
+    }
   }
 }

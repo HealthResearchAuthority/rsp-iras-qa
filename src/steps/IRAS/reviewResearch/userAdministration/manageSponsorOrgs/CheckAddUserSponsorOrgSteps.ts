@@ -12,17 +12,6 @@ When(
     permissionSelected: string
   ) => {
     await checkAddUserSponsorOrganisationPage.assertOnCheckAddUserSponsorOrganisationPage();
-    // await expect
-    //   .soft(
-    //     checkAddUserSponsorOrganisationPage.mainPageContent.getByRole('paragraph', {
-    //       name:
-    //         checkAddUserSponsorOrganisationPage.checkAddUserSponsorOrgPageTestData
-    //           .Check_Add_User_Sponsor_Organisation_Page.page_guidance_prefix_text +
-    //         sponsorOrg +
-    //         '.',
-    //     })
-    //   )
-    //   .toBeVisible();
     await expect
       .soft(
         checkAddUserSponsorOrganisationPage.mainPageContent

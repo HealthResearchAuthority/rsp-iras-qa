@@ -138,35 +138,6 @@ export default class ModificationsReceivedCommonPage {
   }
 
   // Page Methods
-  async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
-    const listAsDates: Date[] = [];
-    const sortedListAsStrings: string[] = [];
-    const formattedDatesSubmitted = datesSubmitted.map((dates) => {
-      const [day, month, year] = dates.split(' ');
-      return [day, month, year];
-    });
-
-    for (const entry of formattedDatesSubmitted.entries()) {
-      const usFormattedEntry = entry[1].toReversed();
-      const dateEntryString = `${usFormattedEntry[0]} ${usFormattedEntry[1]} ${usFormattedEntry[2]}`;
-      const dateFormattedEntry = new Date(dateEntryString);
-      listAsDates.push(dateFormattedEntry);
-    }
-
-    if (sortDirection.toLowerCase() == 'descending') {
-      listAsDates.sort((a, b) => b.getTime() - a.getTime());
-    } else {
-      listAsDates.sort((a, b) => a.getTime() - b.getTime());
-    }
-
-    for (const date of listAsDates) {
-      sortedListAsStrings.push(
-        date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace('Sept', 'Sep')
-      );
-    }
-    return sortedListAsStrings;
-  }
-
   async sortDaysSinceSubmittedListValues(daysSinceSubmitted: string[], sortDirection: string): Promise<string[]> {
     const listAsNums: number[] = [];
     const sortedListAsStrings: string[] = [];
@@ -362,6 +333,8 @@ export default class ModificationsReceivedCommonPage {
           pageType.toLowerCase() == 'team_manager_dashboard_page'
         ) {
           columnIndex = 2;
+        } else if (pageType == 'Sponsor_Organisation_Profile_Page') {
+          columnIndex = 0;
         } else {
           columnIndex = 1;
         }

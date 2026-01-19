@@ -12,7 +12,7 @@ export default class MyOrganisationsUsersPage {
   readonly commonTestData: typeof commonTestData;
   readonly page_heading: Locator;
   readonly page_caption: Locator;
-  readonly user_added_to_sponsor_organisation_success_message_text: Locator;
+  readonly user_added_to_sponsor_organisation__success_message_text: Locator;
   readonly information_alert_banner: Locator;
   readonly user_in_sponsor_organisation_disabled_success_message_text: Locator;
   readonly user_in_sponsor_organisation_enabled_success_message_text: Locator;
@@ -34,7 +34,7 @@ export default class MyOrganisationsUsersPage {
     this.commonTestData = commonTestData;
 
     //Locators
-    this.user_added_to_sponsor_organisation_success_message_text = this.page
+    this.user_added_to_sponsor_organisation__success_message_text = this.page
       .getByRole('heading')
       .getByText(
         this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page
@@ -90,7 +90,7 @@ export default class MyOrganisationsUsersPage {
 
   async assertOnMySponsorOrgUsersPage(sponsor_organisation: string, commonItemsPage: CommonItemsPage): Promise<void> {
     const pageUrl = this.page.url();
-    await expect
+    expect
       .soft(pageUrl.toLowerCase())
       .toContain(this.mySponsorOrgUsersPageTestData.My_Organisations_Users_Page.partial_url);
     await expect
@@ -109,18 +109,7 @@ export default class MyOrganisationsUsersPage {
     }
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
       const userList = await commonItemsPage.getSponsorUsers();
-      const emailAddress: any = userList.get('emailAddressValues');
-      await commonItemsPage.setUserEmail(emailAddress);
-      const firstName: any = userList.get('firstNameValues');
-      await commonItemsPage.setUserFirstName(firstName);
-      const lastName: any = userList.get('lastNameValues');
-      await commonItemsPage.setUserLastName(lastName);
-      await commonItemsPage.setFirstName(firstName[0]);
-      await commonItemsPage.setLastName(lastName[0]);
-      await commonItemsPage.setEmail(emailAddress[0]);
-      if (await commonItemsPage.firstPage.isVisible()) {
-        await commonItemsPage.firstPage.click();
-      }
+      await commonItemsPage.setUserFirstNameLastNameEmail(userList);
     }
   }
 
@@ -139,20 +128,9 @@ WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='active';`);
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.Email);
   }
-  //   async sqlGetAutomationDisabledUserEmails() {
-  //     const sqlConnection = await connect(dbConfigData.Identity_Service);
-  //     const queryResult = await sqlConnection.query(`SELECT Top 5 Email
-  // FROM Users
-  // WHERE Email LIKE 'QAAutomation%hscrd@health.org' and Status='disabled';`);
-  //     await sqlConnection.close();
-  //     return queryResult.recordset.map((row) => row.Email);
-  //   }
 
   async getAutomationUserEmails() {
     const activeUsers = new Set(await this.sqlGetAutomationActiveUserEmails());
-    // const disabledUsers = new Set(await this.sqlGetAutomationDisabledUserEmails());
-    // // Union of two sets
-    // const all = new Set<string>([...activeUsers, ...disabledUsers]);
     return activeUsers;
   }
 }

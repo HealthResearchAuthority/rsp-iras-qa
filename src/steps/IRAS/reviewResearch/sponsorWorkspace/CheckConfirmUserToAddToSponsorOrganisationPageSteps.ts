@@ -26,11 +26,11 @@ When(
       )
       .toBeVisible();
     if (datasetName === 'Sponsor_Org_Admin_User') {
-      userEmailValue = await loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
+      userEmailValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
     } else if (datasetName === 'System_Admin') {
-      userEmailValue = await loginPage.loginPageTestData.System_Admin.username;
+      userEmailValue = loginPage.loginPageTestData.System_Admin.username;
     } else if (datasetName === 'Sponsor_User') {
-      userEmailValue = await loginPage.loginPageTestData.Sponsor_User.username;
+      userEmailValue = loginPage.loginPageTestData.Sponsor_User.username;
     }
     expect
       .soft(confirmStringNotNull(await checkConfirmUserToAddToSponsorOrganisationPage.user_email_value.textContent()))
@@ -76,5 +76,14 @@ When(
         )
         .toBe('No');
     }
+  }
+);
+
+When(
+  'I click the change link against {string} on the check and confirm page to add user to sponsor organisation page',
+  async ({ checkConfirmUserToAddToSponsorOrganisationPage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkConfirmUserToAddToSponsorOrganisationPage);
+    await expect.soft(changeLink).toBeVisible();
+    await changeLink.click();
   }
 );
