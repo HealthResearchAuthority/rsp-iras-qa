@@ -1,10 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as myOrganisationsUserProfilePageTestData from '../../../../resources/test_data/iras/reviewResearch/sponsorWorkspace/my_organisations_user_profile_page_data.json';
+import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
 export default class MyOrganisationsUserProfilePage {
   readonly page: Page;
   readonly myOrganisationsUserProfilePageTestData: typeof myOrganisationsUserProfilePageTestData;
+  readonly linkTextData: typeof linkTextData;
   private _role: string;
   private _authoriser: string;
   private _status: string;
@@ -41,11 +43,13 @@ export default class MyOrganisationsUserProfilePage {
   readonly status_label: Locator;
   readonly status_row: Locator;
   readonly status_value: Locator;
+  readonly user_updated_success_message_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.myOrganisationsUserProfilePageTestData = myOrganisationsUserProfilePageTestData;
+    this.linkTextData = linkTextData;
     this._role = '';
     this._authoriser = '';
     this._status = '';
@@ -122,7 +126,7 @@ export default class MyOrganisationsUserProfilePage {
     this.role_value = this.role_row.getByRole('cell').nth(1);
     this.role_change_link = this.role_row
       .getByRole('link')
-      .getByText(this.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page.change_link);
+      .getByText(this.linkTextData.My_Organisations_User_Profile_Page.Change);
     this.authoriser_label = this.page
       .getByRole('cell')
       .getByText(
@@ -133,7 +137,7 @@ export default class MyOrganisationsUserProfilePage {
     this.authoriser_value = this.authoriser_row.getByRole('cell').nth(1);
     this.authoriser_change_link = this.authoriser_row
       .getByRole('link')
-      .getByText(this.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page.change_link);
+      .getByText(this.linkTextData.My_Organisations_User_Profile_Page.Change);
     this.status_label = this.page
       .getByRole('cell')
       .getByText(
@@ -142,6 +146,9 @@ export default class MyOrganisationsUserProfilePage {
       );
     this.status_row = this.page.getByRole('row').filter({ has: this.status_label });
     this.status_value = this.status_row.getByRole('cell').nth(1);
+    this.user_updated_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(this.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page.user_update_message);
   }
 
   //Getters & Setters for Private Variables

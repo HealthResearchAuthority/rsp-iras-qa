@@ -5,9 +5,22 @@
     "details_heading": "Further details",
     "role_label": "Role",
     "authoriser_label": "Authoriser",
+    "Row_Labels": {
+      "title_label": "Title",
+      "first_name_label": "First name",
+      "last_name_label": "Last name",
+      "email_label": "Email",
+      "telephone_label": "Telephone",
+      "organisation_label": "Organisation",
+      "job_title_label": "Job title"
+    },
     "Role_Sponsor_Authoriser_No": {
       "role_radio": "Sponsor",
       "authoriser_radio": "No"
+    },
+    "Role_Org_Admin_Authoriser_Yes": {
+      "role_radio": "Organisation administrator",
+      "authoriser_radio": "Yes"
     }
   }
 }

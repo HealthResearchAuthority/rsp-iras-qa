@@ -393,5 +393,8 @@
     "Sponsor_Workspace_Breadcrumb": "Sponsor workspace",
     "My_Organisations_Breadcrumb": "My organisations",
     "Sponsor_Organisation_UniversityOfLeeds_Breadcrumb": "University of Leeds"
+  },
+  "My_Organisations_Edit_User_Profile_Page": {
+    "Back": "Back"
   }
 }

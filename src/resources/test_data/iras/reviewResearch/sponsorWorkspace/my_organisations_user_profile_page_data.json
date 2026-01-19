@@ -3,7 +3,7 @@
     "page_caption": "User profile",
     "authoriser_yes": "Yes",
     "authoriser_no": "No",
-    "change_link": "Change",
+    "user_update_message": "User updated",
     "Row_Labels": {
       "title_label": "Title",
       "first_name_label": "First name",
