@@ -40,7 +40,6 @@ Then(
     const auditLog = await commonItemsPage.getAuditLog();
     const expectedOrganisationName = await myOrgSponsorOrgProfilePage.getOrgName();
     const expectedUsername = await commonItemsPage.getSearchKey();
-    const expectedEvents: string[] = [];
     const actualEventValues: string[] = auditLog.get('eventValues');
 
     for (const key in datasetAudit) {
@@ -53,7 +52,6 @@ Then(
         } else {
           expectedEvent = datasetAudit[key];
         }
-        expectedEvents.push(expectedEvent);
         expect.soft(actualEventValues.includes(expectedEvent), `Expecting value: ${expectedEvent}`).toBeTruthy();
         expect
           .soft(
