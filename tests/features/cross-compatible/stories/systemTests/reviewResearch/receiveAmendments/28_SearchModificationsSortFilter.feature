@@ -233,7 +233,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Automation_No_SpOrg_No_ToDate   | Partial            | Approved         |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Automation_No_SpOrg_No_FromDate | Partial            | Not approved     |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed @TestTiji
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor) when JS enabled
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 When I enter the the search input for 'modifications' with '<Search_Input>'
@@ -253,7 +253,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input             | Advanced_Filters     | Modification_Count | Status           |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed @TestTiji
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering partial iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -280,7 +280,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input             | Advanced_Filters     | Modification_Count | Status           | Search_Key_Type |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body | Partial         |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed @TestTiji
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -307,7 +307,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input       | Advanced_Filters     | Modification_Count | Status           | Search_Key_Type |
                         | Valid_Full_Iras_Id | Advanced_Filters_Nth | Single             | With review body | Full            |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @TestTiji
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -332,7 +332,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Lead_Nation | Partial            | With review body |
                         | Valid_Full_Iras_Id       | Advanced_Filters_Lead_Nation | Single             | With review body |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled @TestTiji
+        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications based on the entered partial iras id and the search performed
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
@@ -351,7 +351,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | System_Admin         | Partial            | Approved         | Partial         |
                         | Existing_Partial_IRAS_ID | System_Admin         | Partial            | In draft         | Partial         |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled @TestTiji
+        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications based on the entered full iras id and the search performed
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
@@ -371,7 +371,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id | System_Admin         | Single             | With sponsor     | Full            |
                         | Valid_Full_Iras_Id | System_Admin         | Single             | With review body | Full            |
 
-        @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled @TestTiji
+        @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 When I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -387,7 +387,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @TestTiji
+        @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation
         Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
@@ -586,7 +586,7 @@ Feature: Filter, Search and Sort the Search modifications page
         #                 | Advanced_Filters     |
         #                 | Advanced_Filters_Nth |
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled @TestTiji
+        @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered partial IRAS ID
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 When I enter the the search input for 'modifications' with '<Search_Input>'
@@ -613,7 +613,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input             | Advanced_Filters             | Modification_Count | Status           |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Lead_Nation | Partial            | With review body |
 
-        @RemoveAllActiveFiltersOneByOne @jsDisabled @TestTiji
+        @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered full IRAS ID
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 When I enter the the search input for 'modifications' with '<Search_Input>'
@@ -658,7 +658,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAlTogether @jsDisabled @TestTiji
+        @RemoveActiveFiltersAlTogether @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering partial iras id, then selected advanced filters and click on apply filters button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 When I enter the the search input for 'modifications' with '<Search_Input>'
@@ -682,7 +682,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input             | Advanced_Filters             | Modification_Count | Status           |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Lead_Nation | Partial            | With review body |
 
-        @RemoveActiveFiltersAlTogether @jsDisabled @TestTiji
+        @RemoveActiveFiltersAlTogether @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid full iras id, then selected advanced filters and click on apply filters button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 When I enter the the search input for 'modifications' with '<Search_Input>'
@@ -786,7 +786,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters                      |
                         | Advanced_Filters_Sponsor_Organisation |
 
-        @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID @TestTiji
+        @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID
         Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 When I enter the the search input for 'modifications' with '<Search_Input>'

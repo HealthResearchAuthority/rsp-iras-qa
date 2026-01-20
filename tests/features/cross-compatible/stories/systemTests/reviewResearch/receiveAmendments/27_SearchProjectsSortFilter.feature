@@ -189,7 +189,7 @@ Feature: Filter, Search and Sort the Search project records page
                 When I enter the the search input for 'project records' with '<Valid_Iras_Id>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Projects_Page'
-                And the system displays project records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                And the system displays project records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria '<Advanced_Filters>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
