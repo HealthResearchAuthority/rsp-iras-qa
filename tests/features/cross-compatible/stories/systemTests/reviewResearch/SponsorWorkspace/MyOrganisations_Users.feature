@@ -147,7 +147,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | University of Southampton |
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | University of Southampton |
 
-  @rsp-6425 @BackBreadCrumbs
+  @rsp-6425 @BackBreadCrumbs @KNOWN-DEFECT-RSP-6752
   Scenario Outline: Validate that back breadcrumb from check and add user page for <Select_User_Role>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'

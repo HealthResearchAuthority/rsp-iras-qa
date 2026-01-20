@@ -73,6 +73,7 @@ export default class SearchModificationsPage {
   readonly participating_nation_checkbox_hint_label: Locator;
   readonly participating_nation_checkbox_selected_hint_label: Locator;
   readonly mainPageContent: Locator;
+  readonly total_pages_list: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -319,6 +320,7 @@ export default class SearchModificationsPage {
       .filter({ has: this.page.locator('.govuk-radios__label') });
     this.sponsor_organisation_jsdisabled_no_suggestions_label = this.page.locator('.govuk-inset-text');
     this.results_table = this.page.getByTestId('modificationsTable');
+    this.total_pages_list = this.page.locator('.govuk-pagination__list li');
   }
 
   //Getters & Setters for Private Variables
@@ -370,7 +372,13 @@ export default class SearchModificationsPage {
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForTimeout(3000);
     //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
-    for (let i = 0; i < 3; i++) {
+    let pageCount: number;
+    if ((await this.total_pages_list.count()) < 3) {
+      pageCount = await this.total_pages_list.count();
+    } else {
+      pageCount = 3;
+    }
+    for (let i = 0; i < pageCount; i++) {
       const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');

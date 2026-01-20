@@ -153,10 +153,10 @@ When(
       }
     } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'modifications') {
       if (searchKeyType.toLowerCase() === 'full') {
-        searchKey = await searchModificationsPage.getModificationId();
+        searchKey = await searchModificationsPage.getIrasId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
-        searchKey = (await searchModificationsPage.getModificationId()).substring(0, 2);
-        await searchModificationsPage.setModificationId(searchKey);
+        searchKey = (await searchModificationsPage.getIrasId()).substring(0, 2);
+        await searchModificationsPage.setIrasId(searchKey);
       }
     } else if (
       searchQueryName === 'modification assigned by team manager' &&

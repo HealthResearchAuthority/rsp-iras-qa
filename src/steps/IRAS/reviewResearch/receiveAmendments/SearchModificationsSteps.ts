@@ -51,7 +51,7 @@ Then(
     let irasId: string;
     const testData = searchModificationsPage.searchModificationsPageTestData;
     if (irasIdDatasetName === 'Iras_Id_Retrieved_From_DB_With_Status_Active') {
-      irasId = await searchModificationsPage.getModificationId();
+      irasId = await searchModificationsPage.getIrasId();
     } else {
       irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
     }
