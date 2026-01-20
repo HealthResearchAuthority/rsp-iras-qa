@@ -3,6 +3,7 @@ import { expect, test } from '../../../hooks/CustomFixtures';
 import { Locator } from 'playwright/test';
 import * as dbConfigData from '../../../resources/test_data/common/database/db_config_data.json';
 import { connect } from '../../../utils/DbConfig';
+import { removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -133,3 +134,78 @@ Then(
     }
   }
 );
+
+Then(
+  'I {string} the project closure details for sponsor authorisations view along with the {string} user and {string} status',
+  async (
+    { sponsorAuthorisationsPage, loginPage, projectDetailsIRASPage },
+    action: string,
+    userDatasetName: string,
+    projectStatus: string
+  ) => {
+    if (action.toLowerCase() === 'keep note of') {
+      const shortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+      const irasID = await projectDetailsIRASPage.getUniqueIrasId();
+      const dateReceived = new Date().toLocaleString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      });
+      const userEmail = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
+      const dateClosed = '';
+      const status = projectStatus;
+      sponsorAuthorisationsPage.setProjectClosureDetailsRecord = {
+        shortProjectTitle: shortProjectTitle,
+        irasID: irasID,
+        dateReceived: dateReceived,
+        userEmail: userEmail,
+        dateClosed: dateClosed,
+        status: status,
+      };
+    } else if (action.toLowerCase() === 'update status of') {
+      const recordToUpdate = await projectDetailsIRASPage.getUniqueIrasId();
+      const record = sponsorAuthorisationsPage.projectClosureDetails.find((r) => r.irasID === recordToUpdate);
+      if (record) {
+        record.status = projectStatus;
+        if (projectStatus.toLowerCase() === 'authorised') {
+          const dateClosed = new Date().toLocaleString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+          });
+          record.dateClosed = dateClosed;
+        }
+      }
+    }
+  }
+);
+
+Then('I validate the project closure table for sponsor authorisations view', async ({ sponsorAuthorisationsPage }) => {
+  const projectClosureTableHeadersActual = await Promise.all(
+    (await sponsorAuthorisationsPage.projectClosureTableHeader.allTextContents()).map(
+      async (header) => await removeUnwantedWhitespace(header)
+    )
+  );
+  const projectClosureTableHeadersExpected =
+    sponsorAuthorisationsPage.sponsorAuthorisationsPageTestData.Sponsor_Authorisations_Page
+      .project_closure_table_headers;
+  expect.soft(projectClosureTableHeadersActual).toEqual(projectClosureTableHeadersExpected);
+  const rowCount = await sponsorAuthorisationsPage.projectClosureTableBodyRows.count();
+  const actualProjectClosureRows: string[][] = [];
+  for (let projectClosureRowIndex = 0; projectClosureRowIndex < rowCount; projectClosureRowIndex++) {
+    const row = sponsorAuthorisationsPage.projectClosureTableBodyRows.nth(projectClosureRowIndex);
+    const cellTexts = await row.locator(sponsorAuthorisationsPage.tableCell).allTextContents();
+    actualProjectClosureRows.push(cellTexts.map((text) => text.trim()));
+  }
+  const expectedProjectClosureRows = sponsorAuthorisationsPage.getProjectClosureDetailsRecord
+    .slice()
+    .map((record) => [
+      record.shortProjectTitle,
+      record.irasID,
+      record.dateReceived,
+      record.userEmail,
+      record.dateClosed,
+      record.status,
+    ]);
+  expect.soft(actualProjectClosureRows).toEqual(expectedProjectClosureRows);
+});

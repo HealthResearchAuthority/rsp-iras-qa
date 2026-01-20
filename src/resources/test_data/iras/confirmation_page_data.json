@@ -101,6 +101,17 @@
     "what_happens_next_label": "What happens next",
     "confirmation_body": "The project closure is now with the sponsor. They'll either authorise and submit it or mark it as not authorised. They may contact you if they need more information."
   },
+  "Project_Closure_Authorised_Confirm": {
+    "page_heading": "Are you sure you want to close the project?",
+    "confirmation_body": "Authorising will mean the project is closed permanently and cannot be reopened.",
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title"
+  },
+  "Project_Closure_Authorised": {
+    "page_heading": "Project closed",
+    "what_happens_next_label": "What happens next",
+    "confirmation_body": "This project is now closed and the review bodies have been notified."
+  },
   "add_remove_user_review_Body_confirmation_success_header_label": "User has been successfully",
   "enable_disable_confirmation_header_label": "Confirm that you want to",
   "disable_success_confirmation_header_label": "successfully disabled",

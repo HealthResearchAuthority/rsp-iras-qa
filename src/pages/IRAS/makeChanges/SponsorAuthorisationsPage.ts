@@ -8,6 +8,16 @@ export default class SponsorAuthorisationsPage {
   readonly sponsorAuthorisationsPageTestData: typeof sponsorAuthorisationsPageTestData;
   readonly pageHeading: Locator;
   readonly tableCell: Locator;
+  readonly projectClosureTableHeader: Locator;
+  readonly projectClosureTableBodyRows: Locator;
+  readonly projectClosureDetails: {
+    shortProjectTitle: string;
+    irasID: string;
+    dateReceived: string;
+    userEmail: string;
+    dateClosed: string;
+    status: string;
+  }[] = [];
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -19,6 +29,8 @@ export default class SponsorAuthorisationsPage {
       .getByRole('heading')
       .getByText(this.sponsorAuthorisationsPageTestData.Sponsor_Authorisations_Page.pageHeading);
     this.tableCell = this.page.locator('td');
+    this.projectClosureTableHeader = this.page.locator('#projectClosureTable thead tr th');
+    this.projectClosureTableBodyRows = this.page.locator('#projectClosureTable tbody').getByRole('row');
   }
 
   //Page Methods
@@ -105,5 +117,20 @@ export default class SponsorAuthorisationsPage {
         throw new Error(`${columnName} is not a valid option`);
     }
     return columnIndex;
+  }
+
+  set setProjectClosureDetailsRecord(record: {
+    shortProjectTitle: string;
+    irasID: string;
+    dateReceived: string;
+    userEmail: string;
+    dateClosed: string;
+    status: string;
+  }) {
+    this.projectClosureDetails.push(record);
+  }
+
+  get getProjectClosureDetailsRecord() {
+    return this.projectClosureDetails;
   }
 }

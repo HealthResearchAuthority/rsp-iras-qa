@@ -28,7 +28,7 @@ Then(
   async ({ modificationsCommonPage, projectDetailsIRASPage, modificationsReceivedCommonPage }) => {
     const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
     const shortProjectTitleExpected = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
-    const modificationIDExpected = irasIDExpected + '/' + 1;
+    const modificationIDExpected = irasIDExpected + '/' + modificationsReceivedCommonPage.modificationCounter++;
     const irasIDActual = await modificationsCommonPage.iras_id_value.textContent();
     const shortProjectTitleActual = confirmStringNotNull(
       await modificationsCommonPage.short_project_title_value.textContent()

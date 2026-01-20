@@ -570,3 +570,14 @@ Then(
     await projectOverviewPage.page.waitForLoadState('domcontentloaded');
   }
 );
+
+Then('I can see project ending section in project overview page', async ({ projectOverviewPage }) => {
+  await expect
+    .soft(
+      projectOverviewPage.page.getByText(
+        projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.project_ending_section_heading,
+        { exact: true }
+      )
+    )
+    .toBeVisible();
+});

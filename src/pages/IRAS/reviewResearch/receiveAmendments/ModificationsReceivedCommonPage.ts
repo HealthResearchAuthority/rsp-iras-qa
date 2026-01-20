@@ -30,6 +30,7 @@ export default class ModificationsReceivedCommonPage {
   readonly days_since_submission_to_separator: Locator;
   readonly days_since_submission_suffix_label: Locator;
   readonly pageHeading: Locator;
+  modificationCounter: number;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -45,6 +46,7 @@ export default class ModificationsReceivedCommonPage {
     this._short_project_title = '';
     this._status = '';
     this._decision_outcome = '';
+    this.modificationCounter = 1;
 
     //Locators
     this._rowWithModification = this.page.getByText('');

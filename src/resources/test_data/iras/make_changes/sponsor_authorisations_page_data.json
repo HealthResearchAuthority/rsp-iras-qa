@@ -1,5 +1,6 @@
 {
   "Sponsor_Authorisations_Page": {
-    "pageHeading": "Authorisations"
+    "pageHeading": "Authorisations",
+    "project_closure_table_headers": ["Short project title", "IRAS ID", "Date received", "User email", "Date closed", "Status"]
   }
 }

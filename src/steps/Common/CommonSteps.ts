@@ -283,6 +283,21 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
   ).toBeVisible();
 });
 
+Given(
+  'I cannot see a {string} button on the {string}',
+  async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    await expect
+      .soft(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      )
+      .toHaveCount(0);
+  }
+);
+
 Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
   const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
   const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
@@ -554,6 +569,8 @@ Then(
       teamManagerDashboardPage,
       plannedEndDateChangePage,
       projectPersonnelChangePrincipalInvestigatorPage,
+      closeProjectPage,
+      checkAuthoriseProjectClosurePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -690,6 +707,15 @@ Then(
         projectPersonnelChangePrincipalInvestigatorPage
           .projectPersonnelChangePrincipalInvestigatorModificationPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = projectPersonnelChangePrincipalInvestigatorPage;
+    } else if (pageKey == 'Close_Project_Page') {
+      errorMessageFieldDataset = closeProjectPage.closeProjectPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = closeProjectPage;
+    } else if (pageKey == 'Check_Authorise_Project_Closure_Page') {
+      errorMessageFieldDataset =
+        checkAuthoriseProjectClosurePage.checkAuthoriseProjectClosurePageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = checkAuthoriseProjectClosurePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -697,8 +723,7 @@ Then(
     if (
       errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
       errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error' ||
-      errorMessageFieldAndSummaryDatasetName === 'Both_Filters_Not_Selected_Same_Time_Summary_Only_Error' ||
-      errorMessageFieldAndSummaryDatasetName === 'Summary_Only_Error_Project_Closure'
+      errorMessageFieldAndSummaryDatasetName === 'Both_Filters_Not_Selected_Same_Time_Summary_Only_Error'
     ) {
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
       summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
@@ -2346,3 +2371,15 @@ Then(
     expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
   }
 );
+
+Then('I click on the short project title link', async ({ projectDetailsIRASPage }) => {
+  const shortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+  await projectDetailsIRASPage.page.getByText(shortProjectTitle, { exact: true }).click();
+});
+
+Then('I validate iras id and short project title displayed', async ({ projectDetailsIRASPage, commonItemsPage }) => {
+  const irasID = await projectDetailsIRASPage.getUniqueIrasId();
+  const shortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+  await expect.soft(commonItemsPage.page.getByText(irasID)).toBeVisible();
+  await expect.soft(commonItemsPage.page.getByText(shortProjectTitle)).toBeVisible();
+});
