@@ -1,7 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import MyOrganisationsEditUserProfilePage from '../../../../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsEditUserProfilePage';
-import MyOrganisationsUserProfilePage from '../../../../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsUserProfilePage';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -14,10 +12,8 @@ Given(
   ) => {
     const username = loginPage.loginPageTestData[user].username;
     await userProfilePage.sqlGetUserProfileByEmail(username);
-    let page: MyOrganisationsUserProfilePage | MyOrganisationsEditUserProfilePage;
 
     if (pageType.toLowerCase().includes('edit')) {
-      page = myOrganisationsEditUserProfilePage;
       await expect
         .soft(
           myOrganisationsEditUserProfilePage.role_radio
@@ -33,7 +29,6 @@ Given(
         )
         .toBeChecked();
     } else {
-      page = myOrganisationsUserProfilePage;
       expect.soft(myOrganisationsUserProfilePage.role_value).toHaveText(await myOrganisationsUserProfilePage.getRole());
       expect
         .soft(myOrganisationsUserProfilePage.authoriser_value)
@@ -43,13 +38,13 @@ Given(
         .toHaveText(await myOrganisationsUserProfilePage.getStatus());
     }
 
-    expect.soft(page.title_value).toHaveText(await userProfilePage.getTitle());
-    expect.soft(page.first_name_value).toHaveText(await userProfilePage.getFirstName());
-    expect.soft(page.last_name_value).toHaveText(await userProfilePage.getLastName());
-    expect.soft(page.email_value).toHaveText(await userProfilePage.getEmail());
-    expect.soft(page.telephone_value).toHaveText(await userProfilePage.getTelephone());
-    expect.soft(page.organisation_value).toHaveText(await userProfilePage.getOrganisation());
-    expect.soft(page.job_title_value).toHaveText(await userProfilePage.getJobTitle());
+    expect.soft(myOrganisationsUserProfilePage.title_value).toHaveText(await userProfilePage.getTitle());
+    expect.soft(myOrganisationsUserProfilePage.first_name_value).toHaveText(await userProfilePage.getFirstName());
+    expect.soft(myOrganisationsUserProfilePage.last_name_value).toHaveText(await userProfilePage.getLastName());
+    expect.soft(myOrganisationsUserProfilePage.email_value).toHaveText(await userProfilePage.getEmail());
+    expect.soft(myOrganisationsUserProfilePage.telephone_value).toHaveText(await userProfilePage.getTelephone());
+    expect.soft(myOrganisationsUserProfilePage.organisation_value).toHaveText(await userProfilePage.getOrganisation());
+    expect.soft(myOrganisationsUserProfilePage.job_title_value).toHaveText(await userProfilePage.getJobTitle());
   }
 );
 
