@@ -124,7 +124,7 @@ Feature: Filter, Search and Sort the Search modifications page
         Scenario: Verify back and short project title link navigation for search modifications tasklist
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I can now see a table of search results for 'modifications received for approval'
@@ -183,7 +183,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -206,7 +206,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor) when JS enabled
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -264,7 +264,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
@@ -518,7 +518,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -564,7 +564,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @RemoveActiveFiltersAlTogether @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -668,7 +668,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID
         Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
