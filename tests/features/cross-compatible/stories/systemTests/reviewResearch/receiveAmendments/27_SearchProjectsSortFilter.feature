@@ -26,7 +26,7 @@ Feature: Filter, Search and Sort the Search project records page
         @SortProjectsByColumn @PartialIrasIdSearch  @rsp-6194
         Scenario Outline: Verify the user is able to sort the list of projects by ascending and descending order for each results table column after performing a search with iras id
                 And I capture the iras id and short project title of the recently added project with status as 'Active' from the database
-                And I fill the search input for searching 'project records' with '<Partial_Iras_Id>' as the search query
+                When I enter the the search input for 'project records' with '<Partial_Iras_Id>'
                 And I click the 'Search' button on the 'Search_Projects_Page'
                 And I can now see a table of search results for 'project records'
                 And I can see the list of 'project records' is sorted by 'ascending' order of the 'iras id'

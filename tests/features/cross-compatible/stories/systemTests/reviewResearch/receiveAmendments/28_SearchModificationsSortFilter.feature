@@ -129,21 +129,22 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 And I can now see a table of search results for 'modifications received for approval'
                 And Each 'short project title' displayed on the 'Search_Modifications_Page' is a link
-                When I click a 'short project title' on the 'Search_Modifications_Page'
+                When I click the 'short project title' of the captured modification on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the project overview page
                 Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
-                When I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I can now see a table of search results for 'modifications received for approval'
                 Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
-                When I click a 'modification id' on the 'Search_Modifications_Page'
+                When I click the 'modification id' of the captured modification on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the 'Modification_Details_Page'
                 When I click the 'Back' link on the 'Modification_Details_Page'
+                And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
                 Examples:
                         | Search_Input       | User                 | Status           | Modification_Count |
@@ -158,9 +159,38 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id | Workflow_Coordinator | Not approved     | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | Not approved     | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | Approved         | Single             |
-                        | Valid_Full_Iras_Id | System_Admin         | In draft         | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | With sponsor     | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | With review body | Single             |
+
+        @SearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031
+        Scenario: Verify back and short project title link navigation for search modifications tasklist for <User> and <Status>
+                Given I have navigated to the 'Search_Modifications_Page' as '<User>'
+                And I capture the modification id of '<Modification_Count>' with status '<Status>'
+                When I enter the the search input for 'modifications' with '<Search_Input>'
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for 'modifications received for approval'
+                And Each 'short project title' displayed on the 'Search_Modifications_Page' is a link
+                When I click the 'short project title' of the captured modification on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the project overview page
+                Given I have navigated to the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+                When I enter the the search input for 'modifications' with '<Search_Input>'
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for 'modifications received for approval'
+                Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
+                When I click the 'modification id' of the captured modification on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the review all changes page
+                When I click the 'Back' link on the 'Review_All_Changes_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+                Examples:
+                        | Search_Input       | User         | Status   | Modification_Count |
+                        | Valid_Full_Iras_Id | System_Admin | In draft | Single             |
 
         @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031 @KNOWN-DEFECT-RSP-6500
         Scenario: Verify In draft and WIth sponsor modifications in search modifications page

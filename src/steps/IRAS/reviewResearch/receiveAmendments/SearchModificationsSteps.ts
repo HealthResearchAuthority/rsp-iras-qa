@@ -329,5 +329,7 @@ Then(
     }
     const modificationId = await searchModificationsPage.sqlGetModificationByStatus(status, countValue);
     await searchModificationsPage.saveModificationIdSearch(modificationId.toString(), modificationCount);
+    const irasId = modificationId.toString().split('/')[0];
+    await searchModificationsPage.setIrasId(irasId);
   }
 );

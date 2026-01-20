@@ -1648,6 +1648,24 @@ When(
   }
 );
 
+When(
+  'I click the {string} of the captured modification on the {string}',
+  async (
+    { commonItemsPage, modificationsReceivedCommonPage, searchModificationsPage },
+    fieldName: string,
+    pageKey: string
+  ) => {
+    const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
+    const modificationId = await searchModificationsPage.getModificationId();
+    const row = commonItemsPage.tableBodyRows.filter({
+      has: commonItemsPage.page.getByRole('link', { name: modificationId }),
+    });
+    const fieldLocator = row.getByRole('cell').nth(columnIndex).getByRole('link');
+    await fieldLocator.waitFor({ state: 'visible' });
+    await fieldLocator.click();
+  }
+);
+
 Then(
   'I validate {string} displayed on {string} while uploading {string} documents',
   async (

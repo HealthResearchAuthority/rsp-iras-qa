@@ -179,16 +179,20 @@ When(
 
 When(
   'I enter the the search input for {string} with {string}',
-  async ({ searchModificationsPage, commonItemsPage }, searchType: string, datasetName: string) => {
+  async ({ searchModificationsPage, searchProjectsPage, commonItemsPage }, searchType: string, datasetName: string) => {
     let searchKey: string;
     if (searchType.toLowerCase() == 'modifications') {
       if (datasetName === 'Valid_Full_Iras_Id') {
-        searchKey = await searchModificationsPage.getModificationId();
+        searchKey = await searchModificationsPage.getIrasId();
       } else if (datasetName === 'Existing_Partial_IRAS_ID') {
-        searchKey = (await searchModificationsPage.getModificationId()).substring(0, 2);
+        searchKey = (await searchModificationsPage.getIrasId()).substring(0, 2);
       }
-    } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
-      throw new Error(`There are no items in list to search`);
+    } else if (searchType.toLowerCase() == 'project records') {
+      if (datasetName === 'Valid_Full_Iras_Id') {
+        searchKey = await searchProjectsPage.getIrasId();
+      } else if (datasetName === 'Valid_Iras_Id_Prefix') {
+        searchKey = (await searchProjectsPage.getIrasId()).substring(0, 2);
+      }
     }
     expect.soft(searchKey).toBeTruthy();
     await commonItemsPage.setSearchKey(searchKey);

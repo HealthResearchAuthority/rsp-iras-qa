@@ -17,6 +17,7 @@ export default class SearchModificationsPage {
   readonly linkTextData: typeof linkTextData;
   private _modifications_list_after_search: string[];
   private _modification_id: string;
+  private _iras_id: string;
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
   readonly iras_id_search_text: Locator;
@@ -79,6 +80,7 @@ export default class SearchModificationsPage {
     this.searchModificationsPageTestData = searchModificationsPageTestData;
     this._modifications_list_after_search = [];
     this._modification_id = '';
+    this._iras_id = '';
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
@@ -337,6 +339,14 @@ export default class SearchModificationsPage {
     this._modification_id = value;
   }
 
+  async getIrasId(): Promise<string> {
+    return this._iras_id;
+  }
+
+  async setIrasId(value: string): Promise<void> {
+    this._iras_id = value;
+  }
+
   //Page Methods
 
   async assertOnSearchModificationsPage() {
@@ -493,7 +503,7 @@ ORDER BY NationQuery.CreatedDate DESC;
     if (queryResult.recordset.length == 0) {
       throw new Error(`No suitable modification found in the system with ${status} status`);
     }
-    return queryResult.recordset.map((row) => row.IrasId);
+    return queryResult.recordset.map((row) => row.ModificationIdentifier);
   }
   async saveModificationIdSearch(modificationId: string, countval: string) {
     await this.setModificationId(modificationId);
