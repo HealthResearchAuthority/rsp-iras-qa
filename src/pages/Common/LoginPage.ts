@@ -39,12 +39,10 @@ export default class LoginPage {
   //passwords & mfaKey to be set in AzureDevops Pipeline, add encrypted values to .env when running locally
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
-    let secretKey = '';
-    let authTag = '';
     const userSecret = dataset + '_SECRET_KEY';
     const userAuth = dataset + '_AUTH_TAG';
-    secretKey = process.env[userSecret];
-    authTag = process.env[userAuth];
+    const secretKey = process.env[userSecret];
+    const authTag = process.env[userAuth];
     const mfaKey = resolveEnvExpression(this.loginPageTestData[dataset].mfa);
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),
