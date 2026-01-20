@@ -2,7 +2,7 @@
   "Disable_User_Profile_Labels": {
     "disable_confirmation_header_label": "Confirm that you want to disable",
     "disable_confirmation_body_label": "You are about to disable this user record.",
-    "disable_confirmation_success_header_label": "successfully disabled",
+    "disable_confirmation_success_header_label": "disabled",
     "disable_confirmation_success_body_one_label": "A confirmation email will be sent to",
     "disable_confirmation_success_body_two_label": "to confirm that their record has been disabled"
   },
@@ -15,15 +15,15 @@
   },
   "Disable_Review_Body_Labels": {
     "disable_confirmation_header_label": "Confirm that you want to disable",
-    "disable_confirmation_body_label": "You are about to disable this review body",
-    "disable_confirmation_success_header_label": "Review body successfully disabled",
+    "disable_confirmation_body_label": "You are about to disable this review body.",
+    "disable_confirmation_success_header_label": "Review body disabled",
     "disable_confirmation_success_body_one_label": "A confirmation email will be sent to",
     "disable_confirmation_success_body_two_label": "to confirm that their profile has been disabled."
   },
   "Enable_Review_Body_Labels": {
     "enable_confirmation_header_label": "Confirm that you want to enable",
-    "enable_confirmation_body_label": "You are about to enable this review body",
-    "enable_confirmation_success_header_label": "Review body successfully enabled",
+    "enable_confirmation_body_label": "You are about to enable this review body.",
+    "enable_confirmation_success_header_label": "Review body enabled",
     "enable_confirmation_success_body_one_label": "A confirmation email will be sent to",
     "enable_confirmation_success_body_two_label": "to confirm that their profile has been enabled."
   },
@@ -48,7 +48,7 @@
     "remove_user_confirmation_success_body_two_label": " has been sent an email confirming that they have been removed from "
   },
   "Add_User_Review_Body_Labels": {
-    "page_heading": "User has been successfully added",
+    "page_heading": "User has been added",
     "page_guidance_text": " has been sent an email confirming that they have been added to "
   },
   "Delete_Modification_Confirmation_Labels": {
@@ -96,8 +96,8 @@
     "page_heading": "Review outcome successfully sent to applicant",
     "confirmation_body": "The applicant will receive a status update. Any next steps has been sent to the applicant."
   },
-  "add_remove_user_review_Body_confirmation_success_header_label": "User has been successfully",
+  "add_remove_user_review_Body_confirmation_success_header_label": "User has been",
   "enable_disable_confirmation_header_label": "Confirm that you want to",
-  "disable_success_confirmation_header_label": "successfully disabled",
+  "disable_success_confirmation_header_label": "disabled",
   "enable_success_confirmation_header_label": "enabled"
 }

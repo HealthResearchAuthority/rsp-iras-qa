@@ -5,7 +5,7 @@
     "search_input_label": "Find a user",
     "search_guidance_text": "You can search by first name, last name or email address",
     "no_search_results_heading": "No results found",
-    "no_search_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, go to Manage users where you can check if a user profile exists and create one if needed.",
+    "no_search_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, go to manage users where you can check if a user profile exists and create one if needed.",
     "search_table_headings": ["First name", "Last name", "Email address", "Status", "Last logged in", "Action"]
   },
   "Search_Add_User_Review_Body": {
