@@ -1992,7 +1992,6 @@ Given(
       await expect
         .soft(commonItemsPage.last_name_value_first_row)
         .toHaveText(await searchAddUserReviewBodyPage.getUserLastName());
-
       await expect
         .soft(commonItemsPage.email_address_value_first_row)
         .toHaveText(await searchAddUserReviewBodyPage.getUserEmail());
