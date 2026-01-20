@@ -12,10 +12,9 @@ Then(
   'I can see the sponsor organisation profile page from my organisations for {string}',
   async ({ myOrgSponsorOrgProfilePage, checkSetupSponsorOrganisationPage }, user: string) => {
     const expSponOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
-    await expect.soft(myOrgSponsorOrgProfilePage.pageLabel).toBeVisible();
-    await expect.soft(myOrgSponsorOrgProfilePage.pageHeading.getByText(expSponOrgName)).toBeVisible();
+    await myOrgSponsorOrgProfilePage.assertOnMyOrgSponsorOrgProfilePage(expSponOrgName);
     await expect.soft(myOrgSponsorOrgProfilePage.profile_tabnav).toBeVisible();
-    await myOrgSponsorOrgProfilePage.assertOnMyOrgSponsorOrgProfilePage(user);
+    await myOrgSponsorOrgProfilePage.assertSponsorOrgProfilePageTabs(user);
   }
 );
 

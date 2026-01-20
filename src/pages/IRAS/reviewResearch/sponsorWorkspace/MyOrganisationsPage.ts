@@ -9,7 +9,6 @@ import MyOrgSponsorOrgProfilePage from './MyOrgSponsorOrgProfilePage';
 export default class MyOrganisationsPage {
   readonly page: Page;
   readonly myOrganisationsPageTestData: typeof myOrganisationsPageTestData;
-  readonly myOrganisationsPage: typeof MyOrganisationsPage;
   readonly linkTextData: typeof linkTextData;
   readonly mainPageContent: Locator;
   readonly pageHeading: Locator;

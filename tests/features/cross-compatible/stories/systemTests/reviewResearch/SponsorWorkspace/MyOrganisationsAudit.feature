@@ -120,10 +120,3 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
             | Login_User             | User_Email               | Sponsor_Organisation | Select_User_Role                | Select_User_Permission  |
             | Sponsor_User           | automation sponsor email | University of Leeds  | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
             | Sponsor_Org_Admin_User | sponsor org admin email  | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
-
-# UPDATES AFTER PULL + MERGE
-# Then I can see tabs are displayed based on the logged in user role '<Login_User>'
-# Consider moving this to profile step as a common step
-
-# And the users tab is underlined ---replacing this with common step in profile below
-# And the 'Audit' tab is active and underlined
