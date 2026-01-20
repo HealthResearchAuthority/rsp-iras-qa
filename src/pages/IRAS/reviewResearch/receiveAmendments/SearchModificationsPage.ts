@@ -374,7 +374,7 @@ export default class SearchModificationsPage {
     //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
     let pageCount: number;
     if ((await this.total_pages_list.count()) < 3) {
-      pageCount = await this.total_pages_list.count();
+      pageCount = (await this.total_pages_list.count()) + 1;
     } else {
       pageCount = 3;
     }
