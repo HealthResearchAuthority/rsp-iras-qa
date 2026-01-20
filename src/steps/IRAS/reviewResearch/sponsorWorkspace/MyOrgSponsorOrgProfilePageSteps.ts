@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 
-const { Then } = createBdd(test);
+const { Given, When, Then } = createBdd(test);
 
 let shortProjectTitle: string;
 let irasId: string;
@@ -18,7 +18,14 @@ Then(
   }
 );
 
-Then(
+Given('the {string} tab is active and underlined', async ({ myOrgSponsorOrgProfilePage }, tabName: string) => {
+  const tabText = myOrgSponsorOrgProfilePage.linkTextData.My_Organisations_Sponsor_Org_Profile_Page[tabName];
+  await expect.soft(myOrgSponsorOrgProfilePage.activeTab).toBeVisible();
+  await expect.soft(myOrgSponsorOrgProfilePage.activeTab).toHaveCount(1);
+  await expect.soft(myOrgSponsorOrgProfilePage.activeTab).toHaveText(tabText);
+});
+
+When(
   'I validate the sponsor organisation data displayed in profile tab with rts data',
   async ({ myOrgSponsorOrgProfilePage, rtsPage }) => {
     const [expSponOrg, expCountry, expAddress, expLastUpdated] =

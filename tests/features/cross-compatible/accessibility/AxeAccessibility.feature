@@ -2954,7 +2954,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the my organisations page
     Then I click the 'View' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    And I can see the sponsor organisation profile page from my organisations for 'automation sponsor email'
+    And I can see the sponsor organisation profile page from my organisations for 'Sponsor_User'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

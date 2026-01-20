@@ -583,7 +583,7 @@ Feature: Sponsor Workspace
     And I can see the 'sponsor organisations' list sorted by 'ascending' order of the 'organisation name' on the 'My_Organisations_Page' page
     Then I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    And I can see the sponsor organisation profile page from my organisations
+    And I can see the sponsor organisation profile page from my organisations for '<Login_User>'
 
     Examples:
       | Login_User             | User_Email               | Link   | RTS_API_Data         | RTS_Request                         |
