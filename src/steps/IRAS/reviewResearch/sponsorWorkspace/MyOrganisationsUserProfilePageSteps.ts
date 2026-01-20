@@ -70,9 +70,6 @@ When(
   'I click the change link against {string} on my organisations user profile page',
   async ({ myOrganisationsUserProfilePage, commonItemsPage }, fieldKey: string) => {
     const changeLink = await commonItemsPage.getChangeLink(fieldKey, myOrganisationsUserProfilePage);
-    // await myOrganisationsUserProfilePage.page.pause();
-    // await changeLink.highlight();
-    // await myOrganisationsUserProfilePage.page.pause();
     await expect(changeLink).toBeVisible();
     await changeLink.click();
   }

@@ -41,18 +41,10 @@ export default class LoginPage {
     const username = this.loginPageTestData[dataset].username;
     let secretKey = '';
     let authTag = '';
-    if (dataset === 'Sponsor_User') {
-      secretKey = process.env['WORKFLOW_COORDINATOR_W_SECRET_KEY'];
-      authTag = process.env['WORKFLOW_COORDINATOR_W_AUTH_TAG'];
-    } else if (dataset === 'Sponsor_Org_Admin_User') {
-      secretKey = process.env['WORKFLOW_COORDINATOR_S_SECRET_KEY'];
-      authTag = process.env['WORKFLOW_COORDINATOR_S_AUTH_TAG'];
-    } else {
-      const userSecret = dataset + '_SECRET_KEY';
-      const userAuth = dataset + '_AUTH_TAG';
-      secretKey = process.env[userSecret];
-      authTag = process.env[userAuth];
-    }
+    const userSecret = dataset + '_SECRET_KEY';
+    const userAuth = dataset + '_AUTH_TAG';
+    secretKey = process.env[userSecret];
+    authTag = process.env[userAuth];
     const mfaKey = resolveEnvExpression(this.loginPageTestData[dataset].mfa);
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),

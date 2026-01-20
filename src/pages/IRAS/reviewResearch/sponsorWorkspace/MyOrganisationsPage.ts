@@ -31,8 +31,6 @@ export default class MyOrganisationsPage {
       .getByRole('heading')
       .getByText(this.myOrganisationsPageTestData.My_Organisations_Page.pageHeading);
     this.organisations_table = this.page.getByTestId('myOrganisationsTable');
-    const textsldk = this.linkTextData.My_Organisations_Page.View;
-    console.log(textsldk);
     this.row_view_link_locator = this.page.getByRole('cell').getByText(this.linkTextData.My_Organisations_Page.View);
     this.row_manage_link_locator = this.page
       .getByRole('cell')
