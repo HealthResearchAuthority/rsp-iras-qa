@@ -1,0 +1,18 @@
+{
+  "My_Org_SponsorOrg_Profile_Page": {
+    "pageLabel": "Sponsor organisations profile",
+    "Profile_Link": "Profile",
+    "Projects_Link": "Projects",
+    "Users_Link": "Users",
+    "Audit_Link": "Audit"
+  },
+  "Projects_Tab_Label_Text": {
+    "Find_Project_Label": "Find a project",
+    "Search_Project_Label": "Search for a project",
+    "Search_Button": "Search",
+    "Short_Project_Title_Button": "Short project title",
+    "IRAIS_ID_Button": "IRAS ID",
+    "Date_Created_Button": "Date created",
+    "Status_Button": "Status"
+  }
+}

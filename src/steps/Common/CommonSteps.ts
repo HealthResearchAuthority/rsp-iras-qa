@@ -186,7 +186,6 @@ When(
       case 'Modification_Details_Page':
         await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
         break;
-
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -299,22 +298,32 @@ Given(
 );
 
 Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
-  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  const linkValue = await commonItemsPage.linkTextData[pageKey][linkKey];
   const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
   if (pageKey === 'Progress_Bar') {
     await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
-  } else if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
+    return;
+  }
+  if (pageKey === 'My_Research_Page' && linkKey === 'My_Account') {
     await commonItemsPage.myAccountGovUkBreadCrumbsLink.click();
-  } else if (linkKey.includes('_Filter_Panel')) {
+    return;
+  }
+  if (linkKey.includes('_Filter_Panel')) {
     await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
-  } else if (
+    return;
+  }
+  if (
     (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
     linkKey === 'Back_To_Users'
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else if (noOfLinksFound > 1 && linkKey != 'Back') {
+    return;
+  }
+  if (noOfLinksFound > 1 && linkKey !== 'Back' && linkKey !== 'View') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
-  } else if (
+    return;
+  }
+  if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
     (linkKey === 'Sponsor_Details' ||
       linkKey === 'Modification_Details' ||
@@ -322,13 +331,20 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
       linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
-  } else if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
-    await commonItemsPage.removeLink.click();
-  } else if (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') {
-    await commonItemsPage.govUkLink.getByText(linkValue).click();
-  } else {
-    await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+    return;
   }
+  if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
+    await commonItemsPage.removeLink.click();
+    return;
+  }
+  if (
+    (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') ||
+    (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users')
+  ) {
+    await commonItemsPage.govUkLink.getByText(linkValue).click();
+    return;
+  }
+  await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
 });
 
 Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
@@ -851,6 +867,9 @@ When(
       case 'system admin email':
         searchValue = loginPage.loginPageTestData.System_Admin.username;
         break;
+      case 'sponsor org admin email':
+        searchValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
+        break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
         break;
@@ -917,18 +936,20 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
 Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
-    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-      await commonItemsPage.search_results_count.textContent()
-    );
-    if (recordsCount > 20) {
-      const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-      if (availabilityVal.toLowerCase() === 'available') {
-        await expect(locatorVal).toBeVisible();
-        await expect(locatorVal).toBeEnabled();
-      } else if (availabilityVal.toLowerCase() === 'not available') {
-        await expect(locatorVal).toBeHidden();
-      } else {
-        throw new Error(`Unsupported button state: ${availabilityVal}`);
+    if (linkLabel === 'Next' || linkLabel === 'Previous') {
+      const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
+        await commonItemsPage.search_results_count.textContent()
+      );
+      if (recordsCount > 20) {
+        const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
+        if (availabilityVal.toLowerCase() === 'available') {
+          await expect.soft(locatorVal).toBeVisible();
+          await expect.soft(locatorVal).toBeEnabled();
+        } else if (availabilityVal.toLowerCase() === 'not available') {
+          await expect.soft(locatorVal).toBeHidden();
+        } else {
+          throw new Error(`Unsupported button state: ${availabilityVal}`);
+        }
       }
     }
   }
@@ -1255,7 +1276,8 @@ Then(
         pagename === 'My_Research_Projects_Page' ||
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
-        pagename === 'Review_All_Changes_Page'
+        pagename === 'Review_All_Changes_Page' ||
+        pagename === 'Manage_Sponsor_Organisations_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
@@ -1289,7 +1311,8 @@ Then(
         pagename == 'My_Research_Projects_Page' ||
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
-        pagename === 'Review_All_Changes_Page'
+        pagename === 'Review_All_Changes_Page' ||
+        pagename === 'Manage_Sponsor_Organisations_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
@@ -1502,11 +1525,13 @@ Then(
   }
 );
 
-Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
+Then('the no search results found message is displayed', async ({ commonItemsPage, myOrganisationsPage }) => {
   await expect.soft(commonItemsPage.tableRows).not.toBeVisible();
-  await expect
-    .soft(commonItemsPage.search_results_count)
-    .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+  if (!myOrganisationsPage) {
+    await expect
+      .soft(commonItemsPage.search_results_count)
+      .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+  }
   await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
   await expect.soft(commonItemsPage.search_no_results_header).toBeVisible();
   await expect.soft(commonItemsPage.search_no_results_guidance_text).toBeVisible();
@@ -1791,12 +1816,14 @@ Then(
     },
     orgType: string
   ) => {
+    let userList: Map<string, string[]>;
     if (orgType === 'review body') {
       await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
       const organisationName = await reviewBodyProfilePage.getOrgName();
       await expect(userListReviewBodyPage.page_heading).toHaveText(
         userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
       );
+      userList = await commonItemsPage.getUsers();
     } else if (orgType === 'sponsor organisation') {
       await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage(commonItemsPage);
       const organisationName = await sponsorOrganisationProfilePage.getOrgName();
@@ -1804,27 +1831,10 @@ Then(
         userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
           .heading_prefix_label + organisationName
       );
+      userList = await commonItemsPage.getSponsorUsers();
     }
     if ((await commonItemsPage.userListTableRows.count()) >= 2) {
-      let userList;
-      if (orgType === 'review body') {
-        userList = await commonItemsPage.getUsers();
-      }
-      if (orgType === 'sponsor organisation') {
-        userList = await commonItemsPage.getSponsorUsers();
-      }
-      const emailAddress: any = userList.get('emailAddressValues');
-      await commonItemsPage.setUserEmail(emailAddress);
-      const firstName: any = userList.get('firstNameValues');
-      await commonItemsPage.setUserFirstName(firstName);
-      const lastName: any = userList.get('lastNameValues');
-      await commonItemsPage.setUserLastName(lastName);
-      await commonItemsPage.setFirstName(firstName[0]);
-      await commonItemsPage.setLastName(lastName[0]);
-      await commonItemsPage.setEmail(emailAddress[0]);
-      if (await commonItemsPage.firstPage.isVisible()) {
-        await commonItemsPage.firstPage.click();
-      }
+      await commonItemsPage.setUserFirstNameLastNameEmail(userList);
     }
   }
 );
@@ -1852,7 +1862,7 @@ Then(
         throw new Error(`${sortField} is not a valid option`);
       }
       const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-      expect(firstNameValues).toEqual(sortedList);
+      expect.soft(firstNameValues).toEqual(sortedList);
     }
   }
 );
@@ -2000,20 +2010,32 @@ When(
 Given(
   'I see that the newly added user appears in the user list page for the {string}',
   async ({ searchAddUserReviewBodyPage, commonItemsPage }, orgType: string) => {
-    if (orgType === 'review body' || orgType === 'sponsor organisation') {
-      await expect(commonItemsPage.userListTableBodyRows).toHaveCount(1);
+    await expect.soft(commonItemsPage.userListTableBodyRows).toHaveCount(1);
+    if (orgType === 'review body') {
       await expect(commonItemsPage.first_name_value_first_row).toHaveText(
         await searchAddUserReviewBodyPage.getUserFirstName()
       );
-      await expect(commonItemsPage.last_name_value_first_row).toHaveText(
-        await searchAddUserReviewBodyPage.getUserLastName()
+      await expect
+        .soft(commonItemsPage.last_name_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserLastName());
+      await expect
+        .soft(commonItemsPage.email_address_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserEmail());
+      await expect
+        .soft(commonItemsPage.status_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserStatus());
+    } else if (orgType === 'sponsor organisation') {
+      await expect(commonItemsPage.users_sponsor_org_name_value_first_row).toHaveText(
+        (await searchAddUserReviewBodyPage.getUserFirstName()) +
+          ' ' +
+          (await searchAddUserReviewBodyPage.getUserLastName())
       );
-      await expect(commonItemsPage.email_address_value_first_row).toHaveText(
-        await searchAddUserReviewBodyPage.getUserEmail()
-      );
-      await expect(commonItemsPage.status_value_first_row).toHaveText(
-        await searchAddUserReviewBodyPage.getUserStatus()
-      );
+      await expect
+        .soft(commonItemsPage.users_sponsor_org_email_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserEmail());
+      await expect
+        .soft(commonItemsPage.users_sponsor_org_status_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserStatus());
     }
   }
 );
@@ -2197,6 +2219,9 @@ Then(
         case 'first name':
           columnIndex = 0;
           break;
+        case 'name':
+          columnIndex = 0;
+          break;
         case 'last name':
           columnIndex = 1;
           break;
@@ -2261,9 +2286,51 @@ Then(
       expect.soft(actualList).toEqual(sortedList);
       return;
     }
+    if (lowerListType === 'sponsor organisation users') {
+      // Map columns for user lists
+      switch (lowerSortField) {
+        case 'name':
+          columnIndex = 0;
+          break;
+        case 'email address':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        case 'role':
+          columnIndex = 3;
+          break;
+        case 'authoriser':
+          columnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+
+      // Gather actual list values
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+
+      if (lowerSortDirection === 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) =>
+          a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+      } else {
+        sortedList = [...actualList].toSorted((a, b) =>
+          b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
+        );
+      }
+
+      expect.soft(actualList).toEqual(sortedList);
+      return;
+    }
 
     // ----- Branch: Organisation/Review-body lists -----
-    if (lowerListType === 'manage sponsor organisations' || lowerListType === 'manage review bodies') {
+    if (
+      lowerListType === 'manage sponsor organisations' ||
+      lowerListType === 'manage review bodies' ||
+      lowerListType === 'sponsor organisations'
+    ) {
       // Map columns for organisation/review-body lists
       switch (lowerSortField) {
         case 'organisation name':
@@ -2369,6 +2436,25 @@ Then(
           return 0; // Keeps original order for non-numeric values
         });
     expect.soft(normalize(actualList)).toEqual(normalize(modificationsByLeadNation));
+  }
+);
+
+Then(
+  'the {string} link will be {string} to the user in the {string}',
+  async ({ commonItemsPage }, linkKey: string, availabilityVal: string, pageKey: string) => {
+    const linkValue = await commonItemsPage.linkTextData[pageKey][linkKey];
+    const locatorVal: Locator = commonItemsPage.govUkLink
+      .getByText(linkValue, { exact: true })
+      .or(commonItemsPage.govUkLink.getByText(linkValue))
+      .first();
+    if (availabilityVal.toLowerCase() === 'available') {
+      await expect.soft(locatorVal).toBeVisible();
+      await expect.soft(locatorVal).toBeEnabled();
+    } else if (availabilityVal.toLowerCase() === 'not available') {
+      await expect.soft(locatorVal).toBeHidden();
+    } else {
+      throw new Error(`Unsupported button state: ${availabilityVal}`);
+    }
   }
 );
 

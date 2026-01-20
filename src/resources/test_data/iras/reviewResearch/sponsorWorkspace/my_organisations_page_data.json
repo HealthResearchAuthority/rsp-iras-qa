@@ -1,0 +1,10 @@
+{
+  "My_Organisations_Page": {
+    "pageHeading": "My organisations"
+  },
+  "My_Organisations_Table": {
+    "my_organisations_organisationname_label": "Organisation name",
+    "my_organisations_country_label": "Country",
+    "my_organisations_actions_label": "Actions"
+  }
+}

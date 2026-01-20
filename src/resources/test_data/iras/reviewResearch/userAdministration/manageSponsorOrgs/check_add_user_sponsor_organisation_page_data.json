@@ -2,7 +2,7 @@
   "Check_Add_User_Sponsor_Organisation_Page": {
     "title": "Check and add user profile to sponsor organisation - Manage sponsor organisations - System administration - Plan and manage health and care research",
     "page_heading": "Check and add user",
-    "page_guidance_text": "Check this information is correct before adding the user to ",
+    "page_guidance_prefix_text": "Check this information is correct before adding the user to ",
     "user_details_table_labels": [
       "Title",
       "First name",
@@ -11,7 +11,8 @@
       "Telephone",
       "Organisation",
       "Job title",
-      "Role"
+      "Role",
+      "Authoriser"
     ]
   }
 }

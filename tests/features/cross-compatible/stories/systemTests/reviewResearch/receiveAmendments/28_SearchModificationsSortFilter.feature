@@ -46,9 +46,37 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Modification_Id     | modification id     | Advanced_Filters_Lead_Nation |
                         | Short_Project_Title | short project title | Advanced_Filters_Lead_Nation |
                         | Modification_Type   | modification type   | Advanced_Filters_Lead_Nation |
-                        | Chief_Investigator  | chief investigator  | Advanced_Filters_Lead_Nation |
                         | Lead_Nation         | lead nation         | Advanced_Filters_Lead_Nation |
                         | Status              | status              | Advanced_Filters_Lead_Nation |
+
+        @SortModificationsByColumn @rsp-4090 @rsp-4822 @KNOWN-DEFECT-RSP-6647
+        Scenario Outline: Verify the user is able to sort modifications by ascending and descending order for column-chief investigator
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I capture the page screenshot
+                And I can now see a table of search results for 'modifications received for approval'
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the 'modification id'
+                And I capture the page screenshot
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                Then I can see the list of 'modifications received for approval' is sorted by 'ascending' order of the '<Sort_Field>'
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+                And I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                Then I can see the list of 'modifications received for approval' is sorted by 'descending' order of the '<Sort_Field>'
+                Examples:
+                        | Sort_Button        | Sort_Field         | Advanced_Filters             |
+                        | Chief_Investigator | chief investigator | Advanced_Filters_Lead_Nation |
 
         @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @rsp-4016
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
@@ -96,7 +124,7 @@ Feature: Filter, Search and Sort the Search modifications page
         Scenario: Verify back and short project title link navigation for search modifications tasklist
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I can now see a table of search results for 'modifications received for approval'
@@ -155,7 +183,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -178,7 +206,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor) when JS enabled
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -236,7 +264,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
@@ -490,7 +518,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @RemoveAllActiveFiltersOneByOne @jsDisabled
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -536,7 +564,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @RemoveActiveFiltersAlTogether @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -640,7 +668,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID
         Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria ''

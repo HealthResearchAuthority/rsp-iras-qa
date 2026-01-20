@@ -24,7 +24,7 @@
       "Wales"
     ],
     "short_project_title_label": "Short project title",
-    "short_project_title_hint_text": "Enter the name of the short project title",
+    "short_project_title_hint_text": "Enter the short project title",
     "sponsor_organisation_label": "Sponsor organisation",
     "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
     "Advanced_Filters_Hint_Labels": {
@@ -69,7 +69,7 @@
       ]
     },
     "Advanced_Filters_Short_Project_Title": {
-      "short_project_title_text": "HP in a UK cohort"
+      "short_project_title_text": "Retinal Photographs Inform on Global Health Status in Diabetes"
     },
     "Advanced_Filters_All": {
       "chief_investigator_name_text": "ci_test@test.com",
@@ -303,10 +303,10 @@
   },
   "Search_Queries": {
     "Valid_Iras_Id_Prefix": {
-      "search_input_text": "25"
+      "search_input_text": "32"
     },
     "Valid_Full_Iras_Id": {
-      "search_input_text": "255145"
+      "search_input_text": "320326"
     },
     "Invalid_Iras_Id_Letters": {
       "search_input_text": "abcdefg"

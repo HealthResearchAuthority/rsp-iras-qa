@@ -1,7 +1,7 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled
+@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace
 
-  @rsp-4846 @SponsorWorkspacePageLabelValidation @SetupNewSponsorOrgGoLive
+  @rsp-4846 @SponsorWorkspacePageLabelValidation
   Scenario: Validate the sponsor workspace page
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -44,7 +44,7 @@ Feature: Sponsor Workspace
     Then I can see the sponsor workspace page
     And I can see the ui labels in sponsor workspace page
 
-  @rsp-4846 @SponsorWorkspacePageValidationWhenUserEnabledOrDisabled @SetupNewSponsorOrgGoLive
+  @rsp-4846 @SponsorWorkspacePageValidationWhenUserEnabledOrDisabled
   Scenario: Validate the sponsor workspace page when the user is enabled or disabled for a sponsor organisation in backstage
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -128,7 +128,7 @@ Feature: Sponsor Workspace
     And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
-  @rsp-4846 @SponsorWorkspacePageValidationWhenSponsorOrganisationEnabledOrDisabled @SetupNewSponsorOrgGoLive
+  @rsp-4846 @SponsorWorkspacePageValidationWhenSponsorOrganisationEnabledOrDisabled
   Scenario: Validate the sponsor workspace page when the sponsor organisation is enabled or disabled in backstage
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -204,7 +204,7 @@ Feature: Sponsor Workspace
     And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
-  @rsp-5191 @SetupNewSponsorOrgGoLive @SponsorAuthorisationMandatorySelectionOnOutcomeError @jsEnabled
+  @rsp-5191 @SponsorAuthorisationMandatorySelectionOnOutcomeError @jsEnabled
   Scenario: Validate error message displayed in sponsor check and and authorise page when no option selection to action the modification
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -287,7 +287,7 @@ Feature: Sponsor Workspace
     And I validate 'Summary_Only_Error_Select_Outcome' displayed on 'Sponsor_Check_And_Authorise_Page'
     And I capture the page screenshot
 
-  @CreateDataApprovedModificationAuthorizationListPage @SetupNewSponsorOrgGoLive
+  @CreateDataApprovedModificationAuthorizationListPage
   Scenario Outline: Create approved modifications for modification authorization list page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -386,7 +386,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @CreateDataNotApprovedModificationAuthorizationListPage @SetupNewSponsorOrgGoLive
+  @CreateDataNotApprovedModificationAuthorizationListPage
   Scenario Outline: Create not approved modifications for modification authorization list page
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -488,7 +488,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @rsp-5190 @ValidateModificationListPageSortingPagination @SetupNewSponsorOrgGoLive
+  @rsp-5190 @ValidateModificationListPageSortingPagination
   Scenario: Verify that a sponsor user can access the modification authorization list page, view all modification records, apply sorting on the list, and navigate through records using pagination.
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'

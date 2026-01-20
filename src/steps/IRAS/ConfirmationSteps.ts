@@ -33,7 +33,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
@@ -61,7 +61,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
       expectedSuccessBody
     );
   }
@@ -82,7 +82,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedConfirmationHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
       validationLabelsDataset.enable_confirmation_body_label
     );
   }
@@ -111,7 +111,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
       expectedSuccessBody
     );
   }
@@ -128,7 +128,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
@@ -149,7 +149,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedSuccessHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(expectedSuccessBody);
   }
 );
@@ -164,7 +164,7 @@ Then(
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedConfirmationHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
       validationLabelsDataset.enable_confirmation_body_label
     );
   }
@@ -186,7 +186,7 @@ Then(
       expectedSuccessHeader
     );
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(expectedSuccessBody);
   }
 );
@@ -210,7 +210,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedSuccessHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(expectedSuccessBody);
   }
 );
@@ -222,12 +222,15 @@ Given(
     const lastName = await searchAddUserReviewBodyPage.getUserLastName();
     const reviewBodyName = await reviewBodyProfilePage.getOrgName();
     const guidanceText = confirmationPage.confirmationPageTestData.Add_User_Review_Body_Labels.page_guidance_text;
-    await expect(confirmationPage.confirmation_header_label).toHaveText(
-      confirmationPage.confirmationPageTestData.Add_User_Review_Body_Labels.page_heading
-    );
-    await expect(confirmationPage.confirmation_body_label).toHaveText(
-      `${firstName} ${lastName}${guidanceText}${reviewBodyName}.`
-    );
+    await expect
+      .soft(confirmationPage.confirmation_header_label)
+      .toHaveText(confirmationPage.confirmationPageTestData.Add_User_Review_Body_Labels.page_heading);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(`${firstName} ${lastName}${guidanceText}${reviewBodyName}.`);
+    await expect
+      .soft(confirmationPage.confirmation_body_label)
+      .toHaveText(`${firstName} ${lastName}${guidanceText}${reviewBodyName}.`);
   }
 );
 
@@ -336,7 +339,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
@@ -352,7 +355,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(validationLabelsDataset.enable_confirmation_body_label);
   }
 );
@@ -368,7 +371,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(validationLabelsDataset.disable_confirmation_body_label);
   }
 );
@@ -383,7 +386,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.nth(1).textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(validationLabelsDataset.enable_confirmation_body_label);
   }
 );

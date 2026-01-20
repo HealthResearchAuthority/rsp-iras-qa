@@ -647,7 +647,7 @@ Feature: Team Manager Dashboard page
                 When I click the 'Disable_User_Record' button on the 'User_Profile_Page'
                 And I validate 'Disable_User_Profile_Labels' labels displayed in disable user profile confirmation page using the '<User_Profile>' details
                 And I capture the page screenshot
-                And I click the 'Confirm' button on the 'Confirmation_Page'
+                And I click the 'Disable' button on the 'Confirmation_Page'
                 And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
                 Then I can see the 'Manage_Users_Page'
                 And I capture the page screenshot
