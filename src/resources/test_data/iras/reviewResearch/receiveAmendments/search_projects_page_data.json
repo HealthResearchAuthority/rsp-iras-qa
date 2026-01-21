@@ -9,20 +9,10 @@
     "chief_investigator_hint_text": "Enter the name of the Chief Investigator",
     "lead_nation_label": "Lead nation",
     "lead_nation_hint_text": "selected",
-    "lead_nation_checkbox": [
-      "England",
-      "Northern Ireland",
-      "Scotland",
-      "Wales"
-    ],
+    "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "participating_nation_label": "Participating nation",
     "participating_nation_hint_text": "selected",
-    "participating_nation_checkbox": [
-      "England",
-      "Northern Ireland",
-      "Scotland",
-      "Wales"
-    ],
+    "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "short_project_title_label": "Short project title",
     "short_project_title_hint_text": "Enter the short project title",
     "sponsor_organisation_label": "Sponsor organisation",
@@ -55,18 +45,8 @@
     "Advanced_Filters_All_Except_Short_Project_Title": {
       "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "sponsor_organisation_text": "University of Southampton",
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filters_Short_Project_Title": {
       "short_project_title_text": "Retinal Photographs Inform on Global Health Status in Diabetes"
@@ -75,18 +55,8 @@
       "chief_investigator_name_text": "ci_test@test.com",
       "sponsor_organisation_text": "University of Southampton",
       "short_project_title_text": "QA Automation",
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filters_All_Chief_Investigator_Name_Filter": {
       "chief_investigator_name_text": "ci_test@test.com"
@@ -94,18 +64,8 @@
     "Advanced_Filters_All_After_Remove_Chief_Investigator_Name_Filter": {
       "sponsor_organisation_text": "University of Southampton",
       "short_project_title_text": "QA Automation",
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filters_All_Sponsor_Organisation_Filter": {
       "sponsor_organisation_text": "University of Southampton"
@@ -113,18 +73,8 @@
     "Advanced_Filters_All_After_Remove_Sponsor_Organisation_Filter": {
       "chief_investigator_name_text": "ci",
       "short_project_title_text": "QA Automation",
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filters_All_Short_Project_Title_Filter": {
       "short_project_title_text": "QA Automation"
@@ -132,117 +82,54 @@
     "Advanced_Filters_All_After_Remove_Short_Project_Title_Filter": {
       "chief_investigator_name_text": "ci",
       "sponsor_organisation_text": "University of Southampton",
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filters_Checkboxes": {
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filters_Sponsor_Organisation": {
       "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Lead_Nation": {
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filter_No_Lead_Nation_Selected": {
       "lead_nation_checkbox": []
     },
     "Advanced_Filter_One_Lead_Nation_Selected": {
-      "lead_nation_checkbox": [
-        "England"
-      ]
+      "lead_nation_checkbox": ["England"]
     },
     "Advanced_Filter_Two_Lead_Nation_Selected": {
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland"]
     },
     "Advanced_Filter_Three_Lead_Nation_Selected": {
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
     },
     "Advanced_Filter_Four_Lead_Nation_Selected": {
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filter_No_Participating_Nation_Selected": {
       "participating_nation_checkbox": []
     },
     "Advanced_Filter_One_Participating_Nation_Selected": {
-      "participating_nation_checkbox": [
-        "England"
-      ]
+      "participating_nation_checkbox": ["England"]
     },
     "Advanced_Filter_Two_Participating_Nation_Selected": {
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland"
-      ]
+      "participating_nation_checkbox": ["England", "Northern Ireland"]
     },
     "Advanced_Filter_Three_Participating_Nation_Selected": {
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland"
-      ]
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
     },
     "Advanced_Filter_Four_Participating_Nation_Selected": {
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Advanced_Filters_Automation_No_SpOrg": {
       "chief_investigator_name_text": "ci_test",
       "short_project_title_text": "QA_Automation",
-      "lead_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "participating_nation_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "participating_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     }
   },
   "Sponsor_Organisation": {
@@ -304,10 +191,9 @@
   "Search_Queries": {
     "Valid_Iras_Id_Prefix": {
       "search_input_text": "32"
-      "search_input_text": "28"
     },
     "Valid_Full_Iras_Id": {
-      "search_input_text": "320326"     
+      "search_input_text": "320326"
     },
     "Invalid_Iras_Id_Letters": {
       "search_input_text": "abcdefg"
