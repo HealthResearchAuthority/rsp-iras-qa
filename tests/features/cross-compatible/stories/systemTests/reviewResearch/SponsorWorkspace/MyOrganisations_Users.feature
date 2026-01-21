@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
+@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @KNOWN-DEFECT-RSP-6795
 Feature: Sponsor Workspace - My Organisations Page - Users
 
   Background:
@@ -121,7 +121,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes |
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  |
 
-  @rsp-6425 @BackBreadCrumbs @KNOWN-DEFECT-RSP-6752
+  @rsp-6425 @BackBreadCrumbs
   Scenario Outline: Validate that back breadcrumb from check and add user page for <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -147,7 +147,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | University of Southampton |
       | automation sponsor email | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | University of Southampton |
 
-  @rsp-6425 @BackBreadCrumbs @KNOWN-DEFECT-RSP-6752
+  @rsp-6425 @BackBreadCrumbs
   Scenario Outline: Validate that back breadcrumb from check and add user page for <Select_User_Role>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'

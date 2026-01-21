@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
+@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @KNOWN-DEFECT-RSP-6795
 Feature: Sponsor Workspace-My Organisations-Users-Add user
 
   Background:

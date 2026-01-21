@@ -1,4 +1,4 @@
-@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SysAdminUser @jsEnabled @rsp-6425 @rsp-6465
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SysAdminUser @jsEnabled @rsp-6425 @rsp-6465 @KNOWN-DEFECT-RSP-6795
 Feature: Sponsor authorisation based on permission and role
 
   Background:
