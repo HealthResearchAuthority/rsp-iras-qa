@@ -57,6 +57,11 @@ export default class ModificationsCommonPage {
     userEmailExpected: string;
     dateTimeOfEventExpected: string;
   }[] = [];
+  readonly auditHistoryRecordBackstageUser: {
+    modificationEventExpected: string;
+    userEmailExpected: string;
+    dateTimeOfEventExpected: string;
+  }[] = [];
   readonly notification_heading_text: Locator;
   readonly notification_text: Locator;
 
@@ -451,6 +456,18 @@ export default class ModificationsCommonPage {
 
   async getOverallRankingForChanges() {
     return this.overallRankingForChanges;
+  }
+
+  set addAuditHistoryRecordBackstageUser(record: {
+    modificationEventExpected: string;
+    userEmailExpected: string;
+    dateTimeOfEventExpected: string;
+  }) {
+    this.auditHistoryRecordBackstageUser.push(record);
+  }
+
+  get getAuditHistoryRecordBackstageUser() {
+    return this.auditHistoryRecordBackstageUser;
   }
 
   async calculateAndStoreRankingForChangesForNonApplicability(

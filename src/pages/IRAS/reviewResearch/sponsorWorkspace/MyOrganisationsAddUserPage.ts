@@ -14,6 +14,14 @@ export default class MyOrganisationsAddUserPage {
   readonly non_registered_user_error_heading: Locator;
   readonly banner: Locator;
   readonly banner_heading: Locator;
+  readonly auditHistoryTableHeader: Locator;
+  readonly auditHistoryTableBodyRows: Locator;
+  readonly tableCell: Locator;
+  readonly auditHistoryRecord: {
+    sponsorOrgEventDescriptionExpected: string;
+    userEmailExpected: string;
+    dateTimeOfEventExpected: string;
+  }[] = [];
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -37,10 +45,25 @@ export default class MyOrganisationsAddUserPage {
       name: mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Error_Validation.User_Exists_Message
         .banner_heading,
     });
+    this.auditHistoryTableHeader = this.page.locator('.govuk-table-users').locator('tr th');
+    this.auditHistoryTableBodyRows = this.page.locator('.govuk-table__row');
+    this.tableCell = this.page.locator('td');
   }
 
   async goto(): Promise<void> {
     this.page.goto('');
+  }
+
+  set addAuditHistoryRecord(record: {
+    sponsorOrgEventDescriptionExpected: string;
+    userEmailExpected: string;
+    dateTimeOfEventExpected: string;
+  }) {
+    this.auditHistoryRecord.push(record);
+  }
+
+  get getAuditHistoryRecord() {
+    return this.auditHistoryRecord;
   }
 
   async assertOnMySponsorOrgAddUsersPage(sponsor_organisation: string): Promise<void> {
