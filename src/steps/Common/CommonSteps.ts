@@ -2010,19 +2010,25 @@ Given(
       await expect
         .soft(commonItemsPage.last_name_value_first_row)
         .toHaveText(await searchAddUserReviewBodyPage.getUserLastName());
+      await expect
+        .soft(commonItemsPage.email_address_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserEmail());
+      await expect
+        .soft(commonItemsPage.status_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserStatus());
     } else if (orgType === 'sponsor organisation') {
       await expect(commonItemsPage.users_sponsor_org_name_value_first_row).toHaveText(
         (await searchAddUserReviewBodyPage.getUserFirstName()) +
           ' ' +
           (await searchAddUserReviewBodyPage.getUserLastName())
       );
+      await expect
+        .soft(commonItemsPage.users_sponsor_org_email_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserEmail());
+      await expect
+        .soft(commonItemsPage.users_sponsor_org_status_value_first_row)
+        .toHaveText(await searchAddUserReviewBodyPage.getUserStatus());
     }
-    await expect
-      .soft(commonItemsPage.users_sponsor_org_email_value_first_row)
-      .toHaveText(await searchAddUserReviewBodyPage.getUserEmail());
-    await expect
-      .soft(commonItemsPage.users_sponsor_org_status_value_first_row)
-      .toHaveText(await searchAddUserReviewBodyPage.getUserStatus());
   }
 );
 
