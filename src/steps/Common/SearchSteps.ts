@@ -130,7 +130,13 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
 When(
   'I fill the search input for searching {string} with {string} as the search query as {string}',
   async (
-    { modificationsReadyToAssignPage, commonItemsPage, teamManagerDashboardPage, searchModificationsPage },
+    {
+      modificationsReadyToAssignPage,
+      commonItemsPage,
+      teamManagerDashboardPage,
+      searchModificationsPage,
+      myModificationsTasklistPage,
+    },
     searchType: string,
     searchQueryName: string,
     searchKeyType: string
@@ -139,14 +145,14 @@ When(
     let searchQueryDataset: any;
     if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'team manager dashboard') {
       if (searchKeyType.toLowerCase() === 'full') {
-        searchKey = await teamManagerDashboardPage.getModificationId();
+        searchKey = await teamManagerDashboardPage.getIrasId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await teamManagerDashboardPage.getModificationId()).substring(0, 2);
         await teamManagerDashboardPage.setModificationId(searchKey);
       }
     } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'tasklist') {
       if (searchKeyType.toLowerCase() === 'full') {
-        searchKey = await modificationsReadyToAssignPage.getModificationId();
+        searchKey = await modificationsReadyToAssignPage.getIrasId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await modificationsReadyToAssignPage.getModificationId()).substring(0, 2);
         await modificationsReadyToAssignPage.setModificationId(searchKey);
@@ -157,6 +163,12 @@ When(
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await searchModificationsPage.getIrasId()).substring(0, 2);
         await searchModificationsPage.setIrasId(searchKey);
+      }
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'my tasklist') {
+      if (searchKeyType.toLowerCase() === 'full') {
+        searchKey = await myModificationsTasklistPage.getIrasId();
+      } else if (searchKeyType.toLowerCase() === 'partial') {
+        searchKey = (await myModificationsTasklistPage.getModificationId()).substring(0, 2);
       }
     } else if (
       searchQueryName === 'modification assigned by team manager' &&

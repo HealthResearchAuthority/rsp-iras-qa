@@ -570,7 +570,7 @@ Feature: Team Manager Dashboard page
                         | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
                         | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @KNOWN_DEFECT_RSP-XXXX @5174
         Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
                 Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
                 And I capture the page screenshot
@@ -599,7 +599,7 @@ Feature: Team Manager Dashboard page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<Team_Manager_User>'
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I select modifications by clicking the checkbox in the 'team manager dashboard' page
@@ -611,10 +611,10 @@ Feature: Team Manager Dashboard page
                 And I capture the page screenshot
 
                 Examples:
-                        | User_Profile                                                       | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation      | Availability  | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-                        | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England          | Available     | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
-                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
-                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
+                        | User_Profile                                                       | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation      | Availability  | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User | Search_Key_Type |
+                        | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England          | Available     | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
+                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
+                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
 
         @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland
         Scenario Outline: Validate whether disabled study-wide reviewer is not displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
@@ -647,7 +647,7 @@ Feature: Team Manager Dashboard page
                 When I click the 'Disable_User_Record' button on the 'User_Profile_Page'
                 And I validate 'Disable_User_Profile_Labels' labels displayed in disable user profile confirmation page using the '<User_Profile>' details
                 And I capture the page screenshot
-                And I click the 'Confirm' button on the 'Confirmation_Page'
+                And I click the 'Disable' button on the 'Confirmation_Page'
                 And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
                 Then I can see the 'Manage_Users_Page'
                 And I capture the page screenshot
@@ -661,7 +661,7 @@ Feature: Team Manager Dashboard page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<Team_Manager_User>'
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I select modifications by clicking the checkbox in the 'team manager dashboard' page
@@ -673,8 +673,8 @@ Feature: Team Manager Dashboard page
                 And I capture the page screenshot
 
                 Examples:
-                        | User_Profile                                              | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation | Availability  | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-                        | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
+                        | User_Profile                                              | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation | Availability  | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User | Search_Key_Type |
+                        | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
 
         @BackLinkNavigation @RetainSelectedCheckboxes
         Scenario Outline: Validate the team manger navigates to the team manger dashboard page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page

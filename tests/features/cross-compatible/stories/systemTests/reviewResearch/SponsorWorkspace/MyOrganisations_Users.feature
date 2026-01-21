@@ -172,7 +172,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | User_Email              | Select_User_Role                | Select_User_Permission  | Sponsor_Organisation      |
       | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | University of Southampton |
 
-  @rsp-6425 @NoUserRoleSelectedError @KNOWN-DEFECT-RSP-6697
+  @rsp-6425 @NoUserRoleSelectedError
   Scenario Outline: Validate that Validation error when no role selected on add user role page
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
