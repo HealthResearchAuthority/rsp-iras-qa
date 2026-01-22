@@ -355,7 +355,9 @@
   },
   "My_Organisations_Page": {
     "View": "View",
-    "Manage": "Manage"
+    "Manage": "Manage",
+    "Users": "Users",
+    "Audit": " Audit"
   },
   "My_Organisations_Sponsor_Org_Profile_Page": {
     "Profile": "Profile",
@@ -402,5 +404,8 @@
     "Sponsorworkspace_Breadcrumb": "Sponsor workspace",
     "My_Account_Breadcrumb": "My account",
     "Projects_Link": "Projects"
+  },
+  "Modification_Outcome_Check_Send_Page": {
+    "Change": "Change"
   }
 }
