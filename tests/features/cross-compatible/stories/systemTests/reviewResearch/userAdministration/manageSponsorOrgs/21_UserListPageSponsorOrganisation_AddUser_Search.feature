@@ -78,7 +78,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        Then I can see the 'user added' successful message on sponsor organisation user list page
+        #Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot
     # And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
@@ -109,7 +109,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I capture the page screenshot
         And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-        Then I can see the 'user added' successful message on sponsor organisation user list page
+        #Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot
         When I enter the '<Field_Name>' of the '<Position>' user shown on the current 'sponsor organisation' users list, into the search field

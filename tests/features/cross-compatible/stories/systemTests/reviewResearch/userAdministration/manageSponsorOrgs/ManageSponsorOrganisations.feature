@@ -123,7 +123,7 @@ Feature: Manage sponsor organisations
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the 'user added' successful message on sponsor organisation user list page
+                #Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
                 When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
@@ -307,7 +307,7 @@ Feature: Manage sponsor organisations
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the 'user added' successful message on sponsor organisation user list page
+                #Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
                 When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'

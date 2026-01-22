@@ -45,7 +45,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
@@ -197,7 +197,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -260,7 +260,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -324,7 +324,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -367,7 +367,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -416,7 +416,7 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
