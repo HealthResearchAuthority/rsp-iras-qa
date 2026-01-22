@@ -14,6 +14,17 @@ AfterStep(async ({ page, $step, $testInfo, commonItemsPage }) => {
   }
 });
 
+BeforeScenario({ name: 'Ensure all test automation users have correct roles' }, async function ({ loginPage }) {
+  const testUsers = loginPage.loginPageTestData.User_Role_Map;
+  for (const user in testUsers) {
+    if (Object.hasOwn(testUsers, user)) {
+      const username = testUsers[user].username;
+      const role = testUsers[user].role;
+      await loginPage.sqlResetAllUserRoles(username, role);
+    }
+  }
+});
+
 BeforeScenario(
   { name: 'Attach relevant ticket links to each scenario in test report' },
   async function ({ $tags, $testInfo }) {

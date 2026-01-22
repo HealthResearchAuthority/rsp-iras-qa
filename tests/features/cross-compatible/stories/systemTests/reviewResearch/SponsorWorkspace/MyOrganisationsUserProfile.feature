@@ -52,7 +52,7 @@ Feature: Sponsor Workspace - My Organisations Page - User Profile
         And I capture the page screenshot
         And I see the details for '<Login_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
         And I '<Change_Permission>' see the change links on my organisations user profile page
-        When I click the 'Sponsor_Organisation_UniversityOfLeeds_Breadcrumb' link in the breadcrumbs on the 'My_Organisations_User_Profile_Page'
+        When I click the 'Sponsor_Organisation_UniversityOfSouthampton_Breadcrumb' link in the breadcrumbs on the 'My_Organisations_User_Profile_Page'
         Then I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
         When I navigate 'back'
         Then I can see the 'My_Organisations_User_Profile_Page'
@@ -68,10 +68,10 @@ Feature: Sponsor Workspace - My Organisations Page - User Profile
         Then I can see the 'Home_Page'
 
         Examples:
-            | Login_User             | User_Email               | Sponsor_Organisation | Select_User_Role                | Select_User_Permission  | Link   | Change_Permission |
-            | System_Admin           | system admin email       | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | can               |
-            | Sponsor_User           | automation sponsor email | University of Leeds  | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | View   | cannot            |
-            | Sponsor_Org_Admin_User | sponsor org admin email  | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | can               |
+            | Login_User             | User_Email               | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Link   | Change_Permission |
+            | System_Admin           | system admin email       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | can               |
+            | Sponsor_User           | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | View   | cannot            |
+            | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | can               |
 
     @rsp-6467 @ViewMyOrgEditUserProfilePage
     Scenario Outline: Validate that the my organisations edit user profile page displays as expected
@@ -118,6 +118,6 @@ Feature: Sponsor Workspace - My Organisations Page - User Profile
         And I see the details for '<Login_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
 
         Examples:
-            | Login_User             | User_Email              | Sponsor_Organisation | Select_User_Role                | Select_User_Permission  | Link   | Change_Permission | Change     | Edit_Input                    |
-            | System_Admin           | system admin email      | University of Leeds  | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | Manage | can               | Role       | Role_Org_Admin_Authoriser_Yes |
-            | Sponsor_Org_Admin_User | sponsor org admin email | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | can               | Authoriser | Role_Sponsor_Authoriser_No    |
+            | Login_User             | User_Email              | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Link   | Change_Permission | Change     | Edit_Input                    |
+            | System_Admin           | system admin email      | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | Manage | can               | Role       | Role_Org_Admin_Authoriser_Yes |
+            | Sponsor_Org_Admin_User | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | can               | Authoriser | Role_Sponsor_Authoriser_No    |

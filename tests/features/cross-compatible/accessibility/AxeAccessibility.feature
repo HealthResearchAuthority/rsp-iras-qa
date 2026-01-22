@@ -3157,7 +3157,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfLeeds'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
     When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
@@ -3190,7 +3190,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfLeeds'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
     When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
@@ -3224,7 +3224,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfLeeds'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
     When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'

@@ -5,7 +5,7 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-        And I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfLeeds'
+        And I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
         And I keep note of the organisation name for sponsor organisation setup
@@ -91,8 +91,8 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         Then I can see the 'Home_Page'
 
         Examples:
-            | Login_User   | User_Email         | Sponsor_Organisation | Select_User_Role                | Select_User_Permission  |
-            | System_Admin | system admin email | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+            | Login_User   | User_Email         | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
+            | System_Admin | system admin email | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
     @rsp-6423 @AccessMyOrgAuditPage
     Scenario Outline: Validate that the my organisations audit page can only be accessed by administrators
@@ -117,6 +117,6 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         Then I can see tabs are displayed based on the logged in user role '<Login_User>'
 
         Examples:
-            | Login_User             | User_Email               | Sponsor_Organisation | Select_User_Role                | Select_User_Permission  |
-            | Sponsor_User           | automation sponsor email | University of Leeds  | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
-            | Sponsor_Org_Admin_User | sponsor org admin email  | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+            | Login_User             | User_Email               | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
+            | Sponsor_User           | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
+            | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
