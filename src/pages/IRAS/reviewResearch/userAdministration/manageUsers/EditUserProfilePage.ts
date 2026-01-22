@@ -75,10 +75,9 @@ export default class EditUserProfilePage {
         exact: true,
       }
     );
-
-    this.role_label = this.page
-      .locator('.govuk-label')
-      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label, { exact: true });
+    this.role_label = this.page.locator('legend', {
+      hasText: this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label,
+    });
     this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
     this.country_label = this.page

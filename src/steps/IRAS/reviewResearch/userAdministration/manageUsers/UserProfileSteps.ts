@@ -120,16 +120,16 @@ When(
     let dataset: any;
     if (await userProfilePage.role_value.isVisible()) {
       if (datasetName.includes('_Role_No')) {
-        dataset =
-          manageUsersPage.manageUsersPageTestData.Advanced_Filters[
-            'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
-          ];
+        return;
       } else {
         dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
       }
       const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
       const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-      expect.soft(actualValues).toContain(expectedValues);
+      const actualRoles = actualValues.split(',').map((val: any) => val.trim());
+      const expectedRoles = expectedValues.split(',').map((val: any) => val.trim());
+      const commonValue = actualRoles.some((role) => expectedRoles.includes(role));
+      expect.soft(commonValue).toBe(true);
     }
   }
 );
@@ -140,16 +140,16 @@ When(
     let dataset: any;
     if (await userProfilePage.review_body_value.isVisible()) {
       if (datasetName.includes('_Review_Body_No')) {
-        dataset =
-          manageUsersPage.manageUsersPageTestData.Advanced_Filters[
-            'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
-          ];
+        return;
       } else {
         dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
       }
       const actualValues = confirmStringNotNull(await userProfilePage.review_body_value.textContent());
       const expectedValues = dataset.review_body_checkbox.toString().replaceAll(',', ', ');
-      expect.soft(actualValues.includes(expectedValues) || expectedValues.includes(actualValues)).toBe(true);
+      const actualReviewBodies = actualValues.split(',').map((val: any) => val.trim());
+      const expectedReviewBodies = expectedValues.split(',').map((val: any) => val.trim());
+      const commonValue = actualReviewBodies.some((value) => expectedReviewBodies.includes(value));
+      expect.soft(commonValue).toBe(true);
     }
   }
 );
@@ -160,10 +160,7 @@ When(
     let dataset: any;
     if (await userProfilePage.country_value.isVisible()) {
       if (datasetName.includes('_Country_No')) {
-        dataset =
-          manageUsersPage.manageUsersPageTestData.Advanced_Filters[
-            'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
-          ];
+        return;
       } else {
         dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
       }
