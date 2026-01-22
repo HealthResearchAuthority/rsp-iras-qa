@@ -64,6 +64,8 @@ When(
       searchProjectsPage,
       projectOverviewPage,
       modificationsReceivedCommonPage,
+      myOrganisationsUserProfilePage,
+      myOrganisationsEditUserProfilePage,
     },
     page: string
   ) => {
@@ -185,6 +187,12 @@ When(
         break;
       case 'Modification_Details_Page':
         await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
+        break;
+      case 'My_Organisations_User_Profile_Page':
+        await myOrganisationsUserProfilePage.assertOnMySponsorOrgUserProfilePage();
+        break;
+      case 'My_Organisations_Edit_User_Profile_Page':
+        await myOrganisationsEditUserProfilePage.assertOnMySponsorOrgEditUserProfilePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -1141,6 +1149,7 @@ Given(
       searchModificationsPage,
       teamManagerDashboardPage,
       manageUsersPage,
+      myOrgSponsorOrgProfilePage,
     },
     page: string,
     user: string
@@ -1213,6 +1222,13 @@ Given(
           await manageUsersPage.page.context().addCookies(authState.cookies);
           await manageUsersPage.goto();
           await manageUsersPage.assertOnManageUsersPage();
+          break;
+        case 'My_Organisations_Sponsor_Org_Profile_Page':
+          await myOrgSponsorOrgProfilePage.page.context().addCookies(authState.cookies);
+          await myOrgSponsorOrgProfilePage.goto(await myOrgSponsorOrgProfilePage.getRtsId());
+          await myOrgSponsorOrgProfilePage.assertOnMyOrgSponsorOrgProfilePage(
+            await myOrgSponsorOrgProfilePage.getOrgName()
+          );
           break;
         default:
           throw new Error(`${page} is not a valid option`);

@@ -434,5 +434,8 @@
   "Check_Confirm_User_To_Add_Sponsor_Org_Page": {
     "Confirm": "Confirm",
     "Cancel": "Cancel"
+  },
+  "My_Organisations_Edit_User_Profile_Page": {
+    "Save": "Save"
   }
 }
