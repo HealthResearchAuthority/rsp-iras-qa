@@ -1251,7 +1251,8 @@ Then(
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
         pagename === 'Review_All_Changes_Page' ||
-        pagename === 'Manage_Sponsor_Organisations_Page'
+        pagename === 'Manage_Sponsor_Organisations_Page' ||
+        pagename === 'Project_Documents_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
@@ -1286,7 +1287,8 @@ Then(
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
         pagename === 'Review_All_Changes_Page' ||
-        pagename === 'Manage_Sponsor_Organisations_Page'
+        pagename === 'Manage_Sponsor_Organisations_Page' ||
+        pagename === 'Project_Documents_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
