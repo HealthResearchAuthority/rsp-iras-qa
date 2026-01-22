@@ -21,6 +21,14 @@ Feature: Login as a role which is not same lead nation who created project: sear
         When I enter 'automation sponsor email' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+        And I capture the page screenshot
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         #Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
