@@ -127,8 +127,8 @@ When(
       const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
       const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
       const actualRoles = actualValues.split(',').map((val: any) => val.trim());
-      const expectedRoles = expectedValues.split(',').map((val: any) => val.trim());
-      const commonValue = actualRoles.some((role) => expectedRoles.includes(role));
+      const expectedRoles = new Set(expectedValues.split(',').map((val: any) => val.trim()));
+      const commonValue = actualRoles.some((role) => expectedRoles.has(role));
       expect.soft(commonValue).toBe(true);
     }
   }
@@ -147,8 +147,8 @@ When(
       const actualValues = confirmStringNotNull(await userProfilePage.review_body_value.textContent());
       const expectedValues = dataset.review_body_checkbox.toString().replaceAll(',', ', ');
       const actualReviewBodies = actualValues.split(',').map((val: any) => val.trim());
-      const expectedReviewBodies = expectedValues.split(',').map((val: any) => val.trim());
-      const commonValue = actualReviewBodies.some((value) => expectedReviewBodies.includes(value));
+      const expectedReviewBodies = new Set(expectedValues.split(',').map((val: any) => val.trim()));
+      const commonValue = actualReviewBodies.some((value) => expectedReviewBodies.has(value));
       expect.soft(commonValue).toBe(true);
     }
   }
