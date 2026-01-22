@@ -37,6 +37,8 @@
   },
   "Modification_Outcome_Reasons": {
     "Blank": "",
-    "Lack_Of_Evidence": "There is a lack of evidence provided"
+    "Lack_Of_Evidence": "There is a lack of evidence provided",
+    "Valid_Reason": "Modification details are verified and approved",
+    "Valid_Reason_Not_Approved": "Modification is not approved by the review body for valid reasons"
   }
 }

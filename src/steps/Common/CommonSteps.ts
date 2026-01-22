@@ -324,7 +324,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
   }
   if (
     (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') ||
-    (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users')
+    (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users') ||
+    (pageKey === 'Modification_Outcome_Check_Send_Page' && linkValue === 'Change')
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
     return;
@@ -843,6 +844,9 @@ When(
         break;
       case 'sponsor org admin email':
         searchValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
+        break;
+      case 'Studywide_Reviewer_NI':
+        searchValue = loginPage.loginPageTestData.Studywide_Reviewer_NI.username;
         break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
