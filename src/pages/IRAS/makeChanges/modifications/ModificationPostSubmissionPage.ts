@@ -22,6 +22,6 @@ export default class ModificationPostSubmissionPage {
 
   //Page Methods
   async assertOnModificationPostSubmissionPage() {
-    await expect(this.pageHeading).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
   }
 }

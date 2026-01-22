@@ -78,3 +78,64 @@ Then(
     }
   }
 );
+
+Then(
+  'I record the {string} event for the user {string} to store the sponsor organisation audit history triggered by {string}',
+  async (
+    { loginPage, mySponsorOrgAddUserPage },
+    eventDescriptionDatasetName: string,
+    userDatasetName: string,
+    targetUser: string
+  ) => {
+    const eventText =
+      mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Events[
+        eventDescriptionDatasetName
+      ];
+
+    let userEmailLogin = '';
+    if (userDatasetName.toLowerCase() !== 'blank_user_details') {
+      userEmailLogin = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
+    }
+    const userEmail = loginPage.loginPageTestData[targetUser].username.toLowerCase();
+    const eventDescription = userEmailLogin + eventText;
+    const now = new Date();
+    const dateTimeOfEvent = `${new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    }).format(now)} at ${new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(now)}`;
+    mySponsorOrgAddUserPage.addAuditHistoryRecord = {
+      dateTimeOfEventExpected: dateTimeOfEvent,
+      sponsorOrgEventDescriptionExpected: eventDescription,
+      userEmailExpected: userEmail,
+    };
+  }
+);
+
+Then('I validate the audit history table for sponsor organisation', async ({ mySponsorOrgAddUserPage }) => {
+  const auditHistoryTableHeadersActual = await mySponsorOrgAddUserPage.auditHistoryTableHeader.allTextContents();
+  const auditHistoryTableHeadersExpected =
+    mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Headers;
+  expect.soft(auditHistoryTableHeadersActual).toEqual(auditHistoryTableHeadersExpected);
+  const rowCount = await mySponsorOrgAddUserPage.auditHistoryTableBodyRows.count();
+  const actualAuditHistoryRows: string[][] = [];
+  for (let auditRowIndex = 0; auditRowIndex < rowCount; auditRowIndex++) {
+    const row = mySponsorOrgAddUserPage.auditHistoryTableBodyRows.nth(auditRowIndex);
+    const cellTexts = await row.locator(mySponsorOrgAddUserPage.tableCell).allTextContents();
+    actualAuditHistoryRows.push(cellTexts.map((text) => text.trim()));
+  }
+  const expectedAuditHistoryRows = mySponsorOrgAddUserPage.getAuditHistoryRecord
+    .slice()
+    .reverse()
+    .map((record) => [
+      record.dateTimeOfEventExpected,
+      record.sponsorOrgEventDescriptionExpected,
+      record.userEmailExpected,
+    ]);
+  const expectedRowsToCheck = [...actualAuditHistoryRows];
+  expect.soft(expectedRowsToCheck).toEqual(expectedAuditHistoryRows);
+});
