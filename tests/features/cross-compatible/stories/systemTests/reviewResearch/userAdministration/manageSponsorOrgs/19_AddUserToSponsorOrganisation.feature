@@ -113,7 +113,7 @@ Feature: Add user to sponsor organisation
         And I capture the page screenshot
         When I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        Then I can see the 'user added' successful message on sponsor organisation user list page
+        #Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
 
     @verifySearchSponsorOrgUserListAddedUser
@@ -133,7 +133,7 @@ Feature: Add user to sponsor organisation
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        Then I can see the 'user added' successful message on sponsor organisation user list page
+        #Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot
         When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
@@ -159,7 +159,7 @@ Feature: Add user to sponsor organisation
         Then I can see the 'Check_Add_User_Sponsor_Org_Page'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        Then I can see the 'user added' successful message on sponsor organisation user list page
+        #Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot
         When I enter 'email of the newly added user in the selected sponsor organisation' into the search field

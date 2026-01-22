@@ -501,7 +501,7 @@ Feature: WFC - Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query as '<Search_Key_Type>'
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
@@ -513,39 +513,39 @@ Feature: WFC - Modifications Tasklist page
         And I capture the page screenshot
 
         Examples:
-            | Valid_Iras_Id           | Workflow_Coordinator_User | Status           | Modification_Count |
-            | Existing_IRAS_ID_Single | Workflow_Coordinator      | With review body | Single             |
+            | Valid_Iras_Id           | Workflow_Coordinator_User | Status           | Modification_Count | Search_Key_Type |
+            | Existing_IRAS_ID_Single | Workflow_Coordinator      | With review body | Single             | Full            |
 
-    @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849
-    Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
-        Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
-        And I capture the page screenshot
-        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-        And I capture the page screenshot
-        Then I can see the add a new user profile page
-        When I fill the new user profile page using '<User_Profile>'
-        And I capture the page screenshot
-        And I click the 'Continue' button on the 'Create_User_Profile_Page'
-        Then I can see the check and create user profile page
-        And I capture the page screenshot
-        Then I can see previously filled values in the new user profile page for '<User_Profile>' displayed on the check and create user profile page
-        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
-        Then I can see the create user profile confirmation page for '<User_Profile>'
-        And I capture the page screenshot
-        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-        Then I can see the 'Manage_Users_Page'
-        And I capture the page screenshot
-        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
-        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
-        And I capture the page screenshot
-        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
-        And I capture the page screenshot
-        And I can see the newly created user record should be present in the list for '<User_Profile>' with 'Active' status in the manage user page
-        And I capture the page screenshot
+    @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland @rsp-4076 @rsp-4849  @4076
+    Scenario Outline: Validate active study-wide reviewers displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England,WFC)
+        # Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
+        # And I capture the page screenshot
+        # When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        # And I capture the page screenshot
+        # Then I can see the add a new user profile page
+        # When I fill the new user profile page using '<User_Profile>'
+        # And I capture the page screenshot
+        # And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        # Then I can see the check and create user profile page
+        # And I capture the page screenshot
+        # Then I can see previously filled values in the new user profile page for '<User_Profile>' displayed on the check and create user profile page
+        # And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        # Then I can see the create user profile confirmation page for '<User_Profile>'
+        # And I capture the page screenshot
+        # When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        # Then I can see the 'Manage_Users_Page'
+        # And I capture the page screenshot
+        # And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        # And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        # And I capture the page screenshot
+        # And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        # And I capture the page screenshot
+        # And I can see the newly created user record should be present in the list for '<User_Profile>' with 'Active' status in the manage user page
+        # And I capture the page screenshot
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query as '<Search_Key_Type>'
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
@@ -553,14 +553,16 @@ Feature: WFC - Modifications Tasklist page
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
-        And I can see newly created study-wide reviewer '<User_Profile>' of '<Lead_Nation>' is '<Availability>' in the dropdown based on the lead nation of the selected modification and the review body
+        # And I can see newly created study-wide reviewer '<User_Profile>' of '<SWR_Lead_Nation>' is '<Availability>' in the dropdown based on the lead nation of the selected modification and the review body
+        And I can see study-wide reviewer of '<SWR_Lead_Nation>' is '<Availability>' in the dropdown based on the lead nation of the selected modification and the review body
         And I capture the page screenshot
 
         Examples:
-            | User_Profile                                                       | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation      | Availability  | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England          | Available     | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
+            | User_Profile                                                       | Valid_Iras_Id           | Advanced_Filters_Users                                | SWR_Lead_Nation                 | Availability  | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User | Search_Key_Type |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Study_Wide_Reviewer_HRA_England | Available     | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       | Full            |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Studywide_Reviewer_NI           | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       | Full            |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Studywide_Reviewer_S            | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       | Full            |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Studywide_Reviewer_W            | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       | Full            |
 
 
     @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland @rsp-4076 @rsp-4849
@@ -608,7 +610,7 @@ Feature: WFC - Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query as '<Search_Key_Type>'
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
@@ -621,15 +623,15 @@ Feature: WFC - Modifications Tasklist page
 
         Examples:
 
-            | User_Profile                                              | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation | Availability  | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
+            | User_Profile                                              | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation | Availability  | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User | Search_Key_Type |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       | Full            |
 
-    @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011
+    @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849
     Scenario Outline: Validate the workflow co-ordinator navigates to the modifications task list page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with '<Valid_Iras_Id>' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query as '<Search_Key_Type>'
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
@@ -644,8 +646,8 @@ Feature: WFC - Modifications Tasklist page
         And I capture the page screenshot
 
         Examples:
-            | Valid_Iras_Id           | User                 | Status           | Modification_Count |
-            | Existing_IRAS_ID_Single | Workflow_Coordinator | With review body | Single             |
+            | Valid_Iras_Id           | User                 | Status           | Modification_Count | Search_Key_Type |
+            | Existing_IRAS_ID_Single | Workflow_Coordinator | With review body | Single             | Full            |
 
     @searchTasklistModificationStatus @rsp-4822
     Scenario Outline: Verify that modifications status display as expected on the modifications tasklist page

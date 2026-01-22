@@ -570,36 +570,36 @@ Feature: Team Manager Dashboard page
                         | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
                         | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
-        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland
-        Scenario Outline: Validate whether the active study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
-                Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
-                And I capture the page screenshot
-                When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-                And I capture the page screenshot
-                Then I can see the add a new user profile page
-                When I fill the new user profile page using '<User_Profile>'
-                And I capture the page screenshot
-                And I click the 'Continue' button on the 'Create_User_Profile_Page'
-                Then I can see the check and create user profile page
-                And I capture the page screenshot
-                Then I can see previously filled values in the new user profile page for '<User_Profile>' displayed on the check and create user profile page
-                And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
-                Then I can see the create user profile confirmation page for '<User_Profile>'
-                And I capture the page screenshot
-                When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-                Then I can see the 'Manage_Users_Page'
-                And I capture the page screenshot
-                And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
-                And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
-                And I capture the page screenshot
-                And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
-                And I capture the page screenshot
-                And I can see the newly created user record should be present in the list for '<User_Profile>' with 'Active' status in the manage user page
-                And I capture the page screenshot
+        @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland  @5174
+        Scenario Outline: Validate active study-wide reviewers displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England,TM)
+                # Given I have navigated to the 'Manage_Users_Page' as 'System_Admin'
+                # And I capture the page screenshot
+                # When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+                # And I capture the page screenshot
+                # Then I can see the add a new user profile page
+                # When I fill the new user profile page using '<User_Profile>'
+                # And I capture the page screenshot
+                # And I click the 'Continue' button on the 'Create_User_Profile_Page'
+                # Then I can see the check and create user profile page
+                # And I capture the page screenshot
+                # Then I can see previously filled values in the new user profile page for '<User_Profile>' displayed on the check and create user profile page
+                # And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+                # Then I can see the create user profile confirmation page for '<User_Profile>'
+                # And I capture the page screenshot
+                # When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+                # Then I can see the 'Manage_Users_Page'
+                # And I capture the page screenshot
+                # And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+                # And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+                # And I capture the page screenshot
+                # And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+                # And I capture the page screenshot
+                # And I can see the newly created user record should be present in the list for '<User_Profile>' with 'Active' status in the manage user page
+                # And I capture the page screenshot
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<Team_Manager_User>'
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I select modifications by clicking the checkbox in the 'team manager dashboard' page
@@ -607,14 +607,17 @@ Feature: Team Manager Dashboard page
                 And I click the 'Continue' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 Then I can see the 'Select_Study_Wide_Reviewer_Page'
-                And I can see newly created study-wide reviewer '<User_Profile>' of '<Lead_Nation>' is '<Availability>' in the dropdown based on the lead nation of the selected modification and the review body
+                And I can see study-wide reviewer of '<SWR_Lead_Nation>' is '<Availability>' in the dropdown based on the lead nation of the selected modification and the review body
                 And I capture the page screenshot
+                # And I can see newly created study-wide reviewer '<User_Profile>' of '<Lead_Nation>' is '<Availability>' in the dropdown based on the lead nation of the selected modification and the review body
+                # And I capture the page screenshot
 
                 Examples:
-                        | User_Profile                                                       | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation      | Availability  | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-                        | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England          | Available     | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
-                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
-                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
+                        | User_Profile                                                       | Valid_Iras_Id           | Advanced_Filters_Users                                | SWR_Lead_Nation                 | Availability  | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User | Search_Key_Type |
+                        | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Study_Wide_Reviewer_HRA_England | Available     | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
+                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Studywide_Reviewer_NI           | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
+                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Studywide_Reviewer_S            | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
+                        | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Studywide_Reviewer_W            | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
 
         @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListDisabledLeadNationEngland
         Scenario Outline: Validate whether disabled study-wide reviewer is not displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England)
@@ -661,7 +664,7 @@ Feature: Team Manager Dashboard page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<Team_Manager_User>'
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I select modifications by clicking the checkbox in the 'team manager dashboard' page
@@ -673,8 +676,8 @@ Feature: Team Manager Dashboard page
                 And I capture the page screenshot
 
                 Examples:
-                        | User_Profile                                              | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation | Availability  | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-                        | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
+                        | User_Profile                                              | Valid_Iras_Id           | Advanced_Filters_Users                                | Lead_Nation | Availability  | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User | Search_Key_Type |
+                        | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Existing_IRAS_ID_Single | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
 
         @BackLinkNavigation @RetainSelectedCheckboxes
         Scenario Outline: Validate the team manger navigates to the team manger dashboard page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page

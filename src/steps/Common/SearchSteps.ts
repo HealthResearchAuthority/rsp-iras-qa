@@ -130,7 +130,13 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
 When(
   'I fill the search input for searching {string} with {string} as the search query as {string}',
   async (
-    { modificationsReadyToAssignPage, commonItemsPage, teamManagerDashboardPage, searchModificationsPage },
+    {
+      modificationsReadyToAssignPage,
+      commonItemsPage,
+      teamManagerDashboardPage,
+      searchModificationsPage,
+      myModificationsTasklistPage,
+    },
     searchType: string,
     searchQueryName: string,
     searchKeyType: string
@@ -139,24 +145,30 @@ When(
     let searchQueryDataset: any;
     if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'team manager dashboard') {
       if (searchKeyType.toLowerCase() === 'full') {
-        searchKey = await teamManagerDashboardPage.getModificationId();
+        searchKey = await teamManagerDashboardPage.getIrasId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await teamManagerDashboardPage.getModificationId()).substring(0, 2);
         await teamManagerDashboardPage.setModificationId(searchKey);
       }
     } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'tasklist') {
       if (searchKeyType.toLowerCase() === 'full') {
-        searchKey = await modificationsReadyToAssignPage.getModificationId();
+        searchKey = await modificationsReadyToAssignPage.getIrasId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
         searchKey = (await modificationsReadyToAssignPage.getModificationId()).substring(0, 2);
         await modificationsReadyToAssignPage.setModificationId(searchKey);
       }
     } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'modifications') {
       if (searchKeyType.toLowerCase() === 'full') {
-        searchKey = await searchModificationsPage.getModificationId();
+        searchKey = await searchModificationsPage.getIrasId();
       } else if (searchKeyType.toLowerCase() === 'partial') {
-        searchKey = (await searchModificationsPage.getModificationId()).substring(0, 2);
-        await searchModificationsPage.setModificationId(searchKey);
+        searchKey = (await searchModificationsPage.getIrasId()).substring(0, 2);
+        await searchModificationsPage.setIrasId(searchKey);
+      }
+    } else if (searchQueryName === 'modification with status' && searchType.toLowerCase() == 'my tasklist') {
+      if (searchKeyType.toLowerCase() === 'full') {
+        searchKey = await myModificationsTasklistPage.getIrasId();
+      } else if (searchKeyType.toLowerCase() === 'partial') {
+        searchKey = (await myModificationsTasklistPage.getModificationId()).substring(0, 2);
       }
     } else if (
       searchQueryName === 'modification assigned by team manager' &&
@@ -179,16 +191,20 @@ When(
 
 When(
   'I enter the the search input for {string} with {string}',
-  async ({ searchModificationsPage, commonItemsPage }, searchType: string, datasetName: string) => {
+  async ({ searchModificationsPage, searchProjectsPage, commonItemsPage }, searchType: string, datasetName: string) => {
     let searchKey: string;
     if (searchType.toLowerCase() == 'modifications') {
       if (datasetName === 'Valid_Full_Iras_Id') {
-        searchKey = await searchModificationsPage.getModificationId();
+        searchKey = await searchModificationsPage.getIrasId();
       } else if (datasetName === 'Existing_Partial_IRAS_ID') {
-        searchKey = (await searchModificationsPage.getModificationId()).substring(0, 2);
+        searchKey = (await searchModificationsPage.getIrasId()).substring(0, 2);
       }
-    } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
-      throw new Error(`There are no items in list to search`);
+    } else if (searchType.toLowerCase() == 'project records') {
+      if (datasetName === 'Valid_Full_Iras_Id') {
+        searchKey = await searchProjectsPage.getIrasId();
+      } else if (datasetName === 'Valid_Iras_Id_Prefix') {
+        searchKey = (await searchProjectsPage.getIrasId()).substring(0, 2);
+      }
     }
     expect.soft(searchKey).toBeTruthy();
     await commonItemsPage.setSearchKey(searchKey);
