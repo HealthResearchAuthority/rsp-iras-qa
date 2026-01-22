@@ -51,7 +51,9 @@ Then(
     let irasId: string;
     const testData = searchModificationsPage.searchModificationsPageTestData;
     if (irasIdDatasetName === 'Iras_Id_Retrieved_From_DB_With_Status_Active') {
-      irasId = await searchModificationsPage.getModificationId();
+      irasId = await searchModificationsPage.getIrasId();
+    } else if (irasIdDatasetName === 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+      irasId = (await searchModificationsPage.getIrasId()).substring(0, 2);
     } else {
       irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
     }
@@ -329,5 +331,7 @@ Then(
     }
     const modificationId = await searchModificationsPage.sqlGetModificationByStatus(status, countValue);
     await searchModificationsPage.saveModificationIdSearch(modificationId.toString(), modificationCount);
+    const irasId = modificationId.toString().split('/')[0];
+    await searchModificationsPage.setIrasId(irasId);
   }
 );

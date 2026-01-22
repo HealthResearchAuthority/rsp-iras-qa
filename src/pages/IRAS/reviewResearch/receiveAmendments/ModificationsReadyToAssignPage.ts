@@ -17,6 +17,7 @@ export default class ModificationsReadyToAssignPage {
   private _modification_record: string;
   private _modification_id_title: string[];
   private _modification_id: string;
+  private _iras_id: string;
   readonly modifications_tasklist_link: Locator;
   readonly short_project_title_column_label: Locator;
   readonly modification_id_column_label: Locator;
@@ -53,6 +54,7 @@ export default class ModificationsReadyToAssignPage {
     this._modification_record = '';
     this._modification_id_title = [];
     this._modification_id = '';
+    this._iras_id = '';
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
@@ -145,6 +147,14 @@ export default class ModificationsReadyToAssignPage {
 
   async setModificationId(value: string): Promise<void> {
     this._modification_id = value;
+  }
+
+  async getIrasId(): Promise<string> {
+    return this._iras_id;
+  }
+
+  async setIrasId(value: string): Promise<void> {
+    this._iras_id = value;
   }
 
   //Page Methods

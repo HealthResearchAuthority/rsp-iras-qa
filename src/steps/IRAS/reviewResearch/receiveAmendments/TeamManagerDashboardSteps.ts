@@ -38,6 +38,8 @@ Then(
     );
     await teamManagerDashboardPage.saveModificationIdTM(modificationId.toString(), modificationCount);
     await teamManagerDashboardPage.page.waitForTimeout(2000);
+    const irasId = modificationId.toString().split('/')[0];
+    await teamManagerDashboardPage.setIrasId(irasId);
   }
 );
 

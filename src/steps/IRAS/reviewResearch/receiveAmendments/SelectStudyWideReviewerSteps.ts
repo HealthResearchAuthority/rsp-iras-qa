@@ -59,3 +59,26 @@ Then(
     }
   }
 );
+
+Then(
+  'I can see study-wide reviewer of {string} is {string} in the dropdown based on the lead nation of the selected modification and the review body',
+  async ({ selectStudyWideReviewerPage }, swrLeadNation: string, availability: string) => {
+    const dataset = selectStudyWideReviewerPage.selectStudywideReviewerPageData.Study_Wide_Reviewer[swrLeadNation];
+    const userFullName = dataset.study_wide_reviewer_dropdown;
+    const dropdownValues: string[] = [];
+    const dropdown = selectStudyWideReviewerPage.study_wide_reviewer_dropdown;
+    const options = await dropdown.locator('option').all();
+    for (const option of options) {
+      const text = await option.textContent();
+      dropdownValues.push(text);
+    }
+    const normalizedValues = dropdownValues.map((v) => v.trim());
+    const uniqueDropdownValues = [...new Set(normalizedValues)];
+
+    if (availability.toLowerCase() === 'available' && swrLeadNation.toLowerCase().endsWith('england')) {
+      expect.soft(uniqueDropdownValues).toContain(userFullName);
+    } else {
+      expect.soft(uniqueDropdownValues).not.toContain(userFullName);
+    }
+  }
+);

@@ -141,6 +141,8 @@ Then(
     const testData = searchProjectsPage.searchProjectsPageTestData;
     if (irasIdDatasetName === 'Project_Iras_Id_Retrieved_From_DB_With_Status_Active') {
       irasId = await searchProjectsPage.getIrasId();
+    } else if (irasIdDatasetName === 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+      irasId = (await searchProjectsPage.getIrasId()).substring(0, 2);
     } else {
       irasId = testData.Search_Queries?.[irasIdDatasetName]?.search_input_text;
     }

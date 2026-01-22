@@ -64,6 +64,8 @@ When(
       searchProjectsPage,
       projectOverviewPage,
       modificationsReceivedCommonPage,
+      myOrganisationsUserProfilePage,
+      myOrganisationsEditUserProfilePage,
     },
     page: string
   ) => {
@@ -185,6 +187,12 @@ When(
         break;
       case 'Modification_Details_Page':
         await modificationsReceivedCommonPage.assertOnModificationDetailsPage();
+        break;
+      case 'My_Organisations_User_Profile_Page':
+        await myOrganisationsUserProfilePage.assertOnMySponsorOrgUserProfilePage();
+        break;
+      case 'My_Organisations_Edit_User_Profile_Page':
+        await myOrganisationsEditUserProfilePage.assertOnMySponsorOrgEditUserProfilePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -324,7 +332,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
   }
   if (
     (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') ||
-    (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users')
+    (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users') ||
+    (pageKey === 'Modification_Outcome_Check_Send_Page' && linkValue === 'Change')
   ) {
     await commonItemsPage.govUkLink.getByText(linkValue).click();
     return;
@@ -844,6 +853,9 @@ When(
       case 'sponsor org admin email':
         searchValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
         break;
+      case 'Studywide_Reviewer_NI':
+        searchValue = loginPage.loginPageTestData.Studywide_Reviewer_NI.username;
+        break;
       case 'modification id':
         searchValue = await modificationsCommonPage.getModificationID();
         break;
@@ -924,6 +936,20 @@ Then(
         } else {
           throw new Error(`Unsupported button state: ${availabilityVal}`);
         }
+      }
+    } else if (linkLabel === 'Confirm_Selection') {
+      const buttonValue = commonItemsPage.buttonTextData['Sponsor_Check_And_Authorise_Page']['Confirm_Selection'];
+      const locatorVal: Locator = commonItemsPage.govUkButton
+        .getByText(buttonValue, { exact: true })
+        .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+        .first();
+      if (availabilityVal.toLowerCase() === 'available') {
+        await expect.soft(locatorVal).toBeVisible();
+        await expect.soft(locatorVal).toBeEnabled();
+      } else if (availabilityVal.toLowerCase() === 'not available') {
+        await expect.soft(locatorVal).toBeHidden();
+      } else {
+        throw new Error(`Unsupported button state: ${availabilityVal}`);
       }
     }
   }
@@ -1123,6 +1149,7 @@ Given(
       searchModificationsPage,
       teamManagerDashboardPage,
       manageUsersPage,
+      myOrgSponsorOrgProfilePage,
     },
     page: string,
     user: string
@@ -1195,6 +1222,13 @@ Given(
           await manageUsersPage.page.context().addCookies(authState.cookies);
           await manageUsersPage.goto();
           await manageUsersPage.assertOnManageUsersPage();
+          break;
+        case 'My_Organisations_Sponsor_Org_Profile_Page':
+          await myOrgSponsorOrgProfilePage.page.context().addCookies(authState.cookies);
+          await myOrgSponsorOrgProfilePage.goto(await myOrgSponsorOrgProfilePage.getRtsId());
+          await myOrgSponsorOrgProfilePage.assertOnMyOrgSponsorOrgProfilePage(
+            await myOrgSponsorOrgProfilePage.getOrgName()
+          );
           break;
         default:
           throw new Error(`${page} is not a valid option`);
@@ -1644,6 +1678,24 @@ When(
       .getByRole('cell')
       .nth(columnIndex)
       .getByRole('link');
+    await fieldLocator.click();
+  }
+);
+
+When(
+  'I click the {string} of the captured modification on the {string}',
+  async (
+    { commonItemsPage, modificationsReceivedCommonPage, searchModificationsPage },
+    fieldName: string,
+    pageKey: string
+  ) => {
+    const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
+    const modificationId = await searchModificationsPage.getModificationId();
+    const row = commonItemsPage.tableBodyRows.filter({
+      has: commonItemsPage.page.getByRole('link', { name: modificationId }),
+    });
+    const fieldLocator = row.getByRole('cell').nth(columnIndex).getByRole('link');
+    await fieldLocator.waitFor({ state: 'visible' });
     await fieldLocator.click();
   }
 );

@@ -16,6 +16,8 @@ export default class AddUserRoleSponsorOrgPage {
   readonly role_fieldset: Locator;
   readonly role_radio: Locator;
   readonly add_user_role_sponsor_workspace_hint_text: Locator;
+  readonly authoriser_fieldset: Locator;
+  readonly authoriser_radio: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -62,6 +64,10 @@ export default class AddUserRoleSponsorOrgPage {
       hasText: this.addUserRoleSponsorOrgPageTestData.Add_User_Role_Page.role_label,
     });
     this.role_radio = this.role_fieldset.getByRole('radio');
+    this.authoriser_fieldset = this.mainPageContent.locator('.govuk-form-group', {
+      hasText: this.addUserRoleSponsorOrgPageTestData.Add_User_Role_Page.authoriser_label,
+    });
+    this.authoriser_radio = this.authoriser_fieldset.getByRole('radio');
   }
 
   async goto(): Promise<void> {
