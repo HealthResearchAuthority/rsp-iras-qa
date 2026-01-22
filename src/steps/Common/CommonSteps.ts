@@ -925,6 +925,20 @@ Then(
           throw new Error(`Unsupported button state: ${availabilityVal}`);
         }
       }
+    } else if (linkLabel === 'Confirm_Selection') {
+      const buttonValue = commonItemsPage.buttonTextData['Sponsor_Check_And_Authorise_Page']['Confirm_Selection'];
+      const locatorVal: Locator = commonItemsPage.govUkButton
+        .getByText(buttonValue, { exact: true })
+        .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+        .first();
+      if (availabilityVal.toLowerCase() === 'available') {
+        await expect.soft(locatorVal).toBeVisible();
+        await expect.soft(locatorVal).toBeEnabled();
+      } else if (availabilityVal.toLowerCase() === 'not available') {
+        await expect.soft(locatorVal).toBeHidden();
+      } else {
+        throw new Error(`Unsupported button state: ${availabilityVal}`);
+      }
     }
   }
 );

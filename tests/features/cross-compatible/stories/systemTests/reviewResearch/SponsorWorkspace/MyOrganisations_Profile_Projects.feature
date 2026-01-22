@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @KNOWN-DEFECT-RSP-6795
+@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
   @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation @KNOWN_DEFECT_RSP-6628
