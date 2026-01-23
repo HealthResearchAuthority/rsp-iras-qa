@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableSponsorOrg @STSysAdmin @rsp-5264 @rsp-5327 @SetupNewSponsorOrgGoLive @TestOnly
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableSponsorOrg @STSysAdmin @rsp-5264 @rsp-5327 @SetupNewSponsorOrgGoLive
 Feature: Enable / Disable Sponsor Organisations
 
   Background:
@@ -20,13 +20,15 @@ Feature: Enable / Disable Sponsor Organisations
     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     And I capture the page screenshot
     And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+    And I capture the page screenshot
+    Then I click the view edit link of the 'newly added sponsor organisation'
     # When I enter 'name of the previously added sponsor organisation' into the search field
     # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     # And I capture the page screenshot
     # Then the system displays 'sponsor organisations' matching the search criteria
     # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
-    And I capture the page screenshot
-    Then I click the view edit link of the 'previously added sponsor organisation'
+    # And I capture the page screenshot
+    # Then I click the view edit link of the 'previously added sponsor organisation'
     And I capture the page screenshot
     And I can see the sponsor organisation profile page
     And I capture the page screenshot
@@ -94,13 +96,15 @@ Feature: Enable / Disable Sponsor Organisations
     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     And I capture the page screenshot
     And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+    And I capture the page screenshot
+    Then I click the view edit link of the 'newly added sponsor organisation'
     # When I enter 'name of the previously added sponsor organisation' into the search field
     # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     # And I capture the page screenshot
     # Then the system displays 'sponsor organisations' matching the search criteria
     # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
-    And I capture the page screenshot
-    Then I click the view edit link of the 'previously added sponsor organisation'
+    # And I capture the page screenshot
+    # Then I click the view edit link of the 'previously added sponsor organisation'
     And I capture the page screenshot
     And I can see the sponsor organisation profile page
     And I capture the page screenshot

@@ -47,15 +47,29 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgDefaultSort
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgDefaultSort @SetupNewSponsorOrgGoLive
     Scenario: Verify the user can view the user list page of any selected sponsor organisation and it is sorted by default in the alphabetical order of the 'First Name'
-        When I enter 'name of the previously added sponsor organisation' into the search field
+        And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+        And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        And I keep note of the organisation name for sponsor organisation setup
+        When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+        When I enter 'name of the newly added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
-        Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
-        Then I click the view edit link of the 'previously added sponsor organisation'
+        Then I click the view edit link of the 'newly added sponsor organisation'
+        # When I enter 'name of the previously added sponsor organisation' into the search field
+        # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        # And I capture the page screenshot
+        # Then the system displays 'sponsor organisations' matching the search criteria
+        # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        # And I capture the page screenshot
+        # Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
         And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
@@ -83,15 +97,29 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I capture the page screenshot
     # And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
 
-    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink @SetupNewSponsorOrgGoLive
     Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
-        When I enter 'name of the previously added sponsor organisation' into the search field
+        And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+        And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        And I keep note of the organisation name for sponsor organisation setup
+        When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+        When I enter 'name of the newly added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
-        Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
-        Then I click the view edit link of the 'previously added sponsor organisation'
+        Then I click the view edit link of the 'newly added sponsor organisation'
+        # When I enter 'name of the previously added sponsor organisation' into the search field
+        # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        # And I capture the page screenshot
+        # Then the system displays 'sponsor organisations' matching the search criteria
+        # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        # And I capture the page screenshot
+        # Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
         And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
@@ -131,15 +159,29 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
             | Full_Name     | First    |
             | Full_Name     | Last     |
 
-    @rsp-5233 @rsp-6488 @UserListSponsorOrgSearchNoResultsFound
+    @rsp-5233 @rsp-6488 @UserListSponsorOrgSearchNoResultsFound @SetupNewSponsorOrgGoLive
     Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
-        When I enter 'name of the previously added sponsor organisation' into the search field
+        And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+        And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        And I keep note of the organisation name for sponsor organisation setup
+        When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+        When I enter 'name of the newly added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
-        Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
-        Then I click the view edit link of the 'previously added sponsor organisation'
+        Then I click the view edit link of the 'newly added sponsor organisation'
+        # When I enter 'name of the previously added sponsor organisation' into the search field
+        # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        # And I capture the page screenshot
+        # Then the system displays 'sponsor organisations' matching the search criteria
+        # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        # And I capture the page screenshot
+        # Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
         And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
