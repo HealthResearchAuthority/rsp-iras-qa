@@ -233,7 +233,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Automation_No_SpOrg_No_ToDate   | Partial            | Approved         |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Automation_No_SpOrg_No_FromDate | Partial            | Not approved     |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @DbDataUsed @jsEnabled
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor) when JS enabled
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 When I enter the the search input for 'modifications' with '<Search_Input>'
