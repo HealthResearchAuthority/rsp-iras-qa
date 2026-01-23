@@ -261,7 +261,14 @@ export default class ModificationsReceivedCommonPage {
     searchInput: string
   ): Promise<boolean> {
     let valuesContain = false;
-    if (searchInput.toLowerCase().includes('iras')) {
+    if (searchInput === 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+      for (const irasId of irasIds) {
+        valuesContain = irasId.includes(searchInputDataset);
+        if (!valuesContain) {
+          return valuesContain;
+        }
+      }
+    } else if (searchInput.toLowerCase().includes('iras')) {
       for (const irasId of irasIds) {
         valuesContain = irasId.includes(searchInputDataset[searchInput].search_input_text);
         if (!valuesContain) {
@@ -269,6 +276,7 @@ export default class ModificationsReceivedCommonPage {
         }
       }
     }
+
     if (searchInput.toLowerCase().includes('title')) {
       for (const title of shortTitles) {
         valuesContain = title

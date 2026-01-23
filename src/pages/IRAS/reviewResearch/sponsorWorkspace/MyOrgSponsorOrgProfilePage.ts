@@ -9,8 +9,9 @@ import MyResearchProjectsPage from '../../makeChanges/MyResearchProjectsPage';
 export default class MyOrgSponsorOrgProfilePage {
   readonly page: Page;
   readonly myOrgSponsorOrgProfilePageTestData: typeof myOrgSponsorOrgProfilePageTestData;
-  readonly myOrgSponsorOrgProfilePage: typeof MyOrgSponsorOrgProfilePage;
   readonly linkTextData: typeof linkTextData;
+  private _org_name: string;
+  private _rtsId: string;
   readonly pageHeading: Locator;
   readonly pageLabel: Locator;
   readonly tabLinks: Locator;
@@ -21,12 +22,15 @@ export default class MyOrgSponsorOrgProfilePage {
   readonly irasid_Locator: Locator;
   readonly firstRow_Locator: Locator;
   readonly shortProjectTitle_Locator: Locator;
+  readonly activeTab: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.myOrgSponsorOrgProfilePageTestData = myOrgSponsorOrgProfilePageTestData;
     this.linkTextData = linkTextData;
+    this._org_name = '';
+    this._rtsId = '';
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageLabel = this.page
@@ -40,10 +44,37 @@ export default class MyOrgSponsorOrgProfilePage {
     this.irasid_Locator = this.projects_table.locator('tbody tr td:nth-child(2)');
     this.firstRow_Locator = this.projects_table.locator('tbody tr').first().locator('td');
     this.shortProjectTitle_Locator = this.projects_table.locator('tbody tr td:nth-child(1)').first();
+    this.activeTab = this.page.locator('li.govuk-service-navigation__item--active');
+  }
+
+  //Getters & Setters for Private Variables
+  async getOrgName(): Promise<string> {
+    return this._org_name;
+  }
+
+  async setOrgName(value: string): Promise<void> {
+    this._org_name = value;
+  }
+
+  async getRtsId(): Promise<string> {
+    return this._rtsId;
+  }
+
+  async setRtsId(value: string): Promise<void> {
+    this._rtsId = value;
   }
 
   //Page Methods
-  async assertOnMyOrgSponsorOrgProfilePage(user: string) {
+  async goto(rtsId: string) {
+    await this.page.goto(`sponsorworkspace/myorganisationprofile?rtsId=${rtsId}`);
+  }
+
+  async assertOnMyOrgSponsorOrgProfilePage(expSponOrgName: string) {
+    await expect.soft(this.pageLabel).toBeVisible();
+    await expect.soft(this.pageHeading.getByText(expSponOrgName)).toBeVisible();
+  }
+
+  async assertSponsorOrgProfilePageTabs(user: string) {
     const commonTabs = [
       myOrgSponsorOrgProfilePageTestData.My_Org_SponsorOrg_Profile_Page.Profile_Link,
       myOrgSponsorOrgProfilePageTestData.My_Org_SponsorOrg_Profile_Page.Projects_Link,

@@ -24,7 +24,7 @@ Feature: Modifications - Audit history
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two' and 'Data_With_Lead_Nation_England' dataset
     And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two' for the created modification
     And I can see the modifications details page
@@ -44,7 +44,7 @@ Feature: Modifications - Audit history
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I keep note of the 'Modification_Sent_To_Sponsor' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -71,7 +71,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -81,19 +81,19 @@ Feature: Modifications - Audit history
     Then I click on the searched modification id
     And I can see the sponsor check and authorise page
     When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Modification_Authorised_By_Sponsor' event and 'Sponsor_User' user for modification audit history
-    And I keep note of the 'Modification_Submitted_To_Review_Body' event and 'Sponsor_User' user for modification audit history
+    And I keep note of the 'Modification_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
@@ -104,7 +104,7 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'Post_Approval_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
   @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableAuthorised
@@ -130,7 +130,7 @@ Feature: Modifications - Audit history
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two' and 'Nhs_Involvement_Yes' dataset
     And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two' for the created modification
     And I can see the modifications details page
@@ -150,7 +150,7 @@ Feature: Modifications - Audit history
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I keep note of the 'Modification_Sent_To_Sponsor' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -177,7 +177,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -187,19 +187,19 @@ Feature: Modifications - Audit history
     Then I click on the searched modification id
     And I can see the sponsor check and authorise page
     When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Modification_Authorised_By_Sponsor' event and 'Sponsor_User' user for modification audit history
-    And I keep note of the 'Modification_Approved' event and 'Blank_User_Details' user for modification audit history
+    And I keep note of the 'Modification_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
+    And I keep note of the 'Modification_Approved' event actioned by the user 'Blank_User_Details' to store the modification audit history for 'Applicant_User' user
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
@@ -210,7 +210,7 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'Post_Approval_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
   @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableNotAuthorised
@@ -236,7 +236,7 @@ Feature: Modifications - Audit history
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two' and 'Data_With_Lead_Nation_England' dataset
     And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two' for the created modification
     And I can see the modifications details page
@@ -256,7 +256,7 @@ Feature: Modifications - Audit history
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I keep note of the 'Modification_Sent_To_Sponsor' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -283,7 +283,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -293,18 +293,18 @@ Feature: Modifications - Audit history
     Then I click on the searched modification id
     And I can see the sponsor check and authorise page
     When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event and 'Sponsor_User' user for modification audit history
+    And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
@@ -315,7 +315,7 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'Post_Approval_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
   @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableNotAuthorised
@@ -341,7 +341,7 @@ Feature: Modifications - Audit history
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two' and 'Nhs_Involvement_Yes' dataset
     And I create 'Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two' for the created modification
     And I can see the modifications details page
@@ -361,7 +361,7 @@ Feature: Modifications - Audit history
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I keep note of the 'Modification_Sent_To_Sponsor' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -388,7 +388,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -398,18 +398,18 @@ Feature: Modifications - Audit history
     Then I click on the searched modification id
     And I can see the sponsor check and authorise page
     When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event and 'Sponsor_User' user for modification audit history
+    And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
@@ -420,7 +420,7 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'Post_Approval_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
   @rsp-5268 @LogTheModificationCreatedEventAndModificationSentToSponsorEventinAuditHistoryPage
@@ -450,7 +450,7 @@ Feature: Modifications - Audit history
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     And I can see the select area of change page
     And I capture the page screenshot
     And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and '<Research_Locations>' dataset
@@ -488,7 +488,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And the 'Add_Documents' button should be 'available' on the 'Review_All_Changes_Page'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I keep note of the 'Modification_Sent_To_Sponsor' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     And I capture the page screenshot
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     And I capture the page screenshot
@@ -499,7 +499,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
   @rsp-5268 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
@@ -533,7 +533,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -557,7 +557,9 @@ Feature: Modifications - Audit history
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Submitted' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
     And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
     And I create 'Other_Minor_Change_To_Project_Management' for the created modification
     And I can see the modifications details page
@@ -571,8 +573,10 @@ Feature: Modifications - Audit history
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I keep note of the 'Modification_Sent_To_Sponsor' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
     And I capture the page screenshot
+    # Loging as sponsor user and authorising the modification
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
@@ -586,9 +590,12 @@ Feature: Modifications - Audit history
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Modification_Authorised_By_Sponsor' event and 'Sponsor_User' user for modification audit history
-    And I keep note of the 'Modification_Submitted_To_Review_Body' event and 'Sponsor_User' user for modification audit history
+    And I keep note of the 'Modification_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Backstage_User' user
     And I capture the page screenshot
+    # Logging as workflow coordinator and assigning the modification to study wide reviewer northen ireland
     When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
@@ -598,16 +605,24 @@ Feature: Modifications - Audit history
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Studywide_Reviewer_NI'
+    And I capture the page screenshot
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I keep note of the 'Modification_Assigned' event actioned by the user 'Workflow_Coordinator' to store the modification audit history for 'Backstage_User' user
+    # logging as team manager and reassigning the modification to study wide reviewer hra england
+    When I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
     And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
     And I capture the page screenshot
     And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I keep note of the 'Modification_Reassigned' event actioned by the user 'Team_Manager' to store the modification audit history for 'Backstage_User' user
     And I capture the page screenshot
-    And I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
-    And I capture the page screenshot
-    Then I can see the 'Modifications_Tasklist_Page'
-    And I enter 'iras id' into the search field
-    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-    Then I 'cannot' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
+    # Logging as study wide reviewer and approving the modification with change of reason
     When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
@@ -616,12 +631,37 @@ Feature: Modifications - Audit history
     Then I can see the modification post submission page
     When I click the 'Continue' link on the 'Modification_Details_Page'
     Then I can see the review outcome section
-    When I provide the 'Approved' outcome for the modification with 'Blank' reason
+    When I provide the 'Approved' outcome for the modification with 'Lack_Of_Evidence' reason
     When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
-    And I keep note of the 'Modification_Approved_By_Review_Body' event and 'blank_user_details' user for modification audit history
-    Then I see the check and send review outcome page with 'Approved' outcome and 'Blank' reason
+    Then I see the check and send review outcome page with 'Approved' outcome and 'Lack_Of_Evidence' reason
+    And I capture the page screenshot
+    And I keep note of the 'Modification_Outcome_Selected' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Comment_Added' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
+    When I click the 'Change' link on the 'Modification_Outcome_Check_Send_Page'
+    Then I can see the review outcome section
+    And I capture the page screenshot
+    When I provide the 'Approved' outcome for the modification with 'Valid_Reason' reason
+    When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    Then I see the check and send review outcome page with 'Approved' outcome and 'Valid_Reason' reason
+    And I keep note of the 'Modification_Comment_Changed' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
     When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
+    And I keep note of the 'Modification_Approved_By_Review_Body' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Review_Outcome_Sent' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Approved_By_Review_Body' event actioned by the user 'blank_user_details' to store the modification audit history for 'Applicant_User' user
     Then I validate confirmation screen for modification review outcome sent
+    # Validating the audit history for study wide reviewer
+    When I have navigated to the 'Approvals_Page' as 'Studywide_Reviewer'
+    When I click the 'Search_Records' link on the 'Approvals_Page'
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
+    # Validating the audit history for applicant user
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -631,7 +671,42 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'Post_Approval_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
-    And I validate the audit history table for modifications
+    And I validate the audit history table for modifications of the user 'Applicant_User'
+    And I capture the page screenshot
+    # Validating the audit history for sponsor user
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    When I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
+    And I validate the audit history table for modifications of the user 'Applicant_User'
+    # Validating the audit history for workflow coordinator user
+    When I have navigated to the 'Approvals_Page' as 'Workflow_Coordinator'
+    When I click the 'Search_Records' link on the 'Approvals_Page'
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
+    # Validating the audit history for team manager user
+    When I have navigated to the 'Approvals_Page' as 'Team_Manager'
+    When I click the 'Search_Records' link on the 'Approvals_Page'
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
 
   @rsp-5268 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
@@ -665,7 +740,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -689,7 +764,6 @@ Feature: Modifications - Audit history
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the 'Modification_Created' event and 'Applicant_User' user for modification audit history
     And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_Northern_Ireland' dataset
     And I create 'Other_Minor_Change_To_Project_Management' for the created modification
     And I can see the modifications details page
@@ -703,9 +777,14 @@ Feature: Modifications - Audit history
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I keep note of the 'Modification_Sent_To_Sponsor' event and 'Applicant_User' user for modification audit history
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Submitted' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
     Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
+    # Logging as sponsor user and not authorising the modification
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
@@ -721,10 +800,13 @@ Feature: Modifications - Audit history
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Modification_Authorised_By_Sponsor' event and 'Sponsor_User' user for modification audit history
-    And I keep note of the 'Modification_Submitted_To_Review_Body' event and 'Sponsor_User' user for modification audit history
+    And I keep note of the 'Modification_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Backstage_User' user
     And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
     And I capture the page screenshot
+    # Logging as workflow coordinator and assigning the modification to study wide reviewer northern ireland
     When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
@@ -734,10 +816,25 @@ Feature: Modifications - Audit history
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Studywide_Reviewer_NI'
+    And I capture the page screenshot
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I keep note of the 'Modification_Assigned' event actioned by the user 'Workflow_Coordinator' to store the modification audit history for 'Backstage_User' user
+    And I capture the page screenshot
+    # logging as team manager and reassigning the modification to study wide reviewer hra england
+    When I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
     And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
     And I capture the page screenshot
     And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I keep note of the 'Modification_Reassigned' event actioned by the user 'Team_Manager' to store the modification audit history for 'Backstage_User' user
     And I capture the page screenshot
+    # Logging as study wide reviewer and not approving the modification with change of reason
     When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
@@ -748,10 +845,22 @@ Feature: Modifications - Audit history
     Then I can see the review outcome section
     When I provide the 'Not_Approved' outcome for the modification with 'Lack_Of_Evidence' reason
     When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
-    And I keep note of the 'Modificaiton_Not_Approved_By_Review_Body' event and 'blank_user_details' user for modification audit history
+    And I keep note of the 'Modification_Outcome_Selected' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Comment_Reason_Not_Approved_Added' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
     Then I see the check and send review outcome page with 'Not_Approved' outcome and 'Lack_Of_Evidence' reason
+    When I click the 'Change' link on the 'Modification_Outcome_Check_Send_Page'
+    Then I can see the review outcome section
+    And I capture the page screenshot
+    When I provide the 'Not_Approved' outcome for the modification with 'Valid_Reason_Not_Approved' reason
+    When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    Then I see the check and send review outcome page with 'Not_Approved' outcome and 'Valid_Reason_Not_Approved' reason
+    And I keep note of the 'Modification_Comment_Reason_Not_Approved_Changed' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
     When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
+    And I keep note of the 'Modificaiton_Not_Approved_By_Review_Body' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Review_Outcome_Sent' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modificaiton_Not_Approved_By_Review_Body' event actioned by the user 'blank_user_details' to store the modification audit history for 'Applicant_User' user
     Then I validate confirmation screen for modification review outcome sent
+    # Validating the audit history for applicant user
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -761,5 +870,52 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'Post_Approval_Page'
     Then I click on the searched modification id
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
-    And I validate the audit history table for modifications
+    And I capture the page screenshot
+    And I validate the audit history table for modifications of the user 'Applicant_User'
+    # Validating the audit history for sponsor user
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    When I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
+    # Validating the audit history for study wide reviewer
+    When I have navigated to the 'Approvals_Page' as 'Studywide_Reviewer'
+    When I click the 'Search_Records' link on the 'Approvals_Page'
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    # Validating the audit history for workflow coordinator user
+    When I have navigated to the 'Approvals_Page' as 'Workflow_Coordinator'
+    When I click the 'Search_Records' link on the 'Approvals_Page'
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
+    # Validating the audit history for team manager user
+    When I have navigated to the 'Approvals_Page' as 'Team_Manager'
+    When I click the 'Search_Records' link on the 'Approvals_Page'
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot

@@ -29,11 +29,6 @@ Then(
   }
 );
 
-Then('the users tab is underlined', async ({ mySponsorOrgUsersPage }) => {
-  await expect.soft(mySponsorOrgUsersPage.usersLink).toBeVisible();
-  await expect.soft(mySponsorOrgUsersPage.users_tab_active).toHaveCount(1);
-});
-
 Then(
   'the add a user section is {string} based on the logged in user role',
   async ({ mySponsorOrgUsersPage }, visibility: string) => {

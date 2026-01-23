@@ -91,6 +91,8 @@ Given(
     } else if (pageType.toLowerCase() == 'ready to assign and reassign in team manager dashboard') {
       if (searchInput === 'Iras_Id_Retrieved_From_DB_With_Status_Active') {
         searchInputDataset = await teamManagerDashboardPage.getModificationId();
+      } else if (searchInput === 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+        searchInputDataset = (await teamManagerDashboardPage.getIrasId()).substring(0, 2);
       } else {
         searchInputDataset = teamManagerDashboardPage.teamManagerDashboardPageTestData.Search_Queries;
       }
@@ -102,7 +104,13 @@ Given(
       statusIndex = 6;
       await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
     } else {
-      searchInputDataset = myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries;
+      if (searchInput === 'Iras_Id_Retrieved_From_DB_With_Status_Active') {
+        searchInputDataset = await myModificationsTasklistPage.getIrasId();
+      } else if (searchInput === 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active') {
+        searchInputDataset = (await myModificationsTasklistPage.getIrasId()).substring(0, 2);
+      } else {
+        searchInputDataset = myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries;
+      }
       modificationIdIndex = 0;
       shortProjectTitleIndex = 1;
       dateSubmittedIndex = 2;
@@ -168,6 +176,8 @@ Given(
       expect.soft(await commonItemsPage.tableBodyRows.all()).toHaveLength(1);
       if (pageType === 'ready to assign') {
         irasIdSearchKey = await modificationsReadyToAssignPage.getModificationId();
+      } else if (pageType === 'assigned to me') {
+        irasIdSearchKey = await myModificationsTasklistPage.getIrasId();
       }
       expect
         .soft(

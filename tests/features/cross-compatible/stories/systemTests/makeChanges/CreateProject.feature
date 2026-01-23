@@ -1692,7 +1692,7 @@ Feature: Create Project
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I can see the list is sorted by default in the alphabetical order of the 'document type'
 
-  @rsp-4545 @ProjectDocumentsPaginationFirstPage @KNOWN_DEFECT_RSP-6489
+  @rsp-4545 @ProjectDocumentsPaginationFirstPage
   Scenario Outline: Verify pagination in project documents page when user is on the first page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1726,13 +1726,13 @@ Feature: Create Project
     And I can see the modifications details page
     When I click the 'Add_Documents' button on the 'Modification_Details_Page'
     Then I can see add supporting documents page
-    And I upload 'Multiple_Files' documents
+    And I upload 'Multiple_Files_Twenty_One' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
     And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
     And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
-    And I validate the uploaded 'Multiple_Files' documents are listed along with size and delete option in the review uploaded documents page
+    And I validate the uploaded 'Multiple_Files_Twenty_One' documents are listed along with size and delete option in the review uploaded documents page
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     And I capture the page screenshot
@@ -1740,7 +1740,7 @@ Feature: Create Project
     And I capture the page screenshot
     And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
     And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files' in the add document details for specific document page
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Twenty_One' in the add document details for specific document page
     And I capture the page screenshot
     And I validate the status of each document is 'Document_Status_Complete' in add document details page
     When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
@@ -1774,7 +1774,7 @@ Feature: Create Project
       | page number       |
       | next link         |
 
-  @rsp-4545 @ProjectDocumentsPaginationLastPage @KNOWN_DEFECT_RSP-6489
+  @rsp-4545 @ProjectDocumentsPaginationLastPage
   Scenario Outline: Verify pagination in project documents page when user is on the last page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1808,13 +1808,13 @@ Feature: Create Project
     And I can see the modifications details page
     When I click the 'Add_Documents' button on the 'Modification_Details_Page'
     Then I can see add supporting documents page
-    And I upload 'Multiple_Files' documents
+    And I upload 'Multiple_Files_Twenty_One' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     And I validate the status of each document is 'Document_Status_Uploaded' in the add documents page
     And I can see 'Save_Continue' button 'Enabled' on the 'Add_Document_Modifications_Page'
     And I can see 'Save_For_Later' button 'Enabled' on the 'Add_Document_Modifications_Page'
-    And I validate the uploaded 'Multiple_Files' documents are listed along with size and delete option in the review uploaded documents page
+    And I validate the uploaded 'Multiple_Files_Twenty_One' documents are listed along with size and delete option in the review uploaded documents page
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     And I capture the page screenshot
@@ -1822,7 +1822,7 @@ Feature: Create Project
     And I capture the page screenshot
     And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
     And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files' in the add document details for specific document page
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Twenty_One' in the add document details for specific document page
     And I capture the page screenshot
     And I validate the status of each document is 'Document_Status_Complete' in add document details page
     When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
@@ -2210,7 +2210,7 @@ Feature: Create Project
     And I capture the page screenshot
     Then I can see the review all changes page
     And I capture the page screenshot
-  
+
   #For the execution of the below scenario, we need data in the database for the 'With sponsor' status
   @rsp-6169 @verifyDocumentStatusIsWithSponsorFlow
   Scenario Outline: Validate the read only modification details page when the modification has a with sponsor status
@@ -2227,7 +2227,7 @@ Feature: Create Project
     And I can see the modification post submission page
     And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
-   
+
   #For the execution of the below scenario, we need data in the database for the 'Not authorised' status
   @rsp-6169 @verifyDocumentStatusIsNotAuthorisedFlow
   Scenario Outline: Validate the read only modification details page when the modification has a not authorised status
@@ -2244,7 +2244,7 @@ Feature: Create Project
     And I can see the modification post submission page
     And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
- 
+
   #For the execution of the below scenario, we need data in the database for the 'With review body' status
   @rsp-6169 @verifyDocumentStatusIsWithReviewBodyFlow
   Scenario Outline: Validate the read only modification details page when the modification has a with review body status
@@ -2261,7 +2261,7 @@ Feature: Create Project
     And I can see the modification post submission page
     And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
-  
+
   #For the execution of the below scenario, we need data in the database for the 'Approved' status
   @rsp-6169 @verifyDocumentStatusIsApprovedFlow
   Scenario Outline: Validate the read only modification details page when the modification has a approved status
@@ -2278,7 +2278,7 @@ Feature: Create Project
     And I can see the modification post submission page
     And I cannot see a 'Change' link on the 'Modification_Details_Page'
     And I capture the page screenshot
- 
+
   #For the execution of the below scenario, we need data in the database for the 'Not approved' status
   @rsp-6169 @verifyDocumentStatusIsNotApprovedFlow
   Scenario Outline: Validate the read only modification details page when the modification has a not approved status
