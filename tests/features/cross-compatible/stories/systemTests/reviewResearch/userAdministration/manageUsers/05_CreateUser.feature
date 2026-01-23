@@ -135,6 +135,53 @@ Feature: Manage Users - Create user
     And I capture the page screenshot
     And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Checkbox>'
     And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    When I fill the new user profile page using '<Add_Another_User_Profile>'
+    And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the check and create user profile page
+    Then I can see previously filled values in the new user profile page for '<Add_Another_User_Profile>' displayed on the check and create user profile page
+    And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
+    When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+    And I capture the page screenshot
+    Then I can see the 'Manage_Users_Page'
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+    And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+    And I capture the page screenshot
+    And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status_Enabled>' status in the manage user page
+    And I capture the page screenshot
+
+    Examples:
+      | Add_User_Profile                                             | Add_Another_User_Profile                                             | Status_Enabled | Role_Checkbox   | Advanced_Filters_Users                                  |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Enabled        | Role_TM_SWR_WFC | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Enabled        | Role_TM_SWR_WFC | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Enabled        | Role_TM_SWR_WFC | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Enabled        | Role_TM_SWR_WFC | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Role_TM_SWR_WFC | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Role_TM_SWR_WFC | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
+
+  @rsp-2827 @verifyCheckCreateUserProfileBackLink
+  Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' link
+    When I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the check and create user profile page
+    Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+    When I click the 'Back' button on the 'Check_Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the add a new user profile page
+    Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
+    And I capture the page screenshot
+    And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as study-wide reviewer or team manager or workflow co-ordinator
+    And I capture the page screenshot
+    And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Checkbox>'
+    And I capture the page screenshot
     When I fill the new user profile page using '<Add_Another_User_Profile>'
     And I capture the page screenshot
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -157,16 +204,10 @@ Feature: Manage Users - Create user
 
     Examples:
       | Add_User_Profile                                             | Add_Another_User_Profile                                             | Status_Enabled | Role_Checkbox                       | Advanced_Filters_Users                                  |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Team_Manager_Status_Active         |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Team_Manager_Status_Active         |
       | Valid_Data_In_All_Fields_Role_System_Administrator           | Valid_Data_In_All_Fields_Role_System_Administrator_Another           | Enabled        | Role_Applicant_System_Administrator | Advanced_Filter_Role_System_Administrator_Status_Active |
       | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another | Enabled        | Role_Applicant_System_Administrator | Advanced_Filter_Role_System_Administrator_Status_Active |
       | Valid_Data_In_All_Fields_Role_Applicant                      | Valid_Data_In_All_Fields_Role_Applicant_Another                      | Enabled        | Role_Applicant_System_Administrator | Advanced_Filter_Role_Applicant_Status_Active            |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            | Enabled        | Role_Applicant_System_Administrator | Advanced_Filter_Role_Applicant_Status_Active            |
-      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
-      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
 
   @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleTMSWRWFC @RoleCheckbox
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as study-wide reviewer or team manager or workflow co-ordinator
@@ -184,6 +225,7 @@ Feature: Manage Users - Create user
     And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as study-wide reviewer or team manager or workflow co-ordinator
     And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Checkbox>'
     And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
     When I fill the new user profile page using '<Add_Another_User_Profile>'
     And I capture the page screenshot
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -387,6 +429,7 @@ Feature: Manage Users - Create user
     And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as study-wide reviewer or team manager or workflow co-ordinator
     And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Checkbox>'
     And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
@@ -415,6 +458,7 @@ Feature: Manage Users - Create user
     And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as study-wide reviewer or team manager or workflow co-ordinator
     And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Checkbox>'
     And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
