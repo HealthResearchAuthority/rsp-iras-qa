@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin
+@UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin @SetupNewSponsorOrgGoLive
 Feature: Add user to sponsor organisation
 
     Background:

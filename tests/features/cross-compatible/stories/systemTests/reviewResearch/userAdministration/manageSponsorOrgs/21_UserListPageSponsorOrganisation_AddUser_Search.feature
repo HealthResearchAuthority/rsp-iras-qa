@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233 @SetupNewSponsorOrgGoLive
 Feature: View user list of sponsor org, Search,add user to sponsor org
 
     Background:
@@ -47,7 +47,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgDefaultSort @SetupNewSponsorOrgGoLive
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgDefaultSort
     Scenario: Verify the user can view the user list page of any selected sponsor organisation and it is sorted by default in the alphabetical order of the 'First Name'
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
@@ -97,7 +97,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I capture the page screenshot
     # And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
 
-    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink @SetupNewSponsorOrgGoLive
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @rsp-6488 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
     Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
@@ -159,7 +159,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
             | Full_Name     | First    |
             | Full_Name     | Last     |
 
-    @rsp-5233 @rsp-6488 @UserListSponsorOrgSearchNoResultsFound @SetupNewSponsorOrgGoLive
+    @rsp-5233 @rsp-6488 @UserListSponsorOrgSearchNoResultsFound
     Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'

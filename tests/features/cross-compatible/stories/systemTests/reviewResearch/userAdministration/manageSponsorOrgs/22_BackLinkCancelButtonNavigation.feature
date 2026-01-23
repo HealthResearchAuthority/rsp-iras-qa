@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage @SetupNewSponsorOrgGoLive
 Feature: Back Link and Cancel Button Navigation
 
     Background:

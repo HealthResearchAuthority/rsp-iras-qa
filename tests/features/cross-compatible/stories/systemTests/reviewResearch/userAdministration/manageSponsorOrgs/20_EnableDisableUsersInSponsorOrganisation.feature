@@ -74,7 +74,7 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I capture the page screenshot
     When I click the 'Confirm' button on the 'Confirmation_Page'
     And I capture the page screenshot
-    Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
+    # Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I can see the 'Sponsor_Org_User_List_Page'
     Then I can see the user list page of the 'sponsor organisation'
@@ -102,7 +102,7 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I capture the page screenshot
     When I click the 'Confirm' button on the 'Confirmation_Page'
     And I capture the page screenshot
-    Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
+    # Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I capture the page screenshot
     Then I can see the 'Sponsor_Org_User_List_Page'

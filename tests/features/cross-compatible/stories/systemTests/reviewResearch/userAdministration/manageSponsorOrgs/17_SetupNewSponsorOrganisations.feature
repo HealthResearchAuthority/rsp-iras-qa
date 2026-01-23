@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage @SetupNewSponsorOrgGoLive
 Feature: Set up new sponsor organisation
 
     Background:
@@ -38,7 +38,7 @@ Feature: Set up new sponsor organisation
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @SetupNewSponsorOrgGoLive @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237
     Scenario Outline: Verify the user can add a sponsor organisations which are in the first go live cohort from manage sponsor organisation page
         # When I authorise the rts api using '<RTS_API_Data>'
         # Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country

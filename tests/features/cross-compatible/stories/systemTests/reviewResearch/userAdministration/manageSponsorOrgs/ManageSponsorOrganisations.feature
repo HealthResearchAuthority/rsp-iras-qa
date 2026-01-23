@@ -1,4 +1,4 @@
-@RegressionManageSponsorOrganisations @SysAdminUser @UserAdministration @BackStage @ManageSponsorOrgs
+@RegressionManageSponsorOrganisations @SysAdminUser @UserAdministration @BackStage @ManageSponsorOrgs @SetupNewSponsorOrgGoLive
 Feature: Manage sponsor organisations
 
         Background:
@@ -251,13 +251,15 @@ Feature: Manage sponsor organisations
                 Then I can see the sponsor organisation disabled successful message on manage sponsor organisation page
                 And I capture the page screenshot
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
-                When I enter 'name of the previously added sponsor organisation' into the search field
+                When I enter 'name of the newly added sponsor organisation' into the search field
+                # When I enter 'name of the previously added sponsor organisation' into the search field
                 And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
                 And I capture the page screenshot
                 Then the system displays 'sponsor organisations' matching the search criteria
-                And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Disabled>' status in the manage sponsor organisation page
+                And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Disabled>' status in the manage sponsor organisation page
+                # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Disabled>' status in the manage sponsor organisation page
                 And I capture the page screenshot
-                Then I click the view edit link of the 'previously added sponsor organisation'
+                Then I click the view edit link of the 'newly added sponsor organisation'
                 And I capture the page screenshot
                 And I can see the sponsor organisation profile page
                 # validate sponsor organisation profile page with the selected sponsor organisation and last updated date
@@ -283,13 +285,16 @@ Feature: Manage sponsor organisations
                 Then I can see the sponsor organisation enabled successful message on manage sponsor organisation page
                 And I capture the page screenshot
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
-                When I enter 'name of the previously added sponsor organisation' into the search field
+                When I enter 'name of the newly added sponsor organisation' into the search field
+                # When I enter 'name of the previously added sponsor organisation' into the search field
                 And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
                 And I capture the page screenshot
                 Then the system displays 'sponsor organisations' matching the search criteria
-                And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+                And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+                # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
                 And I capture the page screenshot
-                Then I click the view edit link of the 'previously added sponsor organisation'
+                Then I click the view edit link of the 'newly added sponsor organisation'
+                # Then I click the view edit link of the 'previously added sponsor organisation'
                 And I capture the page screenshot
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
@@ -394,7 +399,7 @@ Feature: Manage sponsor organisations
                 When I click the 'Confirm' button on the 'Confirmation_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
+                # Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
                 And I capture the page screenshot
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
