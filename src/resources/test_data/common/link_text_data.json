@@ -355,10 +355,15 @@
   },
   "My_Organisations_Page": {
     "View": "View",
-    "Manage": "Manage"
+    "Manage": "Manage",
+    "Users": "Users",
+    "Audit": " Audit"
   },
   "My_Organisations_Sponsor_Org_Profile_Page": {
-    "Users": "Users"
+    "Profile": "Profile",
+    "Projects": "Projects",
+    "Users": "Users",
+    "Audit": "Audit"
   },
   "Add_User_Role_Sponsor_Org_Page": {
     "Back": "Back"
@@ -369,10 +374,29 @@
   "My_Organisations_Users_Add_User_Page": {
     "Back": "Back"
   },
+  "Check_Confirm_User_To_Add_Sponsor_Org_Page": {
+    "Back": "Back"
+  },
   "My_Organisations_Users_Add_User_Non_Registered_User_Error_Page": {
     "Back": "Back"
   },
-  "Check_Confirm_User_To_Add_Sponsor_Org_Page": {
+  "My_Organisations_Audit_History_Page": {
+    "My_Account_Breadcrumb": "My account",
+    "Sponsor_Workspace_Breadcrumb": "Sponsor workspace",
+    "My_Organisations_Breadcrumb": "My organisations"
+  },
+  "My_Organisations_Users_Page": {
+    "Manage": "Manage",
+    "View": "View"
+  },
+  "My_Organisations_User_Profile_Page": {
+    "Change": "Change",
+    "My_Account_Breadcrumb": "My account",
+    "Sponsor_Workspace_Breadcrumb": "Sponsor workspace",
+    "My_Organisations_Breadcrumb": "My organisations",
+    "Sponsor_Organisation_UniversityOfSouthampton_Breadcrumb": "University of Southampton"
+  },
+  "My_Organisations_Edit_User_Profile_Page": {
     "Back": "Back"
   },
   "MyOrg_Sponsor_Organisation_Profile_Page": {
@@ -380,5 +404,8 @@
     "Sponsorworkspace_Breadcrumb": "Sponsor workspace",
     "My_Account_Breadcrumb": "My account",
     "Projects_Link": "Projects"
+  },
+  "Modification_Outcome_Check_Send_Page": {
+    "Change": "Change"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "My_Organisations_Audit_History_Page": {
+    "page_heading": "Audit history"
+  },
+  "Table_Columns": {
+    "date_label": "Date",
+    "event_description_label": "Event description",
+    "username_label": "Username"
+  },
+  "All_Org_Admin_To_Sponsor_Events": {
+    "user_assigned_sponsor_event": " assigned Sponsor for sponsor organisation",
+    "user_unassigned_org_admin_event": " unassigned Organisation administrator for sponsor organisation",
+    "user_unassigned_authoriser_event": " unassigned authoriser for sponsor organisation",
+    "user_enabled_event": " enabled for sponsor organisation",
+    "user_disabled_event": " disabled from sponsor organisation",
+    "user_assigned_authoriser_event": " assigned as authoriser for sponsor organisation",
+    "user_assigned_org_admin_event": " assigned Organisation administrator for sponsor organisation",
+    "user_added_event": " added to sponsor organisation",
+    "organisation_enabled_event": " enabled",
+    "organisation_disabled_event": " disabled",
+    "created_event": "Sponsor organisation created"
+  }
+}

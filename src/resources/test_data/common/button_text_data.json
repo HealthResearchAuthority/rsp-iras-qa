@@ -69,7 +69,8 @@
   },
   "Check_Create_User_Profile_Page": {
     "Create_Profile": "Create profile",
-    "Back": "Back"
+    "Back": "Back",
+    "Save": "Save"
   },
   "User_Profile_Page": {
     "Disable_User_Record": "Disable user record",
@@ -358,7 +359,9 @@
   },
   "View_Edit_User_Profile_Page": {
     "Disable_User": "Disable user",
-    "Enable_User": "Enable user"
+    "Enable_User": "Enable user",
+    "Disable": "Disable",
+    "Enable": "Enable"
   },
   "Modification_Sent_To_Sponsor_Page": {
     "Return_To_Project_Overview": "Return to project overview",
@@ -431,5 +434,8 @@
   "Check_Confirm_User_To_Add_Sponsor_Org_Page": {
     "Confirm": "Confirm",
     "Cancel": "Cancel"
+  },
+  "My_Organisations_Edit_User_Profile_Page": {
+    "Save": "Save"
   }
 }

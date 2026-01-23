@@ -186,7 +186,7 @@ Then(
     const actualPageDescription = await modificationsReadyToAssignPage.page_description
       .textContent()
       .then((description: string) => description.trim());
-    expect(actualPageDescription.endsWith(expectedLeadNation)).toBeTruthy();
+    expect.soft(actualPageDescription.endsWith(expectedLeadNation)).toBeTruthy();
   }
 );
 
@@ -237,5 +237,7 @@ Then(
       countValue
     );
     await modificationsReadyToAssignPage.saveModificationIdWFC(modificationId.toString(), modificationCount);
+    const irasId = modificationId.toString().split('/')[0];
+    await modificationsReadyToAssignPage.setIrasId(irasId);
   }
 );

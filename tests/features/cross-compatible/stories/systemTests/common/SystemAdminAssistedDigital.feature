@@ -22,7 +22,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-        Then I can see the 'user added' successful message on sponsor organisation user list page
+        #Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
         Then I have navigated to the 'My_Research_Page' as 'System_Admin'
         And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'

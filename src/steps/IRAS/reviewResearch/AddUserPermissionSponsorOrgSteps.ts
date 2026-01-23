@@ -13,7 +13,7 @@ Given(
 
 When(
   'I fill the add user permission page using {string}',
-  async ({ addUserPermissionSponsorOrgPage, commonItemsPage }, datasetName: string) => {
+  async ({ addUserPermissionSponsorOrgPage, commonItemsPage, myOrganisationsUserProfilePage }, datasetName: string) => {
     if (datasetName === 'Sponsor_Authoriser_Yes') {
       const dataset =
         addUserPermissionSponsorOrgPage.addUserPermissionSponsorOrgPageTestData.Add_User_Permission_Page[datasetName];
@@ -22,6 +22,15 @@ When(
           await commonItemsPage.fillUIComponent(dataset, key, addUserPermissionSponsorOrgPage);
         }
       }
+      await myOrganisationsUserProfilePage.setAuthoriser(
+        myOrganisationsUserProfilePage.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page
+          .authoriser_yes
+      );
+    } else if (datasetName === 'Sponsor_Authoriser_No') {
+      await myOrganisationsUserProfilePage.setAuthoriser(
+        myOrganisationsUserProfilePage.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page
+          .authoriser_no
+      );
     }
   }
 );

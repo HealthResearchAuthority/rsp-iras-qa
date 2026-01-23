@@ -96,15 +96,15 @@ Feature: SWR - My Modifications Tasklist page
     @searchMyTasklistByIrasIdWithResults @rsp-4821
     Scenario Outline: Verify the user is able to search the my modifications tasklist by the iras ID
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the SWR '<User>' and with status '<Status>' and with reviewer '<Study_Wide_Reviewer>'
-        When I fill the search input for searching 'my tasklist' with '<Search_Input>' as the search query
+        When I fill the search input for searching 'my tasklist' with 'modification with status' as the search query as '<Search_Key_Type>'
         And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can now see the table of modifications 'assigned to me' contains the expected search results for '<Search_Input>' with '<Status>'
 
         Examples:
-            | Search_Input             | Status           | Study_Wide_Reviewer             | User               | Modification_Count |
-            # | Existing_IRAS_ID_Single  | With review body | Study_Wide_Reviewer_HRA_England | Studywide_Reviewer | Single             |
-            | Existing_Partial_IRAS_ID | With review body | Study_Wide_Reviewer_HRA_England | Studywide_Reviewer | Partial            |
+            | Search_Input                                         | Status           | Study_Wide_Reviewer             | User               | Modification_Count | Search_Key_Type |
+            | Iras_Id_Retrieved_From_DB_With_Status_Active         | With review body | Study_Wide_Reviewer_HRA_England | Studywide_Reviewer | Single             | Full            |
+            | Partial_Iras_Id_Retrieved_From_DB_With_Status_Active | With review body | Study_Wide_Reviewer_HRA_England | Studywide_Reviewer | Partial            | Partial         |
 
     # @filterMyTasklistByShortTitle @rsp-4821
     # Scenario Outline: Verify the user is able to filter the my modifications tasklist by the short project title
