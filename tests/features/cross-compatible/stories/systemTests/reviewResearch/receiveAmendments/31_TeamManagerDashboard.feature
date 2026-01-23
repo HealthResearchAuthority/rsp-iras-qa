@@ -551,11 +551,11 @@ Feature: Team Manager Dashboard page
         #                 | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
 
         @TMDashboardModificationsList @DBDataUsed
-        Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
+        Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page for Team manager
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<Team_Manager_User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I select modifications by clicking the checkbox in the 'team manager dashboard' page
@@ -565,10 +565,9 @@ Feature: Team Manager Dashboard page
                 Then I can see the 'Select_Study_Wide_Reviewer_Page'
                 And I can see all the selected modifications on that page including details such as the short project title and the modification id
                 And I capture the page screenshot
-
                 Examples:
-                        | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-                        | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       |
+                        | Valid_Iras_Id           | Study_Wide_Reviewer             | Team_Manager_User | Status           | Modification_Count | Study_Wide_Reviewer_User | Search_Key_Type |
+                        | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Team_Manager      | With review body | Single             | Studywide_Reviewer       | Full            |
 
         @SysAdminUser @StudyWideReviewerList @StudyWideReviewerListActiveLeadNationEngland  @5174
         Scenario Outline: Validate active study-wide reviewers displayed based on the lead nation of the selected modification and the corresponding review body(Lead nation - England,TM)

@@ -497,7 +497,7 @@ Feature: WFC - Modifications Tasklist page
             | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
 
     @ModificationsList @rsp-4076 @rsp-4849
-    Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
+    Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page for Workflow coordinator
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
@@ -511,7 +511,6 @@ Feature: WFC - Modifications Tasklist page
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
         And I can see all the selected modifications on that page including details such as the short project title and the modification id
         And I capture the page screenshot
-
         Examples:
             | Valid_Iras_Id           | Workflow_Coordinator_User | Status           | Modification_Count | Search_Key_Type |
             | Existing_IRAS_ID_Single | Workflow_Coordinator      | With review body | Single             | Full            |
