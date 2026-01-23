@@ -48,7 +48,7 @@ Feature: Close Project
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsAuthorisedForClosure @run
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsAuthorisedForClosure
   Scenario: Validate project closure successful when no modifications exist for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -80,6 +80,9 @@ Feature: Close Project
     Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
@@ -119,7 +122,15 @@ Feature: Close Project
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I capture the page screenshot
     And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Closed' on the my research page
     When I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
     And I click on the short project title for the searched iras id from my research projects page
@@ -131,6 +142,105 @@ Feature: Close Project
     Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
+
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsNotAuthorisedForClosure
+  Scenario: Validate project closure when no modifications exist for project and not authorised for project closure
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    When I click the 'Close_Project' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the close project page
+    Then I validate the planned project end date in close project page using 'Valid_Data_All_Fields' dataset
+    Then I can see the ui labels on the close project page
+    Then I fill the close project page with 'Valid_Date_Today'
+    And I capture the page screenshot
+    When I click the 'Send_To_Sponsor' button on the 'Close_Project_Page'
+    And I 'keep note of' the project closure transaction details along with the 'Applicant_User' user and 'With sponsor' status
+    And I capture the page screenshot
+    Then I validate 'Close_Project_Sent_To_Sponsor' labels displayed in the success confirmation page when the project closure has been sent to sponsor
+    When I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Not_Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure not authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Not authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Not authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Active' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    Then I can see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
   @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedModificationsAuthorisedForClosure
   Scenario: Validate project closure successful when there exist an approved modification for project and authorised for project closure
@@ -217,6 +327,220 @@ Feature: Close Project
     Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate iras id and short project title displayed
+    And I validate confirmation screen for project closure when closure is about to be authorised
+    When I click the 'Go_Back_Check_Authorise' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the check and authorise project closure page
+    And I fill the check and authorise project closure page with 'Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    When I click the 'Authorise_Closure' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Closed' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Closed' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedModificationsNotAuthorisedForClosure
+  Scenario: Validate project closure when there exist an approved modification for project and not authorised for project closure
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
+    When I select the modification in order to assign it
+    And I capture the page screenshot
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
+    And I capture the page screenshot
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
+    When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
+    When I click the 'Continue' link on the 'Modification_Details_Page'
+    When I provide the 'Approved' outcome for the modification with 'Blank' reason
+    When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    When I click the 'Close_Project' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the close project page
+    Then I validate the planned project end date in close project page using 'Valid_Data_All_Fields' dataset
+    Then I can see the ui labels on the close project page
+    Then I fill the close project page with 'Valid_Date_Today'
+    And I capture the page screenshot
+    When I click the 'Send_To_Sponsor' button on the 'Close_Project_Page'
+    And I 'keep note of' the project closure transaction details along with the 'Applicant_User' user and 'With sponsor' status
+    And I capture the page screenshot
+    Then I validate 'Close_Project_Sent_To_Sponsor' labels displayed in the success confirmation page when the project closure has been sent to sponsor
+    When I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Not_Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure not authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Not authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Not authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Active' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    Then I can see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
   @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotApprovedModificationsAuthorisedForClosure
   Scenario: Validate project closure successful when there exist a not approved modification for project and authorised for project closure
@@ -303,9 +627,223 @@ Feature: Close Project
     Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate iras id and short project title displayed
+    And I validate confirmation screen for project closure when closure is about to be authorised
+    When I click the 'Go_Back_Check_Authorise' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the check and authorise project closure page
+    And I fill the check and authorise project closure page with 'Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    When I click the 'Authorise_Closure' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Closed' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Closed' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotApprovedModificationsNotAuthorisedForClosure
+  Scenario: Validate project closure when there exist a not approved modification for project and not authorised for project closure
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
+    When I select the modification in order to assign it
+    And I capture the page screenshot
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
+    And I capture the page screenshot
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
+    When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
+    When I click the 'Continue' link on the 'Modification_Details_Page'
+    When I provide the 'Not_Approved' outcome for the modification with 'Lack_Of_Evidence' reason
+    When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    When I click the 'Close_Project' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the close project page
+    Then I validate the planned project end date in close project page using 'Valid_Data_All_Fields' dataset
+    Then I can see the ui labels on the close project page
+    Then I fill the close project page with 'Valid_Date_Today'
+    And I capture the page screenshot
+    When I click the 'Send_To_Sponsor' button on the 'Close_Project_Page'
+    And I 'keep note of' the project closure transaction details along with the 'Applicant_User' user and 'With sponsor' status
+    And I capture the page screenshot
+    Then I validate 'Close_Project_Sent_To_Sponsor' labels displayed in the success confirmation page when the project closure has been sent to sponsor
+    When I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Not_Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure not authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Not authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Not authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Active' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    Then I can see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
   @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedModificationsAuthorisedForClosure
-  Scenario: Validate project closure successful when there exist a not authorised modification for project and authorised for project closure
+  Scenario: Validate project closure when there exist a not authorised modification for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -366,6 +904,197 @@ Feature: Close Project
     Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate iras id and short project title displayed
+    And I validate confirmation screen for project closure when closure is about to be authorised
+    When I click the 'Go_Back_Check_Authorise' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the check and authorise project closure page
+    And I fill the check and authorise project closure page with 'Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    When I click the 'Authorise_Closure' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Closed' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Closed' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedModificationsNotAuthorisedForClosure
+  Scenario: Validate project closure when there exist a not authorised modification for project and not authorised for project closure
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    When I click the 'Close_Project' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the close project page
+    Then I validate the planned project end date in close project page using 'Valid_Data_All_Fields' dataset
+    Then I can see the ui labels on the close project page
+    Then I fill the close project page with 'Valid_Date_Today'
+    And I capture the page screenshot
+    When I click the 'Send_To_Sponsor' button on the 'Close_Project_Page'
+    And I 'keep note of' the project closure transaction details along with the 'Applicant_User' user and 'With sponsor' status
+    And I capture the page screenshot
+    Then I validate 'Close_Project_Sent_To_Sponsor' labels displayed in the success confirmation page when the project closure has been sent to sponsor
+    When I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Not_Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure not authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Not authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Not authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Active' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    Then I can see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
   @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedNotApprovedAndNotAuthorisedModificationsAuthorisedForClosure
   Scenario: Validate project closure successful when there exist a combination of approved, not approved and not authorised modifications for project and authorised for project closure
@@ -535,6 +1264,303 @@ Feature: Close Project
     Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate iras id and short project title displayed
+    And I validate confirmation screen for project closure when closure is about to be authorised
+    When I click the 'Go_Back_Check_Authorise' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the check and authorise project closure page
+    And I fill the check and authorise project closure page with 'Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    When I click the 'Authorise_Closure' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Closed' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Closed' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedNotApprovedAndNotAuthorisedModificationsNotAuthorisedForClosure
+  Scenario: Validate project closure when there exist a combination of approved, not approved and not authorised modifications for project and not authorised for project closure
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
+    When I select the modification in order to assign it
+    And I capture the page screenshot
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
+    And I capture the page screenshot
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
+    When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
+    When I click the 'Continue' link on the 'Modification_Details_Page'
+    When I provide the 'Approved' outcome for the modification with 'Blank' reason
+    When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
+    When I select the modification in order to assign it
+    And I capture the page screenshot
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
+    And I capture the page screenshot
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
+    When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
+    When I click the 'Continue' link on the 'Modification_Details_Page'
+    When I provide the 'Not_Approved' outcome for the modification with 'Lack_Of_Evidence' reason
+    When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    When I click the 'Close_Project' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the close project page
+    Then I validate the planned project end date in close project page using 'Valid_Data_All_Fields' dataset
+    Then I can see the ui labels on the close project page
+    Then I fill the close project page with 'Valid_Date_Today'
+    And I capture the page screenshot
+    When I click the 'Send_To_Sponsor' button on the 'Close_Project_Page'
+    And I 'keep note of' the project closure transaction details along with the 'Applicant_User' user and 'With sponsor' status
+    And I capture the page screenshot
+    Then I validate 'Close_Project_Sent_To_Sponsor' labels displayed in the success confirmation page when the project closure has been sent to sponsor
+    When I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the check and authorise project closure page
+    And I validate iras id and short project title displayed
+    And I can see the ui labels on the check and authorise project closure page
+    And I validate the planned project end date and actual project closure date in check and authorise project closure page using 'Valid_Data_All_Fields' dataset
+    And I fill the check and authorise project closure page with 'Not_Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure not authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Not authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Not authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Active' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    Then I can see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
   @rsp-4908 @PreventProjectClosureWithProjectWithDraftModifications
   Scenario: Validate prevention of project closure when draft modifications exist for project
@@ -947,3 +1973,149 @@ Feature: Close Project
     When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
     And I capture the page screenshot
     Then I validate 'Mandatory_Field_Error' displayed on 'Check_Authorise_Project_Closure_Page'
+
+@rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedThenAuthorisedForClosure @run
+  Scenario: Validate a project closure initially not authorised can be authorised later for project closure
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
+    When I select the modification in order to assign it
+    And I capture the page screenshot
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
+    And I capture the page screenshot
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
+    When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
+    When I click the 'Continue' link on the 'Modification_Details_Page'
+    When I provide the 'Approved' outcome for the modification with 'Blank' reason
+    When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    When I click the 'Close_Project' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the close project page
+    Then I validate the planned project end date in close project page using 'Valid_Data_All_Fields' dataset
+    Then I can see the ui labels on the close project page
+    Then I fill the close project page with 'Valid_Date_Today'
+    And I capture the page screenshot
+    When I click the 'Send_To_Sponsor' button on the 'Close_Project_Page'
+    And I 'keep note of' the project closure transaction details along with the 'Applicant_User' user and 'With sponsor' status
+    And I capture the page screenshot
+    Then I validate 'Close_Project_Sent_To_Sponsor' labels displayed in the success confirmation page when the project closure has been sent to sponsor
+    When I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the project overview page
+    Then I cannot see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Pending_Closure' on the my research page
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I 'keep note of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'With sponsor' status
+    And I fill the check and authorise project closure page with 'Not_Authorised_Data'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Check_Authorise_Project_Closure_Page'
+    And I capture the page screenshot
+    And I validate confirmation screen for project closure when closure not authorised
+    And I 'update status of' the project closure transaction details along with the 'Applicant_User' user and 'Not authorised' status
+    And I 'update status of' the project closure details for sponsor authorisations view along with the 'Applicant_User' user and 'Not authorised' status
+    When I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    And I click the 'Project_Closures' link on the 'Sponsor_Workspace_Page'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I capture the page screenshot
+    And I validate the project closure table for sponsor authorisations view
+    Then I click on the short project title link
+    And I can see the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    Then I validate the project closure transaction table
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I capture the page screenshot
+    Then I can see the project status as 'Project_Status_Active' on the my research page
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I can see project ending section in project overview page
+    Then I can see the iras id and short project title on project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    Then I can see a 'Close_Project' button on the 'Project_Overview_Page'
+    Then I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    Then I validate the project closure transaction table
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_England' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I capture the page screenshot
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'

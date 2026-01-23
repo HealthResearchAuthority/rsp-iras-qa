@@ -1620,7 +1620,7 @@ Feature: Create Project
       | page number       |
       | previous link     |
 
-  @rsp-4545 @rsp-5280 @ProjectDocumentsTab @KNOWN_DEFECT_RSP-6489
+  @rsp-4545 @rsp-5280 @ProjectDocumentsTab
   Scenario: Validate the user is able to access and view the project documents details from the project overview page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
@@ -1689,7 +1689,6 @@ Feature: Create Project
     When I click the 'Project_Documents' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I can see a 'Search' button on the 'Project_Documents_Page'
-    And I click the 'Advanced_Filters' button on the 'Project_Documents_Page'
     And I can see the 'Project_Documents_Tab' ui labels on the project overview page
     And I can see the list is sorted by default in the alphabetical order of the 'document type'
 
@@ -1856,7 +1855,7 @@ Feature: Create Project
       | page number       |
       | previous link     |
 
-  @rsp-3930 @ProjectDocumentDownload @KNOWN_DEFECT_RSP-6510
+  @rsp-3930 @ProjectDocumentDownload
   Scenario: Validate the user is able to download the project document from the project overview page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page

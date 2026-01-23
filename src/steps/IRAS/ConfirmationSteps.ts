@@ -516,3 +516,19 @@ Then('I validate confirmation screen for project closure when closure authorised
     .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Authorised.confirmation_body)
     .isVisible();
 });
+
+Then('I validate confirmation screen for project closure when closure not authorised', async ({ confirmationPage }) => {
+  await confirmationPage.confirmation_header_common_label
+    .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Not_Authorised.page_heading)
+    .isVisible();
+  await expect
+    .soft(
+      confirmationPage.page.getByText(
+        confirmationPage.confirmationPageTestData.Project_Closure_Not_Authorised.what_happens_next_label
+      )
+    )
+    .toBeVisible();
+  await confirmationPage.confirmation_body_label
+    .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Not_Authorised.confirmation_body)
+    .isVisible();
+});
