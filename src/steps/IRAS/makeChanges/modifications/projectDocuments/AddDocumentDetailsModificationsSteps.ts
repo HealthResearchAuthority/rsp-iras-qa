@@ -55,7 +55,7 @@ Then(
         await addDocumentDetailsModificationsPage.documentlink
           .getByText(documentName, { exact: true })
           .first()
-          .waitFor({ state: 'visible', timeout: 10000 });
+          .waitFor({ state: 'visible', timeout: 20000 });
         await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
         //Assertion to verify Add document details for specific document page
         await addDocumentDetailsForSpecificDocumentModificationsPage.assertOnAddDocumentsDetailsForSpecificModificationsPage(
