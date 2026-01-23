@@ -147,8 +147,6 @@
   "All_Role_Checkbox_Fields": {
     "role_checkbox": [
       "Applicant",
-      "Organisation administrator",
-      "Sponsor",
       "Study-wide reviewer",
       "System administrator",
       "Team manager",
