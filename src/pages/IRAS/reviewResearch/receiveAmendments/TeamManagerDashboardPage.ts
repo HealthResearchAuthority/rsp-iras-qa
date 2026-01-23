@@ -249,7 +249,7 @@ ORDER BY NationQuery.CreatedDate DESC;
         `No suitable modification found in the system with ${leadNationOption} lead nation and ${status} status and ${countValue}`
       );
     }
-    return queryResult.recordset.map((row) => row.IrasId);
+    return queryResult.recordset.map((row) => row.ModificationIdentifier);
   }
 
   async sqlGetIrasIdByLeadNationAndStatusCountSWR(

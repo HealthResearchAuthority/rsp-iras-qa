@@ -37,16 +37,16 @@ Feature: Team Manager Dashboard page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page'
                 And I can see the 'Column' ui labels on the team manager dashboard page
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
-                Then the no search results found message is displayed
+                Then I '<Visibility>' see the modification displayed in the 'Team_Manager_Dashboard_Page' list with '<Modification_Status>' status
                 Examples:
-                        | Search_Input            | User         | Status       | Modification_Count |
-                        | Existing_IRAS_ID_Single | Team_Manager | Approved     | Single             |
-                        | Existing_IRAS_ID_Single | Team_Manager | Not approved | Single             |
-                        | Existing_IRAS_ID_Single | Team_Manager | In draft     | Single             |
-                        | Existing_IRAS_ID_Single | Team_Manager | With sponsor | Single             |
+                        | Search_Input            | User         | Modification_Status              | Modification_Count | Search_Key_Type | Visibility | Status       |
+                        | Existing_IRAS_ID_Single | Team_Manager | Modification_Status_Approved     | Single             | Full            | cannot     | Approved     |
+                        | Existing_IRAS_ID_Single | Team_Manager | Modification_Status_Not_Approved | Single             | Full            | cannot     | Not approved |
+                        | Existing_IRAS_ID_Single | Team_Manager | Modification_Status_Indraft      | Single             | Full            | cannot     | In draft     |
+                        | Existing_IRAS_ID_Single | Team_Manager | Modification_Status_With_Sponsor | Single             | Full            | cannot     | With sponsor |
 
         @searchTeamManagerDashboardNotApprovedStatus @rsp-4822 @dataIssue @noDBDataNotApproved
         Scenario Outline: Verify that modifications status display as expected on the team manager dashboard where the status is not approved
@@ -683,7 +683,7 @@ Feature: Team Manager Dashboard page
                 Given I have navigated to the 'Team_Manager_Dashboard_Page' as '<User>'
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the '<User>' and with status '<Status>'
-                When I fill the search input for searching 'team manager dashboard' with '<Valid_Iras_Id>' as the search query
+                When I fill the search input for searching 'team manager dashboard' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I click the 'Search' button on the 'Team_Manager_Dashboard_Page'
                 And I capture the page screenshot
                 When I select modifications by clicking the checkbox in the 'team manager dashboard' page
@@ -698,5 +698,5 @@ Feature: Team Manager Dashboard page
                 And I capture the page screenshot
 
                 Examples:
-                        | Valid_Iras_Id           | User         | Status           | Modification_Count |
-                        | Existing_IRAS_ID_Single | Team_Manager | With review body | Single             |
+                        | Valid_Iras_Id           | User         | Status           | Modification_Count | Search_Key_Type |
+                        | Existing_IRAS_ID_Single | Team_Manager | With review body | Single             | Full            |
