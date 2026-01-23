@@ -210,6 +210,9 @@ export default class ManageSponsorOrganisationsPage {
 
   async sqlGetOrganisationIdFromRTSByName(sponsor_name: string) {
     const sqlConnection = await connect(dbConfigData.Rts_Service);
+    console.log(
+      `SELECT Org.Id FROM OrganisationRole OrgRole INNER JOIN Organisation Org ON OrgRole.OrganisationId = Org.Id where OrgRole.id = '${manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.clinical_research_sponsor_role_id}' and Org.Name='${sponsor_name}' and OrgRole.Status = 'Active';`
+    );
     const queryResult = await sqlConnection.query(
       `SELECT Org.Id FROM OrganisationRole OrgRole INNER JOIN Organisation Org ON OrgRole.OrganisationId = Org.Id where OrgRole.id = '${manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.clinical_research_sponsor_role_id}' and Org.Name='${sponsor_name}' and OrgRole.Status = 'Active';`
     );
