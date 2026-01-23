@@ -1,4 +1,4 @@
-@SystemTest @SysAdminUser @SponsorOrgAdminUser @SetupNewSponsorOrgGoLive
+@SystemTest @SysAdminUser @SponsorOrgAdminUser @SetupNewSponsorOrgGoLive @ManageSponsorOrgs
 Feature: Sponsor organisation audit history
 
     Background:
