@@ -463,7 +463,7 @@ Feature: WFC - Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page' as '<Workflow_Coordinator_User>'
         And I capture the page screenshot
         And I capture the modification id of '<Modification_Count>' where the lead nation is the country linked to the WFC '<Workflow_Coordinator_User>' and with status '<Status>'
-        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query as '<Search_Key_Type>'
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         When I select modifications by clicking the checkbox in the 'modifications ready to assign' page
@@ -480,7 +480,7 @@ Feature: WFC - Modifications Tasklist page
         And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
         And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
-        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query
+        When I fill the search input for searching 'tasklist' with 'modification with status' as the search query as '<Search_Key_Type>'
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see previously assigned modification is no longer displayed
@@ -493,8 +493,8 @@ Feature: WFC - Modifications Tasklist page
         Then I can see the modifications assigned from WFC or TM to SWR are now visible in my task list with status 'Review in progress'
 
         Examples:
-            | Valid_Iras_Id           | Study_Wide_Reviewer             | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User |
-            | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       |
+            | Valid_Iras_Id           | Study_Wide_Reviewer             | Workflow_Coordinator_User | Status           | Modification_Count | Study_Wide_Reviewer_User | Search_Key_Type |
+            | Existing_IRAS_ID_Single | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator      | With review body | Single             | Studywide_Reviewer       | Full            |
 
     @ModificationsList @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page for Workflow coordinator
