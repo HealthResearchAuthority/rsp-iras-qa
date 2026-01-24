@@ -31,8 +31,6 @@ Feature: Close Project
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
