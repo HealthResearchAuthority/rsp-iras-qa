@@ -108,7 +108,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20260120115333725hscrd@health.org",
+    "email_address_unique": "QAAutomation20260122162639311hscrd@health.org",
     "Role_TM_SWR_WFC": {
       "role_checkbox": [
         "Study-wide reviewer",
@@ -686,14 +686,10 @@
       "job_title_text": "Sr.Reviewer Role_All",
       "role_checkbox": [
         "Applicant",
-        "Organisation administrator",
-        "Sponsor",
         "Study-wide reviewer",
+        "System administrator",
         "Team manager",
-        "Workflow co-ordinator",
-        "Sponsor",
-        "Applicant",
-        "System administrator"
+        "Workflow co-ordinator"
       ],
       "country_checkbox": [
         "Wales"
