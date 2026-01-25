@@ -9,7 +9,7 @@ Feature: Enable / Disable Sponsor Organisations
   @rsp-5264 @rsp-5327 @DisableExistingSponsorOrg @EnableExistingSponsorOrg @BreadcrumbEnableSponsorOrg
   Scenario Outline: Verify the user is able to disable a sponsor organisation and then enable it
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfLeeds'
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I capture the page screenshot
     And I keep note of the organisation name for sponsor organisation setup
@@ -91,7 +91,7 @@ Feature: Enable / Disable Sponsor Organisations
   @rsp-5264 @BreadcrumbDisableExistingSponsorOrg
   Scenario Outline: Validate breadcrumb navigations in disable sponsor organisation confirmation page
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfLeeds'
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I capture the page screenshot
     And I keep note of the organisation name for sponsor organisation setup
