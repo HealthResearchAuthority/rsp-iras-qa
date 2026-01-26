@@ -1584,10 +1584,10 @@ export default class CommonItemsPage {
     const firstPage = 1;
     const lastPage = totalPages;
     const assertVisiblePages = (expectedPages: number[]) => {
-      expect(visiblePages).toEqual(expectedPages);
+      expect.soft(visiblePages).toEqual(expectedPages);
     };
     const assertAllVisibleItems = (expectedItems: string[]) => {
-      expect(allVisibleItems).toEqual(expectedItems);
+      expect.soft(allVisibleItems).toEqual(expectedItems);
     };
     const buildExpected = (pages: number[], items: (number | string)[]) => {
       assertVisiblePages(pages);
@@ -1595,7 +1595,7 @@ export default class CommonItemsPage {
     };
     if (totalPages <= 7) {
       buildExpected(visiblePages, allVisibleItems);
-      expect(ellipsisIndices.length).toBe(0);
+      expect.soft(ellipsisIndices.length).toBe(0);
     } else if (currentPage <= 3) {
       const base = [firstPage];
       switch (currentPage) {
@@ -1635,11 +1635,11 @@ export default class CommonItemsPage {
       );
     }
     // Common assertions
-    expect(visiblePages).toContain(currentPage);
-    if (currentPage > 1) expect(visiblePages).toContain(currentPage - 1);
-    if (currentPage < totalPages) expect(visiblePages).toContain(currentPage + 1);
-    expect(visiblePages).toContain(firstPage);
-    expect(visiblePages).toContain(lastPage);
+    expect.soft(visiblePages).toContain(currentPage);
+    if (currentPage > 1) expect.soft(visiblePages).toContain(currentPage - 1);
+    if (currentPage < totalPages) expect.soft(visiblePages).toContain(currentPage + 1);
+    expect.soft(visiblePages).toContain(firstPage);
+    expect.soft(visiblePages).toContain(lastPage);
     // Navigation
     if (navigateMethod === 'next link') {
       await this.clickOnNextLink();
