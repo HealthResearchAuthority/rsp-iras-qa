@@ -127,7 +127,7 @@ export default class SponsorAuthorisationsPage {
     dateClosed: string;
     status: string;
   }) {
-    this.projectClosureDetails.push(record);
+    this.projectClosureDetails.unshift(record);
   }
 
   get getProjectClosureDetailsRecord() {

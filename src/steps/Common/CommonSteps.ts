@@ -2514,7 +2514,7 @@ Then(
 
 Then('I click on the short project title link', async ({ projectDetailsIRASPage }) => {
   const shortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
-  await projectDetailsIRASPage.page.getByText(shortProjectTitle, { exact: true }).click();
+  await projectDetailsIRASPage.page.getByText(shortProjectTitle, { exact: true }).first().click();
 });
 
 Then('I validate iras id and short project title displayed', async ({ projectDetailsIRASPage, commonItemsPage }) => {

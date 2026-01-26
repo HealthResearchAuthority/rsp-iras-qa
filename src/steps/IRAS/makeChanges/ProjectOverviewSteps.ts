@@ -581,3 +581,28 @@ Then('I can see project ending section in project overview page', async ({ proje
     )
     .toBeVisible();
 });
+
+Then(
+  'I validate project closure date displayed in project details page using {string}',
+  async ({ projectOverviewPage, closeProjectPage }, datasetName: string) => {
+    const dataset = closeProjectPage.closeProjectPageTestData[datasetName];
+    let expectedProjectClosureDate: any;
+    if (datasetName === 'Valid_Date_Today') {
+      const todayDate = new Date();
+      expectedProjectClosureDate =
+        todayDate.getDate().toString() +
+        ' ' +
+        todayDate.toLocaleString('en-US', { month: 'long' }) +
+        ' ' +
+        todayDate.getFullYear().toString();
+    } else {
+      expectedProjectClosureDate =
+        dataset.close_project_actual_project_closure_date_day_text +
+        ' ' +
+        dataset.close_project_actual_project_closure_date_month_dropdown +
+        ' ' +
+        dataset.close_project_actual_project_closure_date_year_text;
+    }
+    await expect.soft(projectOverviewPage.actualProjectClosureDateValueLabel).toHaveText(expectedProjectClosureDate);
+  }
+);

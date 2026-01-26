@@ -30,7 +30,7 @@
     "close_project_actual_project_closure_date_day_textbox": "Project closure date must include a year"
   },
   "Cant_Close_Project_Error": {
-    "cant_close_project_error_label": "You can't close this project with ongoing modifications - wait until submitted modifications have been reviewed and delete any unsubmitted modifications to continue- udate to new error message"
+    "cant_close_project_error_label": "You can't currently close this project as it has a modification in progress. If the modification has a status of 'In draft' but it is no longer needed, you can delete it. If the modification has been submitted for review you'll need to wait until the review outcome is issued before you can go on to close the project."
   },
   "Valid_Data_All_Fields": {
     "close_project_actual_project_closure_date_day_textbox": "25",

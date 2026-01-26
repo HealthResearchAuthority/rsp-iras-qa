@@ -25,7 +25,8 @@
     "event_description_project_draft": "Project record draft started",
     "event_description_project_created": "Project record created",
     "audit_modification_id": "Not applicable",
-    "project_ending_section_heading": "Project ending"
+    "project_ending_section_heading": "Project ending",
+    "actual_project_closure_date_label": "Actual project closure date"
   },
   "Modification_Status_Draft": {
     "status": "Draft"

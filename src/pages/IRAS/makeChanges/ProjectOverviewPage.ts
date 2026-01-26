@@ -124,6 +124,7 @@ export default class ProjectOverviewPage {
   readonly project_details_tab_planned_project_end_date: Locator;
   readonly tableCell: Locator;
   readonly tableRows: Locator;
+  readonly actualProjectClosureDateValueLabel: Locator;
   private projectRecordID: string;
   private modificationRecordID: string;
 
@@ -148,11 +149,9 @@ export default class ProjectOverviewPage {
     this.project_iras_id_label = this.page.locator('div[class="govuk-inset-text"] p').nth(0);
     this.project_short_title_label = this.page.locator('div[class="govuk-inset-text"] p').nth(1);
     this.information_alert_banner = this.page.getByRole('alert');
-    this.modification_saved_success_message_header_text = this.page
-      .getByRole('alert')
-      .getByRole('heading', {
-        name: this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_header_text,
-      });
+    this.modification_saved_success_message_header_text = this.page.getByRole('alert').getByRole('heading', {
+      name: this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_header_text,
+    });
     this.modification_saved_success_message_text = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
@@ -529,6 +528,14 @@ export default class ProjectOverviewPage {
       .locator('.govuk-error-message');
     this.tableCell = this.page.locator('td');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.actualProjectClosureDateValueLabel = this.page
+      .locator('.govuk-summary-list__row')
+      .filter({
+        has: this.page.getByText(
+          this.projectOverviewPageTestData.Project_Overview_Page.actual_project_closure_date_label
+        ),
+      })
+      .locator('.govuk-summary-list__value');
   }
 
   public getProjectRecordID(): string {
