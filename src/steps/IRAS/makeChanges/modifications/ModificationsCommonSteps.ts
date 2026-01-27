@@ -49,6 +49,17 @@ Then(
 );
 
 Then(
+  'I keep a note of the displayed modification ID on the modifications page',
+  async ({ modificationsCommonPage, modificationsReceivedCommonPage }) => {
+    const modificationIDActual = confirmStringNotNull(
+      await modificationsCommonPage.modification_id_value.textContent()
+    );
+    await modificationsCommonPage.setModificationID(modificationIDActual);
+    await modificationsReceivedCommonPage.setModificationId(modificationIDActual);
+  }
+);
+
+Then(
   'I create {string} for the created modification',
   async (
     {
@@ -678,3 +689,26 @@ Then('I validate the missing document notification details', async ({ modificati
     )
     .toBeVisible();
 });
+
+Then(
+  'I validate i can see only one {string} on the post approval page',
+  async ({ modificationsCommonPage, commonItemsPage }, statusDataset: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const statusExpected = dataset.status;
+    if (
+      statusDataset === 'Modification_Status_Indraft' ||
+      statusDataset === 'Modification_Status_With_Sponsor' ||
+      statusDataset === 'Modification_Status_With_Review_Body'
+    ) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const modificationRecord = await modificationsCommonPage.getModificationRowNumberPostApprovalPage(rowIndex);
+        const statusActual = modificationRecord.get('statusValue');
+        const statusCount = statusActual.filter((x) => x.toLowerCase() == statusExpected.toLowerCase()).length;
+        if (statusActual[0] == statusExpected) {
+          expect.soft(statusCount).toEqual(1);
+        }
+      }
+    }
+  }
+);

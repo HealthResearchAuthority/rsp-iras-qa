@@ -109,6 +109,7 @@ import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleS
 import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
 import CheckConfirmUserToAddToSponsorOrganisationPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/CheckConfirmUserToAddToSponsorOrganisationPage';
 import CreateModificationErrorPage from '../pages/IRAS/makeChanges/modifications/CreateModificationErrorPage';
+import SendModificationToSponsorErrorPage from '../pages/IRAS/makeChanges/modifications/SendModificationToSponsorErrorPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -218,6 +219,7 @@ type CustomFixtures = {
   addUserPermissionSponsorOrgPage: AddUserPermissionSponsorOrgPage;
   checkConfirmUserToAddToSponsorOrganisationPage: CheckConfirmUserToAddToSponsorOrganisationPage;
   createModificationErrorPage: CreateModificationErrorPage;
+  sendModificationToSponsorErrorPage: SendModificationToSponsorErrorPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -645,6 +647,10 @@ export const test = base.extend<CustomFixtures>({
 
   createModificationErrorPage: async ({ page }, use) => {
     await use(new CreateModificationErrorPage(page));
+  },
+
+  sendModificationToSponsorErrorPage: async ({ page }, use) => {
+    await use(new SendModificationToSponsorErrorPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

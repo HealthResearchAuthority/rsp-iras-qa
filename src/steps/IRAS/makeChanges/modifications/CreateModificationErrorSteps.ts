@@ -18,25 +18,17 @@ Then(
     const shortProjectTitleActual = confirmStringNotNull(
       await createModificationErrorPage.short_project_title_text.textContent()
     );
-    const errorMessageOneActual = confirmStringNotNull(
-      await createModificationErrorPage.error_message_line_one.textContent()
+    const errorMessageActual = confirmStringNotNull(
+      await createModificationErrorPage.create_modification_hint_label.textContent()
     );
-    const errorMessageOneExpected = confirmStringNotNull(
-      createModificationErrorPage.createModificationErrorPageTestData.Label_Texts.create_modification_error_line_one
-    );
-
-    const errorMessageTwoActual = confirmStringNotNull(
-      await createModificationErrorPage.error_message_line_two.textContent()
-    );
-    const errorMessageTwoExpected = confirmStringNotNull(
-      createModificationErrorPage.createModificationErrorPageTestData.Label_Texts.create_modification_error_line_two
+    const errorMessageExpected = confirmStringNotNull(
+      createModificationErrorPage.createModificationErrorPageTestData.Label_Texts.create_modification_hint_label
     );
 
     expect.soft(irasIDActual).toBe(irasIDExpected);
     expect
       .soft(shortProjectTitleActual.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'))
       .toBe(shortProjectTitleExpected.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'));
-    expect.soft(errorMessageOneActual).toBe(errorMessageOneExpected);
-    expect.soft(errorMessageTwoActual).toBe(errorMessageTwoExpected);
+    expect.soft(errorMessageActual).toBe(errorMessageExpected);
   }
 );
