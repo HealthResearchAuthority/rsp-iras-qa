@@ -43,6 +43,14 @@
     "enable_confirmation_header_label": "Confirm that you want to enable",
     "enable_confirmation_body_label": "You are about to enable the user to work under this sponsor organisation."
   },
+  "Disable_User_In_My_Organisation_Labels": {
+    "disable_confirmation_header_label": "Confirm that you want to disable",
+    "disable_confirmation_body_label": "You are about to disable this user record."
+  },
+  "Enable_User_In_My_Organisation_Labels": {
+    "enable_confirmation_header_label": "Confirm that you want to enable",
+    "enable_confirmation_body_label": "You are about to enable this user record."
+  },
   "Remove_User_From_Review_Body_Labels": {
     "remove_user_confirmation_success_header_label": "User has been removed",
     "remove_user_confirmation_success_body_two_label": " has been sent an email confirming that they have been removed from "

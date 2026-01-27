@@ -34,12 +34,17 @@ Then(
 );
 
 Then(
-  'I can see my organisations audit history with {string}',
-  async ({ myOrganisationsAuditHistoryPage, myOrgSponsorOrgProfilePage, commonItemsPage }, datasetName: string) => {
+  'I can see my organisations audit history with {string} by {string}',
+  async (
+    { myOrganisationsAuditHistoryPage, myOrgSponsorOrgProfilePage, commonItemsPage, loginPage },
+    datasetName: string,
+    adminUserDataset: string
+  ) => {
     const datasetAudit = myOrganisationsAuditHistoryPage.myOrganisationsAuditHistoryPageTestData[datasetName];
     const auditLog = await commonItemsPage.getAuditLog();
     const expectedOrganisationName = await myOrgSponsorOrgProfilePage.getOrgName();
     const expectedUsername = await commonItemsPage.getSearchKey();
+    const expectedAdminUsername = loginPage.loginPageTestData[adminUserDataset].username;
     const actualEventValues: string[] = auditLog.get('eventValues');
 
     for (const key in datasetAudit) {
@@ -64,7 +69,7 @@ Then(
 
     const actualAdminUsernameValues: string[] = auditLog.get('adminEmailValues');
     for (const actualUsername of actualAdminUsernameValues) {
-      expect.soft(actualUsername.toLowerCase()).toEqual(expectedUsername.toLowerCase());
+      expect.soft(actualUsername.toLowerCase()).toEqual(expectedAdminUsername.toLowerCase());
     }
   }
 );

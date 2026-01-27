@@ -417,7 +417,8 @@
     "Search": "Search"
   },
   "My_Organisations_Users_Page": {
-    "Add_User": "Add a user"
+    "Add_User": "Add a user",
+    "Search": "Search"
   },
   "Add_User_Role_Sponsor_Org_Page": {
     "Save_Continue": "Save and continue"
@@ -437,5 +438,13 @@
   },
   "My_Organisations_Edit_User_Profile_Page": {
     "Save": "Save"
+  },
+  "My_Organisations_User_Profile_Page": {
+    "Disable_User": "Disable user record",
+    "Enable_User": "Enable user record"
+  },
+  "My_Organisations_Confirm_User_Status_Page": {
+    "Disable_User": "Disable",
+    "Enable_User": "Enable"
   }
 }

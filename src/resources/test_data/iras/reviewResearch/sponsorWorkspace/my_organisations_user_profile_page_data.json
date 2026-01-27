@@ -4,6 +4,10 @@
     "authoriser_yes": "Yes",
     "authoriser_no": "No",
     "user_update_message": "User updated",
+    "disabled_section_header": "Disable this user record",
+    "disabled_section_guidance_text": "Disabling a user record will lock their account and can be reversed",
+    "enabled_section_header": "Enable this user record",
+    "enabled_section_guidance_text": "Enabling a user record will unlock their account",
     "Row_Labels": {
       "title_label": "Title",
       "first_name_label": "First name",

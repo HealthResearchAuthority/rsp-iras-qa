@@ -44,6 +44,10 @@ export default class MyOrganisationsUserProfilePage {
   readonly status_row: Locator;
   readonly status_value: Locator;
   readonly user_updated_success_message_text: Locator;
+  readonly disabled_section_header: Locator;
+  readonly disabled_section_guidance_text: Locator;
+  readonly enabled_section_header: Locator;
+  readonly enabled_section_guidance_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -149,6 +153,22 @@ export default class MyOrganisationsUserProfilePage {
     this.user_updated_success_message_text = this.page
       .getByRole('heading')
       .getByText(this.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page.user_update_message);
+    this.disabled_section_header = this.page
+      .getByRole('heading')
+      .getByText(
+        this.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page.disabled_section_header
+      );
+    this.disabled_section_guidance_text = this.page.getByText(
+      this.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page.disabled_section_guidance_text,
+      { exact: true }
+    );
+    this.enabled_section_header = this.page
+      .getByRole('heading')
+      .getByText(this.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page.enabled_section_header);
+    this.enabled_section_guidance_text = this.page.getByText(
+      this.myOrganisationsUserProfilePageTestData.My_Organisations_User_Profile_Page.enabled_section_guidance_text,
+      { exact: true }
+    );
   }
 
   //Getters & Setters for Private Variables
