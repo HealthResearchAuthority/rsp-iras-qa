@@ -47,21 +47,26 @@
     "nhs_applicability_always_c": [
       "GDPR wording - Unaccepted alternative wording used",
       "Other minor change to project management"
-    ],
-    "nhs_applicability_always_c": [
-      "GDPR wording - Unaccepted alternative wording used",
-      "Other minor change to project management"
     ]
   },
   "Audit_History_Events": {
     "Modification_Created": "Modification created",
+    "Modification_Submitted": "Modification submitted",
     "Modification_Sent_To_Sponsor": "Modification sent to sponsor",
     "Modification_Authorised_By_Sponsor": "Modification authorised by sponsor",
     "Modification_Submitted_To_Review_Body": "Modification submitted to review body",
     "Modification_Approved": "Modification approved",
     "Modification_Not_Authorised_By_Sponsor": "Modification not authorised by sponsor",
     "Modification_Approved_By_Review_Body": "Modification approved by review body",
-    "Modificaiton_Not_Approved_By_Review_Body": "Modification not approved by review body"
+    "Modificaiton_Not_Approved_By_Review_Body": "Modification not approved by review body",
+    "Modification_Assigned": "Modification assigned to",
+    "Modification_Outcome_Selected": "Outcome selected",
+    "Modification_Review_Outcome_Sent": "Review outcome sent to applicant",
+    "Modification_Comment_Added": "Comment added",
+    "Modification_Comment_Changed": "Comment changed",
+    "Modification_Comment_Reason_Not_Approved_Added": "Reason modification not approved added",
+    "Modification_Comment_Reason_Not_Approved_Changed": "Reason modification not approved changed",
+    "Modification_Reassigned": "Modification reassigned to"
   },
   "Modification_Change_Question_Label_Texts": {
     "planned_project_end_date_label": "Change to planned end date",

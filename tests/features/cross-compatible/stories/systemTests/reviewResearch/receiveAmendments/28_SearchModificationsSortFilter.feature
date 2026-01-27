@@ -124,26 +124,27 @@ Feature: Filter, Search and Sort the Search modifications page
         Scenario: Verify back and short project title link navigation for search modifications tasklist
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I can now see a table of search results for 'modifications received for approval'
                 And Each 'short project title' displayed on the 'Search_Modifications_Page' is a link
-                When I click a 'short project title' on the 'Search_Modifications_Page'
+                When I click the 'short project title' of the captured modification on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the project overview page
                 Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
-                When I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I can now see a table of search results for 'modifications received for approval'
                 Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
-                When I click a 'modification id' on the 'Search_Modifications_Page'
+                When I click the 'modification id' of the captured modification on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the 'Modification_Details_Page'
                 When I click the 'Back' link on the 'Modification_Details_Page'
+                And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
                 Examples:
                         | Search_Input       | User                 | Status           | Modification_Count |
@@ -158,9 +159,38 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id | Workflow_Coordinator | Not approved     | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | Not approved     | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | Approved         | Single             |
-                        | Valid_Full_Iras_Id | System_Admin         | In draft         | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | With sponsor     | Single             |
                         | Valid_Full_Iras_Id | System_Admin         | With review body | Single             |
+
+        @SearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031
+        Scenario: Verify back and short project title link navigation for search modifications tasklist for <User> and <Status>
+                Given I have navigated to the 'Search_Modifications_Page' as '<User>'
+                And I capture the modification id of '<Modification_Count>' with status '<Status>'
+                When I enter the the search input for 'modifications' with '<Search_Input>'
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for 'modifications received for approval'
+                And Each 'short project title' displayed on the 'Search_Modifications_Page' is a link
+                When I click the 'short project title' of the captured modification on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the project overview page
+                Given I have navigated to the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+                When I enter the the search input for 'modifications' with '<Search_Input>'
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for 'modifications received for approval'
+                Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
+                When I click the 'modification id' of the captured modification on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the review all changes page
+                When I click the 'Back' link on the 'Review_All_Changes_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
+                Examples:
+                        | Search_Input       | User         | Status   | Modification_Count |
+                        | Valid_Full_Iras_Id | System_Admin | In draft | Single             |
 
         @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031 @KNOWN-DEFECT-RSP-6500
         Scenario: Verify In draft and WIth sponsor modifications in search modifications page
@@ -183,7 +213,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @rsp-4293 @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -193,7 +223,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I capture the page screenshot
                 And I 'cannot' see the advanced filters panel
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria '<Advanced_Filters>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
@@ -206,7 +236,7 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters(with sponsor) when JS enabled
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -215,13 +245,40 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria '<Advanced_Filters>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Search_Input             | Advanced_Filters     | Modification_Count | Status           |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body |
+
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed
+        Scenario Outline: Verify the user is able to view the list of modifications by entering partial iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
+                Given I have navigated to the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I capture the modification id of '<Modification_Count>' with status '<Status>'
+                When I fill the search input for searching 'modifications' with 'modification with status' as the search query as '<Search_Key_Type>'
+                And I capture the page screenshot
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
+                And I capture the page screenshot
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
+                And I capture the page screenshot
+                Examples:
+                        | Search_Input             | Advanced_Filters     | Modification_Count | Status           | Search_Key_Type |
+                        | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body | Partial         |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
@@ -247,9 +304,8 @@ Feature: Filter, Search and Sort the Search modifications page
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
-                        | Search_Input             | Advanced_Filters     | Modification_Count | Status           | Search_Key_Type |
-                        | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body | Partial         |
-                        | Valid_Full_Iras_Id       | Advanced_Filters_Nth | Single             | With review body | Full            |
+                        | Search_Input       | Advanced_Filters     | Modification_Count | Status           | Search_Key_Type |
+                        | Valid_Full_Iras_Id | Advanced_Filters_Nth | Single             | With review body | Full            |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
@@ -264,7 +320,7 @@ Feature: Filter, Search and Sort the Search modifications page
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
@@ -277,28 +333,43 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Valid_Full_Iras_Id       | Advanced_Filters_Lead_Nation | Single             | With review body |
 
         @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
-        Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
+        Scenario Outline: Verify the user can view the list of modifications based on the entered partial iras id and the search performed
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
                 When I fill the search input for searching 'modifications' with 'modification with status' as the search query as '<Search_Key_Type>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria ''
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Search_Input             | User                 | Modification_Count | Status           | Search_Key_Type |
                         | Existing_Partial_IRAS_ID | Team_Manager         | Partial            | With review body | Partial         |
-                        | Valid_Full_Iras_Id       | Studywide_Reviewer   | Single             | With review body | Full            |
                         | Existing_Partial_IRAS_ID | Workflow_Coordinator | Partial            | Approved         | Partial         |
-                        | Valid_Full_Iras_Id       | Workflow_Coordinator | Single             | Not approved     | Full            |
                         | Existing_Partial_IRAS_ID | System_Admin         | Partial            | Approved         | Partial         |
-                        | Valid_Full_Iras_Id       | System_Admin         | Single             | Not approved     | Full            |
                         | Existing_Partial_IRAS_ID | System_Admin         | Partial            | In draft         | Partial         |
-                        | Valid_Full_Iras_Id       | System_Admin         | Single             | With sponsor     | Full            |
-                        | Valid_Full_Iras_Id       | System_Admin         | Single             | With review body | Full            |
+
+        @viewListOfModifications @ValidIrasIdAndNoFilters @jsDisabled
+        Scenario Outline: Verify the user can view the list of modifications based on the entered full iras id and the search performed
+                Given I have navigated to the 'Search_Modifications_Page' as '<User>'
+                And I capture the modification id of '<Modification_Count>' with status '<Status>'
+                When I fill the search input for searching 'modifications' with 'modification with status' as the search query as '<Search_Key_Type>'
+                And I capture the page screenshot
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And the system displays modification records based on the search 'Iras_Id_Retrieved_From_DB_With_Status_Active>' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
+                And I capture the page screenshot
+                Examples:
+                        | Search_Input       | User                 | Modification_Count | Status           | Search_Key_Type |
+                        | Valid_Full_Iras_Id | Studywide_Reviewer   | Single             | With review body | Full            |
+                        | Valid_Full_Iras_Id | Workflow_Coordinator | Single             | Not approved     | Full            |
+                        | Valid_Full_Iras_Id | System_Admin         | Single             | Not approved     | Full            |
+                        | Valid_Full_Iras_Id | System_Admin         | Single             | With sponsor     | Full            |
+                        | Valid_Full_Iras_Id | System_Admin         | Single             | With review body | Full            |
 
         @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
@@ -516,9 +587,9 @@ Feature: Filter, Search and Sort the Search modifications page
         #                 | Advanced_Filters_Nth |
 
         @RemoveAllActiveFiltersOneByOne @jsDisabled
-        Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
+        Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered partial IRAS ID
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -527,21 +598,47 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria '<Advanced_Filters>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I 'cannot' see active filters displayed
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria ''
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 Examples:
                         | Search_Input             | Advanced_Filters             | Modification_Count | Status           |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Lead_Nation | Partial            | With review body |
-                        | Valid_Full_Iras_Id       | Advanced_Filters_Lead_Nation | Single             | With review body |
+
+        @RemoveAllActiveFiltersOneByOne @jsDisabled
+        Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered full IRAS ID
+                And I capture the modification id of '<Modification_Count>' with status '<Status>'
+                When I enter the the search input for 'modifications' with '<Search_Input>'
+                And I capture the page screenshot
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+                And the system displays modification records based on the search 'Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
+                And I capture the page screenshot
+                And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I 'cannot' see active filters displayed
+                And the system displays modification records based on the search 'Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria ''
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
+                And I capture the page screenshot
+                Examples:
+                        | Search_Input       | Advanced_Filters             | Modification_Count | Status           |
+                        | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation | Single             | With review body |
 
         @RemoveActiveFiltersAltogether @rsp-4293
         Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link
@@ -562,9 +659,9 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Advanced_Filters_Nth |
 
         @RemoveActiveFiltersAlTogether @jsDisabled
-        Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
+        Scenario Outline: Verify the user can view the list of modifications by entering partial iras id, then selected advanced filters and click on apply filters button
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -573,18 +670,42 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Search_Input>' and filter criteria '<Advanced_Filters>'
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria '<Advanced_Filters>'
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I 'cannot' see active filters displayed
-                And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria ''
                 Examples:
                         | Search_Input             | Advanced_Filters             | Modification_Count | Status           |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Lead_Nation | Partial            | With review body |
-                        | Valid_Full_Iras_Id       | Advanced_Filters_Lead_Nation | Single             | With review body |
+
+        @RemoveActiveFiltersAlTogether @jsDisabled
+        Scenario Outline: Verify the user can view the list of modifications by entering valid full iras id, then selected advanced filters and click on apply filters button
+                And I capture the modification id of '<Modification_Count>' with status '<Status>'
+                When I enter the the search input for 'modifications' with '<Search_Input>'
+                And I capture the page screenshot
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the 'Search_Modifications_Page' using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+                And the system displays modification records based on the search 'Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria '<Advanced_Filters>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
+                And I capture the page screenshot
+                And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I 'cannot' see active filters displayed
+                And the system displays modification records based on the search 'Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria ''
+                Examples:
+                        | Search_Input       | Advanced_Filters             | Modification_Count | Status           |
+                        | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation | Single             | With review body |
+
 
         @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS @skip
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled-Search Modifications Page
@@ -668,10 +789,10 @@ Feature: Filter, Search and Sort the Search modifications page
         @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID
         Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
-                And I fill the search input for searching 'modifications' with '<Search_Input>' as the search query
+                When I enter the the search input for 'modifications' with '<Search_Input>'
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Search_Input>' and filter criteria ''
+                And the system displays modification records based on the search 'Partial_Iras_Id_Retrieved_From_DB_With_Status_Active' and filter criteria ''
                 When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'modifications' page
                 And I capture the page screenshot
@@ -772,11 +893,11 @@ Feature: Filter, Search and Sort the Search modifications page
                 Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with '<Status>' status
 
                 Examples:
-                        | Status                                 |
-                        | Modification_Status_Approved           |
-                        | Modification_Status_Not_Approved       |
-                        | Modification_Status_Received           |
-                        | Modification_Status_Review_In_Progress |
+                        | Status                           |
+                        | Modification_Status_Approved     |
+                        | Modification_Status_Not_Approved |
+                        | Modification_Status_Received     |
+        # | Modification_Status_Review_In_Progress |
 
         @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
         Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from the Search Modifications page

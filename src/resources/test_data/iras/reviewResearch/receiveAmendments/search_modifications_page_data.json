@@ -138,7 +138,7 @@
   },
   "Advanced_Filters": {
     "Advanced_Filters_Nth": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "short_project_title_text": "a",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "January",
@@ -161,7 +161,7 @@
       "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Nth_Chief_Investigator_Name_Filter": {
-      "chief_investigator_name_text": "ci"
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name"
     },
     "Advanced_Filters_Nth_After_Remove_Chief_Investigator_Name_Filter": {
       "short_project_title_text": "a",
@@ -189,7 +189,7 @@
       "sponsor_organisation_text": "University of Southampton"
     },
     "Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "short_project_title_text": "a",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "January",
@@ -219,7 +219,7 @@
       "date_submitted_to_year_text": "2050"
     },
     "Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "short_project_title_text": "a",
       "sponsor_organisation_text": "University of Southampton",
       "lead_nation_checkbox": [
@@ -239,7 +239,7 @@
       "short_project_title_text": "a"
     },
     "Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "sponsor_organisation_text": "University of Southampton",
       "date_submitted_from_day_text": "01",
       "date_submitted_from_month_dropdown": "January",
@@ -427,10 +427,10 @@
       ]
     },
     "Advanced_Filters_Sixteen": {
-      "chief_investigator_name_text": "Barry White"
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name"
     },
     "Advanced_Filters_Seventeen": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -438,7 +438,7 @@
       ]
     },
     "Advanced_Filters_Eighteen": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "date_submitted_from_day_text": "10",
       "date_submitted_from_month_dropdown": "April",
       "date_submitted_from_year_text": "2025",
@@ -484,7 +484,7 @@
       ]
     },
     "Advanced_Filters_TwentyTwo": {
-      "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -499,7 +499,7 @@
       ]
     },
     "Advanced_Filters_TwentyThree": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "short_project_title_text": "Study title 10",
       "sponsor_organisation_text": "AB SCIEX UK LIMITED",
       "date_submitted_from_day_text": "2",
@@ -684,7 +684,7 @@
       "date_submitted_to_year_text": "'2ooo"
     },
     "Advanced_Filters_Automation_No_SpOrg": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -709,7 +709,7 @@
       "date_submitted_to_year_text": "2030"
     },
     "Advanced_Filters_Automation_No_SpOrg_No_ToDate": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -731,7 +731,7 @@
       "date_submitted_from_year_text": "1990"
     },
     "Advanced_Filters_Automation_No_SpOrg_No_FromDate": {
-      "chief_investigator_name_text": "ci",
+      "chief_investigator_name_text": "Chief Investigator First name Chief Investigator Last name",
       "lead_nation_checkbox": [
         "England",
         "Northern Ireland",
@@ -814,10 +814,10 @@
       "search_input_text": "98"
     },
     "Valid_Full_Iras_Id": {
-      "search_input_text": "240132"
+      "search_input_text": "223291"
     },
     "Existing_Partial_IRAS_ID": {
-      "search_input_text": "24"
+      "search_input_text": "22"
     }
   }
 }

@@ -11,6 +11,19 @@
     "Non_Registered_User": {
       "email_address_text": "hscrd@health.org"
     },
+    "Audit_History_Headers": ["Date", "Event description", "Username"],
+    "Audit_History_Events": {
+      "Sponsor_Organisation_Created": "Sponsor organisation created",
+      "User_Added": " added to sponsor organisation",
+      "User_Assigned_Org_Admin": " assigned Organisation administrator for sponsor organisation",
+      "User_Assigned_Authoriser": " assigned as authoriser for sponsor organisation",
+      "User_Assigned_Sponsor": " assigned Sponsor for sponsor organisation",
+      "User_Unassigned_Org_Admin": " unassigned Organisation administrator for sponsor organisation",
+      "User_Unassigned_Sponsor": " unassigned Sponsor for sponsor organisation",
+      "User_Unassigned_Authoriser": " unassigned authoriser for sponsor organisation",
+      "User_Enabled": " enabled for sponsor organisation",
+      "User_Disabled": " disabled from sponsor organisation"
+    },
     "Invalid_Email_Data_Leading_Dot": {
       "email_address_text": ".john@example.com"
     },

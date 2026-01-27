@@ -28,7 +28,7 @@ Feature: Manage Users - Enable / Disable users
         When I click the 'Disable_User_Record' button on the 'User_Profile_Page'
         Then I validate '<Disable_User_Profile_Labels>' labels displayed in disable user profile confirmation page using the '<Add_User_Profile>' details
         And I capture the page screenshot
-        When I click the 'Confirm' button on the 'Confirmation_Page'
+        When I click the 'Disable' button on the 'Confirmation_Page'
         Then I validate '<Disable_User_Profile_Labels>' labels displayed in disable user profile success page using the '<Add_User_Profile>' details
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
@@ -87,7 +87,7 @@ Feature: Manage Users - Enable / Disable users
         And I capture the page screenshot
         And I search and click on view edit link for unique '<Add_User_Profile>' user with '<Status_Enabled>' status from the manage user page
         And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
-        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I click the 'Disable' button on the 'Confirmation_Page'
         And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -137,7 +137,7 @@ Feature: Manage Users - Enable / Disable users
         And I capture the page screenshot
         And I search and click on view edit link for unique '<Add_User_Profile>' user with '<Status_Enabled>' status from the manage user page
         And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
-        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I click the 'Disable' button on the 'Confirmation_Page'
         And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot

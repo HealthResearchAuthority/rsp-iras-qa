@@ -9,6 +9,7 @@
     "add_user_role_system_admin_workspace_page_caption": "Sponsor organisation's profile",
     "add_user_role_system_admin_workspace_hint_text": "Fill in the role and permissions that you want to assign to the user.",
     "role_label": "Role",
+    "authoriser_label": "Authoriser",
     "add_user_role_org_admin_hint_text": "An organisation administrator can view this organisation's projects, manage its profile and users. This includes adding and managing other organisation administrators. This user has permission to authorise all modification submissions on behalf of the sponsor organisation",
     "add_user_role_sponsor_hint_text": "A sponsor can view this organisation's profile, projects and users.",
     "save_add_continue_button": "Save and continue",
@@ -17,6 +18,12 @@
     },
     "Sponsor_Org_User_Role_Sponsor": {
       "role_radio": "Sponsor"
+    },
+    "Authoriser_Yes":{
+      "authoriser_radio": "Yes"
+    },
+    "Authoriser_No":{
+      "authoriser_radio": "No"
     },
     "Error_Validation": {
       "No_Role_Selected_Error": {

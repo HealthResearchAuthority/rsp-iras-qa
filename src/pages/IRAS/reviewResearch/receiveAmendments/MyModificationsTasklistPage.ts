@@ -14,6 +14,8 @@ export default class MyModificationsTasklistPage {
   readonly page: Page;
   readonly myModificationsTasklistPageTestData: typeof myModificationsTasklistPageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
+  private _modification_id: string;
+  private _iras_id: string;
   readonly page_heading: Locator;
   readonly short_project_title_column_label: Locator;
   readonly modification_id_column_label: Locator;
@@ -46,6 +48,8 @@ export default class MyModificationsTasklistPage {
     this.page = page;
     this.myModificationsTasklistPageTestData = myModificationsTasklistPageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
+    this._modification_id = '';
+    this._iras_id = '';
 
     //Locators
     this.page_heading = this.page
@@ -118,6 +122,24 @@ export default class MyModificationsTasklistPage {
       .getByText(
         this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.my_modification_no_result_heading_label
       );
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getModificationId(): Promise<string> {
+    return this._modification_id;
+  }
+
+  async setModificationId(value: string): Promise<void> {
+    this._modification_id = value;
+  }
+
+  async getIrasId(): Promise<string> {
+    return this._iras_id;
+  }
+
+  async setIrasId(value: string): Promise<void> {
+    this._iras_id = value;
   }
 
   //Page Methods
@@ -197,6 +219,7 @@ ORDER BY NationQuery.CreatedDate DESC;
   }
 
   async saveModificationId(modificationId: string, countval: string) {
+    await this.setModificationId(modificationId);
     const filePath = path.resolve(pathToTestDataJson);
     await this.updateModificationIdTestDataJson(filePath, modificationId, countval);
   }

@@ -462,7 +462,6 @@ export default class UserProfilePage {
     } else {
       await this.setTitle(userQueryResult.recordset[0].Title);
     }
-    await this.setTitle(userQueryResult.recordset[0].Title);
     const roles: string[] = [];
     for (const role of userRolesQueryResult.recordset) {
       const key = role.Name;

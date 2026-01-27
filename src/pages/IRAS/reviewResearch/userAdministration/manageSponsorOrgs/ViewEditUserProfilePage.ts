@@ -133,10 +133,14 @@ export default class ViewEditUserProfilePage {
         }),
     });
     this.role_value = this.page
-      .locator(
-        'tr:has-text("' + this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.role_label + '") td'
-      )
+      .locator('tr', {
+        has: this.page.locator('td:first-child, th:first-child', {
+          hasText: this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.role_label,
+        }),
+      })
+      .locator('td')
       .nth(1);
+
     this.authoriser_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')

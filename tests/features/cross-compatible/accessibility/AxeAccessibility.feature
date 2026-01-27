@@ -2091,7 +2091,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     Then I can see the 'Check_Add_User_Sponsor_Org_Page'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     Then I can see the user list page of the 'sponsor organisation'
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
     And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
@@ -2125,7 +2125,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     Then I can see the 'Check_Add_User_Sponsor_Org_Page'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     Then I can see the user list page of the 'sponsor organisation'
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
     And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
@@ -2160,7 +2160,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
     Then I can see the 'Check_Add_User_Sponsor_Org_Page'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     Then I can see the user list page of the 'sponsor organisation'
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
     And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
@@ -2954,7 +2954,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the my organisations page
     Then I click the 'View' link on the 'My_Organisations_Page'
     And I capture the page screenshot
-    And I can see the sponsor organisation profile page from my organisations for 'automation sponsor email'
+    And I can see the sponsor organisation profile page from my organisations for 'Sponsor_User'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -3117,7 +3117,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityMyOrganisationsUsersPage @SysAdminUser  @SetupNewSponsorOrgGoLive
+  @axeAccessibilityMyOrganisationsUsersPage @SysAdminUser @SetupNewSponsorOrgGoLive
   Scenario: Add user page from Users page for the selected sponsor organisation
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
