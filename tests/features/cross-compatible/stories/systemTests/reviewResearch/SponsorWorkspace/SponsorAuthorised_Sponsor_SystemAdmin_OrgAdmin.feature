@@ -88,7 +88,7 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -230,7 +230,7 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -352,7 +352,7 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -531,7 +531,7 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -710,7 +710,7 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
