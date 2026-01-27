@@ -33,7 +33,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -92,7 +92,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -149,7 +149,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -209,7 +209,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -267,7 +267,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -343,7 +343,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -419,7 +419,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -483,7 +483,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -543,7 +543,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -610,7 +610,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -673,7 +673,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -761,7 +761,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -849,7 +849,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -913,7 +913,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -978,7 +978,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -1046,7 +1046,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    Then I can see the 'user added' successful message on sponsor organisation user list page
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'

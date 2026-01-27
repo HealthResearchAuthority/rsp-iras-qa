@@ -937,6 +937,20 @@ Then(
           throw new Error(`Unsupported button state: ${availabilityVal}`);
         }
       }
+    } else if (linkLabel === 'Confirm_Selection') {
+      const buttonValue = commonItemsPage.buttonTextData['Sponsor_Check_And_Authorise_Page']['Confirm_Selection'];
+      const locatorVal: Locator = commonItemsPage.govUkButton
+        .getByText(buttonValue, { exact: true })
+        .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+        .first();
+      if (availabilityVal.toLowerCase() === 'available') {
+        await expect.soft(locatorVal).toBeVisible();
+        await expect.soft(locatorVal).toBeEnabled();
+      } else if (availabilityVal.toLowerCase() === 'not available') {
+        await expect.soft(locatorVal).toBeHidden();
+      } else {
+        throw new Error(`Unsupported button state: ${availabilityVal}`);
+      }
     }
   }
 );
@@ -1271,7 +1285,8 @@ Then(
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
         pagename === 'Review_All_Changes_Page' ||
-        pagename === 'Manage_Sponsor_Organisations_Page'
+        pagename === 'Manage_Sponsor_Organisations_Page' ||
+        pagename === 'Project_Documents_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
@@ -1306,7 +1321,8 @@ Then(
         pagename === 'Post_Approval_Page' ||
         pagename === 'Sponsor_Org_User_List_Page' ||
         pagename === 'Review_All_Changes_Page' ||
-        pagename === 'Manage_Sponsor_Organisations_Page'
+        pagename === 'Manage_Sponsor_Organisations_Page' ||
+        pagename === 'Project_Documents_Page'
       ) {
         totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
       } else {
@@ -1664,6 +1680,24 @@ When(
       .getByRole('cell')
       .nth(columnIndex)
       .getByRole('link');
+    await fieldLocator.click();
+  }
+);
+
+When(
+  'I click the {string} of the captured modification on the {string}',
+  async (
+    { commonItemsPage, modificationsReceivedCommonPage, searchModificationsPage },
+    fieldName: string,
+    pageKey: string
+  ) => {
+    const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
+    const modificationId = await searchModificationsPage.getModificationId();
+    const row = commonItemsPage.tableBodyRows.filter({
+      has: commonItemsPage.page.getByRole('link', { name: modificationId }),
+    });
+    const fieldLocator = row.getByRole('cell').nth(columnIndex).getByRole('link');
+    await fieldLocator.waitFor({ state: 'visible' });
     await fieldLocator.click();
   }
 );

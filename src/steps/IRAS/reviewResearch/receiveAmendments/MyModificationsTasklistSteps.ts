@@ -58,5 +58,7 @@ Then(
       studyWideReviewer
     );
     await myModificationsTasklistPage.saveModificationId(modificationId.toString(), modificationCount);
+    const irasId = modificationId.toString().split('/')[0];
+    await myModificationsTasklistPage.setIrasId(irasId);
   }
 );

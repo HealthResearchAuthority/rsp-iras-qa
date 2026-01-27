@@ -2077,8 +2077,8 @@ Feature: Modifications - Save Later and Other Scenarios
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP-6489
-  Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modifiction post submission page
+  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP-6395
+  Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modification post submission page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -2099,7 +2099,7 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Add_Documents' button on the 'Modification_Details_Page'
     Then I can see add supporting documents page
     And I capture the page screenshot
-    And I upload 'Multiple_Files' documents
+    And I upload 'Multiple_Files_Twenty_One' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     And I capture the page screenshot
@@ -2109,7 +2109,7 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     And I capture the page screenshot
     And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files' in the add document details for specific document page
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Twenty_One' in the add document details for specific document page
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
     And I capture the page screenshot

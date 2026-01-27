@@ -1468,7 +1468,8 @@ export default class CommonItemsPage {
     return (
       (fromDateValue && !toDateValue && key.endsWith('_from_day_text')) ||
       (!fromDateValue && toDateValue && key.endsWith('_to_day_text')) ||
-      (fromDateValue && toDateValue && key.endsWith('_from_day_text'))
+      (fromDateValue && toDateValue && key.endsWith('_from_day_text')) ||
+      (fromDateValue && toDateValue && key.endsWith('_to_day_text'))
     );
   }
 
@@ -1851,6 +1852,8 @@ export default class CommonItemsPage {
     const locator: Locator = page[key];
     const count = await locator.count();
     for (let i = 0; i < count; i++) {
+      //The below line of code is a temporary fix to avoid un checking checkbox indexes (1 & 2) for Organisation Administrator & Sponsor
+      if (i === 1 || i === 2) continue;
       const checkbox = locator.nth(i);
       const isChecked = await checkbox.isChecked();
       if (isChecked) {

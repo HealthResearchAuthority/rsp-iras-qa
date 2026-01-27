@@ -17,6 +17,7 @@ export default class SearchModificationsPage {
   readonly linkTextData: typeof linkTextData;
   private _modifications_list_after_search: string[];
   private _modification_id: string;
+  private _iras_id: string;
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
   readonly iras_id_search_text: Locator;
@@ -72,6 +73,7 @@ export default class SearchModificationsPage {
   readonly participating_nation_checkbox_hint_label: Locator;
   readonly participating_nation_checkbox_selected_hint_label: Locator;
   readonly mainPageContent: Locator;
+  readonly total_pages_list: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -79,6 +81,7 @@ export default class SearchModificationsPage {
     this.searchModificationsPageTestData = searchModificationsPageTestData;
     this._modifications_list_after_search = [];
     this._modification_id = '';
+    this._iras_id = '';
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
@@ -317,6 +320,7 @@ export default class SearchModificationsPage {
       .filter({ has: this.page.locator('.govuk-radios__label') });
     this.sponsor_organisation_jsdisabled_no_suggestions_label = this.page.locator('.govuk-inset-text');
     this.results_table = this.page.getByTestId('modificationsTable');
+    this.total_pages_list = this.page.locator('.govuk-pagination__list li');
   }
 
   //Getters & Setters for Private Variables
@@ -335,6 +339,14 @@ export default class SearchModificationsPage {
 
   async setModificationId(value: string): Promise<void> {
     this._modification_id = value;
+  }
+
+  async getIrasId(): Promise<string> {
+    return this._iras_id;
+  }
+
+  async setIrasId(value: string): Promise<void> {
+    this._iras_id = value;
   }
 
   //Page Methods
@@ -360,7 +372,13 @@ export default class SearchModificationsPage {
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForTimeout(3000);
     //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
-    for (let i = 0; i < 3; i++) {
+    let pageCount: number;
+    if ((await this.total_pages_list.count()) < 3) {
+      pageCount = (await this.total_pages_list.count()) + 1;
+    } else {
+      pageCount = 3;
+    }
+    for (let i = 0; i < pageCount; i++) {
       const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
@@ -493,7 +511,7 @@ ORDER BY NationQuery.CreatedDate DESC;
     if (queryResult.recordset.length == 0) {
       throw new Error(`No suitable modification found in the system with ${status} status`);
     }
-    return queryResult.recordset.map((row) => row.IrasId);
+    return queryResult.recordset.map((row) => row.ModificationIdentifier);
   }
   async saveModificationIdSearch(modificationId: string, countval: string) {
     await this.setModificationId(modificationId);
