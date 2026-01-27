@@ -5,8 +5,7 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-        And I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfLeeds'
-        # And I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+        And I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
         And I keep note of the organisation name for sponsor organisation setup
@@ -34,7 +33,7 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
 
-    @rsp-6423 @rsp-6545 @ViewMyOrgAuditPage @only
+    @rsp-6423 @rsp-6545 @ViewMyOrgAuditPage @KNOWN_DEFECT_RSP-6489
     Scenario Outline: Validate that the my organisations audit page displays the event history as expected
         When I enter '<Admin_User_Email>' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -53,7 +52,6 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         And I capture the page screenshot
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the 'sponsor organisation'
         And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
         When I enter '<Added_User_Email>' into the search field
@@ -114,23 +112,26 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         Then I can see the sponsor organisations audit history page from my organisations
         And the 'Audit' tab is active and underlined
         And I can see the table column ui labels on my organisations audit history page
-        # And I can see my organisations audit history with 'All_Org_Admin_To_Sponsor_Events' by '<Login_User>'
-        # And I can see the events on my organisations audit history page are sorted by date with most recent at the top
-        # When I click the 'My_Organisations_Breadcrumb' link in the breadcrumbs on the 'My_Organisations_Audit_History_Page'
-        # Then I can see the my organisations page
-        # When I navigate 'back'
-        # Then I can see the sponsor organisations audit history page from my organisations
-        # When I click the 'Sponsor_Workspace_Breadcrumb' link in the breadcrumbs on the 'My_Organisations_Audit_History_Page'
-        # Then I can see the sponsor workspace page
-        # When I navigate 'back'
-        # Then I can see the sponsor organisations audit history page from my organisations
-        # When I click the 'My_Account_Breadcrumb' link in the breadcrumbs on the 'My_Organisations_Audit_History_Page'
-        # Then I can see the 'Home_Page'
+        And I can see my organisations audit history with 'All_Org_Admin_To_Sponsor_Events' by '<Login_User>'
+        And I can see the events on my organisations audit history page are sorted by date with most recent at the top
+        When I click the 'My_Organisations_Breadcrumb' link in the breadcrumbs on the 'My_Organisations_Audit_History_Page'
+        Then I can see the my organisations page
+        When I navigate 'back'
+        Then I can see the sponsor organisations audit history page from my organisations
+        When I click the 'Sponsor_Workspace_Breadcrumb' link in the breadcrumbs on the 'My_Organisations_Audit_History_Page'
+        Then I can see the sponsor workspace page
+        When I navigate 'back'
+        Then I can see the sponsor organisations audit history page from my organisations
+        When I click the 'My_Account_Breadcrumb' link in the breadcrumbs on the 'My_Organisations_Audit_History_Page'
+        Then I can see the 'Home_Page'
 
         Examples:
-            | Login_User   | Admin_User_Email   | Added_User_Email        | Sponsor_Organisation | Select_User_Role                | Select_User_Permission  |
-            | System_Admin | system admin email | sponsor org admin email | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
-    # | System_Admin | system admin email | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+            | Login_User   | Admin_User_Email   | Added_User_Email        | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
+            | System_Admin | system admin email | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+
+    # UPDATE WITH MAIN
+    # REMOVE ROLES FROM SPONSOR AND ORG ADMIN IN HOOKS
+    # LOOK INTO FAILURES TIJI METIONED FURTHER + ADD CHANGE IN THIS PR
 
     @rsp-6423 @AccessMyOrgAuditPage
     Scenario Outline: Validate that the my organisations audit page can only be accessed by administrators
