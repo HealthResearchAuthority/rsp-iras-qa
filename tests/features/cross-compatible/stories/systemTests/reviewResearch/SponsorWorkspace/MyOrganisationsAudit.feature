@@ -129,10 +129,6 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
             | Login_User   | Admin_User_Email   | Added_User_Email        | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
             | System_Admin | system admin email | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-    # UPDATE WITH MAIN
-    # REMOVE ROLES FROM SPONSOR AND ORG ADMIN IN HOOKS
-    # LOOK INTO FAILURES TIJI METIONED FURTHER + ADD CHANGE IN THIS PR
-
     @rsp-6423 @AccessMyOrgAuditPage
     Scenario Outline: Validate that the my organisations audit page can only be accessed by administrators
         When I enter '<User_Email>' into the search field
