@@ -113,3 +113,23 @@ When(
     }
   }
 );
+
+Then(
+  'I {string} see comments tab for the modification record with {string}',
+  async ({ modificationsDetailsPage }, visibility: string, reason: string) => {
+    const commentProvided =
+      modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons[reason];
+    if (commentProvided != '') {
+      if (visibility.toLowerCase() == 'can') {
+        const commentReceived = await modificationsDetailsPage.comment_text.textContent();
+        await expect.soft(modificationsDetailsPage.comments_tab_label).toBeVisible();
+        await expect.soft(modificationsDetailsPage.comment_heading_label).toBeVisible();
+        await expect.soft(commentReceived).toBe(commentProvided);
+      } else {
+        await expect.soft(modificationsDetailsPage.comments_tab_label).not.toBeVisible();
+      }
+    } else {
+      await expect.soft(modificationsDetailsPage.comments_tab_label).not.toBeVisible();
+    }
+  }
+);

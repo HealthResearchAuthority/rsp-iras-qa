@@ -48,7 +48,7 @@ Feature: Studywide reviewer receive and approve amendments
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831
+    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @rsp-6626 @Testonly
     Scenario Outline: Verify the modification approvals workflow
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -128,7 +128,19 @@ Feature: Studywide reviewer receive and approve amendments
         When I click the 'Back_To_Tasklist' link on the 'Modification_Review_Outcome_Sent_Page'
         Then I can see the 'My_Modifications_Tasklist_No_Result_Page'
         And I capture the page screenshot
+        When I have navigated to the 'Approvals_Page' as 'Studywide_Reviewer'
+        When I click the 'Search_Records' link on the 'Approvals_Page'
+        And I select the radio button for 'Modification_Record' in the choose a record type to search page
+        And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+        And I enter 'iras id' into the search field
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        When I click a 'modification id' on the 'Search_Modifications_Page'
+        Then I can see the modification post submission page
+        And I capture the page screenshot
+        When I click the 'Comments' link on the 'Modification_Post_Submission_Page'
+        Then I 'can' see comments tab for the modification record with '<Outcome_Reason>'
+        And I capture the page screenshot
 
         Examples:
             | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome  | Outcome_Reason | Outcome_Status               |
-            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Blank          | Modification_Status_Approved |
+            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Valid_Reason   | Modification_Status_Approved |

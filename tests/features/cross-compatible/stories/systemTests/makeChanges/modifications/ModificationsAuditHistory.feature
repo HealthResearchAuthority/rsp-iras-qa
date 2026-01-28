@@ -502,7 +502,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
-  @rsp-5268 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
+  @rsp-5268 @rsp-6626 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
   Scenario: Verify the modification approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -709,7 +709,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
 
-  @rsp-5268 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
+  @rsp-5268 @rsp-6626 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
   Scenario: Verify the modification not approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'

@@ -39,7 +39,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @AuthoriseAndApproveModification
+    @AuthoriseAndApproveModification @rsp-6626
     Scenario: Validate system admininstrator is able to authorise and approve a modification
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -132,6 +132,21 @@ Feature: This feature file is to validate the assisted digital test coverage as 
         When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
         And I capture the page screenshot
         Then I validate confirmation screen for modification review outcome sent
+        When I click the 'Back_To_Tasklist' link on the 'Modification_Review_Outcome_Sent_Page'
+        Then I can see the 'My_Modifications_Tasklist_No_Result_Page'
+        And I capture the page screenshot
+        When I have navigated to the 'Approvals_Page' as 'System_Admin'
+        When I click the 'Search_Records' link on the 'Approvals_Page'
+        And I select the radio button for 'Modification_Record' in the choose a record type to search page
+        And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+        And I enter 'iras id' into the search field
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        When I click a 'modification id' on the 'Search_Modifications_Page'
+        Then I can see the modification post submission page
+        And I capture the page screenshot
+        When I click the 'Comments' link on the 'Modification_Post_Submission_Page'
+        Then I 'can' see comments tab for the modification record with '<Outcome_Reason>'
+        And I capture the page screenshot
 
         Examples:
             | Changes                                            | Research_Locations  | Outcome  | Outcome_Reason |
