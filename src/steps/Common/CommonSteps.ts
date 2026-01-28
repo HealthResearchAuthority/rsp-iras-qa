@@ -257,28 +257,34 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
   commonItemsPage.samplePageAction(testType);
 });
 
-Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
-  const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-  let button: Locator;
-  if (
-    (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
-    (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview') ||
-    (pageKey === 'Setup_New_Sponsor_Organisation_Page' && buttonKey === 'Save_Continue')
-  ) {
-    button = commonItemsPage.govUkButton
-      .getByText(buttonValue)
-      .or(commonItemsPage.genericButton.getByText(buttonValue))
-      .first();
-  } else {
-    button = commonItemsPage.govUkButton
-      .getByText(buttonValue, { exact: true })
-      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first();
+Then(
+  'I click the {string} button on the {string}',
+  async ({ commonItemsPage, modificationsReceivedCommonPage }, buttonKey: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    let button: Locator;
+    if (
+      (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
+      (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview') ||
+      (pageKey === 'Setup_New_Sponsor_Organisation_Page' && buttonKey === 'Save_Continue')
+    ) {
+      button = commonItemsPage.govUkButton
+        .getByText(buttonValue)
+        .or(commonItemsPage.genericButton.getByText(buttonValue))
+        .first();
+    } else {
+      if (pageKey === 'Project_Overview_Page' && buttonKey === 'Create_New_Modification') {
+        ++modificationsReceivedCommonPage.modificationCounter;
+      }
+      button = commonItemsPage.govUkButton
+        .getByText(buttonValue, { exact: true })
+        .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+        .first();
+    }
+    await commonItemsPage.page.waitForTimeout(500);
+    await button.click();
+    await commonItemsPage.page.waitForLoadState('domcontentloaded');
   }
-  await commonItemsPage.page.waitForTimeout(500);
-  await button.click();
-  await commonItemsPage.page.waitForLoadState('domcontentloaded');
-});
+);
 
 Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];

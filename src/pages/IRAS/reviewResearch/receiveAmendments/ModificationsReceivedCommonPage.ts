@@ -46,7 +46,7 @@ export default class ModificationsReceivedCommonPage {
     this._short_project_title = '';
     this._status = '';
     this._decision_outcome = '';
-    this.modificationCounter = 1;
+    this.modificationCounter = 0;
 
     //Locators
     this._rowWithModification = this.page.getByText('');
