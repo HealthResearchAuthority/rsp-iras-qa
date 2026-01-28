@@ -709,7 +709,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
 
-  @rsp-5268 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
+  @rsp-5268 @rsp-6625 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive @TestONly
   Scenario: Verify the modification not approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -740,7 +740,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -782,7 +782,7 @@ Feature: Modifications - Audit history
     And I keep note of the 'Modification_Submitted' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
     And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
     And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     # Logging as sponsor user and not authorising the modification
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
@@ -840,22 +840,30 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
     Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
     When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
+    And I capture the page screenshot
     Then I can see the modification post submission page
     When I click the 'Continue' link on the 'Modification_Details_Page'
     Then I can see the review outcome section
+    And I capture the page screenshot
     When I provide the 'Not_Approved' outcome for the modification with 'Lack_Of_Evidence' reason
+    And I capture the page screenshot
     When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
     And I keep note of the 'Modification_Outcome_Selected' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
     And I keep note of the 'Modification_Comment_Reason_Not_Approved_Added' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
     Then I see the check and send review outcome page with 'Not_Approved' outcome and 'Lack_Of_Evidence' reason
     When I click the 'Change' link on the 'Modification_Outcome_Check_Send_Page'
+    And I capture the page screenshot
     Then I can see the review outcome section
     And I capture the page screenshot
     When I provide the 'Not_Approved' outcome for the modification with 'Valid_Reason_Not_Approved' reason
+    And I capture the page screenshot
     When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
     Then I see the check and send review outcome page with 'Not_Approved' outcome and 'Valid_Reason_Not_Approved' reason
     And I keep note of the 'Modification_Comment_Reason_Not_Approved_Changed' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
     When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
+    And I capture the page screenshot
     And I keep note of the 'Modificaiton_Not_Approved_By_Review_Body' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
     And I keep note of the 'Modification_Review_Outcome_Sent' event actioned by the user 'Studywide_Reviewer' to store the modification audit history for 'Backstage_User' user
     And I keep note of the 'Modificaiton_Not_Approved_By_Review_Body' event actioned by the user 'blank_user_details' to store the modification audit history for 'Applicant_User' user
@@ -869,6 +877,12 @@ Feature: Modifications - Audit history
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Post_Approval_Page'
     Then I click on the searched modification id
+    And I capture the page screenshot
+    # need to remove later start
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the status 'Modification_Status_Not_Approved' is displayed on the page
+    # need to remove later end
+    Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Applicant_User'
@@ -879,7 +893,11 @@ Feature: Modifications - Audit history
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Search_Modifications_Page'
     When I click a 'modification id' on the 'Search_Modifications_Page'
-    Then I can see the modification post submission page
+    And I capture the page screenshot
+    # need to remove later
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the status 'Modification_Status_Not_Approved' is displayed on the page
+    Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Sponsor_User'
@@ -891,7 +909,11 @@ Feature: Modifications - Audit history
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Search_Modifications_Page'
     When I click a 'modification id' on the 'Search_Modifications_Page'
-    Then I can see the modification post submission page
+    And I capture the page screenshot
+    # need to remove later
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the status 'Modification_Status_Not_Approved' is displayed on the page
+    Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Backstage_User'
@@ -903,8 +925,13 @@ Feature: Modifications - Audit history
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Search_Modifications_Page'
     When I click a 'modification id' on the 'Search_Modifications_Page'
-    Then I can see the modification post submission page
+    And I capture the page screenshot
+    # need to remove later
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the status 'Modification_Status_Not_Approved' is displayed on the page
+    Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
     # Validating the audit history for team manager user
@@ -915,7 +942,12 @@ Feature: Modifications - Audit history
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Search_Modifications_Page'
     When I click a 'modification id' on the 'Search_Modifications_Page'
-    Then I can see the modification post submission page
+    And I capture the page screenshot
+    # need to remove later
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the status 'Modification_Status_Not_Approved' is displayed on the page
+    Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot

@@ -1,4 +1,4 @@
-@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SysAdminUser @jsEnabled @rsp-6425 @rsp-6465 @KNOWN-DEFECT-RSP-6700
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SysAdminUser @jsEnabled @rsp-6425 @rsp-6465
 Feature: Sponsor authorisation based on permission and role
 
   Background:
@@ -729,5 +729,6 @@ Feature: Sponsor authorisation based on permission and role
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role  | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No              | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-# navigate to sponsor workspace >>projects tab >>click with sponsor modifcation>try to access sponsor authorise page >>defect open 6700
+# need to automate below scenario
+# navigate to sponsor workspace >>projects tab >>click with sponsor modifcation>try to access sponsor authorise page >>defect closed 6700
 
