@@ -168,5 +168,11 @@
   },
   "Project_Status_Active": {
     "status": "Active"
+  },
+  "Project_Status_Pending_Closure": {
+    "status": "Pending closure"
+  },
+  "Project_Status_Closed": {
+    "status": "Closed"
   }
 }

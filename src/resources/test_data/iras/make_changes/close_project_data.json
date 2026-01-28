@@ -1,0 +1,95 @@
+{
+  "Close_Project_Page": {
+    "heading": "Close project",
+    "close_project_planned_project_end_date_label": "Planned project end date",
+    "close_project_actual_project_closure_date_label": "Actual project closure date",
+    "close_project_actual_project_closure_date_hint_label": "For example, 28 February 2023",
+    "close_project_actual_project_closure_date_day_label": "Day",
+    "close_project_actual_project_closure_date_month_label": "Month",
+    "close_project_actual_project_closure_date_year_label": "Year",
+    "close_project_now_send_to_sponsor_label": "Now send to sponsor",
+    "close_project_now_send_to_sponsor_hint_label": "When you have checked that the details above describing the closure of this project are correct, continue to 'Send to sponsor'. They will review the information before authorising and submitting.",
+    "project_closure_transaction_table_headers": ["Transaction ID", "Date of project closure", "User email", "Date submitted", "Status"]
+  },
+  "Invalid_Date_Field_Future_Error": {
+    "close_project_actual_project_closure_date_day_textbox": "Project closure date must be today or in the past"
+  },
+  "Invalid_Date_Field_Blank_Error": {
+    "close_project_actual_project_closure_date_day_textbox": "Enter project closure date"
+  },
+  "Invalid_Date_Field_Error": {
+    "close_project_actual_project_closure_date_day_textbox": "Project closure date must be a real date"
+  },
+  "Invalid_Date_Field_Day_Blank_Error": {
+    "close_project_actual_project_closure_date_day_textbox": "Project closure date must include a day"
+  },
+  "Invalid_Date_Field_Month_Blank_Error": {
+    "close_project_actual_project_closure_date_day_textbox": "Project closure date must include a month"
+  },
+  "Invalid_Date_Field_Year_Blank_Error": {
+    "close_project_actual_project_closure_date_day_textbox": "Project closure date must include a year"
+  },
+  "Cant_Close_Project_Error": {
+    "cant_close_project_error_label": "You can't currently close this project as it has a modification in progress. If the modification has a status of 'In draft' but it is no longer needed, you can delete it. If the modification has been submitted for review you'll need to wait until the review outcome is issued before you can go on to close the project."
+  },
+  "Valid_Data_All_Fields": {
+    "close_project_actual_project_closure_date_day_textbox": "25",
+    "close_project_actual_project_closure_date_month_dropdown": "November",
+    "close_project_actual_project_closure_date_year_textbox": "2025"
+  },
+  "Valid_Date_Today": {
+    "close_project_actual_project_closure_date_day_textbox": "Today_Day",
+    "close_project_actual_project_closure_date_month_dropdown": "Today_Month",
+    "close_project_actual_project_closure_date_year_textbox": "'Today_Year"
+  },
+  "Invalid_Day_Number": {
+    "close_project_actual_project_closure_date_day_textbox": "32",
+    "close_project_actual_project_closure_date_month_dropdown": "December",
+    "close_project_actual_project_closure_date_year_textbox": "2028"
+  },
+  "Invalid_Day_Letters": {
+    "close_project_actual_project_closure_date_day_textbox": "o1",
+    "close_project_actual_project_closure_date_month_dropdown": "January",
+    "close_project_actual_project_closure_date_year_textbox": "2028"
+  },
+  "Invalid_Year_Number_1": {
+    "close_project_actual_project_closure_date_day_textbox": "1",
+    "close_project_actual_project_closure_date_month_dropdown": "January",
+    "close_project_actual_project_closure_date_year_textbox": "28"
+  },
+  "Invalid_Year_Number_2": {
+    "close_project_actual_project_closure_date_day_textbox": "1",
+    "close_project_actual_project_closure_date_month_dropdown": "January",
+    "close_project_actual_project_closure_date_year_textbox": "'28"
+  },
+  "Invalid_Year_Letters": {
+    "close_project_actual_project_closure_date_day_textbox": "1",
+    "close_project_actual_project_closure_date_month_dropdown": "January",
+    "close_project_actual_project_closure_date_year_textbox": "'2ooo"
+  },
+  "Invalid_Date_Future": {
+    "close_project_actual_project_closure_date_day_textbox": "1",
+    "close_project_actual_project_closure_date_month_dropdown": "January",
+    "close_project_actual_project_closure_date_year_textbox": "'2050"
+  },
+  "Invalid_Date_No_Day": {
+    "close_project_actual_project_closure_date_day_textbox": "",
+    "close_project_actual_project_closure_date_month_dropdown": "January",
+    "close_project_actual_project_closure_date_year_textbox": "2028"
+  },
+  "Invalid_Date_No_Month": {
+    "close_project_actual_project_closure_date_day_textbox": "1",
+    "close_project_actual_project_closure_date_month_dropdown": "Choose month",
+    "close_project_actual_project_closure_date_year_textbox": "2028"
+  },
+  "Invalid_Date_No_Year": {
+    "close_project_actual_project_closure_date_day_textbox": "1",
+    "close_project_actual_project_closure_date_month_dropdown": "January",
+    "close_project_actual_project_closure_date_year_textbox": ""
+  },
+  "Invalid_Date_Blank": {
+    "close_project_actual_project_closure_date_day_textbox": "",
+    "close_project_actual_project_closure_date_month_dropdown": "Choose month",
+    "close_project_actual_project_closure_date_year_textbox": ""
+  }
+}

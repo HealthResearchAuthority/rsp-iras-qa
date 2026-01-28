@@ -1,4 +1,4 @@
-@ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive @jsEnabled
+@ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive
 Feature: Modifications - Audit history
 
   @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised

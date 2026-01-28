@@ -453,3 +453,82 @@ Then('I validate confirmation screen for modification review outcome sent', asyn
     .getByText(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.confirmation_body)
     .isVisible();
 });
+
+Then(
+  'I validate {string} labels displayed in the success confirmation page when the project closure has been sent to sponsor',
+  async ({ confirmationPage }, validationLabelsDatasetName) => {
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const confirmationHeaderLabel = validationLabelsDataset.page_heading;
+    const confirmationBodyLabel =
+      confirmationPage.confirmationPageTestData[validationLabelsDatasetName].confirmation_body;
+    const whatHappensNextLabel =
+      confirmationPage.confirmationPageTestData[validationLabelsDatasetName].what_happens_next_label;
+    await expect(confirmationPage.page.getByText(confirmationHeaderLabel)).toBeVisible();
+    await expect(confirmationPage.page.getByText(whatHappensNextLabel)).toBeVisible();
+    await expect(confirmationPage.page.getByText(confirmationBodyLabel)).toBeVisible();
+  }
+);
+
+When('I can see the close project confirmation page', async ({ confirmationPage }) => {
+  await confirmationPage.assertOnConfirmationPage();
+});
+
+Then(
+  'I validate confirmation screen for project closure when closure is about to be authorised',
+  async ({ confirmationPage }) => {
+    await confirmationPage.confirmation_header_common_label
+      .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Authorised_Confirm.page_heading)
+      .isVisible();
+    await confirmationPage.confirmation_body_label
+      .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Authorised_Confirm.confirmation_body)
+      .isVisible();
+    await expect
+      .soft(
+        confirmationPage.page.getByText(
+          confirmationPage.confirmationPageTestData.Project_Closure_Authorised_Confirm.iras_id_label,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        confirmationPage.page.getByText(
+          confirmationPage.confirmationPageTestData.Project_Closure_Authorised_Confirm.short_project_title_label,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+  }
+);
+
+Then('I validate confirmation screen for project closure when closure authorised', async ({ confirmationPage }) => {
+  await confirmationPage.confirmation_header_common_label
+    .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Authorised.page_heading)
+    .isVisible();
+  await expect
+    .soft(
+      confirmationPage.page.getByText(
+        confirmationPage.confirmationPageTestData.Project_Closure_Authorised.what_happens_next_label
+      )
+    )
+    .toBeVisible();
+  await confirmationPage.confirmation_body_label
+    .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Authorised.confirmation_body)
+    .isVisible();
+});
+
+Then('I validate confirmation screen for project closure when closure not authorised', async ({ confirmationPage }) => {
+  await confirmationPage.confirmation_header_common_label
+    .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Not_Authorised.page_heading)
+    .isVisible();
+  await expect
+    .soft(
+      confirmationPage.page.getByText(
+        confirmationPage.confirmationPageTestData.Project_Closure_Not_Authorised.what_happens_next_label
+      )
+    )
+    .toBeVisible();
+  await confirmationPage.confirmation_body_label
+    .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Not_Authorised.confirmation_body)
+    .isVisible();
+});

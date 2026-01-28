@@ -1,0 +1,20 @@
+{
+  "Check_Authorise_Project_Closure_Page": {
+    "heading": "Check and authorise project closure",
+    "iras_id_label": "IRAS ID:",
+    "short_project_title_label": "Short project title:",
+    "planned_project_end_date_label": "Planned project end date",
+    "actual_project_closure_date_label": "Actual project closure date",
+    "sub_heading": "Authorise project closure",
+    "guidance_body": "Selecting 'Authorised' will confirm that the 'Actual closure date' is correct and close the project. Selecting 'Not authorised' will mean the project remains open. If you need more information to make a decision, contact the researcher."
+  },
+  "Mandatory_Field_Error": {
+    "authorisations_radio": "Select an outcome"
+  },
+  "Authorised_Data": {
+    "authorisations_radio": "Authorised"
+  },
+  "Not_Authorised_Data": {
+    "authorisations_radio": "Not authorised"
+  }
+}
