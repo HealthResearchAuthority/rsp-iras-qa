@@ -86,7 +86,9 @@
     "Delete_Documents": "Delete documents",
     "Delete_Document": "Delete document",
     "Return_To_Authorisations": "Return to authorisations",
-    "Disable": "Disable"
+    "Disable": "Disable",
+    "Authorise_Closure": "Authorise closure",
+    "Go_Back_Check_Authorise": "Go back to check and authorise"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -242,7 +244,8 @@
     "Create_New_Modification": "Create new modification",
     "Modification_Type": "Modification type",
     "Review_Type": "Review type",
-    "Category": "Category"
+    "Category": "Category",
+    "Close_Project": "Close project"
   },
   "Add_Document_Modifications_Page": {
     "Save_Continue": "Save and continue",
@@ -446,5 +449,12 @@
   "My_Organisations_Confirm_User_Status_Page": {
     "Disable_User": "Disable",
     "Enable_User": "Enable"
+  },
+  "Close_Project_Page": {
+    "Send_To_Sponsor": "Send to sponsor",
+    "Return_To_Project_Overview": "Return to project overview"
+  },
+  "Check_Authorise_Project_Closure_Page": {
+    "Confirm_Selection": "Confirm selection"
   }
 }

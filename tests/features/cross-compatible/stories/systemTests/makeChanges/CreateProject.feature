@@ -1855,7 +1855,7 @@ Feature: Create Project
       | page number       |
       | previous link     |
 
-  @rsp-3930 @ProjectDocumentDownload @KNOWN_DEFECT_RSP-6510
+  @rsp-3930 @ProjectDocumentDownload
   Scenario: Validate the user is able to download the project document from the project overview page
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
