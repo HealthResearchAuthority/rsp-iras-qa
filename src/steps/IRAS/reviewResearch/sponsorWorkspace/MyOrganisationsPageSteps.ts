@@ -2,13 +2,13 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { Locator } from '@playwright/test';
 
-const { Then } = createBdd(test);
+const { Given, When, Then } = createBdd(test);
 
-Then('I can see the my organisations page', async ({ myOrganisationsPage }) => {
+Given('I can see the my organisations page', async ({ myOrganisationsPage }) => {
   await myOrganisationsPage.assertOnMyOrganisationsPage();
 });
 
-Then(
+When(
   'I can see the {string} ui labels on the my organisations page',
   async ({ myOrganisationsPage }, datasetName: string) => {
     const dataset = myOrganisationsPage.myOrganisationsPageTestData.My_Organisations_Table[datasetName];
@@ -44,7 +44,7 @@ Then(
   }
 );
 
-Then(
+When(
   'I enter partial {string} into the search field',
   async (
     { myOrganisationsPage, commonItemsPage, checkSetupSponsorOrganisationPage, myOrgSponsorOrgProfilePage },

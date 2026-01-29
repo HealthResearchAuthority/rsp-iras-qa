@@ -108,6 +108,11 @@ import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspa
 import AddUserRoleSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserRoleSponsorOrgPage';
 import AddUserPermissionSponsorOrgPage from '../pages/IRAS/reviewResearch/AddUserPermissionSponsorOrgPage';
 import CheckConfirmUserToAddToSponsorOrganisationPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/CheckConfirmUserToAddToSponsorOrganisationPage';
+import MyOrganisationsAuditHistoryPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAuditHistoryPage';
+import MyOrganisationsUserProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsUserProfilePage';
+import MyOrganisationsEditUserProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsEditUserProfilePage';
+import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
+import CheckAuthoriseProjectClosurePage from '../pages/IRAS/makeChanges/CheckAuthoriseProjectClosurePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -216,6 +221,11 @@ type CustomFixtures = {
   addUserRoleSponsorOrgPage: AddUserRoleSponsorOrgPage;
   addUserPermissionSponsorOrgPage: AddUserPermissionSponsorOrgPage;
   checkConfirmUserToAddToSponsorOrganisationPage: CheckConfirmUserToAddToSponsorOrganisationPage;
+  myOrganisationsAuditHistoryPage: MyOrganisationsAuditHistoryPage;
+  myOrganisationsUserProfilePage: MyOrganisationsUserProfilePage;
+  myOrganisationsEditUserProfilePage: MyOrganisationsEditUserProfilePage;
+  closeProjectPage: CloseProjectPage;
+  checkAuthoriseProjectClosurePage: CheckAuthoriseProjectClosurePage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -641,9 +651,27 @@ export const test = base.extend<CustomFixtures>({
     await use(new CheckConfirmUserToAddToSponsorOrganisationPage(page));
   },
 
+  myOrganisationsAuditHistoryPage: async ({ page }, use) => {
+    await use(new MyOrganisationsAuditHistoryPage(page));
+  },
+
+  myOrganisationsUserProfilePage: async ({ page }, use) => {
+    await use(new MyOrganisationsUserProfilePage(page));
+  },
+
+  myOrganisationsEditUserProfilePage: async ({ page }, use) => {
+    await use(new MyOrganisationsEditUserProfilePage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
+  },
+  closeProjectPage: async ({ page }, use) => {
+    await use(new CloseProjectPage(page));
+  },
+  checkAuthoriseProjectClosurePage: async ({ page }, use) => {
+    await use(new CheckAuthoriseProjectClosurePage(page));
   },
 
   //Set the Storage State based on User Tag from Feature File

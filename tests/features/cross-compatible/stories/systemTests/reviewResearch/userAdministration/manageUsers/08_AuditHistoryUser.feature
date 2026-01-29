@@ -98,7 +98,7 @@ Feature: Manage Users - View audit history for users
         And I capture the page screenshot
         And I click the '<Change_Status>' button on the 'User_Profile_Page'
         And I capture the page screenshot
-        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I click the '<Confirm_Disable_Button>' button on the 'Confirmation_Page'
         And I capture the current time for 'Audit_History_User_Page'
         And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I have navigated to the 'User_Profile_Page'
@@ -110,9 +110,9 @@ Feature: Manage Users - View audit history for users
         And I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
         Examples:
-            | Status   | Change_Status       | Audit_History |
-            | Enabled  | Disable_User_Record | Disable_User  |
-            | Disabled | Enable_User_Record  | Enable_User   |
+            | Status   | Change_Status       | Audit_History | Confirm_Disable_Button |
+            | Enabled  | Disable_User_Record | Disable_User  | Disable                |
+            | Disabled | Enable_User_Record  | Enable_User   | Confirm                |
 
     @rsp-4021 @VerifyAuditHistoryEditCommonUserFields
     Scenario Outline: Verify the user can view the audit history after editing common user profile fields
@@ -205,7 +205,7 @@ Feature: Manage Users - View audit history for users
         And I capture the page screenshot
         And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
         And I capture the page screenshot
-        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I click the 'Disable' button on the 'Confirmation_Page'
         And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I have navigated to the 'User_Profile_Page'
         And I capture the page screenshot

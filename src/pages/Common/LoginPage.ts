@@ -3,6 +3,8 @@ import * as loginPageTestData from '../../resources/test_data/common/login_page_
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import { getDecryptedValue, resolveEnvExpression } from '../../utils/UtilFunctions';
 import { generateToken } from '../../utils/GenerateMFA';
+import * as dbConfigData from '../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../utils/DbConfig';
 
 //Declare Page Objects
 export default class LoginPage {
@@ -57,5 +59,34 @@ export default class LoginPage {
     const oneTimeMfaCode = generateToken(mfaKey);
     await this.mfaCodeInput.fill(oneTimeMfaCode);
     await this.btnContinue.click();
+  }
+
+  // SQL STATEMENTS //
+
+  async sqlResetAllUserRoles(username: string, role: string): Promise<void> {
+    const sqlConnection = await connect(dbConfigData.Identity_Service);
+    const userQueryResult = await sqlConnection.query(`SELECT Id FROM Users WHERE UserName = '${username}'`);
+    const roleQueryResult = await sqlConnection.query(`SELECT Id FROM Roles WHERE Name = '${role}'`);
+    const userId = userQueryResult.recordset[0].Id;
+    const roleId = roleQueryResult.recordset[0].Id;
+
+    // Add expected user role if not present
+    const userExpectedRoleQueryResult = await sqlConnection.query(
+      `SELECT * FROM UserRoles WHERE UserId = '${userId}' AND RoleId = '${roleId}'`
+    );
+    if (userExpectedRoleQueryResult.rowsAffected[0] < 1) {
+      await sqlConnection.query(`INSERT INTO UserRoles (UserId, RoleId) VALUES ('${userId}', '${roleId}')`);
+    }
+
+    // Remove any unexpected user roles
+    const allUsersRolesQueryResult = await sqlConnection.query(`SELECT * FROM UserRoles WHERE UserId = '${userId}'`);
+    if (allUsersRolesQueryResult.rowsAffected[0] > 1) {
+      for (const record of allUsersRolesQueryResult.recordset) {
+        if (record.RoleId != roleId) {
+          await sqlConnection.query(`DELETE FROM UserRoles WHERE UserId = '${userId}' AND RoleId = '${record.RoleId}'`);
+        }
+      }
+    }
+    await sqlConnection.close();
   }
 }

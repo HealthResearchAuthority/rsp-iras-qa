@@ -1,4 +1,4 @@
-@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SysAdminUser @jsEnabled @rsp-6425 @rsp-6465
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SysAdminUser @jsEnabled @rsp-6425 @rsp-6465 @KNOWN-DEFECT-RSP-6700
 Feature: Sponsor authorisation based on permission and role
 
   Background:
@@ -23,6 +23,7 @@ Feature: Sponsor authorisation based on permission and role
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
+  @ReviewableModificationSponsorAuthorised
   @ReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that <Login_User> can authorise modifications while adding user by system admin
     When I enter '<User_Email>' into the search field
@@ -249,7 +250,7 @@ Feature: Sponsor authorisation based on permission and role
       | Login_User   | User_Email               | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Changes                                            | Research_Locations            |
       | Sponsor_User | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorAuthorised @rsp-6465
+  @ReviewableModificationSponsorAuthorised @rsp-6465 @KNOWN-DEFECT-RSP-6830 @KNOWN-DEFECT-RSP-6831
   Scenario Outline: Verify that <Login_User> can authorise modifications while adding user from sponsor workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -428,7 +429,7 @@ Feature: Sponsor authorisation based on permission and role
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role  | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes             | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorAuthorised @rsp-6465
+  @ReviewableModificationSponsorAuthorised @rsp-6465 @KNOWN-DEFECT-RSP-6830 @KNOWN-DEFECT-RSP-6831
   Scenario Outline: Verify that <Login_User> can authorise the modifications from sponsor workspace for <Another_Registered_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'

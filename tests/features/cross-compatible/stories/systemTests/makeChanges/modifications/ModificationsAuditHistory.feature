@@ -1,4 +1,4 @@
-@ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive @jsEnabled
+@ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive
 Feature: Modifications - Audit history
 
   @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised
@@ -71,6 +71,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'

@@ -42,7 +42,7 @@ Feature: Modifications - Error Validation
       | Missing_All_Mandatory_Fields           | Default_Value              | Default_Value   | Modifications_Tile      |
       | Missing_Mandatory_Only_Specific_Change | Participating_Organisation | Default_Value   | Modifications_Tile      |
 
-  @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications @KNOWN_DEFECT_RSP-6457
+  @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
   Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -455,7 +455,7 @@ Feature: Modifications - Error Validation
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
 
-  @rsp-4314 @ValidateErrorNonRECStudyTypeOptionalDocumentVersionDate
+  @rsp-4314 @ValidateErrorNonRECStudyTypeOptionalDocumentVersionDate @jsEnabled
   Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing, using document types applicable to Non-REC study types where document version and date are optional, for documents uploaded with an Incomplete status
     Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

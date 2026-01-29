@@ -107,5 +107,71 @@
   },
   "Login_Page": {
     "header": "Create your GOV.UK One Login or sign in"
+  },
+  "User_Role_Map": {
+    "System_Admin": {
+      "username": "FutureIRAS.SysAdmin@hra.nhs.uk",
+      "role": "system_administrator"
+    },
+    "Applicant_User": {
+      "username": "futureiras.automation@hra.nhs.uk",
+      "role": "applicant"
+    },
+    "Studywide_Reviewer": {
+      "username": "FutureIRAS.BackStage@hra.nhs.uk",
+      "role": "study-wide_reviewer"
+    },
+    "Studywide_Reviewer_NI": {
+      "username": "FutureIRASBackStageNI@hra.nhs.uk",
+      "role": "study-wide_reviewer"
+    },
+    "Studywide_Reviewer_S": {
+      "username": "FutureIRASBackStageS@hra.nhs.uk",
+      "role": "study-wide_reviewer"
+    },
+    "Studywide_Reviewer_W": {
+      "username": "FutureIRASBackStageW@hra.nhs.uk",
+      "role": "study-wide_reviewer"
+    },
+    "Team_Manager": {
+      "username": "FutureIRAS.TeamManager@hra.nhs.uk",
+      "role": "team_manager"
+    },
+    "Team_Manager_NI": {
+      "username": "FutureIRAS.TeamManager_NI@hra.nhs.uk",
+      "role": "team_manager"
+    },
+    "Team_Manager_S": {
+      "username": "FutureIRAS.TeamManager_S@hra.nhs.uk",
+      "role": "team_manager"
+    },
+    "Team_Manager_W": {
+      "username": "FutureIRAS.TeamManager_W@hra.nhs.uk",
+      "role": "team_manager"
+    },
+    "Workflow_Coordinator": {
+      "username": "FutureIRAS.WorkflowCoordinator@hra.nhs.uk",
+      "role": "workflow_co-ordinator"
+    },
+    "Workflow_Coordinator_NI": {
+      "username": "FutureIRAS.WorkflowCoordinator_NI@hra.nhs.uk",
+      "role": "workflow_co-ordinator"
+    },
+    "Workflow_Coordinator_S": {
+      "username": "FutureIRASWorkflowCoordinators@hra.nhs.uk",
+      "role": "workflow_co-ordinator"
+    },
+    "Workflow_Coordinator_W": {
+      "username": "FutureIRAS.WorkflowCoordinator_W@hra.nhs.uk",
+      "role": "workflow_co-ordinator"
+    },
+    "Sponsor_User": {
+      "username": "FutureIRAS.Sponsor@hra.nhs.uk",
+      "role": "sponsor"
+    },
+    "Sponsor_Org_Admin_User": {
+      "username": "futureiras.automation.SponsorOrgAdmin@hra.nhs.uk",
+      "role": "organisation_administrator"
+    }
   }
 }
