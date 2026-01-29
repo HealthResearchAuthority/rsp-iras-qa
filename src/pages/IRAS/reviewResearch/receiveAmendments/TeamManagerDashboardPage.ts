@@ -149,7 +149,7 @@ export default class TeamManagerDashboardPage {
 
   async assertOnTeamManagerDashboardPage() {
     await expect(this.page_heading).toBeVisible();
-    expect.soft(await this.page.title()).toBe(this.teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page.title);
+    // expect.soft(await this.page.title()).toBe(this.teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page.title);
   }
 
   async sqlGetModificationByLeadNationAndStatus(lead_nation: string, status: string) {

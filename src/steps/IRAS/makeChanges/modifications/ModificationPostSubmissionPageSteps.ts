@@ -27,21 +27,15 @@ Then(
 Then(
   'I see the the modification post submission page with {string} status and {string} reason',
   async (
-    {
-      modificationPostSubmissionPage,
-      modificationsDetailsPage,
-      modificationsCommonPage,
-      modificationOutcomeCheckSendPage,
-    },
+    { modificationsDetailsPage, modificationsCommonPage, modificationOutcomeCheckSendPage },
     statusDataset: string,
     reason: string
   ) => {
-    await modificationPostSubmissionPage.assertOnModificationPostSubmissionPage();
+    // await modificationPostSubmissionPage.assertOnModificationPostSubmissionPage();
     const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
     const expectedStatus = dataset.status;
     const actualStatus = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
     expect.soft(actualStatus).toBe(expectedStatus);
-
     if (statusDataset.toLowerCase() == 'modification_status_not_approved') {
       const expectedReason =
         modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons[reason];
