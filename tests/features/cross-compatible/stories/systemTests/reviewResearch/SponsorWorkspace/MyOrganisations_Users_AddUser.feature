@@ -165,7 +165,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
       # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
-  @rsp-6465 @AddUserRolePermission @KNOWN-DEFECT-RSP-6723
+  @rsp-6465 @AddUserRolePermission @KNOWN-DEFECT-RSP-6723 @TestOnly
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> from sponsor workspace and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -226,6 +226,23 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I click the 'Confirm' button on the 'Check_Confirm_User_To_Add_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on users tab in the sponsor organisation profile for the selected sponsor organisation
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I capture the page screenshot
+    Then I can see the my organisations page
+    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
+    And I can now see a table of results for my organisations
+    When I enter '<Sponsor_Organisation>' into the search field
+    Then I click the 'Search' button on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    And I click the '<Link>' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
     And I capture the page screenshot
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
