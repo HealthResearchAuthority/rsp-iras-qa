@@ -88,18 +88,18 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         Then I can see the 'My_Organisations_User_Profile_Page'
         When I click the 'Disable_User' button on the 'My_Organisations_User_Profile_Page'
         And I validate 'Disable_User_In_My_Organisation_Labels' labels displayed in disable user in sponsor organisation confirmation page using the user name
-        And I click the 'Disable_User' button on the 'My_Organisations_Confirm_User_Status_Page'
+        And I click the 'Confirm' button on the 'My_Organisations_Confirm_User_Status_Page'
         Then I can see the successful user update message on my organisations user profile page
         And I capture the page screenshot
-        And I see the details for 'Sponsor_Org_Admin_User' are correctly displayed on 'My_Organisations_User_Profile_Page'
+        And I see the details for '<Added_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
         And I can see a 'Enable_User' section on my organisation user profile page
         When I click the 'Enable_User' button on the 'My_Organisations_User_Profile_Page'
         And I capture the page screenshot
         And I validate 'Enable_User_In_My_Organisation_Labels' labels displayed in enable user in sponsor organisation confirmation page using the user name
-        And I click the 'Enable_User' button on the 'My_Organisations_Confirm_User_Status_Page'
+        And I click the 'Confirm' button on the 'My_Organisations_Confirm_User_Status_Page'
         Then I can see the successful user update message on my organisations user profile page
         And I capture the page screenshot
-        And I see the details for 'Sponsor_Org_Admin_User' are correctly displayed on 'My_Organisations_User_Profile_Page'
+        And I see the details for '<Added_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
         When I click the 'Change' link on the 'My_Organisations_User_Profile_Page'
         Then I can see the 'My_Organisations_Edit_User_Profile_Page'
         When I fill the my organisation edit user profile page using 'Role_Sponsor_Authoriser_No'
@@ -126,8 +126,8 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         Then I can see the 'Home_Page'
 
         Examples:
-            | Login_User   | Admin_User_Email   | Added_User_Email        | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
-            | System_Admin | system admin email | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+            | Login_User   | Admin_User_Email   | Added_User             | Added_User_Email        | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
+            | System_Admin | system admin email | Sponsor_Org_Admin_User | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
     @rsp-6423 @AccessMyOrgAuditPage
     Scenario Outline: Validate that the my organisations audit page can only be accessed by administrators

@@ -443,12 +443,11 @@
     "Save": "Save"
   },
   "My_Organisations_User_Profile_Page": {
-    "Disable_User": "Disable user record",
-    "Enable_User": "Enable user record"
+    "Disable_User": "Disable user",
+    "Enable_User": "Enable user"
   },
   "My_Organisations_Confirm_User_Status_Page": {
-    "Disable_User": "Disable",
-    "Enable_User": "Enable"
+    "Confirm": "Confirm"
   },
   "Close_Project_Page": {
     "Send_To_Sponsor": "Send to sponsor",

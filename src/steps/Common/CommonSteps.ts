@@ -352,7 +352,7 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     return;
   }
   if (
-    (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') ||
+    (pageKey === 'Manage_Users_Page' && linkValue === 'View/Edit') ||
     (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users') ||
     (pageKey === 'Modification_Outcome_Check_Send_Page' && linkValue === 'Change')
   ) {
@@ -1061,6 +1061,7 @@ Given(
       editYourProfilePage,
       teamManagerDashboardPage,
       searchProjectsPage,
+      sponsorWorkspacePage,
     },
     page: string
   ) => {
@@ -1145,7 +1146,6 @@ Given(
         await searchProjectsPage.goto();
         await searchProjectsPage.assertOnSearchProjectsPage();
         break;
-
       case 'Manage_Sponsor_Organisations_Page':
         await manageSponsorOrganisationPage.goto();
         await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
@@ -1159,6 +1159,9 @@ Given(
         await editYourProfilePage.goto();
         await editYourProfilePage.assertOnEditProfilePage();
         await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Sponsor_Workspace_Page':
+        await sponsorWorkspacePage.goto();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -2528,4 +2531,9 @@ Then('I validate iras id and short project title displayed', async ({ projectDet
   const shortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
   await expect.soft(commonItemsPage.page.getByText(irasID)).toBeVisible();
   await expect.soft(commonItemsPage.page.getByText(shortProjectTitle)).toBeVisible();
+});
+
+Then('I have performed this action as the {string}', async ({ commonItemsPage, loginPage }, adminUser: string) => {
+  const adminUserEmail = loginPage.loginPageTestData[adminUser].username;
+  await commonItemsPage.setAdminEmail(adminUserEmail);
 });
