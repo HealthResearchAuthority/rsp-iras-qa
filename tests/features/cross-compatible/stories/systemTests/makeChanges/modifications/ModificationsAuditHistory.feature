@@ -1054,6 +1054,8 @@ Feature: Modifications - Audit history
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot
+    When I select the modification in order to assign it
+    And I capture the page screenshot
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
