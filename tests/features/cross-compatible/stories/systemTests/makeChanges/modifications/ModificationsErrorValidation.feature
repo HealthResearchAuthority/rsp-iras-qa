@@ -1,4 +1,4 @@
-@ApplicantUser @ModificationsErrorValidation @SystemTest
+@ApplicantUser @ModificationsErrorValidation @SystemTest @SystemTestFrontStage
 Feature: Modifications - Error Validation
 
   Background:
