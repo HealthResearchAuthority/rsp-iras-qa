@@ -1195,28 +1195,6 @@
       }
     }
   },
-  "Multiple_Modifications_In_Draft": {
-    "Modification_One": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Chief Investigator: conflict of interest"
-    },
-    "Modification_Two": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Principal Investigator: conflict of interest"
-    },
-    "Modification_Three": {
-      "area_of_change_dropdown": "Participant procedures",
-      "specific_change_dropdown": "Other minor change to participant procedures"
-    },
-    "Modification_Four": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Changes to the research team"
-    },
-    "Modification_Five": {
-      "area_of_change_dropdown": "Project design",
-      "specific_change_dropdown": "Change to planned end date"
-    }
-  },
   "Modification_Status_Indraft": {
     "status": "In draft",
     "submited_date": ""

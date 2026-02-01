@@ -272,26 +272,12 @@ Feature: Create project - Error Validations
 
   @rsp-4887 @DateSubmittedErrorValidationPostApproval
   Scenario Outline: Verify that correct validation is in place for the date submitted filter
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    And I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the unique iras id in project details iras page
-    And I capture the page screenshot
-    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the chief investigator page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    And I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id for multiple modification' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+    And I capture the page screenshot
     And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
     And I capture the page screenshot
     And I enter values in the '<Advanced_Filters>' of the post approval page

@@ -139,7 +139,7 @@ export default class ProjectOverviewPage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.heading);
-    this.projectStatusTag = this.page.locator('.govuk-grid-row').locator('.govuk-tag').first();
+    this.projectStatusTag = this.page.locator('.project-status--desktop .govuk-tag').first();
     this.project_details_hint_label = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_hint_label);

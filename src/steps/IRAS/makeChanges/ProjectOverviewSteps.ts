@@ -205,10 +205,11 @@ Then(
 Then(
   'I can see the project status for {string} displayed on the project overview page',
   async ({ projectOverviewPage }, projectName: string) => {
-    await expect(projectOverviewPage.projectStatusTag).toBeVisible();
-    expect(await projectOverviewPage.projectStatusTag.textContent()).toBe(
-      projectOverviewPage.projectOverviewPageTestData[projectName].status
-    );
+    await expect(
+      projectOverviewPage.projectStatusTag.getByText(
+        projectOverviewPage.projectOverviewPageTestData[projectName].status
+      )
+    ).toBeVisible();
   }
 );
 

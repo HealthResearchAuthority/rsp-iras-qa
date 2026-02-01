@@ -819,7 +819,6 @@ Feature: Create Project
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I enter '<Search_Queries>' into the search field for post approval page
     And I click the 'Search' button on the 'Search_Modifications_Page'
     Then I can now see the table of modifications contains the expected search results for '<Search_Queries>'
@@ -852,7 +851,6 @@ Feature: Create Project
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     When I fill the search input for searching 'modifications in post approval' with '<Search_Input>' as the search query
     And I capture the page screenshot
     And I click the 'Search' button on the 'Post_Approval_Page'
@@ -900,8 +898,6 @@ Feature: Create Project
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I capture the page screenshot
     And I enter '<Search_Queries>' into the search field for post approval page
     And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
     And I capture the page screenshot
@@ -943,7 +939,6 @@ Feature: Create Project
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
     When I enter values in the '<Advanced_Filters>' of the post approval page
     And I capture the page screenshot
@@ -981,7 +976,6 @@ Feature: Create Project
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
     When I enter values in the '<Advanced_Filters>' of the post approval page
     And I capture the page screenshot
@@ -1485,35 +1479,11 @@ Feature: Create Project
 
   @rsp-4876 @PostApprovalPageSort
   Scenario Outline: Validate the user is able to sort the post approval fields
-    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    Then I can see the create project record page
-    And I capture the page screenshot
-    When I click the 'Start' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
-    And I capture the page screenshot
-    And I can see the 'Label_Texts' ui labels on the project details iras page
-    And I fill the unique iras id in project details iras page
-    And I capture the page screenshot
-    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the chief investigator page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    And I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id for multiple modification' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I capture the page screenshot
     And the default page size should be 'twenty'
     And I capture the page screenshot
@@ -1530,36 +1500,11 @@ Feature: Create Project
 
   @rsp-4876 @PostApprovalPaginationFirstPage
   Scenario Outline: Verify pagination in post approval page when user is on the first page
-    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    Then I can see the create project record page
-    And I capture the page screenshot
-    When I click the 'Start' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
-    And I capture the page screenshot
-    And I can see the 'Label_Texts' ui labels on the project details iras page
-    And I fill the unique iras id in project details iras page
-    And I capture the page screenshot
-    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the chief investigator page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    And I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id for multiple modification' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I capture the page screenshot
     And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
@@ -1576,36 +1521,11 @@ Feature: Create Project
 
   @rsp-4876 @PostApprovalPaginationLastPage
   Scenario Outline: Verify pagination in post approval page when user is on the last page
-    When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    Then I can see the create project record page
-    And I capture the page screenshot
-    When I click the 'Start' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
-    And I capture the page screenshot
-    And I can see the 'Label_Texts' ui labels on the project details iras page
-    And I fill the unique iras id in project details iras page
-    And I capture the page screenshot
-    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the chief investigator page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    And I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id for multiple modification' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I capture the page screenshot
     And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
