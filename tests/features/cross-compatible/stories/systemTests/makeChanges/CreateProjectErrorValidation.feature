@@ -1,4 +1,4 @@
-@ApplicantUser @createProject @createAmendment @SystemTest
+@ApplicantUser @createProject @createAmendment @SystemTest @SystemTestFrontStage
 Feature: Create project - Error Validations
 
   Background:

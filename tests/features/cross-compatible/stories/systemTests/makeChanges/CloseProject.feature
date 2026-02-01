@@ -1,4 +1,4 @@
-@ApplicantUser @CloseProject @SystemTest @SetupNewSponsorOrgGoLive
+@ApplicantUser @CloseProject @SystemTest @SetupNewSponsorOrgGoLive @SystemTestFrontStage
 Feature: Close Project
 
   Background:

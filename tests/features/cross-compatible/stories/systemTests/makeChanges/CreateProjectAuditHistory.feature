@@ -1,4 +1,4 @@
-@SystemTest @jsEnabled
+@SystemTest @jsEnabled @SystemTestFrontStage
 Feature: Create project - Audit history
 
   @rsp-5259 @AuditHistoryDraftProject @ApplicantUser

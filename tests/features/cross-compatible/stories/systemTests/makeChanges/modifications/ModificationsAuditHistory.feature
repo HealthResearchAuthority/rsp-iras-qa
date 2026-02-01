@@ -1,4 +1,4 @@
-@ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive
+@ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive @SystemTestFrontStage
 Feature: Modifications - Audit history
 
   @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised
