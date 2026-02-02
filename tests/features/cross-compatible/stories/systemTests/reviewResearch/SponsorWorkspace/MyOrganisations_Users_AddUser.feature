@@ -23,7 +23,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6461 @MyOrganisationsAddUserPage @BackBreadCrumbs @KNOWN-DEFECT-RSP-6723
+  @rsp-6461 @MyOrganisationsAddUserPage @BackBreadCrumbs
   Scenario Outline: Validate that <Login_User> is able to navigate to add users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -81,7 +81,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
       # | System_Admin           | system admin email      | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-  @rsp-6461 @ErrorValidation @KNOWN-DEFECT-RSP-6651 @KNOWN-DEFECT-RSP-6723
+  @rsp-6461 @ErrorValidation
   Scenario Outline: Validate error when attempting to add non registered users to sponsor organisation by <Login_User>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -165,7 +165,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
       # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
-  @rsp-6465 @AddUserRolePermission @KNOWN-DEFECT-RSP-6723 @TestOnly
+  @rsp-6465 @AddUserRolePermission
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> from sponsor workspace and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'

@@ -49,7 +49,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Lead_Nation         | lead nation         | Advanced_Filters_Lead_Nation |
                         | Status              | status              | Advanced_Filters_Lead_Nation |
 
-        @SortModificationsByColumn @rsp-4090 @rsp-4822 @KNOWN-DEFECT-RSP-6647
+        @SortModificationsByColumn @rsp-4090 @rsp-4822
         Scenario Outline: Verify the user is able to sort modifications by ascending and descending order for column-chief investigator
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -192,7 +192,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input       | User         | Status   | Modification_Count |
                         | Valid_Full_Iras_Id | System_Admin | In draft | Single             |
 
-        @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031 @KNOWN-DEFECT-RSP-6500
+        @NoModificationsInDraftWithSponsor @rsp-5046 @rsp-5031 @KNOWN-DEFECT-RSP-6500 @PreProdIssue
         Scenario: Verify In draft and WIth sponsor modifications in search modifications page
                 Given I have navigated to the 'Search_Modifications_Page' as '<User>'
                 And I capture the modification id of '<Modification_Count>' with status '<Status>'
@@ -280,7 +280,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input             | Advanced_Filters     | Modification_Count | Status           | Search_Key_Type |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body | Partial         |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed @TestOnly
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot

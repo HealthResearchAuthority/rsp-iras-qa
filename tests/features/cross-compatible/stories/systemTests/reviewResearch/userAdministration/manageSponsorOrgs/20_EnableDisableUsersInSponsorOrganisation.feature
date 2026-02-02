@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin @SetupNewSponsorOrgGoLive @KNOWN-DEFECT-RSP-6836
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin @SetupNewSponsorOrgGoLive
 Feature: Enable/Disable users in the selected Sponsor Org
 
   Background:
