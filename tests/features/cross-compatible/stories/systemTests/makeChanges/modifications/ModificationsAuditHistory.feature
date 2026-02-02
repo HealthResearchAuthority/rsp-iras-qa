@@ -682,7 +682,7 @@ Feature: Modifications - Audit history
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Search_Modifications_Page'
     When I click a 'modification id' on the 'Search_Modifications_Page'
-    Then I can see the modification post submission page
+    Then I can see the modification page for sponsor view
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Applicant_User'
@@ -883,7 +883,7 @@ Feature: Modifications - Audit history
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Search_Modifications_Page'
     When I click a 'modification id' on the 'Search_Modifications_Page'
-    Then I can see the modification post submission page
+    Then I can see the modification page for sponsor view
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Sponsor_User'
