@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { test } from '../../hooks/CustomFixtures';
 import { getAuthState, getTicketReferenceTags, getReportFolderName } from '../../utils/UtilFunctions';
 import * as fs from 'node:fs';
-import path from 'path';
+import path from 'node:path';
 
 const { AfterScenario, AfterStep, BeforeScenario } = createBdd(test);
 
@@ -277,7 +277,7 @@ AfterScenario(
     if ($testInfo.status === 'passed' && knownDefectTag) {
       const tagName = typeof knownDefectTag === 'string' ? knownDefectTag : knownDefectTag.name;
       const featureName = path.basename($testInfo.file).replace(/\.spec\.(js|ts)$/, '');
-      const scenarioName = $testInfo.titlePath.filter((t) => !t.toLowerCase().includes('example')).at(-1);
+      const scenarioName = $testInfo.titlePath.findLast((t) => !t.toLowerCase().includes('example'));
       const logFolder = path.resolve('./test-reports/', getReportFolderName(), 'cucumber', 'html');
       const logFile = path.join(logFolder, 'Passed_Known_Defects.csv');
       if (!fs.existsSync(logFolder)) {
@@ -289,7 +289,6 @@ AfterScenario(
         fs.writeFileSync(logFile, headers, { encoding: 'utf8' });
       }
       fs.appendFileSync(logFile, csvLine, { encoding: 'utf8' });
-      console.log(`${featureName}, ${scenarioName}, ${tagName}`);
     }
   }
 );
