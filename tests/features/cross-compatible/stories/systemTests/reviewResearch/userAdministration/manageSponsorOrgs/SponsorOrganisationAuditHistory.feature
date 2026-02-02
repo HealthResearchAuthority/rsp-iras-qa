@@ -47,7 +47,7 @@ Feature: Sponsor organisation audit history
         And I record the 'User_Assigned_Org_Admin' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I record the 'User_Assigned_Authoriser' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I capture the page screenshot
-        # Then I can see the 'user added' successful message on sponsor organisation user list page
+        Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
         When I have navigated to the 'Home_Page' as '<Login_User>'
         Then I click the 'Sponsor' link on the 'Home_Page'
@@ -94,11 +94,14 @@ Feature: Sponsor organisation audit history
         Then I capture the page screenshot
         And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
         And I capture the page screenshot
-        When I click the 'Manage' link on the 'My_Organisations_Page'
+        When I click the 'View' link on the 'My_Organisations_Page'
         And I capture the page screenshot
-        When I click the 'Audit' link on the 'My_Organisations_Page'
+        And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
         And I capture the page screenshot
-        Then I validate the audit history table for sponsor organisation
+        And I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
+        And the 'Users' tab is active and underlined
+        And the add a user section is 'not visible' based on the logged in user role
+        And the action column section shows the hyperlink as 'View' based on the logged in user role
 
         Examples:
             | Login_User             | User_Email              | Link | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Change_User_Role              |

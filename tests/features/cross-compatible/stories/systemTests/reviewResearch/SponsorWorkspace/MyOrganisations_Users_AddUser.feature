@@ -67,7 +67,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     And I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
     Then I can see tabs are displayed based on the logged in user role '<Login_User>'
-    # And the users tab is underlined
+    And the 'Users' tab is active and underlined
     And the add a user section is '<Add_A_User_Section_Visibility>' based on the logged in user role
     Then I click the 'Add_User' button on the 'My_Organisations_Users_Page'
     And I capture the page screenshot

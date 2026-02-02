@@ -280,7 +280,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Search_Input             | Advanced_Filters     | Modification_Count | Status           | Search_Key_Type |
                         | Existing_Partial_IRAS_ID | Advanced_Filters_Nth | Partial            | With review body | Partial         |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed @TestOnly
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsDisabled @DbDataUsed
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot
