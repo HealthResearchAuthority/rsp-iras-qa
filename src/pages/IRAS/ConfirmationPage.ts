@@ -25,7 +25,7 @@ export default class ConfirmationPage {
       .or(this.page.getByRole('heading', { level: 1 }));
     this.confirmation_header_label = this.mainPageContent
       .getByRole('heading', {
-        name: confirmationPageTestData.add_remove_user_review_Body_confirmation_success_header_label,
+        name: confirmationPageTestData.add_remove_user_review_body_confirmation_success_header_label,
       })
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_disable_confirmation_header_label }))
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.disable_success_confirmation_header_label }))

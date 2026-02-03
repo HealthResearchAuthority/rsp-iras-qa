@@ -22,10 +22,11 @@ Then(
 
 Then(
   'I keep note of the organisation name for sponsor organisation setup',
-  async ({ checkSetupSponsorOrganisationPage, myOrgSponsorOrgProfilePage }) => {
+  async ({ checkSetupSponsorOrganisationPage, myOrgSponsorOrgProfilePage, sponsorOrganisationProfilePage }) => {
     const orgName = confirmStringNotNull(await checkSetupSponsorOrganisationPage.organisation_name_value.textContent());
     await checkSetupSponsorOrganisationPage.setOrgName(orgName);
     await myOrgSponsorOrgProfilePage.setOrgName(orgName);
+    await sponsorOrganisationProfilePage.setOrgName(orgName);
     const startSearchText = 'RtsId=';
     const endSearchText = '&SponsorOrganisationName';
     const startIndex = checkSetupSponsorOrganisationPage.page.url().indexOf(startSearchText);

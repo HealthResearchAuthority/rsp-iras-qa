@@ -165,8 +165,8 @@ Feature: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Role_TM_SWR_WFC | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
       | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Role_TM_SWR_WFC | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
 
-  @rsp-2827 @verifyCheckCreateUserProfileBackLink
-  Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' link
+  @rsp-2827 @verifyCheckCreateAdminApplicantUserProfileBackLink
+  Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add an admin or applicant user profile page by clicking 'Back' link
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
