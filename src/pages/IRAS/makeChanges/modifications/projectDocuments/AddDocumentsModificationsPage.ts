@@ -58,10 +58,7 @@ export default class AddDocumentsModificationsPage {
   }
   async assertOnAddSupportDocumentsPage() {
     await expect.soft(this.pageHeading).toBeVisible();
-    const expectedPageTitle =
-      this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title_first_part +
-      ' ' +
-      this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title_second_part;
+    const expectedPageTitle = this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title;
     expect.soft(await this.page.title()).toBe(expectedPageTitle);
   }
 

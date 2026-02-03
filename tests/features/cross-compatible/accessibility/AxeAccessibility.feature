@@ -1236,7 +1236,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
     And I enter 'Partial_Modification_ID' into the search field for post approval page
     And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
     And I enter values in the 'Advanced_Filter_All_Fields' of the post approval page
