@@ -472,7 +472,7 @@ Feature: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Team_Manager         | First_Name  | Role_TM_SWR_WFC | Missing_Mandatory_Field_Country_Role_Team_Manager           | Missing_Mandatory_Field_Country_Role_Team_Manager_Error           |
       | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Last_Name   | Role_TM_SWR_WFC | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error |
 
-  @rsp-3952 @DuplicateEmailValidation @DuplicateEmailExisting @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  @rsp-3952 @DuplicateEmailValidation @DuplicateEmailExisting @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @KNOWN-DEFECT-RSP-7164
   Scenario Outline: Get existing email addresses from manage users list page and validate error messages are displayed for the duplicate email in create user profile page
     When I click the 'Back' link on the 'Create_User_Profile_Page'
     And I capture the page screenshot
@@ -495,7 +495,7 @@ Feature: Manage Users - Create user
       | Email_Address | First    | Duplicate_Email_Role_Applicant_System_Admin | Duplicate_Email_Error           |
       | Email_Address | Last     | Duplicate_Email_Role_SWR_TM_WFC             | Duplicate_Email_Error           |
 
-  @rsp-3952 @DuplicateEmailValidation @DuplicateEmailNew @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  @rsp-3952 @DuplicateEmailValidation @DuplicateEmailNew @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @KNOWN-DEFECT-RSP-7164
   Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page after creating a user
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
