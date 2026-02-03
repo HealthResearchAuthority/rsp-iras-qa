@@ -410,11 +410,10 @@ export default class ModificationsCommonPage {
         changeDataset['planned_project_end_month_dropdown'],
         changeDataset['planned_project_end_year_text']
       );
-    } else if (
-      changeDataset['specific_change_dropdown'] === 'Change of Chief Investigator' ||
-      changeDataset['specific_change_dropdown'] === 'Change of Principal Investigator'
-    ) {
-      expectedSpecificChangeValue = changeDataset['select_details_to_change_radio'];
+    } else if (changeDataset['specific_change_dropdown'] === 'Change of Principal Investigator') {
+      expectedSpecificChangeValue = changeDataset['new_principal_investigator_first_name_text'];
+    } else if (changeDataset['specific_change_dropdown'] === 'Change of Chief Investigator') {
+      expectedSpecificChangeValue = changeDataset['new_chief_investigator_first_name_text'];
     } else if (changeDataset['specific_change_dropdown'] === 'Contact details') {
       expectedSpecificChangeValue = changeDataset['select_contact_details_to_change_radio'];
     } else if (
@@ -781,15 +780,23 @@ export default class ModificationsCommonPage {
             cardData['project_reference_numbers_radio'] = cleanedValue;
           } else if (dataset['specific_change_dropdown'] === 'Project identification' && keys.includes('title_radio')) {
             cardData['title_radio'] = cleanedValue;
-          } else if (
-            dataset['specific_change_dropdown'] === 'Change of Chief Investigator' ||
-            dataset['specific_change_dropdown'] === 'Change of Principal Investigator'
-          ) {
-            cardData['select_details_to_change_radio'] = cleanedValue;
+          } else if (dataset['specific_change_dropdown'] === 'Change of Principal Investigator') {
+            cardData['new_principal_investigator_first_name_text'] = cleanedValue;
+          } else if (dataset['specific_change_dropdown'] === 'Change of Chief Investigator') {
+            cardData['new_chief_investigator_first_name_text'] = cleanedValue;
           } else if (keys.includes('select_contact_details_to_change_radio')) {
             cardData['select_contact_details_to_change_radio'] = cleanedValue;
           } else {
             dataset['specific_change_dropdown'] = cleanedValue;
+          }
+          break;
+        }
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .principal_investigator_last_name_label: {
+          if (dataset.specific_change_dropdown === 'Change of Chief Investigator') {
+            cardData['new_chief_investigator_last_name_text'] = cleanedValue;
+          } else if (dataset.specific_change_dropdown === 'Change of Principal Investigator') {
+            cardData['new_principal_investigator_last_name_text'] = cleanedValue;
           }
           break;
         }
@@ -845,21 +852,17 @@ export default class ModificationsCommonPage {
           break;
         }
         case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.first_name_label: {
-          cardData['first_name_text'] = cleanedValue;
-          break;
-        }
-        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.last_name_label: {
-          cardData['last_name_text'] = cleanedValue;
+          cardData['new_chief_investigator_first_name_text'] = cleanedValue;
           break;
         }
         case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
           .new_chief_investigator_email_label: {
-          cardData['chief_investigator_email_text'] = cleanedValue;
+          cardData['new_chief_investigator_email_text'] = cleanedValue;
           break;
         }
         case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
           .new_principal_investigator_email_label: {
-          cardData['principal_investigator_email_text'] = cleanedValue;
+          cardData['new_principal_investigator_email_text'] = cleanedValue;
           break;
         }
         case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts.name_label: {

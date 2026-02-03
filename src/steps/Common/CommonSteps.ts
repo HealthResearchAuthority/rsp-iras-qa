@@ -318,10 +318,7 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
   }
   if (
     (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
-    (linkKey === 'Sponsor_Details' ||
-      linkKey === 'Modification_Details' ||
-      linkKey === 'Documents' ||
-      linkKey === 'History')
+    (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details' || linkKey === 'History')
   ) {
     await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
     return;

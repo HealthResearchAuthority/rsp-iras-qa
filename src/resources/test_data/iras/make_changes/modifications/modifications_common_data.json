@@ -50,6 +50,8 @@
     ]
   },
   "Audit_History_Events": {
+    "Project_Record_Draft_Started": "Project record draft started",
+    "Project_Record_Created": "Project record created",
     "Modification_Created": "Modification created",
     "Modification_Submitted": "Modification submitted",
     "Modification_Sent_To_Sponsor": "Modification sent to sponsor",
@@ -66,7 +68,14 @@
     "Modification_Comment_Changed": "Comment changed",
     "Modification_Comment_Reason_Not_Approved_Added": "Reason modification not approved added",
     "Modification_Comment_Reason_Not_Approved_Changed": "Reason modification not approved changed",
-    "Modification_Reassigned": "Modification reassigned to"
+    "Modification_Reassigned": "Modification reassigned to",
+    "Chief_Investigator_First_Name_Changed": "Chief Investigator first name changed from",
+    "Chief_Investigator_Last_Name_Changed": "Chief Investigator last name changed from",
+    "Chief_Investigator_Email_Changed": "Chief Investigator email changed from",
+    "Short_Project_Title_Changed": "Short project title changed from",
+    "Full_Project_Title_Changed": "Full project title changed from",
+    "Planned_Project_End_Date_Changed": "Planned project end date changed from",
+    "Modification_Id": "Not applicable"
   },
   "Modification_Change_Question_Label_Texts": {
     "planned_project_end_date_label": "Change to planned end date",
@@ -89,10 +98,12 @@
     "first_name_label": "First name",
     "last_name_label": "Last name",
     "new_chief_investigator_email_label": "New Chief Investigator email",
-    "new_principal_investigator_email_label": "New principal investigator email",
+    "new_principal_investigator_email_label": "New Principal Investigator email",
     "name_label": "Name",
     "sponsor_contact_email_label": "Sponsor contact email",
-    "email_label": "Email"
+    "email_label": "Email",
+    "principal_investigator_last_name_label": "Last name",
+    "new_chief_investigator_last_name_label": "Last name"
   },
   "Modifications_To_Add_Free_Text": [
     "Other significant change to participant procedures",
@@ -954,18 +965,17 @@
     "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Chief Investigator",
-      "select_details_to_change_radio": "Temporary arrangement to cover absence",
-      "chief_investigator_email_text": "ci_test_modified@test.com",
-      "first_name_text": "QA test First name",
-      "last_name_text": "QA test Last name",
+      "new_chief_investigator_email_text": "ci_test_modified@test.com",
+      "new_chief_investigator_first_name_text": "QA test First name",
+      "new_chief_investigator_last_name_text": "QA test Last name",
       "change_status": "Change ready for submission"
     },
     "Project_Personnel_Principal_Investigator_New": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Principal Investigator",
-      "select_details_to_change_radio": "New Principal Investigator",
-      "principal_investigator_email_text": "test_modified@test.com",
-      "name_text": "QA test",
+      "new_principal_investigator_email_text": "test_modified@test.com",
+      "new_principal_investigator_first_name_text": "QA test First name",
+      "new_principal_investigator_last_name_text": "QA test Last name",
       "change_status": "Change ready for submission",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
@@ -976,9 +986,9 @@
     "Project_Personnel_Temporary_Arrangement": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Principal Investigator",
-      "select_details_to_change_radio": "Temporary arrangement to cover absence",
-      "principal_investigator_email_text": "test_modified@test.com",
-      "name_text": "QA test",
+      "new_principal_investigator_email_text": "test_modified@test.com",
+      "new_principal_investigator_first_name_text": "QA test First name",
+      "new_principal_investigator_last_name_text": "QA test Last name",
       "change_status": "Change ready for submission",
       "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
@@ -990,7 +1000,7 @@
       "area_of_change_dropdown": "Administrative details for the project",
       "specific_change_dropdown": "Contact details",
       "select_contact_details_to_change_radio": "Chief Investigator",
-      "chief_investigator_email_text": "ci_test_modified@test.com",
+      "new_chief_investigator_email_text": "ci_test_modified@test.com",
       "change_status": "Change ready for submission"
     },
     "Contact_Details_Sponsor_Contact": {
@@ -1838,5 +1848,63 @@
   "Missing_Document_Details_Notification": {
     "notification_heading_text": "You cannot proceed whilst document details are incomplete",
     "notification_text": "All documents must have the status 'Complete' before you can continue. For any documents with the status 'Incomplete', either select 'Change details' to add missing document details, or remove that document if it is no longer needed."
+  },
+  "Project_Personnel__Change_Chief_Investigator_Details": {
+    "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of Chief Investigator",
+      "new_chief_investigator_email_text": "ci_test_modified@test.com",
+      "new_chief_investigator_first_name_text": "QA test First name",
+      "new_chief_investigator_last_name_text": "QA test Last name",
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Modification_To_Add_Administrative_Details_Project_Titles": {
+    "Project_Identification_Project_Titles": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Project identification",
+      "title_radio": "Title",
+      "which_titles_do_you_need_to_change_checkboxes": ["Short project title", "Full project title"],
+      "change_status": "Change ready for submission",
+      "Project_Reference": {
+        "new_short_project_title_text": "QA_Automation - This is a short project title",
+        "new_full_project_title_text": "QA_Automation - This is a full project title"
+      }
+    }
+  },
+  "Planned_End_Date_NHS_All_Yes_All_Countries": {
+    "Planned_End_Date_NHS_All_Yes_All_Countries": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "01",
+      "planned_project_end_month_dropdown": "January",
+      "planned_project_end_year_text": "2035",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": [
+        "England",
+        "Northern Ireland",
+        "Scotland",
+        "Wales"
+      ],
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Project_Personnel_Principal_Investigator_New": {
+    "Project_Personnel_Principal_Investigator_New": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of Principal Investigator",
+      "new_principal_investigator_first_name_text": "QA test New PI First name",
+      "new_principal_investigator_last_name_text": "QA test New PI Last name",
+      "new_principal_investigator_email_text": "qa_test_new_pi_email@test.com",
+      "change_status": "Change ready for submission",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    }
   }
 }

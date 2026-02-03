@@ -13,7 +13,7 @@ Then(
       await commonItemsPage.fillUIComponent(dataset, radioKey, contactDetailsModificationPage);
       await commonItemsPage.clickButton('Modifications_Page', clickAction);
     }
-    const contactKeys = ['chief_investigator_email_text', 'sponsor_contact_email_text', 'name_text', 'email_text'];
+    const contactKeys = ['new_chief_investigator_email_text', 'sponsor_contact_email_text', 'name_text', 'email_text'];
     for (const key of contactKeys) {
       if (dataset[key]) {
         await commonItemsPage.fillUIComponent(dataset, key, contactDetailsModificationPage);
@@ -105,7 +105,7 @@ Then(
               .toBeVisible();
             break;
           }
-          case 'chief_investigator_email_text': {
+          case 'new_chief_investigator_email_text': {
             await expect
               .soft(modificationReviewChangesPage.chief_investigator_email_value.getByText(dataset[key]))
               .toBeVisible();

@@ -24,7 +24,8 @@
     "maxPagesToVisit": 2,
     "event_description_project_draft": "Project record draft started",
     "event_description_project_created": "Project record created",
-    "audit_modification_id": "Not applicable"
+    "audit_modification_id": "Not applicable",
+    "Audit_History_Headers": ["Date", "Event description", "Modification ID", "User email"]
   },
   "Modification_Status_Draft": {
     "status": "Draft"

@@ -5,6 +5,8 @@ import {
   removeUnwantedWhitespace,
   getRandomNumber,
   confirmArrayNotNull,
+  convertDate,
+  convertDateMonthToNumber,
 } from '../../../utils/UtilFunctions';
 import path from 'node:path';
 const { When, Then } = createBdd(test);
@@ -151,6 +153,160 @@ Then(
     expect.soft(actualChiefInvestigatorEmail).toBe(expectedChiefInvestigatorEmail);
   }
 );
+
+Then(
+  'I verify that the updated project details are reflected at the project level using {string} data',
+  async ({ projectOverviewPage, modificationsCommonPage, commonItemsPage }, datasetName: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const firstKey = Object.keys(dataset)[0];
+    const changesDataset = dataset[firstKey];
+    if (Object.keys(changesDataset).includes('end_year_text')) {
+      await commonItemsPage.clickButton('Project_Overview_Page', 'Project_Details');
+      const projectEndDateFormatted = await convertDate(
+        changesDataset['planned_project_end_day_text'],
+        changesDataset['planned_project_end_month_dropdown'],
+        changesDataset['planned_project_end_year_text']
+      );
+      const actualPlannedEndDate = confirmStringNotNull(
+        await projectOverviewPage.project_details_tab_planned_project_end_date.textContent()
+      );
+      expect.soft(actualPlannedEndDate).toBe(projectEndDateFormatted);
+    } else if (
+      Object.keys(changesDataset).includes('short_project_title_text') ||
+      Object.keys(changesDataset).includes('full_project_title_text')
+    ) {
+      await commonItemsPage.clickButton('Project_Overview_Page', 'Project_Details');
+      const projectRef = changesDataset['Project_Reference'];
+      const expectedShortProjectTitle = projectRef['new_short_project_title_text'].trim();
+      const expectedFullProjectTitle = projectRef['new_full_project_title_text'].trim();
+      const actualShortProjectTitle = confirmStringNotNull(
+        (await projectOverviewPage.project_details_tab_short_project_title.textContent())
+          ?.replaceAll(/[’‘]/g, "'")
+          .replaceAll(/[“”]/g, '"')
+      );
+      const actualShortProjectTitleUpdated = await removeUnwantedWhitespace(
+        actualShortProjectTitle
+          .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.short_project_title_label, '')
+          .trim()
+      );
+      const actualFullProjectTitle = confirmStringNotNull(
+        (await projectOverviewPage.project_details_tab_full_project_title.textContent())
+          ?.replaceAll(/[’‘]/g, "'")
+          .replaceAll(/[“”]/g, '"')
+      );
+      const actualFullProjectTitleUpdated = await removeUnwantedWhitespace(
+        actualFullProjectTitle
+          .replace(projectOverviewPage.projectOverviewPageTestData.Project_Details_Tab.full_project_title_label, '')
+          .trim()
+      );
+      expect.soft(actualShortProjectTitleUpdated).toBe(expectedShortProjectTitle);
+      expect.soft(actualFullProjectTitleUpdated).toBe(expectedFullProjectTitle);
+    } else if (Object.keys(changesDataset).includes('chief_investigator_first_name_text')) {
+      await commonItemsPage.clickButton('Project_Overview_Page', 'Project_Team');
+      const actualChiefInvestigatorFirstName = confirmStringNotNull(
+        await projectOverviewPage.project_team_tab_chief_investigator_first_name.textContent()
+      );
+      const actualChiefInvestigatorLastName = confirmStringNotNull(
+        await projectOverviewPage.project_team_tab_chief_investigator_last_name.textContent()
+      );
+      const actualChiefInvestigatorEmail = confirmStringNotNull(
+        await projectOverviewPage.project_team_tab_chief_investigator_email.textContent()
+      );
+      expect.soft(actualChiefInvestigatorFirstName).toBe(dataset.chief_investigator_first_name_text);
+      expect.soft(actualChiefInvestigatorLastName).toBe(dataset.chief_investigator_last_name_text);
+      expect.soft(actualChiefInvestigatorEmail).toBe(dataset.chief_investigator_email_text);
+    }
+  }
+);
+
+Then(
+  'I keep note of the {string} audit event actioned by the user {string} using the dataset {string}',
+  async (
+    {
+      modificationsCommonPage,
+      loginPage,
+      chiefInvestigatorPage,
+      projectOverviewPage,
+      projectDetailsIRASPage,
+      projectDetailsTitlePage,
+    },
+    modificationEventDatasetName: string,
+    userDatasetName: string,
+    datasetName: string
+  ) => {
+    let modificationEvent = '';
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeName = Object.keys(dataset);
+    const changeDataset = dataset[changeName];
+    if (modificationEventDatasetName.toLowerCase() === 'chief_investigator_first_name_changed') {
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]} '${chiefInvestigatorPage.chiefInvestigatorPageTestData['Valid_Data_All_Fields']['chief_investigator_first_name_text']}' to '${changeDataset['new_chief_investigator_first_name_text']}'`;
+    } else if (modificationEventDatasetName.toLowerCase() === 'chief_investigator_last_name_changed') {
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]} '${chiefInvestigatorPage.chiefInvestigatorPageTestData['Valid_Data_All_Fields']['chief_investigator_last_name_text']}' to '${changeDataset['new_chief_investigator_last_name_text']}'`;
+    } else if (modificationEventDatasetName.toLowerCase() === 'chief_investigator_email_changed') {
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]} '${chiefInvestigatorPage.chiefInvestigatorPageTestData['Valid_Data_All_Fields']['chief_investigator_email_text']}' to '${changeDataset['new_chief_investigator_email_text']}'`;
+    } else if (modificationEventDatasetName.toLowerCase() === 'short_project_title_changed') {
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]} '${(await projectDetailsIRASPage.getShortProjectTitle()).trim()}' to '${changeDataset['Project_Reference']['new_short_project_title_text']}'`;
+    } else if (modificationEventDatasetName.toLowerCase() === 'full_project_title_changed') {
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]} '${(await projectDetailsIRASPage.getFullProjectTitle()).trim()}' to '${changeDataset['Project_Reference']['new_full_project_title_text']}'`;
+    } else if (modificationEventDatasetName.toLowerCase() === 'planned_project_end_date_changed') {
+      const plannedEndDateDataset = projectDetailsTitlePage.projectDetailsTitlePageTestData['Valid_Data_All_Fields'];
+      const oldPlannedEndDate = await convertDateMonthToNumber(
+        plannedEndDateDataset['planned_project_end_day_text'],
+        plannedEndDateDataset['planned_project_end_month_dropdown'],
+        plannedEndDateDataset['planned_project_end_year_text']
+      );
+      const newPlannedEndDate = await convertDateMonthToNumber(
+        changeDataset['planned_project_end_day_text'],
+        changeDataset['planned_project_end_month_dropdown'],
+        changeDataset['planned_project_end_year_text']
+      );
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]} '${oldPlannedEndDate}' to '${newPlannedEndDate}'`;
+    } else {
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]}`;
+    }
+    let userEmail = '';
+    if (userDatasetName.toLowerCase() !== 'blank_user_details') {
+      userEmail = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
+    }
+    const dateTimeOfEvent = new Date().toLocaleString('en-GB', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    });
+    const modificationId =
+      modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events['Modification_Id'];
+    projectOverviewPage.addAuditHistoryRecord = {
+      dateTimeOfEventExpected: dateTimeOfEvent,
+      modificationEventExpected: modificationEvent,
+      modificationIdExpected: modificationId,
+      userEmailExpected: userEmail,
+    };
+  }
+);
+
+Then('I validate the project level audit history table', async ({ modificationsCommonPage, projectOverviewPage }) => {
+  const auditHistoryTableHeadersActual = await projectOverviewPage.auditHistoryTableHeader.allTextContents();
+  const auditHistoryTableHeadersExpected =
+    projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.Audit_History_Headers;
+  expect.soft(auditHistoryTableHeadersActual).toEqual(auditHistoryTableHeadersExpected);
+  const rowCount = await projectOverviewPage.auditHistoryTableBodyRows.count();
+  const actualAuditHistoryRows: string[][] = [];
+  for (let auditRowIndex = 0; auditRowIndex < rowCount; auditRowIndex++) {
+    const row = projectOverviewPage.auditHistoryTableBodyRows.nth(auditRowIndex);
+    const cellTexts = await row.locator(modificationsCommonPage.tableCell).allTextContents();
+    actualAuditHistoryRows.push(cellTexts.map((text) => text.trim()));
+  }
+  const expectedAuditHistoryRows = projectOverviewPage.getAuditHistoryRecord
+    .slice()
+    .reverse()
+    .map((record) => [
+      record.dateTimeOfEventExpected,
+      record.modificationEventExpected,
+      record.modificationIdExpected,
+      record.userEmailExpected,
+    ]);
+  expect.soft(actualAuditHistoryRows).toEqual(expectedAuditHistoryRows);
+});
 
 Then(
   'I validate the data for {string} is displayed in the research locations tab of project overview page',
