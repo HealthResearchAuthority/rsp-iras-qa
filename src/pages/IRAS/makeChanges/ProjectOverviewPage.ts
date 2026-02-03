@@ -124,6 +124,7 @@ export default class ProjectOverviewPage {
   readonly project_details_tab_planned_project_end_date: Locator;
   readonly tableCell: Locator;
   readonly tableRows: Locator;
+  readonly actualProjectClosureDateValueLabel: Locator;
   private projectRecordID: string;
   private modificationRecordID: string;
   readonly auditHistoryTableHeader: Locator;
@@ -146,7 +147,7 @@ export default class ProjectOverviewPage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.heading);
-    this.projectStatusTag = this.page.locator('.govuk-grid-row').locator('.govuk-tag');
+    this.projectStatusTag = this.page.locator('.project-status--desktop .govuk-tag').first();
     this.project_details_hint_label = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_hint_label);
@@ -156,13 +157,15 @@ export default class ProjectOverviewPage {
     this.project_iras_id_label = this.page.locator('div[class="govuk-inset-text"] p').nth(0);
     this.project_short_title_label = this.page.locator('div[class="govuk-inset-text"] p').nth(1);
     this.information_alert_banner = this.page.getByRole('alert');
-    this.modification_saved_success_message_header_text = this.page
-      .getByTestId('govuk-notification-banner-title')
-      .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_header_text);
+    this.modification_saved_success_message_header_text = this.page.getByRole('alert').getByRole('heading', {
+      name: this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_header_text,
+    });
     this.modification_saved_success_message_text = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
-    this.delete_modification_success_message_text = this.page.locator('#govuk-notification-banner-message');
+    this.delete_modification_success_message_text = this.page
+      .getByRole('alert')
+      .locator('.govuk-notification-banner__heading');
     this.project_overview_heading = this.page.locator('.govuk-inset-text');
     this.project_team_heading = this.page.getByText(
       this.projectOverviewPageTestData.Project_Overview_Page.project_team_heading
@@ -533,6 +536,14 @@ export default class ProjectOverviewPage {
       .locator('.govuk-error-message');
     this.tableCell = this.page.locator('td');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.actualProjectClosureDateValueLabel = this.page
+      .locator('.govuk-summary-list__row')
+      .filter({
+        has: this.page.getByText(
+          this.projectOverviewPageTestData.Project_Overview_Page.actual_project_closure_date_label
+        ),
+      })
+      .locator('.govuk-summary-list__value');
     this.auditHistoryTableHeader = this.page.locator('table thead tr th');
     this.auditHistoryTableBodyRows = this.page.locator('tbody').getByRole('row');
   }

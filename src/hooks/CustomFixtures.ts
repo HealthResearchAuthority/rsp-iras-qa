@@ -111,6 +111,8 @@ import CheckConfirmUserToAddToSponsorOrganisationPage from '../pages/IRAS/review
 import MyOrganisationsAuditHistoryPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAuditHistoryPage';
 import MyOrganisationsUserProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsUserProfilePage';
 import MyOrganisationsEditUserProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsEditUserProfilePage';
+import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
+import CheckAuthoriseProjectClosurePage from '../pages/IRAS/makeChanges/CheckAuthoriseProjectClosurePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -222,6 +224,8 @@ type CustomFixtures = {
   myOrganisationsAuditHistoryPage: MyOrganisationsAuditHistoryPage;
   myOrganisationsUserProfilePage: MyOrganisationsUserProfilePage;
   myOrganisationsEditUserProfilePage: MyOrganisationsEditUserProfilePage;
+  closeProjectPage: CloseProjectPage;
+  checkAuthoriseProjectClosurePage: CheckAuthoriseProjectClosurePage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -662,6 +666,12 @@ export const test = base.extend<CustomFixtures>({
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
+  },
+  closeProjectPage: async ({ page }, use) => {
+    await use(new CloseProjectPage(page));
+  },
+  checkAuthoriseProjectClosurePage: async ({ page }, use) => {
+    await use(new CheckAuthoriseProjectClosurePage(page));
   },
 
   //Set the Storage State based on User Tag from Feature File

@@ -257,28 +257,34 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
   commonItemsPage.samplePageAction(testType);
 });
 
-Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
-  const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-  let button: Locator;
-  if (
-    (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
-    (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview') ||
-    (pageKey === 'Setup_New_Sponsor_Organisation_Page' && buttonKey === 'Save_Continue')
-  ) {
-    button = commonItemsPage.govUkButton
-      .getByText(buttonValue)
-      .or(commonItemsPage.genericButton.getByText(buttonValue))
-      .first();
-  } else {
-    button = commonItemsPage.govUkButton
-      .getByText(buttonValue, { exact: true })
-      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first();
+Then(
+  'I click the {string} button on the {string}',
+  async ({ commonItemsPage, modificationsReceivedCommonPage }, buttonKey: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    let button: Locator;
+    if (
+      (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
+      (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview') ||
+      (pageKey === 'Setup_New_Sponsor_Organisation_Page' && buttonKey === 'Save_Continue')
+    ) {
+      button = commonItemsPage.govUkButton
+        .getByText(buttonValue)
+        .or(commonItemsPage.genericButton.getByText(buttonValue))
+        .first();
+    } else {
+      if (pageKey === 'Project_Overview_Page' && buttonKey === 'Create_New_Modification') {
+        ++modificationsReceivedCommonPage.modificationCounter;
+      }
+      button = commonItemsPage.govUkButton
+        .getByText(buttonValue, { exact: true })
+        .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+        .first();
+    }
+    await commonItemsPage.page.waitForTimeout(500);
+    await button.click();
+    await commonItemsPage.page.waitForLoadState('domcontentloaded');
   }
-  await commonItemsPage.page.waitForTimeout(500);
-  await button.click();
-  await commonItemsPage.page.waitForLoadState('domcontentloaded');
-});
+);
 
 Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
@@ -289,6 +295,21 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
       .first()
   ).toBeVisible();
 });
+
+Given(
+  'I cannot see a {string} button on the {string}',
+  async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    await expect
+      .soft(
+        commonItemsPage.govUkButton
+          .getByText(buttonValue, { exact: true })
+          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+          .first()
+      )
+      .toHaveCount(0);
+  }
+);
 
 Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
   const linkValue = await commonItemsPage.linkTextData[pageKey][linkKey];
@@ -576,6 +597,8 @@ Then(
       teamManagerDashboardPage,
       plannedEndDateChangePage,
       projectPersonnelChangePrincipalInvestigatorPage,
+      closeProjectPage,
+      checkAuthoriseProjectClosurePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -712,6 +735,15 @@ Then(
         projectPersonnelChangePrincipalInvestigatorPage
           .projectPersonnelChangePrincipalInvestigatorModificationPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = projectPersonnelChangePrincipalInvestigatorPage;
+    } else if (pageKey == 'Close_Project_Page') {
+      errorMessageFieldDataset = closeProjectPage.closeProjectPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = closeProjectPage;
+    } else if (pageKey == 'Check_Authorise_Project_Closure_Page') {
+      errorMessageFieldDataset =
+        checkAuthoriseProjectClosurePage.checkAuthoriseProjectClosurePageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = checkAuthoriseProjectClosurePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -864,6 +896,14 @@ When(
         searchValue = projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID.iras_id_text;
         projectDetailsIRASPage.setShortProjectTitle(
           projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID.short_project_title_text
+        );
+        break;
+      case 'iras id for multiple modification':
+        searchValue =
+          projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID_Multiple_Modification.iras_id_text;
+        projectDetailsIRASPage.setShortProjectTitle(
+          projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID_Multiple_Modification
+            .short_project_title_text
         );
         break;
       case 'short project title':
@@ -2482,3 +2522,15 @@ Then(
     }
   }
 );
+
+Then('I click on the short project title link', async ({ projectDetailsIRASPage }) => {
+  const shortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+  await projectDetailsIRASPage.page.getByText(shortProjectTitle, { exact: true }).first().click();
+});
+
+Then('I validate iras id and short project title displayed', async ({ projectDetailsIRASPage, commonItemsPage }) => {
+  const irasID = await projectDetailsIRASPage.getUniqueIrasId();
+  const shortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
+  await expect.soft(commonItemsPage.page.getByText(irasID)).toBeVisible();
+  await expect.soft(commonItemsPage.page.getByText(shortProjectTitle)).toBeVisible();
+});

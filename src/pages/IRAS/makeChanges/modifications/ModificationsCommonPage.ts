@@ -179,8 +179,8 @@ export default class ModificationsCommonPage {
       .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
       .locator('..')
       .locator('[class$="value"]');
-    this.auditHistoryTableHeader = this.page.locator('#history table thead tr th');
-    this.auditHistoryTableBodyRows = this.page.locator('#history tbody').getByRole('row');
+    this.auditHistoryTableHeader = this.page.locator('table thead tr th');
+    this.auditHistoryTableBodyRows = this.page.locator('tbody').getByRole('row');
     this.tableCell = this.page.locator('td');
     this.notification_heading_text = this.page.getByRole('heading', { level: 1 });
     this.notification_text = this.page.locator('p.govuk-body');

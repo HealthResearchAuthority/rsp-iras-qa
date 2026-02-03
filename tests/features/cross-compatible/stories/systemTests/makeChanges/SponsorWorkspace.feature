@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive
+@SponsorWorkspace @SystemTest @SysAdminUser @jsEnabled @SetupNewSponsorOrgGoLive @SystemTestFrontStage
 Feature: Sponsor Workspace
 
   @rsp-4846 @SponsorWorkspacePageLabelValidation
@@ -538,5 +538,6 @@ Feature: Sponsor Workspace
       | Short_Project_Title | short project title |
       | Date_Received       | date received       |
       | Date_Actioned       | date actioned       |
+      | Status              | status              |
       # | Chief_Investigator  | chief investigator  |
       | Status              | status              |
