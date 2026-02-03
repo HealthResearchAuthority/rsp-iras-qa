@@ -1492,8 +1492,7 @@ export default class CommonItemsPage {
     return (
       (fromDateValue && !toDateValue && key.endsWith('_from_day_text')) ||
       (!fromDateValue && toDateValue && key.endsWith('_to_day_text')) ||
-      (fromDateValue && toDateValue && key.endsWith('_from_day_text')) ||
-      (fromDateValue && toDateValue && key.endsWith('_to_day_text'))
+      (fromDateValue && toDateValue && key.endsWith('_from_day_text'))
     );
   }
 

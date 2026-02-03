@@ -54,7 +54,10 @@ Then('I fill the existing iras id in project details iras page', async ({ projec
 Then('I fill the {string} in project details iras page', async ({ projectDetailsIRASPage }, datasetName) => {
   const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
   const irasId = dataset.iras_id_text;
+  const normalizedShortProjectTitle = normalizeUiText(dataset.short_project_title_text);
   await projectDetailsIRASPage.iras_id_text.fill(irasId);
+  await projectDetailsIRASPage.setUniqueIrasId(irasId);
+  await projectDetailsIRASPage.setShortProjectTitle(normalizedShortProjectTitle);
 });
 
 Then(
