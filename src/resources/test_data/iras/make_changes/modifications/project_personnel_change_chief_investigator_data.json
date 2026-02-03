@@ -2,8 +2,8 @@
   "Label_Texts": {
     "chief_investigator_email_label": "New Chief Investigator email",
     "name_label": "Name",
-    "first_name_label": "First name",
-    "last_name_label": "Last name",
+    "first_name_label": "New Chief Investigator first name",
+    "last_name_label": "New Chief Investigator last name",
     "select_detail_enter_link": "Select details to change",
     "chief_investigator_enter_link": "Enter new Chief Investigator email",
     "name_enter_link": "Enter name",
@@ -11,102 +11,102 @@
     "ci_last_name_enter_link": "Enter last name"
   },
   "Chief_Investigator_Invalid_Email_Error_Message": {
-    "chief_investigator_email_text": "Enter an email address in the correct format"
+    "new_chief_investigator_email_text": "Enter an email address in the correct format"
   },
   "Project_Personnel_Chief_Investigator_New_Valid_Data": {
     "specific_change_dropdown": "Change of Chief Investigator",
     "select_details_to_change_radio": "New Chief Investigator",
-    "chief_investigator_email_text": "ci_test_modified@test.com",
-    "first_name_text": "QA test first name",
-    "last_name_text": "QA test last name"
+    "new_chief_investigator_email_text": "ci_test_modified@test.com",
+    "new_chief_investigator_first_name_text": "QA test first name",
+    "new_chief_investigator_last_name_text": "QA test last name"
   },
   "Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data": {
     "specific_change_dropdown": "Change of Chief Investigator",
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": "ci_test_modified@test.com",
-    "first_name_text": "QA test first name",
-    "last_name_text": "QA test last name"
+    "new_chief_investigator_email_text": "ci_test_modified@test.com",
+    "new_chief_investigator_first_name_text": "QA test first name",
+    "new_chief_investigator_last_name_text": "QA test last name"
   },
   "Empty_Data_Select_Details_To_Change_All_Fields": {
     "select_details_to_change_radio": ""
   },
   "Empty_Data_CI_Fields": {
     "select_details_to_change_radio": "New Chief Investigator",
-    "chief_investigator_email_text": "",
-    "first_name_text": "",
-    "last_name_text": ""
+    "new_chief_investigator_email_text": "",
+    "new_chief_investigator_first_name_text": "",
+    "new_chief_investigator_last_name_text": ""
   },
   "Empty_Data_Temporary_Arrangement_All_Fields": {
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": "",
-    "first_name_text": "",
-    "last_name_text": ""
+    "new_chief_investigator_email_text": "",
+    "new_chief_investigator_first_name_text": "",
+    "new_chief_investigator_last_name_text": ""
   },
   "Chief_Investigator_New_Email_Name_Change": {
     "specific_change_dropdown": "Change of Chief Investigator",
-    "chief_investigator_email_text": "ci_test_modified_change@test.com",
-    "first_name_text": "QA modified first name",
-    "last_name_text": "QA modified last name"
+    "new_chief_investigator_email_text": "ci_test_modified_change@test.com",
+    "new_chief_investigator_first_name_text": "QA modified first name",
+    "new_chief_investigator_last_name_text": "QA modified last name"
   },
   "Chief_Investigator_Temporary_Arrangement_Email_Name_Change": {
     "specific_change_dropdown": "Change of Chief Investigator",
-    "chief_investigator_email_text": "ci_test_modified_change@test.com",
-    "first_name_text": "QA modified first name",
-    "last_name_text": "QA modified last name"
+    "new_chief_investigator_email_text": "ci_test_modified_change@test.com",
+    "new_chief_investigator_first_name_text": "QA modified first name",
+    "new_chief_investigator_last_name_text": "QA modified last name"
   },
   "Change_CI_New_To_Temporary_Arrangement_Details": {
     "specific_change_dropdown": "Change of Chief Investigator",
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": "ci_test_modified_change@test.com",
-    "first_name_text": "QA modified first name",
-    "last_name_text": "QA modified last name"
+    "new_chief_investigator_email_text": "ci_test_modified_change@test.com",
+    "new_chief_investigator_first_name_text": "QA modified first name",
+    "new_chief_investigator_last_name_text": "QA modified last name"
   },
   "Invalid_Email_CI_Data_One_Start_With_Dot": {
     "select_details_to_change_radio": "New Chief Investigator",
-    "chief_investigator_email_text": ".john@example.com"
+    "new_chief_investigator_email_text": ".john@example.com"
   },
   "Invalid_Email_CI_Data_One_Double_Dot": {
     "select_details_to_change_radio": "New Chief Investigator",
-    "chief_investigator_email_text": "john..doe@example.com"
+    "new_chief_investigator_email_text": "john..doe@example.com"
   },
   "Invalid_Email_CI_Data_One_TLD": {
     "select_details_to_change_radio": "New Chief Investigator",
-    "chief_investigator_email_text": "john.doe@example.1234"
+    "new_chief_investigator_email_text": "john.doe@example.1234"
   },
   "Invalid_Email_CI_Data_One_Reserved_Domain": {
     "select_details_to_change_radio": "New Chief Investigator",
-    "chief_investigator_email_text": "john.doe@localhost"
+    "new_chief_investigator_email_text": "john.doe@localhost"
   },
   "Invalid_Email_CI_Data_One_Punycode": {
     "select_details_to_change_radio": "New Chief Investigator",
-    "chief_investigator_email_text": "john@example.xn--mgbh0fb"
+    "new_chief_investigator_email_text": "john@example.xn--mgbh0fb"
   },
   "Invalid_Email_CI_Data_One_Max_Char": {
     "select_details_to_change_radio": "New Chief Investigator",
-    "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+    "new_chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   },
   "Invalid_Email_CI_Temorary_Arrangement_Data_One_Start_With_Dot": {
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": ".john@example.com"
+    "new_chief_investigator_email_text": ".john@example.com"
   },
   "Invalid_Email_CI_Temorary_Arrangement_Data_One_Double_Dot": {
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": "john..doe@example.com"
+    "new_chief_investigator_email_text": "john..doe@example.com"
   },
   "Invalid_Email_CI_Temorary_Arrangement_Data_One_TLD": {
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": "john.doe@example.1234"
+    "new_chief_investigator_email_text": "john.doe@example.1234"
   },
   "Invalid_Email_CI_Temorary_Arrangement_Data_One_Reserved_Domain": {
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": "john.doe@localhost"
+    "new_chief_investigator_email_text": "john.doe@localhost"
   },
   "Invalid_Email_CI_Temorary_Arrangement_Data_One_Punycode": {
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": "john@example.xn--mgbh0fb"
+    "new_chief_investigator_email_text": "john@example.xn--mgbh0fb"
   },
   "Invalid_Email_CI_Temorary_Arrangement_Data_One_Max_Char": {
     "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+    "new_chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   }
 }

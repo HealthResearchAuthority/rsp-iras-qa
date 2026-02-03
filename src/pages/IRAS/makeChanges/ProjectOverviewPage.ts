@@ -127,6 +127,14 @@ export default class ProjectOverviewPage {
   readonly actualProjectClosureDateValueLabel: Locator;
   private projectRecordID: string;
   private modificationRecordID: string;
+  readonly auditHistoryTableHeader: Locator;
+  readonly auditHistoryTableBodyRows: Locator;
+  readonly auditHistoryRecord: {
+    dateTimeOfEventExpected: string;
+    modificationEventExpected: string;
+    modificationIdExpected: string;
+    userEmailExpected: string;
+  }[] = [];
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -536,6 +544,8 @@ export default class ProjectOverviewPage {
         ),
       })
       .locator('.govuk-summary-list__value');
+    this.auditHistoryTableHeader = this.page.locator('table thead tr th');
+    this.auditHistoryTableBodyRows = this.page.locator('tbody').getByRole('row');
   }
 
   public getProjectRecordID(): string {
@@ -565,6 +575,19 @@ export default class ProjectOverviewPage {
       columnIndex = 2;
     }
     return columnIndex;
+  }
+
+  set addAuditHistoryRecord(record: {
+    dateTimeOfEventExpected: string;
+    modificationEventExpected: string;
+    modificationIdExpected: string;
+    userEmailExpected: string;
+  }) {
+    this.auditHistoryRecord.push(record);
+  }
+
+  get getAuditHistoryRecord() {
+    return this.auditHistoryRecord;
   }
 
   async findModification(
