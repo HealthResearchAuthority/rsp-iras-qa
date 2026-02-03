@@ -337,13 +337,6 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     return;
   }
-  if (
-    (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
-    (linkKey === 'Sponsor_Details' || linkKey === 'Modification_Details' || linkKey === 'History')
-  ) {
-    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
-    return;
-  }
   if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
     await commonItemsPage.removeLink.click();
     return;
