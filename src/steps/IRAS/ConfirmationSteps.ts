@@ -352,7 +352,11 @@ Then(
 
 Then(
   'I validate {string} labels displayed in disable user in sponsor organisation confirmation page using the user name',
-  async ({ confirmationPage, commonItemsPage }, validationLabelsDatasetName: string) => {
+  async (
+    { confirmationPage, commonItemsPage, myOrganisationsUserProfilePage },
+    validationLabelsDatasetName: string
+  ) => {
+    await myOrganisationsUserProfilePage.setStatus(commonItemsPage.commonTestData.disabled_status);
     const userNameMemory = (await commonItemsPage.getFirstName()) + ' ' + (await commonItemsPage.getLastName());
     await commonItemsPage.setUserDisabledStatusInMemory(userNameMemory);
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
@@ -368,7 +372,11 @@ Then(
 
 Then(
   'I validate {string} labels displayed in enable user in sponsor organisation confirmation page using the user name',
-  async ({ confirmationPage, commonItemsPage }, validationLabelsDatasetName: string) => {
+  async (
+    { confirmationPage, commonItemsPage, myOrganisationsUserProfilePage },
+    validationLabelsDatasetName: string
+  ) => {
+    await myOrganisationsUserProfilePage.setStatus(commonItemsPage.commonTestData.enabled_status);
     const userNameMemory = await commonItemsPage.getUserDisabledStatusInMemory();
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedConfirmationHeader = validationLabelsDataset.enable_confirmation_header_label + ' ' + userNameMemory;

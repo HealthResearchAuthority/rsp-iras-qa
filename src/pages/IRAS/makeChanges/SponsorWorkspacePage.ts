@@ -21,6 +21,10 @@ export default class SponsorWorkspacePage {
   }
 
   //Page Methods
+  async goto() {
+    await this.page.goto('sponsorworkspace');
+  }
+
   async assertOnSponsorWorkspacePage() {
     await expect.soft(this.pageHeading).toBeVisible();
   }

@@ -550,7 +550,7 @@ export async function returnDataFromJSON(filePath?: string): Promise<any> {
   return await fse.readJson(resolvedPath);
 }
 
-export async function convertDate(day: string, month: number, year: number): Promise<any> {
+export async function convertDate(day: string, month: string | number, year: string | number): Promise<any> {
   const formattedDate = `${day.padStart(2, '0')} ${month} ${year}`;
   return formattedDate.toString();
 }
@@ -560,6 +560,43 @@ export async function convertDateShortMonth(day: string, month: string, year: nu
   const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1, 3).toLowerCase();
   const formattedDate = `${formattedDay} ${formattedMonth} ${year}`;
   return formattedDate;
+}
+
+export async function convertDateMonthToNumber(
+  day: string,
+  month: string | number,
+  year: string | number
+): Promise<string> {
+  const dd = String(day).padStart(2, '0');
+  const mm = convertMonthToTwoDigits(month);
+  const yyyy = String(year);
+
+  return `${yyyy}-${mm}-${dd}`;
+}
+function convertMonthToTwoDigits(month: string | number): string {
+  const m = String(month).trim().toLowerCase();
+  if (/^\d{1,2}$/.test(m)) {
+    return String(Number(m)).padStart(2, '0');
+  }
+  const map: Record<string, number> = {
+    jan: 1,
+    january: 1,
+    feb: 2,
+    february: 2,
+    sept: 9,
+    september: 9,
+    oct: 10,
+    october: 10,
+    nov: 11,
+    november: 11,
+    dec: 12,
+    december: 12,
+  };
+  const num = map[m];
+  if (!num) {
+    throw new Error(`Invalid month: ${month}`);
+  }
+  return String(num).padStart(2, '0');
 }
 
 export async function validateDateRange(validationDate: string, fromDate?: string, toDate?: string): Promise<boolean> {

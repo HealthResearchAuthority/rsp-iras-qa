@@ -337,22 +337,12 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     return;
   }
-  if (
-    (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
-    (linkKey === 'Sponsor_Details' ||
-      linkKey === 'Modification_Details' ||
-      linkKey === 'Documents' ||
-      linkKey === 'History')
-  ) {
-    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
-    return;
-  }
   if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
     await commonItemsPage.removeLink.click();
     return;
   }
   if (
-    (pageKey === 'Manage_Users_Page' && linkValue === 'View_Edit') ||
+    (pageKey === 'Manage_Users_Page' && linkValue === 'View/Edit') ||
     (pageKey === 'My_Organisations_Sponsor_Org_Profile_Page' && linkValue === 'Users') ||
     (pageKey === 'Modification_Outcome_Check_Send_Page' && linkValue === 'Change')
   ) {
@@ -901,6 +891,14 @@ When(
           projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID.short_project_title_text
         );
         break;
+      case 'iras id for multiple modification':
+        searchValue =
+          projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID_Multiple_Modification.iras_id_text;
+        projectDetailsIRASPage.setShortProjectTitle(
+          projectDetailsIRASPage.projectDetailsIRASPageTestData.Existing_IRAS_ID_Multiple_Modification
+            .short_project_title_text
+        );
+        break;
       case 'short project title':
         searchValue = await projectDetailsIRASPage.getShortProjectTitle();
         break;
@@ -1061,6 +1059,7 @@ Given(
       editYourProfilePage,
       teamManagerDashboardPage,
       searchProjectsPage,
+      sponsorWorkspacePage,
     },
     page: string
   ) => {
@@ -1145,7 +1144,6 @@ Given(
         await searchProjectsPage.goto();
         await searchProjectsPage.assertOnSearchProjectsPage();
         break;
-
       case 'Manage_Sponsor_Organisations_Page':
         await manageSponsorOrganisationPage.goto();
         await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
@@ -1159,6 +1157,9 @@ Given(
         await editYourProfilePage.goto();
         await editYourProfilePage.assertOnEditProfilePage();
         await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Sponsor_Workspace_Page':
+        await sponsorWorkspacePage.goto();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -2528,4 +2529,9 @@ Then('I validate iras id and short project title displayed', async ({ projectDet
   const shortProjectTitle = await projectDetailsIRASPage.getShortProjectTitle();
   await expect.soft(commonItemsPage.page.getByText(irasID)).toBeVisible();
   await expect.soft(commonItemsPage.page.getByText(shortProjectTitle)).toBeVisible();
+});
+
+Then('I have performed this action as the {string}', async ({ commonItemsPage, loginPage }, adminUser: string) => {
+  const adminUserEmail = loginPage.loginPageTestData[adminUser].username;
+  await commonItemsPage.setAdminEmail(adminUserEmail);
 });

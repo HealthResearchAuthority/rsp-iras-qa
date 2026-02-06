@@ -1,7 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../hooks/CustomFixtures';
-import { getAuthState, getTicketReferenceTags } from '../../utils/UtilFunctions';
+import { getAuthState, getTicketReferenceTags, getReportFolderName } from '../../utils/UtilFunctions';
 import * as fs from 'node:fs';
+import path from 'node:path';
 
 const { AfterScenario, AfterStep, BeforeScenario } = createBdd(test);
 
@@ -260,3 +261,34 @@ AfterScenario({ name: 'Cleanup cucumber report to remove large items' }, async f
     $testInfo.error.message = '[removed large error message]';
   }
 });
+
+AfterScenario(
+  { name: 'Log known defects that passed and need removal from automation' },
+  async function ({ $testInfo }) {
+    if (!$testInfo) return;
+    const tags: (string | { name: string })[] = $testInfo.tags ?? [];
+    const knownDefectTag = tags.find((t) => {
+      const tagName = typeof t === 'string' ? t : t.name;
+      return tagName
+        .toLowerCase()
+        .replaceAll(/[^a-z0-9]/g, '')
+        .includes('knowndefect');
+    });
+    if ($testInfo.status === 'passed' && knownDefectTag) {
+      const tagName = typeof knownDefectTag === 'string' ? knownDefectTag : knownDefectTag.name;
+      const featureName = path.basename($testInfo.file).replace(/\.spec\.(js|ts)$/, '');
+      const scenarioName = $testInfo.titlePath.findLast((t) => !t.toLowerCase().includes('example'));
+      const logFolder = path.resolve('./test-reports/', getReportFolderName(), 'cucumber', 'html');
+      const logFile = path.join(logFolder, 'Passed_Known_Defects.csv');
+      if (!fs.existsSync(logFolder)) {
+        fs.mkdirSync(logFolder, { recursive: true });
+      }
+      const csvLine = `"${featureName}","${scenarioName}","${tagName}"\n`;
+      if (!fs.existsSync(logFile)) {
+        const headers = '"Feature","Scenario","Defect Tag"\n';
+        fs.writeFileSync(logFile, headers, { encoding: 'utf8' });
+      }
+      fs.appendFileSync(logFile, csvLine, { encoding: 'utf8' });
+    }
+  }
+);

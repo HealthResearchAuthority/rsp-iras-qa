@@ -11,7 +11,7 @@
     "other_contact_email_enter_link": "Enter email"
   },
   "Chief_Investigator_Invalid_Email_Error_Message": {
-    "chief_investigator_email_text": "Enter an email address in the correct format"
+    "new_chief_investigator_email_text": "Enter an email address in the correct format"
   },
   "Sponsor_Contact_Invalid_Email_Error_Message": {
     "sponsor_contact_email_text": "Enter an email address in the correct format"
@@ -22,7 +22,7 @@
   "Contact_Details_Chief_Investigator_Valid_Data": {
     "specific_change_dropdown": "Contact details",
     "select_contact_details_to_change_radio": "Chief Investigator",
-    "chief_investigator_email_text": "ci_test_modified@test.com"
+    "new_chief_investigator_email_text": "ci_test_modified@test.com"
   },
   "Contact_Details_Sponsor_Contact_Valid_Data": {
     "specific_change_dropdown": "Contact details",
@@ -40,7 +40,7 @@
   },
   "Empty_Data_CI_Fields": {
     "select_contact_details_to_change_radio": "Chief Investigator",
-    "chief_investigator_email_text": ""
+    "new_chief_investigator_email_text": ""
   },
   "Empty_Data_Sponsor_Contact_All_Fields": {
     "select_contact_details_to_change_radio": "Sponsor contact",
@@ -53,7 +53,7 @@
   },
   "Chief_Investigator_Email_Change": {
     "specific_change_dropdown": "Contact details",
-    "chief_investigator_email_text": "ci_test_modified_change@test.com"
+    "new_chief_investigator_email_text": "ci_test_modified_change@test.com"
   },
   "Change_Contact_Detail_To_Sponsor_Contact_Email": {
     "specific_change_dropdown": "Contact details",
@@ -80,27 +80,27 @@
   },
   "Invalid_Email_CI_Data_One_Start_With_Dot": {
     "select_contact_details_to_change_radio": "Chief Investigator",
-    "chief_investigator_email_text": ".john@example.com"
+    "new_chief_investigator_email_text": ".john@example.com"
   },
   "Invalid_Email_CI_Data_One_Double_Dot": {
     "select_contact_details_to_change_radio": "Chief Investigator",
-    "chief_investigator_email_text": "john..doe@example.com"
+    "new_chief_investigator_email_text": "john..doe@example.com"
   },
   "Invalid_Email_CI_Data_One_TLD": {
     "select_contact_details_to_change_radio": "Chief Investigator",
-    "chief_investigator_email_text": "john.doe@example.1234"
+    "new_chief_investigator_email_text": "john.doe@example.1234"
   },
   "Invalid_Email_CI_Data_One_Reserved_Domain": {
     "select_contact_details_to_change_radio": "Chief Investigator",
-    "chief_investigator_email_text": "john.doe@localhost"
+    "new_chief_investigator_email_text": "john.doe@localhost"
   },
   "Invalid_Email_CI_Data_One_Punycode": {
     "select_contact_details_to_change_radio": "Chief Investigator",
-    "chief_investigator_email_text": "john@example.xn--mgbh0fb"
+    "new_chief_investigator_email_text": "john@example.xn--mgbh0fb"
   },
   "Invalid_Email_CI_Data_One_Max_Char": {
     "select_contact_details_to_change_radio": "Chief Investigator",
-    "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+    "new_chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   },
   "Invalid_Email_SC_Data_One_Start_With_Dot": {
     "select_contact_details_to_change_radio": "Sponsor contact",
