@@ -48,7 +48,7 @@ Feature: Studywide reviewer receive and approve amendments
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @rsp-6626 @Testonly
+    @RegressionReviewModificationOutcomeJourney @rsp-4822 @rsp-4825 @rsp-4827 @rsp-4828 @rsp-4829 @rsp-4831 @rsp-6626
     Scenario Outline: Verify the modification approvals workflow
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -120,6 +120,7 @@ Feature: Studywide reviewer receive and approve amendments
         Then I can see the modification post submission page
         When I click the 'Continue' link on the 'Modification_Details_Page'
         Then I can see the review outcome section
+        Then I provide comment as '<Comment>' in the review outcome page
         When I provide the '<Outcome>' outcome for the modification with '<Outcome_Reason>' reason
         When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
         Then I see the check and send review outcome page with '<Outcome>' outcome and '<Outcome_Reason>' reason
@@ -137,10 +138,54 @@ Feature: Studywide reviewer receive and approve amendments
         When I click a 'modification id' on the 'Search_Modifications_Page'
         Then I can see the modification post submission page
         And I capture the page screenshot
-        When I click the 'Comments' link on the 'Modification_Post_Submission_Page'
-        Then I 'can' see comments tab for the modification record with '<Outcome_Reason>'
+        Then I '<Visibility>' see comments tab for the modification record with '<Comment>'
+        And I capture the page screenshot
+        # Validating comments tab for applicant user
+        When I have navigated to the 'My_Research_Page' as 'Applicant_User'
+        Then I enter 'iras id' into the search field
+        And I click the 'Search' button on the 'My_Research_Page'
+        And I click on the short project title for the searched iras id from my research projects page
+        When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+        When I enter 'modification id' into the search field
+        And I click the 'Search' button on the 'Post_Approval_Page'
+        Then I click on the searched modification id
+        And I 'cannot' see comments tab for the modification record with '<Comment>'
+        And I capture the page screenshot
+        # Validating the comments tab for sponsor user
+        And I have navigated to the 'Home_Page' as 'Sponsor_User'
+        When I click the 'Sponsor' link on the 'Home_Page'
+        When I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+        And I enter 'iras id' into the search field
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        When I click a 'modification id' on the 'Search_Modifications_Page'
+        Then I can see the modification page for sponsor view
+        And I 'cannot' see comments tab for the modification record with '<Comment>'
+        And I capture the page screenshot
+        # Validating the comments tab for workflow coordinator user
+        When I have navigated to the 'Approvals_Page' as 'Workflow_Coordinator'
+        When I have navigated to the 'Approvals_Page' as 'Workflow_Coordinator'
+        When I click the 'Search_Records' link on the 'Approvals_Page'
+        And I select the radio button for 'Modification_Record' in the choose a record type to search page
+        And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+        And I enter 'iras id' into the search field
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        When I click a 'modification id' on the 'Search_Modifications_Page'
+        Then I can see the modification post submission page
+        Then I '<Visibility>' see comments tab for the modification record with '<Comment>'
+        And I capture the page screenshot
+        # Validating the comments tab for team manager user
+        When I have navigated to the 'Approvals_Page' as 'Team_Manager'
+        When I click the 'Search_Records' link on the 'Approvals_Page'
+        And I select the radio button for 'Modification_Record' in the choose a record type to search page
+        And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+        And I enter 'iras id' into the search field
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        When I click a 'modification id' on the 'Search_Modifications_Page'
+        Then I can see the modification post submission page
+        Then I '<Visibility>' see comments tab for the modification record with '<Comment>'
         And I capture the page screenshot
 
         Examples:
-            | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome  | Outcome_Reason | Outcome_Status               |
-            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Valid_Reason   | Modification_Status_Approved |
+            | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Comment       | Outcome  | Outcome_Reason | Outcome_Status               | Visibility |
+            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | First_Comment | Approved | Not Required   | Modification_Status_Approved | can        |
+            | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Blank         | Approved | Not Required   | Modification_Status_Approved | cannot     |

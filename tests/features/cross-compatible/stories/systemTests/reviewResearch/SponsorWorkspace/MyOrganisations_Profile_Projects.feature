@@ -1,7 +1,7 @@
 @SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
-  @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation @KNOWN_DEFECT_RSP-6628
+  @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation
   Scenario: Validate that <Login_User> able to navigate to 'My Organisations' page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -60,7 +60,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-  @rsp-6418 @rsp-6419 @MyOrganisationsPageNavigationValidation @KNOWN_DEFECT_RSP-6628
+  @rsp-6418 @rsp-6419 @MyOrganisationsPageNavigationValidation
   Scenario: Validate that the user with role <Login_User> able to navigate to 'My Organisations' page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'

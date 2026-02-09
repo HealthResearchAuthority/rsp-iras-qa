@@ -333,18 +333,8 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).click();
     return;
   }
-  if (noOfLinksFound > 1 && linkKey !== 'Back' && linkKey !== 'View') {
+  if (noOfLinksFound > 1 && linkKey !== 'Back' && linkKey !== 'View' && linkKey !== 'History') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
-    return;
-  }
-  if (
-    (pageKey === 'Sponsor_Check_And_Authorise_Page' || pageKey === 'Modification_Post_Submission_Page') &&
-    (linkKey === 'Sponsor_Details' ||
-      linkKey === 'Modification_Details' ||
-      linkKey === 'Documents' ||
-      linkKey === 'History')
-  ) {
-    await commonItemsPage.page.locator('label', { hasText: linkValue }).click();
     return;
   }
   if (pageKey === 'Review_Body_User_List_Page' && linkValue === 'Remove') {
@@ -1700,6 +1690,7 @@ When(
   'I click a {string} on the {string}',
   async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
     let testNum: number;
+    await commonItemsPage.tableBodyRows.waitFor({ state: 'visible' });
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
     const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
     if (rowCount > 1) {

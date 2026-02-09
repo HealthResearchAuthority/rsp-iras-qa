@@ -86,6 +86,34 @@ Given('I can see the review outcome section', async ({ modificationsDetailsPage 
   await expect.soft(modificationsDetailsPage.review_outcome_guidance).toBeVisible();
 });
 
+// When(
+//   'I provide the {string} outcome for the modification with {string} reason',
+//   async ({ modificationsDetailsPage, modificationsReceivedCommonPage }, outcome: string, reason: string) => {
+//     const reasonGiven = modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons[reason];
+//     if (outcome.toLowerCase() == 'not_approved') {
+//       await modificationsDetailsPage.not_approved_outcome_option.check();
+//       await modificationsDetailsPage.save_continue_button.click();
+//       await expect(modificationsDetailsPage.not_approved_comment_heading).toBeVisible();
+//       await expect(modificationsDetailsPage.not_approved_comment_guidance).toBeVisible();
+//       await modificationsDetailsPage.not_approved_comment_box.fill(reasonGiven);
+//       await modificationsReceivedCommonPage.setDecisionOutcome(
+//         modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Review_Outcome_Section
+//           .not_approved_outcome_option
+//       );
+//     } else {
+//       await modificationsDetailsPage.review_comment_show.click();
+//       await expect(modificationsDetailsPage.review_comment_hide).toBeVisible();
+//       await expect(modificationsDetailsPage.review_comment_guidance).toBeVisible();
+//       await modificationsDetailsPage.approved_outcome_option.check();
+//       await modificationsDetailsPage.review_comment_box.fill(reasonGiven);
+//       await modificationsReceivedCommonPage.setDecisionOutcome(
+//         modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Review_Outcome_Section
+//           .approved_outcome_option
+//       );
+//     }
+//   }
+// );
+
 When(
   'I provide the {string} outcome for the modification with {string} reason',
   async ({ modificationsDetailsPage, modificationsReceivedCommonPage }, outcome: string, reason: string) => {
@@ -101,11 +129,7 @@ When(
           .not_approved_outcome_option
       );
     } else {
-      await modificationsDetailsPage.review_comment_show.click();
-      await expect(modificationsDetailsPage.review_comment_hide).toBeVisible();
-      await expect(modificationsDetailsPage.review_comment_guidance).toBeVisible();
       await modificationsDetailsPage.approved_outcome_option.check();
-      await modificationsDetailsPage.review_comment_box.fill(reasonGiven);
       await modificationsReceivedCommonPage.setDecisionOutcome(
         modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Review_Outcome_Section
           .approved_outcome_option
@@ -115,19 +139,28 @@ When(
 );
 
 Then(
+  'I provide comment as {string} in the review outcome page',
+  async ({ modificationsDetailsPage }, comment: string) => {
+    const commentProvided =
+      modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons[comment];
+    await modificationsDetailsPage.review_comment_show.click();
+    await expect(modificationsDetailsPage.review_comment_hide).toBeVisible();
+    await expect(modificationsDetailsPage.review_comment_guidance).toBeVisible();
+    await modificationsDetailsPage.review_comment_box.fill(commentProvided);
+  }
+);
+
+Then(
   'I {string} see comments tab for the modification record with {string}',
   async ({ modificationsDetailsPage }, visibility: string, reason: string) => {
     const commentProvided =
       modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons[reason];
-    if (commentProvided != '') {
-      if (visibility.toLowerCase() == 'can') {
-        const commentReceived = await modificationsDetailsPage.comment_text.textContent();
-        await expect.soft(modificationsDetailsPage.comments_tab_label).toBeVisible();
-        await expect.soft(modificationsDetailsPage.comment_heading_label).toBeVisible();
-        await expect.soft(commentReceived).toBe(commentProvided);
-      } else {
-        await expect.soft(modificationsDetailsPage.comments_tab_label).not.toBeVisible();
-      }
+    if (visibility.toLowerCase() == 'can') {
+      await modificationsDetailsPage.comments_tab_label.click();
+      const commentReceived = (await modificationsDetailsPage.comment_text.textContent()).trim();
+      await expect.soft(modificationsDetailsPage.comments_tab_label).toBeVisible();
+      await expect.soft(modificationsDetailsPage.comment_heading_label).toBeVisible();
+      expect.soft(commentReceived).toBe(commentProvided);
     } else {
       await expect.soft(modificationsDetailsPage.comments_tab_label).not.toBeVisible();
     }

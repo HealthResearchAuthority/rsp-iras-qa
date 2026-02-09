@@ -144,7 +144,7 @@ export default class ModificationsDetailsPage {
     this.save_continue_button = this.page
       .getByRole('button')
       .getByText(this.buttonTextData.Modification_Details_Page.Save_And_Continue);
-    this.comments_tab_label = this.page.locator('label[for="tab-comments"]');
+    this.comments_tab_label = this.page.getByRole('link', { name: 'Comments', exact: true });
     this.comment_heading_label = this.page.getByRole('heading', { level: 2, name: 'Comment' });
     this.comment_card = this.page.locator('.govuk-summary-card:has(h2.govuk-summary-card__title:has-text("Comment"))');
     this.comment_text = this.comment_card.locator('.govuk-summary-card__content');
