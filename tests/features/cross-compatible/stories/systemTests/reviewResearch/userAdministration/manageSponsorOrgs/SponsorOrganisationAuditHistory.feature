@@ -125,7 +125,7 @@ Feature: Sponsor organisation audit history
         And I record the 'User_Added' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I record the 'User_Assigned_Sponsor' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I capture the page screenshot
-        # Then I can see the 'user added' successful message on sponsor organisation user list page
+        Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
         When I have navigated to the 'Home_Page' as '<Login_User>'
         Then I click the 'Sponsor' link on the 'Home_Page'
@@ -165,7 +165,7 @@ Feature: Sponsor organisation audit history
         And I record the 'User_Assigned_Sponsor' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I record the 'User_Assigned_Authoriser' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I capture the page screenshot
-        # Then I can see the 'user added' successful message on sponsor organisation user list page
+        Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
         When I have navigated to the 'Home_Page' as '<Login_User>'
         Then I click the 'Sponsor' link on the 'Home_Page'
@@ -207,7 +207,7 @@ Feature: Sponsor organisation audit history
         And I record the 'User_Assigned_Org_Admin' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I record the 'User_Assigned_Authoriser' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I capture the page screenshot
-        # Then I can see the 'user added' successful message on sponsor organisation user list page
+        Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
         And I capture the page screenshot
@@ -245,7 +245,7 @@ Feature: Sponsor organisation audit history
         And I record the 'User_Assigned_Org_Admin' event for the user '<Test_User>' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I record the 'User_Assigned_Authoriser' event for the user '<Test_User>' to store the sponsor organisation audit history triggered by 'System_Admin'
         And I capture the page screenshot
-        # Then I can see the 'user added' successful message on sponsor organisation user list page
+        Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'

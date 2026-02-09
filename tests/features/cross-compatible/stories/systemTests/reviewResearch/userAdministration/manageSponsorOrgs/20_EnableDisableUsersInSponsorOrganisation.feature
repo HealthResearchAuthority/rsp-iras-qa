@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin @SetupNewSponsorOrgGoLive
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin @SetupNewSponsorOrgGoLive @TestTiji
 Feature: Enable/Disable users in the selected Sponsor Org
 
   Background:
@@ -22,13 +22,6 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
     And I capture the page screenshot
     Then I click the view edit link of the 'newly added sponsor organisation'
-    # When I enter 'name of the previously added sponsor organisation' into the search field
-    # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-    # And I capture the page screenshot
-    # Then the system displays 'sponsor organisations' matching the search criteria
-    # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
-    # And I capture the page screenshot
-    # Then I click the view edit link of the 'previously added sponsor organisation'
     And I capture the page screenshot
     And I can see the sponsor organisation profile page
     And I capture the page screenshot
@@ -54,7 +47,6 @@ Feature: Enable/Disable users in the selected Sponsor Org
     Then I can see the 'Check_Add_User_Sponsor_Org_Page'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     Then I can see the user list page of the 'sponsor organisation'
     And I capture the page screenshot
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
@@ -74,7 +66,7 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I capture the page screenshot
     When I click the 'Confirm' button on the 'Confirmation_Page'
     And I capture the page screenshot
-    # Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
+    Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I can see the 'Sponsor_Org_User_List_Page'
     Then I can see the user list page of the 'sponsor organisation'
@@ -102,7 +94,7 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I capture the page screenshot
     When I click the 'Confirm' button on the 'Confirmation_Page'
     And I capture the page screenshot
-    # Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
+    Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I capture the page screenshot
     Then I can see the 'Sponsor_Org_User_List_Page'
@@ -128,13 +120,6 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
     And I capture the page screenshot
     Then I click the view edit link of the 'newly added sponsor organisation'
-    # When I enter 'name of the previously added sponsor organisation' into the search field
-    # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-    # And I capture the page screenshot
-    # Then the system displays 'sponsor organisations' matching the search criteria
-    # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
-    # And I capture the page screenshot
-    # Then I click the view edit link of the 'previously added sponsor organisation'
     And I capture the page screenshot
     And I can see the sponsor organisation profile page
     And I capture the page screenshot
@@ -162,7 +147,7 @@ Feature: Enable/Disable users in the selected Sponsor Org
     Then I can see the 'Check_Add_User_Sponsor_Org_Page'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     Then I can see the user list page of the 'sponsor organisation'
     And I capture the page screenshot
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field

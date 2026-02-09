@@ -1,4 +1,4 @@
-@RegressionManageSponsorOrganisations @SysAdminUser @UserAdministration @BackStage @ManageSponsorOrgs @SetupNewSponsorOrgGoLive
+@RegressionManageSponsorOrganisations @SysAdminUser @UserAdministration @BackStage @ManageSponsorOrgs @SetupNewSponsorOrgGoLive @TestTiji
 Feature: Manage sponsor organisations
 
         Background:
@@ -8,8 +8,6 @@ Feature: Manage sponsor organisations
 
         @RegressionTestVerifyLastUpdatedAfterSetupDisableEnableSponsorOrgAndUser @SetupNewSponsorOrg
         Scenario Outline: Verify that the user is able to perform: add a sponsor organisation, enable or disable a sponsor organisation, assign a user to a selected sponsor organisation, enable or disable a user within the sponsor organisation, and confirm that the 'Last Updated' field on the sponsor organisation profile page reflects these changes accurately
-                # When I authorise the rts api using '<RTS_API_Data>'
-                # Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
                 ## set up a new sponsor organisation
                 And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
                 Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -19,7 +17,6 @@ Feature: Manage sponsor organisations
                 And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
                 And I capture the page screenshot
                 And I keep note of the organisation name for sponsor organisation setup
-                # And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
                 When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 Then I can see the sponsor organisation added successful message on manage sponsor organisation page
@@ -33,8 +30,8 @@ Feature: Manage sponsor organisations
                 Then I click the view edit link of the 'newly added sponsor organisation'
                 And I capture the page screenshot
                 And I can see the sponsor organisation profile page
-                # validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+                ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
+                And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
                 ## disable a sponsor organisation
                 Then I can see the '<Disable_Label_Texts>' ui labels on the 'sponsor organisation' profile page
                 And I capture the page screenshot
@@ -57,8 +54,8 @@ Feature: Manage sponsor organisations
                 Then I click the view edit link of the 'newly added sponsor organisation'
                 And I capture the page screenshot
                 And I can see the sponsor organisation profile page
-                # validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+                ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
+                And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
                 And I capture the page screenshot
                 ## enable a sponsor organisation
                 Then I can see the '<Enable_Label_Texts>' ui labels on the 'sponsor organisation' profile page
@@ -90,7 +87,7 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+                And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
                 And I capture the page screenshot
                 Then I can see the '<Disable_Label_Texts>' ui labels on the 'sponsor organisation' profile page
                 And I capture the page screenshot
@@ -123,13 +120,13 @@ Feature: Manage sponsor organisations
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                #Then I can see the 'user added' successful message on sponsor organisation user list page
+                Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
                 When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+                And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
                 And I capture the page screenshot
                 ## disable user in the user list page of the sponsor organisation
                 And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
@@ -164,7 +161,7 @@ Feature: Manage sponsor organisations
                 When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+                And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
                 And I capture the page screenshot
                 ## enable user in the user list page of the sponsor organisation
                 And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
@@ -204,10 +201,8 @@ Feature: Manage sponsor organisations
                 When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+                And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
                 And I capture the page screenshot
-                ## add a teardown step to delete this sponsor org from the database
-
                 Examples:
                         | Setup_New_Sponsor_Organisation | Status_Enabled | Status_Disabled | RTS_API_Data         | RTS_Request                         | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Navigation_Link |
                         | Sponsor_Organisation_Unused    | Enabled        | Disabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Back            |
@@ -228,14 +223,6 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
                 Then I click the view edit link of the 'newly added sponsor organisation'
-                ## search and select an existing sponsor organisation
-                # When I enter 'name of the previously added sponsor organisation' into the search field
-                # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-                # And I capture the page screenshot
-                # Then the system displays 'sponsor organisations' matching the search criteria
-                # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
-                # And I capture the page screenshot
-                # Then I click the view edit link of the 'previously added sponsor organisation'
                 And I capture the page screenshot
                 And I can see the sponsor organisation profile page
                 ## disable a sponsor organisation
@@ -252,18 +239,16 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
                 When I enter 'name of the newly added sponsor organisation' into the search field
-                # When I enter 'name of the previously added sponsor organisation' into the search field
                 And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
                 And I capture the page screenshot
                 Then the system displays 'sponsor organisations' matching the search criteria
                 And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Disabled>' status in the manage sponsor organisation page
-                # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Disabled>' status in the manage sponsor organisation page
                 And I capture the page screenshot
                 Then I click the view edit link of the 'newly added sponsor organisation'
                 And I capture the page screenshot
                 And I can see the sponsor organisation profile page
-                # validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'
+                ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
+                # And I now see the sponsor organisation profile page with the selected 'Sponsor_Organisation_UniversityOfSouthampton'
                 And I capture the page screenshot
                 ## enable a sponsor organisation
                 Then I can see the '<Enable_Label_Texts>' ui labels on the 'sponsor organisation' profile page
@@ -286,19 +271,16 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
                 When I enter 'name of the newly added sponsor organisation' into the search field
-                # When I enter 'name of the previously added sponsor organisation' into the search field
                 And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
                 And I capture the page screenshot
                 Then the system displays 'sponsor organisations' matching the search criteria
                 And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
-                # And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
                 And I capture the page screenshot
                 Then I click the view edit link of the 'newly added sponsor organisation'
-                # Then I click the view edit link of the 'previously added sponsor organisation'
                 And I capture the page screenshot
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'
+                # And I now see the sponsor organisation profile page with the selected 'Sponsor_Organisation_UniversityOfSouthampton'
                 And I capture the page screenshot
                 Then I can see the '<Disable_Label_Texts>' ui labels on the 'sponsor organisation' profile page
                 And I capture the page screenshot
@@ -325,13 +307,13 @@ Feature: Manage sponsor organisations
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                #Then I can see the 'user added' successful message on sponsor organisation user list page
+                Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
                 When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'
+                # And I now see the sponsor organisation profile page with the selected 'Sponsor_Organisation_UniversityOfSouthampton'
                 And I capture the page screenshot
                 ## disable user in the user list page of the sponsor organisation
                 And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
@@ -366,7 +348,7 @@ Feature: Manage sponsor organisations
                 When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'
+                # And I now see the sponsor organisation profile page with the selected 'Sponsor_Organisation_UniversityOfSouthampton'
                 And I capture the page screenshot
                 ## enable user in the user list page of the sponsor organisation
                 And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
@@ -399,14 +381,14 @@ Feature: Manage sponsor organisations
                 When I click the 'Confirm' button on the 'Confirmation_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                # Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
+                Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
                 And I capture the page screenshot
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
                 When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
-                And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'
+                # And I now see the sponsor organisation profile page with the selected 'Sponsor_Organisation_UniversityOfSouthampton'
                 And I capture the page screenshot
 
                 Examples:

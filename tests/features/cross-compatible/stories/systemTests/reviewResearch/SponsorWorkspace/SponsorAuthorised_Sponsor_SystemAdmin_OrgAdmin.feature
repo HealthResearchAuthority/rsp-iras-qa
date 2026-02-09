@@ -42,8 +42,6 @@ Feature: Sponsor authorisation based on permission and role
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -88,7 +86,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -184,8 +181,6 @@ Feature: Sponsor authorisation based on permission and role
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -230,7 +225,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -267,8 +261,6 @@ Feature: Sponsor authorisation based on permission and role
     And I capture the page screenshot
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -352,7 +344,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -447,8 +438,6 @@ Feature: Sponsor authorisation based on permission and role
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -531,7 +520,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -626,8 +614,6 @@ Feature: Sponsor authorisation based on permission and role
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
@@ -710,7 +696,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    # Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
