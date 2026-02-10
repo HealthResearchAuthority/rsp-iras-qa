@@ -52,7 +52,7 @@ Feature: This feature covers the sponsor authorisation modifications
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP_7137
   Scenario Outline: Validate that sponsor can authorise the reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -295,7 +295,7 @@ Feature: This feature covers the sponsor authorisation modifications
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
       | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP_7137
   Scenario Outline: Validate that sponsor can authorise the combination of reviewable and non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -405,3 +405,60 @@ Feature: This feature covers the sponsor authorisation modifications
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_Northern_Ireland |
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_Wales            |
+
+  @FieldsModificationReflectInProjectRecordModificationApproved @rsp-6462
+  Scenario Outline: Verify fields from Modification are reflecting in Project Record after Studywide reviewer approval
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
+    And I capture the page screenshot
+    Then I click on the searched modification id from sponsor authorisations page
+    And I can see the sponsor check and authorise page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the date created for modification in sponsor check and authorise page
+    And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
+    And I capture the page screenshot
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
+    And I capture the page screenshot
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I capture the page screenshot
+    And I click on the short project title for the searched iras id from my research projects page
+    Then I can see the project overview page
+    And I capture the page screenshot
+    Then I verify that the updated project details are reflected at the project level using '<Changes>' data
+
+    Examples:
+      | Changes                                                   | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome  | Outcome_Reason | Outcome_Status               | Project_Name |
+      | Project_Personnel__Change_Chief_Investigator_Details      | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Blank          | Modification_Status_Approved |              |
+      | Planned_End_Date_NHS_All_Yes_All_Countries                | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Blank          | Modification_Status_Approved |              |
+      | Modification_To_Add_Administrative_Details_Project_Titles | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Blank          | Modification_Status_Approved |              |

@@ -1,4 +1,4 @@
-@ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive
+@ApplicantUser @AuditHistoryModifications @SystemTest @SetupNewSponsorOrgGoLive @SystemTestFrontStage
 Feature: Modifications - Audit history
 
   @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableAuthorised
@@ -614,6 +614,8 @@ Feature: Modifications - Audit history
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot
+    When I select the modification in order to assign it
+    And I capture the page screenshot
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot
     Then I can see the 'Select_Study_Wide_Reviewer_Page'
@@ -834,6 +836,8 @@ Feature: Modifications - Audit history
     When I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager'
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    And I capture the page screenshot
+    When I select the modification in order to assign it
     And I capture the page screenshot
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot

@@ -30,7 +30,9 @@ Then(
       expect(actualProjectTitle).toBe(expectedProjectTitle);
     }
     const iIrasIdText = confirmStringNotNull(await projectOverviewUnfinishedProjectsPage.irasid_text.textContent());
-    const statusText = confirmStringNotNull(await projectOverviewUnfinishedProjectsPage.status_text.textContent());
+    const statusText = confirmStringNotNull(
+      await projectOverviewUnfinishedProjectsPage.status_text.first().textContent()
+    );
     const actualIrasIdText = iIrasIdText
       .replace(
         projectOverviewUnfinishedProjectsPage.projectOverviewUnfinishedProjectsPageTestData.Project_Overview_Page

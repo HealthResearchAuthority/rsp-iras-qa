@@ -8,12 +8,16 @@ Given('I can see the add user role page', async ({ addUserRoleSponsorOrgPage }) 
 
 When(
   'I fill the add user role page using {string}',
-  async ({ addUserRoleSponsorOrgPage, commonItemsPage, myOrganisationsUserProfilePage }, datasetName: string) => {
+  async (
+    { addUserRoleSponsorOrgPage, commonItemsPage, myOrganisationsUserProfilePage, userProfilePage },
+    datasetName: string
+  ) => {
     const dataset = addUserRoleSponsorOrgPage.addUserRoleSponsorOrgPageTestData.Add_User_Role_Page[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, addUserRoleSponsorOrgPage);
         await myOrganisationsUserProfilePage.setRole(dataset[key]);
+        await userProfilePage.setRole(dataset[key]);
       }
     }
     if (datasetName === 'Sponsor_Org_User_Role_Org_Admin') {

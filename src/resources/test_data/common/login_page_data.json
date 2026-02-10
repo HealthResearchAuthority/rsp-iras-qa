@@ -18,19 +18,19 @@
     "authPath": "studywide_reviewer"
   },
   "Studywide_Reviewer_NI": {
-    "username": "FutureIRASBackStageNI@hra.nhs.uk",
+    "username": "futureirasbackstageni@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_NI_PASS}`",
     "mfa": "`${process.env.STUDYWIDE_REVIEWER_NI_MFA_KEY}`",
     "authPath": "studywide_reviewer_ni"
   },
   "Studywide_Reviewer_S": {
-    "username": "FutureIRASBackStageS@hra.nhs.uk",
+    "username": "futureirasbackstages@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_S_PASS}`",
     "mfa": "`${process.env.STUDYWIDE_REVIEWER_S_MFA_KEY}`",
     "authPath": "studywide_reviewer_s"
   },
   "Studywide_Reviewer_W": {
-    "username": "FutureIRASBackStageW@hra.nhs.uk",
+    "username": "futureirasbackstagew@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_W_PASS}`",
     "mfa": "`${process.env.STUDYWIDE_REVIEWER_W_MFA_KEY}`",
     "authPath": "studywide_reviewer_w"
@@ -42,19 +42,19 @@
     "authPath": "team_manager"
   },
   "Team_Manager_NI": {
-    "username": "FutureIRAS.TeamManager_NI@hra.nhs.uk",
+    "username": "futureiras.teammanager_ni@hra.nhs.uk",
     "password": "`${process.env.TEAM_MANAGER_NI_PASS}`",
     "mfa": "`${process.env.TEAM_MANAGER_NI_MFA_KEY}`",
     "authPath": "team_manager_ni"
   },
   "Team_Manager_S": {
-    "username": "FutureIRAS.TeamManager_S@hra.nhs.uk",
+    "username": "futureiras.teammanager_s@hra.nhs.uk",
     "password": "`${process.env.TEAM_MANAGER_S_PASS}`",
     "mfa": "`${process.env.TEAM_MANAGER_S_MFA_KEY}`",
     "authPath": "team_manager_s"
   },
   "Team_Manager_W": {
-    "username": "FutureIRAS.TeamManager_W@hra.nhs.uk",
+    "username": "futureiras.teammanager_w@hra.nhs.uk",
     "password": "`${process.env.TEAM_MANAGER_W_PASS}`",
     "mfa": "`${process.env.TEAM_MANAGER_W_MFA_KEY}`",
     "authPath": "team_manager_w"
@@ -66,31 +66,31 @@
     "authPath": "workflow_coordinator"
   },
   "Workflow_Coordinator_NI": {
-    "username": "FutureIRAS.WorkflowCoordinator_NI@hra.nhs.uk",
+    "username": "futureiras.workflowcoordinator_ni@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_NI_PASS}`",
     "mfa": "`${process.env.WORKFLOW_COORDINATOR_NI_MFA_KEY}`",
     "authPath": "workflow_coordinator_ni"
   },
   "Workflow_Coordinator_S": {
-    "username": "FutureIRASWorkflowCoordinators@hra.nhs.uk",
+    "username": "futureirasworkflowcoordinators@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_S_PASS}`",
     "mfa": "`${process.env.WORKFLOW_COORDINATOR_S_MFA_KEY}`",
     "authPath": "workflow_coordinator_s"
   },
   "Workflow_Coordinator_W": {
-    "username": "FutureIRAS.WorkflowCoordinator_W@hra.nhs.uk",
+    "username": "futureiras.workflowcoordinator_w@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_W_PASS}`",
     "mfa": "`${process.env.WORKFLOW_COORDINATOR_W_MFA_KEY}`",
     "authPath": "workflow_coordinator_w"
   },
   "Sponsor_User": {
-    "username": "FutureIRAS.Sponsor@hra.nhs.uk",
+    "username": "futureiras.sponsor@hra.nhs.uk",
     "password": "`${process.env.SPONSOR_USER_PASS}`",
     "mfa": "`${process.env.SPONSOR_USER_MFA_KEY}`",
     "authPath": "sponsor_user"
   },
   "Sponsor_Org_Admin_User": {
-    "username": "futureiras.automation.SponsorOrgAdmin@hra.nhs.uk",
+    "username": "futureiras.automation.sponsororgadmin@hra.nhs.uk",
     "password": "`${process.env.SPONSOR_ORG_ADMIN_USER_PASS}`",
     "mfa": "`${process.env.SPONSOR_ORG_ADMIN_USER_MFA_KEY}`",
     "authPath": "sponsor_org_admin_user"
@@ -122,15 +122,15 @@
       "role": "study-wide_reviewer"
     },
     "Studywide_Reviewer_NI": {
-      "username": "FutureIRASBackStageNI@hra.nhs.uk",
+      "username": "futureirasbackstageni@hra.nhs.uk",
       "role": "study-wide_reviewer"
     },
     "Studywide_Reviewer_S": {
-      "username": "FutureIRASBackStageS@hra.nhs.uk",
+      "username": "futureirasbackstages@hra.nhs.uk",
       "role": "study-wide_reviewer"
     },
     "Studywide_Reviewer_W": {
-      "username": "FutureIRASBackStageW@hra.nhs.uk",
+      "username": "futureirasbackstagew@hra.nhs.uk",
       "role": "study-wide_reviewer"
     },
     "Team_Manager": {
@@ -138,15 +138,15 @@
       "role": "team_manager"
     },
     "Team_Manager_NI": {
-      "username": "FutureIRAS.TeamManager_NI@hra.nhs.uk",
+      "username": "futureiras.teammanager_ni@hra.nhs.uk",
       "role": "team_manager"
     },
     "Team_Manager_S": {
-      "username": "FutureIRAS.TeamManager_S@hra.nhs.uk",
+      "username": "futureiras.teammanager_s@hra.nhs.uk",
       "role": "team_manager"
     },
     "Team_Manager_W": {
-      "username": "FutureIRAS.TeamManager_W@hra.nhs.uk",
+      "username": "futureiras.teammanager_w@hra.nhs.uk",
       "role": "team_manager"
     },
     "Workflow_Coordinator": {
@@ -154,23 +154,23 @@
       "role": "workflow_co-ordinator"
     },
     "Workflow_Coordinator_NI": {
-      "username": "FutureIRAS.WorkflowCoordinator_NI@hra.nhs.uk",
+      "username": "futureiras.workflowcoordinator_ni@hra.nhs.uk",
       "role": "workflow_co-ordinator"
     },
     "Workflow_Coordinator_S": {
-      "username": "FutureIRASWorkflowCoordinators@hra.nhs.uk",
+      "username": "futureirasworkflowcoordinators@hra.nhs.uk",
       "role": "workflow_co-ordinator"
     },
     "Workflow_Coordinator_W": {
-      "username": "FutureIRAS.WorkflowCoordinator_W@hra.nhs.uk",
+      "username": "futureiras.workflowcoordinator_w@hra.nhs.uk",
       "role": "workflow_co-ordinator"
     },
     "Sponsor_User": {
-      "username": "FutureIRAS.Sponsor@hra.nhs.uk",
+      "username": "futureiras.sponsor@hra.nhs.uk",
       "role": "sponsor"
     },
     "Sponsor_Org_Admin_User": {
-      "username": "futureiras.automation.SponsorOrgAdmin@hra.nhs.uk",
+      "username": "futureiras.automation.sponsororgadmin@hra.nhs.uk",
       "role": "organisation_administrator"
     }
   }

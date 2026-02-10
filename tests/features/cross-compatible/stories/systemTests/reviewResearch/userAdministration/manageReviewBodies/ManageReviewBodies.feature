@@ -128,7 +128,7 @@ Feature: User Administration: Manage Review Bodies
                         | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Audit_History               | Status_Enabled | Status_Disabled |
                         | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Edit_Review_Body_All_Fields | Enabled        | Disabled        |
 
-        @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies
+        @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Verify the user can navigate by clicking 'Back' link and 'Change' link from review body profile page and edit review body page and audit history page
                 Verify the user can view the user list page of any selected review body and it is sorted by default in the alphabetical order of the 'First Name'
                 When I enter 'QA Automation' into the search field
@@ -195,7 +195,7 @@ Feature: User Administration: Manage Review Bodies
                         | Field_Name_Two | Field_Name_Three | Field_Name_Four | Navigation_Link | Status_Enabled | Status_Disabled |
                         | Country        | Email_Address    | Description     | Back            | Enabled        | Disabled        |
 
-        @RegressionTestVerifyBackAndChangeLinksCreateAndCheckCreateReviewBody @CreatedRevBodyCleanup
+        @RegressionTestVerifyBackAndChangeLinksCreateAndCheckCreateReviewBody @CreatedRevBodyCleanup @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Verify the user can navigate via the change links and back links
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
                 Then I can see the 'Create_Review_Body_Page'
@@ -255,7 +255,7 @@ Feature: User Administration: Manage Review Bodies
                         | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_In_All_Fields_Another | Enabled        | Disabled        |
 
 
-        @RegressionTestVerifyValidReviewBodyCharacterLimits
+        @RegressionTestVerifyValidReviewBodyCharacterLimits @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Field validation passes with minimum and maximum characters in organisation name and description
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
                 Then I can see the 'Create_Review_Body_Page'
@@ -275,7 +275,7 @@ Feature: User Administration: Manage Review Bodies
                         | Description_Field_Max_Data                   |
                         | Description_Field_between_Min_Max_Data       |
 
-        @RegressionTestVerifyValidationErrors
+        @RegressionTestVerifyValidationErrors @KNOWN_DEFECT_RSP_7137
         Scenario Outline: When min/max character field validation fails correct error messages display
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
                 Then I can see the 'Create_Review_Body_Page'
@@ -297,7 +297,7 @@ Feature: User Administration: Manage Review Bodies
                         | Invalid_Data_Description_Field                       | Max_Description_Words_Error                                  |
                         | Incorrect_Format_Invalid_Character_Limit_Email_Field | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error |
 
-        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser
+        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -341,7 +341,7 @@ Feature: User Administration: Manage Review Bodies
                         | Status_Enabled |
                         | Enabled        |
 
-        @RegressionTestUserListReviewBodyManageUsersLink
+        @RegressionTestUserListReviewBodyManageUsersLink @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -396,7 +396,7 @@ Feature: User Administration: Manage Review Bodies
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
 
-        @RegressionTestUserListReviewBodyBackToReviewBodyUserListAfterRemoveUser
+        @RegressionTestUserListReviewBodyBackToReviewBodyUserListAfterRemoveUser @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -438,7 +438,7 @@ Feature: User Administration: Manage Review Bodies
                         | Enabled        | Disabled        |
 
 
-        @RegressionTestUserListReviewBodyBackToManageReviewBodiesRemoveUser
+        @RegressionTestUserListReviewBodyBackToManageReviewBodiesRemoveUser @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page from the confirmation page
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -472,7 +472,7 @@ Feature: User Administration: Manage Review Bodies
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
 
-        @RegressionTestUserListReviewBodyBackToReviewBodyUserListCheckRemoveUser
+        @RegressionTestUserListReviewBodyBackToReviewBodyUserListCheckRemoveUser @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -502,7 +502,7 @@ Feature: User Administration: Manage Review Bodies
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
 
-        @RegressionTestUserListReviewBodyRemoveUserNoSearch
+        @RegressionTestUserListReviewBodyRemoveUserNoSearch @KNOWN_DEFECT_RSP_7137
         Scenario Outline: Verify the user can navigate to user list page of the review body and remove any user from the review body without using search
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'

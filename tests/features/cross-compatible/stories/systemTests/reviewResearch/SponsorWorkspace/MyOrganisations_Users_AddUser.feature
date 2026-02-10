@@ -23,7 +23,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6461 @MyOrganisationsAddUserPage @BackBreadCrumbs @KNOWN-DEFECT-RSP-6723
+  @rsp-6461 @MyOrganisationsAddUserPage @BackBreadCrumbs
   Scenario Outline: Validate that <Login_User> is able to navigate to add users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -43,7 +43,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -67,7 +67,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     And I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
     Then I can see tabs are displayed based on the logged in user role '<Login_User>'
-    And the users tab is underlined
+    And the 'Users' tab is active and underlined
     And the add a user section is '<Add_A_User_Section_Visibility>' based on the logged in user role
     Then I click the 'Add_User' button on the 'My_Organisations_Users_Page'
     And I capture the page screenshot
@@ -81,7 +81,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
       # | System_Admin           | system admin email      | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-  @rsp-6461 @ErrorValidation @KNOWN-DEFECT-RSP-6651 @KNOWN-DEFECT-RSP-6723
+  @rsp-6461 @ErrorValidation @KNOWN-DEFECT-RSP-6651
   Scenario Outline: Validate error when attempting to add non registered users to sponsor organisation by <Login_User>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -101,7 +101,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -165,7 +165,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
       # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
-  @rsp-6465 @AddUserRolePermission @KNOWN-DEFECT-RSP-6723
+  @rsp-6465 @AddUserRolePermission
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> from sponsor workspace and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -185,7 +185,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -252,7 +252,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -319,7 +319,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -376,7 +376,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -437,7 +437,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -503,7 +503,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -560,7 +560,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -626,7 +626,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -692,7 +692,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
