@@ -31,7 +31,6 @@ Then(
     statusDataset: string,
     reason: string
   ) => {
-    // await modificationPostSubmissionPage.assertOnModificationPostSubmissionPage();
     const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
     const expectedStatus = dataset.status;
     const actualStatus = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
