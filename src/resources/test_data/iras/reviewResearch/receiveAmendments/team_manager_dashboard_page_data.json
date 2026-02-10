@@ -1,6 +1,6 @@
 {
   "Team_Manager_Dashboard_Page": {
-    "title": "Plan and manage health and care research",
+    "title": "Team manager dashboard - Approvals - Plan and manage health and care research",
     "modifications_tasklist_link": "Modifications tasklist",
     "page_heading": "Team manager dashboard",
     "page_description": "This page shows all the modifications that need to be actioned in ",
@@ -13,11 +13,7 @@
     "project_record_answer_option_lead_nation_northern_ireland": "OPT0019",
     "project_record_answer_option_lead_nation_scotland": "OPT0020",
     "project_record_answer_option_lead_nation_wales": "OPT0021",
-    "filter_headings": [
-      "Date submitted",
-      "Days since submission",
-      "Study-wide reviewer"
-    ]
+    "filter_headings": ["Date submitted", "Days since submission", "Study-wide reviewer"]
   },
   "Column": {
     "short_project_title_column_label": "Short project title",
@@ -199,34 +195,19 @@
   },
   "Modification_Id": {
     "Modification_Id_Ln_England_Pn_England_One": {
-      "modification_id_checkbox": [
-        "1234587/19"
-      ]
+      "modification_id_checkbox": ["1234587/19"]
     },
     "Modification_Id_Ln_England_Pn_England_Two": {
-      "modification_id_checkbox": [
-        "1234587/2"
-      ]
+      "modification_id_checkbox": ["1234587/2"]
     },
     "Modification_Id_Ln_England_Pn_England_Three_Four": {
-      "modification_id_checkbox": [
-        "1234587/3",
-        "1234587/4"
-      ]
+      "modification_id_checkbox": ["1234587/3", "1234587/4"]
     },
     "Modification_Id_Ln_England_Pn_England_Five_Six": {
-      "modification_id_checkbox": [
-        "1234587/5",
-        "1234587/6"
-      ]
+      "modification_id_checkbox": ["1234587/5", "1234587/6"]
     },
     "Modification_Id_Ln_England_Pn_England_All_Assigned_From_WFC_To_SWR": {
-      "modification_id_checkbox": [
-        "1234587/1",
-        "1234587/2",
-        "1234587/3",
-        "1234587/4"
-      ]
+      "modification_id_checkbox": ["1234587/1", "1234587/2", "1234587/3", "1234587/4"]
     }
   },
   "Team_Manager_Nations": {

@@ -577,6 +577,8 @@ Then(
       modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Reassigned} '${loginPage.loginPageTestData['Studywide_Reviewer'].username}'`;
     } else if (modificationEventDatasetName.toLowerCase() === 'modification_comment_reason_not_approved_changed') {
       modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Comment_Reason_Not_Approved_Changed} from ${modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons.Lack_Of_Evidence} to ${modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons.Valid_Reason_Not_Approved}`;
+    } else if (modificationEventDatasetName.toLowerCase() === 'modification_comment_changed') {
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Comment_Changed} from ${modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons.Lack_Of_Evidence} to ${modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons.Valid_Reason}`;
     } else {
       modificationEvent =
         modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName];
@@ -610,6 +612,7 @@ Then(
 Then(
   'I validate the audit history table for modifications of the user {string}',
   async ({ modificationsCommonPage }, userName: string) => {
+    await modificationsCommonPage.auditHistoryTables.waitFor({ state: 'visible' });
     const auditHistoryTableHeadersActual = await modificationsCommonPage.auditHistoryTableHeader.allTextContents();
     const auditHistoryTableHeadersExpected =
       modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.Audit_History_Headers;

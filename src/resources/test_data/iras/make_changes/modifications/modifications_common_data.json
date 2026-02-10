@@ -30,7 +30,8 @@
     "current_chief_investigator_email_label": "Current chief investigator email",
     "dateCreated": "Date created",
     "ViewDetailsLink": "View details",
-    "Audit_History_Headers": ["Date", "Event description", "User email"]
+    "Audit_History_Headers": ["Date", "Event description", "User email"],
+    "Event_Description_Header_Label": "Event description"
   },
   "Ranking_Category": {
     "always_n_a": [

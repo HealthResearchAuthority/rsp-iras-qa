@@ -1,5 +1,5 @@
 @SysAdminUser @SetupNewSponsorOrgGoLive @SystemTest
-Feature: This feature file is to validate the assisted digital test coverage as a system admininstrator for known scenarios
+Feature: Validate the assisted digital test coverage as system admininstrator for known scenarios
 
   Background:
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -30,6 +30,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'System_Admin'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -46,8 +47,8 @@ Feature: This feature file is to validate the assisted digital test coverage as 
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @AuthoriseAndApproveModification
-  Scenario: Validate system admininstrator is able to authorise and approve a modification
+  @AuthoriseAndApproveModification @rsp-6626
+  Scenario: Validate system administrator is able to authorise and approve a modification
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -116,7 +117,7 @@ Feature: This feature file is to validate the assisted digital test coverage as 
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
-    And I can see the searched modification to be present in the list with date actioned with 'with reviewbody' status in the sponsor authorisations page
+    And I can see the searched modification to be present in the list with date actioned with 'With review body' status in the sponsor authorisations page
     And I capture the page screenshot
     When I click the 'Home' link on the 'Banner'
     When I click the 'Approvals' link on the 'Home_Page'
@@ -133,16 +134,32 @@ Feature: This feature file is to validate the assisted digital test coverage as 
     When I click a 'modification id' on the 'Search_Modifications_Page'
     And I capture the page screenshot
     And I click the 'Continue' button on the 'Modifications_Page'
+    Then I provide comment as '<Comment>' in the review outcome page
     When I provide the '<Outcome>' outcome for the modification with '<Outcome_Reason>' reason
     When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     When I click the 'Send_Review_Outcome' button on the 'Modification_Outcome_Check_Send_Page'
     And I capture the page screenshot
     Then I validate confirmation screen for modification review outcome sent
+    When I click the 'Back_To_Tasklist' link on the 'Modification_Review_Outcome_Sent_Page'
+    Then I can see the 'My_Modifications_Tasklist_No_Result_Page'
+    And I capture the page screenshot
+    When I have navigated to the 'Approvals_Page' as 'System_Admin'
+    When I click the 'Search_Records' link on the 'Approvals_Page'
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I can see the modification post submission page
+    And I capture the page screenshot
+    Then I '<Visibility>' see comments tab for the modification record with '<Comment>'
+    And I capture the page screenshot
 
     Examples:
-      | Changes                                            | Research_Locations  | Outcome  | Outcome_Reason |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes | Approved | Blank          |
+      | Changes                                            | Research_Locations  | Outcome  | Outcome_Reason | Visibility | Comment       |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes | Approved | Blank          | cannot     | Blank         |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes | Approved | Valid_Reason   | can        | First_Comment |
 
   @AuthoriseAndAssignModificationToStudyWideReviewer
   Scenario: Validate system adminintrator is able to authorise and assign modification to a study wide reviewer

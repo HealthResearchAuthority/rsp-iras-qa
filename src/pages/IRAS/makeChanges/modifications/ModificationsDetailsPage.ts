@@ -1,12 +1,15 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsDetailsPageTestData from '../../../../resources/test_data/iras/make_changes/modifications/modification_details_data.json';
+import * as modificationPostSubmissionPageTestData from '../../../../resources/test_data/iras/make_changes/modifications/modification_post_submission_page_data.json';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
+import ModificationPostSubmissionPage from './ModificationPostSubmissionPage';
 
 //Declare Page Objects
 export default class ModificationsDetailsPage {
   readonly page: Page;
   readonly modificationsDetailsPageTestData: typeof modificationsDetailsPageTestData;
+  readonly modificationPostSubmissionPageTestData: typeof ModificationPostSubmissionPage;
   readonly linkTextData: typeof linkTextData;
   readonly buttonTextData: typeof buttonTextData;
   readonly pageHeading: Locator;
@@ -42,6 +45,10 @@ export default class ModificationsDetailsPage {
   readonly not_approved_comment_guidance: Locator;
   readonly not_approved_comment_box: Locator;
   readonly save_continue_button: Locator;
+  readonly comments_tab_label: Locator;
+  readonly comment_heading_label: Locator;
+  readonly comment_card: Locator;
+  readonly comment_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -140,6 +147,20 @@ export default class ModificationsDetailsPage {
     this.save_continue_button = this.page
       .getByRole('button')
       .getByText(this.buttonTextData.Modification_Details_Page.Save_And_Continue);
+    this.comments_tab_label = this.page.getByRole('link', {
+      name: modificationPostSubmissionPageTestData.Modification_Post_Submission_Page.comments_tab,
+      exact: true,
+    });
+    this.comment_heading_label = this.page.getByRole('heading', {
+      level: 2,
+      name: modificationPostSubmissionPageTestData.Modification_Post_Submission_Page.comment_label,
+    });
+    this.comment_card = this.page.locator(
+      '.govuk-summary-card:has(h2.govuk-summary-card__title:has-text("' +
+        modificationPostSubmissionPageTestData.Modification_Post_Submission_Page.comment_label +
+        '"))'
+    );
+    this.comment_text = this.comment_card.locator('.govuk-summary-card__content');
   }
 
   //Page Methods
