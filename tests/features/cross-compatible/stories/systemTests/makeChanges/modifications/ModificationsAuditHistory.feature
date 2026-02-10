@@ -70,8 +70,6 @@ Feature: Modifications - Audit history
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
@@ -721,7 +719,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
 
-  @rsp-5268 @rsp-6625 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
+  @rsp-5268 @rsp-6625 @rsp-6626 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
   Scenario: Verify the modification not approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -902,6 +900,7 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'Search_Modifications_Page'
     When I click a 'modification id' on the 'Search_Modifications_Page'
     And I capture the page screenshot
+    Then I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     # valid audit row is not visible
     Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
@@ -941,6 +940,9 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
     # Validating the audit history for team manager user
     When I have navigated to the 'Approvals_Page' as 'Team_Manager'
     When I click the 'Search_Records' link on the 'Approvals_Page'
@@ -954,6 +956,9 @@ Feature: Modifications - Audit history
     Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
 
