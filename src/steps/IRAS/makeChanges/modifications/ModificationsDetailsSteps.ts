@@ -95,34 +95,6 @@ Given('I can see the review outcome section', async ({ modificationsDetailsPage,
   await expect.soft(modificationsDetailsPage.review_outcome_guidance).toBeVisible();
 });
 
-// When(
-//   'I provide the {string} outcome for the modification with {string} reason',
-//   async ({ modificationsDetailsPage, modificationsReceivedCommonPage }, outcome: string, reason: string) => {
-//     const reasonGiven = modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons[reason];
-//     if (outcome.toLowerCase() == 'not_approved') {
-//       await modificationsDetailsPage.not_approved_outcome_option.check();
-//       await modificationsDetailsPage.save_continue_button.click();
-//       await expect(modificationsDetailsPage.not_approved_comment_heading).toBeVisible();
-//       await expect(modificationsDetailsPage.not_approved_comment_guidance).toBeVisible();
-//       await modificationsDetailsPage.not_approved_comment_box.fill(reasonGiven);
-//       await modificationsReceivedCommonPage.setDecisionOutcome(
-//         modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Review_Outcome_Section
-//           .not_approved_outcome_option
-//       );
-//     } else {
-//       await modificationsDetailsPage.review_comment_show.click();
-//       await expect(modificationsDetailsPage.review_comment_hide).toBeVisible();
-//       await expect(modificationsDetailsPage.review_comment_guidance).toBeVisible();
-//       await modificationsDetailsPage.approved_outcome_option.check();
-//       await modificationsDetailsPage.review_comment_box.fill(reasonGiven);
-//       await modificationsReceivedCommonPage.setDecisionOutcome(
-//         modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Review_Outcome_Section
-//           .approved_outcome_option
-//       );
-//     }
-//   }
-// );
-
 When(
   'I provide the {string} outcome for the modification with {string} reason',
   async ({ modificationsDetailsPage, modificationsReceivedCommonPage }, outcome: string, reason: string) => {
