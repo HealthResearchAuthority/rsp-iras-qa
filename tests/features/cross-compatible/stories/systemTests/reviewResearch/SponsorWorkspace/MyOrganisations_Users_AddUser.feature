@@ -24,7 +24,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
 
   @rsp-6461 @MyOrganisationsAddUserPage @BackBreadCrumbs
-  @rsp-6461 @MyOrganisationsAddUserPage @BackBreadCrumbs
   Scenario Outline: Validate that <Login_User> is able to navigate to add users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -79,7 +78,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
 
     Examples:
       | Login_User             | User_Email              | Link   | Add_A_User_Section_Visibility | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
-      # | System_Admin           | system admin email      | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6461 @ErrorValidation
@@ -163,7 +161,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @AddUserRolePermission
@@ -247,7 +244,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @AddUserRolePermissionCancel
@@ -314,7 +310,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @BackBreadCrumbs
@@ -370,7 +365,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
 
@@ -432,7 +426,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I can see the add user role page
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @BackBreadCrumbs
@@ -498,7 +491,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I can see the add user permission page based on '<Select_User_Permission>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @ErrorValidation @NoUserRoleSelectedError
@@ -555,7 +547,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I validate '<Summary_Error_Message>' displayed when no role selected in 'Add_User_Role_Sponsor_Org_Page'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message                    | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error                | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | No_Role_Selected_Sponsor_Workspace_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @ChangeLinkEmailAddress
@@ -621,7 +612,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  | Email_Address |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Email      |
 
   @rsp-6465 @ChangeLinkRole
@@ -687,7 +677,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I can see the add user role page
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  | Email_Address |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Role       |
 
   @rsp-6465 @ChangeLinkAuthoriser
@@ -753,5 +742,4 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I can see the add user permission page based on '<Select_User_Permission>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  | Email_Address |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Authoriser |
