@@ -611,11 +611,8 @@ Then(
 
 Then(
   'I validate the audit history table for modifications of the user {string}',
-  async ({ modificationsCommonPage, page }, userName: string) => {
-    await page
-      .locator('table.govuk-table-users')
-      .filter({ has: page.getByRole('columnheader', { name: 'Event description' }) })
-      .waitFor({ state: 'visible' });
+  async ({ modificationsCommonPage }, userName: string) => {
+    await modificationsCommonPage.auditHistoryTables.waitFor({ state: 'visible' });
     const auditHistoryTableHeadersActual = await modificationsCommonPage.auditHistoryTableHeader.allTextContents();
     const auditHistoryTableHeadersExpected =
       modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.Audit_History_Headers;
