@@ -3622,6 +3622,112 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @ModificationNotApprovedPostSubmissionPage @SetupNewSponsorOrgGoLive
+  Scenario: Modification post submission page- Not approved status with reason
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfBristol'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Sponsor_Organisation_Full_Text_Bristol'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using 'Other_Minor_Change_To_Project_Management' and 'Data_With_Lead_Nation_Northern_Ireland' dataset
+    And I create 'Other_Minor_Change_To_Project_Management' for the created modification
+    And I can see the modifications details page
+    And I validate the project information labels using dataset displayed on modifications page
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Submitted' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    # Logging as sponsor user and not authorising the modification
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
+    Then I click on the searched modification id from sponsor authorisations page
+    And I can see the sponsor check and authorise page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I keep note of the 'Modification_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Submitted_To_Review_Body' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Backstage_User' user
+    And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
+    # Logging as workflow coordinator and assigning the modification to study wide reviewer northern ireland
+    When I have navigated to the 'Modifications_Tasklist_Page' as 'Workflow_Coordinator'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
+    When I select the modification in order to assign it
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Studywide_Reviewer_NI'
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I keep note of the 'Modification_Assigned' event actioned by the user 'Workflow_Coordinator' to store the modification audit history for 'Backstage_User' user
+    # logging as team manager and reassigning the modification to study wide reviewer hra england
+    When I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+    Then I can see the 'Select_Study_Wide_Reviewer_Page'
+    And I select a study wide reviewer in the select a reviewer page using 'Study_Wide_Reviewer_HRA_England'
+    And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+    And I keep note of the 'Modification_Reassigned' event actioned by the user 'Team_Manager' to store the modification audit history for 'Backstage_User' user
+    # Logging as study wide reviewer and not approving the modification with reason
+    When I have navigated to the 'My_Modifications_Tasklist_Page' as 'Studywide_Reviewer'
+    And I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Modifications_Tasklist_Page'
+    Then I 'can' see the modification displayed in the 'My_Modifications_Tasklist_Page' list with 'Modification_Status_Review_In_Progress' status
+    When I click the modification id displayed on the 'My_Modifications_Tasklist_Page'
+    Then I can see the modification post submission page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityCommentsTab @StudyWideReviewer @SetupNewSponsorOrgGoLive
   Scenario Outline: Studywide Reviewer - Approved with Comments - Comments Tab
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'

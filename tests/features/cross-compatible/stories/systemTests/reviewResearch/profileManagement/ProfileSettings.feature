@@ -51,7 +51,7 @@ Feature: Profile Management: Provide signed-in users with access to their profil
             | Settings_Job_Title    |
             | Settings_Organisation |
 
-    @editProfileSettings @rsp-5106 @OneLoginUser @KNOWN-DEFECT-RSP-5329
+    @editProfileSettings @rsp-5106 @OneLoginUser @KNOWN-DEFECT-RSP-6968
     Scenario: Users can update their profile directly via profile settings
         Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
         And I login to the application as the 'One_Login_Account_User'

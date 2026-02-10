@@ -20,7 +20,12 @@ Then(
 
 Then(
   'I capture the modification id of {string} where the lead nation is the country linked to the {string} and with status {string}',
-  async ({ teamManagerDashboardPage }, modificationCount: string, user: string, status: string) => {
+  async (
+    { teamManagerDashboardPage, modificationsReceivedCommonPage },
+    modificationCount: string,
+    user: string,
+    status: string
+  ) => {
     let countValue: string;
     let leadNation = teamManagerDashboardPage.teamManagerDashboardPageTestData.Team_Manager_Nations[user];
     if (leadNation === 'Northern Ireland') {
@@ -36,6 +41,7 @@ Then(
       status,
       countValue
     );
+    await modificationsReceivedCommonPage.setModificationId(modificationId.toString());
     await teamManagerDashboardPage.saveModificationIdTM(modificationId.toString(), modificationCount);
     await teamManagerDashboardPage.page.waitForTimeout(2000);
     const irasId = modificationId.toString().split('/')[0];

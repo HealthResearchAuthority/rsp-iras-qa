@@ -119,6 +119,20 @@ When(
   }
 );
 
+When(
+  'I can see the {string} outcome is selected for the modification with {string} reason',
+  async ({ modificationsDetailsPage }, outcome: string, reason: string) => {
+    const reasonGiven = modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons[reason];
+    if (outcome.toLowerCase() == 'not_approved') {
+      await modificationsDetailsPage.not_approved_outcome_option.isChecked();
+      await modificationsDetailsPage.save_continue_button.click();
+      await expect.soft(modificationsDetailsPage.not_approved_comment_heading).toBeVisible();
+      await expect.soft(modificationsDetailsPage.not_approved_comment_guidance).toBeVisible();
+      expect.soft(await modificationsDetailsPage.not_approved_comment_box.textContent()).toBe(reasonGiven);
+    }
+  }
+);
+
 Then(
   'I provide comment as {string} in the review outcome page',
   async ({ modificationsDetailsPage }, comment: string) => {

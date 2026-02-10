@@ -414,7 +414,7 @@ Then(
     });
     await modificationsReceivedCommonPage.setRowLocator(rowLocator);
     if (visibility.toLowerCase() == 'cannot') {
-      if (await commonItemsPage.tableRows.isVisible()) {
+      if (await commonItemsPage.tableBodyRows.isVisible()) {
         await expect.soft(rowLocator).toBeHidden();
       } else {
         await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();

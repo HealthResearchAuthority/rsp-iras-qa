@@ -5,7 +5,7 @@ Feature: Profile Management: Provide users with the ability to create and update
     So that my account is created and I can access the system
     and make updates to my profile when needed
 
-    @regressionCompleteCheckAddProfile @OneLoginUser @rsp-5073 @rsp-5288 @KNOWN-DEFECT-RSP-5329
+    @regressionCompleteCheckAddProfile @OneLoginUser @rsp-5073 @rsp-5288 @KNOWN-DEFECT-RSP-6968
     Scenario: Users can complete and update their profile when logging into the system for the first time
         Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
         When I login to the application as the 'One_Login_Account_User'

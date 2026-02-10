@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233 @rsp-6488
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233 @rsp-6488 @SetupNewSponsorOrgGoLive
 Feature: Sort, search and pagination of users list in the selected sponsor org
 
   Background:
