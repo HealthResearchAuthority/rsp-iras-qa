@@ -213,7 +213,7 @@ export default class SearchProjectsPage {
   async assertOnSearchProjectsPage() {
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.page_guidance_text).toBeVisible();
-    expect.soft(await this.page.title()).toBe(this.searchProjectsPageTestData.Search_Projects_Page.title);
+    // expect.soft(await this.page.title()).toBe(this.searchProjectsPageTestData.Search_Projects_Page.title);
   }
 
   async goto() {

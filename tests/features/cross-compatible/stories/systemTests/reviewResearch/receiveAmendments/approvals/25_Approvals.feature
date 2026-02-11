@@ -89,7 +89,7 @@ Feature: My Account Home page - Approvals
             | Field_And_Summary_Error_Message |
             | No_Record_Type_Selected_Error   |
 
-    @SearchProjectRecords @TeamManager  @KNOWN-DEFECT-RSP-5909
+    @SearchProjectRecords @TeamManager
     Scenario Outline: Validate routing after selecting project record for different user roles
         Given I have navigated to the 'Approvals_Page' as '<User>'
         And I click the 'Search_Records' link on the 'Approvals_Page'
@@ -108,7 +108,7 @@ Feature: My Account Home page - Approvals
             | Team_Manager         |
             | Workflow_Coordinator |
 
-    @SearchModificationRecords @KNOWN-DEFECT-RSP-5909 @TeamManager
+    @SearchModificationRecords @TeamManager
     Scenario Outline: Validate routing after selecting modification record for different user roles
         Given I have navigated to the 'Approvals_Page' as '<User>'
         And I click the 'Search_Records' link on the 'Approvals_Page'

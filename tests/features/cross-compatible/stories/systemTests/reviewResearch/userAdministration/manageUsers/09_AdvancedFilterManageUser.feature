@@ -58,7 +58,7 @@ Feature: Manage Users - Advanced Filter and Search
             | Empty_Search_Data           | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
             | Existing_QA_User_First_Name | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
 
-    @VerifyApplyingFilterFirstAndSearch @rsp-5250
+    @VerifyApplyingFilterFirstAndSearch @rsp-5250 @KNOWN-DEFECT-RSP-7164
     Scenario Outline: Verify the user can view the list of users by selecting advanced filters and click on apply filters button then entering valid first name and click on search button
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -309,7 +309,7 @@ Feature: Manage Users - Advanced Filter and Search
             | Navigation_Method | Advanced_Filters     |
             | page number       | Advanced_Filter_Nine |
 
-    @rsp-4381 @ActiveFilterRemainAppliedAfterCreateNewUserProfile
+    @rsp-4381 @ActiveFilterRemainAppliedAfterCreateNewUserProfile @KNOWN-DEFECT-RSP-7164
     Scenario Outline: Verify that the active filter remains applied after creating a new user profile with valid data
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'

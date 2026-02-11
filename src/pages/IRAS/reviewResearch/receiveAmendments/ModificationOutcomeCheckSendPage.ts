@@ -45,7 +45,7 @@ export default class ModificationOutcomeCheckSendPage {
         hasText: this.modificationOutcomeCheckSendPageTestData.Summary_List_Labels.short_project_title_label,
       }),
     });
-    this.short_project_title_value = this.short_project_title_row.getByRole('definition');
+    this.short_project_title_value = this.short_project_title_row.getByRole('link');
     this.modification_id_row = this.summary_list_row.filter({
       has: this.page.getByRole('term').filter({
         hasText: this.modificationOutcomeCheckSendPageTestData.Summary_List_Labels.modification_id_label,

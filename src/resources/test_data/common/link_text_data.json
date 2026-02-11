@@ -71,6 +71,9 @@
   "Edit_User_Profile_Page": {
     "Back": "Back"
   },
+  "User_Profile_Audit_History_Page": {
+    "User_Profile_Breadcrumb": "User profile"
+  },
   "Confirmation_Page": {
     "Back": "Back",
     "Back_To_Manage_Users": "Back to Manage users",
@@ -330,7 +333,9 @@
   "Modification_Post_Submission_Page": {
     "Documents": "Documents",
     "History": "History",
-    "Modification_Details": "Modification details"
+    "Modification_Details": "Modification details",
+    "Comments": "Comments",
+    "Audit_History": "View modification audit history"
   },
   "Sponsor_Check_And_Authorise_Page": {
     "Sponsor_Details": "Sponsor details",

@@ -11,6 +11,8 @@
       "document_version_label": "Document version",
       "document_date_label": "Document date",
       "status_label": "Status"
-    }
+    },
+    "comment_label": "Comment",
+    "comments_tab": "Comments"
   }
 }

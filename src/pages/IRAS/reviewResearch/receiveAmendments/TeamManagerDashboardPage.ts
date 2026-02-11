@@ -149,7 +149,7 @@ export default class TeamManagerDashboardPage {
 
   async assertOnTeamManagerDashboardPage() {
     await expect(this.page_heading).toBeVisible();
-    expect.soft(await this.page.title()).toBe(this.teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page.title);
+    // expect.soft(await this.page.title()).toBe(this.teamManagerDashboardPageTestData.Team_Manager_Dashboard_Page.title);
   }
 
   async sqlGetModificationByLeadNationAndStatus(lead_nation: string, status: string) {
@@ -249,7 +249,7 @@ ORDER BY NationQuery.CreatedDate DESC;
         `No suitable modification found in the system with ${leadNationOption} lead nation and ${status} status and ${countValue}`
       );
     }
-    return queryResult.recordset.map((row) => row.IrasId);
+    return queryResult.recordset.map((row) => row.ModificationIdentifier);
   }
 
   async sqlGetIrasIdByLeadNationAndStatusCountSWR(

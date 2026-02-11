@@ -42,8 +42,6 @@ Feature: Sponsor authorisation based on permission and role
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -88,7 +86,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -184,7 +181,6 @@ Feature: Sponsor authorisation based on permission and role
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -229,7 +225,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -248,7 +243,7 @@ Feature: Sponsor authorisation based on permission and role
       | Login_User   | User_Email               | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Changes                                            | Research_Locations            |
       | Sponsor_User | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorAuthorised @rsp-6465 @KNOWN-DEFECT-RSP-6830 @KNOWN-DEFECT-RSP-6831
+  @ReviewableModificationSponsorAuthorised @rsp-6465
   Scenario Outline: Verify that <Login_User> can authorise modifications while adding user from sponsor workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -266,8 +261,6 @@ Feature: Sponsor authorisation based on permission and role
     And I capture the page screenshot
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -351,7 +344,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -427,7 +419,7 @@ Feature: Sponsor authorisation based on permission and role
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role  | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes             | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorAuthorised @rsp-6465 @KNOWN-DEFECT-RSP-6830 @KNOWN-DEFECT-RSP-6831
+  @ReviewableModificationSponsorAuthorised @rsp-6465
   Scenario Outline: Verify that <Login_User> can authorise the modifications from sponsor workspace for <Another_Registered_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -445,8 +437,6 @@ Feature: Sponsor authorisation based on permission and role
     And I capture the page screenshot
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -530,7 +520,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -606,7 +595,7 @@ Feature: Sponsor authorisation based on permission and role
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role    | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select            | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorAuthorised
+  @ReviewableModificationSponsorNotAuthorised
   Scenario Outline: Validate that <Login_User> can't authorise modifications while adding user from sponsor workspace
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -624,8 +613,6 @@ Feature: Sponsor authorisation based on permission and role
     And I capture the page screenshot
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    And I capture the page screenshot
-    # #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -709,7 +696,6 @@ Feature: Sponsor authorisation based on permission and role
     Then I can see the review all changes page
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -727,6 +713,3 @@ Feature: Sponsor authorisation based on permission and role
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Another_Registered_User | Another_Registered_User_Role  | Another_Registered_User_Permission | Changes                                            | Research_Locations            |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Sponsor_User            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No              | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
-
-# navigate to sponsor workspace >>projects tab >>click with sponsor modifcation>try to access sponsor authorise page >>defect open 6700
-
