@@ -349,7 +349,9 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).click();
     return;
   }
-  await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+  const link = commonItemsPage.govUkLink.getByText(linkValue, { exact: true });
+  await link.waitFor({ state: 'visible' });
+  await link.click();
 });
 
 Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
@@ -2147,6 +2149,7 @@ Then(
 
     const expectedDocDate = `${expectedDocDetails.sponsor_document_day_text} ${monthMap[expectedDocDetails.sponsor_document_month_dropdown]} ${expectedDocDetails.sponsor_document_year_text}`;
     const documentRows = modificationsCommonPage.documentRows;
+    await documentRows.first().waitFor({ state: 'visible' });
     const rowCount = await documentRows.count();
     const actualDocsInTable: string[] = [];
 
