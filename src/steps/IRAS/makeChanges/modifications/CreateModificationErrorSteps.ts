@@ -4,7 +4,7 @@ import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
-Then('I can see the create modification error page', async ({ createModificationErrorPage }) => {
+Then('I am navigated to the create modification error page', async ({ createModificationErrorPage }) => {
   await createModificationErrorPage.assertOnCreateModificationErrorPage();
 });
 

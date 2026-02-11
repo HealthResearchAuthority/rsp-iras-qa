@@ -4,26 +4,29 @@ import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
-Then('I can see the send modification to sponsor error page', async ({ sendModificationToSponsorErrorPage }) => {
-  await sendModificationToSponsorErrorPage.assertOnSendModificationToSponsorErrorPage();
-});
+Then(
+  'I am navigated to the send modification to review body error page',
+  async ({ sendModificationToReviewBodyErrorPage }) => {
+    await sendModificationToReviewBodyErrorPage.assertOnSendModificationToReviewBodyErrorPage();
+  }
+);
 
 Then(
-  'I validate the field values and labels displayed on the send modification to sponsor error page',
-  async ({ projectDetailsIRASPage, sendModificationToSponsorErrorPage }) => {
+  'I validate the field values and labels displayed on the send modification to review body error page',
+  async ({ projectDetailsIRASPage, sendModificationToReviewBodyErrorPage }) => {
     const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
     const shortProjectTitleExpected = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
 
-    const irasIDActual = await sendModificationToSponsorErrorPage.iras_id_text.textContent();
+    const irasIDActual = await sendModificationToReviewBodyErrorPage.iras_id_text.textContent();
     const shortProjectTitleActual = confirmStringNotNull(
-      await sendModificationToSponsorErrorPage.short_project_title_text.textContent()
+      await sendModificationToReviewBodyErrorPage.short_project_title_text.textContent()
     );
     const modificationErrorMessageActual = confirmStringNotNull(
-      await sendModificationToSponsorErrorPage.send_modification_to_sponsor_hint_label.textContent()
+      await sendModificationToReviewBodyErrorPage.send_modification_to_sponsor_hint_label.textContent()
     );
     const modificationErrorMessageExpected = confirmStringNotNull(
-      sendModificationToSponsorErrorPage.sendModificationErrorPageTestData.Label_Texts
-        .send_modification_to_sponsor_hint_label
+      sendModificationToReviewBodyErrorPage.sendModificationToReviewBodyErrorPageTestData.Label_Texts
+        .send_modification_to_reviewbody_hint_label
     );
 
     expect.soft(irasIDActual).toBe(irasIDExpected);

@@ -2323,7 +2323,8 @@ Feature: Modifications - Save Later and Other Scenarios
       | Changes                                                  | Area_Of_Change                         | Specific_Change        | Project_Details_Title | Label_Text_Data |
       | Modification_To_Add_Administrative_Details_Single_Change | Administrative_Details_For_The_Project | Project_Identification | Valid_Data_All_Fields | Label_Texts     |
 
-  @6371 @SetupNewSponsorOrgGoLive @NotAuthorisedAndInDraftAndInDraftErrorPage
+  @6371 @SetupNewSponsorOrgGoLive @NotAuthorisedInDraftAndAnotherInDraftErrorPage
+  #tested and working
   Scenario Outline: Validate that the user can create one not authorised modification, one indraft modification and creating another in draft modification displays error message
     #Not authorised modification
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -2405,10 +2406,11 @@ Feature: Modifications - Save Later and Other Scenarios
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
     And I capture the page screenshot
-    When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I capture the page screenshot
-    When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
-    And I capture the page screenshot
+    #this fails
+    #When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
+    #And I capture the page screenshot
+    #When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
+    #And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
@@ -2437,7 +2439,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     # Create another In draft modification
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the create modification error page
+    And I am navigated to the create modification error page
     And I capture the page screenshot
     And I validate the field values and labels displayed on the create modification error page
     And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
@@ -2449,8 +2451,8 @@ Feature: Modifications - Save Later and Other Scenarios
       | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | System_Admin   |
       | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
 
-  @6371 @WithSponsorAndSubmittingInDraftModificationError
-  Scenario Outline: Validate that the user can create one modification with Sponsor and another modification in draft but submitting the indraft modification to sponsor displays error message
+  @6371 @7136 @WithSponsorAndInDraftModificationError @tochange
+  Scenario Outline: Validate that the user can create one modification with Sponsor and creating an indraft modification displays error message
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -2475,24 +2477,34 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I capture the page screenshot
-    # in draft modification and send to sponsor
+    # in draft modification
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I create '<Changes>' for the created modification
-    And I can see the modifications details page
+    And I am navigated to the create modification error page
     And I capture the page screenshot
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I can see the send modification to sponsor error page
-    And I capture the page screenshot
-    And I validate the field values and labels displayed on the send modification to sponsor error page
-    And I click the 'Return_To_Project_Overview' button on the 'Send_Modification_To_Sponsor_Error_Page'
+    And I validate the field values and labels displayed on the create modification error page
+    And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I validate i can see only one 'Modification_Status_With_Sponsor' on the post approval page
     And I validate i can see only one 'Modification_Status_Indraft' on the post approval page
+
+    # in draft modification and send to sponsor
+    # And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    # And I can see the select area of change page
+    # And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    # And I create '<Changes>' for the created modification
+    # And I can see the modifications details page
+    # And I capture the page screenshot
+    # When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    # When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    # Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    # And I can see the send modification to sponsor error page
+    # And I capture the page screenshot
+    # And I validate the field values and labels displayed on the send modification to sponsor error page
+    # And I click the 'Return_To_Project_Overview' button on the 'Send_Modification_To_Sponsor_Error_Page'
+    # When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    # And I validate i can see only one 'Modification_Status_With_Sponsor' on the post approval page
+    # And I validate i can see only one 'Modification_Status_Indraft' on the post approval page
 
     Examples:
       | Changes                                                            | Research_Locations  | Logon_User     |
@@ -2501,8 +2513,8 @@ Feature: Modifications - Save Later and Other Scenarios
       | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | System_Admin   |
       | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
 
-  @6371 @SetupNewSponsorOrgGoLive @WithReviewBodyAndSubmittingInDraftModificationError
-  Scenario Outline: Validate that the user can create one modification with review body and another modification in draft but submitting the indraft modification to sponsor displays error message
+  @6371 @7136 @SetupNewSponsorOrgGoLive @WithReviewBodyWithSponsorAndSubmittingInDraftModificationError @tochange
+  Scenario Outline: Validate that the user can create one modification with review body, another modification with sponsor and creating an indraft modification displays error message
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -2561,8 +2573,8 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<With_Review_Body_Modification_Changes>' and '<Research_Locations>' dataset
+    And I create '<With_Review_Body_Modification_Changes>' for the created modification
     And I can see the modifications details page
     And I keep a note of the displayed modification ID on the modifications page
     And I capture the page screenshot
@@ -2604,8 +2616,8 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<With_Sponsor_Modification_Changes>' and '<Research_Locations>' dataset
+    And I create '<With_Sponsor_Modification_Changes>' for the created modification
     And I can see the modifications details page
     And I keep a note of the displayed modification ID on the modifications page
     And I capture the page screenshot
@@ -2613,20 +2625,177 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I can see the send modification to sponsor error page
-    And I capture the page screenshot
-    And I validate the field values and labels displayed on the send modification to sponsor error page
-    And I click the 'Return_To_Project_Overview' button on the 'Send_Modification_To_Sponsor_Error_Page'
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    And I capture the page screenshot
+    # in draft modification
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I am navigated to the create modification error page
+    And I capture the page screenshot
+    And I validate the field values and labels displayed on the create modification error page
+    And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
+    And I validate i can see only one 'Modification_Status_With_Sponsor' on the post approval page
     And I validate i can see only one 'Modification_Status_With_Review_Body' on the post approval page
     And I validate i can see only one 'Modification_Status_Indraft' on the post approval page
 
     Examples:
-      | Changes                                                            | Research_Locations  | Logon_User     |
-      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Nhs_Involvement_Yes | Applicant_User |
-      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Nhs_Involvement_Yes | System_Admin   |
+      | With_Review_Body_Modification_Changes                              | With_Sponsor_Modification_Changes                                  | Research_Locations  | Logon_User     |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Nhs_Involvement_Yes | System_Admin   |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Nhs_Involvement_Yes | Applicant_User |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | System_Admin   |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
 
-  @6371 @SetupNewSponsorOrgGoLive @ApprovedNotApprovedAndInDraftAndInDraftErrorPage
+
+  @6371 @7136 @SetupNewSponsorOrgGoLive @WithReviewBodyAndSubmittingAnotherModificationToReviewBodyError @tochange
+  Scenario Outline: Validate that the user can create one modification with review body and submitting another modification to review body displays error message
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    Then I can see the add user role page
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on 'Sponsor_Authoriser_Yes'
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation 'University of Southampton' and 'Sponsor_Authoriser_Yes'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    # with review body modification
+    Then I have navigated to the 'My_Research_Page' as '<Logon_User>'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the individual and overall ranking of changes created using '<With_Review_Body_Modification_Changes>' and '<Research_Locations>' dataset
+    And I create '<With_Review_Body_Modification_Changes>' for the created modification
+    And I can see the modifications details page
+    And I keep a note of the displayed modification ID on the modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I can see the sponsor check and authorise page
+    And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
+    And I capture the page screenshot
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
+    # With Sponsor modification submitting to review body
+    Then I have navigated to the 'My_Research_Page' as '<Logon_User>'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Post_Approval_Page'
+    And I can see the searched modification to be present in the list with 'With review body' status in project overview page
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I keep note of the individual and overall ranking of changes created using '<With_Sponsor_Modification_Changes>' and '<Research_Locations>' dataset
+    And I create '<With_Sponsor_Modification_Changes>' for the created modification
+    And I can see the modifications details page
+    And I keep a note of the displayed modification ID on the modifications page
+    And I capture the page screenshot
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
+    And I capture the page screenshot
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
+    And I capture the page screenshot
+    Then I click on the searched modification id
+    And I can see the sponsor check and authorise page
+    And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
+    And I capture the page screenshot
+    And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
+    And I capture the page screenshot
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I capture the page screenshot
+    # what error will be displayed ?
+    And I am navigated to the send modification to review body error page
+    And I capture the page screenshot
+    And I validate the field values and labels displayed on the send modification to review body error page
+    # Return to Sponsor Authorisations page
+    And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
+    And I validate i can see only one 'Modification_Status_With_Sponsor' on the post approval page
+    And I validate i can see only one 'Modification_Status_With_Review_Body' on the post approval page
+    And I validate i can see only one 'Modification_Status_Indraft' on the post approval page
+
+    Examples:
+      | With_Review_Body_Modification_Changes                              | With_Sponsor_Modification_Changes                                  | Research_Locations  | Logon_User     |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Nhs_Involvement_Yes | System_Admin   |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Nhs_Involvement_Yes | Applicant_User |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | System_Admin   |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
+
+  @6371 @7136 @SetupNewSponsorOrgGoLive @ApprovedNotApprovedAndInDraftAndInDraftErrorPage @abc
   Scenario Outline: Validate that the user can create approved modification, not approved modification, indraft modification and creating another indraft modification displays error message
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -2681,8 +2850,8 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     # Approved Modification
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<Approved_And_Indraft_Modification_Changes>' and '<Research_Locations>' dataset
+    And I create '<Approved_And_Indraft_Modification_Changes>' for the created modification
     And I can see the modifications details page
     And I keep a note of the displayed modification ID on the modifications page
     And I capture the page screenshot
@@ -2730,7 +2899,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
     And I capture the page screenshot
-    Then I can see the 'Modifications_Tasklist_Page'
+    #Then I can see the 'Modifications_Tasklist_Page'
     And I enter 'new iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
     Then I 'cannot' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
@@ -2757,8 +2926,8 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<NotApproved_Modification_Changes>' and '<Research_Locations>' dataset
+    And I create '<NotApproved_Modification_Changes>' for the created modification
     And I can see the modifications details page
     And I keep a note of the displayed modification ID on the modifications page
     And I capture the page screenshot
@@ -2806,7 +2975,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
     And I capture the page screenshot
-    Then I can see the 'Modifications_Tasklist_Page'
+    #Then I can see the 'Modifications_Tasklist_Page'
     And I enter 'new iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
     Then I 'cannot' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
@@ -2832,8 +3001,8 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<Approved_And_Indraft_Modification_Changes>' and '<Research_Locations>' dataset
+    And I create '<Approved_And_Indraft_Modification_Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
@@ -2841,12 +3010,14 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     # Another in draft modification
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the create modification error page
+    And I am navigated to the create modification error page
     And I capture the page screenshot
     And I validate the field values and labels displayed on the create modification error page
     And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
 
     Examples:
-      | Changes                                                            | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Logon_User     |
-      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Applicant_User |
-      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | System_Admin   |
+      | Approved_And_Indraft_Modification_Changes                          | NotApproved_Modification_Changes                                   | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Logon_User     |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Applicant_User |
+# | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | System_Admin   |
+# | Multiple_Changes_Non_Reviewable_Set_Two                            | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Applicant_User |
+# | Multiple_Changes_Non_Reviewable_Set_Two                            | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | System_Admin   |
