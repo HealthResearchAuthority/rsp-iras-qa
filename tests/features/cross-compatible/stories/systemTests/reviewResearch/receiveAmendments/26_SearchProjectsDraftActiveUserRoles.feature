@@ -104,7 +104,7 @@ Feature: Display project records on the Search Projects page status and roles
                         | Team_Manager         |
                         | Workflow_Coordinator |
 
-        @DraftStatusProjectSWRWFCTeamManager @KNOWN-DEFECT-RSP-6500
+        @DraftStatusProjectSWRWFCTeamManager @PreProdIssue
         Scenario Outline: Verify that In draft project records are not displayed on the Search Projects page for TM, WFC, and SWR
                 Given I have navigated to the 'My_Research_Page' as 'Applicant_User'
                 And I can see the my research projects page

@@ -1,4 +1,4 @@
-@ApplicantUser @ModificationsOtherScenarios @SystemTest
+@ApplicantUser @ModificationsOtherScenarios @SystemTest @SystemTestFrontStage
 Feature: Modifications - Save Later and Other Scenarios
 
   Background:

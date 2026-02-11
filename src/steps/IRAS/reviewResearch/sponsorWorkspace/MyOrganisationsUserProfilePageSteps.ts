@@ -79,3 +79,16 @@ Then(
       .toBeVisible();
   }
 );
+
+Then(
+  'I can see a {string} section on my organisation user profile page',
+  async ({ myOrganisationsUserProfilePage }, status: string) => {
+    if (status.toLowerCase() == 'disable_user') {
+      await expect.soft(myOrganisationsUserProfilePage.disabled_section_header).toBeVisible();
+      await expect.soft(myOrganisationsUserProfilePage.disabled_section_guidance_text).toBeVisible();
+    } else {
+      await expect.soft(myOrganisationsUserProfilePage.enabled_section_header).toBeVisible();
+      await expect.soft(myOrganisationsUserProfilePage.enabled_section_guidance_text).toBeVisible();
+    }
+  }
+);

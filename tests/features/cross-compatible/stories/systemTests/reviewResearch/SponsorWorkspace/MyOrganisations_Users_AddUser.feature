@@ -23,7 +23,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
 
-  @rsp-6461 @MyOrganisationsAddUserPage @BackBreadCrumbs @KNOWN-DEFECT-RSP-6723
+  @rsp-6461 @MyOrganisationsAddUserPage @BackBreadCrumbs
   Scenario Outline: Validate that <Login_User> is able to navigate to add users page for the selected sponsor organisation
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -43,7 +43,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -67,7 +67,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     And I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
     Then I can see tabs are displayed based on the logged in user role '<Login_User>'
-    And the users tab is underlined
+    And the 'Users' tab is active and underlined
     And the add a user section is '<Add_A_User_Section_Visibility>' based on the logged in user role
     Then I click the 'Add_User' button on the 'My_Organisations_Users_Page'
     And I capture the page screenshot
@@ -78,10 +78,9 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
 
     Examples:
       | Login_User             | User_Email              | Link   | Add_A_User_Section_Visibility | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
-      # | System_Admin           | system admin email      | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email | Manage | visible                       | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-  @rsp-6461 @ErrorValidation @KNOWN-DEFECT-RSP-6651 @KNOWN-DEFECT-RSP-6723
+  @rsp-6461 @ErrorValidation
   Scenario Outline: Validate error when attempting to add non registered users to sponsor organisation by <Login_User>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -101,7 +100,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -162,10 +161,9 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
-  @rsp-6465 @AddUserRolePermission @KNOWN-DEFECT-RSP-6723
+  @rsp-6465 @AddUserRolePermission
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> from sponsor workspace and add a user with <Select_User_Role> and <Select_User_Permission>
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
@@ -185,7 +183,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -227,9 +225,25 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Then I can see the 'user added' successful message on users tab in the sponsor organisation profile for the selected sponsor organisation
     And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Another_Registered_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+    And I capture the page screenshot
+    Then I can see the my organisations page
+    And I can see the 'My_Organisations_Table' ui labels on the my organisations page
+    And I can now see a table of results for my organisations
+    When I enter '<Sponsor_Organisation>' into the search field
+    Then I click the 'Search' button on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    And I click the '<Link>' link on the 'My_Organisations_Page'
+    And I capture the page screenshot
+    And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
+    And I capture the page screenshot
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @AddUserRolePermissionCancel
@@ -252,7 +266,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -296,7 +310,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @BackBreadCrumbs
@@ -319,7 +332,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -352,7 +365,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
 
@@ -376,7 +388,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -414,7 +426,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I can see the add user role page
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @BackBreadCrumbs
@@ -437,7 +448,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -480,7 +491,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I can see the add user permission page based on '<Select_User_Permission>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @ErrorValidation @NoUserRoleSelectedError
@@ -503,7 +513,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -537,7 +547,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I validate '<Summary_Error_Message>' displayed when no role selected in 'Add_User_Role_Sponsor_Org_Page'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message                    | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error                | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | No_Role_Selected_Sponsor_Workspace_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @ChangeLinkEmailAddress
@@ -560,7 +569,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -603,7 +612,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  | Email_Address |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Email      |
 
   @rsp-6465 @ChangeLinkRole
@@ -626,7 +634,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -669,7 +677,6 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     Then I can see the add user role page
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  | Email_Address |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Role       |
 
   @rsp-6465 @ChangeLinkAuthoriser
@@ -692,7 +699,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation '<Sponsor_Organisation>' and '<Select_User_Permission>'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
@@ -735,5 +742,4 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I can see the add user permission page based on '<Select_User_Permission>'
     Examples:
       | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      # | System_Admin           | system admin email      | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Double_Dot                             | User_Exists_Message        | Sponsor_Org_Admin_User  | Email_Address |
       | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Authoriser |

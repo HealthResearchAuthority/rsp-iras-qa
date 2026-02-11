@@ -1,7 +1,7 @@
 @SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
-  @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation @KNOWN_DEFECT_RSP-6628
+  @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation
   Scenario: Validate that <Login_User> able to navigate to 'My Organisations' page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -33,7 +33,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -57,10 +57,9 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
-      # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
-  @rsp-6418 @rsp-6419 @MyOrganisationsPageNavigationValidation @KNOWN_DEFECT_RSP-6628
+  @rsp-6418 @rsp-6419 @MyOrganisationsPageNavigationValidation
   Scenario: Validate that the user with role <Login_User> able to navigate to 'My Organisations' page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -92,7 +91,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -149,7 +147,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -174,7 +171,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     Examples:
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Invalid_Input | Empty_Input |
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | invalid       |             |
-      # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | invalid       |             |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | invalid       |             |
 
   @rsp-6419 @MyOrganisationsPageSearchMoreValidation
@@ -209,7 +205,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -267,7 +262,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -308,7 +302,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
-      # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6420 @MyOrganisationsProfilePageBreadcrumbValidation
@@ -343,7 +336,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -419,7 +411,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -446,7 +437,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | RTS_API_Data         | RTS_Request                         |
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-      # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
   @rsp-6420 @MyOrganisationsProfileTabValidation @RTS @skip
@@ -483,7 +473,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -543,7 +532,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -575,7 +563,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Validation_Text_Research |
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Label_Texts              |
-      # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Label_Texts              |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Label_Texts              |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
@@ -610,7 +597,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -673,7 +659,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -727,7 +712,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     Examples:
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Empty_Input |
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |             |
-      # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |             |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |             |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
@@ -761,7 +745,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -849,7 +832,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -879,7 +861,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     Examples:
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Advanced_Filters                               | Search_Queries              |
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Advanced_Filter_Project_Created_From_Date_Only | Existing_Iras_Id_Data_Three |
-      # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Advanced_Filter_Project_Created_To_Date_Before_From_Date | Existing_Iras_Id_Data       |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Advanced_Filter_Project_Created_From_Date_Only | Existing_Iras_Id_Data_Three |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
@@ -913,7 +894,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -978,7 +958,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
@@ -1011,8 +990,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I capture the page screenshot
     Examples:
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Navigation_Method1 | Navigation_Method2 |
-      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | page number        | page number        |
-      # | System_Admin           | system admin email       | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | page number        | previous link      |
+      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | page number        | previous link      |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | page number        | next link          |
 
   @rsp-6421 @MyOrganisationsProjectsTabValidation
@@ -1046,7 +1024,6 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'

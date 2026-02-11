@@ -108,7 +108,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20260122162639311hscrd@health.org",
+    "email_address_unique": "QAAutomation20260210115909623hscrd@health.org",
     "Role_TM_SWR_WFC": {
       "role_checkbox": [
         "Study-wide reviewer",
@@ -674,6 +674,16 @@
         "Northern Ireland",
         "Scotland",
         "Wales"
+      ]
+    },
+    "Sponsor_Org_Admin_User": {
+      "role_checkbox": [
+        "Organisation administrator"
+      ]
+    },
+    "Sponsor_User": {
+      "role_checkbox": [
+        "Sponsor"
       ]
     },
     "Valid_Data_All_Roles": {

@@ -232,7 +232,7 @@ Feature: User Administration: Create and edit manage users
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         And I can see the users audit history with the 'Disable_User' event as the most recent entry
         And I capture the page screenshot
-        And I click the 'Back' link on the 'Audit_History_User_Page'
+        And I click the 'User_Profile_Breadcrumb' link on the 'User_Profile_Audit_History_Page'
         And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
         Then I validate 'Enable_User_Profile_Labels' labels displayed in enable user profile confirmation page using the '<Add_User_Profile>' details
         And I capture the page screenshot
@@ -356,7 +356,7 @@ Feature: User Administration: Create and edit manage users
         Then I can see the audit history page of the user profile
         And I capture the page screenshot
         And I can see the users audit history with the '<Audit_History>' event as the most recent entry
-        When I click the 'Back' link on the 'Audit_History_User_Page'
+        When I click the 'User_Profile_Breadcrumb' link on the 'User_Profile_Audit_History_Page'
         And I click the change link against '<Field_Name>' on the user profile page
         Then I can see the edit user profile page
         And I capture the page screenshot
@@ -436,7 +436,7 @@ Feature: User Administration: Create and edit manage users
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         Then I can see the audit history page of the user profile
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Audit_History_User_Page'
+        When I click the 'User_Profile_Breadcrumb' link on the 'User_Profile_Audit_History_Page'
         Then I can see the user profile page
         And I capture the page screenshot
         When I click the change link against 'Title' on the user profile page

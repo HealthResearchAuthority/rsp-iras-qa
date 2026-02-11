@@ -25,7 +25,7 @@ export default class ConfirmationPage {
       .or(this.page.getByRole('heading', { level: 1 }));
     this.confirmation_header_label = this.mainPageContent
       .getByRole('heading', {
-        name: confirmationPageTestData.add_remove_user_review_Body_confirmation_success_header_label,
+        name: confirmationPageTestData.add_remove_user_review_body_confirmation_success_header_label,
       })
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_disable_confirmation_header_label }))
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.disable_success_confirmation_header_label }))
@@ -45,7 +45,7 @@ export default class ConfirmationPage {
       name: confirmationPageTestData.Project_Record_Created_Labels.page_heading,
     });
     this.success_message_body_text = this.mainPageContent.locator('.govuk-panel__body');
-    this.confirmation_body_label = this.mainPageContent.locator('.govuk-grid-column-two-thirds p').nth(1);
+    this.confirmation_body_label = this.mainPageContent.locator('.govuk-grid-column-two-thirds p'); //adding .n(0) breaking all the create modification/sponsor authorised/not authorised scripts
     this.what_happens_next_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
     });

@@ -71,9 +71,9 @@ Then(
   'I can see the users audit history with the {string} event as the most recent entry',
   async ({ auditHistoryUserPage, commonItemsPage, userProfilePage }, datasetName: string) => {
     const dataset = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page[datasetName];
-    const auditLog = await commonItemsPage.getAuditLog();
+    const auditLog = await commonItemsPage.getMostRecentAuditLogEntry();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
-    const adminEmailExpected =
+    let adminEmailExpected =
       auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page.system_admin_email_text;
     let methodType: string = '';
     let eventDescriptionExpectedValue: string;
@@ -104,6 +104,15 @@ Then(
         (await userProfilePage[`get${methodType}`]()).join(', '),
         (await userProfilePage[`getNew${methodType}`]()).join(', ')
       );
+    } else if (datasetName == 'Assign_User' || datasetName == 'Unassign_User') {
+      const usersEmail = await userProfilePage.getEmail();
+      const usersRole = await userProfilePage.getRole();
+      eventDescriptionExpectedValue =
+        usersEmail +
+        dataset.event_description_prefix_text +
+        usersRole.toString().toLowerCase() +
+        dataset.event_description_suffix_text;
+      adminEmailExpected = await commonItemsPage.getAdminEmail();
     } else {
       eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
         dataset.event_description_text,
@@ -111,9 +120,9 @@ Then(
         await userProfilePage[`getNew${methodType}`]()
       );
     }
-    expect(confirmArrayNotNull(auditLog.get('timeValues'))[0]).toBe(timeExpected);
-    expect(confirmArrayNotNull(auditLog.get('eventValues'))[0]).toBe(eventDescriptionExpectedValue);
-    expect(confirmArrayNotNull(auditLog.get('adminEmailValues'))[0]).toBe(adminEmailExpected);
+    expect(confirmStringNotNull(auditLog.get('timeValue'))).toBe(timeExpected);
+    expect(confirmStringNotNull(auditLog.get('eventValue'))).toBe(eventDescriptionExpectedValue);
+    expect(confirmStringNotNull(auditLog.get('adminEmailValue'))).toBe(adminEmailExpected);
   }
 );
 

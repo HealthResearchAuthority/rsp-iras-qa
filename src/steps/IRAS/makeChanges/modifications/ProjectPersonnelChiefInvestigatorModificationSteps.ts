@@ -16,7 +16,11 @@ Then(
       await commonItemsPage.fillUIComponent(dataset, radioKey, projectPersonnelChangeChiefInvestigatorPage);
       await commonItemsPage.clickButton('Modifications_Page', clickAction);
     }
-    const ExpectedKeys = ['chief_investigator_email_text', 'first_name_text', 'last_name_text'];
+    const ExpectedKeys = [
+      'new_chief_investigator_email_text',
+      'new_chief_investigator_first_name_text',
+      'new_chief_investigator_last_name_text',
+    ];
     for (const key of ExpectedKeys) {
       if (dataset[key]) {
         await commonItemsPage.fillUIComponent(dataset, key, projectPersonnelChangeChiefInvestigatorPage);
@@ -119,7 +123,7 @@ Then(
             await expect.soft(modificationReviewChangesPage.select_details_to_change_value).toHaveText(dataset[key]);
             break;
           }
-          case 'chief_investigator_email_text': {
+          case 'new_chief_investigator_email_text': {
             await expect
               .soft(
                 modificationReviewChangesPage.chief_investigator_email_value.getByText(dataset[key], { exact: true })

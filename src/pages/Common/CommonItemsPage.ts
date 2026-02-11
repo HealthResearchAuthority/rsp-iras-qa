@@ -52,6 +52,7 @@ export default class CommonItemsPage {
   private _last_name: string;
   private _email_address: string;
   private _disabled_User: string;
+  private _admin_email_address: string;
   private _status: string;
   private _user_full_name: Map<string, string>;
   readonly showAllSectionsAccordion: Locator;
@@ -208,6 +209,7 @@ export default class CommonItemsPage {
     this._last_name = '';
     this._email_address = '';
     this._disabled_User = '';
+    this._admin_email_address = '';
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -647,6 +649,14 @@ export default class CommonItemsPage {
     this._disabled_User = value;
   }
 
+  async getAdminEmail(): Promise<string> {
+    return this._admin_email_address;
+  }
+
+  async setAdminEmail(value: string): Promise<void> {
+    this._admin_email_address = value;
+  }
+
   //Page Methods
   async storeAuthState(user: string) {
     const userPath = confirmStringNotNull(user.toLowerCase());
@@ -1012,6 +1022,20 @@ export default class CommonItemsPage {
     ]);
     return auditMap;
   }
+
+  async getMostRecentAuditLogEntry(): Promise<Map<string, string>> {
+    const columns = this.tableRows.nth(1).getByRole('cell');
+    const timeValue = confirmStringNotNull(await columns.nth(0).textContent());
+    const eventValue = confirmStringNotNull(await columns.nth(1).textContent());
+    const adminEmailValue = confirmStringNotNull(await columns.nth(2).textContent());
+    const auditMap = new Map([
+      ['timeValue', timeValue],
+      ['eventValue', eventValue],
+      ['adminEmailValue', adminEmailValue],
+    ]);
+    return auditMap;
+  }
+
   async getSummaryErrorMessages() {
     const summaryErrorActualValues = (await this.summaryErrorLinks.allTextContents()).map((x) => x.trim());
     return summaryErrorActualValues;
@@ -1468,8 +1492,7 @@ export default class CommonItemsPage {
     return (
       (fromDateValue && !toDateValue && key.endsWith('_from_day_text')) ||
       (!fromDateValue && toDateValue && key.endsWith('_to_day_text')) ||
-      (fromDateValue && toDateValue && key.endsWith('_from_day_text')) ||
-      (fromDateValue && toDateValue && key.endsWith('_to_day_text'))
+      (fromDateValue && toDateValue && key.endsWith('_from_day_text'))
     );
   }
 
@@ -1585,10 +1608,10 @@ export default class CommonItemsPage {
     const firstPage = 1;
     const lastPage = totalPages;
     const assertVisiblePages = (expectedPages: number[]) => {
-      expect(visiblePages).toEqual(expectedPages);
+      expect.soft(visiblePages).toEqual(expectedPages);
     };
     const assertAllVisibleItems = (expectedItems: string[]) => {
-      expect(allVisibleItems).toEqual(expectedItems);
+      expect.soft(allVisibleItems).toEqual(expectedItems);
     };
     const buildExpected = (pages: number[], items: (number | string)[]) => {
       assertVisiblePages(pages);
@@ -1596,7 +1619,7 @@ export default class CommonItemsPage {
     };
     if (totalPages <= 7) {
       buildExpected(visiblePages, allVisibleItems);
-      expect(ellipsisIndices.length).toBe(0);
+      expect.soft(ellipsisIndices.length).toBe(0);
     } else if (currentPage <= 3) {
       const base = [firstPage];
       switch (currentPage) {
@@ -1636,11 +1659,11 @@ export default class CommonItemsPage {
       );
     }
     // Common assertions
-    expect(visiblePages).toContain(currentPage);
-    if (currentPage > 1) expect(visiblePages).toContain(currentPage - 1);
-    if (currentPage < totalPages) expect(visiblePages).toContain(currentPage + 1);
-    expect(visiblePages).toContain(firstPage);
-    expect(visiblePages).toContain(lastPage);
+    expect.soft(visiblePages).toContain(currentPage);
+    if (currentPage > 1) expect.soft(visiblePages).toContain(currentPage - 1);
+    if (currentPage < totalPages) expect.soft(visiblePages).toContain(currentPage + 1);
+    expect.soft(visiblePages).toContain(firstPage);
+    expect.soft(visiblePages).toContain(lastPage);
     // Navigation
     if (navigateMethod === 'next link') {
       await this.clickOnNextLink();
