@@ -869,6 +869,9 @@ When(
       case 'automation sponsor email':
         searchValue = loginPage.loginPageTestData.Sponsor_User.username;
         break;
+      case 'automation sponsor without authoriser email':
+        searchValue = loginPage.loginPageTestData.Sponsor_User_Not_Auth.username;
+        break;
       case 'system admin email':
         searchValue = loginPage.loginPageTestData.System_Admin.username;
         break;

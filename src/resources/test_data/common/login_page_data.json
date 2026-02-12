@@ -84,10 +84,16 @@
     "authPath": "workflow_coordinator_w"
   },
   "Sponsor_User": {
-    "username": "futureiras.sponsor@hra.nhs.uk",
+    "username": "FutureIRAS.automation.SponsorOrgAdminT@hra.nhs.uk",
     "password": "`${process.env.SPONSOR_USER_PASS}`",
     "mfa": "`${process.env.SPONSOR_USER_MFA_KEY}`",
     "authPath": "sponsor_user"
+  },
+  "Sponsor_User_Not_Auth": {
+    "username": "FutureIRAS.SponsorAuthNo@hra.nhs.uk",
+    "password": "`${process.env.SPONSOR_USER_NOT_AUTHORISER_PASS}`",
+    "mfa": "`${process.env.SPONSOR_USER_NOT_AUTHORISER_MFA_KEY}`",
+    "authPath": "sponsor_user_not_auth"
   },
   "Sponsor_Org_Admin_User": {
     "username": "futureiras.automation.sponsororgadmin@hra.nhs.uk",

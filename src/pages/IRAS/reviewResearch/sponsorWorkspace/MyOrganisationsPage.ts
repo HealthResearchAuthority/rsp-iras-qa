@@ -37,7 +37,8 @@ export default class MyOrganisationsPage {
       .getByText(this.linkTextData.My_Organisations_Page.Manage);
     this.orgName_Locator = this.organisations_table.locator('tbody tr td:nth-child(1)');
     this.country_Locator = this.organisations_table.locator('tbody tr td:nth-child(2)');
-    this.action_Locator = this.organisations_table.locator('tbody tr td:nth-child(3)');
+    // this.action_Locator = this.organisations_table.locator('tbody tr td:nth-child(3)');
+    this.action_Locator = this.organisations_table.locator('tbody tr:nth(0) td:nth-child(3)');
   }
 
   //Page Methods
