@@ -6,16 +6,19 @@
     "outcomeHeading": "Outcome",
     "outcomeBody": "When you've finished checking the modification, select an outcome. Selecting 'Authorise' will authorise and submit the modification. If you need to make changes to the modification before authorising you can either do this yourself by selecting 'Revise and authorise', or you can 'Request revisions' from the researcher. If you select 'Not authorised' the researcher will need to prepare a new modification if changes are still required."
   },
-
   "Summary_Only_Error_Select_Outcome": {
     "summaryErrorMessage": "Select an outcome"
   },
-
   "Sponsor_Authorised": {
     "outcome_selection_radio": "Authorised"
   },
-
   "Sponsor_Not_Authorised": {
     "outcome_selection_radio": "Not authorised"
+  },
+  "Sponsor_Revise_And_Authorise": {
+    "outcome_selection_radio": "Revise and authorise"
+  },
+  "Sponsor_Request_Revisions": {
+    "outcome_selection_radio": "Request revisions"
   }
 }

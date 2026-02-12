@@ -151,6 +151,7 @@ export default class ManageSponsorOrganisationsPage {
   async findSponsorOrg(commonItemsPage: CommonItemsPage, sponsorOrgName: string, sponsorOrgStatus?: string) {
     let hasNextPage = true;
     while (hasNextPage) {
+      await this.listRows.first().waitFor({ state: 'visible' });
       const rows = await this.listRows.all();
       for (const row of rows) {
         const match = await this.isMatchingRow(commonItemsPage, row, sponsorOrgName, sponsorOrgStatus);

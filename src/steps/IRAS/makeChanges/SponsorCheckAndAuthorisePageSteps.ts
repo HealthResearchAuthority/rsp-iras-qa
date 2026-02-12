@@ -163,3 +163,44 @@ Then(
     }
   }
 );
+
+Then(
+  'I validate the sponsor outcome options displayed in sponsor check and authorise page',
+  async ({ sponsorCheckAndAuthorisePage }) => {
+    await expect
+      .soft(
+        sponsorCheckAndAuthorisePage.outcomeFieldset.getByText(
+          sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData.Sponsor_Authorised.outcome_selection_radio,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        sponsorCheckAndAuthorisePage.outcomeFieldset.getByText(
+          sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData.Sponsor_Not_Authorised
+            .outcome_selection_radio,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        sponsorCheckAndAuthorisePage.outcomeFieldset.getByText(
+          sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData.Sponsor_Revise_And_Authorise
+            .outcome_selection_radio,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        sponsorCheckAndAuthorisePage.outcomeFieldset.getByText(
+          sponsorCheckAndAuthorisePage.sponsorCheckAndAuthorisePageTestData.Sponsor_Request_Revisions
+            .outcome_selection_radio,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+  }
+);
