@@ -2439,7 +2439,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     # Create another In draft modification
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I am navigated to the create modification error page
+    And I am navigated to the cannot create modification error page
     And I capture the page screenshot
     And I validate the field values and labels displayed on the create modification error page
     And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
@@ -2451,7 +2451,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | System_Admin   |
       | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
 
-  @6371 @7136 @WithSponsorAndInDraftModificationError @tochange
+  @6371 @7136 @WithSponsorAndInDraftModificationError
   Scenario Outline: Validate that the user can create one modification with Sponsor and creating an indraft modification displays error message
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2479,7 +2479,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     # in draft modification
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I am navigated to the create modification error page
+    And I am navigated to the cannot create modification error page
     And I capture the page screenshot
     And I validate the field values and labels displayed on the create modification error page
     And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
@@ -2513,7 +2513,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | System_Admin   |
       | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
 
-  @6371 @7136 @SetupNewSponsorOrgGoLive @WithReviewBodyWithSponsorAndSubmittingInDraftModificationError @tochange
+  @6371 @7136 @SetupNewSponsorOrgGoLive @WithReviewBodyWithSponsorAndCreatingInDraftModificationError
   Scenario Outline: Validate that the user can create one modification with review body, another modification with sponsor and creating an indraft modification displays error message
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -2604,7 +2604,6 @@ Feature: Modifications - Save Later and Other Scenarios
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
-    # In draft modification submitting to sponsor
     Then I have navigated to the 'My_Research_Page' as '<Logon_User>'
     When I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -2614,8 +2613,9 @@ Feature: Modifications - Save Later and Other Scenarios
     And I click the 'Search' button on the 'Post_Approval_Page'
     And I can see the searched modification to be present in the list with 'With review body' status in project overview page
     And I capture the page screenshot
+    # In draft modification submitting to sponsor
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
+    #And I can see the select area of change page
     And I keep note of the individual and overall ranking of changes created using '<With_Sponsor_Modification_Changes>' and '<Research_Locations>' dataset
     And I create '<With_Sponsor_Modification_Changes>' for the created modification
     And I can see the modifications details page
@@ -2627,11 +2627,14 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    #this is new
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'Post_Approval_Page'
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I capture the page screenshot
     # in draft modification
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I am navigated to the create modification error page
+    And I am navigated to the cannot create modification error page
     And I capture the page screenshot
     And I validate the field values and labels displayed on the create modification error page
     And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
@@ -2795,7 +2798,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | System_Admin   |
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
 
-  @6371 @7136 @SetupNewSponsorOrgGoLive @ApprovedNotApprovedAndInDraftAndInDraftErrorPage @abc
+  @6371 @SetupNewSponsorOrgGoLive @ApprovedNotApprovedAndInDraftAndInDraftErrorPage
   Scenario Outline: Validate that the user can create approved modification, not approved modification, indraft modification and creating another indraft modification displays error message
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -2850,8 +2853,8 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     # Approved Modification
-    And I keep note of the individual and overall ranking of changes created using '<Approved_And_Indraft_Modification_Changes>' and '<Research_Locations>' dataset
-    And I create '<Approved_And_Indraft_Modification_Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I keep a note of the displayed modification ID on the modifications page
     And I capture the page screenshot
@@ -2899,7 +2902,6 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
     And I capture the page screenshot
-    #Then I can see the 'Modifications_Tasklist_Page'
     And I enter 'new iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
     Then I 'cannot' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
@@ -2926,8 +2928,8 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the individual and overall ranking of changes created using '<NotApproved_Modification_Changes>' and '<Research_Locations>' dataset
-    And I create '<NotApproved_Modification_Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I keep a note of the displayed modification ID on the modifications page
     And I capture the page screenshot
@@ -2975,7 +2977,6 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
     And I capture the page screenshot
-    #Then I can see the 'Modifications_Tasklist_Page'
     And I enter 'new iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
     Then I 'cannot' see the modification displayed in the 'Modifications_Tasklist_Page' list with 'Modification_Status_Received' status
@@ -3001,8 +3002,8 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I keep note of the individual and overall ranking of changes created using '<Approved_And_Indraft_Modification_Changes>' and '<Research_Locations>' dataset
-    And I create '<Approved_And_Indraft_Modification_Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
+    And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
@@ -3016,8 +3017,6 @@ Feature: Modifications - Save Later and Other Scenarios
     And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
 
     Examples:
-      | Approved_And_Indraft_Modification_Changes                          | NotApproved_Modification_Changes                                   | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Logon_User     |
-      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Applicant_User |
-# | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | System_Admin   |
-# | Multiple_Changes_Non_Reviewable_Set_Two                            | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Applicant_User |
-# | Multiple_Changes_Non_Reviewable_Set_Two                            | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | System_Admin   |
+      | Changes                                                            | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Logon_User     |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Applicant_User |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | System_Admin   |
