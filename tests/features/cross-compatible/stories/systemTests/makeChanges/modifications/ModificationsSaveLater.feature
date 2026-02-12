@@ -2324,7 +2324,6 @@ Feature: Modifications - Save Later and Other Scenarios
       | Modification_To_Add_Administrative_Details_Single_Change | Administrative_Details_For_The_Project | Project_Identification | Valid_Data_All_Fields | Label_Texts     |
 
   @6371 @SetupNewSponsorOrgGoLive @NotAuthorisedInDraftAndAnotherInDraftErrorPage
-  #tested and working
   Scenario Outline: Validate that the user can create one not authorised modification, one indraft modification and creating another in draft modification displays error message
     #Not authorised modification
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -2406,11 +2405,6 @@ Feature: Modifications - Save Later and Other Scenarios
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
     And I capture the page screenshot
-    #this fails
-    #When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
-    #And I capture the page screenshot
-    #When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
-    #And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
@@ -2486,25 +2480,6 @@ Feature: Modifications - Save Later and Other Scenarios
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I validate i can see only one 'Modification_Status_With_Sponsor' on the post approval page
     And I validate i can see only one 'Modification_Status_Indraft' on the post approval page
-
-    # in draft modification and send to sponsor
-    # And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    # And I can see the select area of change page
-    # And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    # And I create '<Changes>' for the created modification
-    # And I can see the modifications details page
-    # And I capture the page screenshot
-    # When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    # When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    # Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    # And I can see the send modification to sponsor error page
-    # And I capture the page screenshot
-    # And I validate the field values and labels displayed on the send modification to sponsor error page
-    # And I click the 'Return_To_Project_Overview' button on the 'Send_Modification_To_Sponsor_Error_Page'
-    # When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    # And I validate i can see only one 'Modification_Status_With_Sponsor' on the post approval page
-    # And I validate i can see only one 'Modification_Status_Indraft' on the post approval page
 
     Examples:
       | Changes                                                            | Research_Locations  | Logon_User     |
@@ -2615,7 +2590,6 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     # In draft modification submitting to sponsor
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    #And I can see the select area of change page
     And I keep note of the individual and overall ranking of changes created using '<With_Sponsor_Modification_Changes>' and '<Research_Locations>' dataset
     And I create '<With_Sponsor_Modification_Changes>' for the created modification
     And I can see the modifications details page
@@ -2627,7 +2601,6 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    #this is new
     When I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Post_Approval_Page'
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
@@ -2650,7 +2623,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
 
 
-  @6371 @7136 @SetupNewSponsorOrgGoLive @WithReviewBodyAndSubmittingAnotherModificationToReviewBodyError @tochange
+  @6371 @7136 @SetupNewSponsorOrgGoLive @WithReviewBodyAndSubmittingAnotherModificationToReviewBodyError
   Scenario Outline: Validate that the user can create one modification with review body and submitting another modification to review body displays error message
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -2741,7 +2714,6 @@ Feature: Modifications - Save Later and Other Scenarios
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With review body' status in the sponsor authorisations page
-    # With Sponsor modification submitting to review body
     Then I have navigated to the 'My_Research_Page' as '<Logon_User>'
     When I enter 'iras id' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -2751,6 +2723,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I click the 'Search' button on the 'Post_Approval_Page'
     And I can see the searched modification to be present in the list with 'With review body' status in project overview page
     And I capture the page screenshot
+    # With Sponsor modification submitting to review body
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I keep note of the individual and overall ranking of changes created using '<With_Sponsor_Modification_Changes>' and '<Research_Locations>' dataset
@@ -2781,15 +2754,16 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
     And I capture the page screenshot
-    # what error will be displayed ?
     And I am navigated to the send modification to review body error page
     And I capture the page screenshot
     And I validate the field values and labels displayed on the send modification to review body error page
-    # Return to Sponsor Authorisations page
-    And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
-    And I validate i can see only one 'Modification_Status_With_Sponsor' on the post approval page
-    And I validate i can see only one 'Modification_Status_With_Review_Body' on the post approval page
-    And I validate i can see only one 'Modification_Status_Indraft' on the post approval page
+    And I capture the page screenshot
+    And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
+    And I capture the page screenshot
 
     Examples:
       | With_Review_Body_Modification_Changes                              | With_Sponsor_Modification_Changes                                  | Research_Locations  | Logon_User     |
@@ -3011,7 +2985,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     # Another in draft modification
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I am navigated to the create modification error page
+    And I am navigated to the cannot create modification error page
     And I capture the page screenshot
     And I validate the field values and labels displayed on the create modification error page
     And I click the 'Return_To_Project_Overview' button on the 'Create_Modification_Error_Page'
