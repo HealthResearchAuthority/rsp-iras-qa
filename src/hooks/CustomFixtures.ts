@@ -113,6 +113,8 @@ import MyOrganisationsUserProfilePage from '../pages/IRAS/reviewResearch/sponsor
 import MyOrganisationsEditUserProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsEditUserProfilePage';
 import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
 import CheckAuthoriseProjectClosurePage from '../pages/IRAS/makeChanges/CheckAuthoriseProjectClosurePage';
+import CreateModificationErrorPage from '../pages/IRAS/makeChanges/modifications/CreateModificationErrorPage';
+import SendModificationToReviewBodyErrorPage from '../pages/IRAS/makeChanges/modifications/SendModificationToReviewBodyErrorPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -226,6 +228,8 @@ type CustomFixtures = {
   myOrganisationsEditUserProfilePage: MyOrganisationsEditUserProfilePage;
   closeProjectPage: CloseProjectPage;
   checkAuthoriseProjectClosurePage: CheckAuthoriseProjectClosurePage;
+  createModificationErrorPage: CreateModificationErrorPage;
+  sendModificationToReviewBodyErrorPage: SendModificationToReviewBodyErrorPage;
 
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -661,6 +665,14 @@ export const test = base.extend<CustomFixtures>({
 
   myOrganisationsEditUserProfilePage: async ({ page }, use) => {
     await use(new MyOrganisationsEditUserProfilePage(page));
+  },
+
+  createModificationErrorPage: async ({ page }, use) => {
+    await use(new CreateModificationErrorPage(page));
+  },
+
+  sendModificationToReviewBodyErrorPage: async ({ page }, use) => {
+    await use(new SendModificationToReviewBodyErrorPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
