@@ -350,7 +350,9 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     return;
   }
   const link = commonItemsPage.govUkLink.getByText(linkValue, { exact: true });
-  await link.waitFor({ state: 'visible' });
+  await link.scrollIntoViewIfNeeded();
+  await link.waitFor({ state: 'attached' });
+  await commonItemsPage.page.waitForLoadState('networkidle');
   await link.click();
 });
 
