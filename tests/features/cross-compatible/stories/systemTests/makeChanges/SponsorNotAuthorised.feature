@@ -30,7 +30,6 @@ Feature: This feature covers the sponsor not authorised modifications
         And I capture the page screenshot
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        #Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
         Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
         And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -47,7 +46,7 @@ Feature: This feature covers the sponsor not authorised modifications
         Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP_7137
+    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @rsp-6864 @ReviewableModificationSponsorAuthorised
     Scenario Outline: Validate that sponsor can action to not authorise the reviewable modifications
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -290,7 +289,7 @@ Feature: This feature covers the sponsor not authorised modifications
             | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_Yes |
             | Multiple_Changes_Non_Reviewable_Set_Two                          | Nhs_Involvement_No  |
 
-    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP_7137
+    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @ReviewableAndNonReviewableModificationSponsorAuthorised
     Scenario Outline: Validate that sponsor can action to not authorise the combination of reviewable and non reviewable modifications
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'

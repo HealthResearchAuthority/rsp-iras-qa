@@ -162,8 +162,8 @@ Feature: Sponsor authorisation based on permission and role
       | Sponsor_User           | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
       | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Data_With_Lead_Nation_England |
 
-  @ReviewableModificationSponsorNotAuthorised
-  Scenario Outline: Validate that <Login_User> can't authorise modifications while adding user by system admin
+  @ValidateOutcomeOptionsForSponsorCheckAndAuthorisePage @rsp-6864
+  Scenario Outline: Validate when authoriser is selected as no, the outcome options will not be displayed in sponsor check and authorise page
     When I enter '<User_Email>' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'

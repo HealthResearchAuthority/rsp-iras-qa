@@ -45,7 +45,7 @@ export default class ConfirmationPage {
       name: confirmationPageTestData.Project_Record_Created_Labels.page_heading,
     });
     this.success_message_body_text = this.mainPageContent.locator('.govuk-panel__body');
-    this.confirmation_body_label = this.mainPageContent.locator('.govuk-grid-column-two-thirds p').nth(0);
+    this.confirmation_body_label = this.mainPageContent.locator('.govuk-grid-column-two-thirds p'); //adding .n(0) breaking all the create modification/sponsor authorised/not authorised scripts
     this.what_happens_next_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
     });
