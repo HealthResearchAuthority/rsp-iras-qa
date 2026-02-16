@@ -530,3 +530,19 @@ Then('I validate confirmation screen for project closure when closure not author
     .getByText(confirmationPage.confirmationPageTestData.Project_Closure_Not_Authorised.confirmation_body)
     .isVisible();
 });
+
+Then('I validate confirmation screen for revisions request sent', async ({ confirmationPage }) => {
+  await confirmationPage.confirmation_header_common_label
+    .getByText(confirmationPage.confirmationPageTestData.Modification_Revisions_Request_Sent.page_heading)
+    .isVisible();
+  await expect
+    .soft(
+      confirmationPage.page.getByText(
+        confirmationPage.confirmationPageTestData.Modification_Revisions_Request_Sent.what_happens_next_label
+      )
+    )
+    .toBeVisible();
+  await confirmationPage.confirmation_body_label
+    .getByText(confirmationPage.confirmationPageTestData.Modification_Revisions_Request_Sent.confirmation_body)
+    .isVisible();
+});

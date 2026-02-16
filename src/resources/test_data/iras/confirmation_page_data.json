@@ -125,6 +125,11 @@
     "what_happens_next_label": "What happens next",
     "confirmation_body": "The project has not been closed and will remain open."
   },
+  "Modification_Revisions_Request_Sent": {
+    "page_heading": "Revisions request sent",
+    "what_happens_next_label": "What happens next",
+    "confirmation_body": "Your request for revisions has been sent to the researcher."
+  },
   "add_remove_user_review_body_confirmation_success_header_label": "User has been",
   "enable_disable_confirmation_header_label": "Confirm that you want to",
   "disable_success_confirmation_header_label": "disabled",
