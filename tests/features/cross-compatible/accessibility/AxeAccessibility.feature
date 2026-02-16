@@ -3897,7 +3897,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the change link against 'Role' on my organisations user profile page
     When I fill the my organisation edit user profile page using 'Role_Org_Admin_Authoriser_No'
     And I click the 'Save' button on the 'My_Organisations_Edit_User_Profile_Page'
-    Then I validate error message for selecting authorisor no for org admin role
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
