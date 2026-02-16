@@ -597,6 +597,7 @@ Then(
       closeProjectPage,
       checkAuthoriseProjectClosurePage,
       myOrganisationsEditUserProfilePage,
+      requestRevisionsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -748,6 +749,10 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = myOrganisationsEditUserProfilePage;
+    } else if (pageKey == 'Request_Revisions_Page') {
+      errorMessageFieldDataset =
+        requestRevisionsPage.requestRevisionsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = requestRevisionsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

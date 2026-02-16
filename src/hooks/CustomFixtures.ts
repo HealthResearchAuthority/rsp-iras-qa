@@ -113,6 +113,7 @@ import MyOrganisationsUserProfilePage from '../pages/IRAS/reviewResearch/sponsor
 import MyOrganisationsEditUserProfilePage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsEditUserProfilePage';
 import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
 import CheckAuthoriseProjectClosurePage from '../pages/IRAS/makeChanges/CheckAuthoriseProjectClosurePage';
+import RequestRevisionsPage from '../pages/IRAS/makeChanges/RequestRevisionsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -226,7 +227,7 @@ type CustomFixtures = {
   myOrganisationsEditUserProfilePage: MyOrganisationsEditUserProfilePage;
   closeProjectPage: CloseProjectPage;
   checkAuthoriseProjectClosurePage: CheckAuthoriseProjectClosurePage;
-
+  requestRevisionsPage: RequestRevisionsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -672,6 +673,9 @@ export const test = base.extend<CustomFixtures>({
   },
   checkAuthoriseProjectClosurePage: async ({ page }, use) => {
     await use(new CheckAuthoriseProjectClosurePage(page));
+  },
+  requestRevisionsPage: async ({ page }, use) => {
+    await use(new RequestRevisionsPage(page));
   },
 
   //Set the Storage State based on User Tag from Feature File

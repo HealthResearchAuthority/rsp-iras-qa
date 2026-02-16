@@ -1068,6 +1068,8 @@ export default class ModificationsCommonPage {
       return this.modificationsCommonPageTestData.Modification_Status_Not_Approved.status;
     } else if (status.toLowerCase() == 'complete') {
       return this.modificationsCommonPageTestData.Document_Status_Complete.status;
+    } else if (status.toLowerCase() == 'in draft') {
+      return this.modificationsCommonPageTestData.Modification_Status_Indraft.status;
     }
   }
 
