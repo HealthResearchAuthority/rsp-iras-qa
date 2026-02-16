@@ -13,8 +13,6 @@ export default class MyOrganisationsEditUserProfilePage {
   readonly role_radio: Locator;
   readonly authoriser_fieldset: Locator;
   readonly authoriser_radio: Locator;
-  readonly orgAdminNotAuthorisor_ErrorHeading: Locator;
-  readonly orgAdminNotAuthorisor_ErrorMessage: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -44,29 +42,11 @@ export default class MyOrganisationsEditUserProfilePage {
       hasText: this.myOrganisationsEditUserProfilePageTestData.My_Organisations_Edit_User_Profile_Page.authoriser_label,
     });
     this.authoriser_radio = this.authoriser_fieldset.getByRole('radio');
-    this.orgAdminNotAuthorisor_ErrorHeading = this.page
-      .getByRole('heading')
-      .getByText(
-        myOrganisationsEditUserProfilePageTestData.OrgAdmin_NotAuthorisor_Error.OrgAdmin_NotAuthorisor_Error_Header
-      );
-    this.orgAdminNotAuthorisor_ErrorMessage = this.page
-      .getByRole('link')
-      .getByText(
-        myOrganisationsEditUserProfilePageTestData.OrgAdmin_NotAuthorisor_Error.OrgAdmin_NotAuthorisor_Error_Message
-      );
   }
 
   //Page Methods
 
   async assertOnMySponsorOrgEditUserProfilePage(): Promise<void> {
-    await expect.soft(this.page_heading).toBeVisible();
-    await expect.soft(this.details_heading).toBeVisible();
-    await expect.soft(this.profile_heading).toBeVisible();
-  }
-
-  async errorVal_OrgAdmin_NotAuthorisor(): Promise<void> {
-    await expect.soft(this.orgAdminNotAuthorisor_ErrorHeading).toBeVisible();
-    await expect.soft(this.orgAdminNotAuthorisor_ErrorMessage).toBeVisible();
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.details_heading).toBeVisible();
     await expect.soft(this.profile_heading).toBeVisible();

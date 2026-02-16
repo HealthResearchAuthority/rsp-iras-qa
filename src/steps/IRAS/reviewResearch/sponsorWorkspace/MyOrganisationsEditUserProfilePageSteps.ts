@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../hooks/CustomFixtures';
 
-const { Given, Then } = createBdd(test);
+const { Given } = createBdd(test);
 
 Given(
   'I fill the my organisation edit user profile page using {string}',
@@ -22,12 +22,5 @@ Given(
         }
       }
     }
-  }
-);
-
-Then(
-  'I validate error message for selecting authorisor no for org admin role',
-  async ({ myOrganisationsEditUserProfilePage }) => {
-    await myOrganisationsEditUserProfilePage.errorVal_OrgAdmin_NotAuthorisor();
   }
 );

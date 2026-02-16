@@ -145,8 +145,8 @@ Feature: Sponsor Workspace - My Organisations Page - User Profile
         When I have navigated to the 'My_Organisations_Sponsor_Org_Profile_Page' as '<Login_User>'
         And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
         And I capture the page screenshot
-        Then I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
-        When I click the '<Link>' link on the 'My_Organisations_Users_Page'
+        Then I can see the users tab in the sponsor organisation profile for the selected sponsor organisation 'University of Leeds'
+        When I click the 'Manage' link on the 'My_Organisations_Users_Page'
         Then I can see the 'My_Organisations_User_Profile_Page'
         And I capture the page screenshot
         And I see the details for '<Login_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
@@ -154,11 +154,11 @@ Feature: Sponsor Workspace - My Organisations Page - User Profile
         Then I can see the 'My_Organisations_Edit_User_Profile_Page'
         And I capture the page screenshot
         And I see the details for '<Login_User>' are correctly displayed on 'My_Organisations_Edit_User_Profile_Page'
-        When I fill the my organisation edit user profile page using '<Edit_Input>'
+        When I fill the my organisation edit user profile page using 'Role_Org_Admin_Authoriser_No'
         And I capture the page screenshot
         And I click the 'Save' button on the 'My_Organisations_Edit_User_Profile_Page'
-        Then I validate error message for selecting authorisor no for org admin role
-        When I fill the my organisation edit user profile page using '<Change_Input>'
+        Then I validate 'Summary_Only_OrgAdmin_NotAuthorisor_Error' displayed on 'My_Organisations_Edit_User_Profile_Page'
+        When I fill the my organisation edit user profile page using 'Role_Org_Admin_Authoriser_Yes'
         And I capture the page screenshot
         And I click the 'Save' button on the 'My_Organisations_Edit_User_Profile_Page'
         Then I can see the 'My_Organisations_User_Profile_Page'
@@ -167,6 +167,6 @@ Feature: Sponsor Workspace - My Organisations Page - User Profile
         And I see the details for '<Login_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
 
         Examples:
-            | Login_User             | User_Email              | Sponsor_Organisation | Select_User_Role                | Select_User_Permission  | Link   | Change_Permission | Change     | Edit_Input                   | Change_Input                  |
-            | System_Admin           | system admin email      | University of Leeds  | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | Manage | can               | Role       | Role_Org_Admin_Authoriser_No | Role_Org_Admin_Authoriser_Yes |
-            | Sponsor_Org_Admin_User | sponsor org admin email | University of Leeds  | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | can               | Authoriser | Role_Org_Admin_Authoriser_No | Role_Org_Admin_Authoriser_Yes |
+            | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Change_Permission | Change     |
+            | System_Admin           | system admin email      | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   | can               | Role       |
+            | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | can               | Authoriser |

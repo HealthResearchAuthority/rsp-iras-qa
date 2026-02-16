@@ -27,8 +27,7 @@
       "authoriser_radio": "No"
     }
   },
-  "OrgAdmin_NotAuthorisor_Error": {
-    "OrgAdmin_NotAuthorisor_Error_Header": "There is a problem",
-    "OrgAdmin_NotAuthorisor_Error_Message": "Select 'Yes' for the Authoriser if the user has the Organisation Administrator role."
+  "Summary_Only_OrgAdmin_NotAuthorisor_Error": {
+    "orgadmin_notauthorisor_error_message": "Select 'Yes' for the Authoriser if the user has the Organisation Administrator role."
   }
 }
