@@ -596,6 +596,7 @@ Then(
       projectPersonnelChangePrincipalInvestigatorPage,
       closeProjectPage,
       checkAuthoriseProjectClosurePage,
+      myOrganisationsEditUserProfilePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -741,6 +742,12 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = checkAuthoriseProjectClosurePage;
+    } else if (pageKey == 'My_Organisations_Edit_User_Profile_Page') {
+      errorMessageFieldDataset =
+        myOrganisationsEditUserProfilePage.myOrganisationsEditUserProfilePageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = myOrganisationsEditUserProfilePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

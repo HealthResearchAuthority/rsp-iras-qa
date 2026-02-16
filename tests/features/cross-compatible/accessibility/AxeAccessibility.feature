@@ -3867,3 +3867,36 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Examples:
       | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome  | Outcome_Reason | Outcome_Status               | Visibility |
       | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Valid_Reason   | Modification_Status_Approved | can        |
+
+  @axeAccessibilityOrgAdminRoleAsNoAuthorisorSelectedError @SetupNewSponsorOrgGoLive @SysAdminUser
+  Scenario Outline: Error message displayed when selecting role=OrgAdmin and Authorior=No in edit user profile page
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    And I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfLeeds'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    And I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    And I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'system admin email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    And I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    When I fill the add user permission page using 'Sponsor_Authoriser_No'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_No'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    When I have navigated to the 'My_Organisations_Sponsor_Org_Profile_Page' as 'System_Admin'
+    And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
+    When I click the 'Manage' link on the 'My_Organisations_Users_Page'
+    When I click the change link against 'Role' on my organisations user profile page
+    When I fill the my organisation edit user profile page using 'Role_Org_Admin_Authoriser_No'
+    And I click the 'Save' button on the 'My_Organisations_Edit_User_Profile_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
