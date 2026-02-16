@@ -300,7 +300,7 @@ BeforeScenario({ name: 'Attach release information to browser request header' },
     const tagName = typeof t === 'string' ? t : t.name;
     return tagName
       .toLowerCase()
-      .replace(/[^a-z0-9]/g, '')
+      .replaceAll(/[^a-z0-9]/g, '')
       .includes('release');
   });
   const releaseTag =
