@@ -291,6 +291,14 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    # --- Below steps added for Release 2.0 to enter reason when sponsor not authorise the modification ---
+    And I can see the modification not authorised page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
+    # --- end ---
     And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
@@ -394,6 +402,14 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    # --- Below steps added for Release 2.0 to enter reason when sponsor not authorise the modification ---
+    And I can see the modification not authorised page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
+    # --- end ---
     And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'

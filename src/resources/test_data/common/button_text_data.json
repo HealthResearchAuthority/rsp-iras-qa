@@ -458,5 +458,8 @@
   },
   "Request_Revisions_Page": {
     "Send_Request": "Send request"
+  },
+  "Modification_Not_Authorised_Page": {
+    "Not_Authorised_Confirm": "Save and continue"
   }
 }
