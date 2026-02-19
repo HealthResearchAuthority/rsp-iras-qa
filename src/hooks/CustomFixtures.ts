@@ -115,6 +115,7 @@ import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
 import CheckAuthoriseProjectClosurePage from '../pages/IRAS/makeChanges/CheckAuthoriseProjectClosurePage';
 import RequestRevisionsPage from '../pages/IRAS/makeChanges/RequestRevisionsPage';
 import ModificationNotAuthorisedPage from '../pages/IRAS/makeChanges/ModificationNotAuthorisedPage';
+import ReviseAndAuthorisePage from '../pages/IRAS/makeChanges/ReviseAndAuthorisePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -230,6 +231,7 @@ type CustomFixtures = {
   checkAuthoriseProjectClosurePage: CheckAuthoriseProjectClosurePage;
   requestRevisionsPage: RequestRevisionsPage;
   modificationNotAuthorisedPage: ModificationNotAuthorisedPage;
+  reviseAndAuthorisePage: ReviseAndAuthorisePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -685,6 +687,10 @@ export const test = base.extend<CustomFixtures>({
 
   modificationNotAuthorisedPage: async ({ page }, use) => {
     await use(new ModificationNotAuthorisedPage(page));
+  },
+
+  reviseAndAuthorisePage: async ({ page }, use) => {
+    await use(new ReviseAndAuthorisePage(page));
   },
 
   //Set the Storage State based on User Tag from Feature File

@@ -461,5 +461,8 @@
   },
   "Modification_Not_Authorised_Page": {
     "Not_Authorised_Confirm": "Save and continue"
+  },
+  "Revise_And_Authorise_Page": {
+    "Authorise": "Authorise"
   }
 }
