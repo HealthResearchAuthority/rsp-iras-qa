@@ -9,6 +9,7 @@ export default class SponsorCheckAndAuthorisePage {
   readonly pageHeading: Locator;
   readonly outcomeBodyLabel: Locator;
   readonly outcome_selection_radio: Locator;
+  readonly outcomeFieldset: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -27,6 +28,7 @@ export default class SponsorCheckAndAuthorisePage {
       .locator('..')
       .getByRole('paragraph');
     this.outcome_selection_radio = this.page.getByRole('radio');
+    this.outcomeFieldset = this.page.locator('#Outcome').getByRole('group');
   }
 
   //Page Methods

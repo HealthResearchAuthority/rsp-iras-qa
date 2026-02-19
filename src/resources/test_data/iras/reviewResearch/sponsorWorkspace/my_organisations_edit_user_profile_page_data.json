@@ -21,6 +21,13 @@
     "Role_Org_Admin_Authoriser_Yes": {
       "role_radio": "Organisation administrator",
       "authoriser_radio": "Yes"
+    },
+    "Role_Org_Admin_Authoriser_No": {
+      "role_radio": "Organisation administrator",
+      "authoriser_radio": "No"
     }
+  },
+  "Summary_Only_OrgAdmin_NotAuthorisor_Error": {
+    "orgadmin_notauthorisor_error_message": "Select 'Yes' for the Authoriser if the user has the Organisation Administrator role."
   }
 }

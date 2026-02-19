@@ -701,16 +701,25 @@ export default class CommonItemsPage {
 
   async fillUIComponent<PageObject>(dataset: JSON | Record<string, any>, key: string, page: PageObject) {
     const locator: Locator = page[key];
+    await locator.first().waitFor({ state: 'visible' });
     const typeAttribute = await locator.first().getAttribute('type');
     if (typeAttribute === 'radio') {
-      await locator.locator('..').getByLabel(dataset[key], { exact: true }).check();
+      const radio = locator.locator('..').getByLabel(dataset[key], { exact: true });
+      await radio.waitFor({ state: 'visible' });
+      await radio.scrollIntoViewIfNeeded();
+      await radio.check();
     } else if (typeAttribute === 'checkbox') {
       for (const checkbox of dataset[key]) {
-        await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
+        const checkboxLocator = locator.locator('..').getByLabel(checkbox, { exact: true });
+        await checkboxLocator.waitFor({ state: 'visible' });
+        await checkboxLocator.scrollIntoViewIfNeeded();
+        await checkboxLocator.check();
       }
     } else if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
+      await locator.waitFor({ state: 'visible' });
       await locator.selectOption({ label: dataset[key] });
     } else {
+      await locator.waitFor({ state: 'visible' });
       await locator.fill(dataset[key]);
     }
   }
@@ -1836,18 +1845,11 @@ export default class CommonItemsPage {
 
   async clickLink(page: string, linkName: string) {
     const linkLabel = this.linkTextData[page][linkName];
-    if (
-      page === 'Sponsor_Check_And_Authorise_Page' &&
-      (linkName === 'Sponsor_Details' || linkName === 'Modification_Details')
-    ) {
-      await this.page.locator('label', { hasText: linkLabel }).click();
-    } else {
-      await this.govUkLink
-        .getByText(linkLabel, { exact: true })
-        .or(this.genericButton.getByText(linkLabel, { exact: true }))
-        .first()
-        .click();
-    }
+    await this.govUkLink
+      .getByText(linkLabel, { exact: true })
+      .or(this.genericButton.getByText(linkLabel, { exact: true }))
+      .first()
+      .click();
   }
 
   async clickErrorSummaryLinkSpecific<PageObject>(key: string, page: PageObject, errorMsg: string) {

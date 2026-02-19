@@ -1,7 +1,7 @@
 @RegressionCreateManageUsers @RegressionManageUsers @Regression @SysAdminUser @BackStage
 Feature: User Administration: Create and edit manage users
 
-    @RegressionTestCreateUserEvents @RevBodyUserListCleanup @KNOWN_DEFECT_RSP_7137
+    @RegressionTestCreateUserEvents @RevBodyUserListCleanup
     Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
         Given I have navigated to the 'Home_Page'
         And I click the 'System_Administration' link on the 'Home_Page'
@@ -232,7 +232,7 @@ Feature: User Administration: Create and edit manage users
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         And I can see the users audit history with the 'Disable_User' event as the most recent entry
         And I capture the page screenshot
-        And I click the 'Back' link on the 'Audit_History_User_Page'
+        And I click the 'User_Profile_Breadcrumb' link on the 'User_Profile_Audit_History_Page'
         And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
         Then I validate 'Enable_User_Profile_Labels' labels displayed in enable user profile confirmation page using the '<Add_User_Profile>' details
         And I capture the page screenshot
@@ -266,7 +266,7 @@ Feature: User Administration: Create and edit manage users
             | Valid_Data_In_All_Fields_Role_System_Administrator | Advanced_Filter_Role_System_Administrator_Status_Active | Role_System_Administrator | Advanced_Filter_Role_System_Administrator_Status_Disabled |
             | Valid_Data_In_All_Fields_Role_Applicant            | Advanced_Filter_Role_Applicant_Status_Active            | Role_Applicant            | Advanced_Filter_Role_Applicant_Status_Disabled            |
 
-    @RegressionTestCreateUserProfileBackLinks @KNOWN_DEFECT_RSP_7137
+    @RegressionTestCreateUserProfileBackLinks
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' back to system admin page via the 'Back' links
         Given I have navigated to the 'Create_User_Profile_Page'
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -332,7 +332,7 @@ Feature: User Administration: Create and edit manage users
             | Invalid_Email_Data_Reserved_Domain                        | Incorrect_Format_Field_Email_Address_Error |
 
 
-    @RegressionTestEditCommonUserFields @KNOWN_DEFECT_RSP_7137
+    @RegressionTestEditCommonUserFields
     Scenario Outline: Verify the user can edit each of the common user profile fields, with an audit history log
         Given I have navigated to the 'Home_Page'
         And I click the 'System_Administration' link on the 'Home_Page'
@@ -356,7 +356,7 @@ Feature: User Administration: Create and edit manage users
         Then I can see the audit history page of the user profile
         And I capture the page screenshot
         And I can see the users audit history with the '<Audit_History>' event as the most recent entry
-        When I click the 'Back' link on the 'Audit_History_User_Page'
+        When I click the 'User_Profile_Breadcrumb' link on the 'User_Profile_Audit_History_Page'
         And I click the change link against '<Field_Name>' on the user profile page
         Then I can see the edit user profile page
         And I capture the page screenshot
@@ -422,7 +422,7 @@ Feature: User Administration: Create and edit manage users
             | Field_Name | Edit_User                 | Audit_History     |
             | Country    | User_Country_Checkbox_One | Edit_User_Country |
 
-    @RegressionTestEditUserProfileBackLinks @KNOWN_DEFECT_RSP_7137
+    @RegressionTestEditUserProfileBackLinks
     Scenario: Verify the user can navigate from audit and edit user pages of the user back to system admin page via the 'Back' links
         Given I have navigated to the 'Home_Page'
         And I click the 'System_Administration' link on the 'Home_Page'
@@ -436,7 +436,7 @@ Feature: User Administration: Create and edit manage users
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         Then I can see the audit history page of the user profile
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Audit_History_User_Page'
+        When I click the 'User_Profile_Breadcrumb' link on the 'User_Profile_Audit_History_Page'
         Then I can see the user profile page
         And I capture the page screenshot
         When I click the change link against 'Title' on the user profile page
@@ -452,7 +452,7 @@ Feature: User Administration: Create and edit manage users
         Then I can see the 'System_Administration_Page'
         And I capture the page screenshot
 
-    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN_DEFECT_RSP_7137
+    @RegressionTestEditUserErrorMessagesInvalidData
     Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
         Given I have navigated to the 'Home_Page'
         And I click the 'System_Administration' link on the 'Home_Page'

@@ -294,3 +294,22 @@ AfterScenario(
     }
   }
 );
+
+BeforeScenario({ name: 'Attach release information to browser request header' }, async function ({ $testInfo, page }) {
+  if (!$testInfo) return;
+  const tags: (string | { name: string })[] = $testInfo.tags ?? [];
+  const releaseTagRaw = tags.find((t) => {
+    const tagName = typeof t === 'string' ? t : t.name;
+    return tagName
+      .toLowerCase()
+      .replaceAll(/[^a-z0-9]/g, '')
+      .includes('release');
+  });
+  const releaseTag =
+    typeof releaseTagRaw === 'string' ? releaseTagRaw.replace(/^@/, '') : releaseTagRaw?.name.replace(/^@/, '');
+  if (releaseTag) {
+    await page.context().setExtraHTTPHeaders({
+      'x-feature-groups': releaseTag,
+    });
+  }
+});

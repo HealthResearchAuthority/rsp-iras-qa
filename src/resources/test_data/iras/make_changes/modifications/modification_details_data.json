@@ -39,6 +39,8 @@
     "Blank": "",
     "Lack_Of_Evidence": "There is a lack of evidence provided",
     "Valid_Reason": "Modification details are verified and approved",
-    "Valid_Reason_Not_Approved": "Modification is not approved by the review body for valid reasons"
+    "Valid_Reason_Not_Approved": "Modification is not approved by the review body for valid reasons",
+    "First_Comment": "This is first comment",
+    "Second_Comment": "This is second comment"
   }
 }

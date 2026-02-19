@@ -15,7 +15,7 @@ Feature: Manage Users - View audit history for users
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         Then I can see the audit history page of the user profile
         And I capture the page screenshot
-        And I click the 'Back' link on the 'Audit_History_User_Page'
+        And I click the 'User_Profile_Breadcrumb' link on the 'User_Profile_Audit_History_Page'
         And I capture the page screenshot
         And I can see the user profile page
         Examples:
@@ -137,7 +137,7 @@ Feature: Manage Users - View audit history for users
         And I can see the audit history page of the user profile
         And I capture the page screenshot
         Then I can see the users audit history with the '<Audit_History>' event as the most recent entry
-        When I click the 'Back' link on the 'Audit_History_User_Page'
+        When I click the 'User_Profile_Breadcrumb' link on the 'User_Profile_Audit_History_Page'
         And I click the change link against '<Field_Name>' on the user profile page
         And I can see the edit user profile page
         And I capture the page screenshot

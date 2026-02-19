@@ -333,7 +333,7 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).click();
     return;
   }
-  if (noOfLinksFound > 1 && linkKey !== 'Back' && linkKey !== 'View') {
+  if (noOfLinksFound > 1 && linkKey !== 'Back' && linkKey !== 'View' && linkKey !== 'History') {
     await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     return;
   }
@@ -349,7 +349,11 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     await commonItemsPage.govUkLink.getByText(linkValue).click();
     return;
   }
-  await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+  const link = commonItemsPage.govUkLink.getByText(linkValue, { exact: true });
+  await link.scrollIntoViewIfNeeded();
+  await link.waitFor({ state: 'attached' });
+  await commonItemsPage.page.waitForLoadState('networkidle');
+  await link.click();
 });
 
 Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
@@ -592,6 +596,8 @@ Then(
       projectPersonnelChangePrincipalInvestigatorPage,
       closeProjectPage,
       checkAuthoriseProjectClosurePage,
+      myOrganisationsEditUserProfilePage,
+      requestRevisionsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -737,6 +743,16 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = checkAuthoriseProjectClosurePage;
+    } else if (pageKey == 'My_Organisations_Edit_User_Profile_Page') {
+      errorMessageFieldDataset =
+        myOrganisationsEditUserProfilePage.myOrganisationsEditUserProfilePageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = myOrganisationsEditUserProfilePage;
+    } else if (pageKey == 'Request_Revisions_Page') {
+      errorMessageFieldDataset =
+        requestRevisionsPage.requestRevisionsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = requestRevisionsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -1704,6 +1720,7 @@ When(
   'I click a {string} on the {string}',
   async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
     let testNum: number;
+    await commonItemsPage.tableBodyRows.waitFor({ state: 'visible' });
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
     const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
     if (rowCount > 1) {
@@ -2150,6 +2167,7 @@ Then(
 
     const expectedDocDate = `${expectedDocDetails.sponsor_document_day_text} ${monthMap[expectedDocDetails.sponsor_document_month_dropdown]} ${expectedDocDetails.sponsor_document_year_text}`;
     const documentRows = modificationsCommonPage.documentRows;
+    await documentRows.first().waitFor({ state: 'visible' });
     const rowCount = await documentRows.count();
     const actualDocsInTable: string[] = [];
 

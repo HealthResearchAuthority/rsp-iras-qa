@@ -71,9 +71,6 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
@@ -177,8 +174,6 @@ Feature: Modifications - Audit history
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -284,8 +279,6 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
-    And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
@@ -388,8 +381,6 @@ Feature: Modifications - Audit history
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -503,7 +494,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
-  @rsp-5268 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
+  @rsp-5268 @rsp-6626 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive @KNOWN-DEFECT-RSP-7288
   Scenario: Verify the modification approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -533,8 +524,6 @@ Feature: Modifications - Audit history
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-    And I capture the page screenshot
-    #Then I can see the 'user added' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -664,6 +653,9 @@ Feature: Modifications - Audit history
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
     # Validating the audit history for applicant user
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id' into the search field
@@ -685,8 +677,8 @@ Feature: Modifications - Audit history
     When I click a 'modification id' on the 'Search_Modifications_Page'
     Then I can see the modification page for sponsor view
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
     And I capture the page screenshot
-    And I validate the audit history table for modifications of the user 'Applicant_User'
     # Validating the audit history for workflow coordinator user
     When I have navigated to the 'Approvals_Page' as 'Workflow_Coordinator'
     When I click the 'Search_Records' link on the 'Approvals_Page'
@@ -697,6 +689,9 @@ Feature: Modifications - Audit history
     When I click a 'modification id' on the 'Search_Modifications_Page'
     Then I can see the modification post submission page
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
     # Validating the audit history for team manager user
@@ -711,8 +706,11 @@ Feature: Modifications - Audit history
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
 
-  @rsp-5268 @rsp-6625 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
+  @rsp-5268 @rsp-6625 @rsp-6626 @LogTheModificationNotApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
   Scenario: Verify the modification not approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -893,12 +891,14 @@ Feature: Modifications - Audit history
     And I click the 'Search' button on the 'Search_Modifications_Page'
     When I click a 'modification id' on the 'Search_Modifications_Page'
     And I capture the page screenshot
+    Then I can see the modification page for sponsor view
     And I validate the project information labels using dataset displayed on modifications page
     # valid audit row is not visible
     Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Sponsor_User'
+    And I capture the page screenshot
     # Validating the audit history for study wide reviewer
     When I have navigated to the 'Approvals_Page' as 'Studywide_Reviewer'
     When I click the 'Search_Records' link on the 'Approvals_Page'
@@ -911,8 +911,11 @@ Feature: Modifications - Audit history
     And I validate the project information labels using dataset displayed on modifications page
     Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
-    And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
     # Validating the audit history for workflow coordinator user
     When I have navigated to the 'Approvals_Page' as 'Workflow_Coordinator'
     When I click the 'Search_Records' link on the 'Approvals_Page'
@@ -928,6 +931,9 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
     # Validating the audit history for team manager user
     When I have navigated to the 'Approvals_Page' as 'Team_Manager'
     When I click the 'Search_Records' link on the 'Approvals_Page'
@@ -941,6 +947,9 @@ Feature: Modifications - Audit history
     Then I see the the modification post submission page with 'Modification_Status_Not_Approved' status and 'Valid_Reason_Not_Approved' reason
     When I click the 'History' link on the 'Modification_Post_Submission_Page'
     And I capture the page screenshot
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
 
