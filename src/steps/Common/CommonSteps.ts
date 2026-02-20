@@ -921,6 +921,9 @@ When(
       case 'short project title':
         searchValue = await projectDetailsIRASPage.getShortProjectTitle();
         break;
+      case 'name of the user in the system':
+        searchValue = await commonItemsPage.getFirstUserEmail();
+        break;
       default:
         searchValue = inputType;
     }
@@ -2556,3 +2559,12 @@ Then('I have performed this action as the {string}', async ({ commonItemsPage, l
   const adminUserEmail = loginPage.loginPageTestData[adminUser].username;
   await commonItemsPage.setAdminEmail(adminUserEmail);
 });
+
+Then(
+  'the system sets the users organisation membership status to {string}',
+  async ({ commonItemsPage }, userStatus: string) => {
+    const columns = commonItemsPage.tableRows.nth(1).getByRole('cell');
+    const actualUserStatus = confirmStringNotNull(await columns.nth(2).textContent());
+    expect.soft(actualUserStatus).toBe(userStatus);
+  }
+);

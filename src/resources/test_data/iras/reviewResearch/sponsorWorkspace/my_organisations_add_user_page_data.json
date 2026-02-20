@@ -7,11 +7,13 @@
     "email_search_box_label": "Email",
     "save_add_continue_button": "Save and continue",
     "add_user_partial_url": "/sponsorworkspace/myorganisationusersadduser?rtsId",
+    "manage_sponsor_org_audit_trial_partial_url": "/sponsororganisations/audittrail?rtsId",
     "non_registered_user_error_heading": "User account doesn't exist",
     "Non_Registered_User": {
       "email_address_text": "hscrd@health.org"
     },
     "Audit_History_Headers": ["Date", "Event description", "Username"],
+    "Audit_History_Headers_Manage_Sponsor": ["Date", "Event description", "System administrator"],
     "Audit_History_Events": {
       "Sponsor_Organisation_Created": "Sponsor organisation created",
       "User_Added": " added to sponsor organisation",
@@ -54,6 +56,9 @@
     "Error_Validation": {
       "Blank_Email_Address_Error": {
         "no_role_selected_link_text": "Enter a user email"
+      },
+      "Disabled_User_Email_Error": {
+        "disabled_user_link_text": "You cannot add a system-disabled user to a sponsor organisation."
       },
       "User_Exists_Message": {
         "banner_heading": "Important",
