@@ -376,7 +376,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @CreateDataNotApprovedModificationAuthorizationListPage
+  @CreateDataNotApprovedModificationAuthorizationListPage @Release_2.0
   Scenario Outline: Create not approved modifications for modification authorization list page
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -458,14 +458,12 @@ Feature: Sponsor Workspace
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    # --- Below steps added for Release 2.0 to enter reason when sponsor not authorise the modification ---
     And I can see the modification not authorised page
     And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
     And I fill the modification not authorised page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
-    # --- end ---
     And I validate confirmation screen for modification not authorised by sponsor
     And I capture the page screenshot
 
@@ -955,8 +953,8 @@ Feature: Sponsor Workspace
 
     Examples:
       | Modification_Not_Authorised_Reason | Field_And_Summary_Error_Message |
-      # | Empty_Data_All_Fields              | Empty_Field_Error               |
       | Max_Char_Data_All_Fields           | Max_Character_Field_Error       |
+      # | Empty_Data_All_Fields              | Empty_Field_Error               |
 
   @rsp-6827 @ValidateNotAuthorisedModificationNotAvailableBackstageUsers @Release_2.0
   Scenario Outline: Validate backstage users should not see the modification which is not authorised by sponsor
@@ -1060,7 +1058,7 @@ Feature: Sponsor Workspace
 
   @rsp-6827 @ReviewableModificationSponsorOrgAdminNotAuthorised @Release_2.0
   Scenario: Validate that sponsor organisation admin can action to not authorise the reviewable modifications
-  Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
     When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
