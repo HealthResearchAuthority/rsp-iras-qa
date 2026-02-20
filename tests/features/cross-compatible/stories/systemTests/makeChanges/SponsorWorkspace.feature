@@ -628,7 +628,7 @@ Feature: Sponsor Workspace
       | System_Admin           | system admin email       | Sponsor_Authoriser_Yes | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One |
       | System_Admin           | system admin email       | Sponsor_Authoriser_Yes | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One     |
 
-  @rsp-6825 @ValidateStatusesAndOutcomeOptionsAfterRequestRevision @Release_2.0 @KNOWN-DEFECT_RSP-7384
+  @rsp-6825 @ValidateStatusesAndOutcomeOptionsAfterRequestRevision @Release_2.0
   Scenario: Validate modification statuses and the outcome options displayed after the applicant has sent the modification back to sponsor which had come for revision
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
