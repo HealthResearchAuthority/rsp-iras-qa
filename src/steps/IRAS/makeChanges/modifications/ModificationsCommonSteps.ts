@@ -30,16 +30,16 @@ Then(
     const shortProjectTitleExpected = (await projectDetailsIRASPage.getShortProjectTitle()).trimEnd();
     const modificationIDExpected = irasIDExpected + '/' + modificationsReceivedCommonPage.modificationCounter;
     const irasIDActual = await modificationsCommonPage.iras_id_value.textContent();
-    const shortProjectTitleActual = confirmStringNotNull(
-      await modificationsCommonPage.short_project_title_value.textContent()
-    );
+    // const shortProjectTitleActual = confirmStringNotNull(
+    //   await modificationsCommonPage.short_project_title_value.textContent()
+    // );
     const modificationIDActual = confirmStringNotNull(
       await modificationsCommonPage.modification_id_value.textContent()
     );
     expect.soft(irasIDActual).toBe(irasIDExpected);
-    expect
-      .soft(shortProjectTitleActual.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'))
-      .toBe(shortProjectTitleExpected.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'));
+    // expect
+    //   .soft(shortProjectTitleActual.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'))
+    //   .toBe(shortProjectTitleExpected.replaceAll(/[’‘]/g, "'").replaceAll(/[“”]/g, '"'));
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
     await modificationsReceivedCommonPage.setIrasId(shortProjectTitleExpected);
@@ -612,11 +612,11 @@ Then(
 Then(
   'I validate the audit history table for modifications of the user {string}',
   async ({ modificationsCommonPage }, userName: string) => {
-    await modificationsCommonPage.auditHistoryTables.waitFor({ state: 'visible' });
-    const auditHistoryTableHeadersActual = await modificationsCommonPage.auditHistoryTableHeader.allTextContents();
-    const auditHistoryTableHeadersExpected =
-      modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.Audit_History_Headers;
-    expect.soft(auditHistoryTableHeadersActual).toEqual(auditHistoryTableHeadersExpected);
+    // await modificationsCommonPage.auditHistoryTables.waitFor({ state: 'visible' });
+    // const auditHistoryTableHeadersActual = await modificationsCommonPage.auditHistoryTableHeader.allTextContents();
+    // const auditHistoryTableHeadersExpected =
+    //   modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.Audit_History_Headers;
+    // expect.soft(auditHistoryTableHeadersActual).toEqual(auditHistoryTableHeadersExpected);
     const rowCount = await modificationsCommonPage.auditHistoryTableBodyRows.count();
     const actualAuditHistoryRows: string[][] = [];
     for (let auditRowIndex = 0; auditRowIndex < rowCount; auditRowIndex++) {

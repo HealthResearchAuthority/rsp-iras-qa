@@ -84,7 +84,7 @@
     "authPath": "workflow_coordinator_w"
   },
   "Sponsor_User": {
-    "username": "futureiras.sponsor@hra.nhs.uk",
+    "username": "futureiras.automation.SponsorOrgAdminP@hra.nhs.uk",
     "password": "`${process.env.SPONSOR_USER_PASS}`",
     "mfa": "`${process.env.SPONSOR_USER_MFA_KEY}`",
     "authPath": "sponsor_user"
