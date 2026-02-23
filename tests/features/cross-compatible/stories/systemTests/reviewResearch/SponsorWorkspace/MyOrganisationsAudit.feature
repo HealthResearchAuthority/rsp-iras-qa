@@ -33,7 +33,7 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
 
-    @rsp-6423 @rsp-6545 @ViewMyOrgAuditPage @KNOWN_DEFECT_RSP-6900
+    @rsp-6423 @rsp-6545 @rsp-6807 @ViewMyOrgAuditPage @KNOWN-DEFECT-RSP-7420
     Scenario Outline: Validate that the my organisations audit page displays the event history as expected
         When I enter '<Admin_User_Email>' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'

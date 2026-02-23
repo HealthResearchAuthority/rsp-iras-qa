@@ -91,7 +91,7 @@ Feature: Manage Users - View audit history for users
             | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       | User_Roles_Checkbox_Empty | Enabled        |
             | Valid_Data_All_Roles                                       | Role       | User_Roles_Checkbox_Empty | Enabled        |
 
-    @VerifyAuditHistoryEnableDisableUser
+    @VerifyAuditHistoryEnableDisableUser @rsp-6807
     Scenario Outline: Verify the user can view the audit history after changing the status of a user
         And I select a 'QA Automation' User to View and Edit which is '<Status>'
         And I can see the user profile page
