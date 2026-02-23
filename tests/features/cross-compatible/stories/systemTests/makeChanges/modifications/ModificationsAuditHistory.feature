@@ -1563,9 +1563,8 @@ Feature: Modifications - Audit history
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 | Data_With_Lead_Nation_England |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             | Data_With_Lead_Nation_England |
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England |
-  # | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England |
 
-  @rsp-6834 @ValidateAuditHistorySponsorRequestRevisionAndApplicantSubmitsBackToSponsor @Release_2.0 @SetupNewSponsorOrgGoLive @Scenario3
+  @rsp-6834 @ValidateAuditHistorySponsorRequestRevisionAndApplicantSubmitsBackToSponsor @Release_2.0 @SetupNewSponsorOrgGoLive @abc
   Scenario Outline: Validate the audit trail when sponsor request for revisions and applicant submits the modification back to sponsor after revision
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1627,20 +1626,22 @@ Feature: Modifications - Audit history
     And I can see the modifications details page
     And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
-    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
-    And I upload 'Multiple_Files_Three' documents
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
-    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
-    And I capture the page screenshot
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    Then I can see the review all changes page
+    # When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    # And I upload 'Multiple_Files_Three' documents
+    # When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    # When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    # When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    # And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    # When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    # And I capture the page screenshot
+    # When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    # And I capture the page screenshot
+    # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    # And I capture the page screenshot
+    # When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    # Then I can see the review all changes page
+    #after uncommenting document remove below line
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
@@ -1659,10 +1660,11 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     Then I click on the searched modification id
     And I can see the sponsor check and authorise page
+    
     And I capture the page screenshot
-    And I fill the sponsor check and authorise page with 'Sponsor_Request_Revisions'
+    And I fill the revise and authorise page with 'Sponsor_Revise_And_Authorise'
     And I capture the page screenshot
-    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Revise_And_Authorise'
     Then I can see the request revisions page
     And I capture the page screenshot
     And I fill the request revisions page with 'Valid_Data_All_Fields'
@@ -1702,7 +1704,7 @@ Feature: Modifications - Audit history
       #| Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England |
       | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England |
 
-  @rsp-6834 @ValidateAuditHistorySponsorReasonNotAuthorised @Release_2.0 @abc
+  @rsp-6834 @ValidateAuditHistorySponsorReasonNotAuthorised @Release_2.0
   Scenario: Validate the audit history when sponsor enters a reason and not authorise the modification
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -1733,20 +1735,20 @@ Feature: Modifications - Audit history
     And I can see the modifications details page
     And I validate the project information labels using dataset displayed on modifications page
     And I capture the page screenshot
-    # When I click the 'Add_Documents' button on the 'Modification_Details_Page'
-    # And I upload 'Multiple_Files_Three' documents
-    # When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    # When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    # When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-    # And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
-    # When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
-    # When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
-    # And I capture the page screenshot
-    # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    # When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    # Then I can see the review all changes page
+    When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    And I upload 'Multiple_Files_Three' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    And I capture the page screenshot
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
     #after uncommenting document remove below line
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    #When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
@@ -1835,7 +1837,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
 
     Examples:
-      | Changes                                                            | Research_Locations            |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 | Data_With_Lead_Nation_England |
-      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             | Data_With_Lead_Nation_England |
-      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England |
+      | Changes                                                            |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable |
