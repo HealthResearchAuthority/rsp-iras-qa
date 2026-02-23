@@ -114,6 +114,8 @@ import MyOrganisationsEditUserProfilePage from '../pages/IRAS/reviewResearch/spo
 import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
 import CheckAuthoriseProjectClosurePage from '../pages/IRAS/makeChanges/CheckAuthoriseProjectClosurePage';
 import RequestRevisionsPage from '../pages/IRAS/makeChanges/RequestRevisionsPage';
+import ModificationNotAuthorisedPage from '../pages/IRAS/makeChanges/ModificationNotAuthorisedPage';
+import ReviseAndAuthorisePage from '../pages/IRAS/makeChanges/ReviseAndAuthorisePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -228,6 +230,8 @@ type CustomFixtures = {
   closeProjectPage: CloseProjectPage;
   checkAuthoriseProjectClosurePage: CheckAuthoriseProjectClosurePage;
   requestRevisionsPage: RequestRevisionsPage;
+  modificationNotAuthorisedPage: ModificationNotAuthorisedPage;
+  reviseAndAuthorisePage: ReviseAndAuthorisePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -668,14 +672,25 @@ export const test = base.extend<CustomFixtures>({
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
   },
+
   closeProjectPage: async ({ page }, use) => {
     await use(new CloseProjectPage(page));
   },
+
   checkAuthoriseProjectClosurePage: async ({ page }, use) => {
     await use(new CheckAuthoriseProjectClosurePage(page));
   },
+
   requestRevisionsPage: async ({ page }, use) => {
     await use(new RequestRevisionsPage(page));
+  },
+
+  modificationNotAuthorisedPage: async ({ page }, use) => {
+    await use(new ModificationNotAuthorisedPage(page));
+  },
+
+  reviseAndAuthorisePage: async ({ page }, use) => {
+    await use(new ReviseAndAuthorisePage(page));
   },
 
   //Set the Storage State based on User Tag from Feature File

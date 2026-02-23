@@ -209,7 +209,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableNotAuthorised
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesReviewableNotAuthorised @Release_2.0
   Scenario: Validate the audit history for reviewable modifications when sponsor not authorised
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -291,6 +291,12 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I can see the modification not authorised page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
@@ -312,7 +318,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
-  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableNotAuthorised
+  @rsp-5339 @ValidateAuditHistoryModificationSponsorChangesNonReviewableNotAuthorised @Release_2.0
   Scenario: Validate the audit history for non reviewable modifications when sponsor not authorised
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -394,6 +400,12 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I can see the modification not authorised page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
