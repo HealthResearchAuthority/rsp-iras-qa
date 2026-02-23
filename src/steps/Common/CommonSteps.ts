@@ -350,7 +350,9 @@ Given('I click the {string} link on the {string}', async ({ commonItemsPage }, l
     return;
   }
   const link = commonItemsPage.govUkLink.getByText(linkValue, { exact: true });
-  await link.waitFor({ state: 'visible' });
+  await link.scrollIntoViewIfNeeded();
+  await link.waitFor({ state: 'attached' });
+  await commonItemsPage.page.waitForLoadState('networkidle');
   await link.click();
 });
 
@@ -594,6 +596,8 @@ Then(
       projectPersonnelChangePrincipalInvestigatorPage,
       closeProjectPage,
       checkAuthoriseProjectClosurePage,
+      myOrganisationsEditUserProfilePage,
+      requestRevisionsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -739,6 +743,16 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = checkAuthoriseProjectClosurePage;
+    } else if (pageKey == 'My_Organisations_Edit_User_Profile_Page') {
+      errorMessageFieldDataset =
+        myOrganisationsEditUserProfilePage.myOrganisationsEditUserProfilePageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = myOrganisationsEditUserProfilePage;
+    } else if (pageKey == 'Request_Revisions_Page') {
+      errorMessageFieldDataset =
+        requestRevisionsPage.requestRevisionsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = requestRevisionsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

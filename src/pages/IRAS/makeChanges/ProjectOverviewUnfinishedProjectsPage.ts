@@ -16,7 +16,7 @@ export default class ProjectOverviewUnfinishedProjectsPage {
     this.projectOverviewUnfinishedProjectsPageTestData = projectOverviewUnfinishedProjectsPageTestData;
     this.project_short_title_text = this.page.locator('div.govuk-inset-text p').nth(1);
     this.irasid_text = this.page.locator('div.govuk-inset-text p').first();
-    this.status_text = this.page.locator('.govuk-tag--blue');
+    this.status_text = this.page.locator('.govuk-tag--blue:visible');
 
     //Locators
     this.pageHeading = this.page
