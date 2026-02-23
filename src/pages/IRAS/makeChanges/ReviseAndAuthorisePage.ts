@@ -17,7 +17,7 @@ export default class ReviseAndAuthorisePage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.reviseAndAuthorisePageTestData.Revise_And_Authorise_Page.pageHeading);
-    this.description_of_revision_textbox = page.locator('#DescriptionOfRevision');
+    this.description_of_revision_textbox = page.locator('#RevisionDescription');
   }
 
   //Page Methods
