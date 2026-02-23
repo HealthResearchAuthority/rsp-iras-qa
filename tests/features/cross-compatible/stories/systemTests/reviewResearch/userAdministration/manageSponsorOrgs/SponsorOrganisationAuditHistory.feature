@@ -311,3 +311,101 @@ Feature: Sponsor organisation audit history
         Examples:
             | Login_User             | User_Email              | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Change_User_Role              | Test_User             |
             | Sponsor_Org_Admin_User | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Sponsor_Org_User_Role_Sponsor | Studywide_Reviewer_NI |
+
+    @rsp-6814 @SponsorOrganisationAuditPagination
+    Scenario Outline: Validate audit history and  Verify pagination in user list page of sponsor organisation when user is on the first page and navigate through each page by clicking page number or by by clicking next link
+        When I enter '<User_Email>' into the search field
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        And I capture the page screenshot
+        Then I can see the add user role page
+        When I fill the add user role page using '<Select_User_Role>'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using '<Select_User_Permission>'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page'
+        And I capture the page screenshot
+        And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+        And I record the 'User_Added' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
+        And I record the 'User_Assigned_Sponsor' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
+        And I record the 'User_Assigned_Authoriser' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
+        And I capture the page screenshot
+        Then I can see the 'user added' successful message on sponsor organisation user list page
+        And I capture the page screenshot
+        When I have navigated to the 'Home_Page' as '<Login_User>'
+        Then I click the 'Sponsor' link on the 'Home_Page'
+        And I can see the sponsor workspace page
+        Then I capture the page screenshot
+        And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+        And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+        And I capture the page screenshot
+        When I click the 'Manage' link on the 'My_Organisations_Page'
+        And I capture the page screenshot
+        When I click the 'Audit' link on the 'My_Organisations_Page'
+        And I capture the page screenshot
+        Then I validate the audit history table for sponsor organisation
+        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the default page size should be 'twenty'
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And the current page number should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Sponsor_Org_User_List_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+
+        Examples:
+            | Login_User             | User_Email              | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Change_User_Role                | Navigation_Method |
+            | Sponsor_Org_Admin_User | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | Sponsor_Org_User_Role_Org_Admin | page number       |
+            | Sponsor_Org_Admin_User | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | Sponsor_Org_User_Role_Org_Admin | next link         |
+
+    @rsp-6814 @SponsorOrganisationAuditPagination
+    Scenario Outline: Validate audit history and  Verify pagination in user list page of sponsor organisation when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
+        When I enter '<User_Email>' into the search field
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        And I capture the page screenshot
+        Then I can see the add user role page
+        When I fill the add user role page using '<Select_User_Role>'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+        And I capture the page screenshot
+        When I fill the add user permission page using '<Select_User_Permission>'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page'
+        And I capture the page screenshot
+        And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+        And I record the 'User_Added' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
+        And I record the 'User_Assigned_Sponsor' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
+        And I record the 'User_Assigned_Authoriser' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
+        And I capture the page screenshot
+        Then I can see the 'user added' successful message on sponsor organisation user list page
+        And I capture the page screenshot
+        When I have navigated to the 'Home_Page' as '<Login_User>'
+        Then I click the 'Sponsor' link on the 'Home_Page'
+        And I can see the sponsor workspace page
+        Then I capture the page screenshot
+        And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+        And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+        And I capture the page screenshot
+        When I click the 'Manage' link on the 'My_Organisations_Page'
+        And I capture the page screenshot
+        When I click the 'Audit' link on the 'My_Organisations_Page'
+        And I capture the page screenshot
+        Then I validate the audit history table for sponsor organisation
+        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Previous' button will be 'available' to the user
+        And the 'Next' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Sponsor_Org_User_List_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+
+        Examples:
+            | Login_User             | User_Email              | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Change_User_Role                | Navigation_Method |
+            | Sponsor_Org_Admin_User | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | Sponsor_Org_User_Role_Org_Admin | page number       |
+            | Sponsor_Org_Admin_User | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | Sponsor_Org_User_Role_Org_Admin | previous link     |
