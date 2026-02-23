@@ -273,4 +273,13 @@ export default class ManageSponsorOrganisationsPage {
       }
     })();
   }
+
+  async sqlGetSponsorRtsIdsByEmailAndActiveAndAuthoriser(userEmail: string) {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(
+      `SELECT RtsId FROM SponsorOrganisationsUsers where Email='${userEmail}' AND  IsActive=1 AND IsAuthoriser=1`
+    );
+    await sqlConnection.close();
+    return queryResult.recordset.map((row) => row.RtsId);
+  }
 }

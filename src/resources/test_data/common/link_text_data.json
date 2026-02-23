@@ -330,7 +330,8 @@
     "My_Account": "My account",
     "Authorisations": "Authorisations",
     "My_Organisations": "My organisations",
-    "Project_Closures": "Project closures"
+    "Project_Closures": "Project closures",
+    "My_Account_Breadcrumb": "My account"
   },
   "Modification_Post_Submission_Page": {
     "Documents": "Documents",
@@ -415,5 +416,11 @@
   },
   "Modification_Outcome_Check_Send_Page": {
     "Change": "Change"
+  },
+  "Authorisations_For_Sponsor_Organisation_Page": {
+    "Authorisations_Breadcrumb": "Authorisations"
+  },
+  "Authorisations_Page": {
+    "Sponsorworkspace_Breadcrumb": "Sponsor workspace"
   }
 }

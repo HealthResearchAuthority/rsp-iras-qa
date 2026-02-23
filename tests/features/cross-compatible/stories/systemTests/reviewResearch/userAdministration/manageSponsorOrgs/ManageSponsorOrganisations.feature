@@ -442,7 +442,7 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 And I can see the search for user to add to sponsor organisation page
                 And I capture the page screenshot
-                When I enter 'name of the disabled user in the system' into the search field
+                When I enter 'name of the user in the system' into the search field
                 And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
                 And I can see that the add users to 'sponsor organisation' search page contains 'Results'
                 And I capture the page screenshot
@@ -549,7 +549,7 @@ Feature: Manage sponsor organisations
                         | Add_User_Profile                                  | Disable_Label_Texts | Disable_User_Profile_Labels | Status_Enabled | Status_Disabled | Advanced_Filters_Users_Active | Advanced_Filters_Users_Disabled | Summary_Error_Message     |
                         | Valid_Data_In_All_Mandatory_Fields_Role_Applicant | Disable_Label_Texts | Disable_User_Profile_Labels | Enabled        | Disabled        | Advanced_Filter_Status_Active | Advanced_Filter_Status_Disabled | Disabled_User_Email_Error |
 
-        @rsp-6803 @AutoDisableSystemDisabledUsersInSponsorOrgs @Test6803
+        @rsp-6803 @AutoDisableSystemDisabledUsersInSponsorOrgs
         Scenario Outline: Verify the auto-disabling all active Sponsor org users when user is system-disabled in the system from manage sponsor organisation user list page
                 Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
                 Then I can see the system administration home page
