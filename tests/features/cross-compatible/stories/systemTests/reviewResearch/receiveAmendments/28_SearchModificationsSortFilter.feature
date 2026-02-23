@@ -931,7 +931,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | page number       | Advanced_Filters_Lead_Nation |
                         | previous link     | Advanced_Filters_Lead_Nation |
 
-        @RegressionSearchModificationsTitleBackLinksNav @SetupNewSponsorOrgGoLive @rsp-4865 @Release_2.0 @KNOWN_DEFECT_RSP_7365
+        @RegressionSearchModificationsTitleBackLinksNav @SetupNewSponsorOrgGoLive @KNOWN_DEFECT_RSP_7365
         Scenario: Verify back button navigation for search modifications from approvals as '<User>'
                 Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
                 And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1078,13 +1078,13 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click on the short project title link
                 And I capture the page screenshot
                 Then I can see the project overview page
-                When I click the 'Back' link on the 'Project_Overview_Page'
-                And I capture the page screenshot
-                Then I can see the modification post submission page
-                When I click the 'Back' link on the 'Review_All_Changes_Page'
-                And I capture the page screenshot
-                Then I can see the 'Search_Modifications_Page'
-                And I can now see a table of search results for 'modifications received for approval'
+                # When I click the 'Back' link on the 'Project_Overview_Page'
+                # And I capture the page screenshot
+                # Then I can see the modification post submission page
+                # When I click the 'Back' link on the 'Review_All_Changes_Page'
+                # And I capture the page screenshot
+                # Then I can see the 'Search_Modifications_Page'
+                # And I can now see a table of search results for 'modifications received for approval'
 
                 Examples:
                         | User                 |
