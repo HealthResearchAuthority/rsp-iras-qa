@@ -1389,7 +1389,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Backstage_User'
     And I capture the page screenshot
 
-  @rsp-6834 @ValidateAuditHistorySponsorReviseAndAuthorise @Release_2.0 @SetupNewSponsorOrgGoLive @abc
+  @rsp-6834 @ValidateAuditHistorySponsorReviseAndAuthorise @Release_2.0 @SetupNewSponsorOrgGoLive
   Scenario Outline: Validate the audit trail when sponsor revise and authorise the modification sent by the applicant
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1547,13 +1547,13 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
 
     Examples:
-      | Changes                                  | Research_Locations            |
-      # | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 | Data_With_Lead_Nation_England |
-      # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             | Data_With_Lead_Nation_England |
-      #| Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England |
-      | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England |
+      | Changes                                                            | Research_Locations            |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 | Data_With_Lead_Nation_England |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             | Data_With_Lead_Nation_England |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England |
+  # | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England |
 
-  @rsp-6834 @ValidateAuditHistorySponsorRequestRevisionAndApplicantSubmitsBackToSponsor @Release_2.0 @SetupNewSponsorOrgGoLive
+  @rsp-6834 @ValidateAuditHistorySponsorRequestRevisionAndApplicantSubmitsBackToSponsor @Release_2.0 @SetupNewSponsorOrgGoLive @Scenario3
   Scenario Outline: Validate the audit trail when sponsor request for revisions and applicant submits the modification back to sponsor after revision
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1689,3 +1689,141 @@ Feature: Modifications - Audit history
       # | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             | Data_With_Lead_Nation_England |
       #| Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England |
       | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England |
+
+  @rsp-6834 @ValidateAuditHistorySponsorReasonNotAuthorised @Release_2.0 @abc
+  Scenario: Validate the audit history when sponsor enters a reason and not authorise the modification
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
+    Then I can see the project identifiers page
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Data_With_Lead_Nation_England'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Created' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Submitted' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Data_With_Lead_Nation_England' dataset
+    And I create '<Changes>' for the created modification
+    And I can see the modifications details page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    # When I click the 'Add_Documents' button on the 'Modification_Details_Page'
+    # And I upload 'Multiple_Files_Three' documents
+    # When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    # When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    # When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    # And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    # When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+    # When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+    # And I capture the page screenshot
+    # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    # When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    # Then I can see the review all changes page
+    #after uncommenting document remove below line
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+    And I capture the page screenshot
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Applicant_User' user
+    And I keep note of the 'Modification_Sent_To_Sponsor' event actioned by the user 'Applicant_User' to store the modification audit history for 'Backstage_User' user
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_Reading'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'automation sponsor email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I have navigated to the 'Home_Page' as 'Sponsor_User'
+    When I click the 'Sponsor' link on the 'Home_Page'
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    Then I click on the searched modification id
+    And I can see the sponsor check and authorise page
+    When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
+    And I capture the page screenshot
+    And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
+    When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    #6827 fill comments after not authorising
+    #And I fill the modification not authorise page with 'Modification_Not_Authorise_Page'
+    When I click the 'Save_Continue' button on the 'Modification_Not_Authorise_Page'
+    And I keep note of the 'Modification_Comment_Reason_Not_Approved_Added' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Backstage_User' user
+    And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Sponsor_User' user
+    And I keep note of the 'Modification_Not_Authorised_By_Sponsor' event actioned by the user 'Sponsor_User' to store the modification audit history for 'Backstage_User' user
+    And I capture the page screenshot
+    And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
+    Then I click on the searched modification id
+    When I click the 'History' link on the 'Sponsor_Check_And_Authorise_Page'
+    # Sponsor - Validate audit trail
+    And I validate the audit history table for modifications of the user 'Sponsor_User'
+    And I capture the page screenshot
+    # Applicant - Validate audit trail
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Post_Approval_Page'
+    Then I click on the searched modification id
+    When I click the 'History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Applicant_User'
+    And I capture the page screenshot
+    # System Admin - Validate the audit trial
+    And I have navigated to the 'My_Research_Page' as 'System_Admin'
+    When I click the 'Home' link on the 'Banner'
+    When I click the 'Approvals' link on the 'Home_Page'
+    And I click the 'Search_Records' link on the 'Approvals_Page'
+    And I select the radio button for 'Modification_Record' in the choose a record type to search page
+    And I capture the page screenshot
+    And I click the 'Next' button on the 'Choose_A_Record_Type_To_Search_Page'
+    Then I can see the 'Search_Modifications_Page'
+    And I enter 'new iras id' into the search field
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    And I capture the page screenshot
+    When I click a 'modification id' on the 'Search_Modifications_Page'
+    Then I click on the searched modification id
+    When I click the 'Audit_History' link on the 'Modification_Post_Submission_Page'
+    And I validate the audit history table for modifications of the user 'Backstage_User'
+    And I capture the page screenshot
+
+    Examples:
+      | Changes                                                            | Research_Locations            |
+      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One                 | Data_With_Lead_Nation_England |
+      | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two             | Data_With_Lead_Nation_England |
+      | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Data_With_Lead_Nation_England |
