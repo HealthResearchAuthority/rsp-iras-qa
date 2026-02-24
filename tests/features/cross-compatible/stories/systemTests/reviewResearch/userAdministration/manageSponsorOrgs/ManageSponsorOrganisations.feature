@@ -851,7 +851,7 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
 
 
-        @VerifySponsorOrgAuditHistoryDisableUser @rsp-6807 @KNOWN-DEFECT-RSP-5003 @KNOWN-DEFECT-RSP-7420
+        @VerifySponsorOrgAuditHistoryDisableUser @rsp-6807 @KNOWN-DEFECT-RSP-5003
         Scenario Outline: Disable the user in 'Manage Sponsor Organisations view' and validate audit history
                 Given I have navigated to the 'Home_Page'
                 When I click the 'System_Administration' link on the 'Home_Page'
