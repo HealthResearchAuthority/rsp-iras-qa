@@ -331,6 +331,7 @@
     "Project_Closures": "Project closures"
   },
   "Modification_Post_Submission_Page": {
+    "Sponsor_Details": "Sponsor details",
     "Documents": "Documents",
     "History": "History",
     "Modification_Details": "Modification details",
@@ -413,5 +414,10 @@
   },
   "Modification_Outcome_Check_Send_Page": {
     "Change": "Change"
+  },
+  "Revise_And_Authorise_Page": {
+    "Back": "Back",
+    "Change": "Change",
+    "Remove": "Remove"
   }
 }

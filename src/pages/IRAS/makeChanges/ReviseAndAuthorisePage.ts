@@ -17,14 +17,17 @@ export default class ReviseAndAuthorisePage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.reviseAndAuthorisePageTestData.Revise_And_Authorise_Page.pageHeading);
-    this.description_of_revision_textbox = page.locator('#DescriptionOfRevision');
+    this.description_of_revision_textbox = page.locator('#RevisionDescription');
   }
 
   //Page Methods
   async assertOnReviseAndAuthorisePage() {
     await expect.soft(this.pageHeading).toBeVisible();
     await expect
-      .soft(this.page.getByText(this.reviseAndAuthorisePageTestData.Revise_And_Authorise_Page.descriptionLabel))
+      .soft(this.page.getByText(this.reviseAndAuthorisePageTestData.Revise_And_Authorise_Page.descriptionHeaderLabel))
+      .toBeVisible();
+    await expect
+      .soft(this.page.getByText(this.reviseAndAuthorisePageTestData.Revise_And_Authorise_Page.descriptionBodyLabel))
       .toBeVisible();
   }
 }

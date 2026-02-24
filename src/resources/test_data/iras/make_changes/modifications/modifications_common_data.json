@@ -32,7 +32,8 @@
     "dateCreated": "Date created",
     "ViewDetailsLink": "View details",
     "Audit_History_Headers": ["Date", "Event description", "User email"],
-    "Event_Description_Header_Label": "Event description"
+    "Event_Description_Header_Label": "Event description",
+    "Sponsor_Details_Header": "Sponsor details"
   },
   "Ranking_Category": {
     "always_n_a": [
@@ -675,6 +676,20 @@
       "planned_project_end_day_text": "23",
       "planned_project_end_month_dropdown": "April",
       "planned_project_end_year_text": "2058",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["Northern Ireland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No",
+      "change_status": "Change ready for submission"
+    }
+  },
+  "Change_To_Planned_End_Date_Changed": {
+    "Change_To_Planned_End_Date": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "10",
+      "planned_project_end_month_dropdown": "January",
+      "planned_project_end_year_text": "2031",
       "which_organisation_change_affect_checkbox": ["NHS/HSC"],
       "where_organisation_change_affect_nhs_question_checkbox": ["Northern Ireland", "Wales"],
       "will_some_or_all_organisations_be_affected_question_radio": "Some",

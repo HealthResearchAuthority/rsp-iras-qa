@@ -83,6 +83,8 @@ Then(
           });
         const documentFoundCount = await expectedDocumentRow.count();
         expect.soft(documentFoundCount).toBeGreaterThan(0);
+      } else {
+        continue;
       }
       //Enter document details
       for (const key in dataset) {

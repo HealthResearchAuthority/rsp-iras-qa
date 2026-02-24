@@ -392,9 +392,13 @@ Then(
 Then(
   'I validate confirmation screen for modification has been authorised by sponsor and submitted for review',
   async ({ confirmationPage }) => {
-    await confirmationPage.confirmation_header_common_label
-      .getByText(confirmationPage.confirmationPageTestData.Modification_Authorised_Submitted_Review.page_heading)
-      .isVisible();
+    await expect
+      .soft(
+        confirmationPage.confirmation_header_common_label.getByText(
+          confirmationPage.confirmationPageTestData.Modification_Authorised_Submitted_Review.page_heading
+        )
+      )
+      .toBeVisible();
     await expect
       .soft(
         confirmationPage.page.getByText(
@@ -402,16 +406,24 @@ Then(
         )
       )
       .toBeVisible();
-    await confirmationPage.confirmation_body_label
-      .getByText(confirmationPage.confirmationPageTestData.Modification_Authorised_Submitted_Review.confirmation_body)
-      .isVisible();
+    await expect
+      .soft(
+        confirmationPage.confirmation_body_label.getByText(
+          confirmationPage.confirmationPageTestData.Modification_Authorised_Submitted_Review.confirmation_body
+        )
+      )
+      .toBeVisible();
   }
 );
 
 Then('I validate confirmation screen for modification not authorised by sponsor', async ({ confirmationPage }) => {
-  await confirmationPage.confirmation_header_common_label
-    .getByText(confirmationPage.confirmationPageTestData.Modification_Not_Authorised.page_heading)
-    .isVisible();
+  await expect
+    .soft(
+      confirmationPage.confirmation_header_common_label.getByText(
+        confirmationPage.confirmationPageTestData.Modification_Not_Authorised.page_heading
+      )
+    )
+    .toBeVisible();
   await expect
     .soft(
       confirmationPage.page.getByText(
@@ -419,17 +431,25 @@ Then('I validate confirmation screen for modification not authorised by sponsor'
       )
     )
     .toBeVisible();
-  await confirmationPage.confirmation_body_label
-    .getByText(confirmationPage.confirmationPageTestData.Modification_Not_Authorised.confirmation_body)
-    .isVisible();
+  await expect
+    .soft(
+      confirmationPage.confirmation_body_label.getByText(
+        confirmationPage.confirmationPageTestData.Modification_Not_Authorised.confirmation_body
+      )
+    )
+    .toBeVisible();
 });
 
 Then(
   'I validate confirmation screen for modification has been authorised by sponsor and approved',
   async ({ confirmationPage }) => {
-    await confirmationPage.confirmation_header_common_label
-      .getByText(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.page_heading)
-      .isVisible();
+    await expect
+      .soft(
+        confirmationPage.confirmation_header_common_label.getByText(
+          confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.page_heading
+        )
+      )
+      .toBeVisible();
     await expect
       .soft(
         confirmationPage.page.getByText(
@@ -437,19 +457,31 @@ Then(
         )
       )
       .toBeVisible();
-    await confirmationPage.confirmation_body_label
-      .getByText(confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.confirmation_body)
-      .isVisible();
+    await expect
+      .soft(
+        confirmationPage.confirmation_body_label.getByText(
+          confirmationPage.confirmationPageTestData.Modification_Authorised_Approved.confirmation_body
+        )
+      )
+      .toBeVisible();
   }
 );
 
 Then('I validate confirmation screen for modification review outcome sent', async ({ confirmationPage }) => {
-  await confirmationPage.confirmation_header_common_label
-    .getByText(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.page_heading)
-    .isVisible();
-  await confirmationPage.confirmation_body_label
-    .getByText(confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.confirmation_body)
-    .isVisible();
+  await expect
+    .soft(
+      confirmationPage.confirmation_header_common_label.getByText(
+        confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.page_heading
+      )
+    )
+    .toBeVisible();
+  await expect
+    .soft(
+      confirmationPage.confirmation_body_label.getByText(
+        confirmationPage.confirmationPageTestData.Modification_Outcome_Sent.confirmation_body
+      )
+    )
+    .toBeVisible();
 });
 
 Then(

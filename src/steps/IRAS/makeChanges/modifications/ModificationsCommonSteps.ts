@@ -256,6 +256,25 @@ Then(
 );
 
 Then(
+  'I validate the change details are displayed as per the {string} dataset for revise and authorise page',
+  async ({ modificationsCommonPage }, datasetName) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeNames = Object.keys(changesDataset).reverse();
+    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
+      const changeName = changeNames[changeIndex];
+      const expectedData = { ...changesDataset[changeName] };
+      expectedData.area_of_change_dropdown = expectedData.area_of_change_dropdown + ' ' + expectedData.change_status;
+      const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
+      const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
+        cardTitle,
+        expectedData
+      );
+      modificationsCommonPage.validateCardData(expectedData, actualData.cardData);
+    }
+  }
+);
+
+Then(
   'I validate the change details are displayed as per the {string} dataset under the tabs sections',
   async ({ modificationsCommonPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];

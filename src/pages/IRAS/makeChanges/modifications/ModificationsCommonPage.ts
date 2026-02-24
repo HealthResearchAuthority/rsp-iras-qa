@@ -4,7 +4,12 @@ import PlannedEndDateChangePage from './PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
-import { confirmStringNotNull, convertDate, validateDateRange } from '../../../../utils/UtilFunctions';
+import {
+  confirmStringNotNull,
+  convertDate,
+  removeUnwantedWhitespace,
+  validateDateRange,
+} from '../../../../utils/UtilFunctions';
 import ContactDetailsModificationPage from './ContactDetailsModificationPage';
 import ProjectPersonnelChangeChiefInvestigatorPage from './ProjectPersonnelChangeChiefInvestigatorPage';
 import ProjectPersonnelChangePrincipalInvestigatorPage from './ProjectPersonnelChangePrincipalInvestigatorPage';
@@ -129,7 +134,7 @@ export default class ModificationsCommonPage {
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
       .locator('..')
-      .locator('a');
+      .locator('[class$="value"]');
     this.modification_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
@@ -1046,7 +1051,7 @@ export default class ModificationsCommonPage {
         continue;
       }
       const expectedValue = expectedData[key];
-      const actualValue = actualData[key];
+      const actualValue = await removeUnwantedWhitespace(actualData[key] ?? '');
       if (Array.isArray(expectedValue)) {
         const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
         const sortedActual = [...(actualValue || [])].sort(

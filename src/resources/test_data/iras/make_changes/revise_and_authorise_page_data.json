@@ -1,7 +1,8 @@
 {
   "Revise_And_Authorise_Page": {
     "pageHeading": "Revise and authorise",
-    "descriptionLabel": "Description of revisions made"
+    "descriptionHeaderLabel": "Description of revisions made",
+    "descriptionBodyLabel": "Enter a brief summary describing the revisions you have made to the modification and your reasons for making them"
   },
   "Valid_Data_All_Fields": {
     "description_of_revision_textbox": "This is a description of the revisions made to the application."

@@ -113,6 +113,15 @@
     "src/resources/test_data/common/document_upload/GIF_File.gif",
     "src/resources/test_data/common/document_upload/DOC_File.doc"
   ],
+  "Single_File": [
+    "src/resources/test_data/common/document_upload/SVG_File.svg"
+  ],
+  "Multiple_Files_Three_Change": [
+    "src/resources/test_data/common/document_upload/PNG_File.png",
+    "src/resources/test_data/common/document_upload/GIF_File.gif",
+    "src/resources/test_data/common/document_upload/DOC_File.doc",
+    "src/resources/test_data/common/document_upload/SVG_File.svg"
+  ],
   "Multiple_Invalid_Files_Non_Video": [
     "src/resources/test_data/common/document_upload/invalid_non_video_files/JSON_File.json",
     "src/resources/test_data/common/document_upload/invalid_non_video_files/7ZIP_File.7z",
