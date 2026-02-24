@@ -186,15 +186,14 @@ export default class ModificationsCommonPage {
       .getByText(this.modificationsCommonPageTestData.Label_Texts.dateCreated)
       .locator('..')
       .locator('[class$="value"]');
-    // this.auditHistoryTables = this.page.locator('table.govuk-table-users').filter({
-    //   has: this.page.getByRole('columnheader', {
-    //     name: modificationsCommonPageTestData.Label_Texts.Event_Description_Header_Label,
-    //   }),
-    // });
+    this.auditHistoryTables = this.page.locator('table.govuk-table-users').filter({
+      has: this.page.getByRole('columnheader', {
+        name: modificationsCommonPageTestData.Label_Texts.Event_Description_Header_Label,
+      }),
+    });
     this.auditHistoryTables = this.page.locator('.govuk-table-users');
     this.auditHistoryTableHeader = this.auditHistoryTables.locator('thead th');
     this.auditHistoryTableBodyRows = this.auditHistoryTables.locator('tbody tr');
-    //this.tableCell = this.page.locator('td');
     this.tableCell = this.page.locator('.govuk-table__cell');
     this.notification_heading_text = this.page.getByRole('heading', { level: 1 });
     this.notification_text = this.page.locator('p.govuk-body');

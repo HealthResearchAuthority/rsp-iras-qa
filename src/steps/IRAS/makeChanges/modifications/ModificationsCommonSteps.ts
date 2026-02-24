@@ -612,11 +612,11 @@ Then(
 Then(
   'I validate the audit history table for modifications of the user {string}',
   async ({ modificationsCommonPage }, userName: string) => {
-    // await modificationsCommonPage.auditHistoryTables.waitFor({ state: 'visible' });
-    // const auditHistoryTableHeadersActual = await modificationsCommonPage.auditHistoryTableHeader.allTextContents();
-    // const auditHistoryTableHeadersExpected =
-    //   modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.Audit_History_Headers;
-    // expect.soft(auditHistoryTableHeadersActual).toEqual(auditHistoryTableHeadersExpected);
+    await modificationsCommonPage.auditHistoryTables.waitFor({ state: 'visible' });
+    const auditHistoryTableHeadersActual = await modificationsCommonPage.auditHistoryTableHeader.allTextContents();
+    const auditHistoryTableHeadersExpected =
+      modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.Audit_History_Headers;
+    expect.soft(auditHistoryTableHeadersActual).toEqual(auditHistoryTableHeadersExpected);
     const rowCount = await modificationsCommonPage.auditHistoryTableBodyRows.count();
     const actualAuditHistoryRows: string[][] = [];
     for (let auditRowIndex = 0; auditRowIndex < rowCount; auditRowIndex++) {
