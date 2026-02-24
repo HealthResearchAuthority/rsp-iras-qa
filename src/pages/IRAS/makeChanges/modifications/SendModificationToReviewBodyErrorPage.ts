@@ -1,14 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as sendModificationToReviewBodyErrorPageTestData from '../../../../resources/test_data/iras/make_changes/modifications/send_modification_to_review_body_error_data.json';
 import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
-import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
-export default class ModificationsSelectAreaOfChangePage {
+export default class SendModificationToReviewBodyErrorPage {
   readonly page: Page;
   readonly sendModificationToReviewBodyErrorPageTestData: typeof sendModificationToReviewBodyErrorPageTestData;
   readonly buttonTextData: typeof buttonTextData;
-  readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
   readonly iras_id_row: Locator;
   readonly iras_id_text: Locator;
@@ -20,7 +18,6 @@ export default class ModificationsSelectAreaOfChangePage {
   constructor(page: Page) {
     this.page = page;
     this.sendModificationToReviewBodyErrorPageTestData = sendModificationToReviewBodyErrorPageTestData;
-    this.linkTextData = linkTextData;
     this.buttonTextData = buttonTextData;
 
     //Locators
