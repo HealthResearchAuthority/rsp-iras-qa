@@ -76,7 +76,7 @@
   "Modification_Sent_To_Sponsor_Labels": {
     "page_heading": "Modification sent to sponsor",
     "what_happens_next_label": "What happens next",
-    "page_guidance_text": "You've sent your modification to the sponsor. They'll either accept the changes and submit it, or contact you for more information."
+    "page_guidance_text": "You've sent your modification to the sponsor. They'll either accept the changes and submit it, contact you for more information or will not authorise it. You can check the status of the modification on the post approval tab of the project overview."
   },
   "Project_Record_Delete_Labels": {
     "page_heading_prefix": "Are you sure you want to delete project",
