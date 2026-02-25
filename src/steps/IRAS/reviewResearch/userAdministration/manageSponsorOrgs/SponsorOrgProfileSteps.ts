@@ -55,3 +55,16 @@ When(
     }
   }
 );
+
+Then(
+  'I can see the user record should be available with {string} status in {string}',
+  async ({ commonItemsPage, myOrganisationsUserProfilePage }, expectedStatus: string, pageKey: string) => {
+    if (pageKey === 'organisation profile users page') {
+      const actualStatus = (await commonItemsPage.users_sponsor_org_status_value_first_row.innerText()).trim();
+      expect.soft(actualStatus).toBe(expectedStatus);
+    } else if (pageKey === 'My_Organisations_User_Profile_Page') {
+      const actualStatus = (await myOrganisationsUserProfilePage.status_value.innerText()).trim();
+      expect.soft(actualStatus).toBe(expectedStatus);
+    }
+  }
+);

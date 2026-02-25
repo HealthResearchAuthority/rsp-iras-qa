@@ -6,7 +6,13 @@ const { Given, When, Then } = createBdd(test);
 Given(
   'I see the details for {string} are correctly displayed on {string}',
   async (
-    { myOrganisationsUserProfilePage, myOrganisationsEditUserProfilePage, loginPage, userProfilePage },
+    {
+      myOrganisationsUserProfilePage,
+      myOrganisationsEditUserProfilePage,
+      loginPage,
+      userProfilePage,
+      viewEditUserProfilePage,
+    },
     user: string,
     pageType: string
   ) => {
@@ -28,23 +34,37 @@ Given(
             .getByLabel(await myOrganisationsUserProfilePage.getAuthoriser())
         )
         .toBeChecked();
-    } else {
-      expect.soft(myOrganisationsUserProfilePage.role_value).toHaveText(await myOrganisationsUserProfilePage.getRole());
-      expect
+    } else if (pageType.toLowerCase().includes('view')) {
+      await expect
+        .soft(myOrganisationsUserProfilePage.role_value)
+        .toHaveText(await myOrganisationsUserProfilePage.getRole());
+      await expect
         .soft(myOrganisationsUserProfilePage.authoriser_value)
         .toHaveText(await myOrganisationsUserProfilePage.getAuthoriser());
-      expect
+      await expect.soft(viewEditUserProfilePage.email_address_value).toHaveText(await userProfilePage.getEmail());
+    } else {
+      await expect
+        .soft(myOrganisationsUserProfilePage.role_value)
+        .toHaveText(await myOrganisationsUserProfilePage.getRole());
+      await expect
+        .soft(myOrganisationsUserProfilePage.authoriser_value)
+        .toHaveText(await myOrganisationsUserProfilePage.getAuthoriser());
+      await expect
         .soft(myOrganisationsUserProfilePage.status_value)
         .toHaveText(await myOrganisationsUserProfilePage.getStatus());
     }
 
-    expect.soft(myOrganisationsUserProfilePage.title_value).toHaveText(await userProfilePage.getTitle());
-    expect.soft(myOrganisationsUserProfilePage.first_name_value).toHaveText(await userProfilePage.getFirstName());
-    expect.soft(myOrganisationsUserProfilePage.last_name_value).toHaveText(await userProfilePage.getLastName());
-    expect.soft(myOrganisationsUserProfilePage.email_value).toHaveText(await userProfilePage.getEmail());
-    expect.soft(myOrganisationsUserProfilePage.telephone_value).toHaveText(await userProfilePage.getTelephone());
-    expect.soft(myOrganisationsUserProfilePage.organisation_value).toHaveText(await userProfilePage.getOrganisation());
-    expect.soft(myOrganisationsUserProfilePage.job_title_value).toHaveText(await userProfilePage.getJobTitle());
+    await expect.soft(myOrganisationsUserProfilePage.title_value).toHaveText(await userProfilePage.getTitle());
+    await expect.soft(myOrganisationsUserProfilePage.first_name_value).toHaveText(await userProfilePage.getFirstName());
+    await expect.soft(myOrganisationsUserProfilePage.last_name_value).toHaveText(await userProfilePage.getLastName());
+    if (!pageType.toLowerCase().includes('view')) {
+      await expect.soft(myOrganisationsUserProfilePage.email_value).toHaveText(await userProfilePage.getEmail());
+    }
+    await expect.soft(myOrganisationsUserProfilePage.telephone_value).toHaveText(await userProfilePage.getTelephone());
+    await expect
+      .soft(myOrganisationsUserProfilePage.organisation_value)
+      .toHaveText(await userProfilePage.getOrganisation());
+    await expect.soft(myOrganisationsUserProfilePage.job_title_value).toHaveText(await userProfilePage.getJobTitle());
   }
 );
 
