@@ -183,5 +183,7 @@ Then('I validate the audit history table for sponsor organisation', async ({ myS
       record.userEmailExpected,
     ]);
   const expectedRowsToCheck = actualAuditHistoryRows;
+  console.log('expectedRowsToCheck', expectedRowsToCheck);
+  console.log('expectedRowsToCheck', expectedAuditHistoryRows);
   expect.soft(expectedRowsToCheck).toEqual(expectedAuditHistoryRows);
 });

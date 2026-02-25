@@ -458,5 +458,10 @@
   },
   "Request_Revisions_Page": {
     "Send_Request": "Send request"
+  },
+  "My_Organisations_Audit_History_Page": {
+    "Date": "Date",
+    "Event_Description": "Event description",
+    "Username": "Username"
   }
 }
