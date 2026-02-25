@@ -114,6 +114,8 @@ import MyOrganisationsEditUserProfilePage from '../pages/IRAS/reviewResearch/spo
 import CloseProjectPage from '../pages/IRAS/makeChanges/CloseProjectPage';
 import CheckAuthoriseProjectClosurePage from '../pages/IRAS/makeChanges/CheckAuthoriseProjectClosurePage';
 import RequestRevisionsPage from '../pages/IRAS/makeChanges/RequestRevisionsPage';
+import CreateModificationErrorPage from '../pages/IRAS/makeChanges/modifications/CreateModificationErrorPage';
+import SendModificationToReviewBodyErrorPage from '../pages/IRAS/makeChanges/modifications/SendModificationToReviewBodyErrorPage';
 import ModificationNotAuthorisedPage from '../pages/IRAS/makeChanges/ModificationNotAuthorisedPage';
 import ReviseAndAuthorisePage from '../pages/IRAS/makeChanges/ReviseAndAuthorisePage';
 
@@ -230,6 +232,9 @@ type CustomFixtures = {
   closeProjectPage: CloseProjectPage;
   checkAuthoriseProjectClosurePage: CheckAuthoriseProjectClosurePage;
   requestRevisionsPage: RequestRevisionsPage;
+  createModificationErrorPage: CreateModificationErrorPage;
+  sendModificationToReviewBodyErrorPage: SendModificationToReviewBodyErrorPage;
+
   modificationNotAuthorisedPage: ModificationNotAuthorisedPage;
   reviseAndAuthorisePage: ReviseAndAuthorisePage;
   makeAxeBuilder: () => AxeBuilder;
@@ -666,6 +671,14 @@ export const test = base.extend<CustomFixtures>({
 
   myOrganisationsEditUserProfilePage: async ({ page }, use) => {
     await use(new MyOrganisationsEditUserProfilePage(page));
+  },
+
+  createModificationErrorPage: async ({ page }, use) => {
+    await use(new CreateModificationErrorPage(page));
+  },
+
+  sendModificationToReviewBodyErrorPage: async ({ page }, use) => {
+    await use(new SendModificationToReviewBodyErrorPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
