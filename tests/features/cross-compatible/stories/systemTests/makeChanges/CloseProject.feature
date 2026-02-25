@@ -46,7 +46,7 @@ Feature: Close Project
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsAuthorisedForClosure
   Scenario: Validate project closure successful when no modifications exist for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -143,7 +143,7 @@ Feature: Close Project
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsNotAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsNotAuthorisedForClosure
   Scenario: Validate project closure when no modifications exist for project and not authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -241,7 +241,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedModificationsAuthorisedForClosure
   Scenario: Validate project closure successful when there exist an approved modification for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -391,7 +391,7 @@ Feature: Close Project
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedModificationsNotAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedModificationsNotAuthorisedForClosure
   Scenario: Validate project closure when there exist an approved modification for project and not authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -542,7 +542,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotApprovedModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotApprovedModificationsAuthorisedForClosure
   Scenario: Validate project closure successful when there exist a not approved modification for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -692,7 +692,7 @@ Feature: Close Project
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotApprovedModificationsNotAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotApprovedModificationsNotAuthorisedForClosure
   Scenario: Validate project closure when there exist a not approved modification for project and not authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -843,7 +843,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedModificationsAuthorisedForClosure
   Scenario: Validate project closure when there exist a not authorised modification for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -970,7 +970,7 @@ Feature: Close Project
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedModificationsNotAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedModificationsNotAuthorisedForClosure
   Scenario: Validate project closure when there exist a not authorised modification for project and not authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1098,7 +1098,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedNotApprovedAndNotAuthorisedModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedNotApprovedAndNotAuthorisedModificationsAuthorisedForClosure
   Scenario: Validate project closure successful when there exist a combination of approved, not approved and not authorised modifications for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1331,7 +1331,7 @@ Feature: Close Project
     Then I cannot see a 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I validate the project closure transaction table
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedNotApprovedAndNotAuthorisedModificationsNotAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedNotApprovedAndNotAuthorisedModificationsNotAuthorisedForClosure
   Scenario: Validate project closure when there exist a combination of approved, not approved and not authorised modifications for project and not authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1977,7 +1977,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I validate 'Mandatory_Field_Error' displayed on 'Check_Authorise_Project_Closure_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedThenAuthorisedForClosure @KNOWN_DEFECT_RSP-6783
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedThenAuthorisedForClosure
   Scenario: Validate a project closure initially not authorised can be authorised later for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

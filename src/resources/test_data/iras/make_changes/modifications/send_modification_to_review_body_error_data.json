@@ -1,0 +1,10 @@
+{
+  "Send_Modification_To_ReviewBody_Error_Page": {
+    "heading": "You cannot submit this modification to the review body"
+  },
+  "Label_Texts": {
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title",
+    "send_modification_to_reviewbody_hint_label": "You cannot submit this modification as this project already has a modification with the review body. You will need to wait until an outcome for the previous modification is issued before you can submit another modification."
+  }
+}
