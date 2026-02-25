@@ -458,5 +458,11 @@
   },
   "Request_Revisions_Page": {
     "Send_Request": "Send request"
+  },
+  "Create_Modification_Error_Page": {
+    "Return_To_Project_Overview": "Return to project overview"
+  },
+  "Send_Modification_To_Sponsor_Error_Page": {
+    "Return_To_Project_Overview": "Return to project overview"
   }
 }
