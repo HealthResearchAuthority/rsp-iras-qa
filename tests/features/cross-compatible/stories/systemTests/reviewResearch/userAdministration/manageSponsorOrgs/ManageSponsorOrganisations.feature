@@ -1,4 +1,4 @@
-@RegressionManageSponsorOrganisations @SysAdminUser @UserAdministration @BackStage @ManageSponsorOrgs @SetupNewSponsorOrgGoLive
+@RegressionManageSponsorOrganisations @SystemTest @SysAdminUser @UserAdministration @BackStage @ManageSponsorOrgs @SetupNewSponsorOrgGoLive
 Feature: Manage sponsor organisations
 
         Background:
