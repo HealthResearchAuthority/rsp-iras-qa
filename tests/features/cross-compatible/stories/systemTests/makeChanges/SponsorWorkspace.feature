@@ -97,8 +97,7 @@ Feature: Sponsor Workspace
     Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
-    When I click the 'Sponsor' link on the 'Home_Page'
-    Then I can see the 'Access_Denied_Page'
+    And I cannot see a 'Sponsor' link on the 'Home_Page'
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -174,7 +173,7 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
-    Then I can see the 'Access_Denied_Page'
+    And I can see the sponsor workspace page
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'

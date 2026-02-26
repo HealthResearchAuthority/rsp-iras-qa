@@ -933,9 +933,12 @@ When(
   'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }, position: string) => {
     let pageLocator: Locator;
-    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-      await commonItemsPage.search_results_count.textContent()
-    );
+    let recordsCount = 0;
+    const count = await commonItemsPage.search_results_count.count();
+    if (count > 0) {
+      const resultsText = await commonItemsPage.search_results_count.textContent();
+      recordsCount = await commonItemsPage.extractNumFromSearchResultCount(resultsText ?? '');
+    }
     if (recordsCount > 20) {
       if (position.toLowerCase() === 'first') {
         pageLocator = commonItemsPage.firstPage;
@@ -1319,9 +1322,12 @@ Then(
 Then(
   'I sequentially navigate through each {string} by clicking on {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
-    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-      await commonItemsPage.search_results_count.textContent()
-    );
+    let recordsCount = 0;
+    const count = await commonItemsPage.search_results_count.count();
+    if (count > 0) {
+      const resultsText = await commonItemsPage.search_results_count.textContent();
+      recordsCount = await commonItemsPage.extractNumFromSearchResultCount(resultsText ?? '');
+    }
     if (recordsCount > 20) {
       const totalPages = await commonItemsPage.getTotalPages();
       //Limiting the max pages to validate to 10
@@ -1355,9 +1361,12 @@ Then(
 Then(
   'I sequentially navigate through each {string} by clicking on {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
-    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-      await commonItemsPage.search_results_count.textContent()
-    );
+    let recordsCount = 0;
+    const count = await commonItemsPage.search_results_count.count();
+    if (count > 0) {
+      const resultsText = await commonItemsPage.search_results_count.textContent();
+      recordsCount = await commonItemsPage.extractNumFromSearchResultCount(resultsText ?? '');
+    }
     if (recordsCount > 20) {
       const totalPages = await commonItemsPage.getTotalPages();
       //Limiting the max pages to validate to 10
