@@ -258,7 +258,10 @@ export default class CommonItemsPage {
       .getByText(this.commonTestData.error_message_summary_header, {
         exact: true,
       });
-    this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
+    //this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
+    this.summaryErrorLinks = this.errorMessageSummaryLabel
+      .locator('..')
+      .locator('ul.govuk-error-summary__list > li > a');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
     this.pagination = page
       .getByRole('navigation', { name: 'Pagination' })

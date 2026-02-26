@@ -762,8 +762,11 @@ Then(
       errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error' ||
       errorMessageFieldAndSummaryDatasetName === 'Both_Filters_Not_Selected_Same_Time_Summary_Only_Error'
     ) {
-      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
-      summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
+      //allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).flat();
+      //summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
+      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+      console.log(JSON.stringify(summaryErrorActualValues));
     } else {
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
       summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
@@ -791,8 +794,9 @@ Then(
             ).toString();
             const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
             expect.soft(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues);
-            const fieldValActuals = summaryErrorActualValues.split(',');
-            for (const val of fieldValActuals) {
+            //const fieldValActuals = summaryErrorActualValues.split(',');
+            const fieldValActuals = JSON.stringify(summaryErrorActualValues, null, 2);
+            for (const val of JSON.parse(fieldValActuals)) {
               const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
               await expect(element).toBeInViewport();
             }

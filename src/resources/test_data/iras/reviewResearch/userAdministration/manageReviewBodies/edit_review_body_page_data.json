@@ -361,26 +361,28 @@
     },
     "Validation": {
       "All_Mandatory_Field_Errors": {
-        "country_checkbox": "Enter a country",
+        "country_checkbox": "Select at least one country",
         "email_address_text": "Enter an email address",
         "organisation_name_text": "Enter an organisation name"
       },
-      "Email_Format": "Enter an email address in the correct format",
+      "Email_Format": "Enter an email address in the correct format, like example@test.com",
       "Mandatory_Field_Organisation_Name_Error": { "organisation_name_text": "Enter an organisation name" },
       "Max_Chars_Organisation_Name_Error": {
         "organisation_name_text": "Organisation name must be 250 characters or less"
       },
       "Mandatory_Field_Email_Address_Error": { "email_address_text": "Enter an email address" },
       "Max_Chars_Email_Address_Error": { "email_address_text": "Email address must be 254 characters or less" },
-      "Email_Format_Error": { "email_address_text": "Enter an email address in the correct format" },
+      "Email_Format_Error": {
+        "email_address_text": "Enter an email address in the correct format, like example@test.com"
+      },
       "Incorrect_Format_Invalid_Character_Limit_Email_Address_Error": {
         "email_address_text": [
           "Email address must be 254 characters or less",
-          "Enter an email address in the correct format"
+          "Enter an email address in the correct format, like example@test.com"
         ]
       },
       "Mandatory_Field_Country_Error": {
-        "country_checkbox": "Enter a country"
+        "country_checkbox": "Select at least one country"
       },
       "Max_Description_Words_Error": {
         "description_text": "The description must be 250 words or less"

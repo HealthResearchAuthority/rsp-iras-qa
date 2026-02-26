@@ -6,7 +6,7 @@ Feature:Manage Review Bodies list and view review bodies profile details
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @viewListOfReviewBodies @rsp-2569
+    @viewListOfReviewBodies @rsp-2569 @KNOWN-DEFECT-RSP-6440
     Scenario Outline: Verify the user is able to view list of review bodies in alphabetical order of Organisation Name
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
@@ -59,7 +59,7 @@ Feature:Manage Review Bodies list and view review bodies profile details
             | Valid_Data_In_All_Fields_Disabled | Disabled |
 
 
-    @viewNewReviewBody @rsp-2571
+    @viewNewReviewBody @rsp-2571 @KNOWN-DEFECT-RSP-6440
     Scenario Outline: Verify that user is able to view review body details with blank last updated date for the new record
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'

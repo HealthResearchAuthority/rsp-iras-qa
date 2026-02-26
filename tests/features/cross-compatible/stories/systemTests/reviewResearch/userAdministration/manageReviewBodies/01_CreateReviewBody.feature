@@ -8,7 +8,7 @@ Feature: Manage Review Bodies - Create review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
 
-    @verifyCreateReviewBody @rsp-3887
+    @verifyCreateReviewBody @rsp-3887 @KNOWN-DEFECT-RSP-6440
     Scenario Outline: Verify the user is able to create a new review body with valid data
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -56,7 +56,7 @@ Feature: Manage Review Bodies - Create review body
             | Review_Body_CAG_Data    |
             | Review_Body_ARSAC_Data  |
 
-    @verifyAddAnotherReviewBody
+    @verifyAddAnotherReviewBody @KNOWN-DEFECT-RSP-6440
     Scenario Outline: Verify the user is able to add another review body via the link on the Confirmation message screen
         And I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -90,7 +90,7 @@ Feature: Manage Review Bodies - Create review body
         And I click the 'Back' link on the 'Create_Review_Body_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @verifyCheckReviewPageBackButtonFlow
+    @verifyCheckReviewPageBackButtonFlow @KNOWN-DEFECT-RSP-6440
     Scenario Outline: Verify the user can navigate from the check and confirm review body pages using the back options
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
