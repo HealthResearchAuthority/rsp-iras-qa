@@ -25,7 +25,7 @@ Feature: Sponsor organisation audit history
     # And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     # And I capture the page screenshot
 
-    @rsp-6499 @SponsorOrganisationAuditHistoryOrgAdminUser @SetupNewSponsorOrgGoLive @TestTiji
+    @rsp-6499 @SponsorOrganisationAuditHistoryOrgAdminUser @SetupNewSponsorOrgGoLive
     Scenario Outline: Validate audit history event when organisation admin user added with authoriser access and switched to sponsor with no authoriser access to the selected sponsor organisation
         Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
