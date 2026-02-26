@@ -6,8 +6,8 @@
     "user_update_message": "User updated",
     "disabled_section_header": "Deactivate user from this sponsor organisation",
     "disabled_section_guidance_text": "Deactivating this user will stop them from working under this sponsor organisation and can be reversed.",
-    "enabled_section_header": "Enable user for this sponsor organisation",
-    "enabled_section_guidance_text": "Enabling this user will allow them to work under this sponsor organisation and can be reversed.",
+    "enabled_section_header": "Activate user for this sponsor organisation",
+    "enabled_section_guidance_text": "Activating this user will allow them to work under this sponsor organisation and can be reversed.",
     "Row_Labels": {
       "title_label": "Title",
       "first_name_label": "First name",
