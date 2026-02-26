@@ -36,12 +36,12 @@
     "enable_confirmation_body_label": "You are about to enable this sponsor organisation."
   },
   "Disable_User_In_Sponsor_Organisation_Labels": {
-    "disable_confirmation_header_label": "Confirm that you want to deactivate",
-    "disable_confirmation_body_label": "You are about to deactivate the user from working under this sponsor organisation."
+    "disable_confirmation_header_label": "Confirm that you want to disable",
+    "disable_confirmation_body_label": "You are about to disable the user from working under this sponsor organisation."
   },
   "Enable_User_In_Sponsor_Organisation_Labels": {
-    "enable_confirmation_header_label": "Confirm that you want to activate",
-    "enable_confirmation_body_label": "You are about to activate the user to work under this sponsor organisation."
+    "enable_confirmation_header_label": "Confirm that you want to enable",
+    "enable_confirmation_body_label": "You are about to enable the user to work under this sponsor organisation."
   },
   "Disable_User_In_My_Organisation_Labels": {
     "disable_confirmation_header_label": "Confirm that you want to deactivate",
