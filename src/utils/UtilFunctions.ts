@@ -734,3 +734,17 @@ export function normalizeUiText(input: string | null | undefined): string {
     .trim();
   return s;
 }
+
+export function findValueByKeyFromJSON(obj: any, targetKey: string): any {
+  if (typeof obj !== 'object' || obj === null) return undefined;
+  if (Object.hasOwn(obj as object, targetKey)) {
+    return (obj as Record<string, any>)[targetKey];
+  }
+  for (const key of Object.keys(obj)) {
+    const result = findValueByKeyFromJSON((obj as Record<string, any>)[key], targetKey);
+    if (result !== undefined) {
+      return result;
+    }
+  }
+  return undefined;
+}

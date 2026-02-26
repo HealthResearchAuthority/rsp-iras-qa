@@ -6,7 +6,7 @@ import {
   getRandomNumber,
   confirmArrayNotNull,
   convertDate,
-  convertDateMonthToNumber,
+  findValueByKeyFromJSON,
 } from '../../../utils/UtilFunctions';
 import path from 'node:path';
 const { When, Then } = createBdd(test);
@@ -250,22 +250,28 @@ Then(
       modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]} '${(await projectDetailsIRASPage.getFullProjectTitle()).trim()}' to '${changeDataset['Project_Reference']['new_full_project_title_text']}'`;
     } else if (modificationEventDatasetName.toLowerCase() === 'planned_project_end_date_changed') {
       const plannedEndDateDataset = projectDetailsTitlePage.projectDetailsTitlePageTestData['Valid_Data_All_Fields'];
-      const oldPlannedEndDate = await convertDateMonthToNumber(
-        plannedEndDateDataset['planned_project_end_day_text'],
-        plannedEndDateDataset['planned_project_end_month_dropdown'],
-        plannedEndDateDataset['planned_project_end_year_text']
-      );
-      const newPlannedEndDate = await convertDateMonthToNumber(
-        changeDataset['planned_project_end_day_text'],
-        changeDataset['planned_project_end_month_dropdown'],
-        changeDataset['planned_project_end_year_text']
-      );
+      const oldPlannedEndDate =
+        plannedEndDateDataset['planned_project_end_day_text'] +
+        ' ' +
+        plannedEndDateDataset['planned_project_end_month_dropdown'] +
+        ' ' +
+        plannedEndDateDataset['planned_project_end_year_text'];
+      const newPlannedEndDate =
+        changeDataset['planned_project_end_day_text'] +
+        ' ' +
+        changeDataset['planned_project_end_month_dropdown'] +
+        ' ' +
+        changeDataset['planned_project_end_year_text'];
       modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]} '${oldPlannedEndDate}' to '${newPlannedEndDate}'`;
     } else {
       modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events[modificationEventDatasetName]}`;
     }
     let userEmail = '';
-    if (userDatasetName.toLowerCase() !== 'blank_user_details') {
+    if (userDatasetName.toLowerCase() === 'system') {
+      userEmail = 'System';
+    } else if (userDatasetName.toLowerCase() === 'review body') {
+      userEmail = 'Review body';
+    } else if (userDatasetName.toLowerCase() !== 'blank_user_details') {
       userEmail = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
     }
     const dateTimeOfEvent = new Date().toLocaleString('en-GB', {
@@ -273,8 +279,15 @@ Then(
       month: 'long',
       year: 'numeric',
     });
-    const modificationId =
-      modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events['Modification_Id'];
+    let modificationId = '';
+    if (
+      modificationEventDatasetName.toLowerCase() === 'project_record_created' ||
+      modificationEventDatasetName.toLowerCase() === 'project_record_draft_started'
+    ) {
+      modificationId = modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events['Modification_Id'];
+    } else {
+      modificationId = await modificationsCommonPage.getModificationID();
+    }
     projectOverviewPage.addAuditHistoryRecord = {
       dateTimeOfEventExpected: dateTimeOfEvent,
       modificationEventExpected: modificationEvent,
@@ -305,7 +318,13 @@ Then('I validate the project level audit history table', async ({ modificationsC
       record.modificationIdExpected,
       record.userEmailExpected,
     ]);
-  expect.soft(actualAuditHistoryRows).toEqual(expectedAuditHistoryRows);
+  const normalizedActualAuditHistoryRows = await Promise.all(
+    actualAuditHistoryRows.map(async (row) => Promise.all(row.map((cell) => removeUnwantedWhitespace(cell))))
+  );
+  const normalizedExpectedAuditHistoryRows = await Promise.all(
+    expectedAuditHistoryRows.map(async (row) => Promise.all(row.map((cell) => removeUnwantedWhitespace(cell))))
+  );
+  expect.soft(normalizedActualAuditHistoryRows).toEqual(normalizedExpectedAuditHistoryRows);
 });
 
 Then(
@@ -426,10 +445,9 @@ Then('I validate the delete modification success message', async ({ projectOverv
 
 Then(
   'I validate the deleted modification does not appear in the modification in the post approval tab',
-  async ({ projectOverviewPage, projectDetailsIRASPage }) => {
+  async ({ projectOverviewPage, modificationsCommonPage }) => {
     const modificationTableData = await projectOverviewPage.getAllModificationTableData();
-    const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
-    const modificationIDExpected = irasIDExpected + '/' + 1;
+    const modificationIDExpected = await modificationsCommonPage.getModificationID();
     expect(modificationTableData).not.toContain(modificationIDExpected);
   }
 );
@@ -761,5 +779,14 @@ Then(
         dataset.close_project_actual_project_closure_date_year_text;
     }
     await expect.soft(projectOverviewPage.actualProjectClosureDateValueLabel).toHaveText(expectedProjectClosureDate);
+  }
+);
+
+Then(
+  'I keep note of the new short project title as per the {string} dataset',
+  async ({ projectDetailsIRASPage, modificationsCommonPage }, datasetName: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const expectedShortProjectTitle = findValueByKeyFromJSON(dataset, 'new_short_project_title_text');
+    await projectDetailsIRASPage.setShortProjectTitle(expectedShortProjectTitle);
   }
 );

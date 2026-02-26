@@ -454,8 +454,7 @@ Then(
   'I can see the current chief investigator email details displayed on modifications page using {string} dataset',
   async ({ modificationsCommonPage, chiefInvestigatorPage }, datasetNameChiefInvestigator) => {
     const currentChiefInvestigatorNameExpected =
-      chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator]
-        .new_chief_investigator_email_text;
+      chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator].chief_investigator_email_text;
     await expect
       .soft(
         modificationsCommonPage.page.getByText(

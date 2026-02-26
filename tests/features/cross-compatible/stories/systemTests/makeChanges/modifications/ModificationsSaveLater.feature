@@ -78,25 +78,6 @@ Feature: Modifications - Save Later and Other Scenarios
       | Project_Design             | Default_Value   | Project_Design               | Modifications_Tile      |
       | Project_Documents          | Default_Value   | Project_Documents            | Modifications_Tile      |
 
-  @rsp-4038 @SelectAreaOfChangeModificationIdValidation
-  Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    Then I can see the project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    Then I validate the modification id is incremented by one for every '<New_Modification_Count>' new modification on select area of change page
-
-    Examples:
-      | New_Modification_Count | Modifications_Tile_Link |
-      | Modification_Count     | Modifications_Tile      |
-
   @rsp-4038 @SelectAreaOfChangeSaveLater
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
@@ -1157,7 +1138,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Email_Text               | Contact_Email_Change                              | Contact_Details_Other_Page              |
 
   @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
-  Scenario: Verify that save for later functionalities and page labels for contact details modifications journey
+  Scenario: Verify that save for later functionalities and page labels for contact details modifications journey - contact details select change page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1179,6 +1160,16 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
+
+  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
+  Scenario: Verify that save for later functionalities and page labels for contact details modifications journey - contact details chief investigator page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
@@ -1192,6 +1183,16 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
+
+  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
+  Scenario: Verify that save for later functionalities and page labels for contact details modifications journey - contact details sponsor contact page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
@@ -1203,6 +1204,16 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
+
+  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
+  Scenario: Verify that save for later functionalities and page labels for contact details modifications journey - contact details other page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
@@ -1214,6 +1225,16 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
+
+  @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
+  Scenario: Verify that save for later functionalities and page labels for contact details modifications journey - review page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Administrative_Details_For_The_Project' from area of change dropdown and 'Contact_Details' from specific change dropdown
@@ -1278,7 +1299,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I fill the change chief investigator modifications page with '<Changes>' for 'create' action
+    And I fill the change chief investigator modifications page with '<Changes>'
     And I keep note of the individual and overall ranking of change chief investigator change created using '<Changes>' and '<Research_Locations>' dataset
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
@@ -1297,7 +1318,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And I can see the '<Page>' page for modifications
     And I capture the page screenshot
-    And I fill the change chief investigator modifications page with '<Changes_Edited>' for 'change' action
+    And I fill the change chief investigator modifications page with '<Changes_Edited>'
     And I keep note of the individual and overall ranking of change chief investigator change created using '<Changes_Edited>' and '<Research_Locations>' dataset
     And I capture the page screenshot
     And I click the 'Save_Changes' button on the 'Modifications_Page'
@@ -1312,15 +1333,12 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I validate individual ranking for single card displayed in modifications page
 
     Examples:
-      | Research_Locations  | Changes                                                               | Change_Field             | Changes_Edited                                             | Page                                         |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | Select_Details_To_Change | Change_CI_New_To_Temporary_Arrangement_Details             | Project_Personnel_Select_Change_Page         |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | Chief_Investigator_Email | Chief_Investigator_New_Email_Name_Change                   | Project_Personnel_Chief_Investigator_Page    |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data                   | CI_First_Name_Text       | Chief_Investigator_New_Email_Name_Change                   | Project_Personnel_Chief_Investigator_Page    |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | Chief_Investigator_Email | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
-      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data | CI_Last_Name_Text        | Chief_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Temporary_Arrangement_Page |
+      | Research_Locations  | Changes                                             | Change_Field             | Changes_Edited                           | Page                                      |
+      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data | Chief_Investigator_Email | Chief_Investigator_New_Email_Name_Change | Project_Personnel_Chief_Investigator_Page |
+      | Nhs_Involvement_Yes | Project_Personnel_Chief_Investigator_New_Valid_Data | CI_First_Name_Text       | Chief_Investigator_New_Email_Name_Change | Project_Personnel_Chief_Investigator_Page |
 
   @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationsLabelsAndSaveForLater
-  Scenario: Verify that save for later functionalities and page labels for project personnel change chief investigator modifications journey
+  Scenario: Verify that save for later functionalities and page labels for project personnel change chief investigator modifications journey - chief investigator details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1330,24 +1348,9 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Select_Change_Page' page for modifications
-    And I capture the page screenshot
-    Then I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I click the 'Save_For_Later' button on the 'Modifications_Page'
-    Then I can see the project overview page
-    And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Select_Change_Page' page for modifications
-    And I fill the change chief investigator modifications page with 'Project_Personnel_Chief_Investigator_New_Valid_Data' for 'create' action
+    And I fill the change chief investigator modifications page with 'Project_Personnel_Chief_Investigator_New_Valid_Data'
     And I can see the 'Project_Personnel_Chief_Investigator_Page' page for modifications
     And I can see the current chief investigator email details displayed on modifications page using 'Valid_Data_All_Fields' dataset
     And I capture the page screenshot
@@ -1355,23 +1358,21 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Select_Change_Page' page for modifications
-    And I fill the change chief investigator modifications page with 'Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data' for 'create' action
-    And I can see the 'Project_Personnel_Temporary_Arrangement_Page' page for modifications
-    And I click the 'Save_For_Later' button on the 'Modifications_Page'
-    Then I can see the project overview page
+
+  @rsp-4982 @ProjectPersonnelChangeChiefInvestigatorModificationsLabelsAndSaveForLater
+  Scenario: Verify that save for later functionalities and page labels for project personnel change chief investigator modifications journey - review changes page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Select_Change_Page' page for modifications
-    And I fill the change chief investigator modifications page with 'Project_Personnel_Chief_Investigator_Temporary_Arrangement_Valid_Data' for 'create' action
+    And I fill the change chief investigator modifications page with 'Project_Personnel_Chief_Investigator_New_Valid_Data'
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I can see the modification review changes page
     And I capture the page screenshot
@@ -1396,7 +1397,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I fill the change chief investigator modifications page with '<Modification_Data>' for 'create' action
+    And I fill the change chief investigator modifications page with '<Modification_Data>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I can see the modification review changes page
@@ -1406,12 +1407,9 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
 
     Examples:
-      | Modification_Data                              | Enter_Link               | Page                                         |
-      | Empty_Data_Select_Details_To_Change_All_Fields | Select_Details_To_Change | Project_Personnel_Select_Change_Page         |
-      | Empty_Data_CI_Fields                           | Chief_Investigator_Email | Project_Personnel_Chief_Investigator_Page    |
-      | Empty_Data_CI_Fields                           | CI_First_Name_Text       | Project_Personnel_Chief_Investigator_Page    |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | Chief_Investigator_Email | Project_Personnel_Temporary_Arrangement_Page |
-      | Empty_Data_Temporary_Arrangement_All_Fields    | CI_Last_Name_Text        | Project_Personnel_Temporary_Arrangement_Page |
+      | Modification_Data    | Enter_Link               | Page                                      |
+      | Empty_Data_CI_Fields | Chief_Investigator_Email | Project_Personnel_Chief_Investigator_Page |
+      | Empty_Data_CI_Fields | CI_First_Name_Text       | Project_Personnel_Chief_Investigator_Page |
 
   @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationChangeLinks
   Scenario Outline: Validate that user can update the saved principal investigator modification by clicking change links in review changes page
@@ -1431,7 +1429,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes>' dataset
-    And I fill the change principal investigator modifications page with '<Changes>' for 'create' action
+    And I fill the change principal investigator modifications page with '<Changes>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
@@ -1455,7 +1453,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And I can see the '<Page>' page for modifications
     And I capture the page screenshot
-    And I fill the change principal investigator modifications page with '<Changes_Edited>' for 'change' action
+    And I fill the change principal investigator modifications page with '<Changes_Edited>'
     And I keep note of the individual and overall ranking of change principal investigator change created using '<Changes_Edited>' dataset
     And I capture the page screenshot
     And I click the 'Save_Changes' button on the 'Modifications_Page'
@@ -1470,15 +1468,12 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I validate individual ranking for single card displayed in modifications page
 
     Examples:
-      | Research_Locations  | Changes                                                                   | Change_Field                 | Changes_Edited                                                 | Page                                                               |
-      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Select_Details_To_Change     | Change_PI_New_To_Temporary_Arrangement_Details                 | Project_Personnel_Principal_Investigator_Select_Change_Page        |
-      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Principal_Investigator_Email | Principal_Investigator_New_Email_Name_Change                   | Project_Personnel_Principal_Investigator_Page                      |
-      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data                   | Name_Text                    | Principal_Investigator_New_Email_Name_Change                   | Project_Personnel_Principal_Investigator_Page                      |
-      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data | Principal_Investigator_Email | Principal_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
-      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data | Name_Text                    | Principal_Investigator_Temporary_Arrangement_Email_Name_Change | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
+      | Research_Locations  | Changes                                                 | Change_Field                 | Changes_Edited                               | Page                                          |
+      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data | Principal_Investigator_Email | Principal_Investigator_New_Email_Name_Change | Project_Personnel_Principal_Investigator_Page |
+      | Nhs_Involvement_Yes | Project_Personnel_Principal_Investigator_New_Valid_Data | CI_First_Name_Text           | Principal_Investigator_New_Email_Name_Change | Project_Personnel_Principal_Investigator_Page |
 
   @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationsLabelsAndSaveForLater
-  Scenario: Verify that save for later functionalities and page labels for project personnel change principal investigator modifications journey
+  Scenario: Verify that save for later functionalities and page labels for project personnel change principal investigator modifications journey - prinicipal investigator details page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1488,47 +1483,30 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
-    And I capture the page screenshot
-    Then I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I click the 'Save_For_Later' button on the 'Modifications_Page'
-    Then I can see the project overview page
-    And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
-    And I fill the change principal investigator modifications page with 'Project_Personnel_Principal_Investigator_New_Valid_Data' for 'create' action
+    And I fill the change principal investigator modifications page with 'Project_Personnel_Principal_Investigator_New_Valid_Data'
     And I can see the 'Project_Personnel_Principal_Investigator_Page' page for modifications
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Modifications_Page'
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
-    And I fill the change principal investigator modifications page with 'Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data' for 'create' action
-    And I can see the 'Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page' page for modifications
-    And I click the 'Save_For_Later' button on the 'Modifications_Page'
-    Then I can see the project overview page
+
+  @rsp-4982 @ProjectPersonnelChangePrincipalInvestigatorModificationsLabelsAndSaveForLater
+  Scenario: Verify that save for later functionalities and page labels for project personnel change principal investigator modifications journey - review changes page
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
-    And I fill the change principal investigator modifications page with 'Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data' for 'create' action
+    And I fill the change principal investigator modifications page with 'Project_Personnel_Principal_Investigator_New_Valid_Data'
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
@@ -1559,7 +1537,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I fill the change principal investigator modifications page with '<Modification_Data>' for 'create' action
+    And I fill the change principal investigator modifications page with '<Modification_Data>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I fill the which organisation this change affect modifications page with 'Valid_Data_All_Fields'
@@ -1575,11 +1553,10 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
 
     Examples:
-      | Modification_Data                           | Enter_Link                   | Page                                                               |
-      | Empty_Data_CI_Fields                        | Principal_Investigator_Email | Project_Personnel_Principal_Investigator_Page                      |
-      | Empty_Data_CI_Fields                        | Name_Text                    | Project_Personnel_Principal_Investigator_Page                      |
-      | Empty_Data_Temporary_Arrangement_All_Fields | Principal_Investigator_Email | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
-      | Empty_Data_Temporary_Arrangement_All_Fields | Name_Text                    | Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page |
+      | Modification_Data    | Enter_Link                   | Page                                          |
+      | Empty_Data_CI_Fields | Principal_Investigator_Email | Project_Personnel_Principal_Investigator_Page |
+      | Empty_Data_CI_Fields | CI_First_Name_Text           | Project_Personnel_Principal_Investigator_Page |
+      | Empty_Data_CI_Fields | CI_Last_Name_Text            | Project_Personnel_Principal_Investigator_Page |
 
   @rsp-3929 @DownloadDocumentsOneByOneInModification
   Scenario Outline: Validate the user is able to download the documents one by one from documents added for page
@@ -1930,33 +1907,11 @@ Feature: Modifications - Save Later and Other Scenarios
 
   @rsp-5573 @ValidateModificationRankingsPostApproval
   Scenario: Verify that an applicant user can access the post approval tab to view all modification records, apply sorting on the list
-    Then I fill the research locations page with 'Nhs_Involvement_Yes'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    And I keep note of the individual and overall ranking of changes created using 'Multiple_Modifications_All_Category' and '<Research_Locations>' dataset
-    Then I can see the project overview page
+    Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
+    When I enter 'iras id for multiple modification' into the search field
+    And I click the 'Search' button on the 'My_Research_Page'
+    And I click on the short project title for the searched iras id from my research projects page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I create multiple modifications using 'Multiple_Modifications_All_Category' dataset
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I create 'Multiple_Modifications_Ranking_B_C' for the created modification
-    And I can see the modifications details page
-    And I capture the page screenshot
-    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
-    And I capture the page screenshot
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    And I capture the page screenshot
-    Then I can see the review all changes page
-    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    And I capture the page screenshot
-    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
-    And I capture the page screenshot
     Then I can see the project overview page
     And I can see the list of modifications submitted for sponsor approval is sorted by 'descending' order of the 'date submitted'
     When I click the 'Modification_Type' button on the 'Project_Overview_Page'
@@ -2077,7 +2032,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP-6395
+  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission
   Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modification post submission page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

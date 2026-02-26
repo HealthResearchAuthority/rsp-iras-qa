@@ -421,9 +421,9 @@ Feature: Modifications - Error Validation
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Multiple_Invalid_Files_Non_Video | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | JSON_File                        | Nhs_Involvement_Yes |
 
-  @rsp-5478 @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages
-  Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
-    Then I fill the research locations page with '<Research_Locations>'
+  @rsp-5478 @rsp-3876 @ValidateDocumentUploadModificationsPageErrorMessages
+  Scenario: Validate the user is able to see error messages for invalid actions on upload documents for modifications
+    Then I fill the research locations page with 'Nhs_Involvement_Yes'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
@@ -435,8 +435,8 @@ Feature: Modifications - Error Validation
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
-    And I keep note of the individual and overall ranking of changes created using '<Changes>' and '<Research_Locations>' dataset
-    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' and 'Nhs_Involvement_Yes' dataset
+    And I create 'Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Add_Documents' button on the 'Modification_Details_Page'
@@ -444,16 +444,6 @@ Feature: Modifications - Error Validation
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
     And I capture the page screenshot
-
-    Examples:
-      | Changes                                            | Research_Locations  |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
-      | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_One | Nhs_Involvement_Yes |
 
   @rsp-4314 @ValidateErrorNonRECStudyTypeOptionalDocumentVersionDate @jsEnabled
   Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing, using document types applicable to Non-REC study types where document version and date are optional, for documents uploaded with an Incomplete status
@@ -910,7 +900,7 @@ Feature: Modifications - Error Validation
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I fill the change chief investigator modifications page with '<Modification_Data>' for 'create' action
+    And I fill the change chief investigator modifications page with '<Modification_Data>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I capture the page screenshot
@@ -924,12 +914,6 @@ Feature: Modifications - Error Validation
       | Invalid_Email_CI_Data_One_Reserved_Domain                      | Chief_Investigator_Invalid_Email_Error_Message |
       | Invalid_Email_CI_Data_One_Punycode                             | Chief_Investigator_Invalid_Email_Error_Message |
       | Invalid_Email_CI_Data_One_Max_Char                             | Chief_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Start_With_Dot  | Chief_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Double_Dot      | Chief_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_TLD             | Chief_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Reserved_Domain | Chief_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Punycode        | Chief_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Max_Char        | Chief_Investigator_Invalid_Email_Error_Message |
 
   @rsp-4982 @ValidateSummaryAndFieldErrorMessagesProjectPersonnelChangePrincipalInvestigatorModification
   Scenario Outline: Validate the error messages displayed on project personnel new principal investigator modification page for invalid email formats
@@ -947,7 +931,7 @@ Feature: Modifications - Error Validation
     And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I fill the change principal investigator modifications page with '<Modification_Data>' for 'create' action
+    And I fill the change principal investigator modifications page with '<Modification_Data>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Modifications_Page'
     And I capture the page screenshot
@@ -961,12 +945,6 @@ Feature: Modifications - Error Validation
       | Invalid_Email_CI_Data_One_Reserved_Domain                      | Principal_Investigator_Invalid_Email_Error_Message |
       | Invalid_Email_CI_Data_One_Punycode                             | Principal_Investigator_Invalid_Email_Error_Message |
       | Invalid_Email_CI_Data_One_Max_Char                             | Principal_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Start_With_Dot  | Principal_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Double_Dot      | Principal_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_TLD             | Principal_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Reserved_Domain | Principal_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Punycode        | Principal_Investigator_Invalid_Email_Error_Message |
-      | Invalid_Email_CI_Temorary_Arrangement_Data_One_Max_Char        | Principal_Investigator_Invalid_Email_Error_Message |
 
   @rsp-4392 @VerifyUserAbleToDeleteTheModificationDetails
   Scenario Outline: Verify user is able to delete the modification details

@@ -254,27 +254,11 @@
       "page_header": "Contact details",
       "page_component_label": "Name"
     },
-    "Project_Personnel_Select_Change_Page": {
-      "page_header": "Change of Chief Investigator",
-      "page_component_label": "Select details to change"
-    },
     "Project_Personnel_Chief_Investigator_Page": {
       "page_header": "Change of Chief Investigator",
       "page_component_label": "New Chief Investigator email"
     },
-    "Project_Personnel_Temporary_Arrangement_Page": {
-      "page_header": "Change of Chief Investigator",
-      "page_component_label": "New Chief Investigator email"
-    },
-    "Project_Personnel_Principal_Investigator_Select_Change_Page": {
-      "page_header": "Change of Principal Investigator",
-      "page_component_label": "Select details to change"
-    },
     "Project_Personnel_Principal_Investigator_Page": {
-      "page_header": "Change of Principal Investigator",
-      "page_component_label": "New principal investigator email"
-    },
-    "Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page": {
       "page_header": "Change of Principal Investigator",
       "page_component_label": "New principal investigator email"
     }
@@ -1826,7 +1810,7 @@
   },
   "Missing_Document_Details_Notification": {
     "notification_heading_text": "You cannot proceed whilst document details are incomplete",
-    "notification_text": "All documents must have the status 'Complete' before you can continue. For any documents with the status 'Incomplete', either select 'Change details' to add missing document details, or remove that document if it is no longer needed."
+    "notification_text": "All documents must have the status 'Complete' before you can continue.For any documents with the status 'Incomplete', either select 'Change details' to add missing document details, or remove that document if it is no longer needed."
   },
   "Project_Personnel__Change_Chief_Investigator_Details": {
     "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {

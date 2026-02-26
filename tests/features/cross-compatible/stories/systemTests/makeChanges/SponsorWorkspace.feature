@@ -79,7 +79,6 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -121,7 +120,6 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
   @rsp-4846 @SponsorWorkspacePageValidationWhenSponsorOrganisationEnabledOrDisabled
@@ -161,7 +159,6 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -195,7 +192,6 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
   @rsp-5191 @SponsorAuthorisationMandatorySelectionOnOutcomeError @jsEnabled

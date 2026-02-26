@@ -275,6 +275,9 @@ Then(
       if (pageKey === 'Project_Overview_Page' && buttonKey === 'Create_New_Modification') {
         ++modificationsReceivedCommonPage.modificationCounter;
       }
+      if (pageKey === 'Confirmation_Page' && buttonKey === 'Delete_Modification') {
+        --modificationsReceivedCommonPage.modificationCounter;
+      }
       button = commonItemsPage.govUkButton
         .getByText(buttonValue, { exact: true })
         .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))

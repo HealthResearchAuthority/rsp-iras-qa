@@ -4,18 +4,12 @@ import { expect, test } from '../../../../hooks/CustomFixtures';
 const { Then } = createBdd(test);
 
 Then(
-  'I fill the change chief investigator modifications page with {string} for {string} action',
-  async ({ commonItemsPage, projectPersonnelChangeChiefInvestigatorPage }, datasetName: string, action: string) => {
+  'I fill the change chief investigator modifications page with {string}',
+  async ({ commonItemsPage, projectPersonnelChangeChiefInvestigatorPage }, datasetName: string) => {
     const dataset =
       projectPersonnelChangeChiefInvestigatorPage.projectPersonnelChangeChiefInvestigatorModificationPageTestData[
         datasetName
       ];
-    const clickAction = action === 'create' ? 'Save_Continue' : 'Save_Changes';
-    const radioKey = 'select_details_to_change_radio';
-    if (dataset[radioKey]) {
-      await commonItemsPage.fillUIComponent(dataset, radioKey, projectPersonnelChangeChiefInvestigatorPage);
-      await commonItemsPage.clickButton('Modifications_Page', clickAction);
-    }
     const ExpectedKeys = [
       'new_chief_investigator_email_text',
       'new_chief_investigator_first_name_text',
@@ -54,16 +48,6 @@ Then(
   'I click enter link displayed on review your answers page for change chief investigator modification for {string}',
   async ({ projectPersonnelChangeChiefInvestigatorPage }, datasetName) => {
     switch (datasetName) {
-      case 'Select_Details_To_Change': {
-        await projectPersonnelChangeChiefInvestigatorPage.page
-          .getByText(
-            projectPersonnelChangeChiefInvestigatorPage.projectPersonnelChangeChiefInvestigatorModificationPageTestData
-              .Label_Texts.select_detail_enter_link
-          )
-          .first()
-          .click();
-        break;
-      }
       case 'Chief_Investigator_Email': {
         await projectPersonnelChangeChiefInvestigatorPage.page
           .getByText(
@@ -72,16 +56,6 @@ Then(
           )
           .filter({ has: projectPersonnelChangeChiefInvestigatorPage.page.locator(':visible') })
           .first()
-          .click();
-        break;
-      }
-      case 'Name_Text': {
-        await projectPersonnelChangeChiefInvestigatorPage.page
-          .getByRole('link', {
-            name: projectPersonnelChangeChiefInvestigatorPage
-              .projectPersonnelChangeChiefInvestigatorModificationPageTestData.Label_Texts.name_enter_link,
-          })
-          .filter({ has: projectPersonnelChangeChiefInvestigatorPage.page.locator(':visible') })
           .click();
         break;
       }
@@ -119,10 +93,6 @@ Then(
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         switch (key) {
-          case 'select_details_to_change_radio': {
-            await expect.soft(modificationReviewChangesPage.select_details_to_change_value).toHaveText(dataset[key]);
-            break;
-          }
           case 'new_chief_investigator_email_text': {
             await expect
               .soft(
@@ -131,9 +101,15 @@ Then(
               .toBeVisible();
             break;
           }
-          case 'name_text': {
+          case 'new_chief_investigator_first_name_text': {
             await expect
-              .soft(modificationReviewChangesPage.name_text_value.getByText(dataset[key], { exact: true }))
+              .soft(modificationReviewChangesPage.ci_first_name_text_row.getByText(dataset[key], { exact: true }))
+              .toBeVisible();
+            break;
+          }
+          case 'new_chief_investigator_last_name_text': {
+            await expect
+              .soft(modificationReviewChangesPage.ci_last_name_text_row.getByText(dataset[key], { exact: true }))
               .toBeVisible();
             break;
           }

@@ -6,35 +6,18 @@
     "principal_investigator_enter_link": "Enter new Principal Investigator email",
     "new_principal_investigator_first_name_label": "New Principal Investigator first name",
     "new_principal_investigator_last_name_label": "New Principal Investigator last name",
-    "name_enter_link": "Enter name"
+    "name_enter_link": "Enter name",
+    "pi_first_name_enter_link": "Enter first name",
+    "pi_last_name_enter_link": "Enter last name"
   },
   "Principal_Investigator_Invalid_Email_Error_Message": {
     "new_principal_investigator_email_text": "Enter an email address in the correct format"
   },
   "Project_Personnel_Principal_Investigator_New_Valid_Data": {
     "specific_change_dropdown": "Change of Principal Investigator",
-    "select_details_to_change_radio": "New Principal Investigator",
     "new_principal_investigator_email_text": "test_modified@test.com",
-    "name_text": "QA test name",
-    "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
-    "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "will_some_or_all_organisations_be_affected_question_radio": "All",
-    "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-    "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-  },
-  "Project_Personnel_Principal_Investigator_Temporary_Arrangement_Valid_Data": {
-    "specific_change_dropdown": "Change of Principal Investigator",
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "new_principal_investigator_email_text": "test_modified@test.com",
-    "name_text": "QA test name",
-    "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
-    "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "will_some_or_all_organisations_be_affected_question_radio": "All",
-    "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-    "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-  },
-  "Empty_Data_Select_Details_To_Change_All_Fields": {
-    "select_details_to_change_radio": "",
+    "new_principal_investigator_first_name_text": "QA test first name",
+    "new_principal_investigator_last_name_text": "QA test last name",
     "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
     "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -42,19 +25,9 @@
     "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
   },
   "Empty_Data_CI_Fields": {
-    "select_details_to_change_radio": "New Principal Investigator",
     "new_principal_investigator_email_text": "",
-    "name_text": "",
-    "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
-    "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "will_some_or_all_organisations_be_affected_question_radio": "All",
-    "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-    "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-  },
-  "Empty_Data_Temporary_Arrangement_All_Fields": {
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "new_principal_investigator_email_text": "",
-    "name_text": "",
+    "new_principal_investigator_first_name_text": "",
+    "new_principal_investigator_last_name_text": "",
     "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
     "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -64,28 +37,8 @@
   "Principal_Investigator_New_Email_Name_Change": {
     "specific_change_dropdown": "Change of Principal Investigator",
     "new_principal_investigator_email_text": "test_modified_change@test.com",
-    "name_text": "Modified Name Change",
-    "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
-    "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "will_some_or_all_organisations_be_affected_question_radio": "All",
-    "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-    "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-  },
-  "Principal_Investigator_Temporary_Arrangement_Email_Name_Change": {
-    "specific_change_dropdown": "Change of Principal Investigator",
-    "new_principal_investigator_email_text": "test_modified_change@test.com",
-    "name_text": "Modified Name Change",
-    "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
-    "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "will_some_or_all_organisations_be_affected_question_radio": "All",
-    "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-    "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-  },
-  "Change_PI_New_To_Temporary_Arrangement_Details": {
-    "specific_change_dropdown": "Change of Principal Investigator",
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "new_principal_investigator_email_text": "test_modified_change@test.com",
-    "name_text": "Modified Name Change",
+    "new_principal_investigator_first_name_text": "Modified First Name",
+    "new_principal_investigator_last_name_text": "Modified Last Name",
     "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
     "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "will_some_or_all_organisations_be_affected_question_radio": "All",
@@ -93,51 +46,21 @@
     "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
   },
   "Invalid_Email_CI_Data_One_Start_With_Dot": {
-    "select_details_to_change_radio": "New Principal Investigator",
     "new_principal_investigator_email_text": ".john@example.com"
   },
   "Invalid_Email_CI_Data_One_Double_Dot": {
-    "select_details_to_change_radio": "New Principal Investigator",
     "new_principal_investigator_email_text": "john..doe@example.com"
   },
   "Invalid_Email_CI_Data_One_TLD": {
-    "select_details_to_change_radio": "New Principal Investigator",
     "new_principal_investigator_email_text": "john.doe@example.1234"
   },
   "Invalid_Email_CI_Data_One_Reserved_Domain": {
-    "select_details_to_change_radio": "New Principal Investigator",
     "new_principal_investigator_email_text": "john.doe@localhost"
   },
   "Invalid_Email_CI_Data_One_Punycode": {
-    "select_details_to_change_radio": "New Principal Investigator",
     "new_principal_investigator_email_text": "john@example.xn--mgbh0fb"
   },
   "Invalid_Email_CI_Data_One_Max_Char": {
-    "select_details_to_change_radio": "New Principal Investigator",
-    "new_principal_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
-  },
-  "Invalid_Email_CI_Temorary_Arrangement_Data_One_Start_With_Dot": {
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "new_principal_investigator_email_text": ".john@example.com"
-  },
-  "Invalid_Email_CI_Temorary_Arrangement_Data_One_Double_Dot": {
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "new_principal_investigator_email_text": "john..doe@example.com"
-  },
-  "Invalid_Email_CI_Temorary_Arrangement_Data_One_TLD": {
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "new_principal_investigator_email_text": "john.doe@example.1234"
-  },
-  "Invalid_Email_CI_Temorary_Arrangement_Data_One_Reserved_Domain": {
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "new_principal_investigator_email_text": "john.doe@localhost"
-  },
-  "Invalid_Email_CI_Temorary_Arrangement_Data_One_Punycode": {
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
-    "new_principal_investigator_email_text": "john@example.xn--mgbh0fb"
-  },
-  "Invalid_Email_CI_Temorary_Arrangement_Data_One_Max_Char": {
-    "select_details_to_change_radio": "Temporary arrangement to cover absence",
     "new_principal_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   }
 }

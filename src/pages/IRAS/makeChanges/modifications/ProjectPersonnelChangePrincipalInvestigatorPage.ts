@@ -6,7 +6,6 @@ import CommonItemsPage from '../../../Common/CommonItemsPage';
 export default class ProjectPersonnelChangePrincipalInvestigatorPage {
   readonly page: Page;
   readonly projectPersonnelChangePrincipalInvestigatorModificationPageTestData: typeof projectPersonnelChangePrincipalInvestigatorModificationPageTestData;
-  readonly select_details_to_change_radio: Locator;
   readonly new_principal_investigator_email_text: Locator;
   readonly name_text: Locator;
   readonly new_principal_investigator_first_name_text: Locator;
@@ -19,7 +18,6 @@ export default class ProjectPersonnelChangePrincipalInvestigatorPage {
       projectPersonnelChangePrincipalInvestigatorModificationPageTestData;
 
     //Locators
-    this.select_details_to_change_radio = this.page.getByTestId(/^IQA0989/);
     this.new_principal_investigator_email_text = this.page
       .getByTestId('IQA0573_Text')
       .or(this.page.getByTestId('IQA0633_Text'));
