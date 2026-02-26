@@ -574,14 +574,15 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
                 And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-                When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+                When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AalborgUniversityHospital'
                 And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
                 And I capture the page screenshot
                 And I keep note of the organisation name for sponsor organisation setup
                 When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
                 And I capture the page screenshot
                 Then I can see the sponsor organisation added successful message on manage sponsor organisation page
-                And I record the 'Sponsor_Organisation_Created' event for the user 'Blank_User_Details' to store the sponsor organisation audit history triggered by 'System_Admin'
+                # And I record the 'Sponsor_Organisation_Created' event for the user 'Blank_User_Details' to store the sponsor organisation audit history triggered by 'System_Admin'
+                And I record the 'Sponsor_Organisation_Created' event for the user 'Blank_User_Details' to store the sponsor organisation audit history triggered by 'System_Admin' for 'manage_sponsor_org_system_admin_workspace'
                 When I enter 'name of the newly added sponsor organisation' into the search field
                 And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
                 And I capture the page screenshot
@@ -614,9 +615,17 @@ Feature: Manage sponsor organisations
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
                 Then I can see the 'user added' successful message on sponsor organisation user list page
-                And I record the 'User_Added' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
-                And I record the 'User_Assigned_Sponsor' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
-                And I record the 'User_Assigned_Authoriser' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
+                # And I record the 'User_Added' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
+                # And I record the 'User_Assigned_Sponsor' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
+                # And I record the 'User_Assigned_Authoriser' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
+                And I record the 'User_Added' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin' for 'manage_sponsor_org_system_admin_workspace'
+                And I record the 'User_Assigned_Sponsor' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin' for 'manage_sponsor_org_system_admin_workspace'
+                And I record the 'User_Assigned_Authoriser' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin' for 'manage_sponsor_org_system_admin_workspace'
+                When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
+                And I capture the page screenshot
+                And I can see the sponsor organisation profile page
+                And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+                And I capture the page screenshot
                 Then I can see the user list page of the 'sponsor organisation'
                 Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
                 Then I can see the system administration home page
@@ -629,7 +638,8 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 When I click the 'Disable' button on the 'Confirmation_Page'
                 And I capture the page screenshot
-                And I record the 'User_Disabled' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
+                # And I record the 'User_Disabled' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
+                And I record the 'User_Disabled' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin' for 'manage_sponsor_org_system_admin_workspace'
                 Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
                 And I capture the page screenshot
                 And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -682,7 +692,7 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
                 And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-                When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+                When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AalborgUniversityHospital'
                 And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
                 And I capture the page screenshot
                 And I keep note of the organisation name for sponsor organisation setup
@@ -745,11 +755,15 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'No_Permission_To_Select'
                 And I capture the page screenshot
-                And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation 'University of Southampton' and 'No_Permission_To_Select'
+                And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation 'Aalborg University Hospital' and 'No_Permission_To_Select'
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+                And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
                 Then I can see the 'user added' successful message on sponsor organisation user list page
                 And I capture the page screenshot
+                And I record the 'User_Added' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
+                And I record the 'User_Assigned_Org_Admin' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
+                And I record the 'User_Assigned_Authoriser' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'System_Admin'
                 Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
                 Then I can see the system administration home page
                 When I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -772,7 +786,7 @@ Feature: Manage sponsor organisations
                 Then I can see the my organisations page
                 And I can see the 'My_Organisations_Table' ui labels on the my organisations page
                 And I can now see a table of results for my organisations
-                When I enter 'University of Southampton' into the search field
+                When I enter 'Aalborg University Hospital' into the search field
                 Then I click the 'Search' button on the 'My_Organisations_Page'
                 And I capture the page screenshot
                 And I click the 'Manage' link on the 'My_Organisations_Page'

@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage @SetupNewSponsorOrgGoLive
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage @SetupNewSponsorOrgFeature
 Feature: Set up new sponsor organisation
 
     Background:
@@ -6,7 +6,7 @@ Feature: Set up new sponsor organisation
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @SetupNewSponsorOrg @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @RTS @skip
+    @SetupNewSponsorOrg @ViewListOfSponsorOrgs @SetupNewSponsorOrgGoLive @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @RTS @skip
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -38,7 +38,7 @@ Feature: Set up new sponsor organisation
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237
+    @ViewListOfSponsorOrgs @SetupNewSponsorOrgGoLive @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237
     Scenario Outline: Verify the user can add a sponsor organisations which are in the first go live cohort from manage sponsor organisation page
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -188,7 +188,7 @@ Feature: Set up new sponsor organisation
     #         | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
     #         | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
 
-    @rsp-5232 @ExistingSPonsorOrgSearchAndView
+    @rsp-5232 @ExistingSPonsorOrgSearchAndView @SetupNewSponsorOrgGoLive
     Scenario Outline: Validate the user can search and view the previously added sponsor organisation from manage sponsor organisation page
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot

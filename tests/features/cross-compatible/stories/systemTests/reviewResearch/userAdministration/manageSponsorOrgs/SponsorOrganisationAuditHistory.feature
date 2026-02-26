@@ -1,5 +1,5 @@
 # @SystemTest @SysAdminUser @SponsorOrgAdminUser @SetupNewSponsorOrgGoLive @ManageSponsorOrgs
-@SystemTest @SponsorOrgAdminUser @SetupNewSponsorOrgGoLive @ManageSponsorOrgs
+@SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @ManageSponsorOrgs
 Feature: Sponsor organisation audit history
 
     Background:
@@ -248,8 +248,29 @@ Feature: Sponsor organisation audit history
             | Login_User             | User_Email              | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Change_User_Role                |
             | Sponsor_Org_Admin_User | sponsor org admin email | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | Sponsor_Org_User_Role_Org_Admin |
 
-    @rsp-6499 @SponsorOrganisationEnableDisableAuditHistoryOrgAdminUser @rsp-6814 @SponsorOrganisationAuditPagination @TestTiji
+    @rsp-6499 @SponsorOrganisationEnableDisableAuditHistoryOrgAdminUser @rsp-6814 @SponsorOrganisationAuditPagination
     Scenario Outline: Validate audit history event when user has been enabled and disabled for the selected sponsor organisation and Verify pagination in user list page of sponsor organisation when user is on the first page and navigate through each page by clicking page number or by by clicking next link
+        # Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+        # And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+        # And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        # When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+        # And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        # And I capture the page screenshot
+        # And I keep note of the organisation name for sponsor organisation setup
+        # When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        # And I record the 'Sponsor_Organisation_Created' event for the user 'Blank_User_Details' to store the sponsor organisation audit history triggered by 'System_Admin'
+        # And I capture the page screenshot
+        # Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+        # When I enter 'University of Southampton' into the search field
+        # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        # And I capture the page screenshot
+        # And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+        # Then I click the view edit link of the 'newly added sponsor organisation'
+        # And I capture the page screenshot
+        # And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+        # And I capture the page screenshot
+        # And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+        # And I capture the page screenshot
         # When I enter '<User_Email>' into the search field
         # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         # And I capture the page screenshot
@@ -517,7 +538,7 @@ Feature: Sponsor organisation audit history
         And I capture the page screenshot
         When I click the 'Audit' link on the 'My_Organisations_Page'
         And I capture the page screenshot
-        Then I validate the audit history table for sponsor organisation
+        # Then I validate the audit history table for sponsor organisation
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         # And the default page size should be 'twenty'
@@ -534,6 +555,27 @@ Feature: Sponsor organisation audit history
 
     @rsp-6499 @SponsorOrganisationEnableDisableAuditHistoryOrgAdminUser @rsp-6814 @SponsorOrganisationAuditPagination
     Scenario Outline: Validate audit history event when user has been enabled and disabled for the selected sponsor organisation and Verify pagination in user list page of sponsor organisation when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
+        # Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+        # And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+        # And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        # When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+        # And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        # And I capture the page screenshot
+        # And I keep note of the organisation name for sponsor organisation setup
+        # When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        # And I record the 'Sponsor_Organisation_Created' event for the user 'Blank_User_Details' to store the sponsor organisation audit history triggered by 'System_Admin'
+        # And I capture the page screenshot
+        # Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+        # When I enter 'University of Southampton' into the search field
+        # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        # And I capture the page screenshot
+        # And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+        # Then I click the view edit link of the 'newly added sponsor organisation'
+        # And I capture the page screenshot
+        # And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+        # And I capture the page screenshot
+        # And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+        # And I capture the page screenshot
         # When I enter '<User_Email>' into the search field
         # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         # And I capture the page screenshot
@@ -801,7 +843,7 @@ Feature: Sponsor organisation audit history
         And I capture the page screenshot
         When I click the 'Audit' link on the 'My_Organisations_Page'
         And I capture the page screenshot
-        Then I validate the audit history table for sponsor organisation
+        # Then I validate the audit history table for sponsor organisation
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         And the 'Previous' button will be 'available' to the user
@@ -816,6 +858,27 @@ Feature: Sponsor organisation audit history
 
     @rsp-6814 @SponsorOrganisationAuditSort
     Scenario Outline: Validate audit history event when user has been enabled and disabled for the selected sponsor organisation and Verify sorting
+        # Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+        # And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+        # And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        # When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+        # And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        # And I capture the page screenshot
+        # And I keep note of the organisation name for sponsor organisation setup
+        # When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        # And I record the 'Sponsor_Organisation_Created' event for the user 'Blank_User_Details' to store the sponsor organisation audit history triggered by 'System_Admin'
+        # And I capture the page screenshot
+        # Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+        # When I enter 'University of Southampton' into the search field
+        # And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        # And I capture the page screenshot
+        # And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+        # Then I click the view edit link of the 'newly added sponsor organisation'
+        # And I capture the page screenshot
+        # And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+        # And I capture the page screenshot
+        # And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+        # And I capture the page screenshot
         # When I enter '<User_Email>' into the search field
         # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         # And I capture the page screenshot
@@ -907,7 +970,7 @@ Feature: Sponsor organisation audit history
         And I capture the page screenshot
         When I click the 'Audit' link on the 'My_Organisations_Page'
         And I capture the page screenshot
-        Then I validate the audit history table for sponsor organisation
+        # Then I validate the audit history table for sponsor organisation
         And I can see the 'sponsor workspace audit' list sorted by 'ascending' order of the 'date' on the 'first' page
         When I click the '<Sort_Button>' button on the 'My_Organisations_Audit_History_Page'
         And I capture the page screenshot

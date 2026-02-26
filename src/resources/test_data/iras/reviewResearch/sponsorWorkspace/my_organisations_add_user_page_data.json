@@ -7,7 +7,8 @@
     "email_search_box_label": "Email",
     "save_add_continue_button": "Save and continue",
     "add_user_partial_url": "/sponsorworkspace/myorganisationusersadduser?rtsId",
-    "manage_sponsor_org_audit_trial_partial_url": "/sponsororganisations/audittrail?rtsId",
+    "sponsor_workspace_my_org_audit_trial_partial_url": "sponsorworkspace/myorganisationaudittrail?rtsId",
+    "manage_sponsor_org_audit_trial_partial_url": "sponsororganisations",
     "non_registered_user_error_heading": "User account doesn't exist",
     "Non_Registered_User": {
       "email_address_text": "hscrd@health.org"
@@ -24,7 +25,7 @@
       "User_Unassigned_Sponsor": " unassigned Sponsor for sponsor organisation",
       "User_Unassigned_Authoriser": " unassigned authoriser for sponsor organisation",
       "User_Enabled": " enabled for sponsor organisation",
-      "User_Disabled": " disabled from sponsor organisation"
+      "User_Disabled": " inactive from sponsor organisation"
     },
     "Invalid_Email_Data_Leading_Dot": {
       "email_address_text": ".john@example.com"
