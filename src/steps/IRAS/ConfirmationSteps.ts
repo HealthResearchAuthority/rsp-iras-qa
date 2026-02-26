@@ -52,14 +52,14 @@ Then(
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.disable_confirmation_success_header_label;
-    const expectedSuccessBody =
-      validationLabelsDataset.disable_confirmation_success_body_one_label +
-      ' ' +
-      userDetailsdataset.first_name_text +
-      ' ' +
-      userDetailsdataset.last_name_text +
-      ' ' +
-      validationLabelsDataset.disable_confirmation_success_body_two_label;
+    const expectedSuccessBody = validationLabelsDataset.disable_confirmation_success_body_three_label;
+    // validationLabelsDataset.disable_confirmation_success_body_one_label +
+    // ' ' +
+    // userDetailsdataset.first_name_text +
+    // ' ' +
+    // userDetailsdataset.last_name_text +
+    // ' ' +
+    // validationLabelsDataset.disable_confirmation_success_body_two_label;
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
@@ -102,14 +102,14 @@ Then(
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.enable_confirmation_success_header_label;
-    const expectedSuccessBody =
-      validationLabelsDataset.enable_confirmation_success_body_one_label +
-      ' ' +
-      userDetailsdataset.first_name_text +
-      ' ' +
-      userDetailsdataset.last_name_text +
-      ' ' +
-      validationLabelsDataset.enable_confirmation_success_body_two_label;
+    const expectedSuccessBody = validationLabelsDataset.enable_confirmation_success_body_three_label;
+    // validationLabelsDataset.enable_confirmation_success_body_one_label +
+    // ' ' +
+    // userDetailsdataset.first_name_text +
+    // ' ' +
+    // userDetailsdataset.last_name_text +
+    // ' ' +
+    // validationLabelsDataset.enable_confirmation_success_body_two_label;
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );

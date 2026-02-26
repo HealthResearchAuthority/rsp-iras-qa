@@ -396,7 +396,7 @@ Feature: Manage sponsor organisations
                         | Existing_Sponsor_Organisation_One | Enabled        | Disabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Back            |
 
 
-        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807 @KNOWN-DEFECT-RSP-7410
+        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807
         Scenario Outline: Disable the user in 'Manage Users' and validate in Sponsor workspace and Manage Sponsor Organisations page
                 ## ---- Create new user from Manage Users ----
                 Given I have navigated to the 'Home_Page'
@@ -542,7 +542,7 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 And I can see the user record should be available with 'Inactive' status in 'My_Organisations_User_Profile_Page'
 
-        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807 @KNOWN-DEFECT-RSP-7410
+        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807
         Scenario Outline: Disable the user in 'Manage Sponsor Organisations view' and validate in Sponsor workspace and Manage Users page
                 ## ---- Create new user from Manage Users ----
                 Given I have navigated to the 'Home_Page'
@@ -697,7 +697,7 @@ Feature: Manage sponsor organisations
                 Then I can see the newly created user record should be present in the list for 'Valid_Data_In_All_Fields_Role_System_Administrator' with 'Active' status in the manage user page
                 And I capture the page screenshot
 
-        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807 @KNOWN-DEFECT-RSP-7410
+        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807
         Scenario Outline: Disable the user in 'Sponsor workspace' and validate in Manage Sponsor Organisation and Manage Users page
                 ## ---- Create new user from Manage Users ----
                 Given I have navigated to the 'Home_Page'

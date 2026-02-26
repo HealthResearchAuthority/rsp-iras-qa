@@ -5,7 +5,8 @@
     "disable_confirmation_success_header_label_first": "The user account for",
     "disable_confirmation_success_header_label": "has been disabled",
     "disable_confirmation_success_body_one_label": "A confirmation email will be sent to",
-    "disable_confirmation_success_body_two_label": "to confirm that their record has been disabled"
+    "disable_confirmation_success_body_two_label": "to confirm that their record has been disabled",
+    "disable_confirmation_success_body_three_label": "This can be enabled again if needed from the Manage Users section."
   },
   "Enable_User_Profile_Labels": {
     "enable_confirmation_header_label": "Confirm that you want to enable",
@@ -13,7 +14,8 @@
     "enable_confirmation_success_header_label_first": "The user account for",
     "enable_confirmation_success_header_label": "has been enabled",
     "enable_confirmation_success_body_one_label": "A confirmation email will be sent to",
-    "enable_confirmation_success_body_two_label": "to confirm that their record has been enabled"
+    "enable_confirmation_success_body_two_label": "to confirm that their record has been enabled",
+    "enable_confirmation_success_body_three_label": "This can be disabled again if needed from the Manage Users section."
   },
   "Disable_Review_Body_Labels": {
     "disable_confirmation_header_label": "Confirm that you want to disable",
