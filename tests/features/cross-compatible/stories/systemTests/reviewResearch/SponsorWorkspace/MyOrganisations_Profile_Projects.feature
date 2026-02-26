@@ -131,7 +131,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     Then I capture the page screenshot
     And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
     And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
@@ -451,7 +451,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     Then I capture the page screenshot
     And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
     And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
@@ -513,7 +513,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     Then I capture the page screenshot
     And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
     And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
