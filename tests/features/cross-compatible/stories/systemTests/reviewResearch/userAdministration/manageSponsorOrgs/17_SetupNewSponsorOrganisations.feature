@@ -79,8 +79,7 @@ Feature: Set up new sponsor organisation
 
     @rsp-5230 @ErrorValidationDuplicateSponsorOrg @jsEnabled
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is enabled
-        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
-        And I capture the page screenshot
+        When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then the system displays 'sponsor organisations' matching the search criteria
@@ -95,14 +94,12 @@ Feature: Set up new sponsor organisation
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
         Examples:
-            | Field_Name        | Position | Field_And_Summary_Error_Message                               |
-            | Organisation_Name | First    | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
-            | Organisation_Name | Last     | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
+            | Field_And_Summary_Error_Message                               |
+            | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
 
     @rsp-5237 @ErrorValidationDuplicateSponsorOrg @jsDisabled
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is disabled
-        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
-        And I capture the page screenshot
+        When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then the system displays 'sponsor organisations' matching the search criteria
@@ -117,9 +114,8 @@ Feature: Set up new sponsor organisation
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
         Examples:
-            | Field_Name        | Position | Field_And_Summary_Error_Message                                |
-            | Organisation_Name | First    | JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error |
-            | Organisation_Name | Last     | JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error |
+            | Field_And_Summary_Error_Message                                |
+            | JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error |
 
     @rsp-5230 @SponsorOrganisationValidation @jsEnabled @RTS @skip
     Scenario Outline: Validate the sponsor organisation suggestion list when javascript is enabled-Set up a new sponsor organisation Page
