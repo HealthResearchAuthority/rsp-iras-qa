@@ -2,6 +2,23 @@
 Feature: View user list of sponsor org, Search,add user to sponsor org
 
     Background:
+        Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+        Then I can see the system administration home page
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
+        When I enter 'QA Automation' into the search field
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using 'Advanced_Filter_Status_Active'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I enter the 'Email_Address' of the 'First' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And I capture the page screenshot
+        And I capture the email address of the user in the system for later use
         Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
@@ -111,7 +128,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I capture the page screenshot
         Then I can see the user list page of the 'sponsor organisation'
         And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
-        When I enter 'QA Automation' into the search field
+        When I enter 'name of the user in the system' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
