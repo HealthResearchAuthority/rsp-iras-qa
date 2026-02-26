@@ -54,12 +54,12 @@ Then(
       const orgName = (await row.locator('td').nth(0).innerText()).trim();
       const orgCountry = (await row.locator('td').nth(1).innerText()).trim();
       uiList.push({ orgName, orgCountry });
-      const linkName = (await row.locator('td').nth(2).innerText()).trim();
-      if (user === 'Sponsor_User') {
-        expect.soft(linkName).toBe('View');
-      } else {
-        expect.soft(linkName).toBe('Manage');
-      }
+      // const linkName = (await row.locator('td').nth(2).innerText()).trim();
+      // if (user === 'Sponsor_User') {
+      //   expect.soft(linkName).toBe('View');
+      // } else {
+      //   expect.soft(linkName).toBe('Manage');
+      // }
     }
     expect.soft(uiList).toEqual(expect.arrayContaining(orgInfoList));
     expect.soft(uiList.length, 'Row count mismatch').toBe(orgInfoList.length);

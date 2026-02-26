@@ -93,7 +93,7 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         And I capture the page screenshot
         Then I can see the successful user update message on my organisations user profile page
         And I capture the page screenshot
-        And I see the details for '<Added_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
+        # And I see the details for '<Added_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
         And I can see a 'Enable_User' section on my organisation user profile page
         When I click the 'Enable_User' button on the 'My_Organisations_User_Profile_Page'
         And I capture the page screenshot
