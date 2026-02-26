@@ -87,8 +87,10 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         When I navigate 'back'
         Then I can see the 'My_Organisations_User_Profile_Page'
         When I click the 'Disable_User' button on the 'My_Organisations_User_Profile_Page'
+        And I capture the page screenshot
         And I validate 'Disable_User_In_My_Organisation_Labels' labels displayed in disable user in sponsor organisation confirmation page using the user name
         And I click the 'Confirm' button on the 'My_Organisations_Confirm_User_Status_Page'
+        And I capture the page screenshot
         Then I can see the successful user update message on my organisations user profile page
         And I capture the page screenshot
         And I see the details for '<Added_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
@@ -97,6 +99,7 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         And I capture the page screenshot
         And I validate 'Enable_User_In_My_Organisation_Labels' labels displayed in enable user in sponsor organisation confirmation page using the user name
         And I click the 'Confirm' button on the 'My_Organisations_Confirm_User_Status_Page'
+        And I capture the page screenshot
         Then I can see the successful user update message on my organisations user profile page
         And I capture the page screenshot
         And I see the details for '<Added_User>' are correctly displayed on 'My_Organisations_User_Profile_Page'
@@ -148,10 +151,26 @@ Feature: Sponsor Workspace - My Organisations Page - Audit
         And I capture the page screenshot
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        And I have navigated to the 'My_Organisations_Sponsor_Org_Profile_Page' as '<Login_User>'
+        # And I have navigated to the 'My_Organisations_Sponsor_Org_Profile_Page' as '<Login_User>'
+        # Then I can see tabs are displayed based on the logged in user role '<Login_User>'
+        When I have navigated to the 'Home_Page' as '<Login_User>'
+        Then I click the 'Sponsor' link on the 'Home_Page'
+        And I can see the sponsor workspace page
+        Then I capture the page screenshot
+        And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+        And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
+        And I capture the page screenshot
+        Then I can see the my organisations page
+        When I enter '<Sponsor_Organisation>' into the search field
+        Then I click the 'Search' button on the 'My_Organisations_Page'
+        And I capture the page screenshot
+        And I click the '<Link>' link on the 'My_Organisations_Page'
+        And I capture the page screenshot
+        And I click the 'Users' link on the 'My_Organisations_Sponsor_Org_Profile_Page'
+        And I capture the page screenshot
         Then I can see tabs are displayed based on the logged in user role '<Login_User>'
 
         Examples:
-            | Login_User             | User_Email               | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
-            | Sponsor_User           | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
-            | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+            | Login_User             | User_Email               | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Link   |
+            | Sponsor_User           | automation sponsor email | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | View   |
+            | Sponsor_Org_Admin_User | sponsor org admin email  | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage |
