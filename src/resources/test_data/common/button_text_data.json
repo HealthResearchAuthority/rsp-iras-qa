@@ -464,5 +464,11 @@
   },
   "Send_Modification_To_Sponsor_Error_Page": {
     "Return_To_Project_Overview": "Return to project overview"
+  },
+  "Modification_Not_Authorised_Page": {
+    "Not_Authorised_Confirm": "Save and continue"
+  },
+  "Revise_And_Authorise_Page": {
+    "Authorise": "Authorise"
   }
 }

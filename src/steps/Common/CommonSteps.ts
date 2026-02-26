@@ -598,6 +598,7 @@ Then(
       checkAuthoriseProjectClosurePage,
       myOrganisationsEditUserProfilePage,
       requestRevisionsPage,
+      modificationNotAuthorisedPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -753,6 +754,10 @@ Then(
       errorMessageFieldDataset =
         requestRevisionsPage.requestRevisionsPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = requestRevisionsPage;
+    } else if (pageKey == 'Modification_Not_Authorised_Page') {
+      errorMessageFieldDataset =
+        modificationNotAuthorisedPage.modificationNotAuthorisedPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = modificationNotAuthorisedPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

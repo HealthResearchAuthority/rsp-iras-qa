@@ -20,6 +20,7 @@ export default class ModificationsCommonPage {
   readonly short_project_title_value: Locator;
   readonly modification_id_value: Locator;
   readonly status_value: Locator;
+  readonly reason_not_authorised_value: Locator;
   readonly tableRows: Locator;
   readonly changes_free_text: Locator;
   readonly modification_type: Locator;
@@ -139,6 +140,11 @@ export default class ModificationsCommonPage {
       .getByText(this.modificationsCommonPageTestData.Label_Texts.status_label)
       .locator('..')
       .locator('[class$="value"]');
+    this.reason_not_authorised_value = this.page
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.reason_not_authorised_label)
+      .locator('..')
+      .locator('[class$="value"]');
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.changes_free_text = this.page
       .getByText(this.modificationsCommonPageTestData.Label_Texts.changes_free_textbox_label)
@@ -187,7 +193,7 @@ export default class ModificationsCommonPage {
     });
     this.auditHistoryTableHeader = this.auditHistoryTables.locator('thead th');
     this.auditHistoryTableBodyRows = this.auditHistoryTables.locator('tbody tr');
-    this.tableCell = this.page.locator('td');
+    this.tableCell = this.page.locator('td').or(this.page.locator('.govuk-table__cell'));
     this.notification_heading_text = this.page.getByRole('heading', { level: 1 });
     this.notification_text = this.page.locator('p.govuk-body');
   }

@@ -1,7 +1,7 @@
 @SponsorRequestRevision @Regression @SetupNewSponsorOrgGoLive @SponsorUser
 Feature: This feature covers the sponsor request revision journeys for modifications
-# This feature validates the end-to-end modification revisions workflow between the sponsor and the applicant. 
-# When an applicant submits a modification request and sponsor identifies required changes, the request can be sent back to the applicant for revision.
+  # This feature validates the end-to-end modification revisions workflow between the sponsor and the applicant.
+  # When an applicant submits a modification request and sponsor identifies required changes, the request can be sent back to the applicant for revision.
 
   Background:
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'

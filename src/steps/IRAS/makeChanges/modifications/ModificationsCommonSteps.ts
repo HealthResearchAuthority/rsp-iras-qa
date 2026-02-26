@@ -756,3 +756,15 @@ Then(
     }
   }
 );
+
+Then(
+  'I validate the reason for not authorised on modifications page using {string} dataset',
+  async ({ modificationNotAuthorisedPage, modificationsCommonPage }, datasetName) => {
+    const reasonNotAuthorisedDataset = modificationNotAuthorisedPage.modificationNotAuthorisedPageTestData[datasetName];
+    const reasonNotAuthorisedExpected = reasonNotAuthorisedDataset.reason_textbox;
+    const reasonNotAuthorisedActual = confirmStringNotNull(
+      await modificationsCommonPage.reason_not_authorised_value.textContent()
+    );
+    expect.soft(reasonNotAuthorisedActual).toBe(reasonNotAuthorisedExpected);
+  }
+);
