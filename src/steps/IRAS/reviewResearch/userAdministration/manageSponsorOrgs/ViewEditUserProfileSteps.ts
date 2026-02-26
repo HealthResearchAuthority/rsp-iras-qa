@@ -6,7 +6,7 @@ const { When, Then } = createBdd(test);
 
 Then(
   'I can see the view and edit user profile page of the sponsor organisation',
-  async ({ viewEditUserProfilePage, commonItemsPage }) => {
+  async ({ viewEditUserProfilePage, commonItemsPage, myOrganisationsUserProfilePage }) => {
     await viewEditUserProfilePage.assertOnViewEditUserProfilePage();
     const userIdStartIndex = viewEditUserProfilePage.page.url().indexOf('=') + 1;
     const userIdEndIndex = viewEditUserProfilePage.page.url().indexOf('&');
@@ -38,12 +38,12 @@ Then(
       await viewEditUserProfilePage.setRole(
         confirmStringNotNull(await viewEditUserProfilePage.role_value.textContent()).split(', ')
       );
-      const actualValues = confirmStringNotNull(await viewEditUserProfilePage.role_value.textContent());
-      expect
-        .soft(actualValues)
-        .toContain(
-          viewEditUserProfilePage.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.sponsor_role_value
-        );
+      await expect.soft(viewEditUserProfilePage.role_value).toBeVisible();
+      await expect.soft(viewEditUserProfilePage.role_value).toHaveText(await myOrganisationsUserProfilePage.getRole());
+      await expect.soft(viewEditUserProfilePage.authoriser_value).toBeVisible();
+      await expect
+        .soft(viewEditUserProfilePage.authoriser_value)
+        .toHaveText(await myOrganisationsUserProfilePage.getAuthoriser());
     }
   }
 );
