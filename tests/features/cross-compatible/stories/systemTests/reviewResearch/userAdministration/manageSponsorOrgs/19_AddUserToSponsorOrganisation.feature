@@ -2,6 +2,23 @@
 Feature: Add user to sponsor organisation
 
     Background:
+        Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+        Then I can see the system administration home page
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
+        When I enter 'QA Automation' into the search field
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using 'Advanced_Filter_Status_Active'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I enter the 'Email_Address' of the 'First' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And I capture the page screenshot
+        And I capture the email address of the user in the system for later use
         Given I have navigated to the 'System_Administration_Page'
         And I capture the page screenshot
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -157,14 +174,14 @@ Feature: Add user to sponsor organisation
 
     @verifySearchForAddedSponsorOrgUserNoResults
     Scenario: Verify that when a user is added to a sponsor organisation, that user no longer appears in the add user to sponsor organisation search
-        When I enter 'QA Automation' into the search field
+        When I enter 'name of the user in the system' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And I can see that the add users to 'sponsor organisation' search page contains 'Results'
         And I capture the page screenshot
-        When I enter the 'Email_Address' of the 'First' item in the list, into the search field
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-        And I capture the page screenshot
+        # When I enter the 'Email_Address' of the 'First' item in the list, into the search field
+        # And I capture the page screenshot
+        # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        # And I capture the page screenshot
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
         And I capture the page screenshot

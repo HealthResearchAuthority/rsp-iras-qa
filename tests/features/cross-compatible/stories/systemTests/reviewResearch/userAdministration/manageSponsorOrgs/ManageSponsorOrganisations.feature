@@ -121,14 +121,14 @@ Feature: Manage sponsor organisations
                 ## add user to sponsor organisation
                 And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
                 And I capture the page screenshot
-                When I enter 'QA Automation' into the search field
+                When I enter 'name of the user in the system' into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
                 And I capture the page screenshot
-                When I enter the 'Email_Address' of the 'First' item in the list, into the search field
-                And I capture the page screenshot
-                And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
-                And I capture the page screenshot
+                # When I enter the 'Email_Address' of the 'First' item in the list, into the search field
+                # And I capture the page screenshot
+                # And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+                # And I capture the page screenshot
                 When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
                 When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
                 And I capture the page screenshot
