@@ -240,7 +240,7 @@ Feature: Manage review bodies-Advanced Filter and Search
       | Advanced_Filters                     |
       | Advanced_Filter_All_Countries_Active |
 
-  @rsp-4381 @ActiveFilterRemainAppliedAfterCreateNewReviewBody @KNOWN-DEFECT-RSP-7490
+  @rsp-4381 @ActiveFilterRemainAppliedAfterCreateNewReviewBody
   Scenario Outline: Verify that the active filter remains applied after creating a new review body with valid data
     And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
     And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
