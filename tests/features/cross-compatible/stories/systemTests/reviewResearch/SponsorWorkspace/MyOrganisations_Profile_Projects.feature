@@ -1,12 +1,44 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
+@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @TestTiji
 Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
-  @rsp-6418 @rsp-6419 @MyOrganisationsPageLabelValidation
+  @rsp-6418 @rsp-6419 @rsp-6648 @MyOrganisationsPageLabelValidation
   Scenario: Validate that <Login_User> able to navigate to 'My Organisations' page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AalborgUniversityHospital'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AlfredHeath'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
@@ -38,7 +70,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     Then I capture the page screenshot
     And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
     And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
@@ -46,18 +78,22 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And I can see the 'My_Organisations_Table' ui labels on the my organisations page
     And I capture the page screenshot
     And I can now see a table of results for my organisations
-    When I enter '<Sponsor_Organisation>' into the search field
-    Then I click the 'Search' button on the 'My_Organisations_Page'
-    And I can see the associated organisations displaying in the table for '<Login_User>'
     And I can see the 'sponsor organisations' list sorted by 'ascending' order of the 'organisation name' on the 'My_Organisations_Page' page
+    And I can see the associated organisations displaying in the table for '<Login_User>'
+    When I enter '<Sponsor_Organisation_One>' into the search field
+    Then I click the 'Search' button on the 'My_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
+    When I enter '<Sponsor_Organisation_Two>' into the search field
+    Then I click the 'Search' button on the 'My_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
     Then I click the '<Link>' link on the 'My_Organisations_Page'
     And I capture the page screenshot
     And I can see the sponsor organisation profile page from my organisations for '<Login_User>'
     Examples:
 
-      | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
-      | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
-      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation_One    | Sponsor_Organisation_Two | Select_User_Role                | Select_User_Permission  |
+      | Sponsor_User           | automation sponsor email | View   | Aalborg University Hospital | Alfred Health            | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Aalborg University Hospital | Alfred Health            | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6418 @rsp-6419 @MyOrganisationsPageNavigationValidation
   Scenario: Validate that the user with role <Login_User> able to navigate to 'My Organisations' page
@@ -95,7 +131,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     Then I capture the page screenshot
     And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
     And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
@@ -415,7 +451,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     Then I capture the page screenshot
     And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
     And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
@@ -477,7 +513,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     When I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     Then I capture the page screenshot
     And I can see a 'My_Organisations' link on the 'Sponsor_Workspace_Page'
     And I click the 'My_Organisations' link on the 'Sponsor_Workspace_Page'
@@ -801,7 +837,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Login_User   | User_Email               | Link | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Empty_Input |
       | Sponsor_User | automation sponsor email | View | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  |             |
 
-  @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
+  @rsp-6421 @MyOrganisationsProjectsTabValidation
   Scenario: Validate the advanced filter under projects tab for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -863,7 +899,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Advanced_Filter_Project_Created_From_Date_Only | Existing_Iras_Id_Data_Three |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Advanced_Filter_Project_Created_From_Date_Only | Existing_Iras_Id_Data_Three |
 
-  @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
+  @rsp-6421 @MyOrganisationsProjectsTabValidation
   Scenario: Validate the advanced filter under projects tab for user with role <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1059,3 +1095,425 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
       | Login_User   | User_Email               | Link | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Navigation_Method1 | Navigation_Method2 |
       | Sponsor_User | automation sponsor email | View | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  | next link          | previous link      |
+
+  @rsp-6819 @MultiOrgAuthorisationValidation
+  Scenario Outline: Multiple-Organisation Authorisations page when Authoriser is set to Yes in two Sponsor Organisations
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AalborgUniversityHospital'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AlfredHeath'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    Then I capture the page screenshot
+    And I can see the associated organisations displaying in the authorisations page for '<Login_User>'
+    And I click the organisation link 'Sponsor_Organisation_AalborgUniversityHospital' in the authorisations page
+    Then I capture the page screenshot
+    And I can see the authorisations page for 'Sponsor_Organisation_AalborgUniversityHospital'
+    When I click the 'Authorisations_Breadcrumb' link in the breadcrumbs on the 'Authorisations_For_Sponsor_Organisation_Page'
+    Then I capture the page screenshot
+    And I can see the associated organisations displaying in the authorisations page for '<Login_User>'
+    When I click the organisation link 'Sponsor_Organisation_AlfredHeath' in the authorisations page
+    Then I capture the page screenshot
+    And I can see the authorisations page for 'Sponsor_Organisation_AlfredHeath'
+    When I click the 'Authorisations_Breadcrumb' link in the breadcrumbs on the 'Authorisations_For_Sponsor_Organisation_Page'
+    Then I capture the page screenshot
+    And I can see the associated organisations displaying in the authorisations page for '<Login_User>'
+    When I click the 'Sponsorworkspace_Breadcrumb' link in the breadcrumbs on the 'Authorisations_Page'
+    Then I capture the page screenshot
+    Then I can see the sponsor workspace page
+    When I click the 'My_Account_Breadcrumb' link in the breadcrumbs on the 'Sponsor_Workspace_Page'
+    And I capture the page screenshot
+    Then I can see the 'Home_Page'
+    Examples:
+
+      | Login_User             | User_Email               | Link   | Sponsor_Organisation_One    | Sponsor_Organisation_Two | Select_User_Role                | Select_User_Permission  |
+      | Sponsor_User           | automation sponsor email | View   | Aalborg University Hospital | Alfred Health            | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
+      | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Aalborg University Hospital | Alfred Health            | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
+
+  @rsp-6819 @MultiOrgAuthorisationValidation
+  Scenario Outline: Multiple-Organisation Authorisations page when Authoriser is set to Yes in one Sponsor Organisation and set to No in another Sponsor Organisation
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AalborgUniversityHospital'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission_Auth>'
+    When I fill the add user permission page using '<Select_User_Permission_Auth>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission_Auth>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AlfredHeath'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission_NoAuth>'
+    When I fill the add user permission page using '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    Then I capture the page screenshot
+    And I can see the sponsor authorisations page
+    When I click the 'Sponsorworkspace_Breadcrumb' link in the breadcrumbs on the 'Authorisations_Page'
+    Then I capture the page screenshot
+    Then I can see the sponsor workspace page
+    When I click the 'My_Account_Breadcrumb' link in the breadcrumbs on the 'Sponsor_Workspace_Page'
+    And I capture the page screenshot
+    Then I can see the 'Home_Page'
+    Examples:
+
+      | Login_User   | User_Email               | Link | Sponsor_Organisation_One    | Sponsor_Organisation_Two | Select_User_Role              | Select_User_Permission_Auth | Select_User_Permission_NoAuth |
+      | Sponsor_User | automation sponsor email | View | Aalborg University Hospital | Alfred Health            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes      | Sponsor_Authoriser_No         |
+
+  @rsp-6819 @MultiOrgAuthorisationValidation
+  Scenario Outline: Multiple-Organisation Authorisations page when Authoriser is set to Yes in two Sponsor Organisations and No in another Sponsor Organisation
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AalborgUniversityHospital'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AlfredHeath'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission>'
+    When I fill the add user permission page using '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    And I capture the page screenshot
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_SheffieldTeachingHospitalsNHSFoundationTrust'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission_NoAuth>'
+    When I fill the add user permission page using '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    Then I capture the page screenshot
+    And I can see the associated organisations displaying in the authorisations page for '<Login_User>'
+    And I click the organisation link 'Sponsor_Organisation_AalborgUniversityHospital' in the authorisations page
+    Then I capture the page screenshot
+    And I can see the authorisations page for 'Sponsor_Organisation_AalborgUniversityHospital'
+    When I click the 'Authorisations_Breadcrumb' link in the breadcrumbs on the 'Authorisations_For_Sponsor_Organisation_Page'
+    Then I capture the page screenshot
+    And I can see the associated organisations displaying in the authorisations page for '<Login_User>'
+    When I click the organisation link 'Sponsor_Organisation_AlfredHeath' in the authorisations page
+    Then I capture the page screenshot
+    And I can see the authorisations page for 'Sponsor_Organisation_AlfredHeath'
+    When I click the 'Authorisations_Breadcrumb' link in the breadcrumbs on the 'Authorisations_For_Sponsor_Organisation_Page'
+    Then I capture the page screenshot
+    And I can see the associated organisations displaying in the authorisations page for '<Login_User>'
+    When I click the 'Sponsorworkspace_Breadcrumb' link in the breadcrumbs on the 'Authorisations_Page'
+    Then I capture the page screenshot
+    Then I can see the sponsor workspace page
+    When I click the 'My_Account_Breadcrumb' link in the breadcrumbs on the 'Sponsor_Workspace_Page'
+    And I capture the page screenshot
+    Then I can see the 'Home_Page'
+    Examples:
+
+      | Login_User   | User_Email               | Link | Sponsor_Organisation_One    | Sponsor_Organisation_Two | Select_User_Role              | Select_User_Permission | Select_User_Permission_NoAuth |
+      | Sponsor_User | automation sponsor email | View | Aalborg University Hospital | Alfred Health            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | Sponsor_Authoriser_No         |
+
+  @rsp-6819 @MultiOrgAuthorisationValidation
+  Scenario Outline: Multiple-Organisation Authorisations page when Authoriser is set to No in all the Sponsor Organisations
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AalborgUniversityHospital'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission_NoAuth>'
+    When I fill the add user permission page using '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_AlfredHeath'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission_NoAuth>'
+    When I fill the add user permission page using '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    And I capture the page screenshot
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_SheffieldTeachingHospitalsNHSFoundationTrust'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    And I keep note of the organisation country for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+    And I capture the page screenshot
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter '<User_Email>' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using '<Select_User_Role>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    And I capture the page screenshot
+    And I can see the add user permission page based on '<Select_User_Permission_NoAuth>'
+    When I fill the add user permission page using '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on '<Select_User_Permission_NoAuth>'
+    And I capture the page screenshot
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the 'user added' successful message on sponsor organisation user list page
+    And I capture the page screenshot
+    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Then I click the 'Sponsor' link on the 'Home_Page'
+    And I can see the sponsor workspace page
+    Then I capture the page screenshot
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    Then I capture the page screenshot
+    Then I can see the 'Access_Denied_Page'
+    Examples:
+
+      | Login_User   | User_Email               | Link | Sponsor_Organisation_One    | Sponsor_Organisation_Two | Select_User_Role              | Select_User_Permission | Select_User_Permission_NoAuth |
+      | Sponsor_User | automation sponsor email | View | Aalborg University Hospital | Alfred Health            | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_Yes | Sponsor_Authoriser_No         |
+

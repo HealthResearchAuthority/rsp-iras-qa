@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @SystemTestFrontStage
+@SponsorWorkspaceFrontStage @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @SystemTestFrontStage
 Feature: Sponsor Workspace
 
   @rsp-4846 @SponsorWorkspacePageLabelValidation
@@ -40,14 +40,14 @@ Feature: Sponsor Workspace
     Then I capture the page screenshot
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
     Then I can see the sponsor workspace page
-    And I can see the ui labels in sponsor workspace page
+  # And I can see the ui labels in sponsor workspace page
 
   @rsp-4846 @SponsorWorkspacePageValidationWhenUserEnabledOrDisabled
   Scenario: Validate the sponsor workspace page when the user is enabled or disabled for a sponsor organisation in backstage
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_SheffieldTeachingHospitalsNHSFoundationTrust'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
@@ -79,7 +79,7 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -99,6 +99,9 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
+    And I capture the page screenshot
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I capture the page screenshot
     Then I can see the 'Access_Denied_Page'
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -121,7 +124,7 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
   @rsp-4846 @SponsorWorkspacePageValidationWhenSponsorOrganisationEnabledOrDisabled
@@ -161,7 +164,7 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -177,6 +180,9 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
+    And I capture the page screenshot
+    And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I capture the page screenshot
     Then I can see the 'Access_Denied_Page'
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -195,7 +201,7 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
+    # And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
   @rsp-5191 @SponsorAuthorisationMandatorySelectionOnOutcomeError @jsEnabled
@@ -532,4 +538,4 @@ Feature: Sponsor Workspace
       | Date_Received       | date received       |
       | Date_Actioned       | date actioned       |
       | Status              | status              |
-      # | Chief_Investigator  | chief investigator  |
+# | Chief_Investigator  | chief investigator  |

@@ -12,7 +12,7 @@ Then(
 
 When(
   'I fill the add user page using {string}',
-  async ({ mySponsorOrgAddUserPage, createUserProfilePage, loginPage }, datasetName: string) => {
+  async ({ mySponsorOrgAddUserPage, createUserProfilePage, loginPage, commonItemsPage }, datasetName: string) => {
     let valueToFill: string | undefined;
     const prefix = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile.email_address_prefix;
     const dataset =
@@ -37,6 +37,12 @@ When(
         }
       }
     }
+    if (datasetName === 'Name_Of_Disabled_User_In_The_System') {
+      valueToFill = await commonItemsPage.getFirstUserEmail();
+      if (valueToFill) {
+        await mySponsorOrgAddUserPage['email_address_text'].fill(valueToFill);
+      }
+    }
   }
 );
 
@@ -54,7 +60,10 @@ Then(
   ) => {
     let errorMessageFieldDataset: any;
     if (pageKey === 'My_Organisations_Users_Add_User_Page') {
-      if (errorMessageSummaryDatasetName.endsWith('Email_Address_Error')) {
+      if (
+        errorMessageSummaryDatasetName.endsWith('Email_Address_Error') ||
+        errorMessageSummaryDatasetName.endsWith('Disabled_User_Email_Error')
+      ) {
         errorMessageFieldDataset =
           mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Error_Validation[
             errorMessageSummaryDatasetName
@@ -82,7 +91,7 @@ Then(
 Then(
   'I record the {string} event for the user {string} to store the sponsor organisation audit history triggered by {string}',
   async (
-    { loginPage, mySponsorOrgAddUserPage },
+    { loginPage, mySponsorOrgAddUserPage, commonItemsPage },
     eventDescriptionDatasetName: string,
     userDatasetName: string,
     targetUser: string
@@ -93,8 +102,13 @@ Then(
       ];
 
     let userEmailLogin = '';
-    if (userDatasetName.toLowerCase() !== 'blank_user_details') {
+    if (
+      userDatasetName.toLowerCase() !== 'blank_user_details' &&
+      userDatasetName.toLowerCase() !== 'non_registered_user'
+    ) {
       userEmailLogin = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
+    } else if (userDatasetName.toLowerCase() === 'non_registered_user') {
+      userEmailLogin = await commonItemsPage.getFirstUserEmail();
     }
     const userEmail = loginPage.loginPageTestData[targetUser].username.toLowerCase();
     const eventDescription = userEmailLogin + eventText;
@@ -116,16 +130,89 @@ Then(
   }
 );
 
+Then(
+  'I record the {string} event for the user {string} to store the sponsor organisation audit history triggered by {string} for {string}',
+  async (
+    { loginPage, mySponsorOrgAddUserPage, commonItemsPage },
+    eventDescriptionDatasetName: string,
+    userDatasetName: string,
+    targetUser: string,
+    workspaceKey: string
+  ) => {
+    const eventText =
+      mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Events[
+        eventDescriptionDatasetName
+      ];
+
+    let userEmailLogin = '';
+    if (
+      userDatasetName.toLowerCase() !== 'blank_user_details' &&
+      userDatasetName.toLowerCase() !== 'non_registered_user'
+    ) {
+      userEmailLogin = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
+    } else if (userDatasetName.toLowerCase() === 'non_registered_user') {
+      userEmailLogin = await commonItemsPage.getFirstUserEmail();
+    }
+    const userEmail = loginPage.loginPageTestData[targetUser].username.toLowerCase();
+    const eventDescription = userEmailLogin + eventText;
+    const now = new Date();
+    let dateTimeOfEvent: string;
+    if (workspaceKey === 'manage_sponsor_org_system_admin_workspace') {
+      dateTimeOfEvent = `${new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      }).format(now)} ${new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }).format(now)}`;
+    } else {
+      dateTimeOfEvent = `${new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      }).format(now)} at ${new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }).format(now)}`;
+    }
+
+    mySponsorOrgAddUserPage.addAuditHistoryRecord = {
+      dateTimeOfEventExpected: dateTimeOfEvent,
+      sponsorOrgEventDescriptionExpected: eventDescription,
+      userEmailExpected: userEmail,
+    };
+  }
+);
+
 Then('I validate the audit history table for sponsor organisation', async ({ mySponsorOrgAddUserPage }) => {
-  const auditHistoryTableHeadersActual = await mySponsorOrgAddUserPage.auditHistoryTableHeader.allTextContents();
-  const auditHistoryTableHeadersExpected =
-    mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Headers;
-  expect.soft(auditHistoryTableHeadersActual).toEqual(auditHistoryTableHeadersExpected);
+  const pageUrl = mySponsorOrgAddUserPage.page.url();
+  const expectedAuditHistoryURLPart =
+    process.env.BASE_URL +
+    mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page
+      .manage_sponsor_org_audit_trial_partial_url;
+  console.log('pageUrl', pageUrl);
+  console.log('expectedAuditHistoryURLPart', expectedAuditHistoryURLPart);
+  if (pageUrl.startsWith(expectedAuditHistoryURLPart)) {
+    const auditHistoryTableHeaders = mySponsorOrgAddUserPage.auditHistoryTableHeader;
+    const auditHistoryTableHeadersExpected =
+      mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page
+        .Audit_History_Headers_Manage_Sponsor;
+    await expect.soft(auditHistoryTableHeaders).toHaveText(auditHistoryTableHeadersExpected);
+  } else {
+    const auditHistoryTableHeaders = mySponsorOrgAddUserPage.auditHistoryTableHeader;
+    const auditHistoryTableHeadersExpected =
+      mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Headers;
+    expect.soft(auditHistoryTableHeaders).toHaveText(auditHistoryTableHeadersExpected);
+  }
   const rowCount = await mySponsorOrgAddUserPage.auditHistoryTableBodyRows.count();
-  const actualAuditHistoryRows: string[][] = [];
+  let actualAuditHistoryRows: string[][] = [];
   for (let auditRowIndex = 0; auditRowIndex < rowCount; auditRowIndex++) {
     const row = mySponsorOrgAddUserPage.auditHistoryTableBodyRows.nth(auditRowIndex);
     const cellTexts = await row.locator(mySponsorOrgAddUserPage.tableCell).allTextContents();
+    console.log('cellTexts', cellTexts);
     actualAuditHistoryRows.push(cellTexts.map((text) => text.trim()));
   }
   const expectedAuditHistoryRows = mySponsorOrgAddUserPage.getAuditHistoryRecord
@@ -136,6 +223,9 @@ Then('I validate the audit history table for sponsor organisation', async ({ myS
       record.sponsorOrgEventDescriptionExpected,
       record.userEmailExpected,
     ]);
-  const expectedRowsToCheck = [...actualAuditHistoryRows];
-  expect.soft(expectedRowsToCheck).toEqual(expectedAuditHistoryRows);
+  actualAuditHistoryRows = actualAuditHistoryRows.filter((row) => row.length > 0);
+  // const expectedRowsToCheck = actualAuditHistoryRows;
+  console.log('actualAuditHistoryRows', actualAuditHistoryRows);
+  console.log('expectedAuditHistoryRows', expectedAuditHistoryRows);
+  expect.soft(actualAuditHistoryRows).toEqual(expectedAuditHistoryRows);
 });

@@ -187,12 +187,23 @@ export default class ManageSponsorOrganisationsPage {
   async sqlGetSponsorRtsIds() {
     const sqlConnection = await connect(dbConfigData.Application_Service);
     const queryResult = await sqlConnection.query(
-      `SELECT RtsId FROM SponsorOrganisationsUsers GROUP BY RtsId HAVING COUNT(SponsorRole) > 20;`
+      `SELECT RtsId FROM SponsorOrganisationsUsers GROUP BY RtsId HAVING COUNT(SponsorRole) > 0;`
     );
+    //   const queryResult = await sqlConnection.query(
+    //   `SELECT RtsId FROM SponsorOrganisationsUsers GROUP BY RtsId HAVING COUNT(SponsorRole) > 20;`
+    // );
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.RtsId);
   }
 
+  async sqlGetSponsorRtsIdsByEmailAndActive(userEmail: string) {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(
+      `SELECT RtsId FROM SponsorOrganisationsUsers where Email='${userEmail}' And  IsActive=1`
+    );
+    await sqlConnection.close();
+    return queryResult.recordset.map((row) => row.RtsId);
+  }
   async sqlGetOrganisationIdsFromRTS() {
     const sqlConnection = await connect(dbConfigData.Rts_Service);
     const queryResult = await sqlConnection.query(
@@ -207,6 +218,13 @@ export default class ManageSponsorOrganisationsPage {
     const queryResult = await sqlConnection.query(`SELECT Name FROM Organisation WHERE Id = '${sponsor_id}'`);
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.Name);
+  }
+
+  async sqlGetOrganisationCountryFromRTSById(sponsor_id: string) {
+    const sqlConnection = await connect(dbConfigData.Rts_Service);
+    const queryResult = await sqlConnection.query(`SELECT CountryName FROM Organisation WHERE Id = '${sponsor_id}'`);
+    await sqlConnection.close();
+    return queryResult.recordset.map((row) => row.CountryName);
   }
 
   async sqlGetOrganisationIdFromRTSByName(sponsor_name: string) {
@@ -257,5 +275,14 @@ export default class ManageSponsorOrganisationsPage {
         throw new Error(`${error} Error updating existing sponsor organisation name to testdata json file:`);
       }
     })();
+  }
+
+  async sqlGetSponsorRtsIdsByEmailAndActiveAndAuthoriser(userEmail: string) {
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(
+      `SELECT RtsId FROM SponsorOrganisationsUsers where Email='${userEmail}' AND  IsActive=1 AND IsAuthoriser=1`
+    );
+    await sqlConnection.close();
+    return queryResult.recordset.map((row) => row.RtsId);
   }
 }

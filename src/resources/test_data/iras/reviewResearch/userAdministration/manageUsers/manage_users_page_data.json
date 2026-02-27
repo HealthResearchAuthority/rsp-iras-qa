@@ -208,6 +208,9 @@
     "Advanced_Filter_Status_Active": {
       "status_radio": "Active"
     },
+    "Advanced_Filter_Status_Disabled": {
+      "status_radio": "Disabled"
+    },
     "Advanced_Filter_No_Country_Selected": {
       "country_checkbox": []
     },

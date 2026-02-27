@@ -52,6 +52,7 @@ export default class CommonItemsPage {
   private _last_name: string;
   private _email_address: string;
   private _disabled_User: string;
+  private _email_disabled_user: string;
   private _admin_email_address: string;
   private _status: string;
   private _user_full_name: Map<string, string>;
@@ -210,6 +211,7 @@ export default class CommonItemsPage {
     this._email_address = '';
     this._disabled_User = '';
     this._admin_email_address = '';
+    this._email_disabled_user = '';
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -523,6 +525,13 @@ export default class CommonItemsPage {
     this._search_key = value;
   }
 
+  async getFirstUserEmail(): Promise<string> {
+    return this._email_disabled_user;
+  }
+
+  async setFirstUserEmail(value: string): Promise<void> {
+    this._email_disabled_user = value;
+  }
   async getNoOfResultsBeforeSearch(): Promise<number> {
     return this._no_of_results_before_search;
   }
@@ -2032,5 +2041,30 @@ export default class CommonItemsPage {
       await this.page.reload({ waitUntil: 'networkidle' });
       await this.page.waitForTimeout(2000);
     }
+  }
+
+  async getFirstEmailFromTheTable(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(3000);
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      // since first row is header, starting from 1;
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
+        searchResultValues.push(emailAddress);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForTimeout(1000);
+      } else {
+        dataFound = true;
+      }
+    }
+    const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
+    return searchResultMap;
   }
 }

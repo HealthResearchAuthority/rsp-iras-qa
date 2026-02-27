@@ -361,8 +361,8 @@
     "Add_Profile": "Add user profile"
   },
   "View_Edit_User_Profile_Page": {
-    "Disable_User": "Disable user",
-    "Enable_User": "Enable user",
+    "Disable_User": "Deactivate user",
+    "Enable_User": "Activate user",
     "Disable": "Disable",
     "Enable": "Enable"
   },
@@ -443,8 +443,8 @@
     "Save": "Save"
   },
   "My_Organisations_User_Profile_Page": {
-    "Disable_User": "Disable user",
-    "Enable_User": "Enable user"
+    "Disable_User": "Deactivate user",
+    "Enable_User": "Activate user"
   },
   "My_Organisations_Confirm_User_Status_Page": {
     "Confirm": "Confirm"
@@ -464,5 +464,10 @@
   },
   "Send_Modification_To_Sponsor_Error_Page": {
     "Return_To_Project_Overview": "Return to project overview"
+  },
+  "My_Organisations_Audit_History_Page": {
+    "Date": "Date",
+    "Event_Description": "Event description",
+    "Username": "Username"
   }
 }

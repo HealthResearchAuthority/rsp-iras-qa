@@ -7,11 +7,14 @@
     "email_search_box_label": "Email",
     "save_add_continue_button": "Save and continue",
     "add_user_partial_url": "/sponsorworkspace/myorganisationusersadduser?rtsId",
+    "sponsor_workspace_my_org_audit_trial_partial_url": "sponsorworkspace/myorganisationaudittrail?rtsId",
+    "manage_sponsor_org_audit_trial_partial_url": "sponsororganisations",
     "non_registered_user_error_heading": "User account doesn't exist",
     "Non_Registered_User": {
       "email_address_text": "hscrd@health.org"
     },
     "Audit_History_Headers": ["Date", "Event description", "Username"],
+    "Audit_History_Headers_Manage_Sponsor": ["Date", "Event description", "System administrator"],
     "Audit_History_Events": {
       "Sponsor_Organisation_Created": "Sponsor organisation created",
       "User_Added": " added to sponsor organisation",
@@ -22,7 +25,7 @@
       "User_Unassigned_Sponsor": " unassigned Sponsor for sponsor organisation",
       "User_Unassigned_Authoriser": " unassigned authoriser for sponsor organisation",
       "User_Enabled": " enabled for sponsor organisation",
-      "User_Disabled": " disabled from sponsor organisation"
+      "User_Disabled": " inactive from sponsor organisation"
     },
     "Invalid_Email_Data_Leading_Dot": {
       "email_address_text": ".john@example.com"
@@ -55,9 +58,15 @@
       "Blank_Email_Address_Error": {
         "no_role_selected_link_text": "Enter a user email"
       },
+      "Disabled_User_Email_Error": {
+        "disabled_user_link_text": "You cannot add a system-disabled user to a sponsor organisation."
+      },
       "User_Exists_Message": {
         "banner_heading": "Important",
         "user_exists_notification_text": "This user already exists in "
+      },
+      "Invalid_Email_Address_Error": {
+        "invalid_email_address_error_text": "Enter an email address in the correct format"
       }
     }
   }

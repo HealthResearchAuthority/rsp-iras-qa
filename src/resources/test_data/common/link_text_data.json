@@ -293,7 +293,8 @@
   },
   "Search_Add_User_Sponsor_Org_Page": {
     "Back": "Back",
-    "Add_User": "Add user"
+    "Add_User": "Add user",
+    "Sponsor_Organisation_Profile": "Sponsor organisation profile"
   },
   "Check_Add_User_Sponsor_Org_Page": {
     "Back": "Back"
@@ -329,7 +330,8 @@
     "My_Account": "My account",
     "Authorisations": "Authorisations",
     "My_Organisations": "My organisations",
-    "Project_Closures": "Project closures"
+    "Project_Closures": "Project closures",
+    "My_Account_Breadcrumb": "My account"
   },
   "Modification_Post_Submission_Page": {
     "Documents": "Documents",
@@ -401,7 +403,8 @@
     "My_Account_Breadcrumb": "My account",
     "Sponsor_Workspace_Breadcrumb": "Sponsor workspace",
     "My_Organisations_Breadcrumb": "My organisations",
-    "Sponsor_Organisation_UniversityOfSouthampton_Breadcrumb": "University of Southampton"
+    "Sponsor_Organisation_UniversityOfSouthampton_Breadcrumb": "University of Southampton",
+    "Sponsor_Organisation_UniversityOfLeeds_Breadcrumb": "University of Leeds"
   },
   "My_Organisations_Edit_User_Profile_Page": {
     "Back": "Back"
@@ -414,5 +417,11 @@
   },
   "Modification_Outcome_Check_Send_Page": {
     "Change": "Change"
+  },
+  "Authorisations_For_Sponsor_Organisation_Page": {
+    "Authorisations_Breadcrumb": "Authorisations"
+  },
+  "Authorisations_Page": {
+    "Sponsorworkspace_Breadcrumb": "Sponsor workspace"
   }
 }

@@ -209,3 +209,67 @@ Then('I validate the project closure table for sponsor authorisations view', asy
     ]);
   expect.soft(actualProjectClosureRows).toEqual(expectedProjectClosureRows);
 });
+
+Then(
+  'I can see the associated organisations displaying in the authorisations page for {string}',
+  async ({ manageSponsorOrganisationPage, loginPage, sponsorAuthorisationsPage }, user: string) => {
+    let userEmailValue: string = '';
+    if (user === 'Sponsor_User') {
+      userEmailValue = loginPage.loginPageTestData.Sponsor_User.username;
+    } else if (user === 'Sponsor_Org_Admin_User') {
+      userEmailValue = loginPage.loginPageTestData.Sponsor_Org_Admin_User.username;
+    }
+    const sponsorIds = new Set(
+      await manageSponsorOrganisationPage.sqlGetSponsorRtsIdsByEmailAndActiveAndAuthoriser(userEmailValue)
+    );
+    const orgInfoList = [];
+    for (const rtsId of sponsorIds) {
+      const orgName = (await manageSponsorOrganisationPage.sqlGetOrganisationNameFromRTSById(rtsId)).toString();
+      orgInfoList.push({
+        orgName,
+      });
+    }
+    const rows = sponsorAuthorisationsPage.organisationNameLinks;
+    const rowCount = await rows.count();
+    const uiList: { orgName: string }[] = [];
+    for (let i = 0; i < rowCount; i++) {
+      const row = rows.nth(i);
+      const orgName = (await row.textContent()).trim();
+      uiList.push({ orgName });
+    }
+    expect.soft(uiList).toEqual(expect.arrayContaining(orgInfoList));
+    expect.soft(uiList.length, 'Row count mismatch').toBe(orgInfoList.length);
+  }
+);
+Then(
+  'I click the organisation link {string} in the authorisations page',
+  async ({ sponsorAuthorisationsPage, setupNewSponsorOrganisationPage }, sponsorDatasetName: string) => {
+    const dataSetSponsorOrg =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
+        sponsorDatasetName
+      ];
+    const organisationName = dataSetSponsorOrg.sponsor_organisation_text;
+    const rows = sponsorAuthorisationsPage.organisationNameLinks;
+    const rowCount = await rows.count();
+    for (let i = 0; i < rowCount; i++) {
+      const row = rows.nth(i);
+      const orgName = (await row.textContent()).trim();
+      if (orgName === organisationName) {
+        await row.click();
+        break;
+      }
+    }
+  }
+);
+
+Then(
+  'I can see the authorisations page for {string}',
+  async ({ sponsorAuthorisationsPage, setupNewSponsorOrganisationPage }, sponsorDatasetName: string) => {
+    const dataSetSponsorOrg =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
+        sponsorDatasetName
+      ];
+    const organisationName = dataSetSponsorOrg.sponsor_organisation_text;
+    await sponsorAuthorisationsPage.assertOnSponsorAuthorisationsPageForMultiOrg(organisationName);
+  }
+);
