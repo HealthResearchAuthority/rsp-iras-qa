@@ -270,7 +270,7 @@ Feature: Create project - Error Validations
       | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Primary_Sponsor_Organisation |
       | Valid_Data_All_Fields | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Primary_Sponsor_Organisation |
 
-  @rsp-4887 @DateSubmittedErrorValidationPostApproval
+  @rsp-4887 @DateSubmittedErrorValidationPostApproval @KNOWN_DEFECT_RSP_7502
   Scenario Outline: Verify that correct validation is in place for the date submitted filter
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field

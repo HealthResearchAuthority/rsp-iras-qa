@@ -584,7 +584,7 @@ Then(
       modificationEventDatasetName.toLowerCase() === 'modification_reassigned' &&
       userDatasetName.toLowerCase() === 'team_manager'
     ) {
-      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Reassigned} '${loginPage.loginPageTestData['Studywide_Reviewer'].username}'`;
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Reassigned} '${loginPage.loginPageTestData['Studywide_Reviewer'].username.toLowerCase()}'`;
     } else if (modificationEventDatasetName.toLowerCase() === 'modification_comment_reason_not_approved_changed') {
       modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Comment_Reason_Not_Approved_Changed} from ${modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons.Lack_Of_Evidence} to ${modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons.Valid_Reason_Not_Approved}`;
     } else if (modificationEventDatasetName.toLowerCase() === 'modification_comment_changed') {

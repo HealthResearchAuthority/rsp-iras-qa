@@ -445,6 +445,8 @@ Then(
 );
 
 When('I select the modification in order to assign it', async ({ modificationsReceivedCommonPage }) => {
-  const rowLocator = await modificationsReceivedCommonPage.getRowLocator();
-  await rowLocator.getByTestId(await modificationsReceivedCommonPage.getModificationId()).click();
+  const checkbox = modificationsReceivedCommonPage.page.getByRole('checkbox').first();
+  await expect(checkbox).toBeVisible();
+  await expect(checkbox).toBeEnabled();
+  await checkbox.check();
 });

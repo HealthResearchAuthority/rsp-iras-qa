@@ -2052,7 +2052,7 @@ Feature: Create Project
     And I validate the project information labels using dataset displayed on modifications page
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'PNG_File' in the add document details for specific document page
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
     And I capture the page screenshot

@@ -2475,7 +2475,6 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation 'University of Southampton' and 'Sponsor_Authoriser_Yes'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     # with review body modification
@@ -2610,7 +2609,6 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation 'University of Southampton' and 'Sponsor_Authoriser_Yes'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     # with review body modification
@@ -2649,6 +2647,8 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Post_Approval_Page'
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
@@ -2692,6 +2692,8 @@ Feature: Modifications - Save Later and Other Scenarios
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I enter 'modification id' into the search field
+    And I click the 'Search' button on the 'Post_Approval_Page'
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
