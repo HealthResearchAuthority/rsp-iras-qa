@@ -143,7 +143,7 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     # And I add twenty five users to the sponsor organisation to verify pagination, search and sort in user list page
     And I capture the page screenshot
-    When I have navigated to the 'Home_Page' as '<Login_User>'
+    Given I have navigated to the 'Home_Page' as '<Login_User>'
     Then I click the 'Sponsor' link on the 'Home_Page'
     And I can see the sponsor workspace page
     Then I capture the page screenshot
@@ -199,8 +199,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     And I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @rsp-6648 @AddUserRolePermission @KNOWN-DEFECT-RSP-5003
   Scenario Outline: Validate that <Login_User> is able to navigate to Users page of <Sponsor_Organisation> from sponsor workspace and add a user with <Select_User_Role> and <Select_User_Permission>
@@ -348,8 +348,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I can see the users tab in the sponsor organisation profile for the selected sponsor organisation '<Sponsor_Organisation>'
     And I capture the page screenshot
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @BackBreadCrumbs
   Scenario Outline: Validate that back breadcrumb from add user role page of sponsor workspace
@@ -403,8 +403,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
 
   @rsp-6465 @BackBreadCrumbs
@@ -464,8 +464,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Then I can see the add user role page
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @BackBreadCrumbs @KNOWN-DEFECT-RSP-5003
   Scenario Outline: Validate that back breadcrumb from check and confirm user page of sponsor workspace
@@ -529,8 +529,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     And I can see the add user permission page based on '<Select_User_Permission>'
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @ErrorValidation @NoUserRoleSelectedError
   Scenario Outline: Validate that Validation error when no role selected on add user role page of sponsor workspace
@@ -585,8 +585,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Then I validate '<Summary_Error_Message>' displayed when no role selected in 'Add_User_Role_Sponsor_Org_Page'
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message                    | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | No_Role_Selected_Sponsor_Workspace_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message                    | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | No_Role_Selected_Sponsor_Workspace_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            |
 
   @rsp-6465 @ChangeLinkEmailAddress @KNOWN-DEFECT-RSP-5003
   Scenario Outline: Validate the navigation on clicking change link against email address field
@@ -650,8 +650,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Then I navigate to the add user page for the selected sponsor organisation '<Sponsor_Organisation>'
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Email      |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Email      |
 
   @rsp-6465 @ChangeLinkRole @KNOWN-DEFECT-RSP-5003
   Scenario Outline: Validate the navigation on clicking change link against role field
@@ -715,8 +715,8 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     Then I can see the add user role page
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Role       |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Role       |
 
   @rsp-6465 @ChangeLinkAuthoriser @KNOWN-DEFECT-RSP-5003
   Scenario Outline: Validate the navigation on clicking change link against authoriser field
@@ -780,5 +780,5 @@ Feature: Sponsor Workspace-My Organisations-Users-Add user
     And I capture the page screenshot
     And I can see the add user permission page based on '<Select_User_Permission>'
     Examples:
-      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation      | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
-      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | University of Southampton | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Authoriser |
+      | Login_User             | User_Email              | Select_User_Role                | Select_User_Permission  | Link   | Sponsor_Organisation        | Email_Address       | Error_Message             | Summary_Error_Message     | Invalid_Email_Address                                     | Existing_User_Notification | Another_Registered_User | Field_Name |
+      | Sponsor_Org_Admin_User | sponsor org admin email | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Manage | Aalborg University Hospital | Non_Registered_User | Non_Registered_User_Error | Blank_Email_Address_Error | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | User_Exists_Message        | Sponsor_User            | Authoriser |

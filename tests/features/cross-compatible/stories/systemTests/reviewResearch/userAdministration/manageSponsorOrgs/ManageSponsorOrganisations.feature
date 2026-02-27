@@ -125,6 +125,10 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
                 And I capture the page screenshot
+                When I enter the 'Email_Address' of the 'First' item in the list, into the search field
+                And I capture the page screenshot
+                And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+                And I capture the page screenshot
                 When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
                 When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
                 And I capture the page screenshot
@@ -537,7 +541,7 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 Then I can see the 'user added' successful message on sponsor organisation user list page
                 And I capture the page screenshot
-                When I have navigated to the 'Home_Page' as 'Sponsor_Org_Admin_User'
+                Given I have navigated to the 'Home_Page' as 'Sponsor_Org_Admin_User'
                 Then I click the 'Sponsor' link on the 'Home_Page'
                 And I can see the sponsor workspace page
                 Then I capture the page screenshot
@@ -793,7 +797,7 @@ Feature: Manage sponsor organisations
                 When I click the 'Disable' button on the 'Confirmation_Page'
                 And I capture the page screenshot
                 And I record the 'User_Disabled' event for the user 'non_registered_user' to store the sponsor organisation audit history triggered by 'System_Admin'
-                When I have navigated to the 'Home_Page' as 'Sponsor_Org_Admin_User'
+                Given I have navigated to the 'Home_Page' as 'Sponsor_Org_Admin_User'
                 Then I click the 'Sponsor' link on the 'Home_Page'
                 And I can see the sponsor workspace page
                 Then I capture the page screenshot
@@ -942,7 +946,7 @@ Feature: Manage sponsor organisations
                 Then I can see the user record should be available with 'Inactive' status in 'organisation profile users page'
                 And I capture the page screenshot
                 ## ---- Validate user status in Sponsor workspace --> My Orgnaisations view ----
-                When I have navigated to the 'Home_Page' as 'System_Admin'
+                Given I have navigated to the 'Home_Page' as 'System_Admin'
                 Then I click the 'Sponsor' link on the 'Home_Page'
                 And I can see the sponsor workspace page
                 Then I capture the page screenshot
@@ -1088,7 +1092,7 @@ Feature: Manage sponsor organisations
                 Then I can see the user record should be available with 'Inactive' status in 'organisation profile users page'
                 And I capture the page screenshot
                 ## ---- Validate user status in Sponsor workspace --> My Orgnaisations view ----
-                When I have navigated to the 'Home_Page' as 'System_Admin'
+                Given I have navigated to the 'Home_Page' as 'System_Admin'
                 Then I click the 'Sponsor' link on the 'Home_Page'
                 And I can see the sponsor workspace page
                 Then I capture the page screenshot
@@ -1207,7 +1211,7 @@ Feature: Manage sponsor organisations
                 Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 ## ---- Disable user from Sponsor workspace --> My Organisations view ----
-                When I have navigated to the 'Home_Page' as 'System_Admin'
+                Given I have navigated to the 'Home_Page' as 'System_Admin'
                 Then I click the 'Sponsor' link on the 'Home_Page'
                 And I can see the sponsor workspace page
                 Then I capture the page screenshot
@@ -1529,7 +1533,7 @@ Feature: Manage sponsor organisations
                 And I can see the successful user update message on my organisations user profile page
                 And I see the details for 'System_Admin' are correctly displayed on 'My_Organisations_View_User_Profile_Page'
                 ## ---- Validate change to user role and authorisation status in Sponsor workspace ----
-                When I have navigated to the 'Home_Page' as 'System_Admin'
+                Given I have navigated to the 'Home_Page' as 'System_Admin'
                 Then I click the 'Sponsor' link on the 'Home_Page'
                 And I can see the sponsor workspace page
                 Then I capture the page screenshot

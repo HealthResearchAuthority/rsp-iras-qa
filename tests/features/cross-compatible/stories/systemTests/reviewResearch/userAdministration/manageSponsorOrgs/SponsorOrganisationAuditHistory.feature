@@ -71,7 +71,7 @@ Feature: Sponsor organisation audit history
         And I capture the page screenshot
         Then I can see the 'user added' successful message on sponsor organisation user list page
         And I capture the page screenshot
-        When I have navigated to the 'Home_Page' as '<Login_User>'
+        Given I have navigated to the 'Home_Page' as '<Login_User>'
         Then I click the 'Sponsor' link on the 'Home_Page'
         And I can see the sponsor workspace page
         Then I capture the page screenshot
@@ -115,7 +115,7 @@ Feature: Sponsor organisation audit history
         And I record the 'User_Unassigned_Org_Admin' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'Sponsor_Org_Admin_User'
         And I record the 'User_Assigned_Sponsor' event for the user 'Sponsor_Org_Admin_User' to store the sponsor organisation audit history triggered by 'Sponsor_Org_Admin_User'
         And I capture the page screenshot
-        When I have navigated to the 'Home_Page' as '<Login_User>'
+        Given I have navigated to the 'Home_Page' as '<Login_User>'
         Then I click the 'Sponsor' link on the 'Home_Page'
         And I can see the sponsor workspace page
         Then I capture the page screenshot

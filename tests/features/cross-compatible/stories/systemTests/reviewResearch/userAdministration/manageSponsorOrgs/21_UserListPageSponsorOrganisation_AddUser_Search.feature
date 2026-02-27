@@ -88,7 +88,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
         Then I can see the search for user to add to sponsor organisation page
-        When I enter 'QA Automation' into the search field
+        When I enter 'name of the user in the system' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot

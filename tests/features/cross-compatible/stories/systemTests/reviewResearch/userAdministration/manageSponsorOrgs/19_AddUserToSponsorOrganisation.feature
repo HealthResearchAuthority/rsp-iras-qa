@@ -161,6 +161,10 @@ Feature: Add user to sponsor organisation
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And I can see that the add users to 'sponsor organisation' search page contains 'Results'
         And I capture the page screenshot
+        When I enter the 'Email_Address' of the 'First' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        And I capture the page screenshot
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
         And I capture the page screenshot
