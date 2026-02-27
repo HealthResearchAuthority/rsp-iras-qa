@@ -837,7 +837,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Login_User   | User_Email               | Link | Sponsor_Organisation      | Select_User_Role              | Select_User_Permission | Empty_Input |
       | Sponsor_User | automation sponsor email | View | University of Southampton | Sponsor_Org_User_Role_Sponsor | Sponsor_Authoriser_No  |             |
 
-  @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
+  @rsp-6421 @MyOrganisationsProjectsTabValidation
   Scenario: Validate the advanced filter under projects tab for <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -899,7 +899,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
       | Sponsor_User           | automation sponsor email | View   | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  | Advanced_Filter_Project_Created_From_Date_Only | Existing_Iras_Id_Data_Three |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select | Advanced_Filter_Project_Created_From_Date_Only | Existing_Iras_Id_Data_Three |
 
-  @rsp-6421 @MyOrganisationsProjectsTabValidation @KNOWN_DEFECT_RSP-6714
+  @rsp-6421 @MyOrganisationsProjectsTabValidation
   Scenario: Validate the advanced filter under projects tab for user with role <Login_User>
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
