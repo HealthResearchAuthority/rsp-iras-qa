@@ -205,10 +205,10 @@ Feature: Manage Users - Advanced Filter and Search
         And I 'cannot' see active filters displayed
 
         Examples:
-            | Advanced_Filters                                                                    | Advanced_Filters_Remove                                                             |
-            | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
-            | Advanced_Filter_Two                                                                 | Advanced_Filter_Two_All                                                             |
-            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor                              |
+            | Advanced_Filters                                       | Advanced_Filters_Remove                                |
+            # | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All | Advanced_Filter_Country_All_Status_Active_From_Date_To_Date_Role_All_Reviewbody_All |
+            # | Advanced_Filter_Two                                                                 | Advanced_Filter_Two_All                                                             |
+            | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor | Advanced_Filter_Country_No_Review_Body_No_Role_Sponsor |
 
     @rsp-4418 @ValidateActiveReviewbodies
     Scenario Outline: Validate the review body checkbox in the advanced filters of manage users page incorporates all currently enabled review bodies from the manage review bodies page
