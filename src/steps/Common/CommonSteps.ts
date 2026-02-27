@@ -1828,7 +1828,7 @@ When(
   'I click a {string} on the {string}',
   async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
     let testNum: number;
-    await commonItemsPage.tableBodyRows.waitFor({ state: 'visible' });
+    //await commonItemsPage.tableBodyRows.waitFor({ state: 'visible' });
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
     const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
     if (rowCount > 1) {

@@ -64,6 +64,9 @@
       "User_Exists_Message": {
         "banner_heading": "Important",
         "user_exists_notification_text": "This user already exists in "
+      },
+      "Invalid_Email_Address_Error": {
+        "invalid_email_address_error_text": "Enter an email address in the correct format"
       }
     }
   }
