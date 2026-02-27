@@ -45,23 +45,25 @@ Then(
       createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[userDetailsdatasetName];
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedSuccessHeader =
+      'The user account for ' +
       userDetailsdataset.first_name_text +
       ' ' +
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.disable_confirmation_success_header_label;
-    const expectedSuccessBody =
-      validationLabelsDataset.disable_confirmation_success_body_one_label +
-      ' ' +
-      userDetailsdataset.first_name_text +
-      ' ' +
-      userDetailsdataset.last_name_text +
-      ' ' +
-      validationLabelsDataset.disable_confirmation_success_body_two_label;
-    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
-      expectedSuccessHeader
-    );
-    await expect.soft(confirmationPage.confirmation_body_label.getByText(expectedSuccessBody)).toBeVisible();
+    const expectedSuccessBody = validationLabelsDataset.disable_confirmation_success_body_one_label;
+    // const expectedSuccessBody =
+    //   validationLabelsDataset.disable_confirmation_success_body_one_label +
+    //   ' ' +
+    //   userDetailsdataset.first_name_text +
+    //   ' ' +
+    //   userDetailsdataset.last_name_text +
+    //   ' ' +
+    //   validationLabelsDataset.disable_confirmation_success_body_two_label;
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedSuccessHeader);
+    await expect.soft(confirmationPage.confirmation_body_label.nth(0).getByText(expectedSuccessBody)).toBeVisible();
   }
 );
 

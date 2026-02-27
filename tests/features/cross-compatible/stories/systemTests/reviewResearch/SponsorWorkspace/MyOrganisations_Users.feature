@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
+@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @TestTiji
 Feature: Sponsor Workspace - My Organisations Page - Users
 
   Background:

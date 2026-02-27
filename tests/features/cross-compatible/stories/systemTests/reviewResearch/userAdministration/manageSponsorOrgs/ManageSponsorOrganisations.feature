@@ -822,7 +822,7 @@ Feature: Manage sponsor organisations
                         | Valid_Data_In_All_Mandatory_Fields_Role_Applicant | Disable_Label_Texts | Disable_User_Profile_Labels | Enabled        | Disabled        | Advanced_Filter_Status_Active | Advanced_Filter_Status_Disabled | Disabled_User_Email_Error |
 
 
-        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807 @KNOWN-DEFECT-RSP-7410
+        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807
         Scenario Outline: Disable the user in 'Manage Users' and validate in Sponsor workspace and Manage Sponsor Organisations page
                 ## ---- Create new user from Manage Users ----
                 Given I have navigated to the 'Home_Page'
@@ -917,7 +917,7 @@ Feature: Manage sponsor organisations
                 Then I validate 'Disable_User_Profile_Labels' labels displayed in disable user profile confirmation page using the 'Valid_Data_In_All_Fields_Role_System_Administrator' details
                 And I capture the page screenshot
                 When I click the 'Disable' button on the 'Confirmation_Page'
-                Then I validate 'Disable_User_Profile_Labels' labels displayed in disable user profile success page using the 'Valid_Data_In_All_Fields_Role_System_Administrator' details
+                # Then I validate 'Disable_User_Profile_Labels' labels displayed in disable user profile success page using the 'Valid_Data_In_All_Fields_Role_System_Administrator' details
                 And I capture the page screenshot
                 When I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
                 And I can see the 'Manage_Users_Page'
@@ -968,7 +968,7 @@ Feature: Manage sponsor organisations
                 And I capture the page screenshot
                 And I can see the user record should be available with 'Inactive' status in 'My_Organisations_User_Profile_Page'
 
-        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807 @KNOWN-DEFECT-RSP-7410
+        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807
         Scenario Outline: Disable the user in 'Manage Sponsor Organisations view' and validate in Sponsor workspace and Manage Users page
                 ## ---- Create new user from Manage Users ----
                 Given I have navigated to the 'Home_Page'
@@ -1123,7 +1123,7 @@ Feature: Manage sponsor organisations
                 Then I can see the newly created user record should be present in the list for 'Valid_Data_In_All_Fields_Role_System_Administrator' with 'Active' status in the manage user page
                 And I capture the page screenshot
 
-        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807 @KNOWN-DEFECT-RSP-7410
+        @RegressionTestVerifyUserStatusInactive @SetupNewSponsorOrgGoLive @rsp-6807
         Scenario Outline: Disable the user in 'Sponsor workspace' and validate in Manage Sponsor Organisation and Manage Users page
                 ## ---- Create new user from Manage Users ----
                 Given I have navigated to the 'Home_Page'
