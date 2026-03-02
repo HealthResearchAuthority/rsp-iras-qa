@@ -2032,7 +2032,7 @@ Feature: Modifications - Save Later and Other Scenarios
       | Changes                           | Research_Locations  |
       | Multiple_Changes_Planned_End_Date | Nhs_Involvement_Yes |
 
-  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission @KNOWN_DEFECT_RSP_7500
+  @rsp-5532 @ModificationsJourneyEntireJourney @PagninationSortingDocumentDownloadInModificationPostSubmission
   Scenario Outline: Validate that user can upload more than 20 documents and are paginated in modification post submission page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -2576,7 +2576,6 @@ Feature: Modifications - Save Later and Other Scenarios
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | System_Admin   |
       | Multiple_Changes_Bulk_Free_Text_Combined_Reviewable_Non_Reviewable | Multiple_Changes_Non_Reviewable_Set_Two                            | Nhs_Involvement_Yes | Applicant_User |
 
-
   @6371 @7136 @SetupNewSponsorOrgGoLive @WithReviewBodyAndSubmittingAnotherModificationToReviewBodyError
   Scenario Outline: Validate that the user can create one modification with review body and submitting another modification to review body displays error message
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
@@ -2831,7 +2830,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     Then I can see the modifications assignment confirmation page for '<Workflow_User>' with reviewer '<Study_Wide_Reviewer>'
     And I capture the page screenshot
-    And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
+    And I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
     And I capture the page screenshot
     And I enter 'new iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
@@ -2906,7 +2905,7 @@ Feature: Modifications - Save Later and Other Scenarios
     And I capture the page screenshot
     Then I can see the modifications assignment confirmation page for '<Workflow_User>' with reviewer '<Study_Wide_Reviewer>'
     And I capture the page screenshot
-    And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
+    And I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
     And I capture the page screenshot
     And I enter 'new iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'

@@ -764,12 +764,11 @@ Then(
     let expectedProjectClosureDate: any;
     if (datasetName === 'Valid_Date_Today') {
       const todayDate = new Date();
-      expectedProjectClosureDate =
-        todayDate.getDate().toString() +
-        ' ' +
-        todayDate.toLocaleString('en-US', { month: 'long' }) +
-        ' ' +
-        todayDate.getFullYear().toString();
+      expectedProjectClosureDate = todayDate.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+      });
     } else {
       expectedProjectClosureDate =
         dataset.close_project_actual_project_closure_date_day_text +

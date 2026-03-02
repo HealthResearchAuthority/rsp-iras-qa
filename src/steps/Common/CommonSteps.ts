@@ -974,10 +974,14 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
 Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
+    let recordsCount: number;
     if (linkLabel === 'Next' || linkLabel === 'Previous') {
-      const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-        await commonItemsPage.search_results_count.textContent()
-      );
+      if (await commonItemsPage.search_results_count.isVisible()) {
+        const text = await commonItemsPage.search_results_count.textContent();
+        recordsCount = await commonItemsPage.extractNumFromSearchResultCount(text ?? '');
+      } else {
+        recordsCount = await commonItemsPage.tableRows.count();
+      }
       if (recordsCount > 20) {
         const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
         if (availabilityVal.toLowerCase() === 'available') {
@@ -1323,10 +1327,12 @@ Then(
   'I sequentially navigate through each {string} by clicking on {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     let recordsCount = 0;
-    const count = await commonItemsPage.search_results_count.count();
-    if (count > 0) {
-      const resultsText = await commonItemsPage.search_results_count.textContent();
-      recordsCount = await commonItemsPage.extractNumFromSearchResultCount(resultsText ?? '');
+    const elementCount = await commonItemsPage.search_results_count.count();
+    if (elementCount > 0) {
+      const text = await commonItemsPage.search_results_count.textContent();
+      recordsCount = await commonItemsPage.extractNumFromSearchResultCount(text ?? '');
+    } else {
+      recordsCount = await commonItemsPage.tableRows.count();
     }
     if (recordsCount > 20) {
       const totalPages = await commonItemsPage.getTotalPages();
