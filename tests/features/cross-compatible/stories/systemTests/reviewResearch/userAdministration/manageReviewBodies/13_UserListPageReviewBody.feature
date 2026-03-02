@@ -6,7 +6,7 @@ Feature:View user list page of review body,Search for the users, remove user
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         And I can see the 'Manage_Review_Bodies_Page'
 
-    @VerifyUserListCreateReviewBody @UserListReviewBodyNoUsersReviewBody @KNOWN-DEFECT-RSP-6440
+    @VerifyUserListCreateReviewBody @UserListReviewBodyNoUsersReviewBody
     Scenario: Verify the user can view the user list page of the newly created review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
