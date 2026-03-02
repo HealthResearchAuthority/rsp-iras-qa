@@ -2,7 +2,7 @@
 Feature: Manage Users - Create user
 
   Background:
-    Given I have navigated to the 'Home_Page'
+    Given I have navigated to the 'Home_Page' as 'System_Admin'
     When I click the 'System_Administration' link on the 'Home_Page'
     Then I can see the system administration home page
     And I capture the page screenshot
