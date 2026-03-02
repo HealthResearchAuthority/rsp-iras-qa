@@ -423,7 +423,7 @@ Then(
       await expect.soft(rowLocator).toBeVisible();
       const statusColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, 'status');
       const actualStatus = await rowLocator.getByRole('cell').nth(statusColumnIndex).textContent();
-      expect.soft(actualStatus).toEqual(statusExpected);
+      expect.soft(actualStatus.trim()).toEqual(statusExpected);
     }
   }
 );
