@@ -975,7 +975,7 @@ Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
     let recordsCount: number;
-    if (linkLabel === 'Next' || linkLabel === 'Previous') {
+    if (['Next', 'Previous'].includes(linkLabel)) {
       if (await commonItemsPage.search_results_count.isVisible()) {
         const text = await commonItemsPage.search_results_count.textContent();
         recordsCount = await commonItemsPage.extractNumFromSearchResultCount(text ?? '');
