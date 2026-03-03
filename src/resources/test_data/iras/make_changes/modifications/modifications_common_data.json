@@ -257,27 +257,11 @@
       "page_header": "Contact details",
       "page_component_label": "Name"
     },
-    "Project_Personnel_Select_Change_Page": {
-      "page_header": "Change of Chief Investigator",
-      "page_component_label": "Select details to change"
-    },
     "Project_Personnel_Chief_Investigator_Page": {
       "page_header": "Change of Chief Investigator",
       "page_component_label": "New Chief Investigator email"
     },
-    "Project_Personnel_Temporary_Arrangement_Page": {
-      "page_header": "Change of Chief Investigator",
-      "page_component_label": "New Chief Investigator email"
-    },
-    "Project_Personnel_Principal_Investigator_Select_Change_Page": {
-      "page_header": "Change of Principal Investigator",
-      "page_component_label": "Select details to change"
-    },
     "Project_Personnel_Principal_Investigator_Page": {
-      "page_header": "Change of Principal Investigator",
-      "page_component_label": "New principal investigator email"
-    },
-    "Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page": {
       "page_header": "Change of Principal Investigator",
       "page_component_label": "New principal investigator email"
     }
@@ -961,33 +945,12 @@
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Chief Investigator",
       "select_details_to_change_radio": "New Chief Investigator",
-      "chief_investigator_email_text": "ci_test_modified@test.com",
-      "first_name_text": "QA test First name",
-      "last_name_text": "QA test Last name",
-      "change_status": "Change ready for submission"
-    },
-    "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of Chief Investigator",
       "new_chief_investigator_email_text": "ci_test_modified@test.com",
       "new_chief_investigator_first_name_text": "QA test First name",
       "new_chief_investigator_last_name_text": "QA test Last name",
       "change_status": "Change ready for submission"
     },
     "Project_Personnel_Principal_Investigator_New": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of Principal Investigator",
-      "new_principal_investigator_email_text": "test_modified@test.com",
-      "new_principal_investigator_first_name_text": "QA test First name",
-      "new_principal_investigator_last_name_text": "QA test Last name",
-      "change_status": "Change ready for submission",
-      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
-      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "will_some_or_all_organisations_be_affected_question_radio": "All",
-      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
-      "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-    },
-    "Project_Personnel_Temporary_Arrangement": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Principal Investigator",
       "new_principal_investigator_email_text": "test_modified@test.com",
@@ -1829,7 +1792,7 @@
   },
   "Missing_Document_Details_Notification": {
     "notification_heading_text": "You cannot proceed whilst document details are incomplete",
-    "notification_text": "All documents must have the status 'Complete' before you can continue. For any documents with the status 'Incomplete', either select 'Change details' to add missing document details, or remove that document if it is no longer needed."
+    "notification_text": "All documents must have the status 'Complete' before you can continue.For any documents with the status 'Incomplete', either select 'Change details' to add missing document details, or remove that document if it is no longer needed."
   },
   "Project_Personnel__Change_Chief_Investigator_Details": {
     "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {

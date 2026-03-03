@@ -364,7 +364,9 @@
     "Disable_User": "Disable user",
     "Enable_User": "Enable user",
     "Disable": "Disable",
-    "Enable": "Enable"
+    "Enable": "Enable",
+    "Deactivate_User": "Deactivate user",
+    "Activate_User": "Activate user"
   },
   "Modification_Sent_To_Sponsor_Page": {
     "Return_To_Project_Overview": "Return to project overview",
@@ -464,11 +466,5 @@
   },
   "Send_Modification_To_Sponsor_Error_Page": {
     "Return_To_Project_Overview": "Return to project overview"
-  },
-  "Modification_Not_Authorised_Page": {
-    "Not_Authorised_Confirm": "Save and continue"
-  },
-  "Revise_And_Authorise_Page": {
-    "Authorise": "Authorise"
   }
 }

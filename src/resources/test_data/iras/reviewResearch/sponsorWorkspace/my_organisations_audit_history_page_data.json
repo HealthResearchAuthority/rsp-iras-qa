@@ -12,7 +12,7 @@
     "user_unassigned_org_admin_event": " unassigned Organisation administrator for sponsor organisation",
     "user_unassigned_authoriser_event": " unassigned authoriser for sponsor organisation",
     "user_enabled_event": " enabled for sponsor organisation",
-    "user_disabled_event": " disabled from sponsor organisation",
+    "user_disabled_event": " inactive from sponsor organisation",
     "user_assigned_authoriser_event": " assigned as authoriser for sponsor organisation",
     "user_assigned_org_admin_event": " assigned Organisation administrator for sponsor organisation",
     "user_added_event": " added to sponsor organisation",

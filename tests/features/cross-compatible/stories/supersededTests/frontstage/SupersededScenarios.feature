@@ -1327,3 +1327,22 @@ Feature: Superseded Scenarios - Fronstage (Retained for Traceability)
     Examples:
       | Planned_End_Date      | Organisation_Change_Affect | Field_And_Summary_Error_Message |
       | Valid_Data_All_Fields | Empty_Data_All_Fields      | Mandatory_Field_Error           |
+
+  @rsp-4038 @SelectAreaOfChangeModificationIdValidation
+  Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    Then I validate the modification id is incremented by one for every '<New_Modification_Count>' new modification on select area of change page
+
+    Examples:
+      | New_Modification_Count | Modifications_Tile_Link |
+      | Modification_Count     | Modifications_Tile      |

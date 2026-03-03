@@ -299,7 +299,7 @@ Feature: This feature covers the sponsor not authorised modifications
       | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
-  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @rsp-6827 @NonReviewableModificationSponsorNotAuthorised @Release_2.0
+  @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised
   Scenario Outline: Validate that sponsor can action to not authorise the non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -360,12 +360,6 @@ Feature: This feature covers the sponsor not authorised modifications
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     And I validate confirmation screen for modification not authorised by sponsor
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
@@ -379,7 +373,6 @@ Feature: This feature covers the sponsor not authorised modifications
     And I validate the project information labels using dataset displayed on modifications page
     And I validate the date created for modification in sponsor check and authorise page
     And I validate the status 'Modification_Status_Not_Authorised' is displayed on the page
-    And I validate the reason for not authorised on modifications page using 'Valid_Data_All_Fields' dataset
     When I click the 'Sponsor_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     And I capture the page screenshot

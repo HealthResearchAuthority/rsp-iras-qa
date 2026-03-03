@@ -148,7 +148,7 @@ Then(
       const dateOfProjectClosure = new Date(await closeProjectPage.getProjectClosureDate()).toLocaleDateString(
         'en-GB',
         {
-          day: 'numeric',
+          day: '2-digit',
           month: 'short',
           year: 'numeric',
         }

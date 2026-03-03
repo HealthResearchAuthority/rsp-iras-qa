@@ -116,8 +116,6 @@ import CheckAuthoriseProjectClosurePage from '../pages/IRAS/makeChanges/CheckAut
 import RequestRevisionsPage from '../pages/IRAS/makeChanges/RequestRevisionsPage';
 import CreateModificationErrorPage from '../pages/IRAS/makeChanges/modifications/CreateModificationErrorPage';
 import SendModificationToReviewBodyErrorPage from '../pages/IRAS/makeChanges/modifications/SendModificationToReviewBodyErrorPage';
-import ModificationNotAuthorisedPage from '../pages/IRAS/makeChanges/ModificationNotAuthorisedPage';
-import ReviseAndAuthorisePage from '../pages/IRAS/makeChanges/ReviseAndAuthorisePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -235,8 +233,6 @@ type CustomFixtures = {
   createModificationErrorPage: CreateModificationErrorPage;
   sendModificationToReviewBodyErrorPage: SendModificationToReviewBodyErrorPage;
 
-  modificationNotAuthorisedPage: ModificationNotAuthorisedPage;
-  reviseAndAuthorisePage: ReviseAndAuthorisePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
