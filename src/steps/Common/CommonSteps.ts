@@ -275,6 +275,9 @@ Then(
       if (pageKey === 'Project_Overview_Page' && buttonKey === 'Create_New_Modification') {
         ++modificationsReceivedCommonPage.modificationCounter;
       }
+      if (pageKey === 'Confirmation_Page' && buttonKey === 'Delete_Modification') {
+        --modificationsReceivedCommonPage.modificationCounter;
+      }
       button = commonItemsPage.govUkButton
         .getByText(buttonValue, { exact: true })
         .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
@@ -930,9 +933,12 @@ When(
   'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }, position: string) => {
     let pageLocator: Locator;
-    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-      await commonItemsPage.search_results_count.textContent()
-    );
+    let recordsCount = 0;
+    const count = await commonItemsPage.search_results_count.count();
+    if (count > 0) {
+      const resultsText = await commonItemsPage.search_results_count.textContent();
+      recordsCount = await commonItemsPage.extractNumFromSearchResultCount(resultsText ?? '');
+    }
     if (recordsCount > 20) {
       if (position.toLowerCase() === 'first') {
         pageLocator = commonItemsPage.firstPage;
@@ -968,35 +974,27 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
 Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
+    let recordsCount: number;
+    const state = availabilityVal.toLowerCase();
     if (linkLabel === 'Next' || linkLabel === 'Previous') {
-      const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-        await commonItemsPage.search_results_count.textContent()
-      );
+      if (await commonItemsPage.search_results_count.isVisible()) {
+        const text = await commonItemsPage.search_results_count.textContent();
+        recordsCount = await commonItemsPage.extractNumFromSearchResultCount(text ?? '');
+      } else {
+        recordsCount = await commonItemsPage.tableRows.count();
+      }
       if (recordsCount > 20) {
         const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-        if (availabilityVal.toLowerCase() === 'available') {
-          await expect.soft(locatorVal).toBeVisible();
-          await expect.soft(locatorVal).toBeEnabled();
-        } else if (availabilityVal.toLowerCase() === 'not available') {
-          await expect.soft(locatorVal).toBeHidden();
-        } else {
-          throw new Error(`Unsupported button state: ${availabilityVal}`);
-        }
+        await commonItemsPage.checkButtonAvailability(locatorVal, state);
       }
     } else if (linkLabel === 'Confirm_Selection') {
       const buttonValue = commonItemsPage.buttonTextData['Sponsor_Check_And_Authorise_Page']['Confirm_Selection'];
+
       const locatorVal: Locator = commonItemsPage.govUkButton
         .getByText(buttonValue, { exact: true })
         .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
         .first();
-      if (availabilityVal.toLowerCase() === 'available') {
-        await expect.soft(locatorVal).toBeVisible();
-        await expect.soft(locatorVal).toBeEnabled();
-      } else if (availabilityVal.toLowerCase() === 'not available') {
-        await expect.soft(locatorVal).toBeHidden();
-      } else {
-        throw new Error(`Unsupported button state: ${availabilityVal}`);
-      }
+      await commonItemsPage.checkButtonAvailability(locatorVal, state);
     }
   }
 );
@@ -1316,9 +1314,14 @@ Then(
 Then(
   'I sequentially navigate through each {string} by clicking on {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
-    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-      await commonItemsPage.search_results_count.textContent()
-    );
+    let recordsCount = 0;
+    const elementCount = await commonItemsPage.search_results_count.count();
+    if (elementCount > 0) {
+      const text = await commonItemsPage.search_results_count.textContent();
+      recordsCount = await commonItemsPage.extractNumFromSearchResultCount(text ?? '');
+    } else {
+      recordsCount = await commonItemsPage.tableRows.count();
+    }
     if (recordsCount > 20) {
       const totalPages = await commonItemsPage.getTotalPages();
       //Limiting the max pages to validate to 10
@@ -1352,9 +1355,12 @@ Then(
 Then(
   'I sequentially navigate through each {string} by clicking on {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
-    const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-      await commonItemsPage.search_results_count.textContent()
-    );
+    let recordsCount = 0;
+    const count = await commonItemsPage.search_results_count.count();
+    if (count > 0) {
+      const resultsText = await commonItemsPage.search_results_count.textContent();
+      recordsCount = await commonItemsPage.extractNumFromSearchResultCount(resultsText ?? '');
+    }
     if (recordsCount > 20) {
       const totalPages = await commonItemsPage.getTotalPages();
       //Limiting the max pages to validate to 10
