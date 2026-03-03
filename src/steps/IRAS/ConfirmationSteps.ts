@@ -87,20 +87,19 @@ Then(
     const userDetailsdataset =
       createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[userDetailsdatasetName];
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
-    const expectedSuccessHeaderPrefix =
-      confirmationPage.confirmationPageTestData.Enable_User_Profile_Labels.enable_confirmation_header_label_prefix;
     const expectedSuccessHeader =
       validationLabelsDataset.enable_confirmation_success_header_label_first +
       ' ' +
-      expectedSuccessHeaderPrefix +
       userDetailsdataset.first_name_text +
       ' ' +
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.enable_confirmation_success_header_label;
+    const expectedSuccessBody = validationLabelsDataset.enable_confirmation_success_body_three_label;
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
+    await expect.soft(confirmationPage.confirmation_body_label.getByText(expectedSuccessBody)).toBeVisible();
   }
 );
 

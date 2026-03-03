@@ -86,6 +86,7 @@ Feature: This feature covers the sponsor authorisation modifications
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Sponsor_Organisation_UniversityOfSouthampton' link on the sponsor workspace page
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
@@ -209,6 +210,7 @@ Feature: This feature covers the sponsor authorisation modifications
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Sponsor_Organisation_UniversityOfSouthampton' link on the sponsor workspace page
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
@@ -329,6 +331,7 @@ Feature: This feature covers the sponsor authorisation modifications
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Sponsor_Organisation_UniversityOfSouthampton' link on the sponsor workspace page
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
@@ -431,6 +434,7 @@ Feature: This feature covers the sponsor authorisation modifications
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Sponsor_Organisation_UniversityOfSouthampton' link on the sponsor workspace page
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
@@ -487,6 +491,7 @@ Feature: This feature covers the sponsor authorisation modifications
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+    And I click the 'Sponsor_Organisation_UniversityOfSouthampton' link on the sponsor workspace page
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page

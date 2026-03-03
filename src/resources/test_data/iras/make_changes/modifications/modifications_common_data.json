@@ -941,14 +941,7 @@
     "Project_Personnel_Chief_Investigator_New": {
       "area_of_change_dropdown": "Project personnel",
       "specific_change_dropdown": "Change of Chief Investigator",
-      "new_chief_investigator_email_text": "ci_test_modified@test.com",
-      "new_chief_investigator_first_name_text": "QA test First name",
-      "new_chief_investigator_last_name_text": "QA test Last name",
-      "change_status": "Change ready for submission"
-    },
-    "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
-      "area_of_change_dropdown": "Project personnel",
-      "specific_change_dropdown": "Change of Chief Investigator",
+      "select_details_to_change_radio": "New Chief Investigator",
       "new_chief_investigator_email_text": "ci_test_modified@test.com",
       "new_chief_investigator_first_name_text": "QA test First name",
       "new_chief_investigator_last_name_text": "QA test Last name",
