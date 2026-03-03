@@ -2080,4 +2080,46 @@ export default class CommonItemsPage {
     const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
     return searchResultMap;
   }
+
+  async clickNextButtonIfAvailable() {
+    if (await this.next_button.isVisible()) {
+      await this.next_button.click();
+      const currentUrl = this.page.url();
+      const currentPageNumber = await this.getPageNumber(currentUrl);
+      const currentPageLabel = `Page ${currentPageNumber}`;
+      const currentPageLink = this.pagination.getByRole('link', { name: currentPageLabel, exact: true }).first();
+      await expect.soft(currentPageLink).toHaveAttribute('aria-current');
+      const currentPageLinkHref = await currentPageLink.getAttribute('href');
+      expect.soft(currentUrl).toContain(currentPageLinkHref);
+      await this.previous_button.click();
+    }
+  }
+
+  async validatePageNumberInUrlAfterNavigation(navigateMethod: string, pagename: string) {
+    const totalPages = await this.getTotalPages();
+    //Limiting the max pages to validate to 10
+    let maxPagesToValidate = 0;
+    if (totalPages > this.commonTestData.maxPagesToValidate) {
+      maxPagesToValidate = this.commonTestData.maxPagesToValidate;
+    } else {
+      maxPagesToValidate = totalPages;
+    }
+    let totalItems: number;
+    if (
+      pagename === 'My_Research_Projects_Page' ||
+      pagename === 'Post_Approval_Page' ||
+      pagename === 'Sponsor_Org_User_List_Page' ||
+      pagename === 'Review_All_Changes_Page' ||
+      pagename === 'Manage_Sponsor_Organisations_Page' ||
+      pagename === 'Project_Documents_Page'
+    ) {
+      totalItems = await this.getTotalItemsNavigatingToLastPage(pagename);
+    } else {
+      totalItems = await this.getTotalItems();
+    }
+    await this.firstPage.click();
+    for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
+      await this.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
+    }
+  }
 }

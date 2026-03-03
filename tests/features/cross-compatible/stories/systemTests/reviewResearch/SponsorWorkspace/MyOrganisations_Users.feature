@@ -80,7 +80,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Login_User             | User_Email               | Link   | Add_A_User_Section_Visibility | Action_Column_Visibility | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  |
       | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_Yes  |
       | Sponsor_User           | automation sponsor email | View   | not visible                   | View                     | University of Southampton | Sponsor_Org_User_Role_Sponsor   | Sponsor_Authoriser_No   |
-      # | System_Admin           | system admin email       | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | visible                       | Manage                   | University of Southampton | Sponsor_Org_User_Role_Org_Admin | No_Permission_To_Select |
 
   @rsp-6425 @BackBreadCrumbs
@@ -235,11 +234,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Sponsor_User           | automation sponsor email | View   | Status        | status        | ascending    | descending     | University of Southampton |
       | Sponsor_User           | automation sponsor email | View   | Role          | role          | ascending    | descending     | University of Southampton |
       | Sponsor_User           | automation sponsor email | View   | Authoriser    | authoriser    | ascending    | descending     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Name          | name          | descending   | ascending      | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Email_Address | email address | ascending    | descending     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Status        | status        | ascending    | descending     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Role          | role          | ascending    | descending     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Authoriser    | authoriser    | ascending    | descending     | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Name          | name          | descending   | ascending      | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | email address | ascending    | descending     | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Status        | status        | ascending    | descending     | University of Southampton |
@@ -291,14 +285,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Sponsor_User           | automation sponsor email | View   | Email_Address | Last     | University of Southampton |
       | Sponsor_User           | automation sponsor email | View   | Full_Name     | First    | University of Southampton |
       | Sponsor_User           | automation sponsor email | View   | Full_Name     | Last     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | First_Name    | First    | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Last_Name     | First    | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Email_Address | First    | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | First_Name    | Last     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Last_Name     | Last     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Email_Address | Last     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Full_Name     | First    | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Full_Name     | Last     | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | First_Name    | First    | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Last_Name     | First    | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Email_Address | First    | University of Southampton |
@@ -346,7 +332,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
     Examples:
       | Login_User             | User_Email               | Link   | Search_Query           | Sponsor_Organisation      |
       | Sponsor_User           | automation sponsor email | View   | Non_Existant_User_Data | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | Non_Existant_User_Data | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | Non_Existant_User_Data | University of Southampton |
 
   @rsp-6422 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationFirstPage @UserlistSponsorOrgPaginationPageNumber @UserlistSponsorOrgPaginationNextLinkClick
@@ -391,8 +376,6 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Login_User             | User_Email               | Link   | Navigation_Method | Sponsor_Organisation      |
       | Sponsor_User           | automation sponsor email | View   | page number       | University of Southampton |
       | Sponsor_User           | automation sponsor email | View   | next link         | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | page number       | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | next link         | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | next link         | University of Southampton |
 
@@ -436,7 +419,5 @@ Feature: Sponsor Workspace - My Organisations Page - Users
       | Login_User             | User_Email               | Link   | Navigation_Method | Sponsor_Organisation      |
       | Sponsor_User           | automation sponsor email | View   | page number       | University of Southampton |
       | Sponsor_User           | automation sponsor email | View   | previous link     | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | page number       | University of Southampton |
-      # | System_Admin           | system admin email       | Manage | previous link     | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | page number       | University of Southampton |
       | Sponsor_Org_Admin_User | sponsor org admin email  | Manage | previous link     | University of Southampton |
