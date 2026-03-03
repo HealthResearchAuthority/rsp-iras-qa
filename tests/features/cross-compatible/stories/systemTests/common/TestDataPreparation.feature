@@ -57,7 +57,7 @@ Feature: Test data preparation - Frontstage
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
 
-  @TestDataPreparationModificationNotAuthorisedStatus @SetupNewSponsorOrgGoLive @Release_2.0
+  @TestDataPreparationModificationNotAuthorisedStatus @SetupNewSponsorOrgGoLive
   Scenario: Create modification with sponsor not authorised status
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -130,8 +130,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
 
   @TestDataPreparationModificationApprovedNonReviewableStatus @SetupNewSponsorOrgGoLive
   Scenario: Create modification with sponsor approved status for non reviewable modification
@@ -712,7 +710,7 @@ Feature: Test data preparation - Frontstage
       | Changes                                  | Research_Locations            | Study_Wide_Reviewer             | Workflow_User        | Reviewer_User      | Outcome  | Outcome_Reason | Outcome_Status               |
       | Other_Minor_Change_To_Project_Management | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Blank          | Modification_Status_Approved |
 
-  @TestDataPreparationMultipleModification @SetupNewSponsorOrgGoLive @Release_2.0
+  @TestDataPreparationMultipleModification @SetupNewSponsorOrgGoLive
   Scenario: Create multiple modification in a project
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -777,12 +775,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -806,12 +798,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -835,12 +821,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -864,12 +844,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -893,12 +867,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -922,12 +890,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -951,12 +913,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -980,12 +936,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1009,12 +959,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1038,12 +982,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1067,12 +1005,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1096,12 +1028,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1125,12 +1051,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1154,12 +1074,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1183,12 +1097,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1212,12 +1120,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1241,12 +1143,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1270,12 +1166,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1299,12 +1189,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1328,12 +1212,6 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     When I enter 'iras id for multiple modification' into the search field
     And I click the 'Search' button on the 'My_Research_Page'
@@ -1357,9 +1235,3 @@ Feature: Test data preparation - Frontstage
     When I click the 'Modification_Details' link on the 'Sponsor_Check_And_Authorise_Page'
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'

@@ -371,7 +371,7 @@ Feature: Sponsor Workspace
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_Scotland         |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Data_With_Lead_Nation_England          |
 
-  @CreateDataNotApprovedModificationAuthorizationListPage @Release_2.0
+  @CreateDataNotApprovedModificationAuthorizationListPage
   Scenario Outline: Create not approved modifications for modification authorization list page
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -453,12 +453,6 @@ Feature: Sponsor Workspace
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I can see the modification not authorised page
-    And I validate the project information labels using dataset displayed on modifications page
-    And I capture the page screenshot
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     And I validate confirmation screen for modification not authorised by sponsor
     And I capture the page screenshot
 

@@ -2473,7 +2473,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySponsorNotAuthorisedConfirmationPage @SponsorUser @SetupNewSponsorOrgGoLive @Release_2.0
+  @axeAccessibilitySponsorNotAuthorisedConfirmationPage @SponsorUser @SetupNewSponsorOrgGoLive
   Scenario: Sponsor not authorised confirmation page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -2527,8 +2527,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I click on the searched modification id from sponsor authorisations page
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
-    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     And I validate confirmation screen for modification not authorised by sponsor
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -3896,7 +3894,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityRequestRevisionsPage @ApplicantUser @SetupNewSponsorOrgGoLive @Release_2.0
+  @axeAccessibilityRequestRevisionsPage @ApplicantUser @SetupNewSponsorOrgGoLive
   Scenario: Sponsor workspace - Request revisions page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -3966,7 +3964,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityRequestRevisionsConfirmationPage @ApplicantUser @SetupNewSponsorOrgGoLive @Release_2.0
+  @axeAccessibilityRequestRevisionsConfirmationPage @ApplicantUser @SetupNewSponsorOrgGoLive
   Scenario: Sponsor workspace - Request revisions confirmation page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'

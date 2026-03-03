@@ -931,7 +931,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | page number       | Advanced_Filters_Lead_Nation |
                         | previous link     | Advanced_Filters_Lead_Nation |
 
-        @RegressionSearchModificationsTitleBackLinksNav @SetupNewSponsorOrgGoLive @rsp-4865 @Release_2.0 @KNOWN_DEFECT_RSP_7507
+        @RegressionSearchModificationsTitleBackLinksNav @SetupNewSponsorOrgGoLive @rsp-4865 @KNOWN_DEFECT_RSP_7507
         Scenario: Verify back button navigation for search modifications from approvals as '<User>'
                 Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
                 And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
