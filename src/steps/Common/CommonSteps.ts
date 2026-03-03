@@ -985,33 +985,16 @@ Then(
       }
       if (recordsCount > 20) {
         const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-        if (state === 'available') {
-          await expect.soft(locatorVal).toBeVisible();
-          await expect.soft(locatorVal).toBeEnabled();
-          return;
-        }
-        if (state === 'not available') {
-          await expect.soft(locatorVal).toBeHidden();
-          return;
-        }
-        throw new Error(`Unsupported button state: ${availabilityVal}`);
+        await commonItemsPage.checkButtonAvailability(locatorVal, state);
       }
     } else if (linkLabel === 'Confirm_Selection') {
       const buttonValue = commonItemsPage.buttonTextData['Sponsor_Check_And_Authorise_Page']['Confirm_Selection'];
+
       const locatorVal: Locator = commonItemsPage.govUkButton
         .getByText(buttonValue, { exact: true })
         .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
         .first();
-      if (state === 'available') {
-        await expect.soft(locatorVal).toBeVisible();
-        await expect.soft(locatorVal).toBeEnabled();
-        return;
-      }
-      if (state === 'not available') {
-        await expect.soft(locatorVal).toBeHidden();
-        return;
-      }
-      throw new Error(`Unsupported button state: ${availabilityVal}`);
+      await commonItemsPage.checkButtonAvailability(locatorVal, state);
     }
   }
 );
