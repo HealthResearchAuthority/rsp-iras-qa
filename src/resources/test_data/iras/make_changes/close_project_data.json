@@ -12,25 +12,25 @@
     "project_closure_transaction_table_headers": ["Transaction ID", "Date of project closure", "User email", "Date submitted", "Status"]
   },
   "Invalid_Date_Field_Future_Error": {
-    "close_project_actual_project_closure_date_day_textbox": "Project closure date must be today or in the past"
+    "close_project_actual_project_closure_date_day_textbox": "Project closure must be today or in the past"
   },
   "Invalid_Date_Field_Blank_Error": {
-    "close_project_actual_project_closure_date_day_textbox": "Enter project closure date"
+    "close_project_actual_project_closure_date_day_textbox": "Enter the project closure date"
   },
   "Invalid_Date_Field_Error": {
-    "close_project_actual_project_closure_date_day_textbox": "Project closure date must be a real date"
+    "close_project_actual_project_closure_date_day_textbox": "Project closure must be a real date"
   },
   "Invalid_Date_Field_Day_Blank_Error": {
-    "close_project_actual_project_closure_date_day_textbox": "Project closure date must include a day"
+    "close_project_actual_project_closure_date_day_textbox": "Project closure must include a day"
   },
   "Invalid_Date_Field_Month_Blank_Error": {
-    "close_project_actual_project_closure_date_day_textbox": "Project closure date must include a month"
+    "close_project_actual_project_closure_date_day_textbox": "Project closure must include a month"
   },
   "Invalid_Date_Field_Year_Blank_Error": {
-    "close_project_actual_project_closure_date_day_textbox": "Project closure date must include a year"
+    "close_project_actual_project_closure_date_day_textbox": "Project closure must include a year"
   },
   "Cant_Close_Project_Error": {
-    "cant_close_project_error_label": "You can't currently close this project as it has a modification in progress. If the modification has a status of 'In draft' but it is no longer needed, you can delete it. If the modification has been submitted for review you'll need to wait until the review outcome is issued before you can go on to close the project."
+    "cant_close_project_error_label": "You cannot currently close this project as it has a modification in progress. If the modification has a status of 'In draft' but it is no longer needed, you can delete it. If the modification has been submitted for review you'll need to wait until the review outcome is issued before you can go on to close the project."
   },
   "Valid_Data_All_Fields": {
     "close_project_actual_project_closure_date_day_textbox": "25",
@@ -70,7 +70,7 @@
   "Invalid_Date_Future": {
     "close_project_actual_project_closure_date_day_textbox": "1",
     "close_project_actual_project_closure_date_month_dropdown": "January",
-    "close_project_actual_project_closure_date_year_textbox": "'2050"
+    "close_project_actual_project_closure_date_year_textbox": "2050"
   },
   "Invalid_Date_No_Day": {
     "close_project_actual_project_closure_date_day_textbox": "",

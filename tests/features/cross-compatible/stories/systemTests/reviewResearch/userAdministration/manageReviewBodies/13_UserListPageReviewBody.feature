@@ -82,7 +82,7 @@ Feature:View user list page of review body,Search for the users, remove user
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        When I click the 'Back_To_Review_Body_Profile' link on the 'Review_Body_User_List_Page'
+        When I click the 'Back' link on the 'Review_Body_User_List_Page'
         Then I can see the review body profile page
 
         Examples:

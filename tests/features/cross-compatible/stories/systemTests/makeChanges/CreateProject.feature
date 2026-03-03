@@ -760,7 +760,7 @@ Feature: Create Project
     And I can see project details along with 'Valid_Data_All_Fields' sponsor organisation and 'Valid_Planned_End_Date' on the project overview page
     And I capture the page screenshot
 
-  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage @KNOWN_DEFECT_RSP-6187
+  @rsp-5302 @ValidateReturnToIrasIdAndBackButtonFunctionalityConfirmProjectDetailsPage
   Scenario: Validate return to iras id button and back button functionality in confirm project details page
     And I capture the page screenshot
     When I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -851,6 +851,9 @@ Feature: Create Project
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I fill the search input for searching 'modifications in post approval' with '<Search_Input>' as the search query
     And I capture the page screenshot
     And I click the 'Search' button on the 'Post_Approval_Page'
@@ -939,6 +942,9 @@ Feature: Create Project
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
     When I enter values in the '<Advanced_Filters>' of the post approval page
     And I capture the page screenshot
@@ -975,6 +981,9 @@ Feature: Create Project
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
     When I enter values in the '<Advanced_Filters>' of the post approval page
@@ -2043,7 +2052,7 @@ Feature: Create Project
     And I validate the project information labels using dataset displayed on modifications page
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'Multiple_Files_Three' in the add document details for specific document page
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'PNG_File' in the add document details for specific document page
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
     And I capture the page screenshot

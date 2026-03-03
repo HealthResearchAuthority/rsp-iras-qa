@@ -45,25 +45,18 @@ Then(
       createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[userDetailsdatasetName];
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedSuccessHeader =
-      'The user account for ' +
+      validationLabelsDataset.disable_confirmation_success_header_label_first +
+      ' ' +
       userDetailsdataset.first_name_text +
       ' ' +
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.disable_confirmation_success_header_label;
-    const expectedSuccessBody = validationLabelsDataset.disable_confirmation_success_body_one_label;
-    // const expectedSuccessBody =
-    //   validationLabelsDataset.disable_confirmation_success_body_one_label +
-    //   ' ' +
-    //   userDetailsdataset.first_name_text +
-    //   ' ' +
-    //   userDetailsdataset.last_name_text +
-    //   ' ' +
-    //   validationLabelsDataset.disable_confirmation_success_body_two_label;
-    expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
-      .toBe(expectedSuccessHeader);
-    await expect.soft(confirmationPage.confirmation_body_label.nth(0).getByText(expectedSuccessBody)).toBeVisible();
+    const expectedSuccessBody = validationLabelsDataset.disable_confirmation_success_body_three_label;
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedSuccessHeader
+    );
+    await expect.soft(confirmationPage.confirmation_body_label.getByText(expectedSuccessBody)).toBeVisible();
   }
 );
 
@@ -95,19 +88,14 @@ Then(
       createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[userDetailsdatasetName];
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedSuccessHeader =
+      validationLabelsDataset.enable_confirmation_success_header_label_first +
+      ' ' +
       userDetailsdataset.first_name_text +
       ' ' +
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.enable_confirmation_success_header_label;
-    const expectedSuccessBody =
-      validationLabelsDataset.enable_confirmation_success_body_one_label +
-      ' ' +
-      userDetailsdataset.first_name_text +
-      ' ' +
-      userDetailsdataset.last_name_text +
-      ' ' +
-      validationLabelsDataset.enable_confirmation_success_body_two_label;
+    const expectedSuccessBody = validationLabelsDataset.enable_confirmation_success_body_three_label;
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
@@ -126,7 +114,7 @@ Then(
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedConfirmationHeader);
     await expect
-      .soft(confirmationPage.confirmation_body_label.getByText(validationLabelsDataset.disable_confirmation_body_label))
+      .soft(confirmationPage.page.getByText(validationLabelsDataset.disable_confirmation_body_label))
       .toBeVisible();
   }
 );
@@ -138,11 +126,7 @@ Then(
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedSuccessHeader = validationLabelsDataset.disable_confirmation_success_header_label;
     const expectedSuccessBody =
-      validationLabelsDataset.disable_confirmation_success_body_one_label +
-      ' ' +
-      organisationNameMemory +
-      ' ' +
-      validationLabelsDataset.disable_confirmation_success_body_two_label;
+      organisationNameMemory + ' ' + validationLabelsDataset.disable_confirmation_success_body_two_label;
     expect
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedSuccessHeader);
@@ -161,7 +145,7 @@ Then(
       expectedConfirmationHeader
     );
     await expect
-      .soft(confirmationPage.confirmation_body_label.getByText(validationLabelsDataset.enable_confirmation_body_label))
+      .soft(confirmationPage.page.getByText(validationLabelsDataset.enable_confirmation_body_label))
       .toBeVisible();
   }
 );
@@ -173,11 +157,7 @@ Then(
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedSuccessHeader = validationLabelsDataset.enable_confirmation_success_header_label;
     const expectedSuccessBody =
-      validationLabelsDataset.enable_confirmation_success_body_one_label +
-      ' ' +
-      organisationNameMemory +
-      ' ' +
-      validationLabelsDataset.enable_confirmation_success_body_two_label;
+      organisationNameMemory + ' ' + validationLabelsDataset.enable_confirmation_success_body_two_label;
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedSuccessHeader
     );
@@ -218,10 +198,10 @@ Given(
       .soft(confirmationPage.confirmation_header_label)
       .toHaveText(confirmationPage.confirmationPageTestData.Add_User_Review_Body_Labels.page_heading);
     expect
-      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .soft(confirmStringNotNull(await confirmationPage.reviewbody_confirmation_body_label.textContent()).trim())
       .toBe(`${firstName} ${lastName}${guidanceText}${reviewBodyName}.`);
     await expect
-      .soft(confirmationPage.confirmation_body_label)
+      .soft(confirmationPage.reviewbody_confirmation_body_label)
       .toHaveText(`${firstName} ${lastName}${guidanceText}${reviewBodyName}.`);
   }
 );
