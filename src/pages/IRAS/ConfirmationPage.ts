@@ -12,6 +12,7 @@ export default class ConfirmationPage {
   readonly confirmation_body_label: Locator;
   readonly what_happens_next_label: Locator;
   readonly mainPageContent: Locator;
+  readonly reviewbody_confirmation_body_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -46,6 +47,7 @@ export default class ConfirmationPage {
     });
     this.success_message_body_text = this.mainPageContent.locator('.govuk-panel__body');
     this.confirmation_body_label = this.mainPageContent.locator('.govuk-grid-column-two-thirds p'); //adding .n(0) breaking all the create modification/sponsor authorised/not authorised scripts
+    this.reviewbody_confirmation_body_label = this.mainPageContent.locator('.govuk-grid-column-two-thirds p').nth(0);
     this.what_happens_next_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
     });
@@ -53,6 +55,6 @@ export default class ConfirmationPage {
 
   async assertOnConfirmationPage() {
     await expect.soft(this.confirmation_header_label).toBeVisible();
-    await expect.soft(this.confirmation_body_label).toBeVisible();
+    await expect.soft(this.reviewbody_confirmation_body_label).toBeVisible();
   }
 }
