@@ -20,3 +20,14 @@ Then(
     await expect.soft(sponsorWorkspacePage.mainPageContent.getByText(myOrganisationsLabel)).toBeVisible();
   }
 );
+
+Then('I click the {string} link on the sponsor workspace page', async ({ sponsorWorkspacePage }, linkName: string) => {
+  const link = await sponsorWorkspacePage.getMyOrganisationsLink(linkName);
+  const count = await link.count();
+  if (count === 0) {
+    console.log(`Link "${linkName}" not present. Skipping click.`);
+    return;
+  }
+  await expect(link, `Link "${linkName}" is present but not visible`).toBeVisible();
+  await link.click();
+});
