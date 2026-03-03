@@ -48,6 +48,12 @@
     },
     "Edit_User_Country": {
       "event_description_text": " was changed to "
+    },
+    "Sponsor_OrgProfile_Disable_User": {
+      "event_description_text": " inactive from sponsor organisation"
+    },
+    "Sponsor_OrgProfile_Enable_User": {
+      "event_description_text": " enabled for sponsor organisation"
     }
   },
   "User_Profiles": {

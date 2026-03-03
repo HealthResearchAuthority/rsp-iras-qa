@@ -2214,58 +2214,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityModificationsProjectPersonnelChangeChiefInvestigatorPage @ApplicantUser
-  Scenario: Modifications - Project Personnel Change Chief Investigator page
-    Given I have navigated to the my research projects page
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    And I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the unique iras id in project details iras page
-    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Select_Change_Page' page for modifications
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
-  @axeAccessibilityModificationsProjectPersonnelChangePrincipalInvestigatorPage @ApplicantUser
-  Scenario: Modifications - Project Personnel Change Principal Investigator page
-    Given I have navigated to the my research projects page
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    And I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the unique iras id in project details iras page
-    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
   @ApplicantUser @IRASIDNotInHARPInvalidErrorPage
   Scenario Outline: IRAS ID not eligible to use the service error page
     Given I have navigated to the my research projects page
@@ -4084,6 +4032,75 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the request revisions page with 'Valid_Data_All_Fields'
     When I click the 'Send_Request' button on the 'Request_Revisions_Page'
     And I validate confirmation screen for revisions request sent
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityViewEditUserProfilePageofSponsorOrg @SysAdminUser @SetupNewSponsorOrgGoLive
+  Scenario: View and Edit user profile page of sponsor organisation
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'system admin email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    When I enter 'system admin email' into the search field
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'View_Edit_User_Profile_Page'
+    And I can see the view and edit user profile page of the sponsor organisation
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityEditUserProfilePageofSponsorOrg @SysAdminUser @SetupNewSponsorOrgGoLive
+  Scenario: Edit user profile page of sponsor organisation
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    And I keep note of the organisation name for sponsor organisation setup
+    When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+    When I enter 'name of the newly added sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'newly added sponsor organisation'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'system admin email' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    When I fill the add user role page using 'Sponsor_Org_User_Role_Sponsor'
+    And I click the 'Save_Continue' button on the 'Add_User_Role_Sponsor_Org_Page'
+    When I fill the add user permission page using 'Sponsor_Authoriser_Yes'
+    And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    When I enter 'system admin email' into the search field
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'View_Edit_User_Profile_Page'
+    When I click the change link against 'Role' on my organisations user profile page
+    Then I can see the 'My_Organisations_Edit_User_Profile_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

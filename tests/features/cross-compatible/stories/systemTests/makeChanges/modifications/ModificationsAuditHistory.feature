@@ -494,7 +494,7 @@ Feature: Modifications - Audit history
     And I validate the audit history table for modifications of the user 'Applicant_User'
     And I capture the page screenshot
 
-  @rsp-5268 @rsp-6626 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive @KNOWN-DEFECT-RSP-7288
+  @rsp-5268 @rsp-6626 @LogTheModificationApprovedByReviewBodyEventinAuditHistoryPage @SetupNewSponsorOrgGoLive
   Scenario: Verify the modification approved by reviewbody and log the event in modification history page
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -623,6 +623,7 @@ Feature: Modifications - Audit history
     Then I can see the modification post submission page
     When I click the 'Continue' link on the 'Modification_Details_Page'
     Then I can see the review outcome section
+    And I provide comment as 'Lack_Of_Evidence' in the review outcome page
     When I provide the 'Approved' outcome for the modification with 'Lack_Of_Evidence' reason
     When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
     Then I see the check and send review outcome page with 'Approved' outcome and 'Lack_Of_Evidence' reason
@@ -632,6 +633,7 @@ Feature: Modifications - Audit history
     When I click the 'Change' link on the 'Modification_Outcome_Check_Send_Page'
     Then I can see the review outcome section
     And I capture the page screenshot
+    And I provide comment as 'Valid_Reason' in the review outcome page
     When I provide the 'Approved' outcome for the modification with 'Valid_Reason' reason
     When I click the 'Save_And_Continue' button on the 'Modification_Details_Page'
     Then I see the check and send review outcome page with 'Approved' outcome and 'Valid_Reason' reason
@@ -715,7 +717,7 @@ Feature: Modifications - Audit history
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfBristol'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
@@ -748,7 +750,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Sponsor_Organisation_Full_Text_Bristol'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -958,7 +960,7 @@ Feature: Modifications - Audit history
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfBristol'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
@@ -991,7 +993,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Sponsor_Organisation_Full_Text_Bristol'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -1175,7 +1177,7 @@ Feature: Modifications - Audit history
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfBristol'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I keep note of the organisation name for sponsor organisation setup
@@ -1208,7 +1210,7 @@ Feature: Modifications - Audit history
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I click the 'Add_Project' button on the 'Confirm_Project_Details_Page'
-    And I fill the project identifiers page with 'Sponsor_Organisation_Full_Text_Bristol'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
@@ -1283,6 +1285,7 @@ Feature: Modifications - Audit history
     When I have navigated to the 'Team_Manager_Dashboard_Page' as 'Team_Manager'
     And I enter 'iras id' into the search field
     And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+    When I select the modification in order to assign it
     And I capture the page screenshot
     And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
     And I capture the page screenshot
