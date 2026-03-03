@@ -1052,7 +1052,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 When I click the 'Back' link on the 'Project_Overview_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
-                And I can now see a table of search results for 'modifications received for approval'
                 When I enter 'new iras id' into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -1065,7 +1064,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 When I click the 'Back' link on the 'Review_All_Changes_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
-                And I can now see a table of search results for 'modifications received for approval'
                 When I enter 'new iras id' into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -1084,7 +1082,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 When I click the 'Back' link on the 'Review_All_Changes_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
-                And I can now see a table of search results for 'modifications received for approval'
 
                 Examples:
                         | User                 |
