@@ -14,8 +14,6 @@ Then(
       orgName = dataset.organisation_name_text;
     }
     const expectedConfirmationEmailNote =
-      createReviewBodyConfirmationPage.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page
-        .confirmation_email_note_start +
       orgName +
       createReviewBodyConfirmationPage.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page
         .confirmation_email_note_end;
