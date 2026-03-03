@@ -764,7 +764,6 @@ Then(
     ) {
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).flat();
       summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
-      console.log(JSON.stringify(summaryErrorActualValues));
     } else {
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
       summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();

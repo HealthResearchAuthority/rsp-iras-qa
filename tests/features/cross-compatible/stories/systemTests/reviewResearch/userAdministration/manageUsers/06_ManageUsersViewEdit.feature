@@ -205,7 +205,7 @@ Feature: Manage user profiles, view and edit user profile
       | Search_Query                |
       | Existing_QA_User_First_Name |
       | Existing_QA_User_Last_Name  |
-  # | Existing_QA_User_Email      |
+      | Existing_QA_User_Email      |
 
   # out of scope for now-since the search box does not support special characters,it may be added in future
   # @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces
