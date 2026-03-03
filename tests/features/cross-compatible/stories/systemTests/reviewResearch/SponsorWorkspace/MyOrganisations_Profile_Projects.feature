@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @TestTiji
+@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace-My Organisations Page-Profile Projects
 
   @rsp-6418 @rsp-6419 @rsp-6648 @MyOrganisationsPageLabelValidation
@@ -1022,7 +1022,7 @@ Feature: Sponsor Workspace-My Organisations Page-Profile Projects
     And the 'Previous' button will be 'available' to the user
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
-    Then I sequentially navigate through each 'My_Research_Projects_Page' by clicking on '<Navigation_Method2>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    Then I sequentially navigate through each 'Sponsor_Organisation_Profile_Page' by clicking on '<Navigation_Method2>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
     Examples:
       | Login_User             | User_Email               | Link   | Sponsor_Organisation      | Select_User_Role                | Select_User_Permission  | Navigation_Method1 | Navigation_Method2 |

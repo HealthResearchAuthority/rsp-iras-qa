@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @TestTiji
+@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace-My Organisations-Users-Add user
 
   Background:

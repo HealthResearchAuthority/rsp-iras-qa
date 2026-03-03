@@ -1,4 +1,4 @@
-@OrganisationsDisabledUsers @SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @TestTiji
+@OrganisationsDisabledUsers @SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace - Organisations Disabled Users
 
     Background:

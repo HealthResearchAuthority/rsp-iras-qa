@@ -119,7 +119,7 @@ Feature: View user list of sponsor org, Search,add user to sponsor org
         When I enter 'name of the newly added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
-        And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the 'newly added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
         And I capture the page screenshot
         Then I click the view edit link of the 'newly added sponsor organisation'
         And I capture the page screenshot

@@ -1,4 +1,4 @@
-@MyOrganisationsUserProfile @SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @TestTiji
+@MyOrganisationsUserProfile @SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace - My Organisations Page - User Profile
 
     Background:

@@ -1,4 +1,4 @@
-@MyOrganisationsAudit @SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @TestTiji
+@MyOrganisationsAudit @SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive
 Feature: Sponsor Workspace - My Organisations Page - Audit
 
     Background:
