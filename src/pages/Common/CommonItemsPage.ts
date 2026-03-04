@@ -52,6 +52,7 @@ export default class CommonItemsPage {
   private _last_name: string;
   private _email_address: string;
   private _disabled_User: string;
+  private _email_disabled_user: string;
   private _admin_email_address: string;
   private _status: string;
   private _user_full_name: Map<string, string>;
@@ -210,6 +211,7 @@ export default class CommonItemsPage {
     this._email_address = '';
     this._disabled_User = '';
     this._admin_email_address = '';
+    this._email_disabled_user = '';
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -523,6 +525,13 @@ export default class CommonItemsPage {
     this._search_key = value;
   }
 
+  async getFirstUserEmail(): Promise<string> {
+    return this._email_disabled_user;
+  }
+
+  async setFirstUserEmail(value: string): Promise<void> {
+    this._email_disabled_user = value;
+  }
   async getNoOfResultsBeforeSearch(): Promise<number> {
     return this._no_of_results_before_search;
   }
@@ -2032,5 +2041,115 @@ export default class CommonItemsPage {
       await this.page.reload({ waitUntil: 'networkidle' });
       await this.page.waitForTimeout(2000);
     }
+  }
+
+  async checkButtonAvailability(locatorVal: Locator, state: string) {
+    if (state === 'available') {
+      await expect.soft(locatorVal).toBeVisible();
+      await expect.soft(locatorVal).toBeEnabled();
+      return;
+    }
+    if (state === 'not available') {
+      await expect.soft(locatorVal).toBeHidden();
+      return;
+    }
+    throw new Error(`Unsupported button state: ${state}`);
+  }
+
+  async getFirstEmailFromTheTable(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(3000);
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      // since first row is header, starting from 1;
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
+        searchResultValues.push(emailAddress);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForTimeout(1000);
+      } else {
+        dataFound = true;
+      }
+    }
+    const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
+    return searchResultMap;
+  }
+
+  async clickNextButtonIfAvailable() {
+    if (await this.next_button.isVisible()) {
+      await this.next_button.click();
+      const currentUrl = this.page.url();
+      const currentPageNumber = await this.getPageNumber(currentUrl);
+      const currentPageLabel = `Page ${currentPageNumber}`;
+      const currentPageLink = this.pagination.getByRole('link', { name: currentPageLabel, exact: true }).first();
+      await expect.soft(currentPageLink).toHaveAttribute('aria-current');
+      const currentPageLinkHref = await currentPageLink.getAttribute('href');
+      expect.soft(currentUrl).toContain(currentPageLinkHref);
+      await this.previous_button.click();
+    }
+  }
+
+  private readonly pagesRequiringLastPageCount = new Set([
+    'My_Research_Projects_Page',
+    'Post_Approval_Page',
+    'Sponsor_Org_User_List_Page',
+    'Review_All_Changes_Page',
+    'Manage_Sponsor_Organisations_Page',
+    'Project_Documents_Page',
+  ]);
+
+  private async getTotalItemsForPage(pagename: string): Promise<number> {
+    return this.pagesRequiringLastPageCount.has(pagename)
+      ? this.getTotalItemsNavigatingToLastPage(pagename)
+      : this.getTotalItems();
+  }
+
+  private async runPaginationValidation(
+    navigateMethod: string,
+    pagename: string,
+    startPage: number,
+    endPage: number,
+    step: number
+  ) {
+    const totalPages = await this.getTotalPages();
+    const totalItems = await this.getTotalItemsForPage(pagename);
+
+    for (let currentPage = startPage; currentPage !== endPage + step; currentPage += step) {
+      await this.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
+    }
+  }
+
+  async validatePaginationFromFirstPage(navigateMethod: string, pagename: string) {
+    const totalPages = await this.getTotalPages();
+    const maxPages = Math.min(totalPages, this.commonTestData.maxPagesToValidate);
+    await this.firstPage.click();
+    await this.runPaginationValidation(
+      navigateMethod,
+      pagename,
+      1, // start
+      maxPages, // end
+      1 // forward
+    );
+  }
+
+  async validatePaginationFromLastPage(navigateMethod: string, pagename: string) {
+    const totalPages = await this.getTotalPages();
+    const validateUntil = Math.max(1, totalPages - this.commonTestData.maxPagesToValidate + 1);
+
+    await this.clickOnPages(totalPages, navigateMethod);
+
+    await this.runPaginationValidation(
+      navigateMethod,
+      pagename,
+      totalPages, // start
+      validateUntil, // end
+      -1 // backward
+    );
   }
 }

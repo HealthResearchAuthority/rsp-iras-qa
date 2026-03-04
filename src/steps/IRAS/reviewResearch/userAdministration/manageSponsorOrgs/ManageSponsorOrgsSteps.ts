@@ -20,8 +20,8 @@ When(
       sponsorOrgName,
       sponsorOrgStatus
     );
-    expect(foundRecords).toBeDefined();
-    expect(foundRecords).toHaveCount(1);
+    expect.soft(foundRecords).toBeDefined();
+    expect.soft(foundRecords).toHaveCount(1);
     await manageSponsorOrganisationPage.setSponsorOrgRow(foundRecords);
   }
 );

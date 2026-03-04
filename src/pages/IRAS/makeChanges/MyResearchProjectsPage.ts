@@ -334,7 +334,7 @@ export default class MyResearchProjectsPage {
       filterFromDate,
       filterToDate
     );
-    expect(isLastLoggedInDateInValidRange).toBe(true);
+    expect.soft(isLastLoggedInDateInValidRange).toBe(true);
   }
 
   async validateSearchInput(searchDatasetName: any, searchCriteriaDataset: any, shortProjectTitle: any, irasId: any) {

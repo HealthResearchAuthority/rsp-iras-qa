@@ -10,6 +10,7 @@ export default class SponsorAuthorisationsPage {
   readonly tableCell: Locator;
   readonly projectClosureTableHeader: Locator;
   readonly projectClosureTableBodyRows: Locator;
+  readonly organisationNameLinks: Locator;
   readonly projectClosureDetails: {
     shortProjectTitle: string;
     irasID: string;
@@ -31,11 +32,20 @@ export default class SponsorAuthorisationsPage {
     this.tableCell = this.page.locator('td');
     this.projectClosureTableHeader = this.page.locator('#projectClosureTable thead tr th');
     this.projectClosureTableBodyRows = this.page.locator('#projectClosureTable tbody').getByRole('row');
+    this.organisationNameLinks = this.page.locator('.hra-card a');
   }
 
   //Page Methods
   async assertOnSponsorAuthorisationsPageTestData() {
     await expect.soft(this.pageHeading).toBeVisible();
+  }
+
+  async assertOnSponsorAuthorisationsPageForMultiOrg(organisationName: string) {
+    await expect
+      .soft(this.pageHeading)
+      .toHaveText(
+        sponsorAuthorisationsPageTestData.Sponsor_Authorisations_Page.pageHeading_Multi_Organisations + organisationName
+      );
   }
 
   async findModification(

@@ -69,7 +69,7 @@ Then(
 
 Then(
   'I can see the users audit history with the {string} event as the most recent entry',
-  async ({ auditHistoryUserPage, commonItemsPage, userProfilePage }, datasetName: string) => {
+  async ({ auditHistoryUserPage, commonItemsPage, userProfilePage, createUserProfilePage }, datasetName: string) => {
     const dataset = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page[datasetName];
     const auditLog = await commonItemsPage.getMostRecentAuditLogEntry();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
@@ -97,6 +97,9 @@ Then(
     if (datasetName == 'Disable_User' || datasetName == 'Enable_User') {
       const userEmail = await userProfilePage.getEmail();
       eventDescriptionExpectedValue = userEmail + dataset.event_description_text;
+    } else if (datasetName == 'Sponsor_OrgProfile_Disable_User' || datasetName == 'Sponsor_OrgProfile_Enable_User') {
+      const userEmail = await createUserProfilePage.getUniqueEmail();
+      eventDescriptionExpectedValue = userEmail + dataset.event_description_text;
     } else if (datasetName == 'Edit_User_Country') {
       //defect - should be ', ', change after fix is in
       eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
@@ -120,9 +123,9 @@ Then(
         await userProfilePage[`getNew${methodType}`]()
       );
     }
-    expect(confirmStringNotNull(auditLog.get('timeValue'))).toBe(timeExpected);
-    expect(confirmStringNotNull(auditLog.get('eventValue'))).toBe(eventDescriptionExpectedValue);
-    expect(confirmStringNotNull(auditLog.get('adminEmailValue'))).toBe(adminEmailExpected);
+    expect.soft(confirmStringNotNull(auditLog.get('timeValue'))).toBe(timeExpected);
+    expect.soft(confirmStringNotNull(auditLog.get('eventValue'))).toBe(eventDescriptionExpectedValue);
+    expect.soft(confirmStringNotNull(auditLog.get('adminEmailValue'))).toBe(adminEmailExpected);
   }
 );
 
