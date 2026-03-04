@@ -1,4 +1,4 @@
-@SponsorWorkspace @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @SystemTestFrontStage
+@SponsorWorkspaceFrontStage @SystemTest @SysAdminUser @SetupNewSponsorOrgGoLive @SystemTestFrontStage
 Feature: Sponsor Workspace
 
   @rsp-4846 @SponsorWorkspacePageLabelValidation

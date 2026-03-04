@@ -211,3 +211,10 @@ When(
     await commonItemsPage.search_text.fill(searchKey);
   }
 );
+
+Given('I capture the email address of the user in the system for later use', async ({ commonItemsPage }) => {
+  const userList = await commonItemsPage.getFirstEmailFromTheTable();
+  const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));
+  const email = userListAfterSearch[0];
+  await commonItemsPage.setFirstUserEmail(email);
+});

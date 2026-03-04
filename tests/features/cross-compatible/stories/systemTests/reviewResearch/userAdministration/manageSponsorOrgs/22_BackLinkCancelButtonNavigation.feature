@@ -70,7 +70,6 @@ Feature: Back Link and Cancel Button Navigation
         And I capture the page screenshot
         Then the system displays 'sponsor organisations' matching the search criteria
         And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
-        # And I capture the page screenshot
         Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page

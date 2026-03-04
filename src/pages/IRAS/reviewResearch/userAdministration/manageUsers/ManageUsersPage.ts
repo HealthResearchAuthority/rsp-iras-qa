@@ -658,7 +658,7 @@ export default class ManageUsersPage {
       filterFromDate,
       filterToDate
     );
-    expect(isLastLoggedInDateInValidRange).toBe(true);
+    expect.soft(isLastLoggedInDateInValidRange).toBe(true);
   }
 
   async validateSearchInput(
