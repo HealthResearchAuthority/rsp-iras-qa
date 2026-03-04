@@ -7,7 +7,7 @@ trigger:
   - release/release_2.0
 
 schedules:
-  - cron: '43 14 * * *'
+  - cron: '* * * * *'
     displayName: 'Nightly run - full suite'
     branches:
       include:
