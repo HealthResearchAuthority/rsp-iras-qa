@@ -2214,58 +2214,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityModificationsProjectPersonnelChangeChiefInvestigatorPage @ApplicantUser
-  Scenario: Modifications - Project Personnel Change Chief Investigator page
-    Given I have navigated to the my research projects page
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    And I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the unique iras id in project details iras page
-    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Chief_Investigator' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Select_Change_Page' page for modifications
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
-  @axeAccessibilityModificationsProjectPersonnelChangePrincipalInvestigatorPage @ApplicantUser
-  Scenario: Modifications - Project Personnel Change Principal Investigator page
-    Given I have navigated to the my research projects page
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    And I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the unique iras id in project details iras page
-    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I select 'Project_Personnel' from area of change dropdown and 'Change_Of_Principal_Investigator' from specific change dropdown
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I can see the 'Project_Personnel_Principal_Investigator_Select_Change_Page' page for modifications
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
   @ApplicantUser @IRASIDNotInHARPInvalidErrorPage
   Scenario Outline: IRAS ID not eligible to use the service error page
     Given I have navigated to the my research projects page

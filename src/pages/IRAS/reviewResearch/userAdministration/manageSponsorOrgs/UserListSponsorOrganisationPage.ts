@@ -14,6 +14,8 @@ export default class UserListReviewBodyPage {
   readonly information_alert_banner: Locator;
   readonly user_in_sponsor_organisation_disabled_success_message_text: Locator;
   readonly user_in_sponsor_organisation_enabled_success_message_text: Locator;
+  readonly user_in_sponsor_organisation_deactivated_success_message_text: Locator;
+  readonly user_in_sponsor_organisation_activated_success_message_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -42,6 +44,18 @@ export default class UserListReviewBodyPage {
       .getByText(
         this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
           .user_in_sponsor_organisation_disabled_success_message_text
+      );
+    this.user_in_sponsor_organisation_deactivated_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(
+        this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
+          .user_in_sponsor_organisation_deactivated_success_message_text
+      );
+    this.user_in_sponsor_organisation_activated_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(
+        this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
+          .user_in_sponsor_organisation_activated_success_message_text
       );
     this.user_in_sponsor_organisation_enabled_success_message_text = this.page
       .getByRole('heading')

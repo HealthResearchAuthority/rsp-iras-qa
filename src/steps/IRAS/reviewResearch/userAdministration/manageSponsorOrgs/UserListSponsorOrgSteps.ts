@@ -24,6 +24,18 @@ Then(
           .toBeVisible();
         await myOrganisationsUserProfilePage.setStatus(disabledStatus);
         break;
+      case 'user in the selected sponsor organisation deactivated':
+        await expect
+          .soft(userListSponsorOrganisationPage.user_in_sponsor_organisation_deactivated_success_message_text)
+          .toBeVisible();
+        await myOrganisationsUserProfilePage.setStatus(disabledStatus);
+        break;
+      case 'user in the selected sponsor organisation activated':
+        await expect
+          .soft(userListSponsorOrganisationPage.user_in_sponsor_organisation_activated_success_message_text)
+          .toBeVisible();
+        await myOrganisationsUserProfilePage.setStatus(enabledStatus);
+        break;
       case 'user in the selected sponsor organisation enabled':
         await expect
           .soft(userListSponsorOrganisationPage.user_in_sponsor_organisation_enabled_success_message_text)

@@ -76,6 +76,7 @@ Feature: Studywide reviewer receive and not approve amendments
         And I have navigated to the 'Home_Page' as 'Sponsor_User'
         When I click the 'Sponsor' link on the 'Home_Page'
         And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+        And I click the 'Sponsor_Organisation_UniversityOfBristol' link if displayed on the sponsor workspace page
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
@@ -155,6 +156,7 @@ Feature: Studywide reviewer receive and not approve amendments
         And I have navigated to the 'Home_Page' as 'Sponsor_User'
         When I click the 'Sponsor' link on the 'Home_Page'
         When I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+        And I click the 'Sponsor_Organisation_UniversityOfBristol' link if displayed on the sponsor workspace page
         And I enter 'iras id' into the search field
         And I click the 'Search' button on the 'Search_Modifications_Page'
         When I click a 'modification id' on the 'Search_Modifications_Page'

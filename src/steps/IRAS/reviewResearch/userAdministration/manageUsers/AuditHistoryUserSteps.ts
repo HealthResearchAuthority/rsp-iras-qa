@@ -123,9 +123,9 @@ Then(
         await userProfilePage[`getNew${methodType}`]()
       );
     }
-    expect(confirmStringNotNull(auditLog.get('timeValue'))).toBe(timeExpected);
-    expect(confirmStringNotNull(auditLog.get('eventValue'))).toBe(eventDescriptionExpectedValue);
-    expect(confirmStringNotNull(auditLog.get('adminEmailValue'))).toBe(adminEmailExpected);
+    expect.soft(confirmStringNotNull(auditLog.get('timeValue'))).toBe(timeExpected);
+    expect.soft(confirmStringNotNull(auditLog.get('eventValue'))).toBe(eventDescriptionExpectedValue);
+    expect.soft(confirmStringNotNull(auditLog.get('adminEmailValue'))).toBe(adminEmailExpected);
   }
 );
 

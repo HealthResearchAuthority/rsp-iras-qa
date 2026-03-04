@@ -140,7 +140,8 @@
     "Manage_Users": "Manage users",
     "Remove": "Remove",
     "Add_User_To_This_Review_Body": "Add a user to this review body",
-    "Back_To_Users": "Back to Users for "
+    "Back_To_Users": "Back to Users for ",
+    "Back": "Back"
   },
   "Check_Remove_User_Profile_Page": {
     "Back": "Back"

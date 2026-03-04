@@ -46,7 +46,7 @@ Feature: Close Project
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsAuthorisedForClosure
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNoModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP_7503
   Scenario: Validate project closure successful when no modifications exist for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -241,7 +241,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedModificationsAuthorisedForClosure
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP_7503
   Scenario: Validate project closure successful when there exist an approved modification for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -542,7 +542,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotApprovedModificationsAuthorisedForClosure
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotApprovedModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP_7503
   Scenario: Validate project closure successful when there exist a not approved modification for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -843,7 +843,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedModificationsAuthorisedForClosure
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureNotAuthorisedModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP_7503
   Scenario: Validate project closure when there exist a not authorised modification for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1098,7 +1098,7 @@ Feature: Close Project
     And I capture the page screenshot
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
 
-  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedNotApprovedAndNotAuthorisedModificationsAuthorisedForClosure
+  @rsp-4888 @rsp-4908 @rsp-5312 @ProjectClosureApprovedNotApprovedAndNotAuthorisedModificationsAuthorisedForClosure @KNOWN_DEFECT_RSP_7503
   Scenario: Validate project closure successful when there exist a combination of approved, not approved and not authorised modifications for project and authorised for project closure
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -1913,7 +1913,7 @@ Feature: Close Project
     Then I can see the project status as 'Project_Status_Active' on the project overview page
     Then I can see the iras id and short project title on project overview page
 
-  @rsp-4908 @ErrorValidationForInvalidDate @KNOWN_DEFECT_RSP-6798
+  @rsp-4908 @ErrorValidationForInvalidDate
   Scenario: Validate the date field error message in project closure page for invalid project closure end date inputs
     Then I fill the research locations page with 'Data_With_Lead_Nation_England'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'

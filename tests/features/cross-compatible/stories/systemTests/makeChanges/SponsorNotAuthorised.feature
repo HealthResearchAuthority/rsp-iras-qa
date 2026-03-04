@@ -1,4 +1,4 @@
-@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser @jsEnabled
+@SponsorAuthorised @Regression @SetupNewSponsorOrgGoLive @SponsorUser
 Feature: This feature covers the sponsor not authorised modifications
 
     Background:
@@ -82,6 +82,7 @@ Feature: This feature covers the sponsor not authorised modifications
         And I have navigated to the 'Home_Page' as 'Sponsor_User'
         When I click the 'Sponsor' link on the 'Home_Page'
         And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+        And I click the 'Sponsor_Organisation_UniversityOfSouthampton' link if displayed on the sponsor workspace page
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
@@ -169,7 +170,7 @@ Feature: This feature covers the sponsor not authorised modifications
             | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Scotland         |
             | Multiple_Changes_Reviewable_Set_Three              | Data_With_Lead_Nation_Wales            |
 
-    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised @KNOWN_DEFECT_RSP_6666
+    @rsp-5191 @rsp-5192 @rsp-5475 @rsp-5476 @rsp-5535 @rsp-5536 @rsp-5338 @NonReviewableModificationSponsorAuthorised
     Scenario Outline: Validate that sponsor can action to not authorise the non reviewable modifications
         Then I fill the research locations page with '<Research_Locations>'
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -205,6 +206,7 @@ Feature: This feature covers the sponsor not authorised modifications
         And I have navigated to the 'Home_Page' as 'Sponsor_User'
         When I click the 'Sponsor' link on the 'Home_Page'
         And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+        And I click the 'Sponsor_Organisation_UniversityOfSouthampton' link if displayed on the sponsor workspace page
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
@@ -325,6 +327,7 @@ Feature: This feature covers the sponsor not authorised modifications
         And I have navigated to the 'Home_Page' as 'Sponsor_User'
         When I click the 'Sponsor' link on the 'Home_Page'
         And I click the 'Authorisations' link on the 'Sponsor_Workspace_Page'
+        And I click the 'Sponsor_Organisation_UniversityOfSouthampton' link if displayed on the sponsor workspace page
         When I enter 'modification id' into the search field
         And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
         And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
