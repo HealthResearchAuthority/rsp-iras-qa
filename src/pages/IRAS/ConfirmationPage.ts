@@ -55,6 +55,6 @@ export default class ConfirmationPage {
 
   async assertOnConfirmationPage() {
     await expect.soft(this.confirmation_header_label).toBeVisible();
-    await expect.soft(this.reviewbody_confirmation_body_label).toBeVisible();
+    await expect.soft(this.confirmation_body_label).toBeVisible();
   }
 }
