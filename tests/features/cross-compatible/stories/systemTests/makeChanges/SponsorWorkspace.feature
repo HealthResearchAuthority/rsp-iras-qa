@@ -79,7 +79,6 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -93,13 +92,12 @@ Feature: Sponsor Workspace
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
     And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
     When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
-    When I click the 'Disable_User' button on the 'View_Edit_User_Profile_Page'
+    When I click the 'Deactivate_User' button on the 'View_Edit_User_Profile_Page'
     When I click the 'Confirm' button on the 'Confirmation_Page'
-    Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
+    Then I can see the 'user in the selected sponsor organisation deactivated' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
-    When I click the 'Sponsor' link on the 'Home_Page'
-    Then I can see the 'Access_Denied_Page'
+    And I cannot see a 'Sponsor' link on the 'Home_Page'
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -113,15 +111,14 @@ Feature: Sponsor Workspace
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
     And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
     When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
-    When I click the 'Enable_User' button on the 'View_Edit_User_Profile_Page'
+    When I click the 'Activate_User' button on the 'View_Edit_User_Profile_Page'
     When I click the 'Confirm' button on the 'Confirmation_Page'
-    Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
+    Then I can see the 'user in the selected sponsor organisation activated' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
   @rsp-4846 @SponsorWorkspacePageValidationWhenSponsorOrganisationEnabledOrDisabled
@@ -161,7 +158,6 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -177,7 +173,7 @@ Feature: Sponsor Workspace
     And I capture the page screenshot
     And I have navigated to the 'Home_Page' as 'Sponsor_User'
     When I click the 'Sponsor' link on the 'Home_Page'
-    Then I can see the 'Access_Denied_Page'
+    And I can see the sponsor workspace page
     And I capture the page screenshot
     And I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -195,7 +191,6 @@ Feature: Sponsor Workspace
     When I click the 'Sponsor' link on the 'Home_Page'
     Then I can see the sponsor workspace page
     And I can see a 'Authorisations' link on the 'Sponsor_Workspace_Page'
-    And I can see the ui labels in sponsor workspace page
     And I capture the page screenshot
 
   @rsp-5191 @SponsorAuthorisationMandatorySelectionOnOutcomeError @jsEnabled

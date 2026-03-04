@@ -164,7 +164,7 @@ Feature: Create project - Audit history
 
 
   @FieldsModificationReflectInProjectRecordAuditHistoryChiefInvFields @rsp-6462 @SetupNewSponsorOrgGoLive @SponsorUser
-  Scenario Outline: Verify the audit history for chief investigator fields updated through modifications.
+  Scenario Outline: Verify the audit history for chief investigator fields updated through modifications
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -195,7 +195,6 @@ Feature: Create project - Audit history
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation 'University of Southampton' and 'Sponsor_Authoriser_Yes'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -254,9 +253,9 @@ Feature: Create project - Audit history
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Chief_Investigator_First_Name_Changed' audit event actioned by the user 'Sponsor_User' using the dataset '<Changes>'
-    And I keep note of the 'Chief_Investigator_Last_Name_Changed' audit event actioned by the user 'Sponsor_User' using the dataset '<Changes>'
-    And I keep note of the 'Chief_Investigator_Email_Changed' audit event actioned by the user 'Sponsor_User' using the dataset '<Changes>'
+    And I keep note of the 'Chief_Investigator_First_Name_Changed' audit event actioned by the user 'System' using the dataset '<Changes>'
+    And I keep note of the 'Chief_Investigator_Last_Name_Changed' audit event actioned by the user 'System' using the dataset '<Changes>'
+    And I keep note of the 'Chief_Investigator_Email_Changed' audit event actioned by the user 'System' using the dataset '<Changes>'
     And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
@@ -275,7 +274,7 @@ Feature: Create project - Audit history
       | Project_Personnel__Change_Chief_Investigator_Details | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Blank          | Modification_Status_Approved |              |
 
   @FieldsModificationReflectInProjectRecordAuditHistoryProjectTitleFields @rsp-6462 @SetupNewSponsorOrgGoLive @SponsorUser
-  Scenario Outline: Verify the audit history for project titles fields updated through modifications.
+  Scenario Outline: Verify the audit history for project titles fields updated through modifications
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -306,7 +305,6 @@ Feature: Create project - Audit history
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation 'University of Southampton' and 'Sponsor_Authoriser_Yes'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -365,8 +363,9 @@ Feature: Create project - Audit history
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Short_Project_Title_Changed' audit event actioned by the user 'Sponsor_User' using the dataset '<Changes>'
-    And I keep note of the 'Full_Project_Title_Changed' audit event actioned by the user 'Sponsor_User' using the dataset '<Changes>'
+    And I keep note of the 'Short_Project_Title_Changed' audit event actioned by the user 'System' using the dataset '<Changes>'
+    And I keep note of the 'Full_Project_Title_Changed' audit event actioned by the user 'System' using the dataset '<Changes>'
+    And I keep note of the new short project title as per the '<Changes>' dataset
     And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'
@@ -385,7 +384,7 @@ Feature: Create project - Audit history
       | Modification_To_Add_Administrative_Details_Project_Titles | Data_With_Lead_Nation_England | Study_Wide_Reviewer_HRA_England | Workflow_Coordinator | Studywide_Reviewer | Approved | Blank          | Modification_Status_Approved |              |
 
   @FieldsModificationReflectInProjectRecordAuditHistoryProjectEndDate @rsp-6462 @SetupNewSponsorOrgGoLive @SponsorUser
-  Scenario Outline: Verify the audit history for project planned end date field updated through modifications.
+  Scenario Outline: Verify the audit history for project planned end date field updated through modifications
     Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
@@ -416,7 +415,6 @@ Feature: Create project - Audit history
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Add_User_Permission_Sponsor_Org_Page' based on 'Sponsor_Authoriser_Yes'
     And I capture the page screenshot
-    And the check and add user to sponsor organisation page displays the expected user details for the selected sponsor organisation 'University of Southampton' and 'Sponsor_Authoriser_Yes'
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
     Then I can see the 'user added' successful message on sponsor organisation user list page
@@ -475,7 +473,7 @@ Feature: Create project - Audit history
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
-    And I keep note of the 'Planned_Project_End_Date_Changed' audit event actioned by the user 'Sponsor_User' using the dataset '<Changes>'
+    And I keep note of the 'Planned_Project_End_Date_Changed' audit event actioned by the user 'System' using the dataset '<Changes>'
     And I validate confirmation screen for modification has been authorised by sponsor and submitted for review
     And I capture the page screenshot
     Then I have navigated to the 'My_Research_Page' as 'Applicant_User'

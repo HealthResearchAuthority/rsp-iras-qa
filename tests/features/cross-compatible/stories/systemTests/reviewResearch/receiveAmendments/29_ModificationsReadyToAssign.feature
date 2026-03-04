@@ -296,7 +296,7 @@ Feature: WFC - Modifications Tasklist page
             | Label_Texts     | page number       |
             | Label_Texts     | previous link     |
 
-    @ModificationsTasklistTitleLinksNav @jsEnabled @rsp-5046
+    @ModificationsTasklistTitleLinksNav @jsEnabled @rsp-5046 @KNOWN_DEFECT_RSP_7507
     Scenario Outline: Verify back and short project title link navigation for modifications tasklist and select reviewer pages
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot

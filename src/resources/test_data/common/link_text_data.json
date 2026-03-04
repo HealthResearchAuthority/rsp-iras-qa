@@ -140,7 +140,8 @@
     "Manage_Users": "Manage users",
     "Remove": "Remove",
     "Add_User_To_This_Review_Body": "Add a user to this review body",
-    "Back_To_Users": "Back to Users for "
+    "Back_To_Users": "Back to Users for ",
+    "Back": "Back"
   },
   "Check_Remove_User_Profile_Page": {
     "Back": "Back"
@@ -283,6 +284,7 @@
   "Sponsor_Organisation_Profile_Page": {
     "Back": "Back",
     "View_This_Sponsor_Org_List_Of_Users": "View this sponsor organisation's list of users",
+    "View_This_Sponsor_Org_Audit_History": "View this sponsor organisation's audit history",
     "Manage_Sponsor_Organisations_Breadcrumb": "Manage sponsor organisations"
   },
   "Sponsor_Org_User_List_Page": {

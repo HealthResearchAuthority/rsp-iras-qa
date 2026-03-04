@@ -2033,4 +2033,17 @@ export default class CommonItemsPage {
       await this.page.waitForTimeout(2000);
     }
   }
+
+  async checkButtonAvailability(locatorVal: Locator, state: string) {
+    if (state === 'available') {
+      await expect.soft(locatorVal).toBeVisible();
+      await expect.soft(locatorVal).toBeEnabled();
+      return;
+    }
+    if (state === 'not available') {
+      await expect.soft(locatorVal).toBeHidden();
+      return;
+    }
+    throw new Error(`Unsupported button state: ${state}`);
+  }
 }
