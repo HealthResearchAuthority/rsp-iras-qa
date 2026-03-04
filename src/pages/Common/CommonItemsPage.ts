@@ -2095,7 +2095,7 @@ export default class CommonItemsPage {
     }
   }
 
-  async validatePageNumberInUrlAfterNavigation(navigateMethod: string, pagename: string) {
+  async validatePaginationFromFirstPage(navigateMethod: string, pagename: string) {
     const totalPages = await this.getTotalPages();
     //Limiting the max pages to validate to 10
     let maxPagesToValidate = 0;
@@ -2119,6 +2119,34 @@ export default class CommonItemsPage {
     }
     await this.firstPage.click();
     for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
+      await this.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
+    }
+  }
+
+  async validatePaginationFromLastPage(navigateMethod: string, pagename: string) {
+    const totalPages = await this.getTotalPages();
+    //Limiting the max pages to validate to 10
+    let validatePageUntil = 0;
+    if (totalPages > this.commonTestData.maxPagesToValidate) {
+      validatePageUntil = totalPages - this.commonTestData.maxPagesToValidate;
+    } else {
+      validatePageUntil = totalPages;
+    }
+    let totalItems: number;
+    if (
+      pagename == 'My_Research_Projects_Page' ||
+      pagename === 'Post_Approval_Page' ||
+      pagename === 'Sponsor_Org_User_List_Page' ||
+      pagename === 'Review_All_Changes_Page' ||
+      pagename === 'Manage_Sponsor_Organisations_Page' ||
+      pagename === 'Project_Documents_Page'
+    ) {
+      totalItems = await this.getTotalItemsNavigatingToLastPage(pagename);
+    } else {
+      totalItems = await this.getTotalItems();
+    }
+    await this.clickOnPages(totalPages, navigateMethod);
+    for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
       await this.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }

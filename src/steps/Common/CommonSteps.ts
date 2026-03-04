@@ -1359,10 +1359,10 @@ Then(
         await commonItemsPage.search_results_count.textContent()
       );
       if (recordsCount > 20) {
-        await commonItemsPage.validatePageNumberInUrlAfterNavigation(navigateMethod, pagename);
+        await commonItemsPage.validatePaginationFromFirstPage(navigateMethod, pagename);
       }
     } else {
-      await commonItemsPage.validatePageNumberInUrlAfterNavigation(navigateMethod, pagename);
+      await commonItemsPage.validatePaginationFromFirstPage(navigateMethod, pagename);
     }
   }
 );
@@ -1375,58 +1375,10 @@ Then(
         await commonItemsPage.search_results_count.textContent()
       );
       if (recordsCount > 20) {
-        const totalPages = await commonItemsPage.getTotalPages();
-        //Limiting the max pages to validate to 10
-        let validatePageUntil = 0;
-        if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
-          validatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
-        } else {
-          validatePageUntil = totalPages;
-        }
-        let totalItems: number;
-        if (
-          pagename == 'My_Research_Projects_Page' ||
-          pagename === 'Post_Approval_Page' ||
-          pagename === 'Sponsor_Org_User_List_Page' ||
-          pagename === 'Review_All_Changes_Page' ||
-          pagename === 'Manage_Sponsor_Organisations_Page' ||
-          pagename === 'Project_Documents_Page'
-        ) {
-          totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
-        } else {
-          totalItems = await commonItemsPage.getTotalItems();
-        }
-        await commonItemsPage.clickOnPages(totalPages, navigateMethod);
-        for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
-          await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
-        }
+        await commonItemsPage.validatePaginationFromLastPage(navigateMethod, pagename);
       }
     } else {
-      const totalPages = await commonItemsPage.getTotalPages();
-      //Limiting the max pages to validate to 10
-      let validatePageUntil = 0;
-      if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
-        validatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
-      } else {
-        validatePageUntil = totalPages;
-      }
-      let totalItems: number;
-      if (
-        pagename == 'My_Research_Projects_Page' ||
-        pagename === 'Post_Approval_Page' ||
-        pagename === 'Sponsor_Org_User_List_Page' ||
-        pagename === 'Review_All_Changes_Page' ||
-        pagename === 'Manage_Sponsor_Organisations_Page' ||
-        pagename === 'Project_Documents_Page'
-      ) {
-        totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
-      } else {
-        totalItems = await commonItemsPage.getTotalItems();
-      }
-      await commonItemsPage.clickOnPages(totalPages, navigateMethod);
-      for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
-        await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
-      }
+      await commonItemsPage.validatePaginationFromLastPage(navigateMethod, pagename);
     }
   }
 );
@@ -1763,7 +1715,6 @@ When(
   'I click a {string} on the {string}',
   async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
     let testNum: number;
-    //await commonItemsPage.tableBodyRows.waitFor({ state: 'visible' });
     const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
     const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
     if (rowCount > 1) {
@@ -2419,14 +2370,14 @@ Then(
           a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
         );
         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-          // expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
         }
       } else {
         sortedList = [...actualList].toSorted((a, b) =>
           b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
         );
         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-          // expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
         }
       }
 
@@ -2518,14 +2469,14 @@ Then(
           a.localeCompare(b, undefined, { sensitivity: 'base', ignorePunctuation: false })
         );
         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-          // expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
+          expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
         }
       } else {
         sortedList = [...actualList].toSorted((a, b) =>
           b.localeCompare(a, undefined, { sensitivity: 'base', ignorePunctuation: false })
         );
         if (lowerSortField === 'status' && lowerCurrentPage === 'first') {
-          // expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
+          expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
         }
       }
 
