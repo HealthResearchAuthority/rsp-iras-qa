@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { generateUniqueEmail } from '../../../../utils/UtilFunctions';
+import { buildAuditHistoryRecord, generateUniqueEmail } from '../../../../utils/UtilFunctions';
 const { Then, When } = createBdd(test);
 
 Then(
@@ -92,41 +92,21 @@ Then(
   'I record the {string} event for the user {string} to store the sponsor organisation audit history triggered by {string}',
   async (
     { loginPage, mySponsorOrgAddUserPage, commonItemsPage },
-    eventDescriptionDatasetName: string,
-    userDatasetName: string,
-    targetUser: string
+    eventDescriptionDatasetName,
+    userDatasetName,
+    targetUser
   ) => {
-    const eventText =
-      mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Events[
-        eventDescriptionDatasetName
-      ];
+    const record = await buildAuditHistoryRecord(
+      loginPage,
+      mySponsorOrgAddUserPage,
+      commonItemsPage,
+      eventDescriptionDatasetName,
+      userDatasetName,
+      targetUser,
+      undefined
+    );
 
-    let userEmailLogin = '';
-    if (
-      userDatasetName.toLowerCase() !== 'blank_user_details' &&
-      userDatasetName.toLowerCase() !== 'non_registered_user'
-    ) {
-      userEmailLogin = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
-    } else if (userDatasetName.toLowerCase() === 'non_registered_user') {
-      userEmailLogin = await commonItemsPage.getFirstUserEmail();
-    }
-    const userEmail = loginPage.loginPageTestData[targetUser].username.toLowerCase();
-    const eventDescription = userEmailLogin + eventText;
-    const now = new Date();
-    const dateTimeOfEvent = `${new Intl.DateTimeFormat('en-GB', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    }).format(now)} at ${new Intl.DateTimeFormat('en-GB', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    }).format(now)}`;
-    mySponsorOrgAddUserPage.addAuditHistoryRecord = {
-      dateTimeOfEventExpected: dateTimeOfEvent,
-      sponsorOrgEventDescriptionExpected: eventDescription,
-      userEmailExpected: userEmail,
-    };
+    mySponsorOrgAddUserPage.addAuditHistoryRecord = record;
   }
 );
 
@@ -134,56 +114,22 @@ Then(
   'I record the {string} event for the user {string} to store the sponsor organisation audit history triggered by {string} for {string}',
   async (
     { loginPage, mySponsorOrgAddUserPage, commonItemsPage },
-    eventDescriptionDatasetName: string,
-    userDatasetName: string,
-    targetUser: string,
-    workspaceKey: string
+    eventDescriptionDatasetName,
+    userDatasetName,
+    targetUser,
+    workspaceKey
   ) => {
-    const eventText =
-      mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Events[
-        eventDescriptionDatasetName
-      ];
+    const record = await buildAuditHistoryRecord(
+      loginPage,
+      mySponsorOrgAddUserPage,
+      commonItemsPage,
+      eventDescriptionDatasetName,
+      userDatasetName,
+      targetUser,
+      workspaceKey
+    );
 
-    let userEmailLogin = '';
-    if (
-      userDatasetName.toLowerCase() !== 'blank_user_details' &&
-      userDatasetName.toLowerCase() !== 'non_registered_user'
-    ) {
-      userEmailLogin = loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
-    } else if (userDatasetName.toLowerCase() === 'non_registered_user') {
-      userEmailLogin = await commonItemsPage.getFirstUserEmail();
-    }
-    const userEmail = loginPage.loginPageTestData[targetUser].username.toLowerCase();
-    const eventDescription = userEmailLogin + eventText;
-    const now = new Date();
-    let dateTimeOfEvent: string;
-    if (workspaceKey === 'manage_sponsor_org_system_admin_workspace') {
-      dateTimeOfEvent = `${new Intl.DateTimeFormat('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      }).format(now)} ${new Intl.DateTimeFormat('en-GB', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      }).format(now)}`;
-    } else {
-      dateTimeOfEvent = `${new Intl.DateTimeFormat('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      }).format(now)} at ${new Intl.DateTimeFormat('en-GB', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      }).format(now)}`;
-    }
-
-    mySponsorOrgAddUserPage.addAuditHistoryRecord = {
-      dateTimeOfEventExpected: dateTimeOfEvent,
-      sponsorOrgEventDescriptionExpected: eventDescription,
-      userEmailExpected: userEmail,
-    };
+    mySponsorOrgAddUserPage.addAuditHistoryRecord = record;
   }
 );
 
@@ -193,8 +139,6 @@ Then('I validate the audit history table for sponsor organisation', async ({ myS
     process.env.BASE_URL +
     mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page
       .manage_sponsor_org_audit_trial_partial_url;
-  console.log('pageUrl', pageUrl);
-  console.log('expectedAuditHistoryURLPart', expectedAuditHistoryURLPart);
   if (pageUrl.startsWith(expectedAuditHistoryURLPart)) {
     const auditHistoryTableHeaders = mySponsorOrgAddUserPage.auditHistoryTableHeader;
     const auditHistoryTableHeadersExpected =
@@ -212,7 +156,6 @@ Then('I validate the audit history table for sponsor organisation', async ({ myS
   for (let auditRowIndex = 0; auditRowIndex < rowCount; auditRowIndex++) {
     const row = mySponsorOrgAddUserPage.auditHistoryTableBodyRows.nth(auditRowIndex);
     const cellTexts = await row.locator(mySponsorOrgAddUserPage.tableCell).allTextContents();
-    console.log('cellTexts', cellTexts);
     actualAuditHistoryRows.push(cellTexts.map((text) => text.trim()));
   }
   const expectedAuditHistoryRows = mySponsorOrgAddUserPage.getAuditHistoryRecord
@@ -224,8 +167,5 @@ Then('I validate the audit history table for sponsor organisation', async ({ myS
       record.userEmailExpected,
     ]);
   actualAuditHistoryRows = actualAuditHistoryRows.filter((row) => row.length > 0);
-  // const expectedRowsToCheck = actualAuditHistoryRows;
-  console.log('actualAuditHistoryRows', actualAuditHistoryRows);
-  console.log('expectedAuditHistoryRows', expectedAuditHistoryRows);
   expect.soft(actualAuditHistoryRows).toEqual(expectedAuditHistoryRows);
 });
