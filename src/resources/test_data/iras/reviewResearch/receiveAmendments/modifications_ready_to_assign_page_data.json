@@ -212,7 +212,7 @@
   },
   "Validation": {
     "Invalid_Date_Range_To_Before_From_Error": {
-      "day_to_text": "The date you’ve selected is before the search above"
+      "day_to_text": "'Search from' date must be the same as or before 'Search to' date"
     },
     "Invalid_Date_From_Error": {
       "day_from_text": "'Search from' date must be in the correct format"

@@ -527,4 +527,4 @@ Feature: Sponsor Workspace
       | Date_Received       | date received       |
       | Date_Actioned       | date actioned       |
       | Status              | status              |
-      # | Chief_Investigator  | chief investigator  |
+# | Chief_Investigator  | chief investigator  |

@@ -3196,7 +3196,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I enter 'modification id' into the search field
     And I click the 'Search' button on the 'Sponsor_Authorisations_Page'
     And I can see the searched modification to be present in the list with 'With sponsor' status in the sponsor authorisations page
-     Then I click on the searched modification id
+    Then I click on the searched modification id
     And I can see the sponsor check and authorise page
     And I validate the status 'Modification_Status_With_Sponsor' is displayed on the page
     And I fill the sponsor check and authorise page with 'Sponsor_Authorised'
