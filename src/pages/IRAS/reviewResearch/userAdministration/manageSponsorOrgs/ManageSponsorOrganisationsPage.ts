@@ -189,9 +189,6 @@ export default class ManageSponsorOrganisationsPage {
     const queryResult = await sqlConnection.query(
       `SELECT RtsId FROM SponsorOrganisationsUsers GROUP BY RtsId HAVING COUNT(SponsorRole) > 0;`
     );
-    //   const queryResult = await sqlConnection.query(
-    //   `SELECT RtsId FROM SponsorOrganisationsUsers GROUP BY RtsId HAVING COUNT(SponsorRole) > 20;`
-    // );
     await sqlConnection.close();
     return queryResult.recordset.map((row) => row.RtsId);
   }
