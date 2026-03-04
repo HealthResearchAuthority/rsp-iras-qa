@@ -4,14 +4,14 @@
 name: Run Playwright Tests
 
 trigger:
-  - merge-main-to-release-2.0-branch
+  - release/release_2.0
 
 schedules:
-  - cron: '* * * * *'
+  - cron: '0 0 * * *'
     displayName: 'Nightly run - full suite'
     branches:
       include:
-        - merge-main-to-release-2.0-branch
+        - release/release_2.0
     always: true
 
 pool: 'rsp-manageddevopspool'
