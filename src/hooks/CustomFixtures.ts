@@ -677,18 +677,21 @@ export const test = base.extend<CustomFixtures>({
     await use(new SendModificationToReviewBodyErrorPage(page));
   },
 
-  makeAxeBuilder: async ({ page }, use) => {
-    const makeAxeBuilder = () => new AxeBuilder({ page });
-    await use(makeAxeBuilder);
-  },
   closeProjectPage: async ({ page }, use) => {
     await use(new CloseProjectPage(page));
   },
+
   checkAuthoriseProjectClosurePage: async ({ page }, use) => {
     await use(new CheckAuthoriseProjectClosurePage(page));
   },
+
   requestRevisionsPage: async ({ page }, use) => {
     await use(new RequestRevisionsPage(page));
+  },
+
+  makeAxeBuilder: async ({ page }, use) => {
+    const makeAxeBuilder = () => new AxeBuilder({ page });
+    await use(makeAxeBuilder);
   },
 
   //Set the Storage State based on User Tag from Feature File

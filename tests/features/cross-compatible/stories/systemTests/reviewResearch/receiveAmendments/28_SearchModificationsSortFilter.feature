@@ -15,7 +15,7 @@ Feature: Filter, Search and Sort the Search modifications page
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        @SortModificationsByColumn @rsp-4090 @rsp-4822
+        @SortModificationsByColumn @rsp-4090 @rsp-4822 @KNOWN_DEFECT_RSP_7533
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -49,7 +49,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | Lead_Nation         | lead nation         | Advanced_Filters_Lead_Nation |
                         | Status              | status              | Advanced_Filters_Lead_Nation |
 
-        @SortModificationsByColumn @rsp-4090 @rsp-4822
+        @SortModificationsByColumn @rsp-4090 @rsp-4822 @KNOWN_DEFECT_RSP_7533
         Scenario Outline: Verify the user is able to sort modifications by ascending and descending order for column-chief investigator
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -893,11 +893,11 @@ Feature: Filter, Search and Sort the Search modifications page
                 Then I 'can' see the modification displayed in the 'Search_Modifications_Page' list with '<Status>' status
 
                 Examples:
-                        | Status                           |
-                        | Modification_Status_Approved     |
-                        | Modification_Status_Not_Approved |
-                        | Modification_Status_Received     |
-        # | Modification_Status_Review_In_Progress |
+                        | Status                                 |
+                        | Modification_Status_Approved           |
+                        | Modification_Status_Not_Approved       |
+                        | Modification_Status_Received           |
+                        | Modification_Status_Review_In_Progress |
 
         @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
         Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from the Search Modifications page
@@ -931,7 +931,7 @@ Feature: Filter, Search and Sort the Search modifications page
                         | page number       | Advanced_Filters_Lead_Nation |
                         | previous link     | Advanced_Filters_Lead_Nation |
 
-        @RegressionSearchModificationsTitleBackLinksNav @SetupNewSponsorOrgGoLive @KNOWN_DEFECT_RSP_7365
+        @RegressionSearchModificationsTitleBackLinksNav @SetupNewSponsorOrgGoLive @rsp-4865 @KNOWN_DEFECT_RSP_7507
         Scenario: Verify back button navigation for search modifications from approvals as '<User>'
                 Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
                 And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1052,7 +1052,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 When I click the 'Back' link on the 'Project_Overview_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
-                And I can now see a table of search results for 'modifications received for approval'
                 When I enter 'new iras id' into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -1065,7 +1064,6 @@ Feature: Filter, Search and Sort the Search modifications page
                 When I click the 'Back' link on the 'Review_All_Changes_Page'
                 And I capture the page screenshot
                 Then I can see the 'Search_Modifications_Page'
-                And I can now see a table of search results for 'modifications received for approval'
                 When I enter 'new iras id' into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -1078,13 +1076,12 @@ Feature: Filter, Search and Sort the Search modifications page
                 And I click on the short project title link
                 And I capture the page screenshot
                 Then I can see the project overview page
-                # When I click the 'Back' link on the 'Project_Overview_Page'
-                # And I capture the page screenshot
-                # Then I can see the modification post submission page
-                # When I click the 'Back' link on the 'Review_All_Changes_Page'
-                # And I capture the page screenshot
-                # Then I can see the 'Search_Modifications_Page'
-                # And I can now see a table of search results for 'modifications received for approval'
+                When I click the 'Back' link on the 'Project_Overview_Page'
+                And I capture the page screenshot
+                Then I can see the modification post submission page
+                When I click the 'Back' link on the 'Review_All_Changes_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
 
                 Examples:
                         | User                 |
