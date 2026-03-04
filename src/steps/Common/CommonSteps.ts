@@ -1000,48 +1000,64 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
 Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
-    if (await commonItemsPage.search_results_count.isVisible()) {
-      if (linkLabel === 'Next' || linkLabel === 'Previous') {
-        const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(
-          await commonItemsPage.search_results_count.textContent()
-        );
-        if (recordsCount > 20) {
-          const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-          if (availabilityVal.toLowerCase() === 'available') {
-            await expect.soft(locatorVal).toBeVisible();
-            await expect.soft(locatorVal).toBeEnabled();
-          } else if (availabilityVal.toLowerCase() === 'not available') {
-            await expect.soft(locatorVal).toBeHidden();
-          } else {
-            throw new Error(`Unsupported button state: ${availabilityVal}`);
-          }
-        }
-      } else if (linkLabel === 'Confirm_Selection') {
-        const buttonValue = commonItemsPage.buttonTextData['Sponsor_Check_And_Authorise_Page']['Confirm_Selection'];
-        const locatorVal: Locator = commonItemsPage.govUkButton
-          .getByText(buttonValue, { exact: true })
-          .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-          .first();
-        if (availabilityVal.toLowerCase() === 'available') {
-          await expect.soft(locatorVal).toBeVisible();
-          await expect.soft(locatorVal).toBeEnabled();
-        } else if (availabilityVal.toLowerCase() === 'not available') {
-          await expect.soft(locatorVal).toBeHidden();
-        } else {
-          throw new Error(`Unsupported button state: ${availabilityVal}`);
-        }
+    const availability = availabilityVal.toLowerCase();
+
+    const assertAvailability = async (locator: Locator) => {
+      if (availability === 'available') {
+        await expect.soft(locator).toBeVisible();
+        await expect.soft(locator).toBeEnabled();
+        return;
       }
-    } else {
-      const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-      if (availabilityVal.toLowerCase() === 'available') {
-        await expect.soft(locatorVal).toBeVisible();
-        await expect.soft(locatorVal).toBeEnabled();
-      } else if (availabilityVal.toLowerCase() === 'not available') {
-        await expect.soft(locatorVal).toBeHidden();
-      } else {
-        throw new Error(`Unsupported button state: ${availabilityVal}`);
+
+      if (availability === 'not available') {
+        await expect.soft(locator).toBeHidden();
+        return;
       }
+
+      throw new Error(`Unsupported button state: ${availabilityVal}`);
+    };
+
+    const getConfirmSelectionLocator = () => {
+      const buttonValue = commonItemsPage.buttonTextData['Sponsor_Check_And_Authorise_Page']['Confirm_Selection'];
+
+      return commonItemsPage.govUkButton
+        .getByText(buttonValue, { exact: true })
+        .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+        .first();
+    };
+
+    const isPaginationButton = linkLabel === 'Next' || linkLabel === 'Previous';
+    const isConfirmSelection = linkLabel === 'Confirm_Selection';
+
+    const handlePaginationButton = async () => {
+      const countEl = commonItemsPage.search_results_count;
+
+      if (await countEl.isVisible()) {
+        const recordsCount = await commonItemsPage.extractNumFromSearchResultCount(await countEl.textContent());
+
+        if (recordsCount <= 20) return; // nothing to do
+      }
+
+      const locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
+      await assertAvailability(locator);
+    };
+
+    const handleConfirmSelection = async () => {
+      const locator = getConfirmSelectionLocator();
+      await assertAvailability(locator);
+    };
+
+    if (isPaginationButton) {
+      await handlePaginationButton();
+      return;
     }
+
+    if (isConfirmSelection) {
+      await handleConfirmSelection();
+      return;
+    }
+
+    throw new Error(`Unsupported linkLabel: ${linkLabel}`);
   }
 );
 
