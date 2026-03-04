@@ -4,9 +4,15 @@
 name: Run Playwright Tests
 
 trigger:
-  - main
+  - release/release_2.0
 
-schedules: []
+schedules:
+  - cron: '43 14 * * *'
+    displayName: 'Nightly run - full suite'
+    branches:
+      include:
+        - release/release_2.0
+    always: true
 
 pool: 'rsp-manageddevopspool'
 
