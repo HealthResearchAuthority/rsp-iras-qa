@@ -2095,7 +2095,7 @@ export default class CommonItemsPage {
     }
   }
 
-  private pagesRequiringLastPageCount = new Set([
+  private readonly pagesRequiringLastPageCount = new Set([
     'My_Research_Projects_Page',
     'Post_Approval_Page',
     'Sponsor_Org_User_List_Page',
