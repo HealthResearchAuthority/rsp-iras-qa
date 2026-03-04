@@ -70,7 +70,7 @@ Then(
 );
 
 Then(
-  'I validate that a changes section is displaayed on the review all changes page for {string}',
+  'I validate that a changes section is displayed on the review all changes page for {string}',
   async ({ reviewAllChangesPage }, modificationName: string) => {
     const dataset = reviewAllChangesPage.reviewAllChangesPageTestData.Modification_Details[modificationName].Changes;
     const expectedNoOfChanges: number = dataset.length;
