@@ -2,14 +2,31 @@
 Feature: Enable/Disable users in the selected Sponsor Org
 
   Background:
-    Given I have navigated to the 'System_Administration_Page'
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
+    Then I can see the system administration home page
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
+    When I enter 'QA Automation' into the search field
+    And I capture the page screenshot
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+    And I select advanced filters in the manage users page using 'Advanced_Filter_Status_Active'
+    And I capture the page screenshot
+    And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    When I enter the 'Email_Address' of the 'First' item in the list, into the search field
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then the system displays user records matching the search criteria
+    And I capture the page screenshot
+    And I capture the email address of the user in the system for later use
+    Given I have navigated to the 'System_Administration_Page' as 'System_Admin'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     Then I can see the 'Manage_Sponsor_Organisations_Page'
 
   @rsp-5332 @rsp-5357 @rsp-5358 @DisableExistingSponsorOrgUser @EnableExistingSponsorOrgUser @BreadcrumbEnableSponsorOrgUser
   Scenario Outline: Verify the user is able to disable a user from the selected sponsor organisation and then enable it
     And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfSouthampton'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'Sponsor_Organisation_UniversityOfManchester'
     And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
     And I capture the page screenshot
     And I keep note of the organisation name for sponsor organisation setup
@@ -32,7 +49,7 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
     Then I can see the 'Search_Add_User_Sponsor_Org_Page'
-    When I enter 'QA Automation' into the search field
+    When I enter 'name of the user in the system' into the search field
     And I capture the page screenshot
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
@@ -132,7 +149,7 @@ Feature: Enable/Disable users in the selected Sponsor Org
     And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
     Then I can see the 'Search_Add_User_Sponsor_Org_Page'
-    When I enter 'QA Automation' into the search field
+    When I enter 'name of the user in the system' into the search field
     And I capture the page screenshot
     And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot

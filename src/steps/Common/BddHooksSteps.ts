@@ -187,6 +187,7 @@ BeforeScenario(
         'Workflow_Coordinator_S',
         'Workflow_Coordinator_W',
         'Sponsor_User',
+        'Sponsor_User_Not_Auth',
         'Sponsor_Org_Admin_User',
       ];
 
@@ -218,6 +219,7 @@ BeforeScenario(
         '@WorkFlowCoordinatorSco': 'workflow_coordinator_s',
         '@WorkFlowCoordinatorWal': 'workflow_coordinator_w',
         '@SponsorUser': 'sponsor_user',
+        '@SponsorUserNoAuth': 'sponsor_user_not_auth',
         '@SponsorOrgAdminUser': 'sponsor_org_admin_user',
       };
 

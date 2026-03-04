@@ -25,6 +25,10 @@
     "Role_Org_Admin_Authoriser_No": {
       "role_radio": "Organisation administrator",
       "authoriser_radio": "No"
+    },
+    "Role_Sponsor_Authoriser_Yes": {
+      "role_radio": "Sponsor",
+      "authoriser_radio": "Yes"
     }
   },
   "Summary_Only_OrgAdmin_NotAuthorisor_Error": {

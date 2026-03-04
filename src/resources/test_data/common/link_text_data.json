@@ -140,7 +140,8 @@
     "Manage_Users": "Manage users",
     "Remove": "Remove",
     "Add_User_To_This_Review_Body": "Add a user to this review body",
-    "Back_To_Users": "Back to Users for "
+    "Back_To_Users": "Back to Users for ",
+    "Back": "Back"
   },
   "Check_Remove_User_Profile_Page": {
     "Back": "Back"
@@ -283,6 +284,7 @@
   "Sponsor_Organisation_Profile_Page": {
     "Back": "Back",
     "View_This_Sponsor_Org_List_Of_Users": "View this sponsor organisation's list of users",
+    "View_This_Sponsor_Org_Audit_History": "View this sponsor organisation's audit history",
     "Manage_Sponsor_Organisations_Breadcrumb": "Manage sponsor organisations"
   },
   "Sponsor_Org_User_List_Page": {
@@ -292,7 +294,8 @@
   },
   "Search_Add_User_Sponsor_Org_Page": {
     "Back": "Back",
-    "Add_User": "Add user"
+    "Add_User": "Add user",
+    "Sponsor_Organisation_Profile": "Sponsor organisation profile"
   },
   "Check_Add_User_Sponsor_Org_Page": {
     "Back": "Back"
@@ -328,7 +331,8 @@
     "My_Account": "My account",
     "Authorisations": "Authorisations",
     "My_Organisations": "My organisations",
-    "Project_Closures": "Project closures"
+    "Project_Closures": "Project closures",
+    "My_Account_Breadcrumb": "My account"
   },
   "Modification_Post_Submission_Page": {
     "Sponsor_Details": "Sponsor details",
@@ -401,7 +405,8 @@
     "My_Account_Breadcrumb": "My account",
     "Sponsor_Workspace_Breadcrumb": "Sponsor workspace",
     "My_Organisations_Breadcrumb": "My organisations",
-    "Sponsor_Organisation_UniversityOfSouthampton_Breadcrumb": "University of Southampton"
+    "Sponsor_Organisation_UniversityOfSouthampton_Breadcrumb": "University of Southampton",
+    "Sponsor_Organisation_UniversityOfLeeds_Breadcrumb": "University of Leeds"
   },
   "My_Organisations_Edit_User_Profile_Page": {
     "Back": "Back"
@@ -414,6 +419,12 @@
   },
   "Modification_Outcome_Check_Send_Page": {
     "Change": "Change"
+  },
+  "Authorisations_For_Sponsor_Organisation_Page": {
+    "Authorisations_Breadcrumb": "Authorisations"
+  },
+  "Authorisations_Page": {
+    "Sponsorworkspace_Breadcrumb": "Sponsor workspace"
   },
   "Revise_And_Authorise_Page": {
     "Back": "Back",

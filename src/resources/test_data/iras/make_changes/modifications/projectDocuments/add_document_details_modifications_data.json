@@ -41,7 +41,7 @@
     "sponsor_document_day_text": "10",
     "sponsor_document_month_dropdown": "October",
     "sponsor_document_year_text": "2025",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "No"
   },
   "New_Valid_Data_Fields": {
     "document_name_text": "DocName",
@@ -50,7 +50,7 @@
     "sponsor_document_day_text": "20",
     "sponsor_document_month_dropdown": "January",
     "sponsor_document_year_text": "2020",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "No"
   },
   "New_Valid_Document_Date": {
     "sponsor_document_day_text": "12",
@@ -126,16 +126,16 @@
 
   "Valid_Data_Fields_Optional_Version_Date": {
     "document_name_text": "DocName",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "No"
   },
   "Valid_Data_Mandatory_Fields": {
     "document_name_text": "DocName",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "No"
   },
   "Mandatory_Data_Fields_Optional_Version_Date": {
     "document_name_text": "DocName",
     "document_type_dropdown": "Evidence of insurance or indemnity",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "No"
   },
   "Missing_Mandatory_Data_Fields_Optional_Version_Date": {
     "document_type_dropdown": "Evidence of insurance or indemnity"
@@ -147,7 +147,7 @@
     "sponsor_document_day_text": "20",
     "sponsor_document_month_dropdown": "January",
     "sponsor_document_year_text": "2020",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "No"
   },
   "Missing_Mandatory_Data_Fields_Mandatory_Version_Date": {
     "document_type_dropdown": "Protocol / Clinical Investigation Plan",
@@ -160,11 +160,11 @@
     "sponsor_document_day_text": "20",
     "sponsor_document_month_dropdown": "January",
     "sponsor_document_year_text": "2020",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "No"
   },
   "Valid_Data_Fields_Mandatory_Date": {
     "sponsor_document_version_text": "1.5",
-    "document_previously_approved_radio": "Yes",
+    "document_previously_approved_radio": "No",
     "sponsor_document_day_text": "20",
     "sponsor_document_month_dropdown": "January",
     "sponsor_document_year_text": "2020"
@@ -174,7 +174,7 @@
     "sponsor_document_day_text": "20",
     "sponsor_document_month_dropdown": "January",
     "sponsor_document_year_text": "2020",
-    "document_previously_approved_radio": "Yes"
+    "document_previously_approved_radio": "No"
   },
   "Invalid_Day_Number": {
     "sponsor_document_day_text": "32",

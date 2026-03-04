@@ -3,7 +3,7 @@
     "pageHeading": "Sponsor"
   },
   "Label_Texts": {
-    "authorisations_label": "View and manage authorisations for projects {{sponsor_organisation_name}} sponsors or is responsible for authorising on behalf of the sponsor.",
+    "authorisations_label": "View and manage authorisations for projects that your organisations sponsor or are responsible for authorising on behalf of the sponsor.",
     "my_organisations_label": "View my sponsor organisations and the projects and staff they are responsible for."
   }
 }

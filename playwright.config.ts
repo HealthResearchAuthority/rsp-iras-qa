@@ -24,6 +24,9 @@ const config: PlaywrightTestConfig = {
   retries: 1,
   use: {
     ...browser,
+    extraHTTPHeaders: {
+      'x-feature-groups': 'Release_2.0',
+    },
     trace: 'retain-on-failure',
     baseURL: `${process.env.BASE_URL}`,
     actionTimeout: 30000,

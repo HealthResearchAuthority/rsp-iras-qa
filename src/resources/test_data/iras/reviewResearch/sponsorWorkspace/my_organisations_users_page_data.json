@@ -22,9 +22,9 @@
     "user_added_to_sponsor_organisation_success_message_header_text": "Success",
     "user_added_to_sponsor_organisation_success_message_text": "User added",
     "user_in_sponsor_organisation_disabled_success_message_header_text": "Success",
-    "user_in_sponsor_organisation_disabled_success_message_text": "User disabled",
+    "user_in_sponsor_organisation_disabled_success_message_text": "User deactivated",
     "user_in_sponsor_organisation_enabled_success_message_header_text": "Success",
-    "user_in_sponsor_organisation_enabled_success_message_text": "User enabled"
+    "user_in_sponsor_organisation_enabled_success_message_text": "User activated"
   },
   "Search_For_Users_In_Sponsor_Organisations": {
     "Search_Queries": {

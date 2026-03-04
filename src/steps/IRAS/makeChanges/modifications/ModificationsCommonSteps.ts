@@ -49,6 +49,17 @@ Then(
 );
 
 Then(
+  'I keep a note of the displayed modification ID on the modifications page',
+  async ({ modificationsCommonPage, modificationsReceivedCommonPage }) => {
+    const modificationIDActual = confirmStringNotNull(
+      await modificationsCommonPage.modification_id_value.textContent()
+    );
+    await modificationsCommonPage.setModificationID(modificationIDActual);
+    await modificationsReceivedCommonPage.setModificationId(modificationIDActual);
+  }
+);
+
+Then(
   'I create {string} for the created modification',
   async (
     {
@@ -473,8 +484,7 @@ Then(
   'I can see the current chief investigator email details displayed on modifications page using {string} dataset',
   async ({ modificationsCommonPage, chiefInvestigatorPage }, datasetNameChiefInvestigator) => {
     const currentChiefInvestigatorNameExpected =
-      chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator]
-        .new_chief_investigator_email_text;
+      chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator].chief_investigator_email_text;
     await expect
       .soft(
         modificationsCommonPage.page.getByText(
@@ -593,7 +603,7 @@ Then(
       modificationEventDatasetName.toLowerCase() === 'modification_reassigned' &&
       userDatasetName.toLowerCase() === 'team_manager'
     ) {
-      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Reassigned} '${loginPage.loginPageTestData['Studywide_Reviewer'].username}'`;
+      modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Reassigned} '${loginPage.loginPageTestData['Studywide_Reviewer'].username.toLowerCase()}'`;
     } else if (modificationEventDatasetName.toLowerCase() === 'modification_comment_reason_not_approved_changed') {
       modificationEvent = `${modificationsCommonPage.modificationsCommonPageTestData.Audit_History_Events.Modification_Comment_Reason_Not_Approved_Changed} from ${modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons.Lack_Of_Evidence} to ${modificationsDetailsPage.modificationsDetailsPageTestData.Modification_Outcome_Reasons.Valid_Reason_Not_Approved}`;
     } else if (modificationEventDatasetName.toLowerCase() === 'modification_comment_changed') {
@@ -741,6 +751,29 @@ Then('I validate the missing document notification details', async ({ modificati
     )
     .toBeVisible();
 });
+
+Then(
+  'I validate i can see only one {string} on the post approval page',
+  async ({ modificationsCommonPage, commonItemsPage }, statusDataset: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const statusExpected = dataset.status;
+    if (
+      statusDataset === 'Modification_Status_Indraft' ||
+      statusDataset === 'Modification_Status_With_Sponsor' ||
+      statusDataset === 'Modification_Status_With_Review_Body'
+    ) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const modificationRecord = await modificationsCommonPage.getModificationRowNumberPostApprovalPage(rowIndex);
+        const statusActual = modificationRecord.get('statusValue');
+        const statusCount = statusActual.filter((x) => x.toLowerCase() == statusExpected.toLowerCase()).length;
+        if (statusActual[0] == statusExpected) {
+          expect.soft(statusCount).toEqual(1);
+        }
+      }
+    }
+  }
+);
 
 Then(
   'I validate the reason for not authorised on modifications page using {string} dataset',

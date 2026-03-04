@@ -307,3 +307,7 @@ Then(
     expect.soft(actualList.slice(0, expectedList.length)).toEqual(expectedList);
   }
 );
+
+Then('I click the view edit link against the user', async ({ manageUsersPage }) => {
+  await manageUsersPage.view_edit_link.click();
+});

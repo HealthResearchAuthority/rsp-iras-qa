@@ -51,7 +51,7 @@ Feature: Filter, Search and Sort the Search project records page
         # | Valid_Iras_Id_Prefix | Short_Project_Title | Short project title |
         # | Valid_Iras_Id_Prefix | Lead_Nation         | Lead nation         |
 
-        @SortProjectsByColumn @DefaultSorting
+        @SortProjectsByColumn @DefaultSorting @KNOWN_DEFECT_RSP_7533
         Scenario Outline: Verify default sorting of projects by IRAS ID, Short Project Title and Lead Nation and check ascending and descending order for each column after applying filters
                 And I click the 'Advanced_Filters' button on the 'Search_Projects_Page'
                 And I capture the page screenshot
@@ -376,9 +376,9 @@ Feature: Filter, Search and Sort the Search project records page
                 And the result count displayed at the top accurately reflects the number of records shown in the search 'projects' page
                 And I capture the page screenshot
                 Examples:
-                        | Valid_Iras_Id      | Advanced_Filters             |
-                        | Valid_Full_Iras_Id | Advanced_Filters_Lead_Nation |
-        # | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title |
+                        | Valid_Iras_Id        | Advanced_Filters                                |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Lead_Nation                    |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_All_Except_Short_Project_Title |
 
         @RemoveActiveFiltersAltogether
         Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link and the search results update accordingly
