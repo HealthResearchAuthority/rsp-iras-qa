@@ -1,6 +1,14 @@
 {
   "Sponsor_Authorisations_Page": {
     "pageHeading": "Authorisations",
-    "project_closure_table_headers": ["Short project title", "IRAS ID", "Date received", "User email", "Date closed", "Status"]
+    "pageHeading_Multi_Organisations": "Authorisations for ",
+    "project_closure_table_headers": [
+      "Short project title",
+      "IRAS ID",
+      "Date received",
+      "User email",
+      "Date closed",
+      "Status"
+    ]
   }
 }
