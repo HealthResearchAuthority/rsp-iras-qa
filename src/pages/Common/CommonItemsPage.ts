@@ -2095,59 +2095,61 @@ export default class CommonItemsPage {
     }
   }
 
-  async validatePaginationFromFirstPage(navigateMethod: string, pagename: string) {
+  private pagesRequiringLastPageCount = new Set([
+    'My_Research_Projects_Page',
+    'Post_Approval_Page',
+    'Sponsor_Org_User_List_Page',
+    'Review_All_Changes_Page',
+    'Manage_Sponsor_Organisations_Page',
+    'Project_Documents_Page',
+  ]);
+
+  private async getTotalItemsForPage(pagename: string): Promise<number> {
+    return this.pagesRequiringLastPageCount.has(pagename)
+      ? this.getTotalItemsNavigatingToLastPage(pagename)
+      : this.getTotalItems();
+  }
+
+  private async runPaginationValidation(
+    navigateMethod: string,
+    pagename: string,
+    startPage: number,
+    endPage: number,
+    step: number
+  ) {
     const totalPages = await this.getTotalPages();
-    //Limiting the max pages to validate to 10
-    let maxPagesToValidate = 0;
-    if (totalPages > this.commonTestData.maxPagesToValidate) {
-      maxPagesToValidate = this.commonTestData.maxPagesToValidate;
-    } else {
-      maxPagesToValidate = totalPages;
-    }
-    let totalItems: number;
-    if (
-      pagename === 'My_Research_Projects_Page' ||
-      pagename === 'Post_Approval_Page' ||
-      pagename === 'Sponsor_Org_User_List_Page' ||
-      pagename === 'Review_All_Changes_Page' ||
-      pagename === 'Manage_Sponsor_Organisations_Page' ||
-      pagename === 'Project_Documents_Page'
-    ) {
-      totalItems = await this.getTotalItemsNavigatingToLastPage(pagename);
-    } else {
-      totalItems = await this.getTotalItems();
-    }
-    await this.firstPage.click();
-    for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
+    const totalItems = await this.getTotalItemsForPage(pagename);
+
+    for (let currentPage = startPage; currentPage !== endPage + step; currentPage += step) {
       await this.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }
 
+  async validatePaginationFromFirstPage(navigateMethod: string, pagename: string) {
+    const totalPages = await this.getTotalPages();
+    const maxPages = Math.min(totalPages, this.commonTestData.maxPagesToValidate);
+    await this.firstPage.click();
+    await this.runPaginationValidation(
+      navigateMethod,
+      pagename,
+      1, // start
+      maxPages, // end
+      1 // forward
+    );
+  }
+
   async validatePaginationFromLastPage(navigateMethod: string, pagename: string) {
     const totalPages = await this.getTotalPages();
-    //Limiting the max pages to validate to 10
-    let validatePageUntil = 0;
-    if (totalPages > this.commonTestData.maxPagesToValidate) {
-      validatePageUntil = totalPages - this.commonTestData.maxPagesToValidate;
-    } else {
-      validatePageUntil = totalPages;
-    }
-    let totalItems: number;
-    if (
-      pagename == 'My_Research_Projects_Page' ||
-      pagename === 'Post_Approval_Page' ||
-      pagename === 'Sponsor_Org_User_List_Page' ||
-      pagename === 'Review_All_Changes_Page' ||
-      pagename === 'Manage_Sponsor_Organisations_Page' ||
-      pagename === 'Project_Documents_Page'
-    ) {
-      totalItems = await this.getTotalItemsNavigatingToLastPage(pagename);
-    } else {
-      totalItems = await this.getTotalItems();
-    }
+    const validateUntil = Math.max(1, totalPages - this.commonTestData.maxPagesToValidate + 1);
+
     await this.clickOnPages(totalPages, navigateMethod);
-    for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
-      await this.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
-    }
+
+    await this.runPaginationValidation(
+      navigateMethod,
+      pagename,
+      totalPages, // start
+      validateUntil, // end
+      -1 // backward
+    );
   }
 }
