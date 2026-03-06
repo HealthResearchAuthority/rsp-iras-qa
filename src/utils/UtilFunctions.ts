@@ -10,9 +10,6 @@ import * as fse from 'fs-extra';
 import path from 'node:path';
 import { Client } from '@microsoft/microsoft-graph-client';
 import { ClientSecretCredential } from '@azure/identity';
-import LoginPage from '../pages/Common/LoginPage';
-import MySponsorOrgAddUserPage from '../pages/IRAS/reviewResearch/sponsorWorkspace/MyOrganisationsAddUserPage';
-import CommonItemsPage from '../pages/Common/CommonItemsPage';
 
 const pathToCreateUserTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
@@ -751,70 +748,3 @@ export function findValueByKeyFromJSON(obj: any, targetKey: string): any {
   }
   return undefined;
 }
-
-const toLower = (s) => s?.toLowerCase?.() ?? s;
-
-const formatDate = (now, sep) => {
-  const date = new Intl.DateTimeFormat('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  }).format(now);
-
-  const time = new Intl.DateTimeFormat('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  }).format(now);
-
-  return sep === 'space' ? `${date} ${time}` : `${date} at ${time}`;
-};
-
-const dateSeparatorForWorkspace = (workspaceKey) => {
-  return workspaceKey === 'manage_sponsor_org_system_admin_workspace' ? 'space' : 'at';
-};
-
-const resolveUserEmailLogin = async (loginPage, commonItemsPage, userDatasetName) => {
-  const name = toLower(userDatasetName);
-
-  if (name !== 'blank_user_details' && name !== 'non_registered_user') {
-    return loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
-  }
-
-  if (name === 'non_registered_user') {
-    return (await commonItemsPage.getFirstUserEmail()).toLowerCase();
-  }
-
-  return '';
-};
-
-export const buildAuditHistoryRecord = async (
-  loginPage: LoginPage,
-  mySponsorOrgAddUserPage: MySponsorOrgAddUserPage,
-  commonItemsPage: CommonItemsPage,
-  eventDescriptionDatasetName: string,
-  userDatasetName: string,
-  targetUser: string,
-  workspaceKey: string
-) => {
-  const eventText =
-    mySponsorOrgAddUserPage.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Events[
-      eventDescriptionDatasetName
-    ];
-
-  const userEmailLogin = await resolveUserEmailLogin(loginPage, commonItemsPage, userDatasetName);
-
-  const userEmail = loginPage.loginPageTestData[targetUser].username.toLowerCase();
-
-  const eventDescription = userEmailLogin + eventText;
-
-  const now = new Date();
-  const sep = dateSeparatorForWorkspace(workspaceKey);
-  const dateTimeOfEvent = formatDate(now, sep);
-
-  return {
-    dateTimeOfEventExpected: dateTimeOfEvent,
-    sponsorOrgEventDescriptionExpected: eventDescription,
-    userEmailExpected: userEmail,
-  };
-};

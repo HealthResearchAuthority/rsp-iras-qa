@@ -1,6 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as mySponsorOrgAddUserPageTestData from '../../../../resources/test_data/iras/reviewResearch/sponsorWorkspace/my_organisations_add_user_page_data.json';
 import * as commonTestData from '../../../../resources/test_data/common/common_data.json';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
+import LoginPage from '../../../Common/LoginPage';
 
 //Declare Page Objects
 export default class MyOrganisationsAddUserPage {
@@ -96,5 +98,77 @@ export default class MyOrganisationsAddUserPage {
     } else {
       throw new Error(`Error message "${error_message}" is not recognized.`);
     }
+  }
+
+  async toLower(s: string): Promise<string> {
+    return s?.toLowerCase?.() ?? s;
+  }
+
+  async formatDate(now: Date, sep: string): Promise<string> {
+    const date = new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    }).format(now);
+
+    const time = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(now);
+
+    return sep === 'space' ? `${date} ${time}` : `${date} at ${time}`;
+  }
+
+  async dateSeparatorForWorkspace(workspaceKey: string): Promise<string> {
+    return workspaceKey === 'manage_sponsor_org_system_admin_workspace' ? 'space' : 'at';
+  }
+
+  async resolveUserEmailLogin(
+    loginPage: LoginPage,
+    commonItemsPage: CommonItemsPage,
+    userDatasetName: string
+  ): Promise<string> {
+    const name = await this.toLower(userDatasetName);
+
+    if (name !== 'blank_user_details' && name !== 'non_registered_user') {
+      return loginPage.loginPageTestData[userDatasetName].username.toLowerCase();
+    }
+
+    if (name === 'non_registered_user') {
+      return (await commonItemsPage.getFirstUserEmail()).toLowerCase();
+    }
+
+    return '';
+  }
+
+  async buildAuditHistoryRecord(
+    loginPage: LoginPage,
+    commonItemsPage: CommonItemsPage,
+    eventDescriptionDatasetName: string,
+    userDatasetName: string,
+    targetUser: string,
+    workspaceKey?: string
+  ) {
+    const eventText =
+      this.mySponsorOrgAddUserPageTestData.My_Organisations_Add_User_Page.Audit_History_Events[
+        eventDescriptionDatasetName
+      ];
+
+    const userEmailLogin = await this.resolveUserEmailLogin(loginPage, commonItemsPage, userDatasetName);
+
+    const userEmail = loginPage.loginPageTestData[targetUser].username.toLowerCase();
+
+    const eventDescription = userEmailLogin + eventText;
+
+    const now = new Date();
+    const sep = await this.dateSeparatorForWorkspace(workspaceKey);
+    const dateTimeOfEvent = await this.formatDate(now, sep);
+
+    return {
+      dateTimeOfEventExpected: dateTimeOfEvent,
+      sponsorOrgEventDescriptionExpected: eventDescription,
+      userEmailExpected: userEmail,
+    };
   }
 }

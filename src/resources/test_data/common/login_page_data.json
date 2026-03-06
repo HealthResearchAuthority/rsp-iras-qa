@@ -91,8 +91,8 @@
   },
   "Sponsor_User_Not_Auth": {
     "username": "FutureIRAS.SponsorAuthNo@hra.nhs.uk",
-    "password": "`${process.env.SPONSOR_USER_NOT_AUTHORISER_PASS}`",
-    "mfa": "`${process.env.SPONSOR_USER_NOT_AUTHORISER_MFA_KEY}`",
+    "password": "`${process.env.SPONSOR_USER_NOT_AUTH_PASS}`",
+    "mfa": "`${process.env.SPONSOR_USER_NOT_AUTH_MFA_KEY}`",
     "authPath": "sponsor_user_not_auth"
   },
   "Sponsor_Org_Admin_User": {

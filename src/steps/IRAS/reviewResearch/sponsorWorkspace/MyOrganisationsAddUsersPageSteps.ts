@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { buildAuditHistoryRecord, generateUniqueEmail } from '../../../../utils/UtilFunctions';
+import { generateUniqueEmail } from '../../../../utils/UtilFunctions';
 const { Then, When } = createBdd(test);
 
 Then(
@@ -96,14 +96,12 @@ Then(
     userDatasetName,
     targetUser
   ) => {
-    const record = await buildAuditHistoryRecord(
+    const record = await mySponsorOrgAddUserPage.buildAuditHistoryRecord(
       loginPage,
-      mySponsorOrgAddUserPage,
       commonItemsPage,
       eventDescriptionDatasetName,
       userDatasetName,
-      targetUser,
-      undefined
+      targetUser
     );
 
     mySponsorOrgAddUserPage.addAuditHistoryRecord = record;
@@ -119,9 +117,8 @@ Then(
     targetUser,
     workspaceKey
   ) => {
-    const record = await buildAuditHistoryRecord(
+    const record = await mySponsorOrgAddUserPage.buildAuditHistoryRecord(
       loginPage,
-      mySponsorOrgAddUserPage,
       commonItemsPage,
       eventDescriptionDatasetName,
       userDatasetName,
