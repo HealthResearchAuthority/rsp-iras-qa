@@ -237,6 +237,12 @@ Feature: This feature covers the sponsor not authorised modifications
     And I fill the sponsor check and authorise page with 'Sponsor_Not_Authorised'
     And I capture the page screenshot
     When I click the 'Confirm_Selection' button on the 'Sponsor_Check_And_Authorise_Page'
+    And I can see the modification not authorised page
+    And I validate the project information labels using dataset displayed on modifications page
+    And I capture the page screenshot
+    And I fill the modification not authorised page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    And I click the 'Not_Authorised_Confirm' button on the 'Modification_Not_Authorised_Page'
     And I validate confirmation screen for modification not authorised by sponsor
     And I capture the page screenshot
     And I click the 'Return_To_Authorisations' button on the 'Confirmation_Page'
